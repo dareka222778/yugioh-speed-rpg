@@ -1,0 +1,63 @@
+{
+  "format": 1,
+  "mission": "M648",
+  "cards": [
+    {
+      "id": "70046172",
+      "konamiId": 4905,
+      "name": "Rush Recklessly",
+      "namePt": "Impulso Precipitado",
+      "firstTCGRelease": "2002-09-16",
+      "firstTCGSet": "MRL-043",
+      "firstOCGRelease": "2000-04-20",
+      "officialText": "Target 1 face-up monster on the field; it gains 700 ATK until the end of this turn.",
+      "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4905&request_locale=en"
+    },
+    {
+      "id": "16430187",
+      "konamiId": 4906,
+      "name": "The Reliable Guardian",
+      "namePt": "O Guardião de Confiança",
+      "firstTCGRelease": "2002-09-16",
+      "firstTCGSet": "MRL-044",
+      "firstOCGRelease": "2000-04-20",
+      "officialText": "Increase 1 face-up monster's DEF by 700 points until the end of this turn.",
+      "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4906&request_locale=en"
+    }
+  ],
+  "scope": "TagDuel clássico 2v2. Quick-Play da mão no próprio turno; carta Set após turno posterior; resposta no Damage Step antes do cálculo por modificar ATK/DEF; alvo face-up em qualquer campo; bônus temporário +700; alvo vinculado por UID/epoch. Adapter isolado, sem catálogo/resolver central/comandos/persistência/produção.",
+  "behavior": [
+    "Rush Recklessly aplica exatamente +700 ATK até a mudança de turno",
+    "The Reliable Guardian aplica exatamente +700 DEF até a mudança de turno",
+    "alvo face-up pode pertencer a qualquer equipe",
+    "Quick-Play da mão só ativa no próprio turno",
+    "Quick-Play Set não ativa no turno em que foi preparada",
+    "Quick-Play Set pode responder em turno posterior, inclusive no Damage Step antes do cálculo",
+    "não ativa depois do Damage Calculation",
+    "alvo perdido, face-down ou com epoch alterado não recebe o bônus; sem retarget",
+    "negação não aplica modificador",
+    "cópias distintas acumulam bônus",
+    "origem retorna ao Cemitério compartilhado da equipe do proprietário físico",
+    "idempotência, imutabilidade, conservação de UIDs e ausência de concessões"
+  ],
+  "invariants": {
+    "mainDeck": "20–30 por assento",
+    "handLimit": 6,
+    "handOverflow": "End Phase",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separada",
+    "extraDeckMax": 5,
+    "inventoryGranted": 0
+  },
+  "verification": {
+    "focusedTests": 28,
+    "adapterBehaviorVerifiedCards": 2,
+    "behaviorCertifiedCards": 0,
+    "automaticCertifications": 0,
+    "playableCatalogAdmission": false,
+    "discordGateway": false,
+    "merge": false,
+    "deploy": false
+  }
+}
