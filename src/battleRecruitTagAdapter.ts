@@ -3,7 +3,6 @@ import {engineCard,getDuelCard} from './effectRegistry';
 import {assertTagDuel,tagInventory,type TagDuel} from './tagDuel';
 import type {DuelState} from './duelEngine';
 import {specialSummonFromPile} from './monsterEntry';
-import {sendMonsterToGrave} from './monsterExit';
 import {shuffleDuel} from './duelRandom';
 
 export const GIANT_RAT_ID='97077563';
