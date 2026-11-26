@@ -1,0 +1,47 @@
+{
+  "format": 1,
+  "mission": "M646",
+  "card": {
+    "id": "05556668",
+    "konamiId": 5218,
+    "name": "Exchange",
+    "namePt": "Troca",
+    "firstTCGRelease": "2002-10-15",
+    "firstOCGRelease": "2001-07-05",
+    "officialText": "Both players reveal their hands and add 1 card from each other's hand to their hand.",
+    "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5218&request_locale=en"
+  },
+  "scope": "TagDuel clássico 2v2. O assento ativo escolhe um oponente físico; somente os dois participantes recebem as mãos reveladas. Cada um escolhe uma carta da mão do outro. Os UIDs e a propriedade física não mudam; a Magia vai ao Cemitério da equipe do proprietário original. Adapter isolado, sem catálogo/resolver central/comandos/persistência/produção.",
+  "behavior": [
+    "Main Phase e prioridade aberta",
+    "ativação da mão ou backrow compartilhada",
+    "seleção explícita de um assento físico da equipe adversária",
+    "revelação bilateral privada somente aos dois participantes",
+    "cada participante escolhe exatamente uma carta da mão do outro",
+    "troca das cartas entre mãos sem alterar UID ou proprietário físico",
+    "Exchange usada retorna ao Cemitério da equipe de seu proprietário original",
+    "negação não revela nem troca cartas",
+    "compromissos SHA-256 rejeitam mãos alteradas entre revelação e resolução",
+    "idempotência, conservação de inventário e rejeição de planos/escolhas forjados"
+  ],
+  "invariants": {
+    "mainDeck": "20–30 por assento",
+    "handLimit": 6,
+    "handOverflow": "End Phase",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separada",
+    "extraDeckMax": 5,
+    "inventoryGranted": 0
+  },
+  "verification": {
+    "focusedTests": 20,
+    "adapterBehaviorVerifiedCards": 1,
+    "behaviorCertifiedCards": 0,
+    "automaticCertifications": 0,
+    "playableCatalogAdmission": false,
+    "discordGateway": false,
+    "merge": false,
+    "deploy": false
+  }
+}
