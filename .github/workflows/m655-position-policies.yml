@@ -1,0 +1,52 @@
+name: M655 continuous position policies TagDuel adapters
+on:
+  push:
+    branches:
+      - feat/work-m655-continuous-position-policies-20261126
+    paths:
+      - "src/positionPolicyTagAdapter.ts"
+      - "tests/positionPolicyTagAdapter.test.cjs"
+      - "docs/evidence/m655-position-policies.json"
+      - ".github/workflows/m655-position-policies.yml"
+  pull_request:
+    branches:
+      - feat/rea-engine-recovery-20261026
+    paths:
+      - "src/positionPolicyTagAdapter.ts"
+      - "tests/positionPolicyTagAdapter.test.cjs"
+      - "docs/evidence/m655-position-policies.json"
+      - ".github/workflows/m655-position-policies.yml"
+permissions:
+  contents: read
+concurrency:
+  group: m655-position-policies-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  adapter:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - run: node --test tests/positionPolicyTagAdapter.test.cjs
+      - run: npm test
+      - run: npm run audit:tag-classic
+      - name: Validate evidence without certifying cards
+        run: |
+          node - <<'NODE'
+          const fs = require('node:fs');
+          const evidence = JSON.parse(fs.readFileSync('docs/evidence/m655-position-policies.json', 'utf8'));
+          if (evidence.format !== 1 || evidence.mission !== 'M655') throw new Error('Invalid evidence header');
+          if (evidence.cards.length !== 2 || evidence.scenarioCount < 15) throw new Error('Incomplete card/scenario evidence');
+          if (evidence.cards.some(card => card.admitted || card.certified)) throw new Error('Adapter CI must not admit or certify cards');
+          if (evidence.verification.behaviorCertifiedCards !== 0 || evidence.verification.automaticCertifications !== 0) throw new Error('Adapter CI must not certify cards');
+          if (evidence.catalogAtStart.engineV9Certified !== 969 || evidence.catalogAtStart.remaining !== 31) throw new Error('Unexpected certification baseline');
+          if (evidence.scope.automaticCertification !== false || evidence.scope.inventoryGranted !== 0) throw new Error('Unsafe side effect recorded');
+          console.log('M655 evidence valid; adapters remain outside catalog and inventory.');
+          NODE
