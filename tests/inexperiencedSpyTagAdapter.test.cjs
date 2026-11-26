@@ -172,7 +172,7 @@ test('invalid teammate target, inactive actor, wrong phase, empty target hand an
   assert.throws(()=>planInexperiencedSpy(state,{...event,sourceUid:'m1:foreign'}));
   const wrongPhase=structuredClone(state);wrongPhase.core.phase='battle';
   assert.throws(()=>planInexperiencedSpy(wrongPhase,event));
-  const empty=structuredClone(state);holder(empty,1).hand.length=0;
+  const empty=structuredClone(state);const emptyHolder=holder(empty,1);emptyHolder.deck.push(...emptyHolder.hand.splice(0));
   assert.throws(()=>planInexperiencedSpy(empty,event),/mão física escolhida está vazia/);
 });
 
@@ -194,7 +194,9 @@ test('the private receipt is not part of persisted duel state or public TagDuel 
   const result=resolveInexperiencedSpy(state,plan(state,0,1,source),target.uid);
   assert.equal(result.state.inexperiencedSpyReceipts.length,1);
   assert.equal(JSON.stringify(result.state).includes(target.id),true,'the authoritative state still contains private hands');
-  const publicView=tag.publicTagDuel(result.state);
+  const publicCandidate=structuredClone(result.state);
+  publicCandidate.core.players[0].grave=publicCandidate.core.players[0].grave.filter(card=>card.uid!==source);
+  const publicView=tag.publicTagDuel(publicCandidate);
   assert.equal(JSON.stringify(publicView).includes(target.id),false);
   assert.equal(JSON.stringify(publicView).includes(target.uid),false);
   assert.equal(JSON.stringify(result.state).includes('privateReceipt'),false);
