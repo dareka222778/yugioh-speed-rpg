@@ -1,0 +1,35 @@
+{
+  "format": 1,
+  "runId": "work-20261126T161750-0300-M656",
+  "mission": "M656",
+  "priority": "P1",
+  "status": "reserved-and-implementing",
+  "startedAt": "2026-11-26T16:17:50-03:00",
+  "endedAt": null,
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "baseHead": "b64d77d21f2cb1b6656fe7e17f03034c007ab9cb",
+  "branch": "feat/work-m656-battle-target-policies-20261126",
+  "headSha": null,
+  "scope": "Adapter TagDuel 2v2 para Staunch Defender e Dark Spirit of the Silent, com alvos válidos, substituição do atacante, políticas por turno, conservação de propriedade física e testes de regras 3+3 / mão 6 End Phase / deck 20–30 / Extra 5.",
+  "reservedFiles": [
+    "src/battleTargetPolicyTagAdapter.ts",
+    "tests/battleTargetPolicyTagAdapter.test.cjs",
+    "docs/evidence/m656-battle-target-policies.json",
+    ".github/workflows/m656-battle-target-policies.yml",
+    "scripts/audit-battle-target-policy-m656.cjs"
+  ],
+  "certifiedCardsBefore": 969,
+  "certifiedCardsAfter": null,
+  "newCertifications": 0,
+  "inventoryGrants": 0,
+  "ci": {
+    "baseCommitStatuses": 0,
+    "m655Focused": "failure (fixture count 21 != 20)",
+    "engineValidation": "failure at npm test; soak passed"
+  },
+  "pr": null,
+  "production": "não alterada",
+  "discord": "não validado ao vivo",
+  "nextTask": "Implementar adapter e cenários; abrir PR draft após CI focada.",
+  "nextWindow": "2026-11-26T17:30:00-03:00"
+}
