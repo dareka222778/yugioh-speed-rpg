@@ -1,0 +1,74 @@
+{
+  "mission": "M656",
+  "title": "Battle target policies for Staunch Defender and Dark Spirit of the Silent",
+  "scope": "Isolated TagDuel 2v2 adapter. The adapter rewrites the pending attack declaration or stores a turn-scoped forced-target policy; it does not execute battle damage or replace the central battle resolver.",
+  "cards": [
+    {
+      "id": "92854392",
+      "name": "Staunch Defender",
+      "konamiDatabaseId": 5737,
+      "kind": "trap",
+      "firstWorldRelease": "2002-11-21",
+      "firstOcgRelease": "2002-11-21",
+      "firstTcgRelease": "2003-12-01",
+      "effect": "Activate only when the opponent declares an attack; choose one face-up monster you control. For the rest of that turn, the opponent can only designate that monster as an attack target and must attack it with all face-up monsters.",
+      "sources": [
+        "https://ftp.yugipedia.com/wiki/Staunch_Defender",
+        "https://www.yugiohcardguide.com/single/staunch-defender.html"
+      ]
+    },
+    {
+      "id": "93599951",
+      "name": "Dark Spirit of the Silent",
+      "konamiDatabaseId": 5227,
+      "kind": "trap",
+      "firstWorldRelease": "2002-12-12",
+      "firstOcgRelease": "2002-12-12",
+      "firstTcgRelease": "2003-03-01",
+      "effect": "When an opponent's monster declares an attack, negate that attack and select another face-up monster your opponent controls; that monster attacks instead, changing from face-up Defense to Attack if needed.",
+      "sources": [
+        "https://ftp.yugipedia.com/wiki/Dark_Spirit_of_the_Silent",
+        "https://ygoprodeck.com/card/dark-spirit-of-the-silent-7790/"
+      ]
+    }
+  ],
+  "testFile": "tests/battleTargetPolicyTagAdapter.test.cjs",
+  "scenarioCount": 30,
+  "fixturePolicy": "Tests use already-enabled Trap IDs as physical fixtures and a test-only lookup to exercise these effects. The two historical card IDs above remain absent from the enabled registry.",
+  "rules": {
+    "mainDeck": "20–30 per physical seat",
+    "hand": "6; discard at End Phase",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "extraDeckMax": 5,
+    "fieldZoneIndependent": true
+  },
+  "physicalIntegrity": {
+    "preserveUidAndCardId": true,
+    "preservePhysicalOwnerSeat": true,
+    "preservePrivateHands": true,
+    "inventoryGrants": 0
+  },
+  "certification": {
+    "status": "not-certified",
+    "newCertifications": 0,
+    "enabledRegistryChanged": false,
+    "releaseAllowlistChanged": false
+  },
+  "integration": {
+    "status": "adapter-only",
+    "centralResolverChanged": false,
+    "commandsChanged": false,
+    "databaseChanged": false,
+    "discordLiveValidation": false
+  },
+  "deployment": {
+    "status": "not-deployed",
+    "productionChanged": false
+  },
+  "limitations": [
+    "A caller must connect the adapter to the response window for Pending attack stage declare.",
+    "The central battle resolver must consume the rewritten pending attacker/target and invoke the forced-target policy for subsequent attacks.",
+    "Damage calculation, destruction, battle triggers and attack counters remain owned by the central resolver."
+  ]
+}
