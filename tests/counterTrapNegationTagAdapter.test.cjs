@@ -17,7 +17,7 @@ const {
 
 const SOURCE_FIXTURE='77414722'; // Magic Jammer: enabled Trap fixture
 const TARGET_TRAP='03819470'; // Seven Tools of the Bandit: enabled Trap fixture
-const TARGET_SPELL='05318639'; // Mystical Space Typhoon: enabled Spell fixture
+const TARGET_SPELL='55144522'; // Pot of Greed: enabled Spell fixture
 const normalDeck=tag.tagNormalCardIds.slice(0,20);
 assert.equal(normalDeck.length,20);
 const COST_MONSTER=normalDeck[0];
@@ -285,7 +285,7 @@ test('Horn of Heaven does not destroy a replacement monster with the same ID',()
 test('Horn of Heaven rejects duplicate activation IDs and duplicate resolution',()=>{
   const f=setupHorn();
   const session=activateHorn(f);
-  assert.throws(()=>activateHorn({...f,duel:session.duel},'m650-horn'),/duplicado/);
+  assert.throws(()=>activateCounterTrap(session,f.sourceUid,'m650-horn',lookup,\n    {effect:'horn-of-heaven',cardId:SOURCE_FIXTURE,costUid:f.costUid}),/duplicado/);
   const resolved=resolve(session,'m650-horn');
   assert.throws(()=>resolveCounterTrap(resolved.session,'m650-horn'),/ausente ou já resolvida/);
 });
