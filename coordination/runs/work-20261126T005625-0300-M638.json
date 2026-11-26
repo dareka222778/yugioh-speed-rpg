@@ -1,0 +1,104 @@
+{
+  "format": 1,
+  "runId": "work-20261126T005625-0300-M638",
+  "mission": "M638",
+  "owner": "Work principal",
+  "priority": "P1",
+  "priorityRequestedBy": "User",
+  "status": "reserved-and-implementing",
+  "startedAt": "2026-11-26T00:56:25-03:00",
+  "endedAt": null,
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "cfc108c369c9c9d7753ffea6f3f1fce588a663cb",
+  "branch": "feat/work-m638-lp-event-tag-adapter-20261126",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "cfc108c369c9c9d7753ffea6f3f1fce588a663cb",
+  "branchHeadSha": null,
+  "pullRequest": null,
+  "reservedFiles": [
+    "src/lpEventTagAdapter.ts",
+    "tests/lpEventTagAdapter.test.cjs",
+    "docs/evidence/m638-lp-event-tag-adapter.json",
+    ".github/workflows/m638-lp-event-tag-adapter.yml"
+  ],
+  "scope": "Adapter isolado de eventos de LP para Fire Princess (gatilho após ganho real), Bad Reaction to Simochi (substituição de ganho de LP do oponente causado por efeito) e Solemn Wishes (500 LP por evento de compra, não por carta comprada). Processa LP compartilhados por equipe no TagDuel; sem integração ao resolver central, catálogo, certificações, comandos, banco, economia ou produção.",
+  "cards": [
+    {
+      "id": "64752646",
+      "name": "Fire Princess",
+      "konamiId": 5197,
+      "officialText": "Each time you gain Life Points, inflict 500 damage to your opponent.",
+      "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5197&ope=2&request_locale=en",
+      "certifiedAtStart": false
+    },
+    {
+      "id": "40633297",
+      "name": "Bad Reaction to Simochi",
+      "konamiId": 4694,
+      "officialText": "As long as this card remains face-up on the field, any effect of increasing your opponent's Life Points is changed to inflict the same amount of points in damage to your opponent's Life Points.",
+      "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4694&ope=2&request_locale=en",
+      "certifiedAtStart": false
+    },
+    {
+      "id": "35346968",
+      "name": "Solemn Wishes",
+      "konamiId": 5125,
+      "officialText": "Each time you draw a card(s), you gain 500 LP.",
+      "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5125&ope=2&request_locale=en",
+      "certifiedAtStart": false
+    }
+  ],
+  "implementation": {
+    "files": [
+      "src/lpEventTagAdapter.ts",
+      "tests/lpEventTagAdapter.test.cjs",
+      "docs/evidence/m638-lp-event-tag-adapter.json",
+      ".github/workflows/m638-lp-event-tag-adapter.yml"
+    ],
+    "scope": "Adaptador TagDuel isolado e regressões focadas; sem resolver central, catálogo, certificação, allowlist, banco ou comandos."
+  },
+  "handoff": {
+    "targetPR": 17,
+    "commentId": 7181835623,
+    "status": "requested by M637; awaiting explicit owner release",
+    "blockedFiles": [
+      "src/monsterEffects.ts",
+      "src/duelEngineCurrent.ts"
+    ],
+    "thisRunDoesNotTouchBlockedFiles": true
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "verification": {
+    "focusedScenarios": 0,
+    "focusedTestResult": "pending",
+    "typecheck": "pending",
+    "build": "pending",
+    "evidenceValidation": "pending",
+    "adapterBehaviorVerifiedCards": 0,
+    "behaviorCertifiedCards": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "liveDiscordValidation": false
+  },
+  "effectiveWorkMinutes": 0,
+  "targetEffectiveWorkMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "nextTask": "Implementar o pipeline de LP com precedência de Simochi, gatilho de Fire Princess, evento de compra de Solemn Wishes, negação por efeitos contínuos, idempotência e conservação de UID/zonas.",
+  "nextWindow": "2026-11-26T05:30:00-03:00",
+  "scopeReleasedToAuxiliary": []
+}
