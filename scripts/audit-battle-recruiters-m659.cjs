@@ -1,0 +1,35 @@
+const fs=require('node:fs');
+const path=require('node:path');
+const {execFileSync}=require('node:child_process');
+const root=path.resolve(__dirname,'..');
+const evidencePath=path.join(root,'artifacts','m659-battle-recruiters-results.json');
+if(!fs.existsSync(evidencePath))throw new Error('Evidência M659 ausente.');
+const evidence=JSON.parse(fs.readFileSync(evidencePath,'utf8'));
+const manifest=JSON.parse(fs.readFileSync(path.join(root,'catalog/engine-v9/manifest.json'),'utf8'));
+const revision=manifest.revisions.find(item=>item.id===manifest.current);
+if(!revision)throw new Error('Revisão atual do catálogo ausente.');
+const catalog=JSON.parse(fs.readFileSync(path.join(root,'catalog/engine-v9',revision.file),'utf8'));
+const ids=new Set(catalog.cards.map(card=>card.id));
+if(evidence.mission!=='M659'||evidence.passed!==true||evidence.scenarioCount<35||
+ evidence.completed!==evidence.scenarioCount||evidence.inventoryConservationChecks<8)
+ throw new Error('A suíte M659 não passou integralmente.');
+if(evidence.certifiedCardsBefore!==969||evidence.certifiedCardsAfter!==catalog.cards.length||
+ evidence.newCertifications!==0||evidence.inventoryGrants!==0)
+ throw new Error('Contagem, certificação ou inventário inesperados.');
+for(const id of ['97077563','95178994','22567609'])if(ids.has(id))
+ throw new Error('Carta não testada foi liberada no catálogo: '+id);
+if(evidence.integratedIntoCentralResolver!==false||evidence.discordLiveValidated!==false||
+ evidence.productionChanged!==false)throw new Error('A evidência exagera integração, Discord ou produção.');
+const protectedFiles={
+ 'src/duelEngineCurrent.ts':'7e16627a2d4e1c7d0aff52fc9e63dc6b85f0f867',
+ 'src/duelEngine.ts':'1683635296a86910b3655bd09f6c068c054f3fbf',
+ 'src/monsterEffects.ts':'c8ba857e3e6534b1a42dde35e9f2a3a36e51bdf2',
+ 'src/cardCertifications.ts':'3725be7ab73c4ce441cdf561037acfaeaa321f6e',
+ 'catalog/engine-v9/manifest.json':'f59955155af85aa94b3a91231ff1a279a1d65f07'
+};
+for(const [file,expected] of Object.entries(protectedFiles)){
+ const actual=execFileSync('git',['hash-object',file],{cwd:root,encoding:'utf8'}).trim();
+ if(actual!==expected)throw new Error('Arquivo central/catálogo alterado: '+file);
+}
+console.log(JSON.stringify({mission:'M659',scenarios:evidence.scenarioCount,passed:evidence.completed,
+ certifiedCards:catalog.cards.length,newCertifications:0,inventoryGrants:0,catalogRevision:manifest.current},null,2));
