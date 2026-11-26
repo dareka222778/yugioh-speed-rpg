@@ -23,6 +23,9 @@ if(evidence.integratedIntoCentralResolver!==false||evidence.discordLiveValidated
 const protectedFiles={
  'src/duelEngineCurrent.ts':'7e16627a2d4e1c7d0aff52fc9e63dc6b85f0f867',
  'src/duelEngine.ts':'1683635296a86910b3655bd09f6c068c054f3fbf',
+ 'src/tagDuel.ts':'25bfbd7b135cd94a9b416529e6fdd1cebafd4dcd',
+ 'src/effectRegistry.ts':'568324c1fbd7a2e43e260625c9af77e76c851cda',
+ 'src/cardMetadata.ts':'2e9680f0f31824ba6abb59e4abdcd863cf68f2dd',
  'src/monsterEffects.ts':'c8ba857e3e6534b1a42dde35e9f2a3a36e51bdf2',
  'src/cardCertifications.ts':'3725be7ab73c4ce441cdf561037acfaeaa321f6e',
  'catalog/engine-v9/manifest.json':'f59955155af85aa94b3a91231ff1a279a1d65f07'
