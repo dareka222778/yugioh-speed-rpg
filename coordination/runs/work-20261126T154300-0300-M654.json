@@ -1,0 +1,90 @@
+{
+  "format": 1,
+  "runId": "work-20261126T154300-0300-M654",
+  "mission": "M654",
+  "owner": "Work principal",
+  "priority": "P1",
+  "priorityRequestedBy": "User",
+  "status": "reserved-and-implementing",
+  "startedAt": "2026-11-26T15:43:00-03:00",
+  "endedAt": null,
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "6eeca3bee5e470c519ce33c6c9c0bbb7404ceec1",
+  "branch": "feat/work-m654-triple-coin-destruction-20261126",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "6eeca3bee5e470c519ce33c6c9c0bbb7404ceec1",
+  "branchHeadSha": "6eeca3bee5e470c519ce33c6c9c0bbb7404ceec1",
+  "pullRequest": null,
+  "reservedFiles": [
+    "src/coinTossTagAdapter.ts",
+    "tests/coinTossTagAdapter.test.cjs",
+    "docs/evidence/m654-triple-coin-destruction.json",
+    ".github/workflows/m654-triple-coin-destruction.yml"
+  ],
+  "cards": [
+    {
+      "id": "21466326",
+      "name": "Barrel Dragon",
+      "konamiDatabaseId": 4749,
+      "firstTCGRelease": "2002-06-26",
+      "admittedAtStart": false,
+      "certifiedAtStart": false
+    },
+    {
+      "id": "25551951",
+      "name": "Blowback Dragon",
+      "konamiDatabaseId": 5964,
+      "firstTCGRelease": "2004-06-01",
+      "admittedAtStart": false,
+      "certifiedAtStart": false
+    }
+  ],
+  "handoff": {
+    "status": "Sem conflito com reservas ativas; adapter isolado em arquivos novos. M637 mantém responsabilidade pelo resolver central.",
+    "conflictingReservations": 0,
+    "blockedFiles": [
+      "src/monsterEffects.ts",
+      "src/duelEngineCurrent.ts",
+      "src/effectRegistry.ts",
+      "src/commands/duel"
+    ],
+    "thisRunDoesNotTouchBlockedFiles": true
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "releasedCardIds": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "verification": {
+    "focusedScenarios": 0,
+    "focusedTestResult": "pending",
+    "typecheck": "pending",
+    "build": "pending",
+    "fullTestSuite": "pending",
+    "classicTagAudit": "pending",
+    "evidenceValidation": "pending",
+    "adapterBehaviorVerifiedCards": 0,
+    "behaviorCertifiedCards": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "liveDiscordValidation": false
+  },
+  "effectiveWorkMinutes": 0,
+  "targetEffectiveWorkMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "nextTask": "Implementar a família de destruição por três moedas; preparar o próximo lote após CI.",
+  "nextWindow": "2026-11-26T17:30:00-03:00",
+  "scopeReleasedToAuxiliary": []
+}
