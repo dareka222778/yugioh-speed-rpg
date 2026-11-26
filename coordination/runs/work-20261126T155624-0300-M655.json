@@ -1,0 +1,90 @@
+{
+  "format": 1,
+  "runId": "work-20261126T155624-0300-M655",
+  "mission": "M655",
+  "owner": "Work principal",
+  "priority": "P1",
+  "priorityRequestedBy": "User",
+  "status": "reserved-and-implementing",
+  "startedAt": "2026-11-26T15:56:24-03:00",
+  "endedAt": null,
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "b47096d0645eeb73f533ed2816118d5193de3c9e",
+  "branch": "feat/work-m655-continuous-position-policies-20261126",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "b47096d0645eeb73f533ed2816118d5193de3c9e",
+  "branchHeadSha": "b47096d0645eeb73f533ed2816118d5193de3c9e",
+  "pullRequest": null,
+  "reservedFiles": [
+    "src/positionPolicyTagAdapter.ts",
+    "tests/positionPolicyTagAdapter.test.cjs",
+    "docs/evidence/m655-position-policies.json",
+    ".github/workflows/m655-position-policies.yml"
+  ],
+  "cards": [
+    {
+      "id": "52503575",
+      "name": "Final Attack Orders",
+      "firstTCGRelease": "2003-12-01",
+      "admittedAtStart": false,
+      "certifiedAtStart": false,
+      "officialEffect": "All face-up monsters on the field are changed to Attack Position and their battle positions cannot be changed."
+    },
+    {
+      "id": "62867251",
+      "name": "Light of Intervention",
+      "firstTCGRelease": "2002-10-20",
+      "admittedAtStart": false,
+      "certifiedAtStart": false,
+      "officialEffect": "While this card is on the field, Monster Cards cannot be Set or flipped face-down. If a Monster Card would be Set, it must be Normal Summoned in face-up Defense Position."
+    }
+  ],
+  "handoff": {
+    "status": "Sem conflito com reservas ativas; adapter isolado em arquivos novos.",
+    "conflictingReservations": 0,
+    "blockedFiles": [
+      "src/monsterEffects.ts",
+      "src/duelEngineCurrent.ts",
+      "src/effectRegistry.ts",
+      "src/commands/duel"
+    ],
+    "thisRunDoesNotTouchBlockedFiles": true
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "releasedCardIds": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "verification": {
+    "focusedScenarios": 0,
+    "focusedTestResult": "pending",
+    "typecheck": "pending",
+    "build": "pending",
+    "fullTestSuite": "pending",
+    "classicTagAudit": "pending",
+    "evidenceValidation": "pending",
+    "adapterBehaviorVerifiedCards": 0,
+    "behaviorCertifiedCards": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "liveDiscordValidation": false
+  },
+  "effectiveWorkMinutes": 0,
+  "targetEffectiveWorkMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "nextTask": "Implementar o adapter de políticas contínuas de posição e seus cenários TagDuel 2v2; preparar lote independente durante a CI.",
+  "nextWindow": "2026-11-26T17:30:00-03:00",
+  "scopeReleasedToAuxiliary": []
+}
