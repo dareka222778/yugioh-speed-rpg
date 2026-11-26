@@ -18,7 +18,7 @@ function unique(kind,predicate,count=100){
   seen.add(name);return true;
  }).slice(0,count);
 }
-const normal=unique('monster',card=>card.monsterType==='normal'&&Number.isFinite(card.atk));
+const normal=unique('monster',card=>card.cardType==='Normal Monster'&&Number.isFinite(card.atk));
 const ratFixture=normal.find(card=>card.atk>1500&&card.attribute!=='EARTH');
 const germFixture=normal.find(card=>card.atk<=1000&&card.id!==ratFixture?.id);
 const momongaFixture=normal.find(card=>card.atk<=1000&&card.id!==ratFixture?.id&&card.id!==germFixture?.id);
