@@ -35,7 +35,7 @@
   "tests": {
     "file": "tests/inexperiencedSpyTagAdapter.test.cjs",
     "command": "node --test tests/inexperiencedSpyTagAdapter.test.cjs",
-    "scenarios": 12,
+    "scenarios": 13,
     "covered": [
       "catalogue remains unchanged",
       "only activating physical seat receives card identity",
@@ -48,7 +48,8 @@
       "stale target selection",
       "non-enumerable private receipt and public view",
       "six-card End Phase ownership",
-      "3+3 zones, Main Deck 20-30 and Extra Deck 5"
+      "3+3 zones, Main Deck 20-30 and Extra Deck 5",
+      "public TagDuel projection does not expose the selected hand card identity"
     ]
   },
   "certification": {
@@ -56,7 +57,8 @@
     "newBehaviorCertifiedCards": 0,
     "catalogAdmission": false,
     "automaticCertification": false,
-    "inventoryGrants": 0
+    "inventoryGrants": 0,
+    "adapterBehaviorVerifiedCards": 1
   },
   "integration": {
     "centralResolver": false,
