@@ -1,0 +1,29 @@
+name: M422 attribute battle recruiter focused validation
+
+on:
+  pull_request:
+    paths:
+      - 'src/attributeBattleRecruit.ts'
+      - 'tests/attributeBattleRecruit.test.cjs'
+      - 'docs/evidence/m422-attribute-battle-recruit.json'
+      - '.github/workflows/m422-attribute-battle-recruit.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  attribute-battle-recruit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Run attribute battle recruit behavior tests
+        run: node --test tests/attributeBattleRecruit.test.cjs
