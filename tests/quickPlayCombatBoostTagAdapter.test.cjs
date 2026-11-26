@@ -13,8 +13,10 @@ const {
 
 const NORMALS=[...new Set(tag.tagNormalCardIds)];
 const MONSTER=NORMALS.find(id=>getPlayableCard(id)?.kind==='monster');
+const FIELD=enabledCardIds.find(id=>getPlayableCard(id)?.kind==='spell'&&getPlayableCard(id)?.field===true);
 assert.ok(NORMALS.length>=20,'fixtures need four physical 20-card decks');
 assert.ok(MONSTER,'fixtures need at least one certified normal monster');
+assert.ok(FIELD,'fixtures need one certified Field Spell');
 let sequence=0;
 function deck(){return NORMALS.slice(0,20);}
 function member(seat){return 'm648-seat-'+seat;}
@@ -263,7 +265,7 @@ test('activation and resolution preserve all physical UIDs and do not mutate the
 test('the Field Zone remains separate from the three shared Spell/Trap Zones',()=>{
   const state=create(0,'field-zone'),monster=addMonster(state,0);
   const source=addSourceToBackrow(state,0,0,RUSH_RECKLESSLY_ID,state.core.turn-1);
-  state.core.players[0].field={...replaceDeckCard(state,0,NORMALS[1]),faceUp:true,setTurn:state.core.turn};
+  state.core.players[0].field={...replaceDeckCard(state,0,FIELD),faceUp:true,setTurn:state.core.turn};
   assert.equal(activate(state,0,source,monster.uid).status,'activated');
 });
 test('hand overflow remains an End Phase responsibility and the adapter never discards',()=>{
