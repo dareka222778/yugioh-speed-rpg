@@ -24,9 +24,9 @@
       "graveEffect": "inflict 500 damage to the opposing team"
     }
   ],
-  "scenarioCount": 27,
+  "scenarioCount": 28,
   "verification": {
-    "focusedTests": 27,
+    "focusedTests": 28,
     "adapterBehaviorVerifiedCards": 2,
     "behaviorCertifiedCards": 0,
     "playableCatalogAdmission": false,
