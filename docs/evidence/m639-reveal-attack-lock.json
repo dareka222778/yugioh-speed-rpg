@@ -63,7 +63,8 @@
     "newBehaviorCertifiedCards": 0,
     "catalogAdmission": false,
     "automaticCertification": false,
-    "inventoryGrants": 0
+    "inventoryGrants": 0,
+    "adapterBehaviorVerifiedCards": 2
   },
   "integration": {
     "centralResolver": false,
