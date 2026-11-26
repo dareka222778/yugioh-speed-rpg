@@ -1,0 +1,100 @@
+{
+  "format": 1,
+  "runId": "work-20261126T152846-0300-M653",
+  "mission": "M653",
+  "owner": "Work principal",
+  "priority": "P1",
+  "priorityRequestedBy": "User",
+  "status": "reserved-and-implementing",
+  "startedAt": "2026-11-26T15:28:46-03:00",
+  "endedAt": null,
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "6b49948e401cc7adb338071f726c75a015d80375",
+  "branch": "feat/work-m653-dice-stat-adapters-20261126",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "6b49948e401cc7adb338071f726c75a015d80375",
+  "branchHeadSha": "6b49948e401cc7adb338071f726c75a015d80375",
+  "pullRequest": null,
+  "reservedFiles": [
+    "src/diceStatTagAdapter.ts",
+    "tests/diceStatTagAdapter.test.cjs",
+    "docs/evidence/m653-dice-stat-adapters.json",
+    ".github/workflows/m653-dice-stat-adapters.yml"
+  ],
+  "scope": "Adapter comportamental isolado para Maximum Six (30707994), Graceful Dice (74137509) e Skull Dice (00126218). Reutilizar o fluxo HMAC persistido para um dado de seis faces; validar janela de ativação, propriedade física 2v2, efeitos em monstros da equipe correta, expiração no fim do turno e bônus face-up de Maximum Six. Testes de regressão sem admissão automática.",
+  "cards": [
+    {
+      "id": "30707994",
+      "name": "Maximum Six",
+      "konamiDatabaseId": 5943,
+      "ocgFirstRelease": "2003-09-19",
+      "tcgFirstRelease": "2008-05-13",
+      "admittedAtStart": false,
+      "certifiedAtStart": false
+    },
+    {
+      "id": "74137509",
+      "name": "Graceful Dice",
+      "konamiDatabaseId": 4815,
+      "tcgFirstRelease": "2002-10-15",
+      "admittedAtStart": false,
+      "certifiedAtStart": false
+    },
+    {
+      "id": "00126218",
+      "name": "Skull Dice",
+      "konamiDatabaseId": 4816,
+      "tcgFirstRelease": "2002-10-15",
+      "admittedAtStart": false,
+      "certifiedAtStart": false
+    }
+  ],
+  "handoff": {
+    "status": "Sem conflito com reservas ativas; nenhum handoff central necessário para adapter isolado. M637 mantém responsabilidade pelos arquivos centrais.",
+    "conflictingReservations": 0,
+    "blockedFiles": [
+      "src/monsterEffects.ts",
+      "src/duelEngineCurrent.ts",
+      "src/effectRegistry.ts",
+      "src/commands/duel"
+    ],
+    "thisRunDoesNotTouchBlockedFiles": true
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "releasedCardIds": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "verification": {
+    "focusedScenarios": 0,
+    "focusedTestResult": "pending",
+    "typecheck": "pending",
+    "build": "pending",
+    "fullTestSuite": "pending",
+    "classicTagAudit": "pending",
+    "evidenceValidation": "pending",
+    "adapterBehaviorVerifiedCards": 0,
+    "behaviorCertifiedCards": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "liveDiscordValidation": false
+  },
+  "effectiveWorkMinutes": 0,
+  "targetEffectiveWorkMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "nextTask": "Implementar adapter e testes de regressão; abrir PR draft e acompanhar CI.",
+  "nextWindow": "2026-11-26T17:30:00-03:00",
+  "scopeReleasedToAuxiliary": []
+}
