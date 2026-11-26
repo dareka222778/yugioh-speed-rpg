@@ -25,5 +25,5 @@ jobs:
       - run: npm ci
       - run: npm run check
       - run: npm run build
-      - run: node -e "const e=JSON.parse(require('node:fs').readFileSync('docs/evidence/m646-exchange.json','utf8')); if(e.mission!=='M646'||e.verification.focusedTests!==20||e.verification.behaviorCertifiedCards!==0) process.exit(1)"
+      - run: node -e "const e=JSON.parse(require('node:fs').readFileSync('docs/evidence/m646-exchange.json','utf8')); if(e.mission!=='M646'||e.verification.focusedTests!==23||e.verification.behaviorCertifiedCards!==0) process.exit(1)"
       - run: node --test tests/exchangeTagAdapter.test.cjs
