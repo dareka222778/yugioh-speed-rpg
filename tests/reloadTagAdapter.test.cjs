@@ -114,7 +114,9 @@ test('the shuffle uses the persisted HMAC duel random stream, not Math.random or
   assert.match(result.state.core.random.seed,/^[a-f0-9]{64}$/);
 });
 test('Reload with no remaining hand cards resolves with zero draws and preserves the Deck',()=>{
-  const state=create(0,'empty-hand'),source=addReloadToHand(state,0);
+  const state=create(0,'empty-hand'),source=addReloadToHand(state,0),actor=holder(state,0);
+  actor.grave.push(...actor.hand.filter(card=>card.uid!==source));
+  actor.hand=[actor.hand.find(card=>card.uid===source)];
   const activation=activate(state,0,source),beforeDeck=holder(activation.state,0).deck.length;
   assert.equal(holder(activation.state,0).hand.length,0);
   const result=resolve(activation);
@@ -123,7 +125,7 @@ test('Reload with no remaining hand cards resolves with zero draws and preserves
   assert.equal(result.status,'resolved');
 });
 test('negation sends only the Spell to its original owner Graveyard and consumes no shuffle randomness',()=>{
-  const state=create(0,'negated'),source=addReloadToHand(state,0,1),activation=activate(state,0,source);
+  const state=create(0,'negated'),source=addReloadToBackrow(state,0,1,state.core.turn-1),activation=activate(state,0,source);
   const beforeHand=holder(activation.state,0).hand.map(card=>card.uid);
   const beforeDeck=holder(activation.state,0).deck.map(card=>card.uid);
   const counter=activation.state.core.random.counter;
