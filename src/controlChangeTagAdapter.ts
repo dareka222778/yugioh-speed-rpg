@@ -118,7 +118,7 @@ function mainPhaseTeam(duel:TagDuel):Team|null{
 function sourceInActiveHand(
  duel:TagDuel,team:Team,uid:string,cardId:string,lookup:ControlChangeLookup
 ):{card:{uid:string;id:string};ownerSeat:Seat}|undefined{
- const ownerSeat=physicalSeat(uid),activeSeat=duel.active[team];
+ const ownerSeat=physicalSeat(uid),activeSeat=duel.active[team] as Seat;
  if(ownerSeat===null||ownerSeat!==activeSeat)return;
  const card=duel.core.players[team].hand.find(candidate=>candidate.uid===uid&&candidate.id===cardId);
  if(!card||lookup(card.id)?.kind!=='spell')return;
@@ -193,7 +193,8 @@ export function snatchStealActions(
  if(lookup(cardId)?.kind!=='spell')return [];
  const sources=duel.core.players[team].hand.filter(card=>
   card.id===cardId&&physicalSeat(card.uid)===duel.active[team]&&lookup(card.id)?.kind==='spell');
- const targets=duel.core.players[1-team].monsters.filter(monster=>
+ const opposingTeam=(1-team) as Team;
+ const targets=duel.core.players[opposingTeam].monsters.filter(monster=>
   monster.faceUp&&lookup(monster.id)?.kind==='monster'&&canAffectMonster(duel.core,monster.uid,'spell')&&
   !duel.core.players.some(player=>player.backrow.some(card=>card.equippedTo===monster.uid)));
  return sources.flatMap(source=>targets.map(target=>({
@@ -212,7 +213,8 @@ export function creatureSwapActions(
   card.id===cardId&&physicalSeat(card.uid)===duel.active[team]&&lookup(card.id)?.kind==='spell');
  const own=duel.core.players[team].monsters.filter(monster=>
   lookup(monster.id)?.kind==='monster'&&canAffectMonster(duel.core,monster.uid,'spell'));
- const opposing=duel.core.players[1-team].monsters.filter(monster=>
+ const opposingTeam=(1-team) as Team;
+ const opposing=duel.core.players[opposingTeam].monsters.filter(monster=>
   lookup(monster.id)?.kind==='monster'&&canAffectMonster(duel.core,monster.uid,'spell'));
  return sources.flatMap(source=>own.flatMap(first=>opposing.map(second=>({
   kind:'spell' as const,card:source.uid,effect:'creature-swap' as const,
@@ -233,11 +235,12 @@ export function activateSnatchSteal(
  if(team===null)throw new Error('Snatch Steal só pode ser ativado na Main Phase do controlador.');
  const cardId=sourceIdFor('snatch-steal',options.cardId);
  const legal=snatchStealActions(input.duel,lookup,{cardId});
- if(!legal.some(action=>action.card===sourceUid&&action.target===options.targetUid)){
+ if(!legal.some(action=>action.kind==='equip'&&action.card===sourceUid&&action.target===options.targetUid)){
   throw new Error('Snatch Steal não tem alvo válido ou a carta não pertence ao participante ativo.');
  }
  const source=sourceInActiveHand(input.duel,team,sourceUid,cardId,lookup);
- const target=findMonster(input.duel.core,1-team,options.targetUid);
+ const opposingTeam=(1-team) as Team;
+ const target=findMonster(input.duel.core,opposingTeam,options.targetUid);
  const targetBinding=bindTarget(input.duel.core,options.targetUid);
  if(!source||!target||!targetBinding||targetBinding.zone!=='monsters'){
   throw new Error('O Equip ou o monstro-alvo saiu da zona esperada.');
@@ -246,8 +249,8 @@ export function activateSnatchSteal(
  putSpellOnField(next.duel.core,team,sourceUid,cardId,options.targetUid);
  next.pending[activationId]={
   activationId,effect:'snatch-steal',sourceUid,sourceId:cardId,sourceOwnerSeat:source.ownerSeat,
-  controllerTeam:team,controllerSeat:next.duel.active[team],turn:next.duel.core.turn,
-  targetUid:options.targetUid,targetBinding,originalControllerTeam:1-team
+  controllerTeam:team,controllerSeat:next.duel.active[team] as Seat,turn:next.duel.core.turn,
+  targetUid:options.targetUid,targetBinding,originalControllerTeam:opposingTeam
  };
  assertSameInventory(before,next.duel);
  assertControlChangeRules(next.duel);
@@ -263,13 +266,14 @@ export function activateCreatureSwap(
  if(team===null)throw new Error('Creature Swap só pode ser ativada na Main Phase do controlador.');
  const cardId=sourceIdFor('creature-swap',options.cardId);
  const legal=creatureSwapActions(input.duel,lookup,{cardId});
- if(!legal.some(action=>action.card===sourceUid&&action.ownTarget===options.ownTargetUid&&
+ if(!legal.some(action=>action.kind==='spell'&&action.card===sourceUid&&action.ownTarget===options.ownTargetUid&&
   action.opposingTarget===options.opposingTargetUid)){
   throw new Error('Creature Swap exige um monstro válido de cada equipe.');
  }
  const source=sourceInActiveHand(input.duel,team,sourceUid,cardId,lookup);
  const ownTarget=findMonster(input.duel.core,team,options.ownTargetUid);
- const opposingTarget=findMonster(input.duel.core,1-team,options.opposingTargetUid);
+ const opposingTeam=(1-team) as Team;
+ const opposingTarget=findMonster(input.duel.core,opposingTeam,options.opposingTargetUid);
  const ownTargetBinding=bindTarget(input.duel.core,options.ownTargetUid);
  const opposingTargetBinding=bindTarget(input.duel.core,options.opposingTargetUid);
  if(!source||!ownTarget||!opposingTarget||!ownTargetBinding||!opposingTargetBinding||
@@ -280,7 +284,7 @@ export function activateCreatureSwap(
  putSpellOnField(next.duel.core,team,sourceUid,cardId);
  next.pending[activationId]={
   activationId,effect:'creature-swap',sourceUid,sourceId:cardId,sourceOwnerSeat:source.ownerSeat,
-  controllerTeam:team,controllerSeat:next.duel.active[team],turn:next.duel.core.turn,
+  controllerTeam:team,controllerSeat:next.duel.active[team] as Seat,turn:next.duel.core.turn,
   ownTargetUid:options.ownTargetUid,opposingTargetUid:options.opposingTargetUid,
   ownTargetBinding,opposingTargetBinding
  };

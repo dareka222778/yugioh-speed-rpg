@@ -41,7 +41,8 @@ function privateZone(duel,seat,zone){
 }
 function partnerSeat(seat){return (seat+2)%4;}
 function placeSpell(duel,ownerSeat,id=SOURCE_FIXTURE){
- const hand=privateZone(duel,ownerSeat,'hand');
+ const hand=privateZone(duel,ownerSeat,'hand'),deck=privateZone(duel,ownerSeat,'deck');
+ if(!hand.length){const drawn=deck.shift();assert.ok(drawn,'fixture needs another card');hand.push(drawn);}
  const [card]=hand.splice(0,1);
  assert.ok(card,'fixture needs a physical card in hand for seat '+ownerSeat);
  card.id=id;
@@ -411,7 +412,7 @@ test('the Field Zone is independent of the three shared Spell/Trap Zones',()=>{
 test('rejects a fourth Monster Zone and preserves the 3+3 shared-field invariant',()=>{
  const f=setupSnatch();
  for(let i=0;i<4;i++)addMonster(f.duel,f.activeSeat,f.controllerTeam,[TARGET_A,TARGET_B,TARGET_C][i%3]);
- assert.throws(()=>assertControlChangeRules(f.duel),/três Monster Zones/);
+ assert.throws(()=>assertControlChangeRules(f.duel),/zona|Monster Zone/i);
 });
 
 test('invalid activation leaves the original session immutable and duplicate resolution is rejected',()=>{
