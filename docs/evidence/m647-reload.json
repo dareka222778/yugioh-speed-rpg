@@ -1,0 +1,47 @@
+{
+  "format": 1,
+  "mission": "M647",
+  "card": {
+    "id": "22589918",
+    "konamiId": 5849,
+    "name": "Reload",
+    "namePt": "Recarga",
+    "firstTCGRelease": "2004-03-01",
+    "firstOCGRelease": "2003-04-24",
+    "officialText": "Add all cards in your hand to your Deck and shuffle it. Then draw the same number of cards that you added to your Deck.",
+    "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5849&request_locale=en"
+  },
+  "scope": "TagDuel clássico 2v2. Quick-Play da mão no próprio turno; Quick-Play baixada após turno posterior, inclusive em janela de resposta com prioridade da equipe controladora. Escopo não cobre ativação da mão no turno adversário. Adapter isolado, sem catálogo/resolver central/comandos/persistência/produção.",
+  "behavior": [
+    "ativação Quick-Play da mão no próprio turno em prioridade aberta Main/Battle ou resposta",
+    "Quick-Play baixada não ativa no mesmo turno; pode responder em turno posterior",
+    "mão e Deck do assento físico ativo permanecem privados e coerentes",
+    "todas as cartas restantes da mão retornam ao Deck físico do mesmo assento",
+    "embaralhamento usa o fluxo HMAC persistido do duelo",
+    "compra do mesmo número de cartas devolvidas ao Deck",
+    "negação não embaralha nem compra",
+    "carta Reload vai ao Cemitério da equipe do proprietário original",
+    "compromissos impedem resolução com mão/Deck alterados",
+    "idempotência e conservação de todos os UIDs físicos"
+  ],
+  "invariants": {
+    "mainDeck": "20–30 por assento",
+    "handLimit": 6,
+    "handOverflow": "End Phase",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separada",
+    "extraDeckMax": 5,
+    "inventoryGranted": 0
+  },
+  "verification": {
+    "focusedTests": 21,
+    "adapterBehaviorVerifiedCards": 0,
+    "behaviorCertifiedCards": 0,
+    "automaticCertifications": 0,
+    "playableCatalogAdmission": false,
+    "discordGateway": false,
+    "merge": false,
+    "deploy": false
+  }
+}
