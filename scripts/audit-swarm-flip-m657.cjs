@@ -19,8 +19,8 @@ if(required.some(id=>ids.has(id)))throw new Error('Uma carta não testada foi li
 if(evidence.integratedIntoCentralResolver!==false||evidence.discordLiveValidated!==false||
  evidence.productionChanged!==false)throw new Error('A evidência exagera a integração ou produção.');
 for(const file of ['src/duelEngineCurrent.ts','src/monsterEffects.ts','src/cardCertifications.ts','catalog/engine-v9/manifest.json']){
- const diff=execFileSync('git',['diff','--quiet','origin/feat/rea-engine-recovery-20261026','--',file],{cwd:root,stdio:'ignore'});
- if(diff!==undefined)throw new Error('Arquivo central/catálogo alterado: '+file);
+ try{execFileSync('git',['diff','--quiet','origin/feat/rea-engine-recovery-20261026','--',file],{cwd:root,stdio:'ignore'});}
+ catch{throw new Error('Arquivo central/catálogo alterado: '+file);}
 }
 console.log(JSON.stringify({mission:'M657',scenarios:evidence.scenarioCount,passed:evidence.completed,
  certifiedCards:catalog.cards.length,newCertifications:0,inventoryGrants:0,catalogRevision:manifest.current},null,2));

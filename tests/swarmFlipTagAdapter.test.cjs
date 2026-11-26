@@ -279,7 +279,7 @@ scenario('um ataque ou revelação de batalha não substitui uma Flip Summon',()
  const {session}=setup('m657-not-flip');
  const source=deploy(session,0,fixtures.scarabs),target=deploy(session,1,monsterIds[2],1);
  const core=session.duel.core;
- core.phase='response';core.pending={kind:'attack',actor:0,card:target.uid,stage:'declare'};
+ core.phase='response';core.pending={kind:'none'};
  assert.throws(()=>prepare(session,source,0,'not-flip'),/janela de gatilho/);
 });
 
@@ -287,7 +287,7 @@ scenario('a fonte precisa estar face-up em Posição de Ataque após a Flip Summ
  const {session}=setup('m657-source-face-up');
  const source=deploy(session,0,fixtures.scarabs,0,false,'def'),target=deploy(session,1,monsterIds[2],1);
  const actor=beginFlip(session,0,source);
- source.faceUp=false;
+ source.position='def';
  assert.throws(()=>prepare(session,source,actor,'source-face-up'),/recém-Flip Summoned/);
  assert.ok(target.uid);
 });
@@ -410,13 +410,13 @@ scenario('a Field Zone não consome as três Spell/Trap Zones',()=>{
 
 scenario('quatro monstros na mesma equipe violam o limite de três Monster Zones',()=>{
  const {session}=setup('m657-four-monsters');
- for(let i=0;i<4;i++)deploy(session,0,monsterIds[i],i%2);
+ for(let i=0;i<4;i++)deploy(session,0,monsterIds[i],i%2===0?0:2);
  assert.throws(()=>assertSwarmFlipRules(session.duel),/três Monster Zones/);
 });
 
 scenario('quatro cartas na retaguarda violam o limite de três Spell/Trap Zones',()=>{
  const {session}=setup('m657-four-backrow');
- for(let i=0;i<4;i++)setBackrow(session,0,trapIds[i%trapIds.length],i%2);
+ for(let i=0;i<4;i++)setBackrow(session,0,trapIds[i%trapIds.length],i%2===0?0:2);
  assert.throws(()=>assertSwarmFlipRules(session.duel),/três Spell\/Trap Zones/);
 });
 
