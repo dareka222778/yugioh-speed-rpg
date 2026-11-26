@@ -5,17 +5,23 @@
   "owner": "Work principal",
   "priority": "P1",
   "priorityRequestedBy": "User",
-  "status": "reserved-and-implementing",
+  "status": "implementation-complete-awaiting-review",
   "startedAt": "2026-11-26T01:30:00-03:00",
-  "endedAt": null,
+  "endedAt": "2026-11-26T01:58:32-03:00",
   "repository": "dareka222778/yugioh-speed-rpg",
   "sharedBranch": "feat/rea-engine-recovery-20261026",
   "sharedHeadAtReservation": "58ff7d48eb71a78e5580fb8d0132b27d84b2bbf8",
   "branch": "feat/work-m640-inexperienced-spy-tag-adapter-20261126",
   "baseBranch": "feat/rea-engine-recovery-20261026",
   "baseSha": "58ff7d48eb71a78e5580fb8d0132b27d84b2bbf8",
-  "branchHeadSha": null,
-  "pullRequest": null,
+  "branchHeadSha": "b5b996e86f47be6183dd25475b5924d966b6fc39",
+  "pullRequest": {
+    "number": 579,
+    "url": "https://github.com/dareka222778/yugioh-speed-rpg/pull/579",
+    "state": "open",
+    "draft": true,
+    "base": "feat/rea-engine-recovery-20261026"
+  },
   "reservedFiles": [
     "src/inexperiencedSpyTagAdapter.ts",
     "tests/inexperiencedSpyTagAdapter.test.cjs",
@@ -67,22 +73,28 @@
     "liveDiscordValidation": false
   },
   "verification": {
-    "focusedScenarios": 0,
-    "focusedTestResult": "pending",
-    "typecheck": "pending",
-    "build": "pending",
-    "evidenceValidation": "pending",
-    "adapterBehaviorVerifiedCards": 0,
+    "focusedScenarios": 13,
+    "focusedTestResult": "success",
+    "typecheck": "success",
+    "build": "success",
+    "evidenceValidation": "success",
+    "adapterBehaviorVerifiedCards": 1,
     "behaviorCertifiedCards": 0,
     "automaticCertifications": 0,
     "inventoryGranted": 0,
-    "liveDiscordValidation": false
+    "liveDiscordValidation": false,
+    "ciRuns": [
+      45756400829,
+      45756400816,
+      45756400845,
+      45756400877
+    ]
   },
   "effectiveWorkMinutes": 0,
   "targetEffectiveWorkMinutes": 60,
   "targetMet": false,
   "ciWaitExcluded": true,
-  "nextTask": "Implementar leitura privada por assento, sem mutar a mão-alvo nem serializar o cardId em estado/log público; testar as duas mãos adversárias e negação.",
+  "nextTask": "M640 está pronto para revisão; não mesclar/deployar sem autorização. M641 segue em branch dependente para a próxima carta de inspeção privada.",
   "nextWindow": "2026-11-26T05:30:00-03:00",
   "scopeReleasedToAuxiliary": []
 }
