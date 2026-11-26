@@ -215,6 +215,19 @@ test('activation IDs prevent repeated payment and resolution IDs prevent duplica
   assert.equal(duplicate.state.core.players[0].grave.filter(card=>card.uid===source).length,1);
 });
 
+test('resolution rejects a forged target/source plan instead of trusting a client-supplied activation object',()=>{
+  const state=create(0,'forged-plan');
+  const source=addMindHaxorz(state,0);
+  const activation=activate(state,0,1,source);
+  const forged={...activation.plan,targetSeat:3};
+  assert.throws(()=>resolveMindHaxorz(activation.state,forged),/registro imutável/);
+  const forgedSource={...activation.plan,sourceUid:'m0:forged-source'};
+  assert.throws(()=>resolveMindHaxorz(activation.state,forgedSource),/registro imutável/);
+  const valid=resolveMindHaxorz(activation.state,activation.plan);
+  assert.equal(valid.status,'resolved');
+  assert.ok(privateMindHaxorzRevealForSeat(valid,0));
+});
+
 test('a Trap removed from the field after activation does not prevent its already activated effect from resolving',()=>{
   const state=create(0,'source-removed');
   const source=addMindHaxorz(state,0);
