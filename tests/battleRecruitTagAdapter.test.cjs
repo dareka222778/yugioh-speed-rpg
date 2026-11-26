@@ -5,6 +5,7 @@ const path=require('node:path');
 const {createTagDuel,tagInventory,assertTagDuel}=require('../dist/tagDuel');
 const {enabledCardIds,engineCard}=require('../dist/effectRegistry');
 const {sendMonsterToGrave}=require('../dist/monsterExit');
+const {synchronizeCardLifetimes}=require('../dist/cardLifetime');
 const {createBattleRecruitAdapter,assertBattleRecruitRules,GIANT_RAT_ID,GIANT_GERM_ID,NIMBLE_MOMONGA_ID}=require('../dist/battleRecruitTagAdapter');
 
 function unique(kind,predicate,count=100){
@@ -66,7 +67,7 @@ function deploy(session,seat,id){
  const team=seat%2,ref=take(session,seat,id),turn=session.duel.core.turn;
  const monster={...ref,owner:team,position:'atk',faceUp:true,entered:turn-1,changed:turn-1,attacked:0,atkBoost:0,defBoost:0};
  session.duel.core.players[team].monsters.push(monster);
- assertTagDuel(session.duel);
+ synchronizeCardLifetimes(session.duel.core);assertTagDuel(session.duel);
  return monster;
 }
 function ensureCopiesInDeck(session,seat,id,count){
@@ -76,6 +77,7 @@ function ensureCopiesInDeck(session,seat,id,count){
   if(index<0)break;
   source.deck.push(source.hand.splice(index,1)[0]);
  }
+ synchronizeCardLifetimes(session.duel.core);
  return source.deck.filter(card=>card.id===id);
 }
 function ensureEarthTarget(session,seat,predicate=card=>card.attribute==='EARTH'&&card.atk<=1500){
@@ -85,6 +87,7 @@ function ensureEarthTarget(session,seat,predicate=card=>card.attribute==='EARTH'
   const index=source.hand.findIndex(ref=>{const card=engineCard(ref.id);return card&&predicate(card);});
   if(index>=0){found=source.hand.splice(index,1)[0];source.deck.push(found);}
  }
+ synchronizeCardLifetimes(session.duel.core);
  assert.ok(found,'eligible Earth target is in the active physical deck');
  return found;
 }
@@ -235,6 +238,7 @@ scenario('Giant Rat só consulta o Deck do assento ativo, nunca a reserva do par
  for(const ref of [...active.deck])if(engineCard(ref.id)?.attribute==='EARTH'&&engineCard(ref.id)?.atk<=1500){
   active.deck.splice(active.deck.indexOf(ref),1);active.hand.push(ref);
  }
+ synchronizeCardLifetimes(session.duel.core);
  const reserveTarget=reserve.deck.find(ref=>engineCard(ref.id)?.attribute==='EARTH'&&engineCard(ref.id)?.atk<=1500);
  assert.ok(reserveTarget);
  assert.throws(()=>safeResolve(session,plan.activationId,[reserveTarget.uid]),/Deck ativo/);
@@ -328,7 +332,7 @@ scenario('fonte pode sair do Cemitério após a ativação sem cancelar o efeito
  const {session}=setup(),{source,plan}=prepare(session,'giant-rat',1,'rat-source-leaves','rat-source-leaves');
  const grave=session.duel.core.players[1].grave,index=grave.findIndex(card=>card.uid===source.uid);
  const [card]=grave.splice(index,1);(session.duel.core.players[1].banished??=[]).push(card);
- require('../dist/cardLifetime').synchronizeCardLifetimes(session.duel.core);
+ synchronizeCardLifetimes(session.duel.core);
  const target=ensureEarthTarget(session,1),result=safeResolve(session,plan.activationId,[target.uid]);
  assert.equal(result.status,'summoned');assert.ok(session.duel.core.players[1].monsters.some(monster=>monster.uid===target.uid));
 });
@@ -355,6 +359,7 @@ scenario('mão privada acima de seis permanece intacta até a End Phase',()=>{
  const {session}=setup(),{plan}=prepare(session,'giant-rat',1,'rat-hand-seven','rat-hand-seven');
  const target=ensureEarthTarget(session,1),source=holder(session,1);
  while(source.hand.length<7){const extra=source.deck.pop();assert.ok(extra);source.hand.push(extra);}
+ synchronizeCardLifetimes(session.duel.core);
  const before=hands(session);
  safeResolve(session,plan.activationId,[target.uid]);
  assert.equal(holder(session,1).hand.length,7);assert.deepEqual(hands(session),before);
