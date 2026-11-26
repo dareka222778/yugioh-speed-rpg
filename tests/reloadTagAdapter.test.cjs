@@ -225,3 +225,27 @@ test('the source card can be Set by a different physical owner and still returns
   const activation=activate(state,0,source),result=resolve(activation);
   assert.equal(result.state.core.players[1].grave.some(card=>card.uid===source),true);
 });
+
+test('a Set Quick-Play response resolves with the physical hand and Deck counts conserved',()=>{
+  const state=create(0,'response-resolution'),source=addReloadToBackrow(state,0,1,state.core.turn-1);
+  state.core.current=1;state.core.priority=0;state.core.phase='response';
+  state.core.chain=[{actor:1,card:'m1:response',id:'response'}];
+  state.core.pending={kind:'spell',actor:1,card:'m1:response',id:'response'};
+  const activation=activate(state,state.active[0],source);
+  const handCount=holder(activation.state,0).hand.length;
+  const deckCount=holder(activation.state,0).deck.length;
+  const result=resolve(activation);
+  assert.equal(result.status,'resolved');
+  assert.equal(holder(result.state,0).hand.length,handCount);
+  assert.equal(holder(result.state,0).deck.length,deckCount);
+  assert.equal(result.state.core.players[1].grave.some(card=>card.uid===source),true);
+});
+test('Reload leaves a valid TagDuel state and the public projection hides private hand UIDs',()=>{
+  const state=create(0,'public-projection'),source=addReloadToHand(state,0),activation=activate(state,0,source);
+  const result=resolve(activation),candidate=structuredClone(result.state);
+  candidate.core.players[0].grave=candidate.core.players[0].grave.filter(card=>card.uid!==source);
+  tag.assertTagDuel(candidate);
+  const publicView=tag.publicTagDuel(candidate);
+  const privateUids=[...holder(candidate,0).hand,...holder(candidate,1).hand].map(card=>card.uid);
+  for(const uid of privateUids)assert.equal(JSON.stringify(publicView).includes(uid),false);
+});
