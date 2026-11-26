@@ -1,0 +1,29 @@
+name: M421 battle-destroyed recruit family focused validation
+
+on:
+  pull_request:
+    paths:
+      - 'src/battleDestroyedRecruitFamily.ts'
+      - 'tests/battleDestroyedRecruitFamily.test.cjs'
+      - 'docs/evidence/m421-battle-destroyed-recruit-family.json'
+      - '.github/workflows/m421-battle-destroyed-recruit-family.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  battle-destroyed-recruit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Run battle-destroyed recruit behavior tests
+        run: node --test tests/battleDestroyedRecruitFamily.test.cjs
