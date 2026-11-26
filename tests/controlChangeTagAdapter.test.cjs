@@ -14,6 +14,7 @@ const {
 }=require('../dist/controlChangeTagAdapter');
 
 const SOURCE_FIXTURE='55144522'; // Pot of Greed: enabled Spell fixture
+const FIELD_FIXTURE='86318356'; // Sogen: enabled Field Spell fixture
 const normalDeck=tag.tagNormalCardIds.slice(0,20);
 assert.equal(normalDeck.length,20);
 const TARGET_A=normalDeck[0],TARGET_B=normalDeck[1],TARGET_C=normalDeck[2];
@@ -43,7 +44,7 @@ function partnerSeat(seat){return (seat+2)%4;}
 function placeSpell(duel,ownerSeat,id=SOURCE_FIXTURE){
  const hand=privateZone(duel,ownerSeat,'hand'),deck=privateZone(duel,ownerSeat,'deck');
  if(!hand.length){const drawn=deck.shift();assert.ok(drawn,'fixture needs another card');hand.push(drawn);}
- const card=hand[0];
+ const card=hand[hand.length-1];
  assert.ok(card,'fixture needs a physical card in hand for seat '+ownerSeat);
  card.id=id;
  return card.uid;
@@ -143,7 +144,7 @@ test('Snatch Steal offers only a face-up opposing monster and an active-seat Spe
 
 test('Snatch Steal rejects a target already equipped by another card',()=>{
  const f=setupSnatch();
- const equipUid=placeBackrow(f.duel,f.activeSeat,f.controllerTeam);
+ const equipUid=placeBackrow(f.duel,partnerSeat(f.activeSeat),f.controllerTeam);
  f.duel.core.players[f.controllerTeam].backrow.find(card=>card.uid===equipUid).equippedTo=f.targetUid;
  assert.deepEqual(snatchStealActions(f.duel,lookup,{cardId:SOURCE_FIXTURE}),[]);
 });
@@ -395,13 +396,14 @@ test('a seven-card hand is retained until End Phase; the adapter does not discar
 });
 
 test('the Field Zone is independent of the three shared Spell/Trap Zones',()=>{
- const f=setupSwap(),fieldUid=placeSpell(f.duel,f.activeSeat);
- const fieldHand=privateZone(f.duel,f.activeSeat,'hand'),fieldIndex=fieldHand.findIndex(card=>card.uid===fieldUid);
+ const f=setupSwap(),fieldOwner=partnerSeat(f.activeSeat),fieldUid=placeSpell(f.duel,fieldOwner,FIELD_FIXTURE);
+ const fieldHand=privateZone(f.duel,fieldOwner,'hand'),fieldIndex=fieldHand.findIndex(card=>card.uid===fieldUid);
  const [fieldCard]=fieldHand.splice(fieldIndex,1);
  f.duel.core.players[f.controllerTeam].field={...fieldCard,faceUp:true,setTurn:0};
- for(let i=0;i<3;i++)placeBackrow(f.duel,f.activeSeat,f.controllerTeam);
+ assert.equal(getDuelCard(FIELD_FIXTURE).field,true);
+ for(let i=0;i<3;i++)placeBackrow(f.duel,fieldOwner,f.controllerTeam);
  assert.doesNotThrow(()=>assertControlChangeRules(f.duel));
- placeBackrow(f.duel,f.activeSeat,f.controllerTeam);
+ placeBackrow(f.duel,fieldOwner,f.controllerTeam);
  assert.throws(()=>assertControlChangeRules(f.duel),/três Spell\/Trap Zones/);
 });
 
