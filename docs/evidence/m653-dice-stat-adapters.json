@@ -117,7 +117,9 @@
     "behaviorCertifiedCards": 0,
     "automaticCertifications": 0,
     "inventoryGranted": 0,
-    "liveDiscordValidation": false
+    "liveDiscordValidation": false,
+    "lastPassingWorkflowRun": 45878127659,
+    "lastPassingCommit": "9f680afa8bad590e005bfb75674d0613a7fba053"
   },
   "catalogAtStart": {
     "engineV9Certified": 969,
