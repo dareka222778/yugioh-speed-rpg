@@ -1,0 +1,45 @@
+name: M659 Battle Recruiters TagDuel adapter
+on:
+  pull_request:
+    branches: [feat/rea-engine-recovery-20261026]
+    paths:
+      - src/battleRecruitTagAdapter.ts
+      - tests/battleRecruitTagAdapter.test.cjs
+      - docs/evidence/m659-battle-recruiters.json
+      - scripts/audit-battle-recruiters-m659.cjs
+      - .github/workflows/m659-battle-recruiters.yml
+  push:
+    branches: [feat/work-m659-battle-recruiters-20261126]
+jobs:
+  focused:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - run: node --test tests/battleRecruitTagAdapter.test.cjs
+      - run: node scripts/audit-battle-recruiters-m659.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: m659-battle-recruiters-evidence
+          path: artifacts/m659-battle-recruiters-results.json
+          if-no-files-found: ignore
+          retention-days: 14
+  repository-regression:
+    needs: focused
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npm run audit:tag-classic
