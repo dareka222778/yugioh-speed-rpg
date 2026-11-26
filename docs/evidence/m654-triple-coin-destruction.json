@@ -1,0 +1,120 @@
+{
+  "format": 1,
+  "mission": "M654",
+  "runId": "work-20261126T154300-0300-M654",
+  "priority": "P1",
+  "branch": "feat/work-m654-triple-coin-destruction-20261126",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "b47096d0645eeb73f533ed2816118d5193de3c9e",
+  "cards": [
+    {
+      "id": "21466326",
+      "konamiId": 4749,
+      "name": "Barrel Dragon",
+      "type": "Effect Monster",
+      "firstTCGRelease": "2002-06-26",
+      "officialEffect": "Once per turn: You can toss a coin 3 times. If 2 or more results are heads, destroy 1 monster your opponent controls.",
+      "admitted": false,
+      "certified": false
+    },
+    {
+      "id": "25551951",
+      "konamiId": 5964,
+      "name": "Blowback Dragon",
+      "type": "Effect Monster",
+      "firstTCGRelease": "2004-06-01",
+      "officialEffect": "Once per turn: You can toss a coin 3 times. If 2 or more results are heads, destroy 1 card on the field.",
+      "admitted": false,
+      "certified": false
+    }
+  ],
+  "sources": [
+    {
+      "publisher": "Konami TCG database",
+      "url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4749&ope=2&request_locale=en",
+      "supports": [
+        "Barrel Dragon identity",
+        "three coin tosses",
+        "two or more heads",
+        "opponent monster destruction",
+        "TCG release 2002-06-26"
+      ]
+    },
+    {
+      "publisher": "Konami TCG database",
+      "url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5964&ope=2&request_locale=en",
+      "supports": [
+        "Blowback Dragon identity",
+        "three coin tosses",
+        "two or more heads",
+        "any field card destruction",
+        "TCG release 2004-06-01"
+      ]
+    }
+  ],
+  "behavior": [
+    "Each activation consumes exactly three values from the persisted HMAC-SHA256 duel random stream; no Math.random fallback.",
+    "At least two heads succeeds; zero or one head resolves without a destruction prompt.",
+    "Barrel Dragon offers only affectable monsters controlled by the opposing team, including its inactive partner.",
+    "Blowback Dragon offers affectable monsters, Spell/Trap Zone cards and the independent Field Zone on either team.",
+    "The target is chosen only after a successful coin result; stale target UIDs are rejected and current options are revalidated.",
+    "Destruction uses sendMonsterToGrave/discardBackrow, preserving physical monster ownership, grave triggers, equip cleanup and card lifetimes.",
+    "Soft once-per-turn use is spent on effect resolution; activation negation releases the flag, effect negation does not.",
+    "No automatic discard: hands above six remain unchanged until the End Phase."
+  ],
+  "constraints": {
+    "mainDeck": "20–30 per physical seat",
+    "handLimit": 6,
+    "handCheck": "End Phase",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "extraDeckMax": 5,
+    "fieldZoneIndependent": true,
+    "privateHandsPerSeat": true,
+    "sharedFieldAndGravePerTeam": true,
+    "physicalUidOwnershipPreserved": true
+  },
+  "scenarioCount": 25,
+  "verification": {
+    "focusedScenarios": 25,
+    "focusedTestResult": "pending",
+    "typecheck": "pending",
+    "build": "pending",
+    "fullTestSuite": "pending",
+    "classicTagAudit": "pending",
+    "evidenceValidation": "pending",
+    "adapterBehaviorVerifiedCards": 0,
+    "behaviorCertifiedCards": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "liveDiscordValidation": false
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "releasedCardIds": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0
+  },
+  "scope": {
+    "newFilesOnly": true,
+    "catalogRegistration": false,
+    "certificateAdded": false,
+    "releaseAllowlistChanged": false,
+    "automaticCertification": false,
+    "resolverIntegration": false,
+    "discordIntegration": false,
+    "persistentPlayerDataChanged": false,
+    "inventoryGranted": 0,
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "limitations": [
+    "Adapter isolado: não altera effectRegistry, resolver central, catálogo, certificações, allowlist, comandos, banco ou dados persistentes de jogadores.",
+    "Os testes usam IDs físicos já certificados como fixtures e injetam a identidade mecânica por lookup; os passcodes reais continuam fora do catálogo.",
+    "O host deve encaminhar a janela de ativação/negação e persistir a sessão + contador HMAC atomicamente; o adapter não executa o gateway Discord.",
+    "Não há merge, deploy ou validação de produção."
+  ]
+}
