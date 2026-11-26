@@ -1,0 +1,64 @@
+{
+  "format": 1,
+  "mission": "M659",
+  "status": "implementation-candidate-not-certified",
+  "cards": [
+    {
+      "name": "Giant Rat",
+      "password": "97077563",
+      "konamiId": 4915,
+      "tcgFirstSet": "2002-09-16",
+      "effect": "Quando destruído em batalha e enviado ao Cemitério: pode Invocar por Invocação-Especial 1 monstro EARTH com 1500 ATK ou menos do Deck em Posição de Ataque.",
+      "officialTCG": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4915&ope=2&request_locale=en"
+    },
+    {
+      "name": "Giant Germ",
+      "password": "95178994",
+      "konamiId": 4921,
+      "tcgFirstSet": "2002-09-16",
+      "effect": "Quando destruído em batalha e enviado ao Cemitério: causa 500 de dano ao oponente e pode Invocar qualquer número de Giant Germ do Deck em Posição de Ataque.",
+      "officialTCG": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4921&ope=2&request_locale=en"
+    },
+    {
+      "name": "Nimble Momonga",
+      "password": "22567609",
+      "konamiId": 4922,
+      "tcgFirstSet": "2002-09-16",
+      "effect": "Quando destruído em batalha e enviado ao Cemitério: ganha 1000 PV e pode Invocar qualquer número de Nimble Momonga do Deck em Posição de Defesa face-down.",
+      "officialOCG": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4922&ope=2&request_locale=ae"
+    }
+  ],
+  "mechanics": {
+    "event": "Recibo explícito do host após destruição por batalha e envio ao Cemitério do proprietário físico; fonte deve ter participado da batalha e estar no Cemitério correto.",
+    "giantRat": "Escolha não-direcionada durante a resolução; exatamente zero ou um monstro não-Ritual/Fusão, EARTH, ATK <=1500, do Deck do membro ativo da equipe proprietária.",
+    "giantGerm": "500 de dano primeiro; se o dano for letal, o duelo termina e a etapa de recrutamento não ocorre. Caso contrário, pode Invocar zero ou mais cópias face-up em Ataque, limitadas às zonas disponíveis.",
+    "nimbleMomonga": "Ganha 1000 PV primeiro; pode Invocar zero ou mais cópias face-down em Defesa, limitadas às zonas disponíveis.",
+    "tagOwnership": "O UID m0..m3 preserva o proprietário físico. O efeito no Cemitério pertence à equipe do proprietário; o Deck consultado é o do assento ativo dessa equipe, nunca a mão/Deck privado do parceiro inativo.",
+    "lifecycle": "Uma ativação por par batalha/fonte; IDs de ativação não reutilizáveis; resolução idempotente; remover a fonte do Cemitério após ativação não cancela o efeito."
+  },
+  "constraints": {
+    "mainDeck": "20-30 por assento físico",
+    "handLimit": 6,
+    "handCheck": "End Phase",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separada",
+    "extraDeckMax": 5,
+    "privateHands": "inalteradas",
+    "physicalOwnership": "UID preservado",
+    "inventoryGrants": 0
+  },
+  "certification": {
+    "before": 969,
+    "after": 969,
+    "new": 0,
+    "reason": "Adapter isolado e regressões de contrato; resolver central, effect registry, catálogo engine-v9 e certificados não foram alterados."
+  },
+  "validation": {
+    "suite": "tests/battleRecruitTagAdapter.test.cjs",
+    "expectedMinimumScenarios": 35,
+    "ci": "pending",
+    "discordLive": "not validated",
+    "production": "unchanged"
+  }
+}
