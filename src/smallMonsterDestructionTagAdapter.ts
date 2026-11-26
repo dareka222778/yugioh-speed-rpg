@@ -179,7 +179,7 @@ export function createSmallMonsterDestructionAdapter(lookup:SmallMonsterLookup=d
   if(working.core.turn!==plan.turn)throw new Error('Gatilho Wanghu obsoleto.');
   const source=assertTargetBinding(working,plan.sourceBinding);
   let status:WanghuResolution['status']='source-lost',destroyedUids:string[]=[];
-  if(source&&source.monster.id===KING_TIGER_WANGHU_ID&&source.monster.faceUp&&!monsterEffectsNegated(working.core,plan.sourceUid)){
+  if(source&&(source.monster.id===KING_TIGER_WANGHU_ID||lookup(source.monster.id)?.effect==='wanghu')&&source.monster.faceUp&&!monsterEffectsNegated(working.core,plan.sourceUid)){
    const targets=plan.summonedBindings.map(binding=>({binding,found:assertTargetBinding(working,binding)}))
     .filter(item=>item.found&&item.found.monster.faceUp&&atk(item.found.monster,working.core)<=1400&&canAffectMonster(working.core,item.binding.uid,'monster'));
    for(const item of targets){
