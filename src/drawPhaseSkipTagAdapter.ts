@@ -1,5 +1,6 @@
 import {RULES_PROFILE,rulesFor} from './rulesProfile';
 import {assertTagDuel,tagInventory,type TagDuel} from './tagDuel';
+import {engineCard} from './effectRegistry';
 import {bindTarget,targetBindingValid,type TargetBinding} from './cardLifetime';
 import {sendMonsterToGrave} from './monsterExit';
 import type {DuelState} from './duelEngine';
@@ -85,7 +86,7 @@ export function assertDrawPhaseSkipRules(duel:TagDuel):void{
  for(const held of Object.values(duel.reserves))for(const card of held.extra??[])extraUids.add(card.uid);
  for(const [uid,id] of inventorySnapshot(duel)){
   const seat=physicalSeat(uid);if(seat===null)throw new Error('Carta sem proprietário físico.');
-  if(extraUids.has(uid)||!!require('./effectRegistry').engineCard(id)?.fusion)extra[seat]++;else main[seat]++;
+  if(extraUids.has(uid)||!!engineCard(id)?.fusion)extra[seat]++;else main[seat]++;
  }
  for(let seat=0;seat<4;seat++){
   if(main[seat]<rules.mainDeckMin||main[seat]>rules.mainDeckMax)throw new Error('Deck principal fora de 20–30 no assento '+seat+'.');
@@ -98,7 +99,7 @@ function assertSession(session:DrawSkipSession):void{
  assertTagDuel(session.duel);assertDrawPhaseSkipRules(session.duel);
  for(let seat=0;seat<4;seat++){
   const due=session.skipDrawBySeat[String(seat)]??[];
-  if(!Array.isArray(due)||due.some(turn=>!Number.isSafeInteger(turn)||turn<=session.duel.core.turn)||
+  if(!Array.isArray(due)||due.some(turn=>!Number.isSafeInteger(turn)||turn<session.duel.core.turn)||
    new Set(due).size!==due.length)throw new Error('Fila de Draw Phase inválida para o assento '+seat+'.');
  }
 }
