@@ -1,0 +1,29 @@
+name: M641 Mind Haxorz private inspection adapter
+on:
+  push:
+    branches:
+      - feat/work-m641-mind-haxorz-private-inspection-20261126
+  pull_request:
+    branches:
+      - feat/work-m640-inexperienced-spy-tag-adapter-20261126
+    paths:
+      - src/mindHaxorzTagAdapter.ts
+      - tests/mindHaxorzTagAdapter.test.cjs
+      - docs/evidence/m641-mind-haxorz.json
+      - .github/workflows/m641-mind-haxorz-private-inspection.yml
+permissions:
+  contents: read
+jobs:
+  mind-haxorz:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m641-mind-haxorz.json', 'utf8'))"
+      - run: node --test tests/mindHaxorzTagAdapter.test.cjs
