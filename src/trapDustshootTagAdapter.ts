@@ -250,7 +250,7 @@ export function resolveTrapDustshoot(
       const ownerSeat=physicalSeat(selected.uid);
       const owner=physicalHolder(next,ownerSeat);
       target.hand=target.hand.filter(card=>card.uid!==selected!.uid);
-      if(getDuelCard(selected.id)?.fusion)owner.extra?.push(selected);
+      if(getDuelCard(selected.id)?.fusion){owner.extra??=[];owner.extra.push(selected);}
       else{
         owner.deck.push(selected);
         shuffleDuel(owner.deck,next.core);
