@@ -125,7 +125,7 @@ function readAttackDeclaration(duel:TagDuel,actorSeat:number){
   throw new Error('Somente o participante ativo da equipe defensora pode responder ao ataque.');
  }
  const attacker=findMonster(duel,attackerTeam,pending.card);
- if(!attacker||!attacker.monster.faceUp||attacker.monster.position!=='atk'){
+ if(!attacker||!attacker.monster.faceUp||attacker.monster.position!=='atk'||attacker.monster.attacked<1||(attacker.monster.attackCount??0)<1){
   throw new Error('O atacante declarado não está face-up em Posição de Ataque.');
  }
  const declaredTargetUid=pending.target??null;
@@ -233,6 +233,8 @@ export function createBattleTargetPolicyAdapter(lookup:BattleTargetLookup=defaul
    replacement.monster.position='atk';
    replacement.monster.faceUp=true;
    replacement.monster.changed=working.core.turn;
+   replacement.monster.attacked=1;
+   replacement.monster.attackCount=1;
    pending.card=selectedUid;
    result={activationId,effect:plan.effect,sourceUid:plan.sourceUid,sourceOwnerSeat:plan.sourceOwnerSeat,
     attackerTeam:plan.attackerTeam,defenderTeam:plan.defenderTeam,originalAttackerUid:plan.attackerUid,

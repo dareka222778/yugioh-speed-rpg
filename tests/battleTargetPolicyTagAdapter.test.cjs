@@ -66,6 +66,7 @@ function setTrap(session,team,id,seat=team,options={}){
 }
 function beginAttack(session,attackerTeam,attacker,targetUid=null){
  const duel=session.duel,defenderTeam=1-attackerTeam;
+ attacker.attacked=1;attacker.attackCount=1;
  assert.equal(duel.core.current,attackerTeam);
  duel.core.priority=defenderTeam;
  duel.core.phase='response';
@@ -261,7 +262,8 @@ scenario('Dark Spirit of the Silent substitui o atacante e preserva o alvo decla
  assert.equal(result.attackTargetUid,target.uid);
  assert.equal(session.duel.core.players[1].monsters.find(card=>card.uid===replacement.uid).position,'atk');
  assert.equal(session.duel.core.players[1].monsters.find(card=>card.uid===replacement.uid).changed,session.duel.core.turn);
- assert.equal(session.duel.core.players[1].monsters.find(card=>card.uid===original.uid).attacked,0);
+ assert.equal(session.duel.core.players[1].monsters.find(card=>card.uid===original.uid).attacked,1);
+ assert.equal(session.duel.core.players[1].monsters.find(card=>card.uid===replacement.uid).attacked,1);
  assertConserved(before,beforeHands,session);
 });
 
