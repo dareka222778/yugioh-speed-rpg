@@ -1,0 +1,79 @@
+{
+  "format": 1,
+  "runId": "work-20261126T053900-0300-M644",
+  "mission": "M644",
+  "owner": "Work principal",
+  "priority": "P1",
+  "priorityRequestedBy": "User",
+  "status": "reserved-and-implementing",
+  "startedAt": "2026-11-26T05:39:00-03:00",
+  "endedAt": null,
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "456368aae8f3c2171061b8992fb3dc6fa8846afc",
+  "branch": "feat/work-m644-graceful-charity-tag-adapter-20261126",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "456368aae8f3c2171061b8992fb3dc6fa8846afc",
+  "branchHeadSha": "456368aae8f3c2171061b8992fb3dc6fa8846afc",
+  "pullRequest": null,
+  "reservedFiles": [
+    "src/gracefulCharityTagAdapter.ts",
+    "tests/gracefulCharityTagAdapter.test.cjs",
+    "docs/evidence/m644-graceful-charity.json",
+    ".github/workflows/m644-graceful-charity.yml"
+  ],
+  "scope": "Adapter isolado TagDuel clássico 2v2 para Graceful Charity: compra de três cartas do Deck físico do assento ativo e descarte de exatamente duas cartas escolhidas da mão para o Cemitério compartilhado, com conservação de UIDs e prioridade de resolução. Sem resolver central, catálogo, certificação, comandos, banco ou produção.",
+  "cards": [
+    {
+      "id": "79571449",
+      "konamiId": 4812,
+      "name": "Graceful Charity",
+      "namePt": "Caridade Graciosa",
+      "officialText": "Draw 3 cards, then discard 2 cards.",
+      "firstTCGRelease": "2003-03-30",
+      "firstOCGRelease": "1999-08-26",
+      "certifiedAtStart": false
+    }
+  ],
+  "handoff": {
+    "status": "escopo independente; nenhuma reserva conflitante tocada; arquivos centrais permanecem bloqueados até liberação explícita",
+    "blockedFiles": [
+      "src/monsterEffects.ts",
+      "src/duelEngineCurrent.ts"
+    ],
+    "thisRunDoesNotTouchBlockedFiles": true
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "verification": {
+    "focusedScenarios": 0,
+    "focusedTestResult": "pending",
+    "typecheck": "pending",
+    "build": "pending",
+    "evidenceValidation": "pending",
+    "adapterBehaviorVerifiedCards": 0,
+    "behaviorCertifiedCards": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "liveDiscordValidation": false
+  },
+  "effectiveWorkMinutes": 0,
+  "targetEffectiveWorkMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "nextTask": "Implementar compra determinística das três cartas do topo, seleção idempotente de duas cartas distintas da mão e descarte para o Cemitério; cobrir deck insuficiente, negação e limites de mão/Deck.",
+  "nextWindow": "2026-11-26T10:30:00-03:00",
+  "scopeReleasedToAuxiliary": []
+}

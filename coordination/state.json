@@ -1,8 +1,8 @@
 {
   "format": 1,
   "sharedBranch": "feat/rea-engine-recovery-20261026",
-  "observedHead": "82e27d2fd7e3b7f077812eb3802f3e720e6a0515",
-  "updatedAt": "2026-11-26T05:30:28-03:00",
+  "observedHead": "456368aae8f3c2171061b8992fb3dc6fa8846afc",
+  "updatedAt": "2026-11-26T05:39:00-03:00",
   "activeReservations": [
     {
       "runId": "work-20261125T203259-0300-M635",
@@ -97,6 +97,20 @@
         "docs/evidence/m643-forceful-sentry.json",
         ".github/workflows/m643-forceful-sentry.yml"
       ]
+    },
+    {
+      "runId": "work-20261126T053900-0300-M644",
+      "mission": "M644",
+      "branch": "feat/work-m644-graceful-charity-tag-adapter-20261126",
+      "state": "reserved-and-implementing",
+      "priority": "P1",
+      "conditionalHeadUpdate": true,
+      "reservedFiles": [
+        "src/gracefulCharityTagAdapter.ts",
+        "tests/gracefulCharityTagAdapter.test.cjs",
+        "docs/evidence/m644-graceful-charity.json",
+        ".github/workflows/m644-graceful-charity.yml"
+      ]
     }
   ],
   "handoffRequests": [
@@ -111,5 +125,5 @@
       ]
     }
   ],
-  "notes": "M635/M637/M638/M639 permanecem ativos em escopos separados. M640 concluiu a implementação isolada de The Inexperienced Spy (PR #579). M641 implementa Mind Haxorz e M642 Trap Dustshoot em branches dependentes, sem tocar no resolver central, comandos ou arquivos reservados por terceiros. M643 iniciou adapter isolado de The Forceful Sentry em branch própria; não toca nos arquivos reservados por M635/M637/M638/M639/M641/M642 nem nos arquivos centrais bloqueados."
+  "notes": "M635/M637/M638/M639 permanecem ativos em escopos separados. M640 concluiu a implementação isolada de The Inexperienced Spy (PR #579). M641 implementa Mind Haxorz e M642 Trap Dustshoot em branches dependentes, sem tocar no resolver central, comandos ou arquivos reservados por terceiros. M643 iniciou adapter isolado de The Forceful Sentry em branch própria; não toca nos arquivos reservados por M635/M637/M638/M639/M641/M642 nem nos arquivos centrais bloqueados. M644 iniciou adapter isolado de Graceful Charity (compra 3, descarte 2) em branch própria, independente das reservas de inspeção de mão, LP e combate."
 }
