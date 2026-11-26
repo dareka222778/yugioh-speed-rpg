@@ -222,5 +222,5 @@ test('Painful Choice preserves the original input and conserves every physical U
 });
 test('a forged plan cannot change the actor, target, or physical source owner',()=>{
   const state=create(0,'forged-plan'),source=addPainfulChoiceToHand(state,0),activation=activate(state,0,1,source);
-  assert.throws(()=>reveal(activation.state,{...activation.plan,targetSeat:3},selectFive(activation.state)),/Plano de Painful Choice/);
+  assert.throws(()=>revealPainfulChoice(activation.state,{...activation.plan,targetSeat:3},selectFive(activation.state)),/Plano de Painful Choice/);
 });
