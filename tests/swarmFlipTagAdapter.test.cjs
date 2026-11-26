@@ -49,7 +49,7 @@ function take(session,seat,id){
 }
 function deploy(session,team,id,seat=team,faceUp=true,position='atk'){
  const card=take(session,seat,id),turn=session.duel.core.turn;
- const monster={...card,position,faceUp,entered:turn-1,changed:turn-1,attacked:0,attackCount:0,atkBoost:0,defBoost:0,owner:team};
+ const monster={...card,position,faceUp,entered:turn-1,changed:turn-1,attacked:0,atkBoost:0,defBoost:0,owner:team};
  session.duel.core.players[team].monsters.push(monster);
  return monster;
 }
