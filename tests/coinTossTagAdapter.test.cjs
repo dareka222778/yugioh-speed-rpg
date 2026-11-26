@@ -211,7 +211,7 @@ test('a Dragon owned by the inactive partner can activate from the shared team f
  assert.equal(plan.sourceOwnerSeat,2);assert.equal(plan.controllerTeam,0);
 });
 
-test('target selection cannot destroy a monster protected from monster effects',()=>{
+test('a target removed after the coin result is rejected before destruction',()=>{
  const {adapter,session}=setup(seedFor(true)),source=summon(session,'barrel'),target=deploy(session,1,monsterIds[2],1,true);
  adapter.prepareActivation(session,0,source.uid,'protection-1');
  const result=adapter.resolveCoinToss(session,'protection-1');
