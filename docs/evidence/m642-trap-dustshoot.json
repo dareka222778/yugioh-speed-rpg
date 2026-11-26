@@ -1,0 +1,87 @@
+{
+  "mission": "M642",
+  "title": "Trap Dustshoot TagDuel private hand disruption adapter",
+  "cards": [
+    {
+      "id": "64697231",
+      "name": "Trap Dustshoot",
+      "konamiId": 5446,
+      "firstTCGRelease": "2003-07-18",
+      "firstOCGRelease": "2003-10-23",
+      "officialText": "If your opponent has 4 or more cards in their hand: Look at your opponent's hand and choose 1 monster from it to shuffle into the Deck.",
+      "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5446&ope=2&request_locale=en",
+      "catalogAdmission": false,
+      "certifiedAtStart": false,
+      "historicalPoolEligibleByTCGRelease": true,
+      "currentForbiddenStatusNotAppliedToHistoricalRuleset": true
+    }
+  ],
+  "behavior": {
+    "activation": "Previously Set Normal Trap, activated in open Main/Battle Phase; selected opposing physical hand must contain at least four cards at activation.",
+    "tagDuelMapping": "The activating seat chooses one of the two opposing physical hands; the other opponent's hand is not affected.",
+    "resolution": "The hand is privately inspected, one Monster is selected, and the card returns to its physical owner's Main Deck followed by persisted duel-RNG shuffle. Fusion monsters return to the owner's Extra Deck.",
+    "noMonster": "If the selected hand contains no Monster at resolution, the inspection resolves without moving a card.",
+    "timing": "The four-card condition is checked at activation; a later chain change below four does not retroactively invalidate activation.",
+    "privacy": "Only the exact activating physical seat receives the private hand snapshot and selected card; the partner and both opponents receive no private payload.",
+    "persistence": "Immutable activation plan and idempotency IDs persist; the private reveal receipt is transient and non-enumerable.",
+    "negation": "If negated, the Trap goes to the shared Graveyard and no hand reveal or card return is produced.",
+    "sourceRemoval": "Removing the activated Trap from the field after activation does not cancel its already-activated effect."
+  },
+  "invariants": {
+    "mainDeckPerPhysicalSeat": "20-30",
+    "handLimit": 6,
+    "handLimitCheck": "End Phase; adapter does not discard",
+    "monsterZonesPerTeam": 3,
+    "spellTrapZonesPerTeam": 3,
+    "fieldZone": "separate",
+    "extraDeckPerPhysicalSeat": 5,
+    "physicalUidConservation": true,
+    "selectedCardReturnsToPhysicalOwner": true,
+    "fusionReturnsToExtraDeck": true,
+    "persistedRandomShuffle": true,
+    "publicLogContainsPrivateHand": false,
+    "inventoryGrants": 0
+  },
+  "tests": {
+    "file": "tests/trapDustshootTagAdapter.test.cjs",
+    "command": "node --test tests/trapDustshootTagAdapter.test.cjs",
+    "scenarios": 14,
+    "covered": [
+      "catalogue and certification allowlist remain unchanged",
+      "previously Set Trap and four-card activation threshold",
+      "private hand delivery and return to selected physical owner's shuffled Deck",
+      "Fusion monster returns to physical owner's Extra Deck",
+      "only selected physical hand changes",
+      "no Monster in hand resolves without a card return",
+      "non-Monster selection and stale selection rejection",
+      "four-card threshold is not rechecked after activation",
+      "negated effect reveals/moves nothing",
+      "activation idempotency and immutable plan anti-forgery",
+      "activated Trap still resolves after leaving the field",
+      "seven-card hand remains until End Phase",
+      "three Monster Zones, three S/T Zones, independent Field Zone",
+      "Main Deck 20-30 and Extra Deck maximum 5 per physical seat"
+    ]
+  },
+  "certification": {
+    "newBehaviorVerifiedCards": 1,
+    "newBehaviorCertifiedCards": 0,
+    "catalogAdmission": false,
+    "automaticCertification": false,
+    "inventoryGrants": 0,
+    "adapterBehaviorVerifiedCards": 1
+  },
+  "integration": {
+    "centralResolver": false,
+    "discordCommands": false,
+    "persistence": false,
+    "liveDiscordGateway": false,
+    "merge": false,
+    "deploy": false
+  },
+  "base": {
+    "sharedHeadAtReservation": "9b44bf6e0e38173e2bfbadb7f2a2677565df6142",
+    "adapterBranchBase": "f50ced27ab3006a4cf8e6c00c1ca7eb553ec2244",
+    "engineV9CertifiedAtReservation": 969
+  }
+}

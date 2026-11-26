@@ -1,0 +1,29 @@
+name: M642 Trap Dustshoot TagDuel adapter
+on:
+  push:
+    branches:
+      - feat/work-m642-trap-dustshoot-tag-adapter-20261126
+  pull_request:
+    branches:
+      - feat/work-m641-mind-haxorz-private-inspection-20261126
+    paths:
+      - src/trapDustshootTagAdapter.ts
+      - tests/trapDustshootTagAdapter.test.cjs
+      - docs/evidence/m642-trap-dustshoot.json
+      - .github/workflows/m642-trap-dustshoot.yml
+permissions:
+  contents: read
+jobs:
+  trap-dustshoot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m642-trap-dustshoot.json', 'utf8'))"
+      - run: node --test tests/trapDustshootTagAdapter.test.cjs

@@ -1,0 +1,89 @@
+{
+  "format": 1,
+  "runId": "work-20261126T020100-0300-M642",
+  "mission": "M642",
+  "owner": "Work principal",
+  "priority": "P1",
+  "priorityRequestedBy": "User",
+  "status": "reserved-and-implementing",
+  "startedAt": "2026-11-26T02:01:00-03:00",
+  "endedAt": null,
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "9b44bf6e0e38173e2bfbadb7f2a2677565df6142",
+  "branch": "feat/work-m642-trap-dustshoot-tag-adapter-20261126",
+  "baseBranch": "feat/work-m641-mind-haxorz-private-inspection-20261126",
+  "baseSha": "f50ced27ab3006a4cf8e6c00c1ca7eb553ec2244",
+  "branchHeadSha": "95a37ca8f9e80eee977ad209b24d80bcda89c280",
+  "pullRequest": null,
+  "reservedFiles": [
+    "src/trapDustshootTagAdapter.ts",
+    "tests/trapDustshootTagAdapter.test.cjs",
+    "docs/evidence/m642-trap-dustshoot.json",
+    ".github/workflows/m642-trap-dustshoot.yml"
+  ],
+  "scope": "Adapter TagDuel isolado para Trap Dustshoot: condição de quatro cartas na mão física escolhida, inspeção privada, devolução de um Monstro ao Deck do proprietário físico com embaralhamento persistido (ou Extra Deck se Fusão), e proteção contra seleção obsoleta/forjada. Sem resolver central, catálogo, comandos Discord, banco ou produção.",
+  "cards": [
+    {
+      "id": "64697231",
+      "name": "Trap Dustshoot",
+      "konamiId": 5446,
+      "officialText": "If your opponent has 4 or more cards in their hand: Look at your opponent's hand and choose 1 monster from it to shuffle into the Deck.",
+      "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5446&ope=2&request_locale=en",
+      "firstTCGRelease": "2003-07-18",
+      "firstOCGRelease": "2003-10-23",
+      "certifiedAtStart": false
+    }
+  ],
+  "implementation": {
+    "files": [
+      "src/trapDustshootTagAdapter.ts",
+      "tests/trapDustshootTagAdapter.test.cjs",
+      "docs/evidence/m642-trap-dustshoot.json",
+      ".github/workflows/m642-trap-dustshoot.yml"
+    ],
+    "scope": "Ativação/limiar de mão, escolha de monstro, retorno ao proprietário físico, shuffle RNG persistido, retorno de Fusão ao Extra Deck, privacidade, idempotência e regressões de regras."
+  },
+  "handoff": {
+    "targetPR": 17,
+    "status": "M637 handoff to central resolver remains awaiting explicit release; M642 does not touch blocked files",
+    "blockedFiles": [
+      "src/monsterEffects.ts",
+      "src/duelEngineCurrent.ts"
+    ],
+    "thisRunDoesNotTouchBlockedFiles": true
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "verification": {
+    "focusedScenarios": 14,
+    "focusedTestResult": "pending CI",
+    "typecheck": "pending CI",
+    "build": "pending CI",
+    "evidenceValidation": "pending CI",
+    "adapterBehaviorVerifiedCards": 1,
+    "behaviorCertifiedCards": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "liveDiscordValidation": false
+  },
+  "effectiveWorkMinutes": 0,
+  "targetEffectiveWorkMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "nextTask": "Validar M642 na CI; manter a PR empilhada até M641 ficar verde; depois avaliar o próximo efeito de mão sem sobrepor as reservas ativas.",
+  "nextWindow": "2026-11-26T05:30:00-03:00",
+  "scopeReleasedToAuxiliary": []
+}
