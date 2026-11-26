@@ -5,17 +5,22 @@
   "owner": "Work principal",
   "priority": "P1",
   "priorityRequestedBy": "User",
-  "status": "reserved-and-implementing",
+  "status": "submitted-for-review; CI passed; reservation released",
   "startedAt": "2026-11-26T06:33:32-03:00",
-  "endedAt": null,
+  "endedAt": "2026-11-26T10:28:00-03:00",
   "repository": "dareka222778/yugioh-speed-rpg",
   "sharedBranch": "feat/rea-engine-recovery-20261026",
   "sharedHeadAtReservation": "1b0a8e179a239970af1a5f28537bf9b82b99985e",
   "branch": "feat/work-m648-quick-play-combat-boost-20261126",
   "baseBranch": "feat/rea-engine-recovery-20261026",
   "baseSha": "1b0a8e179a239970af1a5f28537bf9b82b99985e",
-  "branchHeadSha": "1b0a8e179a239970af1a5f28537bf9b82b99985e",
-  "pullRequest": null,
+  "branchHeadSha": "313446682b009d3ba898b98167ac9f44bd8d3438",
+  "pullRequest": {
+    "number": 585,
+    "url": "https://github.com/dareka222778/yugioh-speed-rpg/pull/585",
+    "state": "open",
+    "draft": true
+  },
   "reservedFiles": [
     "src/quickPlayCombatBoostTagAdapter.ts",
     "tests/quickPlayCombatBoostTagAdapter.test.cjs",
@@ -74,22 +79,32 @@
     "liveDiscordValidation": false
   },
   "verification": {
-    "focusedScenarios": 0,
-    "focusedTestResult": "pending",
-    "typecheck": "pending",
-    "build": "pending",
-    "evidenceValidation": "pending",
-    "adapterBehaviorVerifiedCards": 0,
+    "focusedScenarios": 30,
+    "focusedTestResult": "passed",
+    "typecheck": "passed",
+    "build": "passed",
+    "evidenceValidation": "passed",
+    "adapterBehaviorVerifiedCards": 2,
     "behaviorCertifiedCards": 0,
     "automaticCertifications": 0,
     "inventoryGranted": 0,
-    "liveDiscordValidation": false
+    "liveDiscordValidation": false,
+    "ci": {
+      "status": "success",
+      "workflowRunId": 45796409280,
+      "jobId": 139828071558
+    }
   },
   "effectiveWorkMinutes": 0,
   "targetEffectiveWorkMinutes": 60,
   "targetMet": false,
   "ciWaitExcluded": true,
-  "nextTask": "Implementar o adapter reutilizável de modificadores ATK/DEF temporários com alvo por UID/epoch, regras Quick-Play e 24+ cenários focados.",
+  "nextTask": "Aguardar revisão do proprietário e handoff explícito dos arquivos centrais antes de integrar o adapter ao resolver.",
   "nextWindow": "2026-11-26T11:30:00-03:00",
-  "scopeReleasedToAuxiliary": []
+  "scopeReleasedToAuxiliary": [
+    "src/quickPlayCombatBoostTagAdapter.ts",
+    "tests/quickPlayCombatBoostTagAdapter.test.cjs",
+    "docs/evidence/m648-quick-play-combat-boost.json",
+    ".github/workflows/m648-quick-play-combat-boost.yml"
+  ]
 }
