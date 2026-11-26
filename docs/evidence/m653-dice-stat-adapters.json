@@ -107,13 +107,13 @@
   "scenarioCount": 31,
   "verification": {
     "focusedScenarios": 31,
-    "focusedTestResult": "pending",
-    "typecheck": "pending",
-    "build": "pending",
-    "fullTestSuite": "pending",
-    "classicTagAudit": "pending",
-    "evidenceValidation": "pending",
-    "adapterBehaviorVerifiedCards": 0,
+    "focusedTestResult": "success",
+    "typecheck": "success",
+    "build": "success",
+    "fullTestSuite": "success",
+    "classicTagAudit": "success",
+    "evidenceValidation": "success",
+    "adapterBehaviorVerifiedCards": 3,
     "behaviorCertifiedCards": 0,
     "automaticCertifications": 0,
     "inventoryGranted": 0,
@@ -139,7 +139,10 @@
     "merge": false,
     "deploy": false,
     "backupVerified": false,
-    "liveDiscordValidation": false
+    "liveDiscordValidation": false,
+    "behaviorAdapterVerified": true,
+    "behaviorCertifiedCards": 0,
+    "newCertifications": 0
   },
   "limitations": [
     "Adapter isolado: não registra as três cartas em effectRegistry nem altera o resolver central, catálogo, certificações, allowlist, comandos ou banco.",
