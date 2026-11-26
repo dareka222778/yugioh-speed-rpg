@@ -1,0 +1,47 @@
+{
+  "format": 1,
+  "mission": "M644",
+  "card": {
+    "id": "79571449",
+    "konamiId": 4812,
+    "name": "Graceful Charity",
+    "namePt": "Caridade Graciosa",
+    "firstTCGRelease": "2003-03-30",
+    "firstOCGRelease": "1999-08-26",
+    "officialText": "Draw 3 cards, then discard 2 cards.",
+    "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4812&ope=2&request_locale=en"
+  },
+  "scope": "TagDuel clássico 2v2, adapter isolado sem catálogo/resolver central/comandos/persistência/produção.",
+  "behavior": [
+    "Main Phase e prioridade aberta",
+    "ativação da mão ou backrow compartilhada",
+    "compra das três cartas do topo do Deck físico do assento ativo",
+    "descarte exato de duas cartas distintas escolhidas após a compra",
+    "descarte para o Cemitério compartilhado da equipe",
+    "negação não compra nem descarta",
+    "mão pode exceder seis durante o efeito; limite é aplicado na End Phase",
+    "recibo transitório privado ao assento ativador",
+    "idempotência e proteção contra plano/seleção forjados",
+    "conservação de UID e inventário"
+  ],
+  "invariants": {
+    "mainDeck": "20–30 por assento",
+    "handLimit": 6,
+    "handOverflow": "End Phase",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separada",
+    "extraDeckMax": 5,
+    "inventoryGranted": 0
+  },
+  "verification": {
+    "focusedTests": 18,
+    "adapterBehaviorVerifiedCards": 1,
+    "behaviorCertifiedCards": 0,
+    "automaticCertifications": 0,
+    "playableCatalogAdmission": false,
+    "discordGateway": false,
+    "merge": false,
+    "deploy": false
+  }
+}
