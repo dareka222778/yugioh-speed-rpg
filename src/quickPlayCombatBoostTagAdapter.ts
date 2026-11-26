@@ -41,7 +41,7 @@ export type QuickPlayBoostPlan=QuickPlayBoostEvent&{
   activationPhase:Phase;
   activationCurrent:Team;
   damageStep:boolean;
-  attackStage:'damage'|'calculation'|null;
+  attackStage:'declare'|'damage'|'calculation'|null;
 };
 export type QuickPlayBoostActivation={
   status:'activated';
@@ -192,7 +192,7 @@ function assertPlanBase(input:QuickPlayCombatBoostTagDuel,plan:QuickPlayBoostPla
     !Number.isInteger(plan.turn)||plan.turn!==input.core.turn||
     !['main','battle','response'].includes(plan.activationPhase)||
     !validTeam(plan.activationCurrent)||typeof plan.damageStep!=='boolean'||
-    !(plan.attackStage===null||plan.attackStage==='damage'||plan.attackStage==='calculation')||
+    !(plan.attackStage===null||plan.attackStage==='declare'||plan.attackStage==='damage'||plan.attackStage==='calculation')||
     input.active[plan.actorTeam]!==plan.actorSeat||
     !(input.quickPlayBoostActivationIds??[]).includes(plan.activationId)){
     throw new Error('Plano de Quick-Play Combat Boost obsoleto ou inválido.');
@@ -254,7 +254,7 @@ export function activateQuickPlayCombatBoost(
   const plan:QuickPlayBoostPlan=Object.freeze({
     ...event,cardId:source.cardId,actorTeam,sourceOwnerSeat:source.ownerSeat,
     sourceLocation:source.location,sourceSetTurn:source.setTurn,
-    targetBinding:Object.freeze({...binding}),stat:rule.stat,amount:rule.amount,
+    targetBinding:Object.freeze({...binding,zone:'monsters' as const}),stat:rule.stat,amount:rule.amount,
     turn:next.core.turn,activationPhase:next.core.phase as Phase,
     activationCurrent:next.core.current as Team,damageStep:next.core.damageStep===true,
     attackStage:next.core.pending.kind==='attack'?next.core.pending.stage:null
