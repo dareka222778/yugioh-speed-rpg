@@ -43,7 +43,7 @@ jobs:
           const fs = require('node:fs');
           const evidence = JSON.parse(fs.readFileSync('docs/evidence/m655-position-policies.json', 'utf8'));
           if (evidence.format !== 1 || evidence.mission !== 'M655') throw new Error('Invalid evidence header');
-          if (evidence.cards.length !== 2 || evidence.scenarioCount < 15) throw new Error('Incomplete card/scenario evidence');
+          if (evidence.cards.length !== 3 || evidence.scenarioCount < 19) throw new Error('Incomplete card/scenario evidence');
           if (evidence.cards.some(card => card.admitted || card.certified)) throw new Error('Adapter CI must not admit or certify cards');
           if (evidence.verification.behaviorCertifiedCards !== 0 || evidence.verification.automaticCertifications !== 0) throw new Error('Adapter CI must not certify cards');
           if (evidence.catalogAtStart.engineV9Certified !== 969 || evidence.catalogAtStart.remaining !== 31) throw new Error('Unexpected certification baseline');
