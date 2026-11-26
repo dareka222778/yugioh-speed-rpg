@@ -1,8 +1,8 @@
 {
   "format": 1,
   "sharedBranch": "feat/rea-engine-recovery-20261026",
-  "observedHead": "58ff7d48eb71a78e5580fb8d0132b27d84b2bbf8",
-  "updatedAt": "2026-11-26T01:30:00-03:00",
+  "observedHead": "2675597cf6ecf4b66ef6b4e6b8d93b7852c618ba",
+  "updatedAt": "2026-11-26T01:47:00-03:00",
   "activeReservations": [
     {
       "runId": "work-20261125T203259-0300-M635",
@@ -69,6 +69,20 @@
         "docs/evidence/m640-inexperienced-spy.json",
         ".github/workflows/m640-inexperienced-spy-tag-adapter.yml"
       ]
+    },
+    {
+      "runId": "work-20261126T014700-0300-M641",
+      "mission": "M641",
+      "branch": "feat/work-m641-mind-haxorz-private-inspection-20261126",
+      "state": "reserved-and-implementing",
+      "priority": "P1",
+      "conditionalHeadUpdate": true,
+      "reservedFiles": [
+        "src/mindHaxorzTagAdapter.ts",
+        "tests/mindHaxorzTagAdapter.test.cjs",
+        "docs/evidence/m641-mind-haxorz.json",
+        ".github/workflows/m641-mind-haxorz-private-inspection.yml"
+      ]
     }
   ],
   "handoffRequests": [
@@ -83,5 +97,5 @@
       ]
     }
   ],
-  "notes": "M635/M637/M638/M639 permanecem ativos em escopos separados. M640 isola a leitura privada de The Inexperienced Spy; não altera os arquivos reservados nem o resolver central."
+  "notes": "M635/M637/M638/M639/M640 permanecem em escopos separados. M641 implementa a inspeção privada de Mind Haxorz em branch derivada de M640, sem tocar no resolver central, nos comandos ou nos arquivos reservados por terceiros."
 }
