@@ -1,3 +1,4 @@
+import {createHash} from 'node:crypto';
 import type {TagDuel} from './tagDuel';
 import {tagInventory} from './tagDuel';
 import {shuffleDuel} from './duelRandom';
@@ -137,8 +138,7 @@ function commitment(cards:readonly {uid:string;id:string}[],ordered=false):strin
 function createHashHex(value:string):string{
   // A local, deterministic commitment; the random order itself comes from the
   // duel's persisted HMAC stream in duelRandom.ts.
-  const crypto=require('node:crypto') as typeof import('node:crypto');
-  return crypto.createHash('sha256').update(value).digest('hex');
+  return createHash('sha256').update(value).digest('hex');
 }
 function samePlan(a:ReloadPlan,b:ReloadPlan):boolean{
   return a.activationId===b.activationId&&a.actorSeat===b.actorSeat&&
