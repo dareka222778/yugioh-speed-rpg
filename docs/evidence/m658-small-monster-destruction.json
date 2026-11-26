@@ -1,0 +1,55 @@
+{
+  "format": 1,
+  "mission": "M658",
+  "status": "implementation-candidate-not-certified",
+  "cards": [
+    {
+      "name": "King Tiger Wanghu",
+      "password": "83986578",
+      "konamiId": 5016,
+      "ocgFirstSet": "2002-03-21",
+      "tcgFirstSet": "2003-07-01",
+      "effect": "Após Normal ou Special Summon de um ou mais monstros com ATK 1400 ou menos enquanto controlado, destrói os monstros desse grupo que ainda tenham ATK 1400 ou menos. A fonte precisa permanecer face-up para ativar e resolver.",
+      "officialTCG": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5016&ope=2&request_locale=en",
+      "officialOCG": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5016&ope=2&request_locale=ae"
+    },
+    {
+      "name": "Blast Juggler",
+      "password": "70138455",
+      "konamiId": 4423,
+      "ocgFirstSet": "2002-10-24",
+      "tcgFirstSet": "2002-06-26",
+      "effect": "Somente na Standby Phase: tributa a si mesmo como custo para selecionar dois monstros face-up com ATK 1000 ou menos e destruí-los.",
+      "officialTCG": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4423&ope=2&request_locale=en",
+      "officialOCG": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4423&ope=2&request_locale=ae"
+    }
+  ],
+  "mechanics": {
+    "kingTiger": "Captura o grupo de Normal/Special Summon; não dispara por Flip Summon. Exige ao menos um monstro face-up <=1400 no evento; na resolução reavalia ATK atual de todos os face-up capturados. Não seleciona alvos; mudança de controle não o invalida. Fonte face-up e não negada na ativação e resolução.",
+    "blastJuggler": "StandbyWindow explícita, pois o engine mantém phase='main' durante a janela de Standby. Tributo é pago antes da resolução e permanece pago se o efeito for negado. Dois alvos face-up <=1000 na ativação; a resolução é parcial se um alvo sair, mudar face-down ou se tornar imune. ATK não é reavaliado na resolução.",
+    "lifetime": "TargetBinding/epoch diferencia a mesma carta que deixa e retorna à mesma zona; mudança de controle sem sair do campo mantém o vínculo."
+  },
+  "constraints": {
+    "mainDeck": "20-30",
+    "handLimit": 6,
+    "handCheck": "End Phase",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "extraDeckMax": 5,
+    "physicalOwnership": "UID m0..m3 preservado",
+    "inventoryGrants": 0
+  },
+  "certification": {
+    "before": 969,
+    "after": 969,
+    "new": 0,
+    "reason": "Adapters isolados com testes de contrato; resolver central, catálogo e replay oficial ainda não foram integrados."
+  },
+  "validation": {
+    "suite": "tests/smallMonsterDestructionTagAdapter.test.cjs",
+    "expectedMinimumScenarios": 35,
+    "ci": "pending",
+    "discordLive": "not validated",
+    "production": "unchanged"
+  }
+}
