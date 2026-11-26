@@ -294,7 +294,7 @@ test('activation requires a free shared S/T Zone and respects the separate Field
   for(let i=0;i<3;i++)state.core.players[0].backrow.push({
     uid:'m0:m639-blocker-'+i,id:NORMALS[5+i],setTurn:0,faceUp:false
   });
-  assert.throws(()=>planRevealSpell(state,{activationId:'m639:full',actorSeat:0,sourceUid:source,cardId:SWORDS_OF_REVEALING_LIGHT_ID}),/Zona de Magias/Armadilhas livre/);
+  assert.throws(()=>planRevealSpell(state,{activationId:'m639:full',actorSeat:0,sourceUid:source,cardId:SWORDS_OF_REVEALING_LIGHT_ID}),/Zona de Magias\/Armadilhas livre/);
 });
 
 test('a 7-card hand is not discarded by the adapter; End Phase remains the engine responsibility',()=>{
@@ -320,7 +320,7 @@ test('three shared Monster Zones and three shared S/T Zones are enforced',()=>{
   assert.throws(()=>planRevealSpell(state,{
     activationId:'m639:zone-full',actorSeat:0,
     sourceUid:source,cardId:SWORDS_OF_REVEALING_LIGHT_ID
-  }),/Zona de Magias/Armadilhas livre/);
+  }),/Zona de Magias\/Armadilhas livre/);
   const fourth=structuredClone(state);
   fourth.core.players[0].monsters.push({
     uid:'m0:m639-fourth-monster',id:NORMALS[7],position:'atk',faceUp:true,
