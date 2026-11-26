@@ -43,7 +43,7 @@ jobs:
           const fs = require('node:fs');
           const evidence = JSON.parse(fs.readFileSync('docs/evidence/m652-equip-stat-leave-trigger.json', 'utf8'));
           if (evidence.format !== 1 || evidence.mission !== 'M652') throw new Error('Invalid evidence header');
-          if (evidence.cards.length !== 2 || evidence.scenarioCount !== 27) throw new Error('Incomplete card/scenario evidence');
+          if (evidence.cards.length !== 2 || evidence.scenarioCount !== 28) throw new Error('Incomplete card/scenario evidence');
           if (evidence.cards.some(card => card.admitted || card.certified)) throw new Error('Adapter CI must not admit or certify cards');
           if (evidence.verification.adapterBehaviorVerifiedCards !== 2 || evidence.verification.behaviorCertifiedCards !== 0) throw new Error('Incorrect certification accounting');
           if (evidence.verification.automaticCertifications !== 0 || evidence.verification.inventoryGranted !== 0) throw new Error('Unsafe side effect recorded');
