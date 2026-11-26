@@ -5,7 +5,7 @@
   "owner": "Work principal",
   "priority": "P1",
   "priorityRequestedBy": "User",
-  "status": "reserved-and-implementing",
+  "status": "awaiting-ci",
   "startedAt": "2026-11-26T10:37:41-03:00",
   "endedAt": null,
   "repository": "dareka222778/yugioh-speed-rpg",
@@ -13,9 +13,9 @@
   "sharedHeadAtReservation": "01e278e2855b942860f49f0fecbeec00e7b0de7e",
   "branch": "feat/work-m650-counter-trap-negation-20261126",
   "baseBranch": "feat/rea-engine-recovery-20261026",
-  "baseSha": null,
-  "branchHeadSha": null,
-  "pullRequest": null,
+  "baseSha": "bb61903d3b006e40dc84ca56c4b5925c72f4b0ff",
+  "branchHeadSha": "d4f2b42ceb41e899c39e0da3f5059f8a05657e41",
+  "pullRequest": 586,
   "reservedFiles": [
     "src/counterTrapNegationTagAdapter.ts",
     "tests/counterTrapNegationTagAdapter.test.cjs",
@@ -75,7 +75,7 @@
   },
   "verification": {
     "focusedScenarios": 0,
-    "focusedTestResult": "pending",
+    "focusedTestResult": "failed-on-test-syntax; fixed in d4f2b42; rerun pending",
     "typecheck": "pending",
     "build": "pending",
     "evidenceValidation": "pending",
@@ -85,11 +85,11 @@
     "inventoryGranted": 0,
     "liveDiscordValidation": false
   },
-  "effectiveWorkMinutes": 0,
+  "effectiveWorkMinutes": 15,
   "targetEffectiveWorkMinutes": 60,
   "targetMet": false,
   "ciWaitExcluded": true,
-  "nextTask": "Implementar o adapter compartilhado Horn of Heaven/Trap Jammer com custos e janelas de resposta distintos, testes 2v2 e evidência reproduzível.",
+  "nextTask": "Obter CI verde para os 29 cenários; depois solicitar handoff M637 para integrar os adapters sem tocar em arquivos reservados.",
   "nextWindow": "2026-11-26T12:30:00-03:00",
   "scopeReleasedToAuxiliary": []
 }

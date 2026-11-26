@@ -1,0 +1,94 @@
+{
+  "format": 1,
+  "runId": "work-20261126T105507-0300-M651",
+  "mission": "M651",
+  "owner": "Work principal",
+  "priority": "P1",
+  "priorityRequestedBy": "User",
+  "status": "reserved-and-implementing",
+  "startedAt": "2026-11-26T10:55:07-03:00",
+  "endedAt": null,
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "bb61903d3b006e40dc84ca56c4b5925c72f4b0ff",
+  "branch": "feat/work-m651-control-change-20261126",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "bb61903d3b006e40dc84ca56c4b5925c72f4b0ff",
+  "branchHeadSha": "bb61903d3b006e40dc84ca56c4b5925c72f4b0ff",
+  "pullRequest": null,
+  "reservedFiles": [
+    "src/controlChangeTagAdapter.ts",
+    "tests/controlChangeTagAdapter.test.cjs",
+    "docs/evidence/m651-control-change.json",
+    ".github/workflows/m651-control-change.yml"
+  ],
+  "scope": "Adapter TagDuel clássico 2v2 para Snatch Steal (45986603; CID Konami 4898) e Creature Swap (31036355; CID Konami 5162). Reaproveitar a semântica de controle por equipe sem alterar propriedade física; equipar e transferir controle por UID/epoch, devolver controle quando o Equip sair, creditar 1000 LP ao adversário no Standby dele e impedir mudança de posição dos monstros trocados até o fim do turno. Sem resolver central, catálogo, comandos, banco ou produção.",
+  "cards": [
+    {
+      "id": "45986603",
+      "konamiId": 4898,
+      "name": "Snatch Steal",
+      "namePt": "Roubo",
+      "type": "Equip Spell",
+      "officialText": "Equip only to a monster your opponent controls. Take control of the equipped monster. During each of your opponent's Standby Phases: They gain 1000 Life Points.",
+      "firstTCGRelease": "2002-09-16",
+      "admittedAtStart": false
+    },
+    {
+      "id": "31036355",
+      "konamiId": 5162,
+      "name": "Creature Swap",
+      "namePt": "Troca de Criaturas",
+      "type": "Normal Spell",
+      "officialText": "Each player chooses 1 monster they control and switches control of those monsters with each other. Those monsters cannot change their battle positions for the rest of this turn.",
+      "firstTCGRelease": "2003-06-06",
+      "admittedAtStart": false
+    }
+  ],
+  "handoff": {
+    "status": "Escopo isolado e independente; M650/M649 usam arquivos distintos. M638 mantém seu adapter de LP em arquivo próprio, que não será alterado. Integração central continua aguardando handoff M637.",
+    "blockedFiles": [
+      "src/monsterEffects.ts",
+      "src/duelEngineCurrent.ts",
+      "src/effectRegistry.ts",
+      "src/commands/duel",
+      "src/lpEventTagAdapter.ts"
+    ],
+    "thisRunDoesNotTouchBlockedFiles": true,
+    "conflictingReservations": 0
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "releasedCardIds": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "verification": {
+    "focusedScenarios": 0,
+    "focusedTestResult": "pending",
+    "typecheck": "pending",
+    "build": "pending",
+    "evidenceValidation": "pending",
+    "adapterBehaviorVerifiedCards": 0,
+    "behaviorCertifiedCards": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "liveDiscordValidation": false
+  },
+  "effectiveWorkMinutes": 0,
+  "targetEffectiveWorkMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "nextTask": "Inspecionar os modelos de equip/controle e implementar Snatch Steal + Creature Swap com propriedade física, devolução, Standby LP e bloqueio de posição.",
+  "nextWindow": "2026-11-26T12:30:00-03:00",
+  "scopeReleasedToAuxiliary": []
+}
