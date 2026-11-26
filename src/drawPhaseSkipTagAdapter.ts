@@ -197,17 +197,15 @@ export function createDrawPhaseSkipAdapter(lookup:DrawSkipLookup=defaultDrawSkip
      else status='target-lost';
     }else status='target-lost';
    }
-   if(!negated){
-    const next:DrawSkipSession={...session,duel:working,skipDrawBySeat:queues};
-    scheduleSkip(next,plan.skipSeat,plan.dueTurn);
-    session.skipDrawBySeat=next.skipDrawBySeat;
-   }
+   const next:DrawSkipSession={...session,duel:working,skipDrawBySeat:queues};
+   scheduleSkip(next,plan.skipSeat,plan.dueTurn);
   }
   const result:DrawSkipResolution={activationId,effect:plan.effect,status,skipSeat:plan.skipSeat,
    dueTurn:plan.dueTurn,destroyedUid,turn:plan.turn};
-  session.duel=working;delete session.pending[activationId];session.resolved[activationId]=structuredClone(result);
-  assertSameInventory(before,session.duel);assertHandsUnchanged(handsBefore,session.duel);
-  assertDrawPhaseSkipRules(session.duel);assertTagDuel(session.duel);
+  assertSameInventory(before,working);assertHandsUnchanged(handsBefore,working);
+  assertDrawPhaseSkipRules(working);assertTagDuel(working);
+  session.duel=working;if(!negated)session.skipDrawBySeat=queues;
+  delete session.pending[activationId];session.resolved[activationId]=structuredClone(result);
   return structuredClone(result);
  }
  function consumeDrawSkip(session:DrawSkipSession,seat:DrawSkipSeat,turn:number):boolean{
