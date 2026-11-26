@@ -163,7 +163,7 @@ test('only the activating physical seat receives the inspected hand; a selected 
 test('any card type may be selected, including a Spell; the card returns to the physical owner Main Deck',()=>{
   const state=create(0,'spell-return',{}, {3:[SPELLS[0],...NORMALS.slice(0,19)]});
   const source=addSentryToBackrow(state,0);
-  const spell=moveFromDeckToHand(state,3,SPELLS[0]);
+  const spell=holder(state,3).hand.find(card=>card.id===SPELLS[0])||moveFromDeckToHand(state,3,SPELLS[0]);
   const activation=activate(state,0,3,source);
   const result=resolveForcefulSentry(activation.state,activation.plan,spell.uid);
   assert.equal(holder(result.state,3).deck.some(card=>card.uid===spell.uid),true);
