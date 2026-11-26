@@ -1,7 +1,7 @@
 import {RULES_PROFILE,rulesFor} from './rulesProfile';
 import {getDuelCard} from './effectRegistry';
 import {assertTagDuel,tagInventory,type TagDuel} from './tagDuel';
-import type {DuelState,Monster} from './duelEngine';
+import type {Monster} from './duelEngine';
 import {atk} from './duelEngineCurrent';
 import {canAffectMonster,monsterEffectsNegated} from './continuousEffects';
 import {bindTarget,targetBindingValid,type TargetBinding} from './cardLifetime';
@@ -143,7 +143,7 @@ export function createSmallMonsterDestructionAdapter(lookup:SmallMonsterLookup=d
   }
   if(summonKind!=='normal'&&summonKind!=='special')
    throw new Error('King Tiger Wanghu não dispara por Flip Summon.');
-  if(Object.hasOwn(session.wanghuPending,activationId)||Object.hasOwn(session.wanghuResolved,activationId))
+  if(Object.prototype.hasOwnProperty.call(session.wanghuPending,activationId)||Object.prototype.hasOwnProperty.call(session.wanghuResolved,activationId))
    throw new Error('Ativação Wanghu duplicada.');
   const core=session.duel.core,pending=core.pending;
   const expected=summonKind==='normal'?'summon':'specialSummon';
@@ -221,7 +221,7 @@ export function createSmallMonsterDestructionAdapter(lookup:SmallMonsterLookup=d
    targetUids.length!==2||new Set(targetUids).size!==2||targetUids.includes(sourceUid)){
    throw new Error('Blast Juggler exige exatamente dois alvos distintos.');
   }
-  if(Object.hasOwn(session.blastPending,activationId)||Object.hasOwn(session.blastResolved,activationId))
+  if(Object.prototype.hasOwnProperty.call(session.blastPending,activationId)||Object.prototype.hasOwnProperty.call(session.blastResolved,activationId))
    throw new Error('Ativação Blast Juggler duplicada.');
   const source=findMonster(session.duel,sourceUid);
   if(!source||source.team!==window.team||source.monster.id!==BLAST_JUGGLER_ID&&lookup(source.monster.id)?.effect!=='blast-juggler'||
