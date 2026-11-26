@@ -25,5 +25,5 @@ jobs:
       - run: npm ci
       - run: npm run check
       - run: npm run build
-      - run: node -e "const e=JSON.parse(require('node:fs').readFileSync('docs/evidence/m648-quick-play-combat-boost.json','utf8')); if(e.mission!=='M648'||e.verification.focusedTests!==28||e.verification.adapterBehaviorVerifiedCards!==2||e.verification.behaviorCertifiedCards!==0) process.exit(1)"
+      - run: node -e "const e=JSON.parse(require('node:fs').readFileSync('docs/evidence/m648-quick-play-combat-boost.json','utf8')); if(e.mission!=='M648'||e.verification.focusedTests!==30||e.verification.adapterBehaviorVerifiedCards!==2||e.verification.behaviorCertifiedCards!==0) process.exit(1)"
       - run: node --test tests/quickPlayCombatBoostTagAdapter.test.cjs

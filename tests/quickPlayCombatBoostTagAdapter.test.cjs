@@ -143,7 +143,7 @@ test('activation from hand is legal during the active team Battle Phase',()=>{
 });
 test('activation from hand is not legal during the opponent turn',()=>{
   const state=create(0,'hand-opponent'),monster=addMonster(state,0),source=addSourceToHand(state,0,RUSH_RECKLESSLY_ID);
-  responseWindow(state,1);
+  responseWindow(state,0);
   assert.throws(()=>activate(state,0,source,monster.uid),/prioridade legal/);
 });
 test('a Set Quick-Play Spell cannot be activated in the same turn it was Set',()=>{
@@ -154,7 +154,7 @@ test('a Set Quick-Play Spell cannot be activated in the same turn it was Set',()
 test('a Set Quick-Play Spell can respond during the opponent turn after a prior turn Set',()=>{
   const state=create(0,'set-response'),monster=addMonster(state,0);
   const source=addSourceToBackrow(state,0,0,RUSH_RECKLESSLY_ID,state.core.turn-1);
-  responseWindow(state,1);
+  responseWindow(state,0);
   assert.equal(activate(state,0,source,monster.uid).status,'activated');
 });
 test('a Set Quick-Play Spell owned by the inactive teammate returns to the original owner team Graveyard',()=>{
@@ -183,29 +183,31 @@ test('the same Quick-Play Spell cannot activate after Damage Calculation',()=>{
 });
 test('a target removed before resolution receives no modifier and the Spell still resolves',()=>{
   const state=create(0,'target-removed'),monster=addMonster(state,0),source=addSourceToHand(state,0,RUSH_RECKLESSLY_ID);
-  const activation=activate(state,0,source,monster.uid);
-  state.core.players[0].monsters=state.core.players[0].monsters.filter(card=>card.uid!==monster.uid);
-  state.core.players[0].grave.push(monster);
-  synchronizeCardLifetimes(state.core);
-  const result=resolveQuickPlayCombatBoost(state,activation.plan);
+  const activation=activate(state,0,source,monster.uid),resolving=activation.state;
+  const removed=resolving.core.players[0].monsters.find(card=>card.uid===monster.uid);
+  resolving.core.players[0].monsters=resolving.core.players[0].monsters.filter(card=>card.uid!==monster.uid);
+  resolving.core.players[0].grave.push(removed);
+  synchronizeCardLifetimes(resolving.core);
+  const result=resolveQuickPlayCombatBoost(resolving,activation.plan);
   assert.equal(result.status,'resolved');assert.equal(result.applied,false);
 });
 test('a target that leaves and re-enters the field cannot be retargeted by the old activation',()=>{
   const state=create(0,'target-epoch'),monster=addMonster(state,0),source=addSourceToHand(state,0,RUSH_RECKLESSLY_ID);
-  const activation=activate(state,0,source,monster.uid);
-  state.core.players[0].monsters=state.core.players[0].monsters.filter(card=>card.uid!==monster.uid);
-  state.core.players[0].grave.push(monster);synchronizeCardLifetimes(state.core);
-  state.core.players[0].grave=state.core.players[0].grave.filter(card=>card.uid!==monster.uid);
-  state.core.players[0].monsters.push(monster);synchronizeCardLifetimes(state.core);
-  const before=atk(monster,state.core);
-  const result=resolveQuickPlayCombatBoost(state,activation.plan);
+  const activation=activate(state,0,source,monster.uid),resolving=activation.state;
+  const moved=resolving.core.players[0].monsters.find(card=>card.uid===monster.uid);
+  resolving.core.players[0].monsters=resolving.core.players[0].monsters.filter(card=>card.uid!==monster.uid);
+  resolving.core.players[0].grave.push(moved);synchronizeCardLifetimes(resolving.core);
+  resolving.core.players[0].grave=resolving.core.players[0].grave.filter(card=>card.uid!==monster.uid);
+  resolving.core.players[0].monsters.push(moved);synchronizeCardLifetimes(resolving.core);
+  const before=atk(moved,resolving.core);
+  const result=resolveQuickPlayCombatBoost(resolving,activation.plan);
   assert.equal(result.applied,false);
   assert.equal(atk(result.state.core.players[0].monsters[0],result.state.core),before);
 });
 test('a target turned face-down before resolution does not receive the modifier',()=>{
   const state=create(0,'target-face-down-resolution'),monster=addMonster(state,0),source=addSourceToHand(state,0,RUSH_RECKLESSLY_ID);
   const activation=activate(state,0,source,monster.uid);
-  monster.faceUp=false;
+  activation.state.core.players[0].monsters.find(card=>card.uid===monster.uid).faceUp=false;
   const result=resolve(activation);
   assert.equal(result.applied,false);
 });
@@ -261,7 +263,7 @@ test('activation and resolution preserve all physical UIDs and do not mutate the
 test('the Field Zone remains separate from the three shared Spell/Trap Zones',()=>{
   const state=create(0,'field-zone'),monster=addMonster(state,0);
   const source=addSourceToBackrow(state,0,0,RUSH_RECKLESSLY_ID,state.core.turn-1);
-  state.core.players[0].field={uid:'m0:m648-field',id:NORMALS[1],faceUp:true,setTurn:state.core.turn};
+  state.core.players[0].field={...replaceDeckCard(state,0,NORMALS[1]),faceUp:true,setTurn:state.core.turn};
   assert.equal(activate(state,0,source,monster.uid).status,'activated');
 });
 test('hand overflow remains an End Phase responsibility and the adapter never discards',()=>{
