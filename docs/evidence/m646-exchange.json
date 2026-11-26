@@ -36,12 +36,19 @@
   },
   "verification": {
     "focusedTests": 23,
-    "adapterBehaviorVerifiedCards": 1,
+    "adapterBehaviorVerifiedCards": 0,
     "behaviorCertifiedCards": 0,
     "automaticCertifications": 0,
     "playableCatalogAdmission": false,
     "discordGateway": false,
     "merge": false,
-    "deploy": false
+    "deploy": false,
+    "focusedTestResult": "pending; expected engine invariant blocker documented by test"
+  },
+  "integrationBlocker": {
+    "file": "src/duelIntegrity.ts",
+    "invariant": "private deck/hand UIDs must retain the physical seat prefix of the current holder",
+    "consequence": "Exchange must move a card between opposing private hands; the resulting state is rejected by assertTagDuel until ownership/holder modeling is extended cooperatively",
+    "certificationAllowed": false
   }
 }
