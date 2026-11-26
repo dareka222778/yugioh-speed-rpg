@@ -8,7 +8,8 @@ import {removeToken} from './tokens';
 
 export const AXE_OF_DESPAIR_ID='40619825';
 export const BLACK_PENDANT_ID='65169794';
-export type EquipStatEffect='axe-of-despair'|'black-pendant';
+export const HORN_OF_THE_UNICORN_ID='64047146';
+export type EquipStatEffect='axe-of-despair'|'black-pendant'|'horn-of-the-unicorn';
 type Team=0|1;
 type Seat=0|1|2|3;
 type CardKind='monster'|'spell'|'trap';
@@ -20,7 +21,8 @@ export type EquipStatAction={
 type Rule={atk:number;def:number};
 const RULES:Record<EquipStatEffect,Rule>={
  'axe-of-despair':{atk:1000,def:0},
- 'black-pendant':{atk:500,def:0}
+ 'black-pendant':{atk:500,def:0},
+ 'horn-of-the-unicorn':{atk:700,def:700}
 };
 type PendingEquip={
  activationId:string;effect:EquipStatEffect;sourceUid:string;sourceId:string;
@@ -48,6 +50,7 @@ export type AxeGraveTriggerResult={
 export type BlackPendantTriggerResult={
  activationId:string;status:'resolved'|'duplicate';applied:boolean;damage:number;winner:Team|null
 };
+export type HornGraveTriggerResult={activationId:string;status:'returned-to-deck'|'duplicate'};
 
 function isTeam(value:unknown):value is Team{return value===0||value===1;}
 function physicalSeat(uid:string):Seat|null{
@@ -120,7 +123,10 @@ export function assertEquipStatRules(duel:TagDuel):void{
  }
 }
 function sourceIdFor(effect:EquipStatEffect,override?:string):string{
- return override??(effect==='axe-of-despair'?AXE_OF_DESPAIR_ID:BLACK_PENDANT_ID);
+ if(override)return override;
+ if(effect==='axe-of-despair')return AXE_OF_DESPAIR_ID;
+ if(effect==='black-pendant')return BLACK_PENDANT_ID;
+ return HORN_OF_THE_UNICORN_ID;
 }
 function mainPhaseTeam(duel:TagDuel):Team|null{
  const core=duel.core,team=core.current;
@@ -248,6 +254,9 @@ export function axeOfDespairActions(
 export function blackPendantActions(
  duel:TagDuel,lookup:EquipStatLookup,options:{cardId?:string}={}
 ):EquipStatAction[]{return actionsFor(duel,lookup,'black-pendant',options);}
+export function hornOfTheUnicornActions(
+ duel:TagDuel,lookup:EquipStatLookup,options:{cardId?:string}={}
+):EquipStatAction[]{return actionsFor(duel,lookup,'horn-of-the-unicorn',options);}
 export function createEquipStatSession(duel:TagDuel):EquipStatSession{
  assertEquipStatRules(duel);
  return {duel:structuredClone(duel),pending:{},active:{},sent:{},resolved:[],triggered:[]};
@@ -288,6 +297,10 @@ export function activateBlackPendant(
  input:EquipStatSession,sourceUid:string,activationId:string,lookup:EquipStatLookup,
  options:{cardId?:string;targetUid:string}
 ):EquipStatSession{return activate(input,sourceUid,activationId,lookup,'black-pendant',options);}
+export function activateHornOfTheUnicorn(
+ input:EquipStatSession,sourceUid:string,activationId:string,lookup:EquipStatLookup,
+ options:{cardId?:string;targetUid:string}
+):EquipStatSession{return activate(input,sourceUid,activationId,lookup,'horn-of-the-unicorn',options);}
 export function resolveEquipStat(
  input:EquipStatSession,activationId:string,options:{sourceActivationNegated?:boolean}={}
 ):{session:EquipStatSession;result:EquipStatResolution}{
@@ -391,6 +404,26 @@ export function resolveAxeOfDespairGraveTrigger(
  next.triggered.push(activationId);next.triggered=next.triggered.slice(-256);
  finishSession(next,before);
  return {session:next,result:{activationId,status:'returned-to-deck',tributeUid}};
+}
+
+export function resolveHornOfTheUnicornGraveTrigger(
+ input:EquipStatSession,activationId:string
+):{session:EquipStatSession;result:HornGraveTriggerResult}{
+ const entry=input.sent[activationId];
+ if(!entry||entry.effect!=='horn-of-the-unicorn')throw new Error('Gatilho de Horn of the Unicorn ausente.');
+ if(input.triggered.includes(activationId)){
+  return {session:input,result:{activationId,status:'duplicate'}};
+ }
+ assertEquipStatRules(input.duel);
+ const before=inventorySnapshot(input.duel),next=structuredClone(input);
+ const sourceIndex=sourceInOwnerGrave(next.duel,entry);
+ if(sourceIndex<0)throw new Error('Horn of the Unicorn não está no Cemitério do proprietário.');
+ const grave=next.duel.core.players[entry.ownerTeam].grave;
+ const [source]=grave.splice(sourceIndex,1);
+ physicalDeck(next.duel,entry.sourceOwnerSeat).unshift(source);
+ next.triggered.push(activationId);next.triggered=next.triggered.slice(-256);
+ finishSession(next,before);
+ return {session:next,result:{activationId,status:'returned-to-deck'}};
 }
 export function resolveBlackPendantGraveTrigger(
  input:EquipStatSession,activationId:string
