@@ -1,0 +1,76 @@
+{
+  "format": 1,
+  "mission": "M651",
+  "runId": "work-20261126T105507-0300-M651",
+  "priority": "P1",
+  "branch": "feat/work-m651-control-change-20261126",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "bb61903d3b006e40dc84ca56c4b5925c72f4b0ff",
+  "cards": [
+    {
+      "id": "45986603",
+      "konamiId": 4898,
+      "name": "Snatch Steal",
+      "namePt": "Roubo",
+      "type": "Equip Spell",
+      "firstTCGRelease": "2002-09-16",
+      "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4898&ope=2&request_locale=en",
+      "admitted": false,
+      "certified": false
+    },
+    {
+      "id": "31036355",
+      "konamiId": 5162,
+      "name": "Creature Swap",
+      "namePt": "Troca de Criaturas",
+      "type": "Normal Spell",
+      "firstTCGRelease": "2003-06-06",
+      "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5162&ope=2&request_locale=en",
+      "admitted": false,
+      "certified": false
+    }
+  ],
+  "behavior": [
+    "Snatch Steal toma controle apenas após resolver, preserva UID/proprietário físico e mantém Equip vinculado ao alvo.",
+    "Quando o Equip sai, o monstro retorna ao controlador anterior; se a zona estiver cheia, vai ao Cemitério do proprietário físico.",
+    "Durante cada Standby do time adversário, o time adversário recebe 1000 LP; o evento é idempotente por turno.",
+    "Creature Swap escolhe um monstro de cada campo no momento da resolução e bloqueia mudança de posição até o fim do turno.",
+    "O Equip Snatch Steal usa epoch de zona para impedir retargeting após saída/retorno.",
+    "Nenhum efeito altera inventário, Deck, mão, Extra Deck ou propriedade física."
+  ],
+  "scenarioCount": 31,
+  "verification": {
+    "focusedScenarios": 31,
+    "focusedTestResult": "pending",
+    "typecheck": "pending",
+    "build": "pending",
+    "fullTestSuite": "pending",
+    "classicTagAudit": "pending",
+    "evidenceValidation": "pending",
+    "adapterBehaviorVerifiedCards": 2,
+    "behaviorCertifiedCards": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "liveDiscordValidation": false
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "releasedCardIds": 969,
+    "target": 1000,
+    "remaining": 31
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "limits": [
+    "Adapter isolado: não altera effectRegistry, monsterEffects, duelEngineCurrent, comandos, banco ou persistência.",
+    "As cartas permanecem fora do catálogo jogável e não são certificadas por importação.",
+    "Fixtures de teste usam uma Magia habilitada como carta física substituta para não admitir as cartas históricas.",
+    "Discord real/gateway não foi validado; o adapter ainda depende de integração e handoff central explícito."
+  ],
+  "automaticCertifications": 0,
+  "inventoryGranted": 0
+}
