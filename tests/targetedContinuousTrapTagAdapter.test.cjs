@@ -13,7 +13,10 @@ const [trapA,trapB,trapC]=trapIds;
 const normalIds=tagNormalCardIds.slice(0,17);
 assert.ok(trapA&&trapB&&trapC,'O catálogo-base precisa fornecer três Armadilhas físicas para fixtures isoladas.');
 assert.equal(normalIds.length,17);
-const mainDeck=[...normalIds,trapA,trapB,trapC];
+const fieldId=enabled.find(id=>getDuelCard(id)?.kind==='spell');
+const jinzoId=enabled.find(id=>getDuelCard(id)?.name==='Jinzo');
+assert.ok(fieldId&&jinzoId,'Fixtures precisam de uma Magia de Campo e Jinzo habilitados.');
+const mainDeck=[...normalIds.slice(0,15),trapA,trapB,trapC,fieldId,jinzoId];
 const players=()=>[
  {id:'p0',name:'Azul A',cards:[...mainDeck],extra:[]},
  {id:'p1',name:'Vermelho A',cards:[...mainDeck],extra:[]},
@@ -23,9 +26,10 @@ const players=()=>[
 function baseDuel(){
  return createTagDuel(players(),{seed:'m684-targeted-continuous-traps',first:0,classic:true});
 }
-function setMainWindow(duel,team){
- duel.cursor=duel.active[team];duel.core.current=team;duel.core.priority=team;duel.core.phase='main';
+function setMainWindow(duel,team,turn=duel.core.turn){
+ duel.core.turn=turn;duel.cursor=duel.active[team];duel.core.current=team;duel.core.priority=team;duel.core.phase='main';
  duel.core.turnEnding=undefined;duel.core.damageStep=undefined;
+ if(duel.core.teamRotation){duel.core.teamRotation.cursor=duel.cursor;duel.core.teamRotation.active=duel.active;duel.core.teamRotation.reserves=duel.reserves;}
 }
 function takePhysical(duel,seat,id){
  const team=seat%2,held=duel.active[team]===seat?duel.core.players[team]:duel.reserves[seat];
@@ -97,9 +101,10 @@ function setup(effect,options={}){
 function physicalInventory(duel){
  return new Map(tagInventory(duel).filter(card=>card.entityKind!=='token').map(card=>[card.uid,card.id]));
 }
-function standby(session,adapter,team=0,eventId='turn-1-team-'+team+'-standby'){
- setMainWindow(session.duel,team);
- return adapter.resolveStandbyPhase(session,{eventId,turn:session.duel.core.turn,controllerTeam:team,phase:'standby'});
+function standby(session,adapter,team=0,eventId){
+ const turn=team===session.duel.core.current?session.duel.core.turn:session.duel.core.turn+1;
+ setMainWindow(session.duel,team,turn);
+ return adapter.resolveStandbyPhase(session,{eventId:eventId??('turn-'+turn+'-team-'+team+'-standby'),turn:session.duel.core.turn,controllerTeam:team,phase:'standby'});
 }
 
 test('baseline: duas cartas novas permanecem fora do catálogo e da certificação',()=>{
@@ -124,8 +129,7 @@ test('mão pode passar de seis durante resolução; limite é verificado apenas 
 });
 
 test('Field Zone é separada das três Spell/Trap Zones',()=>{
- const duel=baseDuel(),fieldId=enabled.find(id=>getDuelCard(id)?.kind==='spell');
- assert.ok(fieldId);
+ const duel=baseDuel();
  placeBackrow(duel,0,trapA);placeBackrow(duel,0,trapB);placeBackrow(duel,0,trapC);
  const card=takePhysical(duel,0,fieldId);
  duel.core.players[0].field={...card,setTurn:0,faceUp:true,resolved:true};
@@ -139,13 +143,13 @@ test('quatro cartas na mesma Spell/Trap Zone group são rejeitadas',()=>{
  const extra=takePhysical(duel,2,normalIds[0]);
  duel.core.players[0].backrow.push({...extra,setTurn:0,faceUp:false});
  synchronizeCardLifetimes(duel.core);
- assert.throws(()=>assertTargetedContinuousTrapRules(duel),/três Spell\/Trap Zones/);
+ assert.throws(()=>assertTargetedContinuousTrapRules(duel),/limite de zonas/);
 });
 
 test('quatro monstros na mesma equipe são rejeitados',()=>{
  const duel=baseDuel();
  for(let i=0;i<4;i++)placeMonster(duel,0,normalIds[i]);
- assert.throws(()=>assertTargetedContinuousTrapRules(duel),/três Monster Zones/);
+ assert.throws(()=>assertTargetedContinuousTrapRules(duel),/limite de zonas/);
 });
 
 test('Shadow Spell exige alvo adversário face-up',()=>{
@@ -230,35 +234,35 @@ test('efeito negado deixa a Armadilha face-up, mas sem política ativa',()=>{
  assert.equal(s.adapter.isAttackBlocked(s.session,s.target.uid),false);
 });
 
-test('Royal Decree nega o efeito contínuo sem apagar a identidade física',()=>{
- const duel=baseDuel(),source=placeBackrow(duel,0,trapA,{setTurn:0});
- const target=placeMonster(duel,1,normalIds[0]),decreeId=enabled.find(id=>getDuelCard(id)?.name==='Royal Decree');
- assert.ok(decreeId,'Royal Decree precisa estar disponível como regressão.');
- const decree=placeBackrow(duel,0,decreeId,{setTurn:0,faceUp:true,resolved:true});
- setMainWindow(duel,0);const adapter=makeAdapter(),session=adapter.createSession(duel);
- adapter.activate(session,{activationId:'royal-decree',sourceUid:source.uid,targetUid:target.uid,actorSeat:0});
- const resolution=adapter.resolve(session,'royal-decree');
+test('Jinzo suprime efeito contínuo já ativado e a política retorna quando ele sai',()=>{
+ const s=setup('nightmare-wheel',{resolveOptions:false});
+ const jinzo=placeMonster(s.session.duel,0,jinzoId);
+ const resolution=s.adapter.resolve(s.session,'activation-1');
  assert.equal(resolution.status,'active');
- assert.equal(adapter.isAttackBlocked(session,target.uid),false);
- assert.ok(physicalInventory(session.duel).has(source.uid));
- moveBackrowToGrave(session.duel,decree.uid);
- assert.equal(adapter.isAttackBlocked(session,target.uid),true,'o efeito contínuo deve voltar quando Royal Decree sair do campo.');
+ assert.equal(s.adapter.isAttackBlocked(s.session,s.target.uid),false);
+ assert.ok(physicalInventory(s.session.duel).has(s.source.uid));
+ moveMonsterToGrave(s.session.duel,jinzo.uid);
+ assert.equal(s.adapter.isAttackBlocked(s.session,s.target.uid),true,'o efeito deve retornar quando Jinzo sair do campo.');
 });
 
 
-test('cláusula de autodestruição também fica suspensa enquanto Royal Decree nega Armadilhas',()=>{
+test('cláusula de autodestruição também fica suspensa enquanto Jinzo nega Armadilhas',()=>{
+ const s=setup('nightmare-wheel',{resolveOptions:false});
+ const jinzo=placeMonster(s.session.duel,0,jinzoId);
+ s.adapter.resolve(s.session,'activation-1');
+ moveMonsterToGrave(s.session.duel,s.target.uid);
+ assert.equal(s.adapter.reconcileTargets(s.session),0);
+ assert.ok(s.session.duel.core.players[0].backrow.some(card=>card.uid===s.source.uid));
+ moveMonsterToGrave(s.session.duel,jinzo.uid);
+ assert.equal(s.adapter.reconcileTargets(s.session),1);
+ assert.ok(s.session.duel.core.players[0].grave.some(card=>card.uid===s.source.uid));
+});
+
+test('Jinzo impede novas ativações de Armadilha',()=>{
  const duel=baseDuel(),source=placeBackrow(duel,0,trapA,{setTurn:0}),target=placeMonster(duel,1,normalIds[0]);
- const decreeId=enabled.find(id=>getDuelCard(id)?.name==='Royal Decree');assert.ok(decreeId);
- const decree=placeBackrow(duel,0,decreeId,{setTurn:0,faceUp:true,resolved:true});
- setMainWindow(duel,0);const adapter=makeAdapter(),session=adapter.createSession(duel);
- adapter.activate(session,{activationId:'suppressed-leave',sourceUid:source.uid,targetUid:target.uid,actorSeat:0});
- adapter.resolve(session,'suppressed-leave');
- moveMonsterToGrave(session.duel,target.uid);
- assert.equal(adapter.reconcileTargets(session),0);
- assert.ok(session.duel.core.players[0].backrow.some(card=>card.uid===source.uid));
- moveBackrowToGrave(session.duel,decree.uid);
- assert.equal(adapter.reconcileTargets(session),1);
- assert.ok(session.duel.core.players[0].grave.some(card=>card.uid===source.uid));
+ placeMonster(duel,0,jinzoId);setMainWindow(duel,0);
+ const adapter=makeAdapter(),session=adapter.createSession(duel);
+ assert.throws(()=>adapter.activate(session,{activationId:'jinzo-block',sourceUid:source.uid,targetUid:target.uid,actorSeat:0}),/bloqueada/);
 });
 
 test('alvo que deixa o campo destrói Nightmare Wheel e envia-a ao dono',()=>{

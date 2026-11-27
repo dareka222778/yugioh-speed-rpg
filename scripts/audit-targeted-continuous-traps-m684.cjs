@@ -28,7 +28,7 @@ const explicitCertificates=[...certificates.matchAll(/^\s*"([0-9]{8})"\s*:/gm)].
 assert.equal(explicitCertificates,959,'Baseline de certificados mudou; revisar o checkpoint antes de atualizar a evidência.');
 assert.equal(evidence.baseline.certificationEntriesObserved,explicitCertificates);
 assert.equal(evidence.implementation.adapterBehaviorVerifiedCards,2);
-assert.equal((testSource.match(/\\btest\\(/g)||[]).length,evidence.implementation.focusedScenarios);
+assert.equal((testSource.match(/\btest\(/g)||[]).length,evidence.implementation.focusedScenarios);
 assert.equal(evidence.implementation.focusedScenarios,37);
 assert.equal(getDuelCard('77585513')?.name,'Jinzo','Jinzo é somente fixture de regressão para negação contínua.');
 assert.equal(evidence.implementation.behaviorCertifiedCards,0);
