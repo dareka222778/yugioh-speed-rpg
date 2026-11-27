@@ -1,0 +1,36 @@
+name: M682 Fiend effect negation
+on:
+  pull_request:
+    paths:
+      - "src/fiendEffectNegationTagAdapter.ts"
+      - "tests/fiendEffectNegationTagAdapter.test.cjs"
+      - "docs/evidence/m682-fiend-effect-negation.json"
+      - "scripts/audit-fiend-effect-negation-m682.cjs"
+      - ".github/workflows/m682-fiend-effect-negation.yml"
+      - "src/cardCertifications.ts"
+      - "src/cardMetadata.ts"
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: m682-fiend-effect-negation-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Audit evidence and certification boundaries
+        run: node scripts/audit-fiend-effect-negation-m682.cjs
+      - name: Run M682 behavior tests
+        run: node --test tests/fiendEffectNegationTagAdapter.test.cjs
+      - name: Run isolated regression suite
+        run: npm test
