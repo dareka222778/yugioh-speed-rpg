@@ -186,7 +186,8 @@ scenario('Armadilha Baixada no turno atual não pode ativar',()=>{
 
 scenario('parceiro inativo não pode ativar Armadilha da própria mão privada',()=>{
  const {session}=setup(),window=openOpponentMain(session,0),partner=(window.actorSeat+2)%4;
- const trapCard=take(session,partner,fixtures.roar);
+ const trapCard=holder(session,partner).hand[0];
+ assert.ok(trapCard);
  assert.throws(()=>activate(session,{uid:trapCard.uid},window,'partner-hand'),/Spell\/Trap Zone/);
 });
 
