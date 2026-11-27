@@ -272,3 +272,9 @@ test('session survives JSON serialization with active source and receipts',()=>{
  capture(session,adapter,monster,'json');const restored=JSON.parse(JSON.stringify(session));
  assert.doesNotThrow(()=>adapter.captureAttackDeclaration(restored,eventFor(restored,monster,'json')));
 });
+
+test('prototype keys cannot poison the idempotency receipt ledger',()=>{
+ const {session,adapter}=setup(),monster=deploy(session);
+ assert.throws(()=>adapter.captureAttackDeclaration(session,eventFor(session,monster,'__proto__')),/Identificador de ataque inválido/);
+ assert.equal(Object.prototype.hasOwnProperty.call(session.receipts,'__proto__'),false);
+});
