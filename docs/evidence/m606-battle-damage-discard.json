@@ -1,0 +1,77 @@
+{
+  "format": 1,
+  "mission": "M606",
+  "cards": [
+    {
+      "name": "White Magical Hat",
+      "passcode": "15150365",
+      "konamiDatabaseId": 4120,
+      "firstTcgPrinting": "MRD-EN016",
+      "firstTcgReleaseDate": "2002-06-26",
+      "effect": "When this card inflicts Battle Damage to your opponent's Life Points, your opponent discards 1 card randomly from his/her hand.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4120&request_locale=en"
+    },
+    {
+      "name": "Robbin' Goblin",
+      "passcode": "88279736",
+      "konamiDatabaseId": 4876,
+      "firstTcgPrinting": "MRD-EN135",
+      "firstTcgReleaseDate": "2002-06-26",
+      "effect": "Each time a monster you control inflicts Battle Damage to your opponent, your opponent discards 1 random card.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4876&request_locale=en"
+    }
+  ],
+  "implementation": {
+    "branch": "feat/work-m606-battle-damage-discard-20261124",
+    "paths": [
+      "src/battleDamageDiscardTagAdapter.ts",
+      "tests/battleDamageDiscardTagAdapter.test.cjs",
+      "docs/evidence/m606-battle-damage-discard.json",
+      ".github/workflows/m606-battle-damage-discard.yml"
+    ],
+    "behavior": [
+      "White Magical Hat only plans after positive battle damage from that face-up monster; it may resolve after the source reaches its physical owner's Graveyard.",
+      "Robbin' Goblin reacts to each positive battle-damage event from a monster controlled by its team; every face-up copy receives a distinct activation receipt.",
+      "Both effects discard one random card from the active physical opponent seat's private hand, not the inactive partner's reserve hand.",
+      "The host injects the random-index function; the adapter does not select a target and never substitutes another card.",
+      "Robbin' Goblin must remain face-up in its controller team's backrow at resolution; negation, empty hand, stale events and duplicate receipts are handled explicitly.",
+      "The physical UID owner is preserved when a stolen attacker is destroyed; discarded card moves to the shared team Graveyard without creating or granting inventory.",
+      "A hand above six is not normalized here; the ordinary End Phase owns the hand-limit discard."
+    ],
+    "rulesValidated": {
+      "mainDeckPerPhysicalSeat": "20-30",
+      "extraDeckPerPhysicalSeat": "0-5",
+      "monsterZonesPerTeam": 3,
+      "spellTrapZonesPerTeam": 3,
+      "handLimit": 6,
+      "handDiscard": "deferred to End Phase"
+    },
+    "integrationBoundary": "Isolated TagDuel adapter only. No catalog registration, card certification, central resolver, Discord command, persistent player data or deployment changes."
+  },
+  "verification": {
+    "focusedScenarios": [
+      "White Magical Hat random discard from active opponent seat",
+      "source leaves field after damage and physical-owner Graveyard routing",
+      "source already in owner's Graveyard when event is delivered",
+      "effect damage/zero damage/incomplete Damage Step/turn/team rejection",
+      "Robbin' Goblin triggers for any team-controlled attacker",
+      "multiple face-up copies trigger independently",
+      "Robbin' Goblin removed before resolution",
+      "negation, empty hand, duplicate receipt and invalid RNG",
+      "hand above six remains for End Phase",
+      "3+3 zones, Main Deck 20 and 30, Extra Deck 5 and overflow",
+      "inventory conservation and physical-seat privacy"
+    ],
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "merge": false,
+    "deploy": false,
+    "liveDiscordValidation": false
+  },
+  "limitations": [
+    "Cards are not registered in engine-v9 on the shared branch; the production adapter remains pinned to official passcodes and tests use admitted fixture IDs.",
+    "The host must emit a genuine post-Damage-Step battle-damage event, supply the active opponent seat through current TagDuel rotation, and inject the duel RNG.",
+    "Central trigger wiring, catalog admission, certification and Discord command integration remain separate work and require the M61 resolver handoff."
+  ]
+}
