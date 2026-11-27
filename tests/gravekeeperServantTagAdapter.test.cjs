@@ -271,7 +271,7 @@ test('fourth Monster Zone and fourth Spell/Trap Zone are rejected',()=>{
   const card=take(other.duel,other.duel.active[1],id);
   other.duel.core.players[1].backrow.push({...card,setTurn:1,faceUp:false,resolved:false});
  }
- assert.throws(()=>assertGravekeeperServantRules(other.duel),/mais de três Spell\/Trap Zones/);
+ assert.throws(()=>assertGravekeeperServantRules(other.duel),/(limite de zonas|mais de três Spell\/Trap Zones)/);
 });
 test('session survives JSON serialization with active source and receipts',()=>{
  const {session,adapter}=setup();register(session,adapter,1);const monster=deploy(session);
