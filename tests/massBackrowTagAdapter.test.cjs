@@ -114,14 +114,14 @@ test('Harpie ativa da mão física do jogador ativo e ocupa uma Spell/Trap Zone 
 
 test('não permite ativar uma Magia da mão privada do parceiro',()=>{
  const duel=makeDuel(0),partner=partnerSeat(0),sourceUid=putHandCard(duel,partner,sourceIds['heavy-storm']);
- const adapter=createMassBackrowAdapter(lookup),session=adapter.createSession(duel);
+ const adapter=createMassBackrowAdapter(),session=adapter.createSession(duel);
  assert.throws(()=>adapter.activate(session,{activationId:'partner-hand',sourceUid,actorSeat:0,turn:duel.core.turn}),/mão privada/);
 });
 
 test('rejeita ativação fora da Main Phase',()=>{
  const duel=makeDuel(0),sourceUid=putHandCard(duel,0,sourceIds['heavy-storm']);
  duel.core.phase='battle';
- const adapter=createMassBackrowAdapter(lookup),session=adapter.createSession(duel);
+ const adapter=createMassBackrowAdapter(),session=adapter.createSession(duel);
  assert.throws(()=>adapter.activate(session,{activationId:'wrong-phase',sourceUid,actorSeat:0,turn:duel.core.turn}),/Main Phase/);
 });
 
@@ -129,13 +129,13 @@ test('rejeita ativação quando as três Spell/Trap Zones já estão ocupadas',(
  const duel=makeDuel(0);
  for(let i=0;i<3;i++)placeBackrow(duel,0,0,fixtureSpells[3+i],false);
  const sourceUid=putHandCard(duel,0,sourceIds['heavy-storm']);
- const adapter=createMassBackrowAdapter(lookup),session=adapter.createSession(duel);
+ const adapter=createMassBackrowAdapter(),session=adapter.createSession(duel);
  assert.throws(()=>adapter.activate(session,{activationId:'full-backrow',sourceUid,actorSeat:0,turn:duel.core.turn}),/Zone livre/);
 });
 
 test('rejeita fonte que não seja uma das três Magias de varredura',()=>{
  const duel=makeDuel(0),sourceUid=putHandCard(duel,0,fixtureTraps[0]);
- const adapter=createMassBackrowAdapter(lookup),session=adapter.createSession(duel);
+ const adapter=createMassBackrowAdapter(),session=adapter.createSession(duel);
  assert.throws(()=>adapter.activate(session,{activationId:'not-a-sweep',sourceUid,actorSeat:0,turn:duel.core.turn}),/fonte não é/);
 });
 
@@ -293,7 +293,7 @@ test('inventário e UIDs permanecem conservados sem concessões automáticas',()
 
 test('assento ou turno divergente é rejeitado sem mutação',()=>{
  const duel=makeDuel(0),sourceUid=putHandCard(duel,0,sourceIds['heavy-storm']);
- const adapter=createMassBackrowAdapter(lookup),session=adapter.createSession(duel);
+ const adapter=createMassBackrowAdapter(),session=adapter.createSession(duel);
  assert.throws(()=>adapter.activate(session,{activationId:'wrong-seat',sourceUid,actorSeat:2,turn:duel.core.turn}),/Main Phase/);
  assert.throws(()=>adapter.activate(session,{activationId:'wrong-turn',sourceUid,actorSeat:0,turn:duel.core.turn+1}),/Main Phase/);
 });
