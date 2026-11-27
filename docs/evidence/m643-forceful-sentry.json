@@ -1,0 +1,47 @@
+{
+  "format": 1,
+  "mission": "M643",
+  "card": {
+    "id": "42829885",
+    "konamiId": 4907,
+    "name": "The Forceful Sentry",
+    "namePt": "O Sentinela Forte",
+    "firstTCGRelease": "2002-09-16",
+    "firstOCGRelease": "2002-06-20",
+    "officialText": "Look at your opponent's hand. Select 1 card from it and return it to the Deck. Then shuffle the Deck.",
+    "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4907&ope=2&request_locale=en"
+  },
+  "scope": "TagDuel clássico 2v2, adapter isolado sem catálogo/resolver central/comandos/persistência/produção.",
+  "behavior": [
+    "Main Phase e prioridade aberta",
+    "ativação da mão ou backrow compartilhada",
+    "seleção de uma mão física adversária",
+    "recibo privado somente ao assento ativador",
+    "qualquer tipo de carta retorna ao Deck do proprietário e embaralha com RNG persistido",
+    "Fusão retorna ao Extra Deck",
+    "mão vazia resolve sem seleção",
+    "negação não revela nem embaralha",
+    "UIDs e inventário conservados",
+    "idempotência e proteção contra plano/seleção forjados"
+  ],
+  "invariants": {
+    "mainDeck": "20–30 por assento",
+    "handLimit": 6,
+    "handOverflow": "End Phase",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separada",
+    "extraDeckMax": 5,
+    "inventoryGranted": 0
+  },
+  "verification": {
+    "focusedTests": 20,
+    "adapterBehaviorVerifiedCards": 1,
+    "behaviorCertifiedCards": 0,
+    "automaticCertifications": 0,
+    "playableCatalogAdmission": false,
+    "discordGateway": false,
+    "merge": false,
+    "deploy": false
+  }
+}
