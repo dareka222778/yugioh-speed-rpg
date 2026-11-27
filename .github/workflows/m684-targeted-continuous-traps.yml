@@ -23,7 +23,7 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - run: npm run typecheck
+      - run: npm run check
       - run: npm run build
       - run: node --test tests/targetedContinuousTrapTagAdapter.test.cjs
       - run: node scripts/audit-targeted-continuous-traps-m684.cjs
