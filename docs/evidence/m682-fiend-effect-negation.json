@@ -1,0 +1,108 @@
+{
+  "format": 1,
+  "mission": "M682",
+  "title": "Negação de efeitos Fiend em TagDuel 2v2",
+  "status": "implemented-awaiting-ci",
+  "base": {
+    "sharedBranch": "feat/rea-engine-recovery-20261026",
+    "sharedHeadBeforeReservation": "ab6a0befb3d745c23eefcf1692588dcdfbd5be31",
+    "reservationCommit": "2f36c7117505b110220209dfafa2d4d95e434450"
+  },
+  "cards": [
+    {
+      "id": "53982768",
+      "name": "Dark Ruler Ha Des",
+      "konamiCid": 5301,
+      "firstTcgRelease": "2003-06-06",
+      "effectScope": "efeitos de Effect Monsters destruídos em batalha por Fiends controlados pela mesma equipe",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5301&ope=2&request_locale=en",
+      "newToMetadata": true,
+      "newToCertification": true
+    },
+    {
+      "id": "80071763",
+      "name": "Dark Balter the Terrible",
+      "konamiCid": 5302,
+      "firstTcgRelease": "2003-06-06",
+      "firstOcgRelease": "2001-09-20",
+      "effectScope": "efeitos de Effect Monsters destruídos em batalha pelo próprio Balter; negação do efeito de Normal Spell com custo de 1000 LP",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5302&ope=2&request_locale=en",
+      "newToMetadata": true,
+      "newToCertification": true
+    },
+    {
+      "id": "82732705",
+      "name": "Skill Drain",
+      "konamiCid": 5740,
+      "effectScope": "interação de regressão: nega efeitos de monstros face-up no campo sem impedir sua ativação",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5740&ope=2&request_locale=en",
+      "newToMetadata": false,
+      "newToCertification": false,
+      "certificatePresent": true,
+      "metadataPresent": false
+    }
+  ],
+  "baseline": {
+    "certificationEntriesObserved": 959,
+    "priorM681CheckpointClaimed": 969,
+    "discrepancy": 10,
+    "skillDrainCertificateOrphanedFromMetadata": true
+  },
+  "implementation": {
+    "files": [
+      "src/fiendEffectNegationTagAdapter.ts",
+      "tests/fiendEffectNegationTagAdapter.test.cjs",
+      "docs/evidence/m682-fiend-effect-negation.json",
+      "scripts/audit-fiend-effect-negation-m682.cjs",
+      ".github/workflows/m682-fiend-effect-negation.yml"
+    ],
+    "adapterVerifiedCards": 3,
+    "newlyBehaviorCertifiedCards": 0,
+    "newEngineCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGrants": 0,
+    "centralResolverIntegrated": false,
+    "cardMetadataChanged": false,
+    "cardCertificationsChanged": false,
+    "commandsIntegrated": false,
+    "discordLiveValidation": false,
+    "productionChanged": false,
+    "fusionSummonMaterialsAndStrictFusionSummon": false
+  },
+  "rules": {
+    "mainDeck": "20–30",
+    "handLimit": 6,
+    "handCheck": "End Phase",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZoneSeparate": true,
+    "extraDeckMax": 5,
+    "ownerPreserved": true,
+    "inventoryConserved": true
+  },
+  "scenarios": [
+    "Skill Drain: custo de 1000 LP, ativação/ resolução em etapas, face-up, efeito contínuo, face-down, saída do campo, ambos os times, ativação de monstro ainda permitida",
+    "Skill Drain: Jinzo bloqueia ativação antes do custo; Royal Decree permite ativar mas nega efeito; negação de ativação mantém custo; LP exatamente 1000 encerra o duelo",
+    "Dark Ruler Ha Des: Fiend de qualquer parceiro da equipe, alvo Effect Monster, não-Fiend, alvo normal, fonte face-down, Skill Drain",
+    "Dark Balter: apenas o próprio Balter para efeito de batalha; parceiro Fiend não herda o efeito; Normal Spell versus Quick-Play; custo de 1000 LP; Skill Drain; fonte sai do campo",
+    "Identidade: UID físico, epoch, propriedade, idempotência, conservação de inventário e validação de equipes opostas",
+    "Regras: Deck 20–30, mão 7 durante turno permitida até End Phase, 3+3 zonas, Field Zone independente, Extra 5"
+  ],
+  "verification": {
+    "typecheck": "pending",
+    "build": "pending",
+    "focusedTests": "pending",
+    "audit": "pending",
+    "ci": "pending",
+    "discord": "not-run",
+    "production": "not-changed"
+  },
+  "limits": [
+    "O adapter fornece políticas/recibos isolados; ainda não está ligado ao resolver central nem aos gatilhos reais de batalha/Spell.",
+    "Dark Balter exige um Fusion Summon válido com materiais específicos; esta validação permanece fora deste bloco.",
+    "Os dois cards novos não foram inseridos no metadata nem certificados; nenhum número de certificação foi incrementado.",
+    "Skill Drain aparece como chave no arquivo cardCertifications.ts mas não no cardMetadata.ts; não foi tratado como card ativo nem contado como novo comportamento.",
+    "Não foi feita validação ao vivo no Discord, merge ou deploy."
+  ],
+  "nextTask": "Executar typecheck/build/testes focados; corrigir qualquer falha; então executar a suíte completa, abrir PR e atualizar o checkpoint com SHA/CI reais."
+}
