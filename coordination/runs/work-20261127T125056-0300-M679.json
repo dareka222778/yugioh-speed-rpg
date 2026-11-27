@@ -5,16 +5,16 @@
   "owner": "Work principal",
   "priority": "P1",
   "priorityRequestedBy": "User",
-  "status": "reserved-and-implementing",
+  "status": "ci-passed-awaiting-review",
   "startedAt": "2026-11-27T12:50:56-03:00",
-  "endedAt": null,
+  "endedAt": "2026-11-27T19:34:57.320Z",
   "repository": "dareka222778/yugioh-speed-rpg",
   "sharedBranch": "feat/rea-engine-recovery-20261026",
-  "sharedBaseHead": "219badc42cac90d91572a86fe7ade5c6747c344b",
+  "sharedBaseHead": "15115048e30cbf00d30351d2fd5d0bccca3367e0",
   "branch": "feat/work-m679-battle-destruction-retaliation-20261127",
   "baseBranch": "feat/rea-engine-recovery-20261026",
-  "baseSha": "219badc42cac90d91572a86fe7ade5c6747c344b",
-  "headSha": null,
+  "baseSha": "15115048e30cbf00d30351d2fd5d0bccca3367e0",
+  "headSha": "49089f770bda9aa85c4187a5a5df2e20f3f05276",
   "reservedFiles": [
     "src/battleDestructionRetaliationTagAdapter.ts",
     "tests/battleDestructionRetaliationTagAdapter.test.cjs",
@@ -48,20 +48,23 @@
   ],
   "blocksCompleted": [
     "HEAD, coordenação, reservas ativas, PRs e CI reais inspecionados",
-    "escopo isolado sem sobreposição de arquivos; IDs, datas e textos oficiais conferidos"
+    "escopo isolado sem sobreposição de arquivos; IDs, datas e textos oficiais conferidos",
+    "Adapter M679 concluído: Yomi Ship e Helpoemer com bindings UID/epoch, propriedade física e HMAC persistido.",
+    "13 cenários focados passaram; GitHub Actions 46031326035 confirmou check, build, auditoria e testes.",
+    "PR draft #605 aberto para revisão; integração central mantida bloqueada até handoff explícito."
   ],
-  "implementedCards": 0,
-  "behaviorVerifiedCards": 0,
+  "implementedCards": 2,
+  "behaviorVerifiedCards": 2,
   "newCertifications": 0,
   "automaticCertifications": 0,
   "inventoryGrants": 0,
   "verification": {
-    "typecheck": "pending",
-    "build": "pending",
-    "focusedTests": "pending",
-    "evidenceValidation": "pending",
-    "ci": "pending",
-    "adapterBehaviorVerifiedCards": 0,
+    "typecheck": "passed",
+    "build": "passed",
+    "focusedTests": "passed (13 scenarios)",
+    "evidenceValidation": "passed",
+    "ci": "passed (46031326035)",
+    "adapterBehaviorVerifiedCards": 2,
     "behaviorCertifiedCards": 0,
     "discordLive": "not-run"
   },
@@ -69,14 +72,22 @@
   "targetEffectiveWorkMinutes": 60,
   "targetMet": false,
   "ciWaitExcluded": true,
-  "pr": null,
+  "pr": {
+    "number": 605,
+    "url": "https://github.com/dareka222778/yugioh-speed-rpg/pull/605",
+    "state": "open",
+    "draft": true,
+    "mergeable": false
+  },
   "production": "not-changed",
   "merge": "not-authorized",
   "deploy": "not-authorized",
   "blockers": [
-    "Integração no resolver central depende de handoff explícito; esta frente permanece isolada."
+    "Integração no resolver central e certificação engine-v9 aguardam handoff explícito dos arquivos centrais; CI focada não substitui validação Discord ao vivo."
   ],
-  "nextTask": "Implementar o adapter com snapshots de destruição, binding por UID/epoch, descarte aleatório HMAC e testes 2v2 de propriedade/privacidade.",
+  "nextTask": "Após handoff central, integrar e validar em engine-v9; em paralelo iniciar próxima família independente não reservada.",
   "nextWindow": "2026-11-27T17:30:00-03:00",
-  "scopeReleasedToAuxiliary": []
+  "scopeReleasedToAuxiliary": [
+    "Pode avançar em branch própria com uma família de cartas ainda não reservada; não editar resolver central, catálogo/certificações ou arquivos reservados por terceiros."
+  ]
 }

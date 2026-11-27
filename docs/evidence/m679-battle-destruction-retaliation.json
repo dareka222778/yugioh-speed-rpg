@@ -26,7 +26,7 @@
     }
   ],
   "adapterBehaviorVerifiedCards": 2,
-  "verificationState": "awaiting-ci",
+  "verificationState": "ci-passed",
   "behaviorCertifiedCards": 0,
   "newEngineV9Certifications": 0,
   "automaticCertifications": 0,
@@ -67,5 +67,16 @@
     "A janela de fim da Battle Phase é fornecida pelo host; o scheduler central ainda não foi alterado.",
     "Testes offline TagDuel; nenhuma sessão com gateway Discord ou implantação real foi executada.",
     "As duas cartas não foram adicionadas ao catálogo engine-v9 nem certificadas."
-  ]
+  ],
+  "ciRun": {
+    "id": 46031326035,
+    "url": "https://github.com/dareka222778/yugioh-speed-rpg/actions/runs/46031326035",
+    "conclusion": "success",
+    "checks": [
+      "npm run check",
+      "npm run build",
+      "evidence audit",
+      "13 focused TagDuel scenarios"
+    ]
+  }
 }
