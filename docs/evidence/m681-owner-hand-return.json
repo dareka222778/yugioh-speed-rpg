@@ -1,0 +1,70 @@
+{
+  "mission": "M681",
+  "runId": "work-202611271646560300-M681",
+  "title": "Physical-owner hand-return adapters — Nightmare Penguin + Compulsory Evacuation Device",
+  "branch": "feat/work-m681-owner-hand-return-20261127",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "ab6a0befb3d745c23eefcf1692588dcdfbd5be31",
+  "cards": [
+    {
+      "id": "81306586",
+      "name": "Nightmare Penguin",
+      "konamiDatabaseCid": 5803,
+      "atk": 900,
+      "def": 1800,
+      "firstTcgRelease": "2004-12-01",
+      "firstOcgRelease": "2004-08-05",
+      "officialText": "WATER monsters you control gain 200 ATK. If this card is flipped face-up: Target 1 card your opponent controls; return that target to the hand.",
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5803&ope=2&request_locale=en"
+    },
+    {
+      "id": "94192409",
+      "name": "Compulsory Evacuation Device",
+      "konamiDatabaseCid": 5914,
+      "firstTcgRelease": "2004-07-15",
+      "officialText": "Target 1 monster on the field; return that target to the hand.",
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5914&ope=2&request_locale=en"
+    }
+  ],
+  "adapterBehaviorVerifiedCards": 2,
+  "verificationState": "awaiting-ci",
+  "behaviorCertifiedCards": 0,
+  "newEngineV9Certifications": 0,
+  "automaticCertifications": 0,
+  "inventoryGrants": 0,
+  "playerDataChanged": false,
+  "tests": {
+    "file": "tests/ownerHandReturnTagAdapter.test.cjs",
+    "count": 13,
+    "command": "npm run check && npm run build && node scripts/audit-owner-hand-return-m681.cjs && node scripts/run-tests-isolated.cjs tests/ownerHandReturnTagAdapter.test.cjs"
+  },
+  "coverage": [
+    "Nightmare Penguin retorna um monstro ou Spell/Trap face-down controlado pelo oponente à mão do dono físico.",
+    "Mãos de participantes inativos recebem a carta em reserva privada; projeção pública não revela ID/nome da carta.",
+    "Aura contínua de +200 ATK por cópia face-up para monstros WATER face-up controlados pela equipe.",
+    "Compulsory Evacuation Device exige trap setada desde turno anterior, janela legal e alvo monstro com binding UID/epoch.",
+    "Controle pode mudar sem alterar o proprietário físico; Fusion retorna ao Extra Deck e token desaparece com causa return.",
+    "Negação, alvo que sai do campo, replay idempotente, conservação de inventário e limites de zonas/deck/mão."
+  ],
+  "rules": {
+    "mainDeck": "20–30 por assento físico",
+    "handLimit": 6,
+    "handCheck": "End Phase",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separada",
+    "extraDeckMax": 5
+  },
+  "integration": {
+    "centralResolver": false,
+    "commands": false,
+    "discordLive": false,
+    "production": false
+  },
+  "limitations": [
+    "Adapter isolado; evento de flip de Nightmare Penguin deve ser fornecido pelo trigger resolver central.",
+    "Aura é exposta por nightmareWaterAtkBonus/effectiveAtk; integração com cálculo central ainda não autorizada.",
+    "Fusion/Field Zone possuem roteamento implementado, mas o catálogo atual não oferece fixtures válidas para ambos neste lote.",
+    "Testes offline TagDuel; nenhum gateway Discord, merge ou deploy executado."
+  ]
+}
