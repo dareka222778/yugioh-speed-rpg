@@ -10,10 +10,10 @@
   "endedAt": null,
   "repository": "dareka222778/yugioh-speed-rpg",
   "sharedBranch": "feat/rea-engine-recovery-20261026",
-  "sharedBaseHead": "219badc42cac90d91572a86fe7ade5c6747c344b",
+  "sharedBaseHead": "15115048e30cbf00d30351d2fd5d0bccca3367e0",
   "branch": "feat/work-m679-battle-destruction-retaliation-20261127",
   "baseBranch": "feat/rea-engine-recovery-20261026",
-  "baseSha": "219badc42cac90d91572a86fe7ade5c6747c344b",
+  "baseSha": "15115048e30cbf00d30351d2fd5d0bccca3367e0",
   "headSha": null,
   "reservedFiles": [
     "src/battleDestructionRetaliationTagAdapter.ts",
