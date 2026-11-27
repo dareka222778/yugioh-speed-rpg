@@ -50,7 +50,7 @@ function assertId(value:string,label:string,max=128):void{
  if(typeof value!=='string'||!value.trim()||value.length>max||!/^[a-zA-Z0-9:_-]+$/.test(value)||
   ['__proto__','constructor','prototype'].includes(value))throw new Error(label+' inválido.');
 }
-function assertJowgenRules(duel:TagDuel):void{
+export function assertJowgenRules(duel:TagDuel):void{
  if(!duel||duel.mode!=='tag-classic')throw new Error('O adapter exige TagDuel clássico.');
  assertTagDuel(duel);
  if(!duel.core.teamRotation||duel.core.players.length!==2||duel.members.length!==4||duel.active.length!==2){

@@ -98,10 +98,13 @@ test('Jowgen com efeito negado não bloqueia Invocação-Especial',()=>{
  assert.equal(s.adapter.canSpecialSummon(s.duel),true);
 });
 
-test('remover Jowgen do campo encerra o bloqueio contínuo',()=>{
+test('remover Jowgen do campo encerra o bloqueio contínuo sem perder a carta do inventário',()=>{
  const s=prepareJowgen(),field=s.duel.core.players[0].monsters,index=field.findIndex(card=>card.uid===s.jowgen.uid);
- field.splice(index,1);synchronizeCardLifetimes(s.duel.core);
+ const [removed]=field.splice(index,1);
+ s.duel.core.players[0].grave.push({uid:removed.uid,id:removed.id,...(removed.properlySummoned?{properlySummoned:true}:{})});
+ synchronizeCardLifetimes(s.duel.core);
  assert.equal(s.adapter.canSpecialSummon(s.duel),true);
+ assert.ok(s.duel.core.players[0].grave.some(card=>card.uid===removed.uid));
 });
 
 test('registro de Invocação distingue normal de especial e é idempotente',()=>{
