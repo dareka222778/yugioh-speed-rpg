@@ -1,0 +1,30 @@
+name: Coordination guard
+on:
+  pull_request:
+    paths:
+      - 'scripts/coordination-guard.cjs'
+      - 'tests/coordinationGuard.test.cjs'
+      - 'docs/evidence/m635-coordination-guard.json'
+      - '.github/workflows/coordination-guard.yml'
+      - 'coordination/state.json'
+  push:
+    branches:
+      - 'feat/work-m635-coordination-guard-20261125'
+    paths:
+      - 'scripts/coordination-guard.cjs'
+      - 'tests/coordinationGuard.test.cjs'
+      - 'docs/evidence/m635-coordination-guard.json'
+      - '.github/workflows/coordination-guard.yml'
+      - 'coordination/state.json'
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Test compare-and-swap and reservation safety
+        run: node --test tests/coordinationGuard.test.cjs
+      - name: Audit current coordination state
+        run: node scripts/coordination-guard.cjs audit coordination/state.json
