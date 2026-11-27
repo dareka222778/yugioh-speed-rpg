@@ -1,0 +1,55 @@
+{
+  "format": 1,
+  "mission": "M662",
+  "status": "isolated-behavior-verified-candidate",
+  "card": {
+    "name": "Neko Mane King",
+    "password": "11021521",
+    "konamiCardDatabaseId": 5595,
+    "kind": "Effect Monster",
+    "attribute": "EARTH",
+    "race": "Beast",
+    "level": 1,
+    "atk": 0,
+    "defense": 0,
+    "ocgFirstRelease": "2004-01-22",
+    "tcgFirstReleaseAudited": false,
+    "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5595&ope=2&request_locale=ae",
+    "identitySource": "https://ftp.yugipedia.com/wiki/Neko_Mane_King"
+  },
+  "effectParaphrase": "Durante o turno da equipe adversária, se a carta em posse da equipe for enviada ao Cemitério por um efeito controlado pela equipe adversária, a resolução do gatilho obrigatório transforma a fase atual na Fase Final deste turno.",
+  "mechanics": {
+    "possession": "A equipe em posse é capturada no instante do envio; não é inferida apenas do proprietário físico. Se a carta estiver no campo, a posse precisa corresponder ao controlador naquele evento.",
+    "physicalIdentity": "O UID m0..m3 preserva o assento proprietário; a equipe proprietária é seat % 2 e permanece distinta da equipe que possuía/controlava a carta.",
+    "triggerTiming": "O envio é observado somente após a cadeia que o causou terminar; o gatilho obrigatório abre uma nova cadeia e ainda pode ser negado.",
+    "resolution": "A resolução muda para End Phase sem avançar o turno. As rotinas de End Phase continuam obrigatórias; o efeito não pula o descarte por limite de mão.",
+    "idempotency": "eventId e activationId são únicos; resolução repetida após restauração JSON devolve o mesmo recibo e não aplica uma segunda transição."
+  },
+  "rules": {
+    "mainDeck": "20-30 por participante",
+    "handLimit": 6,
+    "handCheck": "End Phase",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separada",
+    "extraDeckMax": 5
+  },
+  "certification": {
+    "before": 969,
+    "after": 969,
+    "new": 0,
+    "status": "not-certified",
+    "reason": "Adapter isolado; não foi registrado no catálogo nem no resolver central, aguardando handoff autorizado."
+  },
+  "inventoryGrants": 0,
+  "production": "unchanged",
+  "discord": "não validado ao vivo; nenhuma chamada a gateway/token ou escrita de sessão persistente",
+  "validation": {
+    "suite": "tests/nekoManeKingTagAdapter.test.cjs",
+    "focusedScenarios": 26,
+    "localTypecheck": "passed (isolated strict TypeScript 5.8.3)",
+    "localFocusedTests": "26/26 passed",
+    "ci": "pending",
+    "integrationLimit": "O resolver central precisa emitir o evento de envio pós-cadeia e aplicar nextPhase=end; nenhum hook central foi alterado nesta missão."
+  }
+}
