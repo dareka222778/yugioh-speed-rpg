@@ -60,13 +60,6 @@ function assertSameInventory(before:Map<string,string>,duel:TagDuel):void{
 function assertHandsUnchanged(before:string[],duel:TagDuel):void{
  if(JSON.stringify(before)!==JSON.stringify(handSnapshot(duel)))throw new Error('A operação alterou uma mão privada.');
 }
-function findMonster(core:DuelState,uid:string){
- for(const team of [0,1] as const){
-  const monster=core.players[team].monsters.find(card=>card.uid===uid);
-  if(monster)return {team,monster};
- }
- return undefined;
-}
 function findSpellTrap(core:DuelState,uid:string):SpellLocation|undefined{
  for(const team of [0,1] as const){
   const backrow=core.players[team].backrow.find(card=>card.uid===uid);
@@ -88,6 +81,7 @@ export function assertSpellNegationRules(duel:TagDuel):void{
  for(const player of duel.core.players){
   if(player.monsters.length>RULES_PROFILE.monsterZones)throw new Error('Mais de três Monster Zones.');
   if(player.backrow.length>RULES_PROFILE.spellTrapZones)throw new Error('Mais de três Spell/Trap Zones.');
+  if(player.field&&engineCard(player.field.id)?.kind!=='spell')throw new Error('A Field Zone aceita somente Magias.');
   for(const card of player.extra??[])extraUids.add(card.uid);
  }
  for(const held of Object.values(duel.reserves))for(const card of held.extra??[])extraUids.add(card.uid);
@@ -149,9 +143,7 @@ export function createSpellNegationAdapter(lookup:SpellNegationLookup=defaultSpe
    .map(monster=>monster.uid));
   const trapEffectsSuppressed=continuousTrapsNegated(core);
   const imperialOrderUids=trapEffectsSuppressed?[]:core.players.flatMap(player=>
-   [...player.backrow,...player.field?[player.field]:[]]
-    .filter(card=>card.faceUp&&lookup(card.id)?.effect==='imperial-order')
-    .map(card=>card.uid));
+   player.backrow.filter(card=>card.faceUp&&lookup(card.id)?.effect==='imperial-order').map(card=>card.uid));
   return {spellCancellerUids,imperialOrderUids};
  }
  /** Spell Canceller blocks new Spell activations for both teams; Imperial Order does not. */
@@ -180,7 +172,7 @@ export function createSpellNegationAdapter(lookup:SpellNegationLookup=defaultSpe
   if(receipt.turn!==core.turn||core.phase!=='main'||core.pending.kind!=='none'||core.chain.length!==0||
    core.turnEnding||!validTeam(core.current))throw new Error('O recibo não corresponde ao início do turno.');
   const location=findSpellTrap(core,receipt.sourceUid),ownerSeat=physicalSeat(receipt.sourceUid);
-  if(!location||!location.card.faceUp||lookup(location.card.id)?.effect!=='imperial-order'||ownerSeat===null){
+  if(!location||location.zone!=='backrow'||!location.card.faceUp||lookup(location.card.id)?.effect!=='imperial-order'||ownerSeat===null){
    return {activationId:receipt.activationId,sourceUid:receipt.sourceUid,turn:receipt.turn,
     controllerTeam:core.current as SpellNegationTeam,ownerSeat:ownerSeat??receipt.actorSeat,
     status:'source-lost',lpBefore:core.players[core.current].lp,lpAfter:core.players[core.current].lp,paid:0};
