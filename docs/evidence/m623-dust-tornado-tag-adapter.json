@@ -1,0 +1,88 @@
+{
+  "format": 1,
+  "runId": "work-20261125T143244-0300-M623",
+  "mission": "M623",
+  "priority": "P1",
+  "status": "adapter e testes preparados; aguardando CI",
+  "cards": [
+    {
+      "name": "Dust Tornado",
+      "passcode": "60082869",
+      "konamiDatabaseId": 4988,
+      "kind": "Normal Trap",
+      "firstTcgSet": "PSV-EN011",
+      "firstTcgRelease": "2002-10-20",
+      "officialEffect": "Target 1 Spell/Trap your opponent controls; destroy that target, then you can Set 1 Spell/Trap from your hand.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4988&ope=2&request_locale=en"
+    }
+  ],
+  "implementation": {
+    "branch": "feat/work-m623-dust-tornado-tag-adapter-20261125",
+    "baseSha": "625abea1583d14dc0dbc37ef65161159b39a9349",
+    "files": [
+      "src/dustTornadoTagAdapter.ts",
+      "tests/dustTornadoTagAdapter.test.cjs",
+      "docs/evidence/m623-dust-tornado-tag-adapter.json",
+      ".github/workflows/m623-dust-tornado-tag-adapter.yml"
+    ],
+    "behavior": [
+      "Aceita somente Trap face-down setada antes do turno atual, no backrow compartilhado da equipe que detém a prioridade; a carta pode pertencer fisicamente ao parceiro.",
+      "Respeita bloqueio de ativação de Armadilhas (Jinzo/preventActivation), impede ativação na Damage Step, durante escolha pendente, descarte de End Phase ou encerramento do turno.",
+      "Alvo é Spell/Trap controlada pela equipe adversária, em backrow ou Field Zone; o plano não expõe o ID do alvo.",
+      "Vincula alvo por UID, zona e epoch; alvo que sai e retorna não é substituído nem destruído.",
+      "Destrói para o Cemitério da equipe proprietária física, não necessariamente a equipe que controlava a carta.",
+      "A negação do efeito não destrói o alvo e não executa o Set opcional.",
+      "Set opcional consome apenas a mão privada do assento físico ativo; aceita Spell/Trap, posiciona face-down e registra setTurn atual.",
+      "Field Spell vai para a Field Zone separada; as três Spell/Trap Zones continuam limitadas a três.",
+      "Recibo serializável impede replay; inventário físico conserva UID e identidade de todas as cartas."
+    ],
+    "integrationBoundary": "Adapter isolado; não altera resolver v9, cardMetadata, cardCertifications, allowlist, comandos Discord, persistência, inventário inicial ou produção. Integração central aguarda handoff M61."
+  },
+  "rules": {
+    "mainDeckPerPhysicalSeat": "20–30",
+    "extraDeckPerPhysicalSeat": "0–5",
+    "monsterZonesPerTeam": 3,
+    "spellTrapZonesPerTeam": 3,
+    "fieldZone": "uma por equipe, separada das três Spell/Trap Zones",
+    "handLimit": 6,
+    "handDiscard": "somente na End Phase"
+  },
+  "verification": {
+    "plannedScenarios": 35,
+    "focusedScenarios": 35,
+    "focusedTestCommand": "node --test tests/dustTornadoTagAdapter.test.cjs",
+    "focusedTestResult": "pending",
+    "typecheck": "pending",
+    "build": "pending",
+    "evidenceValidation": "pending",
+    "focusedWorkflowRun": null,
+    "cardBatchFast": "pending",
+    "milestone1000": "pending",
+    "engineValidation": "pending",
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "status": "último checkpoint M621/M622; recontagem atual pendente do CI M623",
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "limitations": [
+    "Dust Tornado permanece fora de metadata, certificações e allowlist; testes usam uma Trap já habilitada como fixture. Nenhuma certificação foi concedida.",
+    "O adapter não é chamado pelo resolver central. A camada central ainda precisa oferecer a janela legal de resposta e integrar a resolução de Trap.",
+    "A proteção genérica de cartas Spell/Trap não está modelada neste adapter; somente proteção/timing já expostos pelo engine são respeitados.",
+    "A seleção opcional de Set é fornecida à resolução pelo chamador; não há UI/command Discord integrada.",
+    "Sem validação live do gateway Discord, backup de produção, merge ou deploy."
+  ],
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  }
+}
