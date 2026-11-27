@@ -106,6 +106,18 @@ function moveMonsterToGrave(duel,uid){
  }
  throw new Error('Monstro não encontrado para mover ao Cemitério.');
 }
+function reviveMonsterFromGrave(duel,uid){
+ for(let team=0;team<2;team++){
+  const index=duel.core.players[team].grave.findIndex(card=>card.uid===uid);
+  if(index>=0){
+   const [card]=duel.core.players[team].grave.splice(index,1);
+   const owner=Number(/^m([0-3]):/.exec(uid)?.[1]??team);
+   duel.core.players[owner%2].monsters.push({...card,position:'atk',faceUp:true,entered:duel.core.turn,changed:duel.core.turn,attacked:0,atkBoost:0,defBoost:0,owner});
+   synchronizeCardLifetimes(duel.core);return;
+  }
+ }
+ throw new Error('Monstro não encontrado para reviver.');
+}
 function setSkillDrain(session){
  const uid=placeBackrow(session.duel,0,trapId);
  session.duel.core.phase='main';session.duel.core.priority=0;
@@ -389,4 +401,15 @@ test('uma batalha entre membros da mesma equipe é rejeitada',()=>{
  assert.throws(()=>adapter.recordBattleDestruction(session,{
   battleId:'same-team',destroyerUid:attacker,destroyedUid:target,destroyedByBattle:true
  }),/equipes adversárias/i);
+});
+
+test('negação de batalha acompanha o UID até o Cemitério e termina quando a carta retorna ao campo',()=>{
+ const session=adapter.createSession(makeDuel());
+ placeMonster(session.duel,0,fiendA);
+ const result=battle(session,{battleId:'lifetime-battle'});
+ assert.equal(adapter.isDestroyedMonsterEffectNegated(session,result.destroyedUid),true);
+ moveMonsterToGrave(session.duel,result.destroyedUid);
+ assert.equal(adapter.isDestroyedMonsterEffectNegated(session,result.destroyedUid),true);
+ reviveMonsterFromGrave(session.duel,result.destroyedUid);
+ assert.equal(adapter.isDestroyedMonsterEffectNegated(session,result.destroyedUid),false);
 });
