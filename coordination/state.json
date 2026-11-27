@@ -1,8 +1,8 @@
 {
   "format": 1,
   "sharedBranch": "feat/rea-engine-recovery-20261026",
-  "observedHead": "385c3b12925578bc63e80582965106ffed840c98",
-  "updatedAt": "2026-11-27T02:58:34-03:00",
+  "observedHead": "542c8db6c488e323dadda27a708b979189b65d53",
+  "updatedAt": "2026-11-27T06:27:36-03:00",
   "activeReservations": [
     {
       "runId": "work-20261125T203259-0300-M635",
@@ -468,6 +468,24 @@
         "coordination/runs/work-20261127T025834-0300-M670.json"
       ],
       "scope": "Adapter TagDuel isolado para Marauding Captain (02460565/CID 5318) e Command Knight (10375182/CID 5017): gatilho de Normal Summon que recruta monstro de nível 4 ou menor da mão privada do assento físico; proteção de alvo de ataque para Warriors; aura cumulativa de +400 ATK a Warriors e autoproteção condicional de Command Knight. Sem alterar resolver central, catálogo/certificações, comandos, banco, inventário ou produção."
+    },
+    {
+      "runId": "work-20261127T062736-0300-M671",
+      "mission": "M671",
+      "priority": "P1",
+      "branch": "feat/work-m671-multi-attack-spirit-20261127",
+      "state": "reserved-and-implementing",
+      "conditionalHeadUpdate": true,
+      "headSha": "542c8db6c488e323dadda27a708b979189b65d53",
+      "reservedFiles": [
+        "src/multiAttackSpiritTagAdapter.ts",
+        "tests/multiAttackSpiritTagAdapter.test.cjs",
+        "docs/evidence/m671-multi-attack-spirit.json",
+        ".github/workflows/m671-multi-attack-spirit.yml",
+        "scripts/audit-multi-attack-spirit-m671.cjs",
+        "coordination/runs/work-20261127T062736-0300-M671.json"
+      ],
+      "scope": "Adapter TagDuel isolado para Mataza the Zapper (22609617 / Konami CID 5898) e Asura Priest (02134346 / Konami CID 5381): dois ataques por Battle Phase e bloqueio de troca de controle enquanto Mataza estiver face-up; Asura ataca cada monstro da equipe adversária uma vez, não pode ser Invocado-Especialmente e retorna à mão do proprietário físico na End Phase do turno de Normal/Flip Summon. Inclui vínculos por UID/epoch, rotação 2v2, idempotência, privacidade de mãos, Deck 20–30, mão 6 na End Phase, zonas 3+3 e Extra 5. Sem resolver central, catálogo/certificações, comandos, persistência, inventário ou produção."
     }
   ],
   "handoffRequests": [
