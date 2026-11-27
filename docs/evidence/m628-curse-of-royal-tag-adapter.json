@@ -1,0 +1,90 @@
+{
+  "format": 1,
+  "mission": "M628",
+  "runId": "work-20261125T153138-0300-M628",
+  "priority": "P1",
+  "status": "adapter isolado implementado; primeira CI falhou somente na validação de metadados; correção publicada e aguardando nova CI",
+  "historicalCutoff": "2004-10-01",
+  "cards": [
+    {
+      "name": "Curse of Royal",
+      "passcode": "02926176",
+      "konamiDatabaseId": 5441,
+      "kind": "Counter Trap",
+      "firstTcgSet": "PGD-044",
+      "firstTcgRelease": "2003-07-18",
+      "officialEffect": "Negate the activation and the effect of a Spell or Trap Card that includes the effect of destroying 1 Spell or Trap Card and destroy it.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5441&ope=2&request_locale=en",
+      "adapterBehavior": [
+        "Only responds to the current opponent Spell/Trap activation when a typed effect descriptor explicitly states that it destroys exactly one Spell/Trap.",
+        "Rejects monster effects, same-team activations, already-negated links, missing descriptors, and destroy-all effects.",
+        "Negates the activation/effect and destroys the activated physical card when the exact response link and card lifetime remain current.",
+        "Routes both the Counter Trap and destroyed card to their physical owner's team Graveyard, including stolen cards and inactive partners.",
+        "Uses a serializable activation session and bounded anti-replay receipt list."
+      ]
+    }
+  ],
+  "implementation": {
+    "branch": "feat/work-m628-curse-of-royal-tag-adapter-20261125",
+    "baseSha": "aabfa8cbd8914b5bd1546abee71bc77bd8ea64a5",
+    "files": [
+      "src/curseOfRoyalTagAdapter.ts",
+      "tests/curseOfRoyalTagAdapter.test.cjs",
+      "docs/evidence/m628-curse-of-royal-tag-adapter.json",
+      ".github/workflows/m628-curse-of-royal-tag-adapter.yml"
+    ],
+    "plannedScenarios": 24,
+    "focusedScenarios": 24,
+    "integrationBoundary": "Pure isolated adapter. Host must provide the typed destroysExactlyOneSpellTrap descriptor from an authoritative effect model; central Chain/resolver integration awaits explicit M61 handoff."
+  },
+  "rules": {
+    "mainDeckPerPhysicalSeat": "20–30",
+    "extraDeckPerPhysicalSeat": "0–5",
+    "monsterZonesPerTeam": 3,
+    "spellTrapZonesPerTeam": 3,
+    "fieldZone": "separate",
+    "handLimit": 6,
+    "handDiscard": "End Phase only"
+  },
+  "verification": {
+    "focusedTestCommand": "node --test tests/curseOfRoyalTagAdapter.test.cjs",
+    "focusedTestResult": "pending-after-metadata-and-fixture-fix",
+    "typecheck": "passed",
+    "build": "passed",
+    "evidenceValidation": "pending-after-metadata-fix",
+    "focusedWorkflowRun": null,
+    "cardBatchFast": "pending",
+    "milestone1000": "pending",
+    "engineValidation": "pending",
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "focusedScenarios": 24
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "status": "baseline do checkpoint compartilhado; revalidar via CI"
+  },
+  "limitations": [
+    "Curse of Royal permanece fora do catálogo, metadata, certificações e allowlist; testes usam Trap já habilitada como fixture.",
+    "O adapter não é chamado pelo resolver central; a camada host deve fornecer o descritor de efeito confiável e a janela Chain.",
+    "Não há integração de comandos Discord nem validação de gateway/guild ao vivo.",
+    "Nenhuma concessão de inventário, alteração de dados persistentes, merge ou deploy."
+  ],
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "m61Handoff": {
+    "pr": 17,
+    "status": "awaiting-explicit-release",
+    "centralFilesExcluded": true
+  }
+}
