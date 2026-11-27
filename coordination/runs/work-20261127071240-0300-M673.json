@@ -4,7 +4,7 @@
   "mission": "M673",
   "owner": "Work principal",
   "priority": "P1",
-  "status": "reserved-and-implementing",
+  "status": "implementation-committed-awaiting-ci",
   "startedAt": "2026-11-27T07:12:40.830-03:00",
   "endedAt": null,
   "repository": "dareka222778/yugioh-speed-rpg",
@@ -33,7 +33,13 @@
       "effect": "Neither player can Special Summon while this card is face-up; discard 1 random card from your hand to the GY to destroy all Special Summoned monsters on the field."
     }
   ],
-  "blocksCompleted": [],
+  "blocksCompleted": [
+    "adapter de lock global de Invocação-Especial",
+    "registro de eventos normal/especial por UID e época",
+    "custo aleatório privado com crypto.randomInt e RNG injetável",
+    "22 cenários 2v2",
+    "evidência histórica, auditoria e workflow focado"
+  ],
   "implementedCards": 1,
   "behaviorVerifiedCards": 0,
   "newCertifications": 0,
@@ -49,7 +55,7 @@
     "behaviorCertifiedCards": 0,
     "discordLive": "not-run"
   },
-  "effectiveWorkMinutes": 0,
+  "effectiveWorkMinutes": 5,
   "targetEffectiveWorkMinutes": 60,
   "targetMet": false,
   "ciWaitExcluded": true,
@@ -60,7 +66,7 @@
   "blockers": [
     "Adapter isolado; integração com o resolver de Invocação e histórico de special summons depende de handoff central explícito."
   ],
-  "nextTask": "Implementar lock global de Invocação-Especial, rastreamento de instâncias especiais e custo aleatório privado do Jowgen; validar em 2v2.",
+  "nextTask": "Executar CI focada, corrigir falhas reais e revisar interação do lock com regras 3+3 e rotação física.",
   "nextWindow": "2026-11-27T11:30:00-03:00",
   "scopeReleasedToAuxiliary": []
 }
