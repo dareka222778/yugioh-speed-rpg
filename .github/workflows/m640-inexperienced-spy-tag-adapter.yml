@@ -1,0 +1,29 @@
+name: M640 The Inexperienced Spy private-hand TagDuel adapter
+on:
+  push:
+    branches:
+      - feat/work-m640-inexperienced-spy-tag-adapter-20261126
+  pull_request:
+    branches:
+      - feat/rea-engine-recovery-20261026
+    paths:
+      - src/inexperiencedSpyTagAdapter.ts
+      - tests/inexperiencedSpyTagAdapter.test.cjs
+      - docs/evidence/m640-inexperienced-spy.json
+      - .github/workflows/m640-inexperienced-spy-tag-adapter.yml
+permissions:
+  contents: read
+jobs:
+  inexperienced-spy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m640-inexperienced-spy.json', 'utf8'))"
+      - run: node --test tests/inexperiencedSpyTagAdapter.test.cjs

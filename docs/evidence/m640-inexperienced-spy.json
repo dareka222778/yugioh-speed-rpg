@@ -1,0 +1,75 @@
+{
+  "mission": "M640",
+  "title": "The Inexperienced Spy private-hand TagDuel adapter",
+  "cards": [
+    {
+      "id": "81820689",
+      "name": "The Inexperienced Spy",
+      "konamiId": 4848,
+      "firstTCGRelease": "2002-03-29",
+      "officialText": "Select and see 1 card in your opponent's hand.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4848&ope=2&request_locale=en"
+    }
+  ],
+  "behavior": {
+    "selection": "The activating seat chooses one of the two opposing physical seats and one UID from that seat's private hand.",
+    "privacy": "Only the exact activating seat receives the card identity. Its teammate and both opponents receive no private payload.",
+    "persistence": "The reveal receipt is transient and non-enumerable; it is not stored in TagDuel state or the public duel log.",
+    "movement": "The selected card stays in its owner's hand; The Inexperienced Spy goes to the shared Graveyard.",
+    "timing": "Main Phase of the active seat; negation produces no reveal; duplicate activation receipts are idempotent."
+  },
+  "invariants": {
+    "mainDeckPerPhysicalSeat": "20-30",
+    "handLimit": 6,
+    "handLimitCheck": "End Phase; adapter does not discard",
+    "monsterZonesPerTeam": 3,
+    "spellTrapZonesPerTeam": 3,
+    "fieldZone": "separate",
+    "extraDeckPerPhysicalSeat": 5,
+    "privateHandsPreserved": true,
+    "physicalUidConservation": true,
+    "inventoryGrants": 0,
+    "publicLogContainsRevealedCardId": false,
+    "partnerReceivesPrivateReveal": false
+  },
+  "tests": {
+    "file": "tests/inexperiencedSpyTagAdapter.test.cjs",
+    "command": "node --test tests/inexperiencedSpyTagAdapter.test.cjs",
+    "scenarios": 13,
+    "covered": [
+      "catalogue remains unchanged",
+      "only activating physical seat receives card identity",
+      "both opposing physical hands, including inactive partner",
+      "selected card remains in the selected hand",
+      "set source owned by inactive teammate",
+      "negation",
+      "idempotent resolution",
+      "invalid target/actor/phase/empty hand",
+      "stale target selection",
+      "non-enumerable private receipt and public view",
+      "six-card End Phase ownership",
+      "3+3 zones, Main Deck 20-30 and Extra Deck 5",
+      "public TagDuel projection does not expose the selected hand card identity"
+    ]
+  },
+  "certification": {
+    "newBehaviorVerifiedCards": 0,
+    "newBehaviorCertifiedCards": 0,
+    "catalogAdmission": false,
+    "automaticCertification": false,
+    "inventoryGrants": 0,
+    "adapterBehaviorVerifiedCards": 1
+  },
+  "integration": {
+    "centralResolver": false,
+    "discordCommands": false,
+    "persistence": false,
+    "liveDiscordGateway": false,
+    "merge": false,
+    "deploy": false
+  },
+  "base": {
+    "sharedHead": "2675597cf6ecf4b66ef6b4e6b8d93b7852c618ba",
+    "engineV9CertifiedAtReservation": 969
+  }
+}
