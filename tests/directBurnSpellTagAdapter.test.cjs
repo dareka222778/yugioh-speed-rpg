@@ -36,8 +36,8 @@ function makeDuel(first=0){
   duel.core.turn=3;
   duel.core.phase='main';
   duel.core.resume='main';
-  duel.core.current=0;
-  duel.core.priority=0;
+  duel.core.current=first%2;
+  duel.core.priority=first%2;
   duel.core.pending={kind:'none'};
   duel.core.chain=[];
   duel.core.passes=0;
@@ -55,10 +55,20 @@ function privateZone(duel,seat,zone){
     :duel.reserves[String(seat)][zone];
 }
 function partnerSeat(seat){return (seat+2)%4;}
-function setup({first=0,team=0,effectCardId=FINAL_FLAME_ID,sourceOwnerSeat,sourceCardId=SOURCE_SPELL_ID,opponentLP=8000,controllerLP=8000}={}){
-  const duel=makeDuel(first);
+function setActiveTeam(duel,team){
+  const seat=duel.active[team];
+  duel.cursor=seat;
   duel.core.current=team;
   duel.core.priority=team;
+  if(duel.core.teamRotation){
+    duel.core.teamRotation.cursor=seat;
+    duel.core.teamRotation.active=[duel.active[0],duel.active[1]];
+    duel.core.teamRotation.reserves=duel.reserves;
+  }
+}
+function setup({first=0,team=first%2,effectCardId=FINAL_FLAME_ID,sourceOwnerSeat,sourceCardId=SOURCE_SPELL_ID,opponentLP=8000,controllerLP=8000}={}){
+  const duel=makeDuel(first);
+  setActiveTeam(duel,team);
   duel.core.players[team].lp=controllerLP;
   duel.core.players[1-team].lp=opponentLP;
   const owner=sourceOwnerSeat??duel.active[team];
@@ -198,7 +208,7 @@ test('requires a live Main Phase, current team and priority',()=>{
   wrongPriority.core.priority=1;
   assert.deepEqual(directBurnSpellActions(wrongPriority,f.effectCardId,{sourceCardId:f.sourceCardId}),[]);
   const wrongCurrent=structuredClone(f.duel);
-  wrongCurrent.core.current=1;
+  setActiveTeam(wrongCurrent,1);
   assert.deepEqual(directBurnSpellActions(wrongCurrent,f.effectCardId,{sourceCardId:f.sourceCardId}),[]);
 });
 test('does not activate while a Pending effect or Chain is already open',()=>{
@@ -263,7 +273,7 @@ test('does not resolve after the turn or current team changes',()=>{
   session.duel.core.turn++;
   assert.throws(()=>resolve(session),/ponto de resolução exato/);
   const other=activate(f);
-  other.duel.core.current=1;
+  setActiveTeam(other.duel,1);
   assert.throws(()=>resolve(other),/ponto de resolução exato/);
 });
 test('a Normal Spell removed after activation still resolves its already-open effect',()=>{
@@ -286,9 +296,9 @@ test('all four opening-seat rotations route damage to the opposing team and the 
   for(const first of [0,1,2,3]){
     const f=setup({first});
     const resolved=resolve(activate(f));
-    assert.equal(resolved.session.duel.core.players[1].lp,7400,'first='+first);
-    assert.equal(resolved.session.duel.core.players[0].lp,8000,'first='+first);
-    assert.ok(graveHas(resolved.session.duel,0,f.sourceUid),'first='+first);
+    assert.equal(resolved.session.duel.core.players[1-f.team].lp,7400,'first='+first);
+    assert.equal(resolved.session.duel.core.players[f.team].lp,8000,'first='+first);
+    assert.ok(graveHas(resolved.session.duel,f.team,f.sourceUid),'first='+first);
   }
 });
 test('three shared Spell/Trap slots and the separate Field Zone remain valid',()=>{
