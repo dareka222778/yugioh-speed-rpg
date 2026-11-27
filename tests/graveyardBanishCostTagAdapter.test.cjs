@@ -10,10 +10,10 @@ const level2=normal.find(id=>getDuelCard(id)?.level===2);
 const level3=normal.find(id=>getDuelCard(id)?.level===3);
 assert.ok(level2&&level3,'o catálogo de teste precisa de monstros normais de Nível 2 e 3');
 const other=normal.filter(id=>id!==level2&&id!==level3);
-const deckIds=[...other.slice(0,7),level2,level3];
-const spell='05318639';
-const deck=deckIds.flatMap(id=>[id,id]).concat([spell,spell]);
-const alias={bazoo:deckIds[0],skull:deckIds[1],fodderA:deckIds[2],fodderB:deckIds[3],fodderC:deckIds[4],target2:level2,target3:level3};
+const deckIds=[...other.slice(0,6),level2,level3];
+const spell='05318639',trap='44095762';
+const deck=deckIds.flatMap(id=>[id,id]).concat([spell,spell,trap,trap]);
+const alias={bazoo:deckIds[0],skull:trap,fodderA:deckIds[1],fodderB:deckIds[2],fodderC:deckIds[3],target2:level2,target3:level3};
 const lookup=id=>id===alias.bazoo?{kind:'monster',effect:'bazoo'}:
  id===alias.skull?{kind:'trap',effect:'skull-lair'}:undefined;
 const adapter=createGraveyardBanishCostAdapter(lookup);
@@ -190,12 +190,17 @@ test('Skull Lair rejeita custo não-monstro e mantém inventário inalterado',()
 test('regras 2v2 preservam Deck 20–30, mão 6 somente na End Phase, 3+3 zonas, Field Zone separada e Extra 5',()=>{
  const duel=game(0);
  duel.core.players[0].hand.push(...duel.core.players[0].deck.splice(0,3));
- duel.core.players[0].field={...take(duel,0,alias.fodderA),setTurn:0,faceUp:true,resolved:true};
  assert.equal(duel.core.players[0].hand.length,7);
  assert.doesNotThrow(()=>adapter.createSession(duel));
  const crowded=game(0);
  for(let i=0;i<4;i++)deploy(crowded,0,deckIds[i]);
  assert.throws(()=>adapter.createSession(crowded));
+ const crowdedBackrow=game(0);
+ for(const id of [trap,trap,spell,spell]){
+  const card=take(crowdedBackrow,0,id);
+  crowdedBackrow.core.players[0].backrow.push({...card,setTurn:0,faceUp:false,resolved:false});
+ }
+ assert.throws(()=>adapter.createSession(crowdedBackrow));
 });
 
 test('janelas inválidas e IDs reutilizados com fatos diferentes são rejeitados sem perda de inventário',()=>{
