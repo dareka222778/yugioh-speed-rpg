@@ -143,7 +143,7 @@ test('Helpoemer triggers again on each later opponent Battle Phase while its sam
 test('Helpoemer does not trigger during its owner team Battle Phase',()=>{
  const duel=game(1),source=putGrave(duel,0,alias.helpoemer),destroyer=deploy(duel,1,alias.target);
  const session=adapter.createSession(duel);adapter.capture(session,event(session.duel,source,destroyer,'helpoemer-team'));
- session.duel.cursor=0;session.duel.core.teamRotation.cursor=0;session.duel.core.current=0;
+ session.duel.cursor=0;session.duel.core.teamRotation.cursor=0;session.duel.core.current=0;swapTeamSeat(session.duel.core,0);
  const own=adapter.resolveHelpoemerBattlePhaseEnd(session,{kind:'opponent-battle-phase-end',eventId:'own-phase',team:0,activeSeat:0,turn:1});
  assert.equal(own.length,0);
 });
