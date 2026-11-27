@@ -1,0 +1,40 @@
+{
+  "format": 1,
+  "runId": "work-20261127T015620-0300-M667",
+  "mission": "M667",
+  "priority": "P1",
+  "status": "reserved-and-implementing",
+  "startedAt": "2026-11-27T01:56:20-03:00",
+  "endedAt": null,
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "baseHead": "e6ea5d82bd18c9cbdee3b2c6fefe50e961d38da6",
+  "branch": "feat/work-m667-gravekeepers-servant-20261127",
+  "reservedFiles": [
+    "src/gravekeeperServantTagAdapter.ts",
+    "tests/gravekeeperServantTagAdapter.test.cjs",
+    "docs/evidence/m667-gravekeeper-servant.json",
+    "scripts/audit-gravekeeper-servant-m667.cjs",
+    ".github/workflows/m667-gravekeeper-servant.yml"
+  ],
+  "headSha": null,
+  "scope": "Adapter TagDuel isolado para Gravekeeper's Servant (16762927/CID 4893): custo por ataque de 1 carta do topo do Deck físico do representante ativo atacante por cópia contínua adversária; valida fontes, negação, remoção, destino GY, Deck insuficiente, 2v2, idempotência e conservação de UID. Sem resolver central, catálogo/certificações, comandos, banco, inventário ou produção.",
+  "certifiedCardsBefore": null,
+  "certifiedCardsAfter": null,
+  "newCertifications": 0,
+  "automaticCertifications": 0,
+  "inventoryGrants": 0,
+  "verification": {
+    "sourceIdentity": "verified against Konami CID 4893",
+    "focusedTests": "pending",
+    "typecheck": "pending",
+    "build": "pending",
+    "repositoryRegression": "pending",
+    "discordLive": "not-run"
+  },
+  "pr": null,
+  "production": "não alterada",
+  "discord": "não validado ao vivo",
+  "handoff": "Sem sobreposição de arquivos com M665/M666. Integração central aguarda handoff explícito M637/M662; nenhuma reserva de terceiros será alterada.",
+  "nextTask": "Executar CI focada e regressão do repositório; revisar o limite 2v2 do Deck pagador; manter certificação pendente até integração central.",
+  "nextWindow": "2026-11-27T06:30:00-03:00"
+}
