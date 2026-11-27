@@ -1,0 +1,77 @@
+{
+  "format": 1,
+  "mission": "M605",
+  "cards": [
+    {
+      "name": "Dream Clown",
+      "passcode": "13215230",
+      "konamiDatabaseId": 4126,
+      "firstTcgPrinting": "MRD-080",
+      "firstTcgReleaseDate": "2002-06-26",
+      "effect": "If this Attack Position card is changed to face-up Defense Position: Target 1 monster your opponent controls; destroy that target.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4126&request_locale=en"
+    },
+    {
+      "name": "Crass Clown",
+      "passcode": "93889755",
+      "konamiDatabaseId": 4101,
+      "firstTcgPrinting": "MRD-078",
+      "firstTcgReleaseDate": "2002-06-26",
+      "effect": "If this Defense Position card is changed to Attack Position: Target 1 monster your opponent controls; return that target to the hand.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4101&request_locale=en"
+    }
+  ],
+  "implementation": {
+    "branch": "feat/work-m605-dream-crass-clown-position-change-20261124",
+    "paths": [
+      "src/clownPositionChangeTagAdapter.ts",
+      "tests/clownPositionChangeTagAdapter.test.cjs",
+      "docs/evidence/m605-clown-position-change.json",
+      ".github/workflows/m605-clown-position-change.yml"
+    ],
+    "behavior": [
+      "Dream Clown only accepts face-up Attack to face-up Defense transitions.",
+      "Crass Clown accepts Defense to face-up Attack transitions, including a face-down Defense Flip Summon.",
+      "The source may leave the field after the recorded position change and remain eligible from its physical owner's Graveyard.",
+      "Target selection is restricted to the opposing team and current monster-effect immunity; face-down monsters remain valid targets.",
+      "A target binding prevents substitution if the selected monster leaves the field, changes identity, or changes to the controller's team.",
+      "Dream Clown destruction routes to the target's physical owner's Graveyard.",
+      "Crass Clown returns a non-Fusion monster to its physical owner's hand, a Fusion monster to that owner's Extra Deck, and removes a Token without inventing inventory.",
+      "Inactive owners receive returned cards in their own reserve hand/Extra Deck.",
+      "A hand that grows above six is left untouched; the existing End Phase flow owns discard."
+    ],
+    "rulesValidated": {
+      "mainDeckPerPhysicalSeat": "20-30",
+      "extraDeckPerPhysicalSeat": "0-5",
+      "monsterZonesPerTeam": 3,
+      "spellTrapZonesPerTeam": 3,
+      "handLimit": 6,
+      "handDiscard": "deferred to End Phase"
+    },
+    "integrationBoundary": "Isolated TagDuel adapter only. No catalog registration, central resolver, command handler, or Discord runtime integration was changed."
+  },
+  "verification": {
+    "focusedScenarios": [
+      "Dream Clown destroys a face-down target and respects the target's physical owner under stolen control",
+      "Crass Clown returns a card to an inactive physical owner's reserve hand",
+      "Crass Clown routes a Fusion monster to the owner's Extra Deck",
+      "source leaves field after the position-change event",
+      "no-target and invalid transition/controller/turn/source rejection",
+      "selected target leaves field and cannot be replaced",
+      "selected target changes to the controller's team",
+      "negation and duplicate activation are idempotent",
+      "3+3 zones, Main Deck 20/30, Extra Deck maximum five"
+    ],
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "merge": false,
+    "deploy": false,
+    "liveDiscordValidation": false
+  },
+  "limitations": [
+    "The production adapter is pinned to the official passcodes but these cards are not registered in the catalog/resolver on this branch.",
+    "The host must provide a genuine position-change event, controller-at-activation team, and whether the source left the field after the event.",
+    "Central trigger integration and Discord command validation remain separate work."
+  ]
+}
