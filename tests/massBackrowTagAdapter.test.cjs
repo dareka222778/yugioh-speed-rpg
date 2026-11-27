@@ -74,7 +74,11 @@ function setup(effect,options={}){
  const activation=adapter.activate(session,{activationId,sourceUid,actorSeat:activeSeat,turn:duel.core.turn});
  return {duel:session.duel,adapter,session,activation,activationId,sourceUid,activeSeat,activeTeam};
 }
-function resolve(s,options={}){return s.adapter.resolve(s.session,{activationId:s.activationId,...options});}
+function resolve(s,options={}){
+ const result=s.adapter.resolve(s.session,{activationId:s.activationId,...options});
+ s.duel=s.session.duel;
+ return result;
+}
 function location(duel,uid){
  for(const team of [0,1]){
   const index=duel.core.players[team].backrow.findIndex(card=>card.uid===uid);

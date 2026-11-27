@@ -139,7 +139,6 @@ function pushToOwnerGrave(duel:TagDuel,ownerSeat:Seat,card:CardRef):void{
   uid:card.uid,id:card.id,...(card.properlySummoned?{properlySummoned:true}:{})
  });
 }
-function sourceEffectLabel(effect:MassBackrowEffect):string{return effect;}
 export function createMassBackrowAdapter(
  lookup:MassBackrowLookup=defaultLookup,
  onLeaveField?:MassBackrowLeaveHandler
