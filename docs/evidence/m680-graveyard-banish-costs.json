@@ -46,7 +46,7 @@
     "Skull Lair paga banimento de monstros como custo, exige armadilha face-up/resolvida e seleciona monstro face-up de Level correspondente somente na resolução.",
     "Skull Lair não retargeta uma escolha inválida; permite nova escolha antes de finalizar a resolução, e não reembolsa custo se não houver alvo.",
     "Banish e destruição preservam UID/proprietário físico, inventário, mãos privadas e zonas 2v2.",
-    "Deck 20–30 por assento, mão 6 com checagem só na End Phase, 3 Monster + 3 Spell/Trap Zones, Field Zone separada e Extra Deck 5.",
+    "Deck 20–30 por assento, mão 6 com checagem só na End Phase, 3 Monster + 3 Spell/Trap Zones e Extra Deck 5; o adapter não modifica a Field Zone.",
     "Replay idempotente e bloqueio de IDs de ativação reutilizados com fatos diferentes."
   ],
   "rules": {
@@ -68,6 +68,7 @@
     "Adapter/plan layer isolado; integração central aguarda handoff explícito.",
     "Bônus de Bazoo é exposto por effectiveAtk/bazooBonus; o resolver central ainda não consome este modificador.",
     "Testes offline TagDuel; nenhuma sessão gateway Discord ou implantação real foi executada.",
-    "As duas cartas não foram adicionadas ao catálogo engine-v9 nem certificadas."
+    "As duas cartas não foram adicionadas ao catálogo engine-v9 nem certificadas.",
+    "A Field Zone permanece fora das três Spell/Trap Zones e não é modificada pelo adapter; não foi exercitada por ausência de fixture de Field Spell habilitada."
   ]
 }

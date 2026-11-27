@@ -5,7 +5,7 @@ const {synchronizeCardLifetimes}=require('../dist/cardLifetime');
 const {getDuelCard}=require('../dist/effectRegistry');
 const {createGraveyardBanishCostAdapter}=require('../dist/graveyardBanishCostTagAdapter');
 
-const normal=tag.tagNormalCardIds;
+const normal=[...new Set(tag.tagNormalCardIds)];
 const level2=normal.find(id=>getDuelCard(id)?.level===2);
 const level3=normal.find(id=>getDuelCard(id)?.level===3);
 assert.ok(level2&&level3,'o catálogo de teste precisa de monstros normais de Nível 2 e 3');
@@ -187,7 +187,7 @@ test('Skull Lair rejeita custo não-monstro e mantém inventário inalterado',()
  assert.deepEqual(inventory(session.duel),before);
 });
 
-test('regras 2v2 preservam Deck 20–30, mão 6 somente na End Phase, 3+3 zonas, Field Zone separada e Extra 5',()=>{
+test('regras 2v2 preservam Deck 20–30, mão 6 somente na End Phase, 3+3 zonas e Extra 5',()=>{
  const duel=game(0);
  duel.core.players[0].hand.push(...duel.core.players[0].deck.splice(0,3));
  assert.equal(duel.core.players[0].hand.length,7);
