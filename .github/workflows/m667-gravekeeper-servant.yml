@@ -22,7 +22,7 @@ on:
 permissions:
   contents: read
 concurrency:
-  group: m667-gravekeeper-servant-\${{ github.ref }}
+  group: m667-gravekeeper-servant
   cancel-in-progress: true
 jobs:
   focused:
