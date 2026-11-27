@@ -1,0 +1,71 @@
+{
+  "format": 1,
+  "mission": "M665",
+  "runId": "work-20261127T012829-0300-M665",
+  "title": "Robbin' Goblin + Robbin' Zombie — TagDuel battle-damage triggers",
+  "cards": [
+    {
+      "name": "Robbin' Goblin",
+      "id": "88279736",
+      "konamiCid": 4876,
+      "kind": "Continuous Trap",
+      "firstRelease": "2002-06-26",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4876&request_locale=en",
+      "behavior": "Quando um monstro da equipe controladora causa dano de batalha positivo à equipe adversária, o assento defensor ativo descarta uma carta aleatória da própria mão."
+    },
+    {
+      "name": "Robbin' Zombie",
+      "id": "83258273",
+      "konamiCid": 5920,
+      "kind": "Continuous Trap",
+      "firstRelease": "2004-03-01",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5920&request_locale=en",
+      "behavior": "Quando um monstro da equipe controladora causa dano de batalha positivo à equipe adversária, a carta do topo do Deck físico do assento defensor ativo vai ao Cemitério compartilhado."
+    }
+  ],
+  "cutoff": "2004-09-30",
+  "scenarioCount": 28,
+  "certifiedCardsBefore": 959,
+  "certifiedCardsAfter": null,
+  "coverage": [
+    "dano positivo/zero",
+    "assentos ativos e equipe correta",
+    "mão privada e descarte HMAC",
+    "topo do Deck físico",
+    "mão/Deck vazios",
+    "fonte removida/virada/negada",
+    "negação da ativação/efeito",
+    "eventos duplicados e restauração JSON",
+    "múltiplas fontes",
+    "UID/propriedade física",
+    "inventário sem concessões",
+    "Deck 20–30",
+    "mão 6 somente na End Phase",
+    "3+3 zonas",
+    "Field Zone separada",
+    "Extra Deck 5"
+  ],
+  "rules": {
+    "mainDeck": "20–30 por assento físico",
+    "handLimit": 6,
+    "handCheck": "End Phase",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "extraDeckMax": 5,
+    "fieldZone": "separada"
+  },
+  "randomness": "HMAC-SHA256 persistido em duel.core.random; nenhuma chamada a Math.random para descarte",
+  "privacy": "resultado não contém UID nem ID da carta descartada; alvo vinculado ao assento defensor ativo no momento do dano",
+  "certificationStatus": "not-certified",
+  "newCertifications": 0,
+  "inventoryGrants": 0,
+  "runtimeIntegration": "pending-explicit-handoff",
+  "discordLive": false,
+  "production": "unchanged",
+  "limitations": [
+    "Adapter isolado; não ligado ao resolver central, comandos ou catálogo porque o handoff M61 permanece pendente.",
+    "A seleção do assento defensor ativo é uma política explícita de TagDuel para evitar acesso à mão privada do parceiro; precisa de aprovação do proprietário na integração.",
+    "CI ainda precisa executar typecheck, build, testes focados e regressão do repositório."
+  ],
+  "nextTask": "Aguardar handoff explícito de M61; integrar o evento de dano de batalha ao resolver central e somente então registrar metadados/certificação após testes completos."
+}

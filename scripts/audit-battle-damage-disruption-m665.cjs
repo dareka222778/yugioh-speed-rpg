@@ -1,0 +1,12 @@
+const fs=require('node:fs');
+const assert=require('node:assert/strict');
+const api=require('../dist/battleDamageDisruptionTagAdapter');
+const evidence=JSON.parse(fs.readFileSync('docs/evidence/m665-battle-damage-disruption.json','utf8'));
+const testSource=fs.readFileSync('tests/battleDamageDisruptionTagAdapter.test.cjs','utf8');
+const testCount=(testSource.match(/\btest\(/g)||[]).length;
+assert.deepEqual(api.lookupBattleDamageEffect(api.ROBBIN_GOBLIN_ID),{kind:'trap',effect:'robbin-goblin'});
+assert.deepEqual(api.lookupBattleDamageEffect(api.ROBBIN_ZOMBIE_ID),{kind:'trap',effect:'robbin-zombie'});
+assert.equal(evidence.cards.length,2);assert.equal(evidence.newCertifications,0);assert.equal(evidence.inventoryGrants,0);
+assert.ok(evidence.scenarioCount>=20);assert.ok(testCount>=evidence.scenarioCount);
+assert.equal(evidence.runtimeIntegration,'pending-explicit-handoff');assert.equal(evidence.discordLive,false);
+console.log(JSON.stringify({mission:evidence.mission,cards:evidence.cards.map(c=>({name:c.name,id:c.id,konamiCid:c.konamiCid,firstRelease:c.firstRelease})),scenarioCount:testCount,certification:'not promoted; isolated adapter evidence only',inventoryGrants:0,rules:evidence.rules,runtimeIntegration:evidence.runtimeIntegration},null,2));

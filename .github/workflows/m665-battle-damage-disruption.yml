@@ -1,0 +1,53 @@
+name: M665 Robbin battle-damage triggers
+on:
+  push:
+    branches:
+      - feat/work-m665-battle-damage-disruption-20261127
+    paths:
+      - src/battleDamageDisruptionTagAdapter.ts
+      - tests/battleDamageDisruptionTagAdapter.test.cjs
+      - docs/evidence/m665-battle-damage-disruption.json
+      - scripts/audit-battle-damage-disruption-m665.cjs
+      - .github/workflows/m665-battle-damage-disruption.yml
+  pull_request:
+    branches:
+      - feat/rea-engine-recovery-20261026
+    paths:
+      - src/battleDamageDisruptionTagAdapter.ts
+      - tests/battleDamageDisruptionTagAdapter.test.cjs
+      - docs/evidence/m665-battle-damage-disruption.json
+      - scripts/audit-battle-damage-disruption-m665.cjs
+      - .github/workflows/m665-battle-damage-disruption.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: m665-battle-damage-disruption-\${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  focused:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - run: node --test tests/battleDamageDisruptionTagAdapter.test.cjs
+      - run: node scripts/audit-battle-damage-disruption-m665.cjs
+      - run: npm run check:cards
+  repository-regression:
+    needs: focused
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npm run audit:tag-classic
