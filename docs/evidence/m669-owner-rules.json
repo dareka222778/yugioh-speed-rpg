@@ -1,0 +1,38 @@
+{
+  "format": 1,
+  "mission": "M669",
+  "scope": "Regressão automatizada das regras do proprietário para o TagDuel clássico 2v2.",
+  "ruleContract": {
+    "mainDeckMin": 20,
+    "mainDeckMax": 30,
+    "extraDeckMax": 5,
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separada",
+    "handLimit": 6,
+    "handCheck": "End Phase"
+  },
+  "scenarios": [
+    "Deck nos limites 20 e 30; rejeição de 19 e 31",
+    "Extra Deck com 5; rejeição de 6",
+    "Três Monster Zones e três Spell/Trap Zones com Field Zone independente",
+    "Rejeição de quarta carta em qualquer uma das duas zonas",
+    "Mão pode exceder 6 durante o turno; descarte até 6 somente na End Phase do assento ativo",
+    "Mão do parceiro físico permanece privada e não é descartada no turno do representante",
+    "Conservação de UID/inventário antes e depois da transição"
+  ],
+  "newCards": 0,
+  "newCertifications": 0,
+  "automaticCertifications": 0,
+  "inventoryGrants": 0,
+  "validation": {
+    "typecheck": "pending",
+    "build": "pending",
+    "focusedTests": "pending",
+    "cardAudit": "pending"
+  },
+  "limitations": [
+    "Sem conexão a gateway Discord real.",
+    "Sem alterações de catálogo, resolver central ou produção."
+  ]
+}

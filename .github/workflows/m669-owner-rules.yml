@@ -1,0 +1,31 @@
+name: M669 owner rules invariants
+on:
+  pull_request:
+    paths:
+      - 'tests/tagOwnerRulesM669.test.cjs'
+      - 'docs/evidence/m669-owner-rules.json'
+      - '.github/workflows/m669-owner-rules.yml'
+      - 'src/tagDuel.ts'
+      - 'src/duelEngineCurrent.ts'
+      - 'src/duelIntegrity.ts'
+      - 'src/rulesProfile.ts'
+      - 'src/handFlow.ts'
+      - 'src/teamRotation.ts'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  owner-rules:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - run: node --test tests/tagOwnerRulesM669.test.cjs
+      - run: npm run check:cards
