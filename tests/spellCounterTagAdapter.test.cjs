@@ -70,7 +70,7 @@ function take(duel,seat,id){
 }
 function deploy(session,team,id,ownerSeat=session.duel.active[team],faceUp=true){
  const card=take(session.duel,ownerSeat,id),turn=session.duel.core.turn;
- const monster={...card,position:'atk',faceUp,entered:turn,lastSummonedTurn:turn,changed:turn,attacked:0,attackCount:0,atkBoost:0,defBoost:0,owner:team};
+ const monster={...card,position:'atk',faceUp,entered:turn,lastSummonedTurn:turn,changed:turn,attacked:0,atkBoost:0,defBoost:0,owner:team};
  session.duel.core.players[team].monsters.push(monster);
  synchronizeCardLifetimes(session.duel.core);
  return monster;

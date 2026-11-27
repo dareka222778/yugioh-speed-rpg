@@ -5,7 +5,7 @@
   "owner": "Work principal",
   "priority": "P1",
   "priorityRequestedBy": "User",
-  "status": "implementation-committed-awaiting-ci",
+  "status": "fix-committed-awaiting-retest",
   "startedAt": "2026-11-27T06:54:49-03:00",
   "endedAt": null,
   "repository": "dareka222778/yugioh-speed-rpg",
@@ -65,7 +65,8 @@
     "31 cenários de regressão 2v2",
     "evidência de texto e corte histórico",
     "auditoria de evidência e contagem de certificações",
-    "workflow focado para typecheck/build/test/audit/card-audit"
+    "workflow focado para typecheck/build/test/audit/card-audit",
+    "corrigido contador de ataque inválido nos fixtures e no monstro Invocado-Especialmente"
   ],
   "implementedCards": 3,
   "newCards": 0,
@@ -73,16 +74,16 @@
   "automaticCertifications": 0,
   "inventoryGrants": 0,
   "verification": {
-    "typecheck": "pending",
-    "build": "pending",
-    "focusedTests": "pending",
+    "typecheck": "passed",
+    "build": "passed",
+    "focusedTests": "failed-first-run; fix committed; retest pending",
     "evidenceValidation": "pending",
-    "ci": "pending",
+    "ci": "retest pending",
     "adapterBehaviorVerifiedCards": 0,
     "behaviorCertifiedCards": 0,
     "discordLive": "not-run"
   },
-  "effectiveWorkMinutes": 15,
+  "effectiveWorkMinutes": 20,
   "targetEffectiveWorkMinutes": 60,
   "targetMet": false,
   "ciWaitExcluded": true,
@@ -91,7 +92,8 @@
   "merge": "not-authorized",
   "deploy": "not-authorized",
   "blockers": [
-    "Handoff explícito M61 para integração central solicitado no PR #17; sem liberação, os três efeitos permanecerão em adapter isolado e não serão certificados."
+    "Handoff explícito M61 para integração central solicitado no PR #17; sem liberação, os três efeitos permanecerão em adapter isolado e não serão certificados.",
+    "Primeiro CI encontrou attackCount:0 inválido na integridade do duelo; corrigido removendo o campo opcional até o primeiro ataque."
   ],
   "nextTask": "Executar CI focada, corrigir falhas reais e então iniciar a próxima família de cartas no mesmo ciclo.",
   "nextWindow": "2026-11-27T11:30:00-03:00",

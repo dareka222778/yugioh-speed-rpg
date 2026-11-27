@@ -411,7 +411,7 @@ export function createSpellCounterAdapter(
      const [card]=target.list.splice(target.index,1);
      const monster:Monster={
       ...card,position:'atk',faceUp:true,entered:plan.turn,lastSummonedTurn:plan.turn,changed:plan.turn,
-      attacked:0,attackCount:0,atkBoost:0,defBoost:0,owner:plan.controllerTeam
+      attacked:0,atkBoost:0,defBoost:0,owner:plan.controllerTeam
      };
      session.duel.core.players[plan.controllerTeam].monsters.push(monster);
      synchronizeCardLifetimes(session.duel.core);
