@@ -1,0 +1,39 @@
+name: M579 banishment TagDuel adapter
+on:
+  push:
+    branches:
+      - feat/work-m579-bazoo-banisher-tag-adapter-20261124
+    paths:
+      - 'src/banishmentTagAdapter.ts'
+      - 'tests/banishmentTagAdapter.test.cjs'
+      - 'docs/evidence/m579-banishment-tag-adapter.json'
+      - '.github/workflows/m579-banishment-tag-adapter.yml'
+  pull_request:
+    branches:
+      - feat/rea-engine-recovery-20261026
+      - 'feat/work-*'
+    paths:
+      - 'src/banishmentTagAdapter.ts'
+      - 'tests/banishmentTagAdapter.test.cjs'
+      - 'docs/evidence/m579-banishment-tag-adapter.json'
+      - '.github/workflows/m579-banishment-tag-adapter.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  banishment-tag-adapter:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate factual evidence
+        run: node -e "const e=require('./docs/evidence/m579-banishment-tag-adapter.json'); if(e.mission!=='M579'||e.behaviorCertifiedCards!==0||e.automaticCertifications!==0||e.inventoryGranted!==0) process.exit(1)"
+      - name: Run isolated behavioral regressions
+        run: node scripts/run-tests-isolated.cjs tests/banishmentTagAdapter.test.cjs
