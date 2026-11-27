@@ -1,0 +1,68 @@
+{
+  "format": 1,
+  "mission": "M607",
+  "card": {
+    "name": "Injection Fairy Lily",
+    "passcode": "79575620",
+    "konamiDatabaseId": 5031,
+    "firstTcgPrinting": "LOD-100",
+    "firstTcgReleaseDate": "2003-06-06",
+    "firstOcgReleaseDate": "2003-09-18",
+    "effect": "Once per battle, during damage calculation, if this card battles (Quick Effect): You can pay 2000 LP; this card gains 3000 ATK during that damage calculation only.",
+    "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5031&ope=2&request_locale=en"
+  },
+  "implementation": {
+    "branch": "feat/work-m607-injection-fairy-lily-damage-calculation-20261124",
+    "paths": [
+      "src/injectionFairyLilyDamageCalculationTagAdapter.ts",
+      "tests/injectionFairyLilyDamageCalculationTagAdapter.test.cjs",
+      "docs/evidence/m607-injection-fairy-lily-damage-calculation.json",
+      ".github/workflows/m607-injection-fairy-lily-damage-calculation.yml"
+    ],
+    "behavior": [
+      "Only plans during a real Damage Calculation window when the face-up source is the attacker or defender in the supplied battle.",
+      "The controller team, not the physical owner seat, pays 2000 LP from the team's shared LP pool.",
+      "The cost is paid at activation; negation or the source leaving the field does not refund it.",
+      "The effect can be used once per battle, not once per turn; separate battle IDs in the same turn remain independent.",
+      "On successful resolution, returns a temporary +3000 ATK-only modifier for that Damage Calculation; no persistent atkBoost or DEF modification is written.",
+      "Requires LP strictly greater than 2000, matching the engine's existing optional LP-cost eligibility rule."
+    ],
+    "rulesValidated": {
+      "mainDeckPerPhysicalSeat": "20-30",
+      "extraDeckPerPhysicalSeat": "0-5",
+      "monsterZonesPerTeam": 3,
+      "spellTrapZonesPerTeam": 3,
+      "handLimit": 6,
+      "handDiscard": "deferred to End Phase",
+      "teamLP": "shared by controller team"
+    },
+    "integrationBoundary": "Isolated TagDuel adapter only. It does not alter central Damage Calculation, monster registry, card catalog, certification, Discord commands, persistent player data or deployment."
+  },
+  "verification": {
+    "focusedScenarios": [
+      "attacker and defender activation windows",
+      "defending team activation during opponent turn",
+      "shared team LP cost versus physical owner",
+      "once-per-battle receipt and second battle in same turn",
+      "LP <= 2000 rejection and no partial payment",
+      "cost retained after negation",
+      "cost retained if source leaves field before resolution",
+      "stale timing and nonparticipant/face-down rejection",
+      "ATK-only temporary modifier; DEF and persistent atkBoost unchanged",
+      "hand above six remains untouched until End Phase",
+      "3+3 zones, Main Deck 20/30 and Extra Deck 5/overflow",
+      "inventory conservation"
+    ],
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "merge": false,
+    "deploy": false,
+    "liveDiscordValidation": false
+  },
+  "limitations": [
+    "The central Damage Calculation resolver must call plan/activate/resolve; this PR does not wire the card into monsterEffects or certify it.",
+    "The host must provide a unique battleId per battle and the current battle participants/teams.",
+    "A successful adapter result exposes a temporary ATK-only modifier; no persistent card stat is changed."
+  ]
+}
