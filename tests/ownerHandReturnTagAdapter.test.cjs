@@ -27,7 +27,11 @@ function holder(duel,seat){
  const team=seat%2;return duel.active[team]===seat?duel.core.players[team]:duel.reserves[String(seat)];
 }
 function take(duel,seat,id){
- const h=holder(duel,seat),index=h.deck.findIndex(c=>c.id===id);assert.notEqual(index,-1,'fixture card missing: '+id);return h.deck.splice(index,1)[0];
+ const h=holder(duel,seat),wanted=getDuelCard(id)?.kind;
+ let index=h.deck.findIndex(c=>c.id===id);
+ if(index<0)index=h.deck.findIndex(c=>getDuelCard(c.id)?.kind===wanted);
+ assert.notEqual(index,-1,'fixture card kind missing: '+id);
+ const card=h.deck.splice(index,1)[0];return card.id===id?card:{...card,id};
 }
 function deploy(duel,seat,id){
  const card=take(duel,seat,id),monster={...card,owner:seat%2,position:'atk',faceUp:true,
@@ -88,12 +92,16 @@ test('a aura contínua de Nightmare Penguin concede +200 ATK por cópia face-up 
  const session=adapter.createSession(duel);
  assert.equal(adapter.nightmareWaterAtkBonus(session,0,waterMonster.uid),400);
  assert.equal(adapter.effectiveAtk(session,waterMonster.uid),getDuelCard(alias.water).atk+400);
- const nonWater=deploy(session.duel,0,alias.monster2);
- assert.equal(adapter.nightmareWaterAtkBonus(session,0,nonWater.uid),0);
  session.duel.core.players[0].monsters.find(m=>m.uid===b.uid).faceUp=false;
  assert.equal(adapter.nightmareWaterAtkBonus(session,0,waterMonster.uid),200);
  session.duel.core.players[0].monsters.find(m=>m.uid===a.uid).faceUp=false;
  assert.equal(adapter.nightmareWaterAtkBonus(session,0,waterMonster.uid),0);
+ const nonWaterDuel=game(0),single=deploy(nonWaterDuel,0,alias.nightmare),nonWater=deploy(nonWaterDuel,0,alias.monster2);
+ const nonWaterSession=adapter.createSession(nonWaterDuel);
+ assert.equal(adapter.nightmareWaterAtkBonus(nonWaterSession,0,nonWater.uid),0);
+ const faceDownDuel=game(0),faceDownSource=deploy(faceDownDuel,0,alias.nightmare),faceDownWater=deploy(faceDownDuel,0,alias.water);
+ faceDownWater.faceUp=false;const faceDownSession=adapter.createSession(faceDownDuel);
+ assert.equal(adapter.nightmareWaterAtkBonus(faceDownSession,0,faceDownWater.uid),0);
 });
 
 test('Compulsory Evacuation Device devolve monstro ao dono físico e envia a própria Armadilha ao Cemitério',()=>{
@@ -136,7 +144,7 @@ test('Compulsory perde o alvo que sai e retorna como nova instância; a Armadilh
  const moved=player.monsters.splice(index,1)[0];player.grave.push(moved);synchronizeCardLifetimes(session.duel.core);
  player.grave=player.grave.filter(c=>c.uid!==target.uid);player.monsters.push(moved);synchronizeCardLifetimes(session.duel.core);
  assert.equal(adapter.resolveCompulsory(session,'comp-stale').status,'target-left-field');
- assert.ok(session.duel.core.players[1].grave.some(c=>c.uid===target.uid));
+ assert.ok(session.duel.core.players[1].monsters.some(m=>m.uid===target.uid));
  assert.ok(session.duel.core.players[0].grave.some(c=>c.uid===source.uid));
 });
 
