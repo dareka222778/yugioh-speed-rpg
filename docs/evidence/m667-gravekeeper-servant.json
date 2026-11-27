@@ -1,0 +1,54 @@
+{
+  "format": 1,
+  "mission": "M667",
+  "runId": "work-20261127T015620-0300-M667",
+  "priority": "P1",
+  "cards": [
+    {
+      "name": "Gravekeeper's Servant",
+      "id": "16762927",
+      "konamiCid": 4893,
+      "kind": "Continuous Spell",
+      "firstRelease": "2002-09-16",
+      "set": "MRL-031",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4893&ope=2&request_locale=en"
+    }
+  ],
+  "behavior": [
+    "Cada cópia face-up, resolvida e não negada controlada pela equipe adversária adiciona um custo de 1 carta do topo do Deck físico do representante atacante ativo.",
+    "O custo é pago antes da janela de resposta; se o ataque for negado depois, o custo permanece.",
+    "Duas cópias acumulam custos; Deck insuficiente ou impossibilidade de enviar ao Cemitério bloqueia a declaração sem mover cartas.",
+    "O card pago vai ao Cemitério compartilhado da equipe, preservando UID e proprietário físico.",
+    "Fontes removidas, face-down, não resolvidas ou negadas deixam de taxar novos ataques; recibos impedem pagamento duplicado."
+  ],
+  "rules": {
+    "mainDeck": "20–30 por assento físico",
+    "handLimit": "6, descarte somente na End Phase",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separada",
+    "extraDeck": 5,
+    "tagSeats": 4,
+    "sharedGraveyard": true,
+    "physicalDeckPayer": "representante ativo da equipe atacante"
+  },
+  "scenarioCount": 33,
+  "certifiedCardsBefore": null,
+  "certifiedCardsAfter": null,
+  "newCertifications": 0,
+  "automaticCertifications": 0,
+  "inventoryGrants": 0,
+  "runtimeIntegration": "pending-explicit-handoff",
+  "discordLive": false,
+  "production": "not-changed",
+  "limitations": [
+    "A identidade real ainda não foi adicionada ao catálogo/allowlist; os testes injetam a identidade sobre fixtures Spell já habilitadas.",
+    "O resolver central ainda precisa chamar captureAttackDeclaration antes de abrir a janela de resposta e encaminhar o predicado de substituição de destino.",
+    "A política 2v2 de usar o Deck do representante físico ativo, e não o Deck do proprietário físico do monstro, precisa de aprovação na integração.",
+    "Não há validação ao vivo no gateway Discord, certificação, concessão de inventário, merge ou deploy."
+  ],
+  "sources": [
+    "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4893&ope=2&request_locale=en",
+    "https://goatrulings.com/goat-indv-rulings/gravekeepers-servant.html"
+  ]
+}
