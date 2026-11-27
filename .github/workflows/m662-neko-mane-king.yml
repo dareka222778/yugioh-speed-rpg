@@ -1,0 +1,32 @@
+name: M662 Neko Mane King focused validation
+
+on:
+  push:
+    branches:
+      - feat/work-m662-neko-mane-king-end-phase-20261126
+  pull_request:
+    paths:
+      - 'src/nekoManeKingTagAdapter.ts'
+      - 'tests/nekoManeKingTagAdapter.test.cjs'
+      - 'docs/evidence/m662-neko-mane-king.json'
+      - 'scripts/audit-neko-mane-king-m662.cjs'
+      - '.github/workflows/m662-neko-mane-king.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  focused:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - run: node --test tests/nekoManeKingTagAdapter.test.cjs
+      - run: node scripts/audit-neko-mane-king-m662.cjs
