@@ -224,7 +224,7 @@ export function createFiendEffectNegationAdapter(lookup:FiendNegationLookup=defa
    session.skillDrainResolved[activationId]=result;return {...result};
   }
   const location=findBackrow(session.duel,activation.sourceUid);
-  if(!location||!targetBindingValid(session.duel.core,activation.sourceBinding)){
+  if(!location||!location.card.faceUp||!targetBindingValid(session.duel.core,activation.sourceBinding)){
    const result:SkillDrainResolution={activationId,sourceUid:activation.sourceUid,status:'source-left-field',lpPaid:activation.lpPaid,replayed:false};
    session.skillDrainResolved[activationId]=result;return {...result};
   }
@@ -309,6 +309,7 @@ export function createFiendEffectNegationAdapter(lookup:FiendNegationLookup=defa
   }
   const attacker=findMonster(session.duel,input.destroyerUid),target=findMonster(session.duel,input.destroyedUid);
   if(!attacker||!target)throw new Error('Os dois monstros devem estar no campo no registro de destruição.');
+  if(attacker.team===target.team)throw new Error('Uma batalha válida precisa envolver equipes adversárias.');
   const targetCard=getDuelCard(target.monster.id),targetEffect=getEffect(target.monster.id);
   const effectMonster=targetCard?.kind==='monster'&&(targetCard.monsterType==='effect'||targetEffect?.kind==='monsterEffect');
   if(!effectMonster){
