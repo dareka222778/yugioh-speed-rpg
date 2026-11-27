@@ -260,11 +260,17 @@ test('Extra Deck above five is rejected without changing any player inventory',(
  assert.throws(()=>assertGravekeeperServantRules(session.duel),/(limite de zonas|excedeu cinco)/);
 });
 test('fourth Monster Zone and fourth Spell/Trap Zone are rejected',()=>{
- const {session}=setup(),monster=deploy(session),card=take(session.duel,session.duel.active[0],monsterIds[5]);
- session.duel.core.players[0].monsters.push({...monster,...card,uid:card.uid,position:'atk',faceUp:true,entered:1,changed:1,attacked:0,atkBoost:0,defBoost:0});
- assert.throws(()=>assertGravekeeperServantRules(session.duel),/mais de três Monster Zones/);
- const {session:other}=setup(),source=setSource(other,1),held=holder(other.duel,other.duel.active[1]),fill=take(other.duel,other.duel.active[1],spellIds[3]);
- other.duel.core.players[1].backrow.push({...fill,setTurn:1,faceUp:false,resolved:false},{...fill,uid:fill.uid+':extra',setTurn:1,faceUp:false,resolved:false},{...source,uid:source.uid+':extra',setTurn:1,faceUp:false,resolved:false});
+ const {session}=setup();deploy(session);
+ for(const id of monsterIds.slice(1,4)){
+  const card=take(session.duel,session.duel.active[0],id);
+  session.duel.core.players[0].monsters.push({...card,position:'atk',faceUp:true,entered:1,changed:1,attacked:0,atkBoost:0,defBoost:0,owner:0});
+ }
+ assert.throws(()=>assertGravekeeperServantRules(session.duel),/(limite de zonas|mais de três Monster Zones)/);
+ const {session:other}=setup();setSource(other,1);
+ for(const id of spellIds.slice(3,6)){
+  const card=take(other.duel,other.duel.active[1],id);
+  other.duel.core.players[1].backrow.push({...card,setTurn:1,faceUp:false,resolved:false});
+ }
  assert.throws(()=>assertGravekeeperServantRules(other.duel),/mais de três Spell\/Trap Zones/);
 });
 test('session survives JSON serialization with active source and receipts',()=>{
