@@ -95,11 +95,12 @@ test('classic 2v2 baseline preserves Deck 20–30, Extra 5, zones 3+3 and Field 
 });
 
 test('attack declarations require the active physical seat and the real Battle Phase',()=>{
- const {session}=setup(),mataza=deploy(session,0,fixture.mataza);
+ const {session}=setup(),mataza=deploy(session,0,fixture.mataza),seat=session.duel.active[0],turn=session.duel.core.turn;
+ const base={attackerUid:mataza.uid,attackerSeat:seat,turn,direct:true};
  session.duel.core.phase='main';
- assert.throws(()=>attack(session,mataza,null,'bad-phase'),/fase ou turno/);
+ assert.throws(()=>adapter.declareAttack(session,{...base,eventId:'bad-phase'}),/fase ou turno/);
  session.duel.core.phase='battle';
- assert.throws(()=>attack(session,mataza,null,'bad-seat',{attackerSeat:0}),/representante físico ativo/);
+ assert.throws(()=>adapter.declareAttack(session,{...base,eventId:'bad-seat',attackerSeat:0}),/representante físico ativo/);
 });
 
 test('Mataza can declare exactly two attacks in one Battle Phase',()=>{
