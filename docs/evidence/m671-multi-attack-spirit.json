@@ -1,0 +1,71 @@
+{
+  "format": 1,
+  "mission": "M671",
+  "runId": "work-20261127T062736-0300-M671",
+  "title": "Mataza the Zapper + Asura Priest — multi-attack and Spirit return in TagDuel",
+  "cards": [
+    {
+      "name": "Mataza the Zapper",
+      "id": "22609617",
+      "konamiCid": 5898,
+      "kind": "Effect Monster",
+      "firstTcgRelease": "2004-03-01",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5898&ope=2&request_locale=en",
+      "behavior": "Pode realizar um segundo ataque durante cada Battle Phase; o controle desta carta face-up no campo não pode ser trocado."
+    },
+    {
+      "name": "Asura Priest",
+      "id": "02134346",
+      "konamiCid": 5381,
+      "kind": "Spirit Effect Monster",
+      "firstTcgRelease": "2003-06-06",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5381&ope=2&request_locale=en",
+      "behavior": "Não pode ser Invocado-Especialmente; no fim do turno em que foi Normal Summoned ou Flip Summoned, retorna à mão do proprietário físico; pode atacar cada monstro da equipe adversária uma vez."
+    }
+  ],
+  "cutoff": "2004-09-30",
+  "scenarioCount": 29,
+  "certifiedCardsBefore": null,
+  "certifiedCardsAfter": null,
+  "coverage": [
+    "identidade e fontes oficiais Konami",
+    "Mataza: segundo ataque, limite de dois ataques e reset por turno",
+    "Mataza: repetição de alvo e ataques diretos",
+    "Mataza: bloqueio de troca de controle somente face-up",
+    "Asura: cada monstro da equipe adversária uma vez, incluindo face-down",
+    "Asura: vínculo por UID/epoch após saída e retorno de zona",
+    "Asura: bloqueio de ataque direto com monstros presentes ou após ataque a monstro",
+    "Asura: ataque direto único quando o campo adversário está vazio",
+    "Asura: bloqueio de Special Summon",
+    "Spirit: Normal Summon e Flip Summon",
+    "Spirit: retorno durante a End Phase real do turno de invocação",
+    "Spirit: retorno à mão física do dono mesmo após troca de controle e rotação 2v2",
+    "Spirit: negação, face-down, saída de campo e idempotência",
+    "conservação de UID, identidade e inventário",
+    "Deck 20–30, mão 6 somente na End Phase, zonas 3+3, Field Zone separada e Extra Deck 5"
+  ],
+  "rules": {
+    "mainDeck": "20–30 por assento físico",
+    "handLimit": 6,
+    "handCheck": "End Phase",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "extraDeckMax": 5,
+    "fieldZone": "separada",
+    "tagDuel": "2 equipes, 4 assentos físicos, mãos/decks privados"
+  },
+  "certificationStatus": "not-certified",
+  "newCertifications": 0,
+  "automaticCertifications": 0,
+  "inventoryGrants": 0,
+  "runtimeIntegration": "pending-explicit-handoff",
+  "discordLive": false,
+  "production": "unchanged",
+  "limitations": [
+    "Adapter isolado; não conectado ao resolver central, catálogo, comandos ou persistência de jogadores.",
+    "Os testes usam duas cartas já habilitadas como fixtures físicas e injetam as identidades Mataza/Asura no lookup; isso verifica o comportamento do adapter, não a admissão das cartas reais.",
+    "Nenhuma certificação é reivindicada. A integração no combate e no fluxo de End Phase exige handoff explícito para os arquivos centrais.",
+    "Sem sessão real no gateway Discord, backup, merge ou deploy."
+  ],
+  "nextTask": "Aguardar liberação explícita M61 para integrar a permissão de ataque, o bloqueio de controle e o retorno Spirit no resolver; adicionar metadados e certificação somente após regressão completa."
+}
