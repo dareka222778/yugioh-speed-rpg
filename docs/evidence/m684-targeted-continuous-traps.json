@@ -1,0 +1,85 @@
+{
+  "format": 1,
+  "mission": "M684",
+  "status": "implementation-pending-ci",
+  "branch": "feat/work-m684-targeted-continuous-traps-20261127",
+  "sharedBaseHead": "b4d9e249f539a3dab7babeef044f40f8b1f50cd3",
+  "branchStartHead": "b636d05f4acf8821a558e754eec5a0cf986250ce",
+  "baseline": {
+    "certificationEntriesObserved": 959,
+    "metadataPresent": false,
+    "certificationPresent": false,
+    "verifiedAgainst": "src/cardCertifications.ts plus every module imported by src/cardMetadata.ts at shared HEAD"
+  },
+  "cards": [
+    {
+      "id": "54704216",
+      "name": "Nightmare Wheel",
+      "konamiCid": 5298,
+      "firstOcgRelease": "2003-10-23",
+      "firstTcgRelease": "2003-07-18",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5298&ope=2&request_locale=en",
+      "behavior": [
+        "target opponent monster",
+        "cannot attack or change battle position",
+        "destroy this Trap when target leaves field",
+        "500 LP damage to opponent during controller's Standby Phase while target remains on field"
+      ],
+      "metadataPresent": false,
+      "certificationPresent": false
+    },
+    {
+      "id": "29267084",
+      "name": "Shadow Spell",
+      "konamiCid": 4675,
+      "firstOcgRelease": "2001-04-01",
+      "firstTcgRelease": "2004-03-01",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4675&ope=2&request_locale=en",
+      "behavior": [
+        "target face-up opponent monster",
+        "lose 700 ATK",
+        "cannot attack or change battle position",
+        "destroy this Trap when target leaves field"
+      ],
+      "metadataPresent": false,
+      "certificationPresent": false
+    }
+  ],
+  "implementation": {
+    "source": "src/targetedContinuousTrapTagAdapter.ts",
+    "tests": "tests/targetedContinuousTrapTagAdapter.test.cjs",
+    "focusedScenarios": 35,
+    "adapterBehaviorVerifiedCards": 2,
+    "behaviorCertifiedCards": 0,
+    "newEngineCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGrants": 0,
+    "centralIntegration": "not integrated"
+  },
+  "rules": {
+    "mainDeck": "20–30",
+    "handLimit": 6,
+    "handCheck": "End Phase",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZoneSeparate": true,
+    "extraDeckMax": 5,
+    "physicalOwnerPreserved": true,
+    "inventoryConserved": true
+  },
+  "testFixturePolicy": "Os dois IDs novos não são admitidos no catálogo. Os cenários usam três Armadilhas já habilitadas como fixtures físicas e um lookup injetado para testar a política; isso verifica o adapter, não certifica nem concede as cartas novas.",
+  "limitations": [
+    "A integração em resolver central aguarda handoff explícito de src/monsterEffects.ts e src/duelEngineCurrent.ts.",
+    "O engine atual não representa Standby como DuelState.phase distinto; resolveStandbyPhase exige evento explícito do início do turno em phase='main'.",
+    "A admissão no metadata, a certificação engine-v9, os comandos Discord e a validação live continuam fora deste branch.",
+    "Nenhuma alteração em inventário, banco, produção, merge ou deploy."
+  ],
+  "verification": {
+    "typecheck": "pending",
+    "build": "pending",
+    "focusedTests": "pending",
+    "evidenceAudit": "pending",
+    "ci": "pending",
+    "discordLive": "not-run"
+  }
+}

@@ -1,0 +1,29 @@
+name: M684 targeted continuous traps
+on:
+  pull_request:
+    branches:
+      - feat/rea-engine-recovery-20261026
+    paths:
+      - src/targetedContinuousTrapTagAdapter.ts
+      - tests/targetedContinuousTrapTagAdapter.test.cjs
+      - docs/evidence/m684-targeted-continuous-traps.json
+      - scripts/audit-targeted-continuous-traps-m684.cjs
+      - .github/workflows/m684-targeted-continuous-traps.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run build
+      - run: node --test tests/targetedContinuousTrapTagAdapter.test.cjs
+      - run: node scripts/audit-targeted-continuous-traps-m684.cjs
