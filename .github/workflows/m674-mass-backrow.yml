@@ -1,5 +1,8 @@
 name: M674 mass backrow TagDuel adapter
 on:
+  push:
+    branches:
+      - "feat/work-m674-mass-backrow-spells-20261127"
   pull_request:
     paths:
       - "src/massBackrowTagAdapter.ts"
