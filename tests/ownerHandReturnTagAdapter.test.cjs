@@ -9,9 +9,11 @@ const normal=tag.tagNormalCardIds,level2=normal.find(id=>getDuelCard(id)?.level=
 const water=normal.find(id=>getDuelCard(id)?.attribute==='WATER');
 assert.ok(level2&&level3&&water,'fixtures precisam de monstros normais de Nível 2/3 e WATER');
 const other=normal.filter(id=>id!==level2&&id!==level3&&id!==water);
-const deckIds=[...other.slice(0,5),water,level2,level3];
+const nonWater=other.find(id=>getDuelCard(id)?.attribute!=='WATER');
+assert.ok(nonWater,'fixture precisa de monstro não-WATER');
+const deckIds=[...other.filter(id=>id!==nonWater).slice(0,4),nonWater,water,level2,level3];
 const spell='05318639',trap='44095762',deck=deckIds.flatMap(id=>[id,id]).concat([spell,spell,trap,trap]);
-const alias={nightmare:deckIds[0],monster:deckIds[1],monster2:deckIds[2],water,level2,level3,compulsory:trap};
+const alias={nightmare:deckIds[0],monster:nonWater,monster2:nonWater,water,level2,level3,compulsory:trap};
 const lookup=id=>id===alias.nightmare?{kind:'monster',effect:'nightmare-penguin'}:
  id===trap?{kind:'trap',effect:'compulsory'}:undefined;
 const adapter=createOwnerHandReturnAdapter(lookup);
@@ -131,7 +133,8 @@ test('Compulsory perde o alvo que sai e retorna como nova instância; a Armadilh
  const {duel,source,target}=compulsoryFixture(),session=adapter.createSession(duel);
  adapter.activateCompulsory(session,'comp-stale',source.uid,0,target.uid);
  const player=session.duel.core.players[1],index=player.monsters.findIndex(m=>m.uid===target.uid);
- player.grave.push(player.monsters.splice(index,1)[0]);synchronizeCardLifetimes(session.duel.core);
+ const moved=player.monsters.splice(index,1)[0];player.grave.push(moved);synchronizeCardLifetimes(session.duel.core);
+ player.grave=player.grave.filter(c=>c.uid!==target.uid);player.monsters.push(moved);synchronizeCardLifetimes(session.duel.core);
  assert.equal(adapter.resolveCompulsory(session,'comp-stale').status,'target-left-field');
  assert.ok(session.duel.core.players[1].grave.some(c=>c.uid===target.uid));
  assert.ok(session.duel.core.players[0].grave.some(c=>c.uid===source.uid));
@@ -141,7 +144,7 @@ test('Compulsory aceita resposta no turno oponente e preserva o dono físico da 
  const duel=game(0),source=setTrap(duel,3),target=deploy(duel,0,alias.monster);
  duel.core.phase='response';duel.core.resume='main';duel.core.priority=1;tag.assertTagDuel(duel);
  const session=adapter.createSession(duel);
- adapter.activateCompulsory(session,'comp-response',source.uid,3,target.uid);
+ adapter.activateCompulsory(session,'comp-response',source.uid,1,target.uid);
  assert.equal(adapter.resolveCompulsory(session,'comp-response').status,'returned');
  assert.ok(session.duel.core.players[1].grave.some(c=>c.uid===source.uid));
 });
