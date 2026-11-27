@@ -48,7 +48,8 @@
     "34 cenários de comportamento criados",
     "evidência e auditoria de não-certificação criadas",
     "workflow dedicado com typecheck, build, testes focados, check:cards, suíte completa e auditoria TagDuel criado",
-    "contagem estática reconciliada: 42 cenários independentes"
+    "contagem estática reconciliada: 42 cenários independentes",
+    "primeira CI identificou fixture de monstro inválida (attacked -1); corrigida para contador válido e expectativas de erro alinhadas à integridade central"
   ],
   "implementedCards": 2,
   "behaviorVerifiedCards": 0,
@@ -58,7 +59,7 @@
   "verification": {
     "typecheck": "pending",
     "build": "pending",
-    "focusedTests": "pending",
+    "focusedTests": "rerun-pending",
     "evidenceValidation": "pending",
     "ci": "pending",
     "adapterBehaviorVerifiedCards": 0,

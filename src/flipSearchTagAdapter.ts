@@ -46,12 +46,12 @@ export type FlipSearchResolution={
   receipt:FlipSearchReceipt|null;
 };
 
-export function defaultFlipSearchEffect(id:string):FlipSearchEffect|undefined{return defaultLookup(id);}
 const defaultLookup:FlipSearchLookup=(id)=>{
   if(id===CAT_OF_ILL_OMEN_ID)return 'cat-trap';
   if(id===AN_OWL_OF_LUCK_ID)return 'owl-field';
   return undefined;
 };
+export function defaultFlipSearchEffect(id:string):FlipSearchEffect|undefined{return defaultLookup(id);}
 export function hasNecrovalleyOnField(duel:TagDuel):boolean{
   return duel.core.players.some(player=>player.field?.id===NECROVALLEY_ID&&player.field.faceUp===true);
 }

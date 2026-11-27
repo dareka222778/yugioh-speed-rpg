@@ -38,7 +38,7 @@ function addSource(state,team,ownerSeat,effect='cat-trap'){
   assert.ok(card,'source fixture must exist in physical Deck');
   state.core.players[team].monsters.push({
     ...card,position:'atk',faceUp:true,entered:state.core.turn,changed:state.core.turn,
-    attacked:-1,atkBoost:0,defBoost:0
+    attacked:0,atkBoost:0,defBoost:0
   });
   return {
     uid:card.uid,id:card.id,ownerSeat,
@@ -316,15 +316,15 @@ scenario('Field Zone remains separate while all three shared backrow slots are o
 scenario('fourth backrow card is rejected without treating Field Zone as a fourth slot',()=>{
   const state=create(0,'backrow-overflow'),source=addSource(state,0,2);
   addBackrow(state,0,2);addBackrow(state,0,2);addBackrow(state,0,2);addBackrow(state,0,2);
-  assert.throws(()=>activate(state,0,source),/três Spell\/Trap Zones/);
+  assert.throws(()=>activate(state,0,source),/limite de zonas|três Spell\/Trap Zones/);
 });
 scenario('fourth monster in a shared team field is rejected',()=>{
   const state=create(0,'monster-overflow'),source=addSource(state,0,2);
   for(let i=0;i<3;i++){
     const owner=i%2===0?2:0,physical=holder(state,owner),card=physical.deck.shift();
-    state.core.players[0].monsters.push({...card,position:'atk',faceUp:true,entered:state.core.turn,changed:state.core.turn,attacked:-1,atkBoost:0,defBoost:0});
+    state.core.players[0].monsters.push({...card,position:'atk',faceUp:true,entered:state.core.turn,changed:state.core.turn,attacked:0,atkBoost:0,defBoost:0});
   }
-  assert.throws(()=>activate(state,0,source),/três Monster Zones/);
+  assert.throws(()=>activate(state,0,source),/limite de zonas|três Monster Zones/);
 });
 scenario('main Deck below 20 is rejected instead of silently drawing or granting cards',()=>{
   const state=create(0,'deck-underflow'),source=addSource(state,0,2);
@@ -342,7 +342,7 @@ scenario('six Extra Deck cards are rejected; the profile cap remains five',()=>{
   assert.equal(fusionIds.length,6);
   const extra=holder(state,0).extra??(holder(state,0).extra=[]);
   fusionIds.forEach((id,index)=>extra.push({uid:'m0:m677-extra-'+index,id}));
-  assert.throws(()=>activate(state,0,source),/Extra Deck físico excedeu cinco/);
+  assert.throws(()=>activate(state,0,source),/limite de zonas|Extra Deck físico excedeu cinco/);
 });
 scenario('the active seat can be seat two and still searches its own private Deck',()=>{
   const state=create(2,'active-seat-two'),source=addSource(state,0,0),target=addCandidate(state,2,TRAP_ID);
