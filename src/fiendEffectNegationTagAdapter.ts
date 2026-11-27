@@ -3,6 +3,7 @@ import type {TagDuel} from './tagDuel';
 import {assertTagDuel,tagInventory} from './tagDuel';
 import {RULES_PROFILE,rulesFor} from './rulesProfile';
 import {getDuelCard} from './effectRegistry';
+import {getMonsterEffect} from './monsterEffects';
 import {bindTarget,targetBindingValid,synchronizeCardLifetimes,type TargetBinding} from './cardLifetime';
 import {cardActivationAllowed,canAffectMonster,continuousTrapActivationsBlocked,continuousTrapsNegated,monsterEffectsNegated} from './continuousEffects';
 
@@ -313,7 +314,7 @@ export function createFiendEffectNegationAdapter(lookup:FiendNegationLookup=defa
   if(attacker.team===target.team)throw new Error('Uma batalha válida precisa envolver equipes adversárias.');
   if(!attacker.monster.faceUp)throw new Error('O atacante precisa estar face-up para registrar a batalha.');
   const targetCard=getDuelCard(target.monster.id);
-  const effectMonster=targetCard?.kind==='monster'&&targetCard.monsterType==='effect';
+  const effectMonster=targetCard?.kind==='monster'&&(targetCard.monsterType==='effect'||!!getMonsterEffect(target.monster.id));
   if(!effectMonster){
    const result:BattleNegation={battleId:input.battleId,destroyerUid:input.destroyerUid,destroyedUid:input.destroyedUid,
     sourceUids:[],status:'not-effect-monster',replayed:false};session.battleNegations[input.battleId]=result;return {...result};
