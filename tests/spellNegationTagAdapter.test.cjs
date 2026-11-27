@@ -152,7 +152,7 @@ scenario('Spell Canceller remains an activation lock alongside Imperial Order',(
 });
 scenario('Spell Canceller ceases to block activations after it leaves the shared Monster Zone',()=>{
  const duel=makeDuel();const uid=placeMonster(duel,2,0,CANCELLER_FIXTURE,true);
- duel.core.players[0].monsters=duel.core.players[0].monsters.filter(card=>card.uid!==uid);
+ const [removed]=duel.core.players[0].monsters.splice(duel.core.players[0].monsters.findIndex(card=>card.uid===uid),1);duel.core.players[0].grave.push({uid:removed.uid,id:removed.id});
  assert.equal(adapter.spellActivationBlocked(duel),false);
 });
 scenario('a Spell target outside the shared field is not treated as an on-field Spell effect',()=>{
@@ -274,4 +274,4 @@ scenario('three backrow slots remain separate from the Field Zone',()=>{
  assert.ok(duel.core.players[0].field);
  assert.doesNotThrow(()=>assertSpellNegationRules(duel));
 });
-process.on('exit',()=>{if(scenarios!==29)process.exitCode=1;});
+process.on('exit',()=>{if(scenarios!==32)process.exitCode=1;});
