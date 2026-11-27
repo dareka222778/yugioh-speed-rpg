@@ -1,0 +1,39 @@
+name: M612 Attribute Field Spells Tag Adapter
+on:
+  push:
+    branches:
+      - feat/work-m612-attribute-field-spells-tag-adapter-20261125
+    paths:
+      - src/attributeFieldSpellTagAdapter.ts
+      - tests/attributeFieldSpellTagAdapter.test.cjs
+      - docs/evidence/m612-attribute-field-spells-tag-adapter.json
+      - .github/workflows/m612-attribute-field-spells-tag-adapter.yml
+  pull_request:
+    branches:
+      - feat/rea-engine-recovery-20261026
+    paths:
+      - src/attributeFieldSpellTagAdapter.ts
+      - tests/attributeFieldSpellTagAdapter.test.cjs
+      - docs/evidence/m612-attribute-field-spells-tag-adapter.json
+      - .github/workflows/m612-attribute-field-spells-tag-adapter.yml
+permissions:
+  contents: read
+concurrency:
+  group: m612-attribute-field-spells-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+jobs:
+  focused:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate evidence metadata
+        run: node -e "const e=require('./docs/evidence/m612-attribute-field-spells-tag-adapter.json'); if(e.format!==1 || e.mission!=='M612' || e.cards.length!==6 || e.verification.newCertifications!==0) process.exit(1)"
+      - run: node --test tests/attributeFieldSpellTagAdapter.test.cjs

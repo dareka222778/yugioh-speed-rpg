@@ -1,0 +1,128 @@
+{
+  "format": 1,
+  "runId": "work-20261125T054422-0300-M612",
+  "mission": "M612",
+  "priority": "P1",
+  "cards": [
+    {
+      "name": "Luminous Spark",
+      "passcode": "81777047",
+      "konamiDatabaseId": 4936,
+      "kind": "Field Spell",
+      "firstTcgSet": "MRL-100",
+      "firstTcgRelease": "2002-09-16",
+      "officialEffect": "Increase the ATK of all LIGHT monsters by 500 points and decrease their DEF by 400 points.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4936&ope=2&request_locale=en"
+    },
+    {
+      "name": "Mystic Plasma Zone",
+      "passcode": "18161786",
+      "konamiDatabaseId": 4937,
+      "kind": "Field Spell",
+      "firstTcgSet": "MRL-101",
+      "firstTcgRelease": "2002-09-16",
+      "officialEffect": "Increase the ATK of all DARK monsters by 500 points and decrease their DEF by 400 points.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4937&ope=2&request_locale=en"
+    },
+    {
+      "name": "Gaia Power",
+      "passcode": "56594520",
+      "konamiDatabaseId": 4932,
+      "kind": "Field Spell",
+      "firstTcgSet": "MRL-096",
+      "firstTcgRelease": "2002-09-16",
+      "officialEffect": "Increase the ATK of all EARTH monsters by 500 points and decrease their DEF by 400 points.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4932&ope=2&request_locale=en"
+    },
+    {
+      "name": "Umiiruka",
+      "passcode": "82999629",
+      "konamiDatabaseId": 4933,
+      "kind": "Field Spell",
+      "firstTcgSet": "MRL-097",
+      "firstTcgRelease": "2002-09-16",
+      "officialEffect": "Increase the ATK of all WATER monsters by 500 points and decrease their DEF by 400 points.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4933&ope=2&request_locale=en"
+    },
+    {
+      "name": "Molten Destruction",
+      "passcode": "19384334",
+      "konamiDatabaseId": 4934,
+      "kind": "Field Spell",
+      "firstTcgSet": "MRL-098",
+      "firstTcgRelease": "2002-09-16",
+      "officialEffect": "Increase the ATK of all FIRE monsters by 500 points and decrease their DEF by 400 points.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4934&ope=2&request_locale=en"
+    },
+    {
+      "name": "Rising Air Current",
+      "passcode": "45778932",
+      "konamiDatabaseId": 4935,
+      "kind": "Field Spell",
+      "firstTcgSet": "MRL-099",
+      "firstTcgRelease": "2002-09-16",
+      "officialEffect": "Increase the ATK of all WIND monsters by 500 points and decrease their DEF by 400 points.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4935&ope=2&request_locale=en"
+    }
+  ],
+  "implementation": {
+    "branch": "feat/work-m612-attribute-field-spells-tag-adapter-20261125",
+    "baseSha": "6f921b8068b6cbd24ec2fc5924154e34670af094",
+    "files": [
+      "src/attributeFieldSpellTagAdapter.ts",
+      "tests/attributeFieldSpellTagAdapter.test.cjs",
+      "docs/evidence/m612-attribute-field-spells-tag-adapter.json",
+      ".github/workflows/m612-attribute-field-spells-tag-adapter.yml"
+    ],
+    "behavior": [
+      "Luminous Spark modifica somente monstros LIGHT face-up: +500 ATK e -400 DEF.",
+      "Mystic Plasma Zone modifica somente monstros DARK face-up: +500 ATK e -400 DEF.",
+      "Cada equipe possui Field Zone separada; uma fonte face-up e resolvida afeta monstros correspondentes dos dois lados do campo compartilhado.",
+      "Duas cópias válidas em Field Zones distintas acumulam seus modificadores; negação, face-down, substituição ou remoção desligam apenas a fonte correspondente.",
+      "Consultas não revelam atributo de monstros face-down, não alteram UIDs/inventário, não descartam mão antes da End Phase e não consomem zonas 3+3.",
+      "O mesmo algoritmo parametrizado cobre as seis Field Spells clássicas de atributo: LIGHT, DARK, EARTH, WATER, FIRE e WIND."
+    ],
+    "integrationBoundary": "Adapter isolado. O resolver central ainda precisa consultar getAttributeModifier na composição de ATK/DEF. Não altera cardMetadata, cardCertifications, catálogo, allowlist, comandos Discord, persistência ou dados dos jogadores."
+  },
+  "rules": {
+    "mainDeckPerPhysicalSeat": "20–30",
+    "extraDeckPerPhysicalSeat": "0–5",
+    "monsterZonesPerTeam": 3,
+    "spellTrapZonesPerTeam": 3,
+    "fieldZone": "uma por equipe, separada das três Spell/Trap Zones",
+    "handLimit": 6,
+    "handDiscard": "diferido à End Phase; o adapter é somente leitura"
+  },
+  "verification": {
+    "focusedScenarios": 20,
+    "focusedTestCommand": "node --test tests/attributeFieldSpellTagAdapter.test.cjs",
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "merge": false,
+    "deploy": false,
+    "liveDiscordValidation": false,
+    "actualFocusedRun": null
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "limitations": [
+    "Os testes usam Sogen (ID 86318356), a única Field Spell já certificada no catálogo-base, como fixture físico válido; o lookup injetado remapeia esse ID para cada uma das seis identidades oficiais. Os seis passcodes/textos reais permanecem na evidência.",
+    "As cartas permanecem fora do catálogo/allowlist e não recebem certificação por importação.",
+    "A integração na fórmula central de ATK/DEF depende do handoff M61 explícito.",
+    "CI e testes são offline; não houve sessão no gateway Discord nem acesso ao host de produção."
+  ],
+  "cardsCount": 6
+}
