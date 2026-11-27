@@ -1,0 +1,97 @@
+{
+  "format": 1,
+  "runId": "work-20261127T173009-0300-M684",
+  "mission": "M684",
+  "owner": "Work principal",
+  "priority": "P1",
+  "priorityRequestedBy": "User",
+  "status": "reserved-and-implementing",
+  "startedAt": "2026-11-27T17:30:09-03:00",
+  "endedAt": null,
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedBaseHead": "b4d9e249f539a3dab7babeef044f40f8b1f50cd3",
+  "branch": "feat/work-m684-targeted-continuous-traps-20261127",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "b4d9e249f539a3dab7babeef044f40f8b1f50cd3",
+  "headSha": null,
+  "reservedFiles": [
+    "src/targetedContinuousTrapTagAdapter.ts",
+    "tests/targetedContinuousTrapTagAdapter.test.cjs",
+    "docs/evidence/m684-targeted-continuous-traps.json",
+    "scripts/audit-targeted-continuous-traps-m684.cjs",
+    ".github/workflows/m684-targeted-continuous-traps.yml",
+    "coordination/runs/work-20261127T173009-0300-M684.json"
+  ],
+  "scope": "Adapter TagDuel clássico 2v2 isolado para Nightmare Wheel (54704216/CID 5298) e Shadow Spell (29267084/CID 4675): alvo físico UID/epoch, bloqueio de ataque/posição, redução de 700 ATK em Shadow Spell, dano de 500 LP na Standby Phase do controlador para Nightmare Wheel, destruição da Armadilha quando o alvo deixa o campo, idempotência, propriedade física e inventário conservado. Ambos ausentes do metadata/certificações no HEAD-base; fixtures usam Armadilhas já habilitadas via lookup porque não há autorização de admissão/certificação. Não integra resolver central nem altera catálogo, certificações, comandos, banco, inventário ou produção.",
+  "cards": [
+    {
+      "id": "54704216",
+      "name": "Nightmare Wheel",
+      "konamiCid": 5298,
+      "firstOcgRelease": "2003-10-23",
+      "firstTcgRelease": "2003-07-18",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5298&ope=2&request_locale=en",
+      "newToMetadata": true,
+      "newToCertification": true
+    },
+    {
+      "id": "29267084",
+      "name": "Shadow Spell",
+      "konamiCid": 4675,
+      "firstOcgRelease": "2001-04-01",
+      "firstTcgRelease": "2004-03-01",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4675&ope=2&request_locale=en",
+      "newToMetadata": true,
+      "newToCertification": true
+    }
+  ],
+  "baseline": {
+    "certificationEntriesObserved": 959,
+    "metadataAbsent": true,
+    "certificationAbsent": true,
+    "source": "src/cardCertifications.ts and full cardMetadata import graph at shared HEAD"
+  },
+  "implementedCards": 0,
+  "adapterBehaviorVerifiedCards": 0,
+  "behaviorCertifiedCards": 0,
+  "newlyBehaviorCertifiedCards": 0,
+  "newEngineCertifications": 0,
+  "automaticCertifications": 0,
+  "inventoryGrants": 0,
+  "verification": {
+    "typecheck": "pending",
+    "build": "pending",
+    "focusedTests": "pending",
+    "evidenceAudit": "pending",
+    "ci": "pending",
+    "discordLive": "not-run",
+    "production": "not-changed"
+  },
+  "rules": {
+    "mainDeck": "20–30",
+    "handLimit": 6,
+    "handCheck": "End Phase",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZoneSeparate": true,
+    "extraDeckMax": 5,
+    "ownerPreserved": true,
+    "inventoryConserved": true
+  },
+  "effectiveWorkMinutes": 0,
+  "targetEffectiveWorkMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "pr": null,
+  "merge": "not-authorized",
+  "deploy": "not-authorized",
+  "production": "not-changed",
+  "blockers": [
+    "Handoff explícito dos hooks centrais ainda pendente; este bloco permanece adapter-only.",
+    "Novas cartas não podem ser admitidas/certificadas sem autorização e integração central."
+  ],
+  "nextTask": "Implementar o adapter de Continuous Traps, cobrir alvo/UID/epoch/Standby/LP e executar CI focada + suíte isolada.",
+  "nextWindow": "2026-11-27T22:30:00-03:00",
+  "scopeReleasedToAuxiliary": []
+}
