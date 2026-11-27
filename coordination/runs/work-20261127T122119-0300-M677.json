@@ -1,0 +1,77 @@
+{
+  "format": 1,
+  "runId": "work-20261127T122119-0300-M677",
+  "mission": "M677",
+  "owner": "Work principal",
+  "priority": "P1",
+  "priorityRequestedBy": "User",
+  "status": "reserved-and-implementing",
+  "startedAt": "2026-11-27T12:21:19.000-03:00",
+  "endedAt": null,
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedBaseHead": "742b85dcbab2ab9dc5afed3aa7806a810e1d33f1",
+  "branch": "feat/work-m677-flip-search-tag-adapter-20261127",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "742b85dcbab2ab9dc5afed3aa7806a810e1d33f1",
+  "headSha": null,
+  "reservedFiles": [
+    "src/flipSearchTagAdapter.ts",
+    "tests/flipSearchTagAdapter.test.cjs",
+    "docs/evidence/m677-flip-search.json",
+    "scripts/audit-flip-search-m677.cjs",
+    ".github/workflows/m677-flip-search.yml",
+    "coordination/runs/work-20261127T122119-0300-M677.json"
+  ],
+  "scope": "Adapter TagDuel clássico isolado para A Cat of Ill Omen (24140059/CID 5520) e An Owl of Luck (23927567/CID 5523): efeitos FLIP que selecionam Armadilha ou Magia de Campo do Deck físico do participante ativo; colocam no topo do Deck ou, se Necrovalley estiver face-up no campo, permitem adicionar à mão. Preserva UID/proprietário físico, privacidade de Deck/mão, 20–30 cartas por Deck, mão 6 com descarte somente na End Phase, 3+3 zonas, Field Zone separada e Extra Deck 5. Sem resolver central, catálogo/certificações, comandos, banco, inventário ou produção.",
+  "cards": [
+    {
+      "id": "24140059",
+      "name": "A Cat of Ill Omen",
+      "konamiCid": 5520,
+      "firstTcgRelease": "2003-07-18",
+      "officialText": "FLIP: Choose 1 Trap from your Deck and place it on top of your Deck, or, if \"Necrovalley\" is on the field, you can add that Trap to your hand instead.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5520&request_locale=en"
+    },
+    {
+      "id": "23927567",
+      "name": "An Owl of Luck",
+      "konamiCid": 5523,
+      "firstTcgRelease": "2003-07-18",
+      "officialText": "FLIP: Select 1 Field Spell Card from your Deck and place it on top of your Deck. If \"Necrovalley\" is on the field, you can add the selected Field Spell Card to your hand instead.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5523&request_locale=en"
+    }
+  ],
+  "blocksCompleted": [
+    "coordenação e reserva CAS registradas"
+  ],
+  "implementedCards": 0,
+  "behaviorVerifiedCards": 0,
+  "newCertifications": 0,
+  "automaticCertifications": 0,
+  "inventoryGrants": 0,
+  "verification": {
+    "typecheck": "pending",
+    "build": "pending",
+    "focusedTests": "pending",
+    "evidenceValidation": "pending",
+    "ci": "pending",
+    "adapterBehaviorVerifiedCards": 0,
+    "behaviorCertifiedCards": 0,
+    "discordLive": "not-run"
+  },
+  "effectiveWorkMinutes": 0,
+  "targetEffectiveWorkMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "pr": null,
+  "production": "not-changed",
+  "merge": "not-authorized",
+  "deploy": "not-authorized",
+  "blockers": [
+    "Handoff cooperativo para integração futura no resolver central ainda depende de liberação explícita dos arquivos compartilhados; esta sessão permanece isolada."
+  ],
+  "nextTask": "Implementar os dois efeitos FLIP com busca privada por assento ativo, seleção por UID, topo do Deck e ramo opcional de mão sob Necrovalley; testar negação, alvo inválido, idempotência e regras 2v2.",
+  "nextWindow": "2026-11-27T17:30:00-03:00",
+  "scopeReleasedToAuxiliary": []
+}
