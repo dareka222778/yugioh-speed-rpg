@@ -1,0 +1,88 @@
+{
+  "format": 1,
+  "mission": "M632",
+  "runId": "work-20261125T200307-0300-M632",
+  "priority": "P1",
+  "cards": [
+    {
+      "name": "Tsukuyomi",
+      "passcode": "34853266",
+      "konamiDatabaseId": 5780,
+      "firstTcgRelease": "2003-12-01",
+      "type": "DARK / Spellcaster / Spirit / Effect / Level 4",
+      "atk": 1100,
+      "def": 1400,
+      "effect": "Cannot be Special Summoned. During the End Phase of the turn this card is Normal Summoned or flipped face-up: Return it to the hand. When this card is Normal Summoned or flipped face-up: Target 1 face-up monster on the field; change it to face-down Defense Position.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5780&ope=2&request_locale=en"
+    },
+    {
+      "name": "Otohime",
+      "passcode": "39751093",
+      "konamiDatabaseId": 5379,
+      "firstTcgRelease": "2003-06-06",
+      "type": "LIGHT / Spellcaster / Spirit / Effect / Level 3",
+      "atk": 0,
+      "def": 100,
+      "effect": "Cannot be Special Summoned. During the End Phase of the turn this card is Normal Summoned or flipped face-up: Return it to the hand. When this card is Normal Summoned or flipped face-up: You can target 1 face-up monster your opponent controls; change that target's battle position.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5379&ope=2&request_locale=en"
+    }
+  ],
+  "implementation": {
+    "branch": "feat/work-m632-tsukuyomi-otohime-spirit-position-20261125",
+    "paths": [
+      "src/tsukuyomiOtohimeTagAdapter.ts",
+      "tests/tsukuyomiOtohimeTagAdapter.test.cjs",
+      "docs/evidence/m632-tsukuyomi-otohime-spirit-position.json",
+      ".github/workflows/m632-tsukuyomi-otohime-spirit-position.yml"
+    ],
+    "behavior": [
+      "Proíbe Invocação-Especial para ambos os monstros.",
+      "Registra Normal Summon, Flip Summon e virada face-up por efeito com vínculo de UID/epoch.",
+      "Tsukuyomi seleciona qualquer monstro face-up não-token e o coloca em Defesa face-down; Otohime seleciona somente monstro face-up da equipe adversária e alterna Ataque/Defesa.",
+      "A seleção é consumida uma única vez por evento; o plano fica persistido e não pode ser retargetado.",
+      "No End Phase do mesmo turno, a instância face-up e não-negada retorna à mão privada do proprietário físico, mesmo após troca de controle.",
+      "Saída/reentrada cria novo epoch; face-down impede o retorno; o adapter não descarta mão acima de seis."
+    ],
+    "integrationBoundary": "Adapter isolado; sem resolver central, catálogo, metadata, certificações, allowlist, comandos Discord, banco ou produção. Integração exige handoff M61 explícito."
+  },
+  "rules": {
+    "mainDeckPerPhysicalSeat": "20–30",
+    "extraDeckPerPhysicalSeat": "0–5",
+    "monsterZonesPerTeam": 3,
+    "spellTrapZonesPerTeam": 3,
+    "fieldZone": "separate",
+    "handLimit": 6,
+    "handDiscard": "End Phase only; adapter does not discard"
+  },
+  "verification": {
+    "plannedScenarios": 38,
+    "focusedTests": 0,
+    "typecheck": "pending",
+    "build": "pending",
+    "evidenceValidation": "pending",
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "liveDiscordValidation": false,
+    "focusedTestResult": "38 scenarios; final zone assertion correction pushed"
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "limitations": [
+    "Os testes usam IDs de monstros de efeito já habilitados como fixtures; os passcodes reais permanecem fixos no adapter.",
+    "As cartas não foram adicionadas ao catálogo/allowlist nem certificadas.",
+    "Sem sessão real no gateway Discord, merge ou deploy."
+  ]
+}
