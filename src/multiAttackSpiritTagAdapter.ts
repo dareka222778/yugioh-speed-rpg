@@ -155,8 +155,8 @@ function assertSession(session:MultiAttackSpiritSession):void{
  }
  for(const [id,receipt]of Object.entries(session.attackReceipts))if(id!==receipt.event.eventId||id!==receipt.result.eventId)throw new Error('Recibo de ataque inconsistente.');
  for(const [uid,summon]of Object.entries(session.spiritSummons))if(uid!==summon.uid||physicalSeat(uid)!==summon.ownerSeat||!Number.isSafeInteger(summon.turn)||summon.turn<1)throw new Error('Registro de Invocação Spirit inconsistente.');
- for(const [id,pending]of Object.entries(session.pendingReturns))if(id!==pending.activationId||physicalSeat(pending.uid)!==pending.ownerSeat)throw new Error('Retorno Spirit pendente inconsistente.');
- for(const [id,receipt]of Object.entries(session.spiritReceipts))if(id!==receipt.result.activationId)throw new Error('Recibo de retorno Spirit inconsistente.');
+ for(const [id,pending]of Object.entries(session.pendingReturns))if(id!==pending.activationId||physicalSeat(pending.uid)!==pending.ownerSeat||!Number.isSafeInteger(pending.retry)||pending.retry<0)throw new Error('Retorno Spirit pendente inconsistente.');
+ for(const [id,receipt]of Object.entries(session.spiritReceipts))if(id!==receipt.result.activationId||!['activation-negated','effect-negated','resolved'].includes(receipt.outcome))throw new Error('Recibo de retorno Spirit inconsistente.');
 }
 
 export function lookupMultiAttackSpiritEffect(id:string){return defaultLookup(id);}
@@ -294,7 +294,7 @@ export function createMultiAttackSpiritAdapter(lookup:MultiAttackLookup=defaultL
    else if(lookup(found.monster.id)?.effect!=='asura-all-monsters')reason='source-changed';
    else{
     const before=inventorySnapshot(session.duel);
-    const card:CardRef={uid:found.monster.uid,id:found.monster.id,...found.monster.properlySummoned?{properlySummoned:true}:{}};
+    const card:CardRef={uid:found.monster.uid,id:found.monster.id,...(found.monster.properlySummoned?{properlySummoned:true}:{})};
     session.duel.core.players[found.team].monsters=session.duel.core.players[found.team].monsters.filter(monster=>monster.uid!==pending.uid);
     physicalHolder(session.duel,pending.ownerSeat).hand.push(card);
     synchronizeCardLifetimes(session.duel.core);
@@ -303,7 +303,7 @@ export function createMultiAttackSpiritAdapter(lookup:MultiAttackLookup=defaultL
    }
   }
   delete session.pendingReturns[activationId];
-  const result:SpiritReturnResult={activationId,uid:pending.uid,applied,reason,replayed:false,...nextActivationId?{nextActivationId}:{}};
+  const result:SpiritReturnResult={activationId,uid:pending.uid,applied,reason,replayed:false,...(nextActivationId?{nextActivationId}:{})};
   session.spiritReceipts[activationId]={outcome:outcomeKey,result};
   return result;
  }
