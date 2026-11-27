@@ -18,7 +18,7 @@
       "behavior": "Cancela somente a declaração de ataque vinculada ao UID original e volta face-down com setTurn atualizado, sem terminar a Battle Phase."
     }
   ],
-  "scenarioCount": 24,
+  "scenarioCount": 25,
   "behaviorVerifiedCards": 2,
   "engineCertifiedCardsBefore": 959,
   "engineCertifiedCardsAfter": 959,

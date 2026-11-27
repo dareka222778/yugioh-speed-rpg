@@ -215,7 +215,7 @@ export function createBattlePhaseDenialAdapter(lookup:BattlePhaseDenialLookup=de
    }
    const plan=session.activations[input.activationId];
    if(!plan)throw new Error('Ativação da Armadilha não encontrada.');
-   const before=inventorySnapshot(session.duel),handsBefore=handSnapshot(session.duel),next=structuredClone(session.duel);
+   const before=inventorySnapshot(session.duel),handsBefore=handSnapshot(session.duel),next=structuredClone(session.duel),nextLocks=structuredClone(session.attackLocks);
    const sourceLocation=locateBackrow(next,plan.controllerTeam,plan.sourceUid);
    let status:Receipt['status'];
    if(activationNegated||effectNegated){
@@ -225,8 +225,12 @@ export function createBattlePhaseDenialAdapter(lookup:BattlePhaseDenialLookup=de
     }
     status=activationNegated?'activation-negated':'effect-negated';
    }else if(plan.effect==='threatening-roar'){
-    if(!next.attackLocks.some(lock=>lock.team===plan.opponentTeam&&lock.turn===plan.turn)){
-     next.attackLocks;
+    if(!nextLocks.some(lock=>lock.team===plan.opponentTeam&&lock.turn===plan.turn)){
+     nextLocks.push({team:plan.opponentTeam,turn:plan.turn,sourceUid:plan.sourceUid,activationId:plan.activationId});
+    }
+    if(sourceLocation){
+     const source=removeBackrow(next,sourceLocation);
+     pushToOwnerGrave(next,plan.sourceOwnerSeat,source);
     }
     status='attack-lock-created';
    }else{
@@ -244,21 +248,12 @@ export function createBattlePhaseDenialAdapter(lookup:BattlePhaseDenialLookup=de
     }
     status='attack-cancelled';
    }
-   if(plan.effect==='threatening-roar'&&!activationNegated&&!effectNegated){
-    if(!next.attackLocks.some(lock=>lock.team===plan.opponentTeam&&lock.turn===plan.turn)){
-     next.attackLocks.push({team:plan.opponentTeam,turn:plan.turn,sourceUid:plan.sourceUid,activationId:plan.activationId});
-    }
-    if(sourceLocation){
-     const source=removeBackrow(next,sourceLocation);
-     pushToOwnerGrave(next,plan.sourceOwnerSeat,source);
-    }
-   }
    synchronizeCardLifetimes(next.core);
    assertBattlePhaseDenialRules(next);
    assertSameInventory(before,next);assertSameHands(handsBefore,next);
    const result:Receipt={activationId:plan.activationId,effect:plan.effect,status,sourceUid:plan.sourceUid,
     attackerUid:plan.attackerUid,turn:plan.turn,activationNegated,effectNegated,replayed:false};
-   session.duel=next;session.attackLocks=next.attackLocks;
+   session.duel=next;session.attackLocks=nextLocks;
    session.receipts[input.activationId]=result;
    return {...result};
   },

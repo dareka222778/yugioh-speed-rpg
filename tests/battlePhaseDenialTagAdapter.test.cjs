@@ -195,9 +195,9 @@ scenario('somente o assento ativo da equipe defensora pode responder',()=>{
  assert.throws(()=>adapter.activate(session,{activationId:'wrong-seat',sourceUid:trap.uid,actorSeat:window.attackerTeam,turn:session.duel.core.turn}),/participante ativo/);
 });
 
-scenario('Threatening Roar não ativa no próprio turno de sua equipe controladora',()=>{
- const {session}=setup(),window=openOpponentMain(session,1),trap=setTrap(session,window.defenderTeam,'threatening-roar',window.actorSeat);
- assert.throws(()=>activate(session,trap,window,'own-turn'),/participante ativo/);
+scenario('Threatening Roar não pode ser ativada pela equipe cujo turno está em andamento',()=>{
+ const {session}=setup(1),window=openOpponentMain(session,1),trap=setTrap(session,1,'threatening-roar',session.duel.active[1]);
+ assert.throws(()=>adapter.activate(session,{activationId:'own-turn',sourceUid:trap.uid,actorSeat:session.duel.active[1],turn:session.duel.core.turn}),/equipe defensora/);
 });
 
 scenario('ataque alterado antes da resolução de Scrap-Iron não recebe retarget',()=>{
