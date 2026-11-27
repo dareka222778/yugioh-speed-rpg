@@ -52,7 +52,7 @@ function take(duel,seat,id){
 }
 function deploy(s,team,id,ownerSeat=s.duel.active[team],faceUp=true){
  const card=take(s.duel,ownerSeat,id),turn=s.duel.core.turn;
- const monster={...card,position:'atk',faceUp,entered:turn,lastSummonedTurn:turn,changed:turn,attacked:0,attackCount:0,atkBoost:0,defBoost:0,owner:team};
+ const monster={...card,position:'atk',faceUp,entered:turn,lastSummonedTurn:turn,changed:turn,attacked:0,atkBoost:0,defBoost:0,owner:team};
  s.duel.core.players[team].monsters.push(monster);synchronizeCardLifetimes(s.duel.core);return monster;
 }
 function setMain(duel,seat=duel.cursor){
