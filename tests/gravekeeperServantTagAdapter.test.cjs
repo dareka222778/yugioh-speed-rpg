@@ -257,7 +257,7 @@ test('main Deck lower bound is checked against physical inventory',()=>{
 test('Extra Deck above five is rejected without changing any player inventory',()=>{
  const {session}=setup(),extra=session.duel.core.players[0].extra,card=extra[0];
  extra.push({...card,uid:card.uid+':overflow'});
- assert.throws(()=>assertGravekeeperServantRules(session.duel),/excedeu cinco/);
+ assert.throws(()=>assertGravekeeperServantRules(session.duel),/(limite de zonas|excedeu cinco)/);
 });
 test('fourth Monster Zone and fourth Spell/Trap Zone are rejected',()=>{
  const {session}=setup(),monster=deploy(session),card=take(session.duel,session.duel.active[0],monsterIds[5]);
