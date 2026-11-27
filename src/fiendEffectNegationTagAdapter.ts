@@ -179,8 +179,8 @@ export function createFiendEffectNegationAdapter(lookup:FiendNegationLookup=defa
   return {skillDrainUids,haDesUids,darkBalterUids};
  }
  /** Skill Drain negates face-up monster effects, but never prohibits their activation. */
- function monsterEffectActivationAllowed(duel:TagDuel,_uid:string):boolean{
-  assertFiendEffectNegationRules(duel);return true;
+ function monsterEffectActivationAllowed(duel:TagDuel,uid:string):boolean{
+  assertFiendEffectNegationRules(duel);return !!findMonster(duel,uid);
  }
  function monsterEffectNegated(duel:TagDuel,uid:string):boolean{
   assertFiendEffectNegationRules(duel);return otherMonsterNegation(duel,uid,lookup);
@@ -258,6 +258,7 @@ export function createFiendEffectNegationAdapter(lookup:FiendNegationLookup=defa
    throw new Error('Dark Balter deve estar face-up no campo.');
   }
   assertActiveSeat(session.duel,found.team,input.actorSeat);assertResponseWindow(session.duel,found.team);
+  if(session.duel.core.phase!=='response')throw new Error('Dark Balter só pode responder a uma ativação de Magia em uma Corrente.');
   const working=structuredClone(session.duel),lpBefore=working.core.players[found.team].lp;
   if(lpBefore<1000)throw new Error('PV insuficientes para pagar 1000.');
   const sourceBinding=bindTarget(working.core,input.sourceUid);
@@ -310,6 +311,7 @@ export function createFiendEffectNegationAdapter(lookup:FiendNegationLookup=defa
   const attacker=findMonster(session.duel,input.destroyerUid),target=findMonster(session.duel,input.destroyedUid);
   if(!attacker||!target)throw new Error('Os dois monstros devem estar no campo no registro de destruição.');
   if(attacker.team===target.team)throw new Error('Uma batalha válida precisa envolver equipes adversárias.');
+  if(!attacker.monster.faceUp)throw new Error('O atacante precisa estar face-up para registrar a batalha.');
   const targetCard=getDuelCard(target.monster.id),targetEffect=getEffect(target.monster.id);
   const effectMonster=targetCard?.kind==='monster'&&(targetCard.monsterType==='effect'||targetEffect?.kind==='monsterEffect');
   if(!effectMonster){
