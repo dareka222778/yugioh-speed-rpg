@@ -36,7 +36,7 @@
   "playerDataChanged": false,
   "tests": {
     "file": "tests/graveyardBanishCostTagAdapter.test.cjs",
-    "count": 13,
+    "count": 14,
     "command": "npm run check && npm run build && node scripts/audit-graveyard-banish-costs-m680.cjs && node scripts/run-tests-isolated.cjs tests/graveyardBanishCostTagAdapter.test.cjs"
   },
   "coverage": [
@@ -46,7 +46,8 @@
     "Skull Lair paga banimento de monstros como custo, exige armadilha face-up/resolvida e seleciona monstro face-up de Level correspondente somente na resolução.",
     "Skull Lair não retargeta uma escolha inválida; permite nova escolha antes de finalizar a resolução, e não reembolsa custo se não houver alvo.",
     "Banish e destruição preservam UID/proprietário físico, inventário, mãos privadas e zonas 2v2.",
-    "Deck 20–30 por assento, mão 6 com checagem só na End Phase, 3 Monster + 3 Spell/Trap Zones, Field Zone separada e Extra Deck 5."
+    "Deck 20–30 por assento, mão 6 com checagem só na End Phase, 3 Monster + 3 Spell/Trap Zones, Field Zone separada e Extra Deck 5.",
+    "Replay idempotente e bloqueio de IDs de ativação reutilizados com fatos diferentes."
   ],
   "rules": {
     "mainDeck": "20–30 por assento físico",

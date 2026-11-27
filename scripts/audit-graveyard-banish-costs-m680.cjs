@@ -6,5 +6,5 @@ const required=['40133511','06733059','payMonsterBanishCost','sourceStillMonster
 for(const token of required)if(!source.includes(token))throw new Error('Implementação M680 incompleta: '+token);
 if(evidence.mission!=='M680'||evidence.cards.length!==2||evidence.adapterBehaviorVerifiedCards!==2)throw new Error('Evidência M680 inconsistente.');
 if(evidence.behaviorCertifiedCards!==0||evidence.newEngineV9Certifications!==0||evidence.automaticCertifications!==0||evidence.inventoryGrants!==0)throw new Error('M680 não pode certificar nem conceder inventário automaticamente.');
-if(evidence.tests.count!==13||!tests.includes('target-required')||!tests.includes('banished'))throw new Error('Cobertura M680 incompleta.');
-console.log('M680 evidence audit passed: 2 adapter behaviors, 13 focused scenarios, 0 certifications, 0 inventory grants.');
+if(evidence.tests.count!==14||!tests.includes('target-required')||!tests.includes('banished'))throw new Error('Cobertura M680 incompleta.');
+console.log('M680 evidence audit passed: 2 adapter behaviors, 14 focused scenarios, 0 certifications, 0 inventory grants.');
