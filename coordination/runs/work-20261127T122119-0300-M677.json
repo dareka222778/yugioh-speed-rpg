@@ -43,9 +43,18 @@
     }
   ],
   "blocksCompleted": [
-    "coordenação e reserva CAS registradas"
+    "coordenação e reserva CAS registradas",
+    "adapter de busca FLIP implementado para 2 cartas em branch isolada",
+    "34 cenários de comportamento criados",
+    "evidência e auditoria de não-certificação criadas",
+    "workflow dedicado com typecheck, build, testes focados, check:cards, suíte completa e auditoria TagDuel criado",
+    "contagem estática reconciliada: 42 cenários independentes",
+    "primeira CI identificou fixture de monstro inválida (attacked -1); corrigida para contador válido e expectativas de erro alinhadas à integridade central",
+    "segunda leitura da CI: monstros de fixture exigem attacked >= 0; Deck inicial distribui 5 cartas à mão, então helpers passaram a localizar Field Spells em mão/Deck sem alterar identidade",
+    "terceira leitura da CI: fixtures de Campo corrigidas para respeitar a mão inicial do createDuel; o teste de tipo incompatível agora mantém ao menos um alvo válido do tipo correto no Deck",
+    "quarta leitura da CI: cenário Cat/Spell corrigido para preparar ambos os candidatos antes do snapshot do gatilho"
   ],
-  "implementedCards": 0,
+  "implementedCards": 2,
   "behaviorVerifiedCards": 0,
   "newCertifications": 0,
   "automaticCertifications": 0,
@@ -53,7 +62,7 @@
   "verification": {
     "typecheck": "pending",
     "build": "pending",
-    "focusedTests": "pending",
+    "focusedTests": "rerun-pending",
     "evidenceValidation": "pending",
     "ci": "pending",
     "adapterBehaviorVerifiedCards": 0,
@@ -71,7 +80,8 @@
   "blockers": [
     "Handoff cooperativo para integração futura no resolver central ainda depende de liberação explícita dos arquivos compartilhados; esta sessão permanece isolada."
   ],
-  "nextTask": "Implementar os dois efeitos FLIP com busca privada por assento ativo, seleção por UID, topo do Deck e ramo opcional de mão sob Necrovalley; testar negação, alvo inválido, idempotência e regras 2v2.",
+  "nextTask": "Executar CI e corrigir qualquer falha. Em paralelo, revisar a próxima família histórica do worklist; não integrar ao resolver central até handoff explícito.",
   "nextWindow": "2026-11-27T17:30:00-03:00",
-  "scopeReleasedToAuxiliary": []
+  "scopeReleasedToAuxiliary": [],
+  "scenarioCount": 42
 }
