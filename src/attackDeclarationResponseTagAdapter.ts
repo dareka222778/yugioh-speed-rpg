@@ -1,10 +1,10 @@
-import type {Backrow,Monster,DuelState,TargetBinding} from './duelEngine';
+import type {Backrow,Monster,DuelState} from './duelEngine';
 import type {TagDuel} from './tagDuel';
 import type {Effect} from './effectDefinitions';
 import {assertTagDuel,tagInventory} from './tagDuel';
 import {RULES_PROFILE,rulesFor} from './rulesProfile';
 import {getDuelCard} from './effectRegistry';
-import {bindTarget,targetBindingValid,synchronizeCardLifetimes} from './cardLifetime';
+import {bindTarget,targetBindingValid,synchronizeCardLifetimes,type TargetBinding} from './cardLifetime';
 import {atk} from './duelEngine';
 import {resolveAttackResponse} from './attackResponses';
 import {cardActivationAllowed,continuousTrapActivationsBlocked,continuousTrapsNegated} from './continuousEffects';
@@ -110,7 +110,8 @@ function assertAttackWindow(duel:TagDuel,team:AttackResponseTeam,targetUid:strin
 function finishByLP(core:DuelState):void{
  const [a,b]=core.players;
  if(a.lp>0&&b.lp>0)return;
- core.phase='finished';core.damageStep=undefined;core.winner=a.lp<=0&&b.lp<=0?null:a.lp<=0?b.id:a.id;
+ delete core.movementSelection;delete core.afterEffectFlips;delete core.effectFlips;delete core.ritual;delete core.standby;
+ core.phase='finished';core.damageStep=undefined;core.turnEnding=undefined;core.pendingNegated=undefined;core.winner=a.lp<=0&&b.lp<=0?null:a.lp<=0?b.id:a.id;
  core.reason='pontos de vida';core.pending={kind:'none'};core.chain=[];core.choice=undefined;core.handFlow=undefined;
  core.triggerBuild=undefined;core.chainRoot=undefined;core.afterMonsterEffect=undefined;core.graveTriggers=[];core.summonTriggers=[];core.battleFlip=undefined;
 }
@@ -157,7 +158,7 @@ export function createAttackDeclarationResponseAdapter(lookup:AttackResponseLook
   }
   const source=findBackrow(session.duel,input.sourceUid),ownerSeat=physicalSeat(input.sourceUid);
   const meta=source?lookup(source.card.id):undefined;
-  if(!source||source.card.faceUp||source.card.setTurn>=session.duel.core.turn||meta?.kind!=='trap'||ownerSeat===null){
+  if(!source||source.card.faceUp||source.card.setTurn>=session.duel.core.turn||!meta||meta.kind!=='trap'||ownerSeat===null){
    throw new Error('A Armadilha precisa estar Baixada desde um turno anterior.');
   }
   const team=source.team,core=session.duel.core,pending=core.pending;
