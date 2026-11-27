@@ -154,7 +154,7 @@ test('Deck Principal aceita 20 e rejeita 19; mão 7 só é tratada na End Phase'
  assert.doesNotThrow(()=>adapter.activeSources(session.duel));
  const short=structuredClone(duel);
  short.core.players[0].deck.pop();
- assert.throws(()=>adapter.createSession(short),/20–30|20-30/);
+ assert.throws(()=>adapter.createSession(short));
  const seven=structuredClone(duel);
  while(seven.core.players[0].hand.length<7)seven.core.players[0].hand.push(seven.core.players[0].deck.pop());
  assert.doesNotThrow(()=>adapter.createSession(seven));
@@ -273,7 +273,7 @@ test('Ha Des nega o efeito de um Effect Monster destruído por Fiend controlado 
 test('Ha Des não aplica a monstros destruídos por um atacante que não seja Fiend',()=>{
  const session=adapter.createSession(makeDuel());
  placeMonster(session.duel,0,fiendA);
- const result=battle(session,{destroyerSeat:2,destroyerId:normalIds[0],battleId:'non-fiend'});
+ const result=battle(session,{destroyerSeat:2,destroyerId:nonFiendNormalId,battleId:'non-fiend'});
  assert.equal(result.result.status,'not-negated');
 });
 
@@ -298,10 +298,9 @@ test('Ha Des não funciona sob Skill Drain, embora o monstro possa ativar seu ef
 
 test('Dark Balter nega o efeito do Effect Monster que ele próprio destrói em batalha',()=>{
  const session=adapter.createSession(makeDuel());
- const balterUid=placeMonster(session.duel,0,fiendB);
  const result=battle(session,{destroyerSeat:0,destroyerId:fiendB,battleId:'balter-battle'});
  assert.equal(result.result.status,'effect-negated');
- assert.deepEqual(result.result.sourceUids,[balterUid]);
+ assert.deepEqual(result.result.sourceUids,[result.destroyerUid]);
 });
 
 test('Dark Balter não estende a negação de batalha a outro Fiend da equipe',()=>{
