@@ -1,0 +1,81 @@
+{
+  "mission": "M639",
+  "title": "Swords of Revealing Light and Dark-Piercing Light TagDuel adapter",
+  "cards": [
+    {
+      "id": "72302403",
+      "name": "Swords of Revealing Light",
+      "konamiId": 4354,
+      "firstTCGRelease": "2002-03-08",
+      "officialText": "After this card's activation, it remains on the field, but you must destroy it during the End Phase of your opponent's 3rd turn. When this card is activated: If your opponent controls a face-down monster, flip all monsters they control face-up. While this card is face-up on the field, your opponent's monsters cannot declare an attack.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4354&ope=2&request_locale=en"
+    },
+    {
+      "id": "68008297",
+      "name": "Dark-Piercing Light",
+      "konamiId": 4356,
+      "firstTCGRelease": "2002-12-20",
+      "officialText": "Flip all face-down monsters on your opponent's side of the field face-up.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4356&ope=2&request_locale=en"
+    }
+  ],
+  "behavior": {
+    "swords": "Revela os monstros da equipe adversária somente quando ela controla ao menos um face-down; mantém o Normal Spell face-up, bloqueia declarações de ataque da equipe adversária e destrói a fonte no End Phase do terceiro turno adversário. Cada cópia tem contador independente.",
+    "darkPiercing": "Revela somente os monstros face-down da equipe adversária e envia a fonte ao Cemitério após resolver.",
+    "flipEvents": "Retorna UIDs revelados ao host; não executa Flip Effects dentro da resolução da própria Magia.",
+    "timing": "Somente Main Phase da equipe ativa; resolução aceita negação e recibos idempotentes.",
+    "tagDuel": "Efeitos de campo são compartilhados por equipe; mãos e propriedade física permanecem por assento."
+  },
+  "invariants": {
+    "mainDeckPerPhysicalSeat": "20-30",
+    "handLimit": 6,
+    "handLimitCheck": "End Phase; este adapter não descarta",
+    "monsterZonesPerTeam": 3,
+    "spellTrapZonesPerTeam": 3,
+    "fieldZone": "separate",
+    "extraDeckPerPhysicalSeat": 5,
+    "uidConservation": true,
+    "privateHandsPreserved": true,
+    "inventoryGrants": 0
+  },
+  "tests": {
+    "file": "tests/revealAndAttackLockTagAdapter.test.cjs",
+    "command": "node --test tests/revealAndAttackLockTagAdapter.test.cjs",
+    "scenarios": 17,
+    "covered": [
+      "catalogue remains unchanged",
+      "team-wide reveal and attack lock",
+      "three opposing End Phase countdown",
+      "own End Phase does not decrement",
+      "idempotent End Phase receipt",
+      "source removal and independent copies",
+      "inactive partner ownership of a set source",
+      "Dark-Piercing Light one-shot reveal",
+      "negation",
+      "duplicate activation",
+      "zone and deck/Extra limits",
+      "six-card End Phase ownership",
+      "7-card hand remains intact until the engine's End Phase discard"
+    ]
+  },
+  "certification": {
+    "newBehaviorVerifiedCards": 0,
+    "newBehaviorCertifiedCards": 0,
+    "catalogAdmission": false,
+    "automaticCertification": false,
+    "inventoryGrants": 0,
+    "adapterBehaviorVerifiedCards": 2
+  },
+  "integration": {
+    "centralResolver": false,
+    "discordCommands": false,
+    "persistence": false,
+    "liveDiscordGateway": false,
+    "merge": false,
+    "deploy": false
+  },
+  "base": {
+    "sharedHead": "58ff7d48eb71a78e5580fb8d0132b27d84b2bbf8",
+    "engineV9CertifiedAtReservation": 969
+  }
+}
