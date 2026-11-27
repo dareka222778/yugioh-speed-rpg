@@ -1,0 +1,615 @@
+{
+  "format": 1,
+  "mission": "M392",
+  "reviewedAt": "2026-11-19",
+  "authority": "Konami official Yu-Gi-Oh! OCG Card Database",
+  "sourceLocale": "ja",
+  "historicalCutoffInclusive": "2004-09-30",
+  "sourceWorklistBranches": [
+    "feat/work-m355-official-text-review-first-ten-20261118",
+    "feat/work-m356-official-text-review-next-ten-20261118",
+    "feat/work-m357-official-text-review-final-eleven-20261118"
+  ],
+  "method": "For each identity, inspect the official Japanese OCG card-detail page, use the earliest listed OCG printing (minimum release date) and preserve its set code and page line range. This establishes OCG eligibility only; no TCG-first-release claim is made.",
+  "cards": [
+    {
+      "id": "86988864",
+      "name": "3-Hump Lacooda",
+      "konamiCardDatabaseId": 6032,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6032&ope=2&request_locale=ja",
+      "sourceLocale": "ja",
+      "sourceSection": "OCG",
+      "sourceLineRange": [
+        119,
+        123
+      ],
+      "earliestOcgRelease": "2004-02-26",
+      "earliestOcgSetCode": "309-015",
+      "eligibleAtHistoricalCutoff": true,
+      "tcgFirstReleaseAudited": false,
+      "behaviorStatus": "not-certified",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    },
+    {
+      "id": "14261867",
+      "name": "8-Claws Scorpion",
+      "konamiCardDatabaseId": 5421,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5421&ope=2&request_locale=ja",
+      "sourceLocale": "ja",
+      "sourceSection": "OCG",
+      "sourceLineRange": [
+        128,
+        132
+      ],
+      "earliestOcgRelease": "2002-03-21",
+      "earliestOcgSetCode": "PH-24",
+      "eligibleAtHistoricalCutoff": true,
+      "tcgFirstReleaseAudited": false,
+      "behaviorStatus": "not-certified",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    },
+    {
+      "id": "24140059",
+      "name": "A Cat of Ill Omen",
+      "konamiCardDatabaseId": 5520,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5520&ope=2&request_locale=ja",
+      "sourceLocale": "ja",
+      "sourceSection": "OCG",
+      "sourceLineRange": [
+        152,
+        156
+      ],
+      "earliestOcgRelease": "2002-05-16",
+      "earliestOcgSetCode": "301-018",
+      "eligibleAtHistoricalCutoff": true,
+      "tcgFirstReleaseAudited": false,
+      "behaviorStatus": "not-certified",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    },
+    {
+      "id": "51351302",
+      "name": "A Man with Wdjat",
+      "konamiCardDatabaseId": 5518,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5518&ope=2&request_locale=ja",
+      "sourceLocale": "ja",
+      "sourceSection": "OCG",
+      "sourceLineRange": [
+        118,
+        122
+      ],
+      "earliestOcgRelease": "2002-05-16",
+      "earliestOcgSetCode": "301-016",
+      "eligibleAtHistoricalCutoff": true,
+      "tcgFirstReleaseAudited": false,
+      "behaviorStatus": "not-certified",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    },
+    {
+      "id": "13026402",
+      "name": "A-Team: Trap Disposal Unit",
+      "konamiCardDatabaseId": 6202,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6202&ope=2&request_locale=ja",
+      "sourceLocale": "ja",
+      "sourceSection": "OCG",
+      "sourceLineRange": [
+        128,
+        132
+      ],
+      "earliestOcgRelease": "2004-08-05",
+      "earliestOcgSetCode": "RDS-JP033",
+      "eligibleAtHistoricalCutoff": true,
+      "tcgFirstReleaseAudited": false,
+      "behaviorStatus": "not-certified",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    },
+    {
+      "id": "49771608",
+      "name": "Absorbing Kid from the Sky",
+      "konamiCardDatabaseId": 6034,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6034&ope=2&request_locale=ja",
+      "sourceLocale": "ja",
+      "sourceSection": "OCG",
+      "sourceLineRange": [
+        140,
+        144
+      ],
+      "earliestOcgRelease": "2004-02-26",
+      "earliestOcgSetCode": "309-017",
+      "eligibleAtHistoricalCutoff": true,
+      "tcgFirstReleaseAudited": false,
+      "behaviorStatus": "not-certified",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    },
+    {
+      "id": "18318842",
+      "name": "Abyss Soldier",
+      "konamiCardDatabaseId": 5927,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5927&ope=2&request_locale=ja",
+      "sourceLocale": "ja",
+      "sourceSection": "OCG",
+      "sourceLineRange": [
+        152,
+        156
+      ],
+      "earliestOcgRelease": "2004-07-29",
+      "earliestOcgSetCode": "CMC-JP001",
+      "eligibleAtHistoricalCutoff": true,
+      "tcgFirstReleaseAudited": false,
+      "behaviorStatus": "not-certified",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    },
+    {
+      "id": "16135253",
+      "name": "Agido",
+      "konamiCardDatabaseId": 5366,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5366&ope=2&request_locale=ja",
+      "sourceLocale": "ja",
+      "sourceSection": "OCG",
+      "sourceLineRange": [
+        128,
+        132
+      ],
+      "earliestOcgRelease": "2003-02-20",
+      "earliestOcgSetCode": "305-027",
+      "eligibleAtHistoricalCutoff": true,
+      "tcgFirstReleaseAudited": false,
+      "behaviorStatus": "not-certified",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    },
+    {
+      "id": "18036057",
+      "name": "Airknight Parshath",
+      "konamiCardDatabaseId": 5023,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5023&ope=2&request_locale=ja",
+      "sourceLocale": "ja",
+      "sourceSection": "OCG",
+      "sourceLineRange": [
+        188,
+        192
+      ],
+      "earliestOcgRelease": "2001-11-29",
+      "earliestOcgSetCode": "MA-13",
+      "eligibleAtHistoricalCutoff": true,
+      "tcgFirstReleaseAudited": false,
+      "behaviorStatus": "not-certified",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    },
+    {
+      "id": "73574678",
+      "name": "Amazoness Blowpiper",
+      "konamiCardDatabaseId": 5646,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5646&ope=2&request_locale=ja",
+      "sourceLocale": "ja",
+      "sourceSection": "OCG",
+      "sourceLineRange": [
+        128,
+        132
+      ],
+      "earliestOcgRelease": "2002-09-19",
+      "earliestOcgSetCode": "303-008",
+      "eligibleAtHistoricalCutoff": true,
+      "tcgFirstReleaseAudited": false,
+      "behaviorStatus": "not-certified",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    },
+    {
+      "id": "29654737",
+      "name": "Amazoness Chain Master",
+      "konamiCardDatabaseId": 5291,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5291&ope=2&request_locale=ja",
+      "sourceLocale": "ja",
+      "sourceSection": "OCG",
+      "sourceLineRange": [
+        152,
+        156
+      ],
+      "earliestOcgRelease": "2001-07-31",
+      "earliestOcgSetCode": "WJ-02",
+      "eligibleAtHistoricalCutoff": true,
+      "tcgFirstReleaseAudited": false,
+      "behaviorStatus": "not-certified",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    },
+    {
+      "id": "94004268",
+      "name": "Amazoness Swords Woman",
+      "konamiCardDatabaseId": 5284,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5284&ope=2&request_locale=ja",
+      "sourceLocale": "ja",
+      "sourceSection": "OCG",
+      "sourceLineRange": [
+        164,
+        168
+      ],
+      "earliestOcgRelease": "2002-09-19",
+      "earliestOcgSetCode": "303-007",
+      "eligibleAtHistoricalCutoff": true,
+      "tcgFirstReleaseAudited": false,
+      "behaviorStatus": "not-certified",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    },
+    {
+      "id": "10979723",
+      "name": "Amazoness Tiger",
+      "konamiCardDatabaseId": 5647,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5647&ope=2&request_locale=ja",
+      "sourceLocale": "ja",
+      "sourceSection": "OCG",
+      "sourceLineRange": [
+        130,
+        134
+      ],
+      "earliestOcgRelease": "2002-09-19",
+      "earliestOcgSetCode": "303-009",
+      "eligibleAtHistoricalCutoff": true,
+      "tcgFirstReleaseAudited": false,
+      "behaviorStatus": "not-certified",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    },
+    {
+      "id": "95174353",
+      "name": "Ameba",
+      "konamiCardDatabaseId": 4490,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4490&ope=2&request_locale=ja",
+      "sourceLocale": "ja",
+      "sourceSection": "OCG",
+      "sourceLineRange": [
+        152,
+        156
+      ],
+      "earliestOcgRelease": "2000-04-20",
+      "earliestOcgSetCode": "MR-10",
+      "eligibleAtHistoricalCutoff": true,
+      "tcgFirstReleaseAudited": false,
+      "behaviorStatus": "not-certified",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    },
+    {
+      "id": "23927567",
+      "name": "An Owl of Luck",
+      "konamiCardDatabaseId": 5523,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5523&ope=2&request_locale=ja",
+      "sourceLocale": "ja",
+      "sourceSection": "OCG",
+      "sourceLineRange": [
+        140,
+        144
+      ],
+      "earliestOcgRelease": "2002-05-16",
+      "earliestOcgSetCode": "301-021",
+      "eligibleAtHistoricalCutoff": true,
+      "tcgFirstReleaseAudited": false,
+      "behaviorStatus": "not-certified",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    },
+    {
+      "id": "54912977",
+      "name": "Ancient Lamp",
+      "konamiCardDatabaseId": 5238,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5238&ope=2&request_locale=ja",
+      "sourceLocale": "ja",
+      "sourceSection": "OCG",
+      "sourceLineRange": [
+        188,
+        192
+      ],
+      "earliestOcgRelease": "2001-04-01",
+      "earliestOcgSetCode": "L3-08",
+      "eligibleAtHistoricalCutoff": true,
+      "tcgFirstReleaseAudited": false,
+      "behaviorStatus": "not-certified",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    },
+    {
+      "id": "15013468",
+      "name": "Andro Sphinx",
+      "konamiCardDatabaseId": 6087,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6087&ope=2&request_locale=ja",
+      "sourceLocale": "ja",
+      "sourceSection": "OCG",
+      "sourceLineRange": [
+        128,
+        132
+      ],
+      "earliestOcgRelease": "2004-08-05",
+      "earliestOcgSetCode": "PP7-JP002",
+      "eligibleAtHistoricalCutoff": true,
+      "tcgFirstReleaseAudited": false,
+      "behaviorStatus": "not-certified",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    },
+    {
+      "id": "65064143",
+      "name": "Anti-Aircraft Flower",
+      "konamiCardDatabaseId": 5890,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5890&ope=2&request_locale=ja",
+      "sourceLocale": "ja",
+      "sourceSection": "OCG",
+      "sourceLineRange": [
+        129,
+        133
+      ],
+      "earliestOcgRelease": "2003-07-17",
+      "earliestOcgSetCode": "307-021",
+      "eligibleAtHistoricalCutoff": true,
+      "tcgFirstReleaseAudited": false,
+      "behaviorStatus": "not-certified",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    },
+    {
+      "id": "09156135",
+      "name": "Apprentice Magician",
+      "konamiCardDatabaseId": 5650,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5650&ope=2&request_locale=ja",
+      "sourceLocale": "ja",
+      "sourceSection": "OCG",
+      "sourceLineRange": [
+        176,
+        180
+      ],
+      "earliestOcgRelease": "2002-09-19",
+      "earliestOcgSetCode": "303-012",
+      "eligibleAtHistoricalCutoff": true,
+      "tcgFirstReleaseAudited": false,
+      "behaviorStatus": "not-certified",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    },
+    {
+      "id": "40916023",
+      "name": "Aqua Spirit",
+      "konamiCardDatabaseId": 5253,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5253&ope=2&request_locale=ja",
+      "sourceLocale": "ja",
+      "sourceSection": "OCG",
+      "sourceLineRange": [
+        176,
+        180
+      ],
+      "earliestOcgRelease": "2001-07-12",
+      "earliestOcgSetCode": "LN-17",
+      "eligibleAtHistoricalCutoff": true,
+      "tcgFirstReleaseAudited": false,
+      "behaviorStatus": "not-certified",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    },
+    {
+      "id": "55001420",
+      "name": "Arcane Archer of the Forest",
+      "konamiCardDatabaseId": 5971,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5971&ope=2&request_locale=ja",
+      "sourceLocale": "ja",
+      "sourceSection": "OCG",
+      "sourceLineRange": [
+        128,
+        132
+      ],
+      "earliestOcgRelease": "2003-11-20",
+      "earliestOcgSetCode": "308-029",
+      "eligibleAtHistoricalCutoff": true,
+      "tcgFirstReleaseAudited": false,
+      "behaviorStatus": "not-certified",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    },
+    {
+      "id": "50287060",
+      "name": "Archfiend of Gilfer",
+      "konamiCardDatabaseId": 5091,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5091&ope=2&request_locale=ja",
+      "sourceLocale": "ja",
+      "sourceSection": "OCG",
+      "sourceLineRange": [
+        200,
+        204
+      ],
+      "earliestOcgRelease": "2001-02-09",
+      "earliestOcgSetCode": "WJ-01",
+      "eligibleAtHistoricalCutoff": true,
+      "tcgFirstReleaseAudited": false,
+      "behaviorStatus": "not-certified",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    },
+    {
+      "id": "18378582",
+      "name": "Archlord Zerato",
+      "konamiCardDatabaseId": 5976,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5976&ope=2&request_locale=ja",
+      "sourceLocale": "ja",
+      "sourceSection": "OCG",
+      "sourceLineRange": [
+        128,
+        132
+      ],
+      "earliestOcgRelease": "2003-11-20",
+      "earliestOcgSetCode": "308-034",
+      "eligibleAtHistoricalCutoff": true,
+      "tcgFirstReleaseAudited": false,
+      "behaviorStatus": "not-certified",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    },
+    {
+      "id": "00980973",
+      "name": "Armed Dragon LV3",
+      "konamiCardDatabaseId": 6105,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6105&ope=2&request_locale=ja",
+      "sourceLocale": "ja",
+      "sourceSection": "OCG",
+      "sourceLineRange": [
+        188,
+        192
+      ],
+      "earliestOcgRelease": "2004-05-27",
+      "earliestOcgSetCode": "SOD-JP013",
+      "eligibleAtHistoricalCutoff": true,
+      "tcgFirstReleaseAudited": false,
+      "behaviorStatus": "not-certified",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    },
+    {
+      "id": "46384672",
+      "name": "Armed Dragon LV5",
+      "konamiCardDatabaseId": 6106,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6106&ope=2&request_locale=ja",
+      "sourceLocale": "ja",
+      "sourceSection": "OCG",
+      "sourceLineRange": [
+        187,
+        191
+      ],
+      "earliestOcgRelease": "2004-05-27",
+      "earliestOcgSetCode": "SOD-JP014",
+      "eligibleAtHistoricalCutoff": true,
+      "tcgFirstReleaseAudited": false,
+      "behaviorStatus": "not-certified",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    },
+    {
+      "id": "73879377",
+      "name": "Armed Dragon LV7",
+      "konamiCardDatabaseId": 6107,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6107&ope=2&request_locale=ja",
+      "sourceLocale": "ja",
+      "sourceSection": "OCG",
+      "sourceLineRange": [
+        188,
+        192
+      ],
+      "earliestOcgRelease": "2004-05-27",
+      "earliestOcgSetCode": "SOD-JP015",
+      "eligibleAtHistoricalCutoff": true,
+      "tcgFirstReleaseAudited": false,
+      "behaviorStatus": "not-certified",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    },
+    {
+      "id": "07180418",
+      "name": "Armor Exe",
+      "konamiCardDatabaseId": 5659,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5659&ope=2&request_locale=ja",
+      "sourceLocale": "ja",
+      "sourceSection": "OCG",
+      "sourceLineRange": [
+        119,
+        123
+      ],
+      "earliestOcgRelease": "2002-09-19",
+      "earliestOcgSetCode": "303-021",
+      "eligibleAtHistoricalCutoff": true,
+      "tcgFirstReleaseAudited": false,
+      "behaviorStatus": "not-certified",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    },
+    {
+      "id": "42364374",
+      "name": "Arsenal Bug",
+      "konamiCardDatabaseId": 5033,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5033&ope=2&request_locale=ja",
+      "sourceLocale": "ja",
+      "sourceSection": "OCG",
+      "sourceLineRange": [
+        132,
+        136
+      ],
+      "earliestOcgRelease": "2002-03-21",
+      "earliestOcgSetCode": "PH-07",
+      "eligibleAtHistoricalCutoff": true,
+      "tcgFirstReleaseAudited": false,
+      "behaviorStatus": "not-certified",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    },
+    {
+      "id": "02134346",
+      "name": "Asura Priest",
+      "konamiCardDatabaseId": 5381,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5381&ope=2&request_locale=ja",
+      "sourceLocale": "ja",
+      "sourceSection": "OCG",
+      "sourceLineRange": [
+        152,
+        156
+      ],
+      "earliestOcgRelease": "2001-11-29",
+      "earliestOcgSetCode": "MA-23",
+      "eligibleAtHistoricalCutoff": true,
+      "tcgFirstReleaseAudited": false,
+      "behaviorStatus": "not-certified",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    },
+    {
+      "id": "88236094",
+      "name": "Aswan Apparition",
+      "konamiCardDatabaseId": 6026,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6026&ope=2&request_locale=ja",
+      "sourceLocale": "ja",
+      "sourceSection": "OCG",
+      "sourceLineRange": [
+        128,
+        132
+      ],
+      "earliestOcgRelease": "2004-02-26",
+      "earliestOcgSetCode": "309-009",
+      "eligibleAtHistoricalCutoff": true,
+      "tcgFirstReleaseAudited": false,
+      "behaviorStatus": "not-certified",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    },
+    {
+      "id": "87340664",
+      "name": "Atomic Firefly",
+      "konamiCardDatabaseId": 5966,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5966&ope=2&request_locale=ja",
+      "sourceLocale": "ja",
+      "sourceSection": "OCG",
+      "sourceLineRange": [
+        129,
+        133
+      ],
+      "earliestOcgRelease": "2003-11-20",
+      "earliestOcgSetCode": "308-024",
+      "eligibleAtHistoricalCutoff": true,
+      "tcgFirstReleaseAudited": false,
+      "behaviorStatus": "not-certified",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    }
+  ],
+  "summary": {
+    "reviewed": 31,
+    "uniqueCardIds": 31,
+    "officialOcgSources": 31,
+    "eligibleAtHistoricalCutoff": 31,
+    "historicalIneligible": 0,
+    "tcgEligibilityAudited": 0,
+    "behaviorCertificationsAdded": 0,
+    "automaticCertifications": 0
+  }
+}
