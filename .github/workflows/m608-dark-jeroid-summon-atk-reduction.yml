@@ -1,0 +1,29 @@
+name: M608 Dark Jeroid summon ATK reduction adapter
+on:
+  push:
+    branches:
+      - feat/work-m608-dark-jeroid-summon-atk-reduction-20261124
+  pull_request:
+    branches:
+      - feat/rea-engine-recovery-20261026
+    paths:
+      - src/darkJeroidSummonAtkReductionTagAdapter.ts
+      - tests/darkJeroidSummonAtkReductionTagAdapter.test.cjs
+      - docs/evidence/m608-dark-jeroid-summon-atk-reduction.json
+      - .github/workflows/m608-dark-jeroid-summon-atk-reduction.yml
+permissions:
+  contents: read
+jobs:
+  dark-jeroid:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m608-dark-jeroid-summon-atk-reduction.json', 'utf8'))"
+      - run: node --test tests/darkJeroidSummonAtkReductionTagAdapter.test.cjs
