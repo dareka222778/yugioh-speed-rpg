@@ -5,7 +5,7 @@ const {
  DARK_RULER_HA_DES_ID,DARK_BALTER_THE_TERRIBLE_ID,SKILL_DRAIN_ID
 } = require('../dist/fiendEffectNegationTagAdapter');
 const {createTagDuel,tagNormalCardIds,tagInventory} = require('../dist/tagDuel');
-const {getDuelCard,getEffect,getEnabledCardIds} = require('../dist/effectRegistry');
+const {getDuelCard,getCardStatus,getEffect,getEnabledCardIds} = require('../dist/effectRegistry');
 const {getMonsterEffect} = require('../dist/monsterEffects');
 const {synchronizeCardLifetimes} = require('../dist/cardLifetime');
 const {RULES_PROFILE} = require('../dist/rulesProfile');
@@ -138,7 +138,8 @@ test('fixtures cobrem duas cartas novas e Skill Drain sem alterar o catálogo ne
  assert.equal(SKILL_DRAIN_ID,'82732705');
  assert.equal(getDuelCard(DARK_RULER_HA_DES_ID),undefined);
  assert.equal(getDuelCard(DARK_BALTER_THE_TERRIBLE_ID),undefined);
- assert.equal(getDuelCard(SKILL_DRAIN_ID),undefined);
+ assert.equal(getDuelCard(SKILL_DRAIN_ID)?.id,SKILL_DRAIN_ID);
+ assert.equal(getCardStatus(SKILL_DRAIN_ID)?.stage,'certified');
  assert.equal(RULES_PROFILE.mainDeckMin,20);
  assert.equal(RULES_PROFILE.mainDeckMax,30);
  assert.equal(RULES_PROFILE.handLimit,6);
@@ -285,7 +286,7 @@ test('Ha Des nega o efeito de um Effect Monster destruído por Fiend controlado 
 test('Ha Des não aplica a monstros destruídos por um atacante que não seja Fiend',()=>{
  const session=adapter.createSession(makeDuel());
  placeMonster(session.duel,0,fiendA);
- const result=battle(session,{destroyerSeat:2,destroyerId:nonFiendNormalId,battleId:'non-fiend'});
+ const result=battle(session,{destroyerSeat:2,destroyerId:normalIds[0],battleId:'non-fiend'});
  assert.equal(result.result.status,'not-negated');
 });
 

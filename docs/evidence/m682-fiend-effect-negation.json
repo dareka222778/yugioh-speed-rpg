@@ -39,14 +39,15 @@
       "newToMetadata": false,
       "newToCertification": false,
       "certificatePresent": true,
-      "metadataPresent": false
+      "metadataPresent": true
     }
   ],
   "baseline": {
     "certificationEntriesObserved": 959,
     "priorM681CheckpointClaimed": 969,
     "discrepancy": 10,
-    "skillDrainCertificateOrphanedFromMetadata": true
+    "skillDrainCertificateOrphanedFromMetadata": false,
+    "skillDrainMetadataResolution": "Present in the effective card metadata registry through generated batch imports; runtime getDuelCard/getCardStatus is authoritative."
   },
   "implementation": {
     "files": [
@@ -101,7 +102,7 @@
     "O adapter fornece políticas/recibos isolados; ainda não está ligado ao resolver central nem aos gatilhos reais de batalha/Spell.",
     "Dark Balter exige um Fusion Summon válido com materiais específicos; esta validação permanece fora deste bloco.",
     "Os dois cards novos não foram inseridos no metadata nem certificados; nenhum número de certificação foi incrementado.",
-    "Skill Drain aparece como chave no arquivo cardCertifications.ts mas não no cardMetadata.ts; não foi tratado como card ativo nem contado como novo comportamento.",
+    "Skill Drain já integra o metadata efetivo por importação de batch gerado e possui certificado legado; foi usado somente como regressão, sem novo certificado.",
     "Não foi feita validação ao vivo no Discord, merge ou deploy."
   ],
   "nextTask": "Executar typecheck/build/testes focados; corrigir qualquer falha; então executar a suíte completa, abrir PR e atualizar o checkpoint com SHA/CI reais."

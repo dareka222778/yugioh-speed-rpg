@@ -3,8 +3,8 @@ const assert=require('node:assert/strict');
 const evidence=JSON.parse(fs.readFileSync('docs/evidence/m682-fiend-effect-negation.json','utf8'));
 const source=fs.readFileSync('src/fiendEffectNegationTagAdapter.ts','utf8');
 const tests=fs.readFileSync('tests/fiendEffectNegationTagAdapter.test.cjs','utf8');
-const metadata=fs.readFileSync('src/cardMetadata.ts','utf8');
 const certifications=fs.readFileSync('src/cardCertifications.ts','utf8');
+const {getDuelCard,getCardStatus}=require('../dist/effectRegistry');
 const ids=evidence.cards.map(card=>card.id);
 assert.equal(evidence.mission,'M682');
 assert.equal(new Set(ids).size,ids.length,'Card IDs duplicados na evidência.');
@@ -20,8 +20,10 @@ const certificationIds=[...certifications.matchAll(/^\s*"([0-9]{8})"\s*:/gm)].ma
 assert.equal(certificationIds.length,evidence.baseline.certificationEntriesObserved,
  'A contagem real de certificações mudou; atualizar evidência e revisar o diff.');
 assert.ok(certifications.includes('"82732705":'),'O registro legado de Skill Drain mudou inesperadamente.');
-assert.ok(!metadata.includes('53982768')&&!metadata.includes('80071763'),
- 'Card novo entrou no metadata sem integração/certificação autorizada.');
+assert.ok(getDuelCard('82732705'),'Skill Drain precisa existir no metadata efetivo via batches gerados.');
+assert.equal(getCardStatus('82732705')?.stage,'certified','Skill Drain deve manter apenas seu certificado legado.');
+assert.equal(getDuelCard('53982768'),undefined,'Ha Des não pode entrar no catálogo nesta etapa.');
+assert.equal(getDuelCard('80071763'),undefined,'Dark Balter não pode entrar no catálogo nesta etapa.');
 assert.equal(evidence.implementation.newEngineCertifications,0);
 assert.equal(evidence.implementation.newlyBehaviorCertifiedCards,0);
 assert.equal(evidence.implementation.automaticCertifications,0);
@@ -35,4 +37,4 @@ assert.ok(testCount>=20,'Esperadas pelo menos 20 cenários comportamentais; enco
 for(const phrase of ['Skill Drain paga 1000','Ha Des nega','Dark Balter nega','Jinzo impede','Royal Decree permite','Field Zone é independente','Deck Principal aceita 20']){
  assert.ok(tests.includes(phrase),'Cenário obrigatório ausente: '+phrase);
 }
-console.log(JSON.stringify({mission:'M682',testCases:testCount,baselineCertifiedCards:certificationIds.length,newEngineCertifications:0,adapterVerifiedCards:3,newCardsCovered:2,skillDrainLegacyCertificateWithoutMetadata:true,automaticCertifications:0,inventoryGrants:0,centralResolverIntegrated:false,productionChanged:false},null,2));
+console.log(JSON.stringify({mission:'M682',testCases:testCount,baselineCertifiedCards:certificationIds.length,newEngineCertifications:0,adapterVerifiedCards:3,newCardsCovered:2,skillDrainLegacyCertificateWithoutMetadata:false,automaticCertifications:0,inventoryGrants:0,centralResolverIntegrated:false,productionChanged:false},null,2));
