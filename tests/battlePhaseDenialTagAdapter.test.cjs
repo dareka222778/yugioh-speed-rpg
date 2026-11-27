@@ -283,5 +283,5 @@ scenario('inventário e UIDs são conservados sem concessões automáticas',()=>
 scenario('carta sem metadados habilitados não pode ser usada como fonte',()=>{
  const {session}=setup(),window=openOpponentMain(session,0),trap=setTrap(session,window.defenderTeam,'threatening-roar',window.actorSeat);
  trap.id='00000000';
- assert.throws(()=>activate(session,trap,window,'unknown-source'),/metadados habilitados/);
+ assert.throws(()=>activate(session,trap,window,'unknown-source'),/identificador de carta ausente/);
 });
