@@ -115,7 +115,7 @@ export function assertMassBackrowRules(duel:TagDuel):void{
   if(metadata.fusion)extra[owner]++;else main[owner]++;
  }
  for(let seat=0;seat<4;seat++){
-  if(main[seat]<rules.mainDeckMin||main[seat]>rules.mainDeckMax)throw new Error('Deck principal físico fora de 20–30.');
+  if(main[seat]<rules.mainDeckMin||main[seat]>rules.mainDeckMax)throw new Error('Deck principal físico fora de 20–30 no assento '+seat+': '+main[seat]+' cartas; Extra '+extra[seat]+'.');
   if(extra[seat]>rules.extraDeckMax)throw new Error('Deck Adicional físico excede cinco cartas.');
  }
  for(const player of duel.core.players){

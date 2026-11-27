@@ -2,7 +2,7 @@
 const {test}=require('node:test');
 const assert=require('node:assert/strict');
 const {createTagDuel,tagInventory,tagNormalCardIds}=require('../dist/tagDuel');
-const {enabledCardIds,getDuelCard,getEffect,engineCard,getCardStatus}=require('../dist/effectRegistry');
+const {enabledCardIds,getDuelCard,getEffect,engineCard,getPlayableCard,getCardStatus}=require('../dist/effectRegistry');
 const {
  HARPIES_FEATHER_DUSTER_ID,HEAVY_STORM_ID,GIANT_TRUNADE_ID,
  createMassBackrowAdapter,assertMassBackrowRules
@@ -51,6 +51,10 @@ function takeHand(duel,seat,id){
  const hand=privateZone(duel,seat,'hand'),card=hand.shift();
  assert.ok(card,'fixture needs a card in the physical hand');card.id=id;return card;
 }
+function putHandCard(duel,seat,id){
+ const card=privateZone(duel,seat,'hand')[0];
+ assert.ok(card,'fixture needs a card in the physical hand');card.id=id;return card.uid;
+}
 function placeBackrow(duel,ownerSeat,controllerTeam,id,faceUp=false){
  const card=takeHand(duel,ownerSeat,id);
  duel.core.players[controllerTeam].backrow.push({...card,faceUp,setTurn:0});
@@ -67,12 +71,13 @@ function inventory(duel){
 }
 function setup(effect,options={}){
  const duel=makeDuel(options.first??0),activeSeat=duel.cursor,activeTeam=activeSeat%2;
- const sourceUid=takeHand(duel,activeSeat,sourceIds[effect]).uid;
+ const sourceUid=putHandCard(duel,activeSeat,sourceIds[effect]);
+ const sourceHandBefore=privateZone(duel,activeSeat,'hand').length;
  const adapter=createMassBackrowAdapter(lookup,options.onLeaveField);
  const session=adapter.createSession(duel);
  const activationId=options.activationId||'m674-'+effect+'-activation';
  const activation=adapter.activate(session,{activationId,sourceUid,actorSeat:activeSeat,turn:duel.core.turn});
- return {duel:session.duel,adapter,session,activation,activationId,sourceUid,activeSeat,activeTeam};
+ return {duel:session.duel,adapter,session,activation,activationId,sourceUid,activeSeat,activeTeam,sourceHandBefore};
 }
 function resolve(s,options={}){
  const result=s.adapter.resolve(s.session,{activationId:s.activationId,...options});
@@ -99,42 +104,45 @@ function partnerSeat(seat){return (seat+2)%4;}
 
 test('os três IDs permanecem fora do catálogo e não recebem certificação por importar adapter',()=>{
  for(const id of [HARPIES_FEATHER_DUSTER_ID,HEAVY_STORM_ID,GIANT_TRUNADE_ID]){
-  assert.equal(engineCard(id),undefined);assert.equal(getCardStatus(id),undefined);assert.equal(getEffect(id),undefined);
+  assert.ok(engineCard(id),'factual metadata may exist before admission');
+  assert.equal(getPlayableCard(id),undefined);
+  assert.equal(getEffect(id),undefined);
+  assert.notEqual(getCardStatus(id)?.stage,'certified');
  }
 });
 
 test('Harpie ativa da mão física do jogador ativo e ocupa uma Spell/Trap Zone compartilhada',()=>{
- const s=setup('harpie-feather-duster'),beforeHand=privateZone(s.duel,s.activeSeat,'hand').length;
+ const s=setup('harpie-feather-duster');
  assert.equal(s.activation.effect,'harpie-feather-duster');assert.equal(s.activation.replayed,false);
- assert.equal(privateZone(s.duel,s.activeSeat,'hand').length,beforeHand);
+ assert.equal(privateZone(s.duel,s.activeSeat,'hand').length,s.sourceHandBefore-1);
  assert.ok(s.duel.core.players[s.activeTeam].backrow.some(card=>card.uid===s.sourceUid&&card.faceUp));
 });
 
 test('não permite ativar uma Magia da mão privada do parceiro',()=>{
- const duel=makeDuel(0),partner=partnerSeat(0),source=takeHand(duel,partner,sourceIds['heavy-storm']);
+ const duel=makeDuel(0),partner=partnerSeat(0),sourceUid=putHandCard(duel,partner,sourceIds['heavy-storm']);
  const adapter=createMassBackrowAdapter(lookup),session=adapter.createSession(duel);
- assert.throws(()=>adapter.activate(session,{activationId:'partner-hand',sourceUid:source.uid,actorSeat:0,turn:duel.core.turn}),/mão privada/);
+ assert.throws(()=>adapter.activate(session,{activationId:'partner-hand',sourceUid,actorSeat:0,turn:duel.core.turn}),/mão privada/);
 });
 
 test('rejeita ativação fora da Main Phase',()=>{
- const duel=makeDuel(0),source=takeHand(duel,0,sourceIds['heavy-storm']);
+ const duel=makeDuel(0),sourceUid=putHandCard(duel,0,sourceIds['heavy-storm']);
  duel.core.phase='battle';
  const adapter=createMassBackrowAdapter(lookup),session=adapter.createSession(duel);
- assert.throws(()=>adapter.activate(session,{activationId:'wrong-phase',sourceUid:source.uid,actorSeat:0,turn:duel.core.turn}),/Main Phase/);
+ assert.throws(()=>adapter.activate(session,{activationId:'wrong-phase',sourceUid,actorSeat:0,turn:duel.core.turn}),/Main Phase/);
 });
 
 test('rejeita ativação quando as três Spell/Trap Zones já estão ocupadas',()=>{
  const duel=makeDuel(0);
  for(let i=0;i<3;i++)placeBackrow(duel,0,0,fixtureSpells[3+i],false);
- const source=takeHand(duel,0,sourceIds['heavy-storm']);
+ const sourceUid=putHandCard(duel,0,sourceIds['heavy-storm']);
  const adapter=createMassBackrowAdapter(lookup),session=adapter.createSession(duel);
- assert.throws(()=>adapter.activate(session,{activationId:'full-backrow',sourceUid:source.uid,actorSeat:0,turn:duel.core.turn}),/Zone livre/);
+ assert.throws(()=>adapter.activate(session,{activationId:'full-backrow',sourceUid,actorSeat:0,turn:duel.core.turn}),/Zone livre/);
 });
 
 test('rejeita fonte que não seja uma das três Magias de varredura',()=>{
- const duel=makeDuel(0),source=takeHand(duel,0,fixtureTraps[0]);
+ const duel=makeDuel(0),sourceUid=putHandCard(duel,0,fixtureTraps[0]);
  const adapter=createMassBackrowAdapter(lookup),session=adapter.createSession(duel);
- assert.throws(()=>adapter.activate(session,{activationId:'not-a-sweep',sourceUid:source.uid,actorSeat:0,turn:duel.core.turn}),/fonte não é/);
+ assert.throws(()=>adapter.activate(session,{activationId:'not-a-sweep',sourceUid,actorSeat:0,turn:duel.core.turn}),/fonte não é/);
 });
 
 test('Harpie destrói a backrow e a Field Zone oponentes, inclusive cartas face-down, mas preserva a própria equipe',()=>{
@@ -290,8 +298,8 @@ test('inventário e UIDs permanecem conservados sem concessões automáticas',()
 });
 
 test('assento ou turno divergente é rejeitado sem mutação',()=>{
- const duel=makeDuel(0),source=takeHand(duel,0,sourceIds['heavy-storm']);
+ const duel=makeDuel(0),sourceUid=putHandCard(duel,0,sourceIds['heavy-storm']);
  const adapter=createMassBackrowAdapter(lookup),session=adapter.createSession(duel);
- assert.throws(()=>adapter.activate(session,{activationId:'wrong-seat',sourceUid:source.uid,actorSeat:2,turn:duel.core.turn}),/Main Phase/);
- assert.throws(()=>adapter.activate(session,{activationId:'wrong-turn',sourceUid:source.uid,actorSeat:0,turn:duel.core.turn+1}),/Main Phase/);
+ assert.throws(()=>adapter.activate(session,{activationId:'wrong-seat',sourceUid,actorSeat:2,turn:duel.core.turn}),/Main Phase/);
+ assert.throws(()=>adapter.activate(session,{activationId:'wrong-turn',sourceUid,actorSeat:0,turn:duel.core.turn+1}),/Main Phase/);
 });

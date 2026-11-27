@@ -74,7 +74,7 @@
   "merge": "not-authorized",
   "discordLive": false,
   "limitations": [
-    "Os três IDs reais não estão admitidos em cardMetadata/effectRegistry; os testes injetam metadados de fonte sobre cartas Spell já habilitadas para verificar somente o adapter.",
+    "Os três IDs reais têm metadados factuais, mas ainda não são jogáveis/certificados no resolver: getPlayableCard e getEffect permanecem ausentes. Os testes injetam metadados de fonte sobre cartas Spell já habilitadas para verificar somente o adapter.",
     "O adapter não está conectado ao resolver central; o host precisa encaminhar a ativação e o estado de negação de Spell para este adapter.",
     "Efeitos específicos de Equip/contínuas que disparam quando a carta sai do campo dependem do callback onLeaveField fornecido pelo host.",
     "Não há comandos, banco, gateway Discord, certificação engine-v9, merge ou deploy."
