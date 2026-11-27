@@ -169,7 +169,7 @@ test('evento repetido é idempotente e não concede um segundo contador',()=>{
 
 test('efeito de Magia ativado do Cemitério não é tratado como ativação de Card de Magia',()=>{
  const s=setup(0),library=deploy(s,0,fixture.library),card=sendSpellToGrave(s.duel,0,0);
- assert.throws(()=>s.adapter.onSpellResolved(s.session,{eventId:'spell-from-grave',spellUid:card.uid,spellId:card.id,activatingSeat:0,activationZone:'grave',turn:s.duel.core.turn,resolved:true}),/zona de ativação/);
+ assert.throws(()=>s.adapter.onSpellResolved(s.session,{eventId:'spell-from-grave',spellUid:card.uid,spellId:card.id,activatingSeat:0,activationZone:'grave',turn:s.duel.core.turn,resolved:true}),/zona de ativação/i);
  assert.equal(s.adapter.counterCount(s.session,library.uid),0);
 });
 
