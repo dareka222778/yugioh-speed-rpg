@@ -17,7 +17,7 @@ export type AttackDeclarationEvent={
 };
 export type AttackResult={
  eventId:string;attackerUid:string;effect:MultiAttackEffect;allowed:boolean;
- reason:'allowed'|'attack-limit'|'opponent-monsters-remain'|'target-already-attacked'|'direct-already-used'|'direct-after-monster';
+ reason:'allowed'|'attack-limit'|'opponent-monsters-remain'|'target-already-attacked'|'direct-already-used'|'direct-after-monster'|'monster-after-direct';
  attacksUsed:number;replayed:boolean
 };
 export type SpiritSummonEvent={
@@ -27,7 +27,7 @@ export type SpiritSummonReceipt={eventId:string;uid:string;ownerSeat:Seat;turn:n
 export type SpiritEndPhaseResult={eventId:string;turn:number;activationIds:string[];replayed:boolean};
 export type SpiritReturnResult={
  activationId:string;uid:string;applied:boolean;
- reason:'returned'|'negated'|'not-on-field'|'not-face-up'|'source-changed';replayed:boolean
+ reason:'returned'|'activation-negated'|'effect-negated'|'not-on-field'|'not-face-up'|'source-changed';replayed:boolean;nextActivationId?:string
 };
 type Team=0|1;
 type Seat=0|1|2|3;
@@ -36,9 +36,9 @@ type PhysicalHolder={deck:CardRef[];hand:CardRef[];extra?:CardRef[]};
 type AttackLedger={turn:number;attacks:number;directAttacks:number;directBlocked:boolean;targetEpochs:Record<string,number>};
 type AttackReceipt={event:AttackDeclarationEvent;result:AttackResult};
 type SpiritSummon={eventId:string;uid:string;ownerSeat:Seat;controllerTeam:Team;turn:number;kind:'normal'|'flip'};
-type SpiritActivation={activationId:string;endPhaseEventId:string;uid:string;ownerSeat:Seat;controllerTeam:Team;turn:number};
+type SpiritActivation={activationId:string;endPhaseEventId:string;uid:string;ownerSeat:Seat;controllerTeam:Team;turn:number;retry:number};
 type SpiritEndPhaseReceipt={eventId:string;activationIds:string[]};
-type SpiritReceipt={negated:boolean;result:SpiritReturnResult};
+type SpiritReceipt={outcome:'activation-negated'|'effect-negated'|'resolved';result:SpiritReturnResult};
 export type MultiAttackSpiritSession={
  duel:TagDuel;
  attacks:Record<string,AttackLedger>;
@@ -193,7 +193,8 @@ export function createMultiAttackSpiritAdapter(lookup:MultiAttackLookup=defaultL
   }else{
    const targetUid=event.targetUid!;
    const epoch=cardEpoch(session.duel,targetUid);
-   if(ledger.targetEpochs[targetUid]===epoch)reason='target-already-attacked';
+   if(ledger.directAttacks>0)reason='monster-after-direct';
+   else if(ledger.targetEpochs[targetUid]===epoch)reason='target-already-attacked';
    else allowed=true;
    if(allowed){ledger.targetEpochs[targetUid]=epoch;ledger.directBlocked=true;}
   }
@@ -253,25 +254,39 @@ export function createMultiAttackSpiritAdapter(lookup:MultiAttackLookup=defaultL
    const found=findMonster(session.duel,uid);
    if(!found||!found.monster.faceUp||lookup(found.monster.id)?.effect!=='asura-all-monsters'){delete session.spiritSummons[uid];continue;}
    const activationId=eventId+':'+uid;assertId(activationId);
-   const pending:SpiritActivation={activationId,endPhaseEventId:eventId,uid,ownerSeat:summon.ownerSeat,controllerTeam:found.team,turn};
+   const pending:SpiritActivation={activationId,endPhaseEventId:eventId,uid,ownerSeat:summon.ownerSeat,controllerTeam:found.team,turn,retry:0};
    session.pendingReturns[activationId]=pending;activationIds.push(activationId);delete session.spiritSummons[uid];
   }
   session.endPhases[key]={eventId,activationIds:[...activationIds]};
   return {eventId,turn,activationIds,replayed:false};
  }
- function resolveSpiritReturn(session:MultiAttackSpiritSession,activationId:string,negated=false):SpiritReturnResult{
+ function resolveSpiritReturn(session:MultiAttackSpiritSession,activationId:string,outcome:{activationNegated?:boolean;effectNegated?:boolean}={}):SpiritReturnResult{
   assertSession(session);assertId(activationId);
-  if(typeof negated!=='boolean')throw new Error('Estado de negação inválido.');
+  if(!outcome||typeof outcome!=='object'||typeof outcome.activationNegated==='undefined'&&typeof outcome.effectNegated==='undefined'&&Object.keys(outcome).length||outcome.activationNegated!==undefined&&typeof outcome.activationNegated!=='boolean'||outcome.effectNegated!==undefined&&typeof outcome.effectNegated!=='boolean')throw new Error('Resultado de resolução Spirit inválido.');
+  const activationNegated=outcome.activationNegated===true,effectNegated=outcome.effectNegated===true;
+  if(activationNegated&&effectNegated)throw new Error('Uma ativação não pode ser simultaneamente negada e resolvida com efeito negado.');
+  const outcomeKey:SpiritReceipt['outcome']=activationNegated?'activation-negated':effectNegated?'effect-negated':'resolved';
   const previous=session.spiritReceipts[activationId];
   if(previous){
-   if(previous.negated!==negated)throw new Error('O recibo Spirit foi repetido com negação diferente.');
+   if(previous.outcome!==outcomeKey)throw new Error('O recibo Spirit foi repetido com resultado diferente.');
    return {...previous.result,replayed:true};
   }
   const pending=session.pendingReturns[activationId];
   if(!pending)throw new Error('Ativação Spirit pendente não encontrada.');
   let applied=false;
   let reason:SpiritReturnResult['reason']='not-on-field';
-  if(negated)reason='negated';
+  let nextActivationId:string|undefined;
+  if(activationNegated){
+   const found=findMonster(session.duel,pending.uid);
+   if(!found)reason='not-on-field';
+   else if(!found.monster.faceUp)reason='not-face-up';
+   else if(lookup(found.monster.id)?.effect!=='asura-all-monsters')reason='source-changed';
+   else{
+    nextActivationId=activationId+':retry:'+(pending.retry+1);assertId(nextActivationId);
+    session.pendingReturns[nextActivationId]={...pending,activationId:nextActivationId,controllerTeam:found.team,retry:pending.retry+1};
+    reason='activation-negated';
+   }
+  }else if(effectNegated)reason='effect-negated';
   else{
    const found=findMonster(session.duel,pending.uid);
    if(!found)reason='not-on-field';
@@ -288,8 +303,8 @@ export function createMultiAttackSpiritAdapter(lookup:MultiAttackLookup=defaultL
    }
   }
   delete session.pendingReturns[activationId];
-  const result:SpiritReturnResult={activationId,uid:pending.uid,applied,reason,replayed:false};
-  session.spiritReceipts[activationId]={negated,result};
+  const result:SpiritReturnResult={activationId,uid:pending.uid,applied,reason,replayed:false,...nextActivationId?{nextActivationId}:{}};
+  session.spiritReceipts[activationId]={outcome:outcomeKey,result};
   return result;
  }
  return {createSession,declareAttack,canChangeControl,canSpecialSummon,assertSummonAllowed,recordSpiritSummon,beginSpiritEndPhase,resolveSpiritReturn};
