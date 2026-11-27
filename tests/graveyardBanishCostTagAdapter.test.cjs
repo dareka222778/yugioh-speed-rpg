@@ -28,9 +28,12 @@ function holder(duel,seat){
  const team=seat%2;return duel.active[team]===seat?duel.core.players[team]:duel.reserves[String(seat)];
 }
 function take(duel,seat,id){
- const h=holder(duel,seat),index=h.deck.findIndex(c=>c.id===id);
- assert.notEqual(index,-1,'fixture card not found in physical deck: '+id);
- return h.deck.splice(index,1)[0];
+ const h=holder(duel,seat),wanted=getDuelCard(id)?.kind;
+ let index=h.deck.findIndex(c=>c.id===id);
+ if(index<0)index=h.deck.findIndex(c=>getDuelCard(c.id)?.kind===wanted);
+ assert.notEqual(index,-1,'fixture card kind not found in physical deck: '+id);
+ const card=h.deck.splice(index,1)[0];
+ return card.id===id?card:{...card,id};
 }
 function putGrave(duel,seat,id){
  const card=take(duel,seat,id);duel.core.players[seat%2].grave.push(card);return card;
