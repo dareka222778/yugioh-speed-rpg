@@ -1,0 +1,138 @@
+{
+  "format": 1,
+  "mission": "M655",
+  "runId": "work-20261126T155624-0300-M655",
+  "priority": "P1",
+  "branch": "feat/work-m655-continuous-position-policies-20261126",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "b64d77d21f2cb1b6656fe7e17f03034c007ab9cb",
+  "cards": [
+    {
+      "id": "52503575",
+      "name": "Final Attack Orders",
+      "type": "Continuous Trap",
+      "firstTCGRelease": "2003-12-01",
+      "officialEffect": "All face-up monsters on the field are changed to Attack Position and their battle positions cannot be changed.",
+      "admitted": false,
+      "certified": false
+    },
+    {
+      "id": "62867251",
+      "name": "Light of Intervention",
+      "type": "Continuous Trap",
+      "firstTCGRelease": "2002-10-20",
+      "officialEffect": "While this card is on the field, Monster Cards cannot be Set or flipped face-down. If a Monster Card would be Set, it must be Normal Summoned in face-up Defense Position.",
+      "admitted": false,
+      "certified": false
+    },
+    {
+      "id": "33950246",
+      "name": "Royal Command",
+      "type": "Continuous Trap",
+      "firstTCGRelease": "2003-03-01",
+      "officialEffect": "Flip monsters' effects cannot be activated, also their effects are negated.",
+      "admitted": false,
+      "certified": false
+    }
+  ],
+  "sources": [
+    {
+      "publisher": "Yu-Gi-Oh! Card Guide / Yugipedia",
+      "url": "https://www.yugiohcardguide.com/single/final-attack-orders.html",
+      "supports": [
+        "identity and passcode",
+        "continuous Trap type",
+        "position enforcement",
+        "first appearance 2003-12-01"
+      ]
+    },
+    {
+      "publisher": "YGOPRODeck / Yugipedia",
+      "url": "https://ygoprodeck.com/CARD/LIGHT-OF-INTERVENTION-5306",
+      "supports": [
+        "identity and passcode",
+        "continuous Trap type",
+        "Set becomes face-up Defense Normal Summon",
+        "first TCG date 2002-10-20"
+      ]
+    },
+    {
+      "publisher": "Yu-Gi-Oh! Card Guide / Yugipedia",
+      "url": "https://www.yugiohcardguide.com/single/royal-command.html",
+      "supports": [
+        "identity and passcode",
+        "continuous Trap type",
+        "Flip Effect activation and effect negation",
+        "first TCG release 2003-03-01"
+      ]
+    }
+  ],
+  "behavior": [
+    "Final Attack Orders changes every face-up monster on both teams to Attack Position and prevents further battle-position changes while its resolved Continuous Trap remains face-up.",
+    "Light of Intervention prevents monsters from being Set or changed face-down; a would-be Set is represented as a face-up Defense Normal Summon.",
+    "When both policies are active, Final Attack Orders takes precedence for the resulting face-up monster position.",
+    "Face-down monsters already on the field remain face-down when Light of Intervention resolves; a later Flip Summon is still possible.",
+    "A partner-set Continuous Trap can be activated by the active teammate while preserving its physical owner UID.",
+    "Activation negation sends the Trap to the shared Graveyard; effect negation leaves it face-up but inactive.",
+    "A removed or stale source cannot apply its continuous policy; source removal releases the position lock if no other source remains.",
+    "The adapter exposes an explicit applyContinuousPolicies hook for face-up monsters entering after activation.",
+    "Hands above six are not discarded early; the hand check remains exclusive to the End Phase.",
+    "Royal Command blocks activation of Flip Effect monster effects and negates those effects while its resolved Continuous Trap remains face-up; non-Flip monster effects remain eligible."
+  ],
+  "constraints": {
+    "mainDeck": "20–30 per physical seat",
+    "handLimit": 6,
+    "handCheck": "End Phase",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "extraDeckMax": 5,
+    "fieldZoneIndependent": true,
+    "privateHandsPerSeat": true,
+    "sharedFieldAndGravePerTeam": true,
+    "physicalUidOwnershipPreserved": true
+  },
+  "scenarioCount": 19,
+  "verification": {
+    "focusedScenarios": 19,
+    "focusedTestResult": "pending",
+    "typecheck": "pending",
+    "build": "pending",
+    "fullTestSuite": "pending",
+    "classicTagAudit": "pending",
+    "evidenceValidation": "pending",
+    "adapterBehaviorVerifiedCards": 0,
+    "behaviorCertifiedCards": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "liveDiscordValidation": false
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "releasedCardIds": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0
+  },
+  "scope": {
+    "newFilesOnly": true,
+    "catalogRegistration": false,
+    "certificateAdded": false,
+    "releaseAllowlistChanged": false,
+    "automaticCertification": false,
+    "resolverIntegration": false,
+    "discordIntegration": false,
+    "persistentPlayerDataChanged": false,
+    "inventoryGranted": 0,
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "limitations": [
+    "Adapter isolado: não altera resolver central, effect registry, catálogo, certificações, allowlist, comandos Discord, banco ou dados persistentes.",
+    "Os testes usam IDs físicos já certificados como fixtures e injetam a identidade mecânica; os passcodes reais continuam fora do catálogo.",
+    "O host ainda precisa chamar applyContinuousPolicies após efeitos que coloquem monstros face-up e integrar as políticas à validação central de Set/posição.",
+    "A conversão de Set em Invocação-Normal é representada no estado do adapter, mas o pipeline de gatilhos de Invocação-Normal continua dependente da integração central.",
+    "Sem merge, deploy ou validação de gateway Discord ao vivo."
+  ]
+}
