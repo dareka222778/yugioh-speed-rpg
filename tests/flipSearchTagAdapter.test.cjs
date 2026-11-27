@@ -175,9 +175,9 @@ scenario('Owl selects only a Field Spell and places it on top of the active Deck
   assert.equal(holder(result.state,0).deck[0].id,FIELD_ID);assertRules(result.state);
 });
 scenario('Cat cannot select a Spell even when the Deck contains one',()=>{
-  const state=create(0,'cat-wrong-type'),source=addSource(state,0,2),trap=addCandidate(state,0,TRAP_ID),activation=activate(state,0,source);
-  const field=findCandidate(state,0,FIELD_ID);
+  const state=create(0,'cat-wrong-type'),source=addSource(state,0,2),trap=addCandidate(state,0,TRAP_ID),field=findCandidate(state,0,FIELD_ID);
   assert.ok(field);
+  const activation=activate(state,0,source);
   assert.throws(()=>resolve(activation,{selectedUid:field.uid,destination:'top'}),/Tipo de carta incompatível/);assert.ok(trap);
 });
 scenario('Owl cannot select a Trap even when a Field Spell is also available',()=>{
