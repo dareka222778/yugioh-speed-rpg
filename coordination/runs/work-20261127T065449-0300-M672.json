@@ -1,0 +1,92 @@
+{
+  "format": 1,
+  "runId": "work-20261127T065449-0300-M672",
+  "mission": "M672",
+  "owner": "Work principal",
+  "priority": "P1",
+  "priorityRequestedBy": "User",
+  "status": "reserved-and-implementing",
+  "startedAt": "2026-11-27T06:54:49-03:00",
+  "endedAt": null,
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedBaseHead": "a56e805079728a850b0248ee0f61ef6a510f2830",
+  "branch": "feat/work-m672-spell-counter-20261127",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "a56e805079728a850b0248ee0f61ef6a510f2830",
+  "headSha": null,
+  "reservedFiles": [
+    "src/spellCounterTagAdapter.ts",
+    "tests/spellCounterTagAdapter.test.cjs",
+    "docs/evidence/m672-spell-counter-adapter.json",
+    ".github/workflows/m672-spell-counter-adapter.yml",
+    "scripts/audit-spell-counter-m672.cjs",
+    "coordination/runs/work-20261127T065449-0300-M672.json"
+  ],
+  "scope": "Adapter TagDuel 2v2 isolado para Royal Magical Library (70791313), Skilled Dark Magician (73752131) e Skilled White Magician (46363422): contadores de Magia adicionados somente quando uma Magia resolve, limite de três por instância, uso idempotente e custos por UID/epoch; Biblioteca remove três para comprar uma carta uma vez por turno; Magos Habilidosos tributam a si mesmos com três contadores para Invocar o monstro nomeado da mão/Deck/Cemitério permitido ao assento físico. Preserva mãos privadas, Deck 20–30, mão 6 com descarte somente na End Phase, zonas 3+3, Field Zone separada, Extra Deck 5, UID/propriedade física e inventário. Sem resolver central, catálogo, certificações, comandos, banco ou produção.",
+  "cards": [
+    {
+      "id": "70791313",
+      "name": "Royal Magical Library",
+      "konamiId": 5658,
+      "firstTcg": "2003-10-10",
+      "effect": "spell resolves -> 1 Spell Counter (max 3); once per turn remove 3 to draw 1"
+    },
+    {
+      "id": "73752131",
+      "name": "Skilled Dark Magician",
+      "konamiId": 5649,
+      "firstTcg": "2003-10-10",
+      "effect": "spell resolves -> 1 Spell Counter (max 3); tribute with 3 to Special Summon Dark Magician from own hand/Deck or team GY"
+    },
+    {
+      "id": "46363422",
+      "name": "Skilled White Magician",
+      "konamiId": 5648,
+      "firstTcg": "2003-10-10",
+      "effect": "spell resolves -> 1 Spell Counter (max 3); tribute with 3 to Special Summon Buster Blader from own hand/Deck or team GY"
+    }
+  ],
+  "handoff": {
+    "status": "requested-awaiting-explicit-release",
+    "targetPR": 17,
+    "commentId": 7215356459,
+    "blockedFiles": [
+      "src/monsterEffects.ts",
+      "src/duelEngineCurrent.ts",
+      "src/effectRegistry.ts",
+      "src/cardMetadata.ts",
+      "src/cardCertifications.ts"
+    ],
+    "thisRunDoesNotTouchBlockedFiles": true
+  },
+  "blocksCompleted": [],
+  "implementedCards": 3,
+  "newCards": 0,
+  "newCertifications": 0,
+  "automaticCertifications": 0,
+  "inventoryGrants": 0,
+  "verification": {
+    "typecheck": "pending",
+    "build": "pending",
+    "focusedTests": "pending",
+    "evidenceValidation": "pending",
+    "adapterBehaviorVerifiedCards": 0,
+    "behaviorCertifiedCards": 0,
+    "discordLive": "not-run"
+  },
+  "effectiveWorkMinutes": 0,
+  "targetEffectiveWorkMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "pr": null,
+  "production": "not-changed",
+  "merge": "not-authorized",
+  "deploy": "not-authorized",
+  "blockers": [
+    "Handoff explícito M61 para integração central solicitado no PR #17; sem liberação, os três efeitos permanecerão em adapter isolado e não serão certificados."
+  ],
+  "nextTask": "Implementar adapter de contadores de Magia, suíte 2v2 e evidência; validar CI focada e abrir PR draft.",
+  "nextWindow": "2026-11-27T11:30:00-03:00",
+  "scopeReleasedToAuxiliary": []
+}
