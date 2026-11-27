@@ -78,7 +78,7 @@ function takePhysical(duel,seat,id){
 }
 function placeMonster(duel,seat,id,{faceUp=true,position='atk'}={}){
  const card=takePhysical(duel,seat,id);
- duel.core.players[seat%2].monsters.push({...card,position,faceUp,entered:duel.core.turn,changed:duel.core.turn,attacked:0,atkBoost:0,defBoost:0,owner:seat});
+ duel.core.players[seat%2].monsters.push({...card,position,faceUp,entered:duel.core.turn,changed:duel.core.turn,attacked:0,atkBoost:0,defBoost:0,owner:seat%2});
  synchronizeCardLifetimes(duel.core);
  return card.uid;
 }
@@ -112,7 +112,7 @@ function reviveMonsterFromGrave(duel,uid){
   if(index>=0){
    const [card]=duel.core.players[team].grave.splice(index,1);
    const owner=Number(/^m([0-3]):/.exec(uid)?.[1]??team);
-   duel.core.players[owner%2].monsters.push({...card,position:'atk',faceUp:true,entered:duel.core.turn,changed:duel.core.turn,attacked:0,atkBoost:0,defBoost:0,owner});
+   duel.core.players[owner%2].monsters.push({...card,position:'atk',faceUp:true,entered:duel.core.turn,changed:duel.core.turn,attacked:0,atkBoost:0,defBoost:0,owner:owner%2});
    synchronizeCardLifetimes(duel.core);return;
   }
  }
