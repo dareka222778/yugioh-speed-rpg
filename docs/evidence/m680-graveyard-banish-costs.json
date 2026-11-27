@@ -1,0 +1,72 @@
+{
+  "mission": "M680",
+  "runId": "work-202611271637320300-M680",
+  "title": "Graveyard banish-cost adapters — Bazoo the Soul-Eater + Skull Lair",
+  "branch": "feat/work-m680-graveyard-banish-costs-20261127",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "e05c3398cccac7c4a0e489499a995681637514ca",
+  "cards": [
+    {
+      "id": "40133511",
+      "name": "Bazoo the Soul-Eater",
+      "konamiDatabaseCid": 5250,
+      "atk": 1600,
+      "def": 900,
+      "firstTcgRelease": "2003-03-01",
+      "firstOcgRelease": "2003-06-26",
+      "officialText": "Once per turn: You can banish up to 3 monsters from your GY; this card gains 300 ATK for each, until the end of your opponent's turn.",
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5250&ope=2&request_locale=en"
+    },
+    {
+      "id": "06733059",
+      "name": "Skull Lair",
+      "konamiDatabaseCid": 5264,
+      "firstTcgRelease": "2003-03-01",
+      "firstOcgRelease": "2001-07-21",
+      "officialText": "Remove from play any number of Monster Cards in your Graveyard to destroy 1 face-up monster on the field whose Level is equal to the number of the cards you removed from play.",
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5264&ope=2&request_locale=en"
+    }
+  ],
+  "adapterBehaviorVerifiedCards": 2,
+  "verificationState": "awaiting-ci",
+  "behaviorCertifiedCards": 0,
+  "newEngineV9Certifications": 0,
+  "automaticCertifications": 0,
+  "inventoryGrants": 0,
+  "playerDataChanged": false,
+  "tests": {
+    "file": "tests/graveyardBanishCostTagAdapter.test.cjs",
+    "count": 13,
+    "command": "npm run check && npm run build && node scripts/audit-graveyard-banish-costs-m680.cjs && node scripts/run-tests-isolated.cjs tests/graveyardBanishCostTagAdapter.test.cjs"
+  },
+  "coverage": [
+    "Bazoo paga 1–3 monstros do Cemitério compartilhado da equipe controladora, com custo irreversível e +300 ATK por monstro.",
+    "Bônus de Bazoo permanece durante o turno da equipe adversária e expira somente no fim desse turno; uso por UID/epoch uma vez por turno.",
+    "Negação e saída/retorno da mesma instância não restauram custo nem concedem bônus.",
+    "Skull Lair paga banimento de monstros como custo, exige armadilha face-up/resolvida e seleciona monstro face-up de Level correspondente somente na resolução.",
+    "Skull Lair não retargeta uma escolha inválida; permite nova escolha antes de finalizar a resolução, e não reembolsa custo se não houver alvo.",
+    "Banish e destruição preservam UID/proprietário físico, inventário, mãos privadas e zonas 2v2.",
+    "Deck 20–30 por assento, mão 6 com checagem só na End Phase, 3 Monster + 3 Spell/Trap Zones, Field Zone separada e Extra Deck 5."
+  ],
+  "rules": {
+    "mainDeck": "20–30 por assento físico",
+    "handLimit": 6,
+    "handCheck": "End Phase",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separada",
+    "extraDeckMax": 5
+  },
+  "integration": {
+    "centralResolver": false,
+    "commands": false,
+    "discordLive": false,
+    "production": false
+  },
+  "limitations": [
+    "Adapter/plan layer isolado; integração central aguarda handoff explícito.",
+    "Bônus de Bazoo é exposto por effectiveAtk/bazooBonus; o resolver central ainda não consome este modificador.",
+    "Testes offline TagDuel; nenhuma sessão gateway Discord ou implantação real foi executada.",
+    "As duas cartas não foram adicionadas ao catálogo engine-v9 nem certificadas."
+  ]
+}

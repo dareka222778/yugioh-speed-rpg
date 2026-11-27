@@ -1,0 +1,39 @@
+name: M680 Graveyard banish-cost TagDuel adapters
+on:
+  push:
+    branches:
+      - feat/work-m680-graveyard-banish-costs-20261127
+    paths:
+      - 'src/graveyardBanishCostTagAdapter.ts'
+      - 'tests/graveyardBanishCostTagAdapter.test.cjs'
+      - 'docs/evidence/m680-graveyard-banish-costs.json'
+      - 'scripts/audit-graveyard-banish-costs-m680.cjs'
+      - '.github/workflows/m680-graveyard-banish-costs.yml'
+  pull_request:
+    branches:
+      - feat/rea-engine-recovery-20261026
+      - 'feat/work-*'
+    paths:
+      - 'src/graveyardBanishCostTagAdapter.ts'
+      - 'tests/graveyardBanishCostTagAdapter.test.cjs'
+      - 'docs/evidence/m680-graveyard-banish-costs.json'
+      - 'scripts/audit-graveyard-banish-costs-m680.cjs'
+      - '.github/workflows/m680-graveyard-banish-costs.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  focused:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - run: node scripts/audit-graveyard-banish-costs-m680.cjs
+      - run: node scripts/run-tests-isolated.cjs tests/graveyardBanishCostTagAdapter.test.cjs
