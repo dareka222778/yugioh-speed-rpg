@@ -1,0 +1,66 @@
+{
+  "format": 1,
+  "mission": "M661",
+  "priority": "P1",
+  "runId": "work-20261126T210030-0300-M661",
+  "status": "isolated-behavior-candidate-not-certified",
+  "base": {
+    "sharedBranch": "feat/rea-engine-recovery-20261026",
+    "head": "48bbf0051afcd078582e1415e01bfc65e4498180",
+    "manifestRevision": "3af4ee461ba728be019de373b6c9652c3a7fd21b94fd475aac6af22b5127ca99",
+    "catalogEntries": 969,
+    "behaviorCertifiedCards": 965
+  },
+  "cards": [
+    {
+      "id": "84636823",
+      "name": "Spell Canceller",
+      "kind": "monster",
+      "konamiCardDatabaseId": 5594,
+      "tcgRelease": "2003-10-10",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5594&request_locale=en",
+      "behavior": "Enquanto estiver face-up, impede a ativação de Magias por ambas as equipes e nega efeitos de Magia no campo."
+    },
+    {
+      "id": "61740673",
+      "name": "Imperial Order",
+      "kind": "trap",
+      "konamiCardDatabaseId": 4960,
+      "tcgRelease": "2002-10-20",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4960&request_locale=en",
+      "behavior": "Nega efeitos de Magia no campo, mas não impede a ativação. Em cada Standby Phase da equipe controladora, paga 700 LP compartilhados; se não puder pagar, é destruída."
+    }
+  ],
+  "behaviorModel": {
+    "activationPolicy": "Spell Canceller bloqueia novas ativações; Imperial Order apenas nega efeitos de Magia no campo.",
+    "sourceNegation": "Spell Canceller respeita monsterEffectsNegated; Imperial Order respeita continuousTrapsNegated (Jinzo/Royal Decree).",
+    "tagDuel": "A equipe controladora determina o efeito e paga os LP compartilhados; UID m0–m3 preserva o proprietário físico, inclusive quando a carta é controlada pela equipe adversária.",
+    "upkeep": "Recibo explícito window=standby, turno e assento ativo; idempotência por activationId e por UID/turno; 700 LP por cópia e por Standby Phase da equipe.",
+    "ownership": "Quando o custo não pode ser pago, Imperial Order vai ao Cemitério da equipe do proprietário físico, sem alterar mãos ou inventário."
+  },
+  "validation": {
+    "focusedTest": "tests/spellNegationTagAdapter.test.cjs",
+    "expectedScenarios": 32,
+    "auditScript": "scripts/audit-spell-negation-m661.cjs",
+    "workflow": ".github/workflows/m661-spell-negation.yml",
+    "ci": "pending",
+    "discordLive": "not tested",
+    "integration": "adapter isolado; nenhum handler Discord ou resolver central foi alterado"
+  },
+  "certification": {
+    "status": "not-certified",
+    "newCertifications": 0,
+    "reason": "As duas cartas não existem no catálogo engine-v9 da base; este PR não adiciona definições ao registry, ao resolver nem ao catálogo. Importação/evidência isolada não equivale a certificação."
+  },
+  "inventoryGrants": 0,
+  "production": "unchanged",
+  "rulesProfile": {
+    "mainDeck": "20–30 por assento físico",
+    "handLimit": 6,
+    "handCheck": "End Phase",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separada",
+    "extraDeckMax": 5
+  }
+}
