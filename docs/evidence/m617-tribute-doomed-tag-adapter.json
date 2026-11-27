@@ -1,0 +1,84 @@
+{
+  "format": 1,
+  "runId": "work-20261125T101645-0300-M617",
+  "mission": "M617",
+  "priority": "P1",
+  "cards": [
+    {
+      "name": "Tribute to The Doomed",
+      "passcode": "79759861",
+      "konamiDatabaseId": 4856,
+      "kind": "Normal Spell",
+      "firstTcgSet": "MRD-057",
+      "firstTcgRelease": "2002-06-26",
+      "officialEffect": "Discard 1 card, then target 1 monster on the field; destroy it.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4856&ope=2&request_locale=en"
+    }
+  ],
+  "implementation": {
+    "branch": "feat/work-m617-tribute-doomed-tag-adapter-20261125",
+    "baseSha": "fc2497732342f3fb1380de3090899b70b82070f1",
+    "files": [
+      "src/tributeDoomedTagAdapter.ts",
+      "tests/tributeDoomedTagAdapter.test.cjs",
+      "docs/evidence/m617-tribute-doomed-tag-adapter.json",
+      ".github/workflows/m617-tribute-doomed-tag-adapter.yml"
+    ],
+    "behavior": [
+      "Ativa na Main Phase aberta da mão privada do assento físico ativo.",
+      "Descarta exatamente um card qualquer como custo imediato; Spell/Trap também são válidos.",
+      "Alvo é qualquer monstro de qualquer equipe, face-up ou face-down, vinculado por UID/ID e época de zona.",
+      "Resolução usa executeDestruction e sendMonsterToGrave compartilhados, respeitando proteção Spell, proprietário do Cemitério, limpeza de Equip e triggers de envio.",
+      "Alvo que sai e retorna com o mesmo UID não é retargetado; negação/alvo inválido não devolvem custo; recibo bloqueia replay.",
+      "Preserva Deck 20–30, Extra 5, zonas 3+3, Field Zone separada e mão 6 com descarte de regra apenas na End Phase."
+    ],
+    "integrationBoundary": "Adapter isolado; não altera resolver central, catálogo, metadata, certificações, allowlist, comandos Discord, persistência ou produção. Integração central aguarda handoff M61.",
+    "plannedScenarios": 24
+  },
+  "rules": {
+    "mainDeckPerPhysicalSeat": "20–30",
+    "extraDeckPerPhysicalSeat": "0–5",
+    "monsterZonesPerTeam": 3,
+    "spellTrapZonesPerTeam": 3,
+    "fieldZone": "uma por equipe, separada das três Spell/Trap Zones",
+    "handLimit": 6,
+    "handDiscard": "somente na End Phase para descarte de regra; custo de efeito é imediato"
+  },
+  "verification": {
+    "plannedScenarios": 24,
+    "focusedScenarios": 24,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "focusedTestCommand": "node --test tests/tributeDoomedTagAdapter.test.cjs",
+    "typecheck": "pending",
+    "build": "pending",
+    "evidenceValidation": "pending",
+    "cardBatchFast": "pending",
+    "milestone1000": "pending",
+    "engineValidation": "pending",
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "limitations": [
+    "A identidade real Tribute to The Doomed permanece fora do catálogo; testes usam uma Spell habilitada como fixture e passam a identidade real pelo adapter.",
+    "A validação de integração com resolver v9 e corrente Discord ainda não ocorreu; o adapter deve ser chamado no boundary correto do link de Spell.",
+    "Sem gateway Discord real, backup verificável, certificação, merge ou deploy."
+  ],
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  }
+}

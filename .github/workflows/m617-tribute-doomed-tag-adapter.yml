@@ -1,0 +1,39 @@
+name: M617 Tribute to The Doomed Tag Adapter
+on:
+  push:
+    branches:
+      - feat/work-m617-tribute-doomed-tag-adapter-20261125
+    paths:
+      - src/tributeDoomedTagAdapter.ts
+      - tests/tributeDoomedTagAdapter.test.cjs
+      - docs/evidence/m617-tribute-doomed-tag-adapter.json
+      - .github/workflows/m617-tribute-doomed-tag-adapter.yml
+  pull_request:
+    branches:
+      - feat/rea-engine-recovery-20261026
+    paths:
+      - src/tributeDoomedTagAdapter.ts
+      - tests/tributeDoomedTagAdapter.test.cjs
+      - docs/evidence/m617-tribute-doomed-tag-adapter.json
+      - .github/workflows/m617-tribute-doomed-tag-adapter.yml
+permissions:
+  contents: read
+concurrency:
+  group: m617-tribute-doomed-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+jobs:
+  focused:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate evidence metadata
+        run: node -e "const e=require('./docs/evidence/m617-tribute-doomed-tag-adapter.json'); if(e.format!==1 || e.mission!=='M617' || e.cards.length!==1 || e.verification.newCertifications!==0 || e.verification.inventoryGranted!==0) process.exit(1)"
+      - run: node --test tests/tributeDoomedTagAdapter.test.cjs
