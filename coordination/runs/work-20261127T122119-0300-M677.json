@@ -47,7 +47,8 @@
     "adapter de busca FLIP implementado para 2 cartas em branch isolada",
     "34 cenários de comportamento criados",
     "evidência e auditoria de não-certificação criadas",
-    "workflow dedicado com typecheck, build, testes focados, check:cards, suíte completa e auditoria TagDuel criado"
+    "workflow dedicado com typecheck, build, testes focados, check:cards, suíte completa e auditoria TagDuel criado",
+    "contagem estática reconciliada: 42 cenários independentes"
   ],
   "implementedCards": 2,
   "behaviorVerifiedCards": 0,
@@ -77,5 +78,6 @@
   ],
   "nextTask": "Executar CI e corrigir qualquer falha. Em paralelo, revisar a próxima família histórica do worklist; não integrar ao resolver central até handoff explícito.",
   "nextWindow": "2026-11-27T17:30:00-03:00",
-  "scopeReleasedToAuxiliary": []
+  "scopeReleasedToAuxiliary": [],
+  "scenarioCount": 42
 }

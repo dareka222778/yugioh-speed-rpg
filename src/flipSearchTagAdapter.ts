@@ -46,6 +46,7 @@ export type FlipSearchResolution={
   receipt:FlipSearchReceipt|null;
 };
 
+export function defaultFlipSearchEffect(id:string):FlipSearchEffect|undefined{return defaultLookup(id);}
 const defaultLookup:FlipSearchLookup=(id)=>{
   if(id===CAT_OF_ILL_OMEN_ID)return 'cat-trap';
   if(id===AN_OWL_OF_LUCK_ID)return 'owl-field';
