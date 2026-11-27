@@ -1,8 +1,8 @@
 {
   "format": 1,
   "sharedBranch": "feat/rea-engine-recovery-20261026",
-  "observedHead": "e6ea5d82bd18c9cbdee3b2c6fefe50e961d38da6",
-  "updatedAt": "2026-11-27T02:19:47-03:00",
+  "observedHead": "aa828bf9384c223c9f7398ad9194e2cc045eaecf",
+  "updatedAt": "2026-11-27T02:25:28-03:00",
   "activeReservations": [
     {
       "runId": "work-20261125T203259-0300-M635",
@@ -434,6 +434,22 @@
         "coordination/runs/work-20261127T021947-0300-M668.json"
       ],
       "scope": "Recuperação da CI falha do M631 (Final Flame/Raimei): corrigir fixtures 2v2 para sincronizar cursor, equipe ativa e teamRotation em todos os quatro assentos; preservar lógica de cartas e certificações. Sem alteração de resolver central, catálogo, inventário ou produção."
+    },
+    {
+      "runId": "work-20261127T022528-0300-M669",
+      "mission": "M669",
+      "priority": "P1",
+      "branch": "feat/work-m669-owner-rules-invariants-20261127",
+      "state": "reserved-and-implementing",
+      "conditionalHeadUpdate": true,
+      "headSha": "aa828bf9384c223c9f7398ad9194e2cc045eaecf",
+      "reservedFiles": [
+        "tests/tagOwnerRulesM669.test.cjs",
+        "docs/evidence/m669-owner-rules.json",
+        ".github/workflows/m669-owner-rules.yml",
+        "coordination/runs/work-20261127T022528-0300-M669.json"
+      ],
+      "scope": "Regressão isolada das regras do proprietário em TagDuel: Deck 20–30, Extra Deck 5, 3 Monster + 3 Spell/Trap Zones com Field Zone separada, mão 6 descartada somente na End Phase, privacidade de mãos físicas e conservação de inventário. Sem alterar resolver central, catálogo/certificações, comandos, banco ou produção."
     }
   ],
   "handoffRequests": [
