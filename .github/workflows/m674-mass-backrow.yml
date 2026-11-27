@@ -1,0 +1,27 @@
+name: M674 mass backrow TagDuel adapter
+on:
+  pull_request:
+    paths:
+      - "src/massBackrowTagAdapter.ts"
+      - "tests/massBackrowTagAdapter.test.cjs"
+      - "docs/evidence/m674-mass-backrow.json"
+      - "scripts/audit-mass-backrow-m674.cjs"
+      - ".github/workflows/m674-mass-backrow.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - run: node --test tests/massBackrowTagAdapter.test.cjs
+      - run: node scripts/audit-mass-backrow-m674.cjs
+      - run: npm run check:cards
