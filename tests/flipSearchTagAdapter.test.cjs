@@ -21,7 +21,7 @@ function member(seat){return 'm677-seat-'+seat;}
 function deckFor(seat){
   const base=NORMALS.slice(0,19);
   if(seat===0)return [...base,FIELD_ID];
-  if(seat===1)return [...base,FIELD_SENTINEL_ID];
+  if(seat===1)return NORMALS.slice(0,20);
   return NORMALS.slice(0,20);
 }
 function create(first=0,seed='default'){
@@ -51,11 +51,8 @@ function addCandidate(state,seat,id){
   return uid;
 }
 function addFieldSentinel(state,team=1,ownerSeat=1){
-  const physical=holder(state,ownerSeat),deckIndex=physical.deck.findIndex(card=>card.id===FIELD_SENTINEL_ID);
-  const handIndex=physical.hand.findIndex(card=>card.id===FIELD_SENTINEL_ID);
-  assert.ok(deckIndex>=0||handIndex>=0,'field sentinel fixture must exist');
-  const [card]=deckIndex>=0?physical.deck.splice(deckIndex,1):physical.hand.splice(handIndex,1);
-  state.core.players[team].field={...card,faceUp:true,setTurn:Math.max(0,state.core.turn-1)};
+  const card={uid:'m'+ownerSeat+':m677-field-sentinel-'+(++sequence),id:FIELD_SENTINEL_ID,faceUp:true,setTurn:Math.max(0,state.core.turn-1)};
+  state.core.players[team].field=card;
   return card.uid;
 }
 function addBackrow(state,team,ownerSeat,id=TRAP_ID){
@@ -178,10 +175,10 @@ scenario('Owl selects only a Field Spell and places it on top of the active Deck
   assert.equal(holder(result.state,0).deck[0].id,FIELD_ID);assertRules(result.state);
 });
 scenario('Cat cannot select a Spell even when the Deck contains one',()=>{
-  const state=create(0,'cat-wrong-type'),source=addSource(state,0,2),activation=activate(state,0,source);
+  const state=create(0,'cat-wrong-type'),source=addSource(state,0,2),trap=addCandidate(state,0,TRAP_ID),activation=activate(state,0,source);
   const field=findCandidate(state,0,FIELD_ID);
   assert.ok(field);
-  assert.throws(()=>resolve(activation,{selectedUid:field.uid,destination:'top'}),/Tipo de carta incompatível/);
+  assert.throws(()=>resolve(activation,{selectedUid:field.uid,destination:'top'}),/Tipo de carta incompatível/);assert.ok(trap);
 });
 scenario('Owl cannot select a Trap even when a Field Spell is also available',()=>{
   const state=create(0,'owl-wrong-type'),source=addSource(state,0,2,'owl-field'),field=findCandidate(state,0,FIELD_ID),trap=addCandidate(state,0,TRAP_ID);

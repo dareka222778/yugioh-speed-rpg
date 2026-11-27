@@ -50,7 +50,8 @@
     "workflow dedicado com typecheck, build, testes focados, check:cards, suíte completa e auditoria TagDuel criado",
     "contagem estática reconciliada: 42 cenários independentes",
     "primeira CI identificou fixture de monstro inválida (attacked -1); corrigida para contador válido e expectativas de erro alinhadas à integridade central",
-    "segunda leitura da CI: monstros de fixture exigem attacked >= 0; Deck inicial distribui 5 cartas à mão, então helpers passaram a localizar Field Spells em mão/Deck sem alterar identidade"
+    "segunda leitura da CI: monstros de fixture exigem attacked >= 0; Deck inicial distribui 5 cartas à mão, então helpers passaram a localizar Field Spells em mão/Deck sem alterar identidade",
+    "terceira leitura da CI: fixtures de Campo corrigidas para respeitar a mão inicial do createDuel; o teste de tipo incompatível agora mantém ao menos um alvo válido do tipo correto no Deck"
   ],
   "implementedCards": 2,
   "behaviorVerifiedCards": 0,
