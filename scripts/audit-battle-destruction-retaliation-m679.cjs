@@ -1,0 +1,13 @@
+const fs=require('node:fs'),path=require('node:path');
+const evidence=JSON.parse(fs.readFileSync(path.join(__dirname,'../docs/evidence/m679-battle-destruction-retaliation.json'),'utf8'));
+const source=fs.readFileSync(path.join(__dirname,'../src/battleDestructionRetaliationTagAdapter.ts'),'utf8');
+const tests=fs.readFileSync(path.join(__dirname,'../tests/battleDestructionRetaliationTagAdapter.test.cjs'),'utf8');
+const required=['51534754','76052811','sendMonsterToGrave','targetBindingValid','randomIndex','physicalHolder','assertBattleDestructionRetaliationRules'];
+for(const token of required)if(!source.includes(token))throw new Error('Implementação M679 incompleta: '+token);
+if(evidence.mission!=='M679'||evidence.cards.length!==2||evidence.adapterBehaviorVerifiedCards!==2)throw new Error('Evidência M679 inconsistente.');
+if(evidence.behaviorCertifiedCards!==0||evidence.newEngineV9Certifications!==0||evidence.automaticCertifications!==0||evidence.inventoryGranted!==0||evidence.playerDataChanged!==false)throw new Error('M679 não pode certificar ou conceder inventário.');
+if(evidence.integration.centralResolver!==false||evidence.integration.commands!==false||evidence.integration.production!==false)throw new Error('Escopo M679 excedido.');
+const count=(tests.match(/\btest\(/g)||[]).length;
+if(count<13||evidence.tests.count!==count)throw new Error('Contagem de testes M679 divergente: '+count);
+for(const token of ['Yomi Ship','Helpoemer','End Phase','active physical hand','HMAC'])if(!tests.includes(token))throw new Error('Cobertura M679 ausente: '+token);
+console.log('M679 evidence OK: 2 adapter cards; '+count+' focused scenarios; 0 engine certifications; 0 inventory grants.');
