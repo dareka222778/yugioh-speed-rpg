@@ -5,7 +5,7 @@ const {synchronizeCardLifetimes}=require('../dist/cardLifetime');
 const {createTokenGroup}=require('../dist/tokens');
 const {createOwnerHandReturnAdapter,publicReturnReceipt}=require('../dist/ownerHandReturnTagAdapter');
 
-const normal=tag.tagNormalCardIds,level2=normal.find(id=>getDuelCard(id)?.level===2),level3=normal.find(id=>getDuelCard(id)?.level===3);
+const normal=[...new Set(tag.tagNormalCardIds)],level2=normal.find(id=>getDuelCard(id)?.level===2),level3=normal.find(id=>getDuelCard(id)?.level===3);
 const water=normal.find(id=>getDuelCard(id)?.attribute==='WATER');
 assert.ok(level2&&level3&&water,'fixtures precisam de monstros normais de Nível 2/3 e WATER');
 const other=normal.filter(id=>id!==level2&&id!==level3&&id!==water);
