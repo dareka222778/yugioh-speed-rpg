@@ -24,15 +24,10 @@ assert.equal(deck.length,20);assert.ok(fixtureSpells.length>=7);assert.ok(fixtur
 assert.ok(fieldSpellId);assert.equal(fusionIds.length,5);
 
 const sourceIds={
- 'harpie-feather-duster':fixtureSpells[0],
- 'heavy-storm':fixtureSpells[1],
- 'giant-trunade':fixtureSpells[2]
+ 'harpie-feather-duster':HARPIES_FEATHER_DUSTER_ID,
+ 'heavy-storm':HEAVY_STORM_ID,
+ 'giant-trunade':GIANT_TRUNADE_ID
 };
-const sourceEffects=Object.fromEntries(Object.entries(sourceIds).map(([effect,id])=>[id,effect]));
-function lookup(id){
- if(sourceEffects[id])return {kind:'spell',effect:sourceEffects[id]};
- const card=getDuelCard(id);return card?{kind:card.kind}:undefined;
-}
 function makeDuel(first=0){
  const players=[0,1,2,3].map(seat=>({
   id:'m674-seat-'+seat,name:'M674 Seat '+seat,cards:[...deck],extra:[...fusionIds]
@@ -73,7 +68,7 @@ function setup(effect,options={}){
  const duel=makeDuel(options.first??0),activeSeat=duel.cursor,activeTeam=activeSeat%2;
  const sourceUid=putHandCard(duel,activeSeat,sourceIds[effect]);
  const sourceHandBefore=privateZone(duel,activeSeat,'hand').length;
- const adapter=createMassBackrowAdapter(lookup,options.onLeaveField);
+ const adapter=createMassBackrowAdapter(undefined,options.onLeaveField);
  const session=adapter.createSession(duel);
  const activationId=options.activationId||'m674-'+effect+'-activation';
  const activation=adapter.activate(session,{activationId,sourceUid,actorSeat:activeSeat,turn:duel.core.turn});
