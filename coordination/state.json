@@ -1,8 +1,8 @@
 {
   "format": 1,
   "sharedBranch": "feat/rea-engine-recovery-20261026",
-  "observedHead": "e05c3398cccac7c4a0e489499a995681637514ca",
-  "updatedAt": "2026-11-27T16:46:56-03:00",
+  "observedHead": "ab6a0befb3d745c23eefcf1692588dcdfbd5be31",
+  "updatedAt": "2026-11-27T17:01:05-03:00",
   "activeReservations": [
     {
       "runId": "work-20261125T203259-0300-M635",
@@ -628,6 +628,23 @@
         "coordination/runs/work-202611271646560300-M681.json"
       ],
       "scope": "Adapter TagDuel clássico de retorno à mão física: Nightmare Penguin (81306586/CID 5803) — flip, devolve 1 carta controlada pelo oponente ao dono; aura +200 ATK para WATER face-up da equipe; Compulsory Evacuation Device (94192409/CID 5914) — trap direcionada que devolve 1 monstro ao dono. Destinos em mão privada/reserva do proprietário físico, Fusion para Extra Deck, tokens removidos, UID/epoch preservados e nenhuma exposição pública de identidade. Preserva Deck 20–30, mão 6 na End Phase, zonas 3+3, Field Zone separada e Extra 5."
+    },
+    {
+      "runId": "work-20261127T170105-0300-M682",
+      "mission": "M682",
+      "priority": "P1",
+      "branch": "feat/work-m682-fiend-effect-negation-20261127",
+      "state": "reserved-and-implementing",
+      "conditionalHeadUpdate": true,
+      "reservedFiles": [
+        "src/fiendEffectNegationTagAdapter.ts",
+        "tests/fiendEffectNegationTagAdapter.test.cjs",
+        "docs/evidence/m682-fiend-effect-negation.json",
+        "scripts/audit-fiend-effect-negation-m682.cjs",
+        ".github/workflows/m682-fiend-effect-negation.yml",
+        "coordination/runs/work-20261127T170105-0300-M682.json"
+      ],
+      "scope": "Adapter TagDuel clássico 2v2 isolado para Dark Ruler Ha Des (53982768/CID 5301) e Dark Balter the Terrible (80071763/CID 5302): negação dos efeitos de Effect Monsters destruídos em batalha por Fiends controlados pela equipe (Ha Des) ou pelo próprio Balter; Balter também pode negar o efeito de Normal Spell mediante custo de 1000 LP. Inclui Skill Drain (82732705/CID 5740, já presente no arquivo de certificados mas fora do metadata ativo) apenas como interação de regressão: nega efeitos de monstros face-up no campo, sem impedir sua ativação; custo pago não é devolvido se o efeito do Balter for negado. Não implementa Fusion Summon/materials nem altera resolver central, catálogo, certificações, comandos, banco, inventário ou produção. Preserva Deck 20–30, mão 6 na End Phase, 3+3 zonas, Field Zone separada e Extra 5."
     }
   ],
   "handoffRequests": [
@@ -707,13 +724,13 @@
   },
   "nextExecution": "2026-11-27T17:30:00-03:00",
   "currentWorkRun": {
-    "runId": "work-202611271646560300-M681",
-    "mission": "M681",
-    "branch": "feat/work-m681-owner-hand-return-20261127",
+    "runId": "work-20261127T170105-0300-M682",
+    "mission": "M682",
+    "branch": "feat/work-m682-fiend-effect-negation-20261127",
     "status": "reserved-and-implementing",
     "priority": "P1",
-    "sharedBaseHead": "e05c3398cccac7c4a0e489499a995681637514ca",
-    "nextTask": "Implementar retorno genérico à mão física com owner/epoch, destino de Fusion no Extra, tokens removidos e privacidade de mão; cobrir Nightmare Penguin e Compulsory.",
+    "sharedBaseHead": "ab6a0befb3d745c23eefcf1692588dcdfbd5be31",
+    "nextTask": "Implementar as três políticas de negação com custos, UID/epoch, propriedade física, regras 2v2 e testes determinísticos.",
     "nextWindow": "2026-11-27T17:30:00-03:00"
   }
 }
