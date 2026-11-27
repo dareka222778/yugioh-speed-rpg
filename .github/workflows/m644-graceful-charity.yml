@@ -1,0 +1,29 @@
+name: M644 Graceful Charity TagDuel adapter
+on:
+  push:
+    branches:
+      - feat/work-m644-graceful-charity-tag-adapter-20261126
+  pull_request:
+    branches:
+      - feat/rea-engine-recovery-20261026
+    paths:
+      - src/gracefulCharityTagAdapter.ts
+      - tests/gracefulCharityTagAdapter.test.cjs
+      - docs/evidence/m644-graceful-charity.json
+      - .github/workflows/m644-graceful-charity.yml
+permissions:
+  contents: read
+jobs:
+  graceful-charity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m644-graceful-charity.json', 'utf8'))"
+      - run: node --test tests/gracefulCharityTagAdapter.test.cjs
