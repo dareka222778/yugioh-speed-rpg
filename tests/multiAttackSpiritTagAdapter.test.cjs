@@ -52,7 +52,7 @@ function deploy(session,team,id,seat=session.duel.active[team],options={}){
 function attack(session,attacker,target,eventId,overrides={}){
  const duel=session.duel,team=duel.core.players.findIndex(p=>p.monsters.some(m=>m.uid===attacker.uid));
  duel.core.phase='battle';
- return adapter.declareAttack(session,{eventId,attackerUid:attacker.uid,attackerSeat:duel.active[team],turn:duel.core.turn,...target?{targetUid:target.uid}:{direct:true},...overrides});
+ return adapter.declareAttack(session,{eventId,attackerUid:attacker.uid,attackerSeat:duel.active[team],turn:duel.core.turn,...(target?{targetUid:target.uid}:{direct:true}),...overrides});
 }
 function inventory(duel){return new Map(tagInventory(duel).filter(c=>c.entityKind!=='token').map(c=>[c.uid,c.id]));}
 function assertInventoryEqual(before,duel){
