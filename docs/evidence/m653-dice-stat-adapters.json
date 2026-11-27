@@ -1,0 +1,155 @@
+{
+  "format": 1,
+  "mission": "M653",
+  "runId": "work-20261126T152846-0300-M653",
+  "priority": "P1",
+  "branch": "feat/work-m653-dice-stat-adapters-20261126",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "6eeca3bee5e470c519ce33c6c9c0bbb7404ceec1",
+  "cards": [
+    {
+      "id": "30707994",
+      "konamiId": 5943,
+      "name": "Maximum Six",
+      "type": "Effect Monster",
+      "ocgFirstRelease": "2003-09-19",
+      "atk": 1900,
+      "def": 1600,
+      "officialText": "When this card is Tribute Summoned: Roll a six-sided die, and this card gains ATK equal to the result x 200.",
+      "admitted": false,
+      "certified": false
+    },
+    {
+      "id": "74137509",
+      "konamiId": 4815,
+      "name": "Graceful Dice",
+      "type": "Quick-Play Spell",
+      "firstTCGRelease": "2002-10-15",
+      "officialText": "Roll a six-sided die. All monsters you currently control gain ATK/DEF equal to the result x 100, until the end of this turn.",
+      "admitted": false,
+      "certified": false
+    },
+    {
+      "id": "00126218",
+      "konamiId": 4816,
+      "name": "Skull Dice",
+      "type": "Normal Trap",
+      "firstTCGRelease": "2002-10-15",
+      "officialText": "Roll a six-sided die. All monsters your opponent currently controls lose ATK/DEF equal to the result x 100, until the end of this turn.",
+      "admitted": false,
+      "certified": false
+    }
+  ],
+  "sources": [
+    {
+      "publisher": "Konami OCG database",
+      "url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5943&ope=2&request_locale=ja",
+      "supports": [
+        "Maximum Six identity",
+        "1900/1600 stats",
+        "Tribute Summon trigger",
+        "face-up-only ATK increase",
+        "OCG release 2003-09-19"
+      ]
+    },
+    {
+      "publisher": "Konami TCG database",
+      "url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5943&ope=2&request_locale=en",
+      "supports": [
+        "Maximum Six English card text"
+      ]
+    },
+    {
+      "publisher": "Konami TCG database",
+      "url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4815&ope=2&request_locale=en",
+      "supports": [
+        "Graceful Dice identity",
+        "Quick-Play Spell type",
+        "six-sided die",
+        "team-controlled monsters gain ATK/DEF until End Phase",
+        "first TCG printing 2002-10-15"
+      ]
+    },
+    {
+      "publisher": "Konami TCG database",
+      "url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4816&ope=2&request_locale=en",
+      "supports": [
+        "Skull Dice identity",
+        "Normal Trap type",
+        "six-sided die",
+        "opponent-controlled monsters lose ATK/DEF until End Phase",
+        "first TCG printing 2002-10-15"
+      ]
+    }
+  ],
+  "behavior": [
+    "All three effects consume one result from the persisted HMAC-SHA256 duel random stream; no Math.random fallback.",
+    "Graceful Dice applies +roll×100 ATK/DEF to face-up monsters controlled by the activating team at resolution, including its inactive partner.",
+    "Skull Dice applies -roll×100 ATK/DEF to face-up monsters controlled by the opposing team at resolution, including that team's inactive partner.",
+    "Graceful Dice from hand requires the active physical owner's own turn; Quick-Play/Trap cards Set in a previous turn may be activated by the active seat of their team when it has priority.",
+    "Graceful Dice and Skull Dice may respond in the Damage Step before Damage Calculation because they modify ATK/DEF; they cannot be activated during Damage Calculation or chained to a Counter Trap.",
+    "Maximum Six triggers only after a successful Tribute Summon; its +roll×200 ATK modifier lasts while that same physical card remains face-up on the field and is removed on face-down/leave/re-entry.",
+    "Negated activations do not roll or apply modifiers; duplicate resolution is idempotent.",
+    "No automatic discard: a seven-card hand remains intact until the End Phase."
+  ],
+  "constraints": {
+    "mainDeck": "20–30 per physical seat",
+    "handLimit": 6,
+    "handCheck": "End Phase",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "extraDeckMax": 5,
+    "fieldZoneIndependent": true,
+    "privateHandsPerSeat": true,
+    "sharedFieldAndGravePerTeam": true,
+    "physicalUidOwnershipPreserved": true
+  },
+  "scenarioCount": 31,
+  "verification": {
+    "focusedScenarios": 31,
+    "focusedTestResult": "success",
+    "typecheck": "success",
+    "build": "success",
+    "fullTestSuite": "success",
+    "classicTagAudit": "success",
+    "evidenceValidation": "success",
+    "adapterBehaviorVerifiedCards": 3,
+    "behaviorCertifiedCards": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "liveDiscordValidation": false,
+    "lastPassingWorkflowRun": 45878127659,
+    "lastPassingCommit": "9f680afa8bad590e005bfb75674d0613a7fba053"
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "releasedCardIds": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0
+  },
+  "scope": {
+    "newFilesOnly": true,
+    "catalogRegistration": false,
+    "certificateAdded": false,
+    "releaseAllowlistChanged": false,
+    "automaticCertification": false,
+    "resolverIntegration": false,
+    "discordIntegration": false,
+    "persistentPlayerDataChanged": false,
+    "inventoryGranted": 0,
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false,
+    "behaviorAdapterVerified": true,
+    "behaviorCertifiedCards": 0,
+    "newCertifications": 0
+  },
+  "limitations": [
+    "Adapter isolado: não registra as três cartas em effectRegistry nem altera o resolver central, catálogo, certificações, allowlist, comandos ou banco.",
+    "Os testes usam IDs físicos já certificados como fixtures e injetam a identidade mecânica por lookup; os três passcodes reais continuam ausentes do catálogo.",
+    "O adapter modela o resultado após a cadeia ser confirmada pelo host; a integração central deve fornecer a janela/negação e persistir sessão+RNG atomicamente.",
+    "O adapter não valida um gateway Discord/guild real; não há merge, deploy ou backup de produção."
+  ]
+}
