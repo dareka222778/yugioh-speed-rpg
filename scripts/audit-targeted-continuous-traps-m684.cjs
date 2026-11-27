@@ -2,6 +2,7 @@ const assert=require('node:assert/strict');
 const fs=require('node:fs');
 const evidence=JSON.parse(fs.readFileSync('docs/evidence/m684-targeted-continuous-traps.json','utf8'));
 const certificates=fs.readFileSync('src/cardCertifications.ts','utf8');
+const testSource=fs.readFileSync('tests/targetedContinuousTrapTagAdapter.test.cjs','utf8');
 const {getDuelCard,getEnabledCardIds}=require('../dist/effectRegistry');
 const {NIGHTMARE_WHEEL_ID,SHADOW_SPELL_ID,createTargetedContinuousTrapAdapter,assertTargetedContinuousTrapRules}=require('../dist/targetedContinuousTrapTagAdapter');
 
@@ -27,6 +28,9 @@ const explicitCertificates=[...certificates.matchAll(/^\s*"([0-9]{8})"\s*:/gm)].
 assert.equal(explicitCertificates,959,'Baseline de certificados mudou; revisar o checkpoint antes de atualizar a evidência.');
 assert.equal(evidence.baseline.certificationEntriesObserved,explicitCertificates);
 assert.equal(evidence.implementation.adapterBehaviorVerifiedCards,2);
+assert.equal((testSource.match(/\\btest\\(/g)||[]).length,evidence.implementation.focusedScenarios);
+assert.equal(evidence.implementation.focusedScenarios,37);
+assert.equal(getDuelCard('77585513')?.name,'Jinzo','Jinzo é somente fixture de regressão para negação contínua.');
 assert.equal(evidence.implementation.behaviorCertifiedCards,0);
 assert.equal(evidence.implementation.newEngineCertifications,0);
 assert.equal(evidence.implementation.automaticCertifications,0);

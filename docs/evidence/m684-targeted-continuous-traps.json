@@ -48,13 +48,15 @@
   "implementation": {
     "source": "src/targetedContinuousTrapTagAdapter.ts",
     "tests": "tests/targetedContinuousTrapTagAdapter.test.cjs",
-    "focusedScenarios": 35,
+    "focusedScenarios": 37,
     "adapterBehaviorVerifiedCards": 2,
     "behaviorCertifiedCards": 0,
     "newEngineCertifications": 0,
     "automaticCertifications": 0,
     "inventoryGrants": 0,
-    "centralIntegration": "not integrated"
+    "centralIntegration": "not integrated",
+    "regressionFixture": "Jinzo (77585513) é usado somente para exercitar negação contínua de Armadilhas; não é uma carta nova deste lote.",
+    "effectNegationCoverage": "Jinzo bloqueia novas ativações e suprime efeitos contínuos já resolvidos; os efeitos retornam quando Jinzo sai, e a autodestruição por perda do alvo aguarda o fim da negação."
   },
   "rules": {
     "mainDeck": "20–30",

@@ -250,7 +250,7 @@ export function createTargetedContinuousTrapAdapter(lookup:TargetedTrapLookup=de
   return !isAttackBlocked(session,targetUid);
  }
  function atkModifier(session:TargetedContinuousTrapSession,targetUid:string):number{
-  assertId(targetUid,'UID do monstro');return activeEffects(session).filter(effect=>effect.targetUid===targetUid&&effect.effect==='shadow-spell').length*-700;
+  assertId(targetUid,'UID do monstro');const count=activeEffects(session).filter(effect=>effect.targetUid===targetUid&&effect.effect==='shadow-spell').length;return count===0?0:count*-700;
  }
  function resolveStandbyPhase(session:TargetedContinuousTrapSession,input:{eventId:string;turn:number;controllerTeam:TargetedTrapTeam;phase:'standby'}):TargetedTrapStandbyReceipt{
   assertSession(session);assertId(input?.eventId,'ID da janela de Espera');
