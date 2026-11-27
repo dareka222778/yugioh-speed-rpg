@@ -3,7 +3,9 @@ import type {TagDuel} from './tagDuel';
 import type {Effect} from './effectDefinitions';
 import {assertTagDuel,tagInventory} from './tagDuel';
 import {RULES_PROFILE,rulesFor} from './rulesProfile';
-import {getDuelCard} from './effectRegistry';
+import {getDuelCard,getEffect} from './effectRegistry';
+import {getActivationModel} from './effectModels';
+import {getMonsterEffect} from './monsterEffects';
 import {bindTarget,targetBindingValid,synchronizeCardLifetimes,type TargetBinding} from './cardLifetime';
 import {atk} from './duelEngine';
 import {resolveAttackResponse} from './attackResponses';
@@ -167,8 +169,13 @@ export function createAttackDeclarationResponseAdapter(lookup:AttackResponseLook
   if(!attacker||attacker.team!==1-team||!attacker.monster.faceUp||attacker.monster.position!=='atk'||pending.kind!=='attack'||pending.actor!==attacker.team){
    throw new Error('O alvo precisa ser o monstro atacante face-up do oponente.');
   }
-  const last=core.chain.at(-1) as {speed?:number}|undefined;
-  if(last?.speed===3&&meta.speed!==3)throw new Error('Uma Armadilha comum não pode responder a uma Counter Trap.');
+  const last=core.chain.at(-1);
+  if(last){
+   const lastEffect=getEffect(last.id),lastMonsterEffect=getMonsterEffect(last.id);
+   const lastSpeed=lastEffect?getActivationModel(lastEffect)?.speed:lastMonsterEffect?(lastMonsterEffect.trigger==='quick'?2:1):undefined;
+   if(lastSpeed===undefined)throw new Error('Spell Speed da última Chain Link não pôde ser validada.');
+   if(lastSpeed===3&&meta.speed!==3)throw new Error('Uma Armadilha comum não pode responder a uma Counter Trap.');
+  }
   if(continuousTrapActivationsBlocked(core)||!cardActivationAllowed(core,team,'trap'))throw new Error('A ativação de Armadilhas está bloqueada.');
   const working=structuredClone(session.duel),sourceWorking=findBackrow(working,input.sourceUid)!;
   const sourceBinding=bindTarget(working.core,input.sourceUid),targetBinding=bindTarget(working.core,input.targetUid);
