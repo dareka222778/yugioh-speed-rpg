@@ -1,0 +1,39 @@
+{
+  "format": 1,
+  "runId": "work-20261127T012829-0300-M665",
+  "mission": "M665",
+  "priority": "P1",
+  "status": "reserved-and-implementing",
+  "startedAt": "2026-11-27T01:28:29-03:00",
+  "endedAt": null,
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "baseHead": "8ef2f97d49a1f0f65d63cb50329503bfadff9c08",
+  "branch": "feat/work-m665-battle-damage-disruption-20261127",
+  "headSha": null,
+  "scope": "Adapter TagDuel 2v2 isolado para Robbin' Goblin (88279736 / Konami CID 4876) e Robbin' Zombie (83258273 / Konami CID 5920): gatilhos por dano de batalha positivo, descarte aleatório HMAC da mão física do assento atingido e envio do topo do Deck físico ao GY compartilhado. Evento vinculado ao assento defensor ativo; privacidade de mão, UID/propriedade física, idempotência, remoção/negação da fonte contínua e inventário sem concessões. Sem resolver central, catálogo/certificações, comandos, banco ou produção.",
+  "reservedFiles": [
+    "src/battleDamageDisruptionTagAdapter.ts",
+    "tests/battleDamageDisruptionTagAdapter.test.cjs",
+    "docs/evidence/m665-battle-damage-disruption.json",
+    "scripts/audit-battle-damage-disruption-m665.cjs",
+    ".github/workflows/m665-battle-damage-disruption.yml"
+  ],
+  "certifiedCardsBefore": 959,
+  "certifiedCardsAfter": null,
+  "newCertifications": 0,
+  "inventoryGrants": 0,
+  "verification": {
+    "sourceIdentity": "pending",
+    "focusedTests": "pending",
+    "typecheck": "pending",
+    "build": "pending",
+    "repositoryRegression": "pending",
+    "discordLive": "not-run"
+  },
+  "pr": null,
+  "production": "não alterada",
+  "discord": "não validado ao vivo",
+  "handoff": "Sem conflito: os cinco caminhos são exclusivos; M637/M662 mantêm pedido de handoff pendente para src/monsterEffects.ts e src/duelEngineCurrent.ts. Nenhum arquivo reservado de terceiros será alterado.",
+  "nextTask": "Implementar adapter e 25+ cenários focados: dano >0, dano zero, time/assento correto, descarte HMAC sem vazamento, mill do topo, mão/deck vazios, múltiplas fontes, negação/remoção, replay/restauração e conservação de inventário.",
+  "nextWindow": "2026-11-27T06:30:00-03:00"
+}
