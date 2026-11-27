@@ -14,7 +14,7 @@
   "branch": "feat/work-m684-targeted-continuous-traps-20261127",
   "baseBranch": "feat/rea-engine-recovery-20261026",
   "baseSha": "b4d9e249f539a3dab7babeef044f40f8b1f50cd3",
-  "headSha": "d486a9ab77f18542c070906002ba4479015db703",
+  "headSha": "b751ab9ea46313d01e22458b310f635ca3ac8d47",
   "reservedFiles": [
     "src/targetedContinuousTrapTagAdapter.ts",
     "tests/targetedContinuousTrapTagAdapter.test.cjs",
@@ -60,11 +60,11 @@
   "automaticCertifications": 0,
   "inventoryGrants": 0,
   "verification": {
-    "typecheck": "in_progress",
-    "build": "in_progress",
-    "focusedTests": "in_progress",
-    "evidenceAudit": "in_progress",
-    "ci": "four workflows in progress",
+    "typecheck": "passed on 93e3bf",
+    "build": "passed on 93e3bf",
+    "focusedTests": "27/36 passed on 00b3c; 9 fixture/rotation assertions corrected in b751ab; rerun queued",
+    "evidenceAudit": "pending rerun",
+    "ci": "M684 dedicated + Engine validation + Card batch + Milestone1000 queued on b751ab",
     "discordLive": "not-run",
     "production": "not-changed"
   },
@@ -79,7 +79,7 @@
     "ownerPreserved": true,
     "inventoryConserved": true
   },
-  "effectiveWorkMinutes": 0,
+  "effectiveWorkMinutes": 23,
   "targetEffectiveWorkMinutes": 60,
   "targetMet": false,
   "ciWaitExcluded": true,
@@ -97,7 +97,7 @@
     "Handoff explícito dos hooks centrais ainda pendente; este bloco permanece adapter-only.",
     "Novas cartas não podem ser admitidas/certificadas sem autorização e integração central."
   ],
-  "nextTask": "Acompanhar a CI M684; corrigir falhas com novos commits condicionados ao HEAD; depois revisar M683 apenas após handoff explícito.",
+  "nextTask": "Acompanhar CI no SHA b751ab; corrigir qualquer falha remanescente, validar auditoria e suíte completa; depois atualizar PR #609.",
   "nextWindow": "2026-11-27T22:30:00-03:00",
   "scopeReleasedToAuxiliary": [],
   "branchStartSha": "b636d05f4acf8821a558e754eec5a0cf986250ce",
@@ -107,6 +107,9 @@
     "Criada reserva M684 P1 com atualização condicionada ao HEAD; branch isolada iniciada após o commit de coordenação.",
     "Implementado adapter de duas Continuous Traps com alvo UID/epoch, bloqueio, ATK -700, dano Standby, destruição ao perder alvo, idempotência e preservação de proprietário/inventário.",
     "Adicionados 36 cenários focados, evidência JSON, auditoria de não-admissão e workflow dedicado.",
-    "Commit d486a9ab77f18542c070906002ba4479015db703 publicado; PR #609 draft aberto."
+    "Commit d486a9ab77f18542c070906002ba4479015db703 publicado; PR #609 draft aberto.",
+    "Workflow dedicado corrigido para usar npm run check; typecheck e build passaram no SHA 93e3bf.",
+    "Primeira suíte focada: 27/36 passaram; nove falhas identificadas (Field Spell fora do deck fixture, limite de zona já validado por assertTagDuel, -0, Jinzo/Royal Decree ausente e rotação TagDuel inconsistente).",
+    "Commit b751ab9ea46313d01e22458b310f635ca3ac8d47 corrige fixtures com Field Spell/Jinzo, sincroniza teamRotation, normaliza -0 e amplia regressão de negação contínua; 37 cenários no rerun."
   ]
 }

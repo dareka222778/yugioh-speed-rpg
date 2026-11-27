@@ -5,9 +5,9 @@
   "owner": "Work principal",
   "priority": "P1",
   "priorityRequestedBy": "User",
-  "status": "ci-running",
+  "status": "completed-awaiting-review",
   "startedAt": "2026-11-27T17:01:05-03:00",
-  "endedAt": null,
+  "endedAt": "2026-11-27T17:54:41.454-03:00",
   "repository": "dareka222778/yugioh-speed-rpg",
   "sharedBranch": "feat/rea-engine-recovery-20261026",
   "sharedBaseHead": "ab6a0befb3d745c23eefcf1692588dcdfbd5be31",
@@ -23,7 +23,7 @@
     ".github/workflows/m682-fiend-effect-negation.yml",
     "coordination/runs/work-20261127T170105-0300-M682.json"
   ],
-  "scope": "Adapter TagDuel clássico 2v2 isolado para Dark Ruler Ha Des (53982768/CID 5301) e Dark Balter the Terrible (80071763/CID 5302): negação dos efeitos de Effect Monsters destruídos em batalha por Fiends controlados pela equipe (Ha Des) ou pelo próprio Balter; Balter também pode negar o efeito de Normal Spell mediante custo de 1000 LP. Inclui Skill Drain (82732705/CID 5740, já presente no arquivo de certificados mas fora do metadata ativo) apenas como interação de regressão: nega efeitos de monstros face-up no campo, sem impedir sua ativação; custo pago não é devolvido se o efeito do Balter for negado. Não implementa Fusion Summon/materials nem altera resolver central, catálogo, certificações, comandos, banco, inventário ou produção. Preserva Deck 20–30, mão 6 na End Phase, 3+3 zonas, Field Zone separada e Extra 5.",
+  "scope": "Adapter TagDuel clássico 2v2 isolado para Dark Ruler Ha Des (53982768/CID 5301) e Dark Balter the Terrible (80071763/CID 5302): negação dos efeitos de Effect Monsters destruídos em batalha por Fiends controlados pela equipe (Ha Des) ou pelo próprio Balter; Balter também pode negar o efeito de Normal Spell mediante custo de 1000 LP. Inclui Skill Drain (82732705/CID 5740, presente no metadata efetivo por batch gerado e com certificado legado) apenas como interação de regressão: nega efeitos de monstros face-up no campo, sem impedir sua ativação; custo pago não é devolvido se o efeito do Balter for negado. Não implementa Fusion Summon/materials nem altera resolver central, catálogo, certificações, comandos, banco, inventário ou produção. Preserva Deck 20–30, mão 6 na End Phase, 3+3 zonas, Field Zone separada e Extra 5.",
   "cards": [
     {
       "id": "53982768",
@@ -45,7 +45,8 @@
       "name": "Skill Drain (interação de regressão; certificado legado, fora do metadata ativo)",
       "konamiCid": 5740,
       "firstTcgRelease": "2003-12-01",
-      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5740&ope=2&request_locale=en"
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5740&ope=2&request_locale=en",
+      "metadataPresent": true
     }
   ],
   "blocksCompleted": [
@@ -56,7 +57,8 @@
     "Corrigidas duas falhas dos testes: Skill Drain está no metadata efetivo via batch gerado; fixture usa normalIds[0] em vez de variável inexistente.",
     "Evidência/auditoria ajustadas para não declarar Skill Drain órfã; 0 novas certificações e 0 inventário.",
     "Commit c813c8b0fc2178cec02a6a2184716258d8c47a7b publicado na branch própria; PR #608 draft.",
-    "Workflow M682 dedicado aprovado; validação completa do engine continua em execução."
+    "Workflow M682 dedicado aprovado; validação completa do engine continua em execução.",
+    "CI final verde no SHA c813c8b: M682 dedicated, Engine validation, Card batch fast feedback e Milestone1000 todos success."
   ],
   "implementedCards": 2,
   "behaviorVerifiedCards": 2,
@@ -68,11 +70,13 @@
     "build": "passed",
     "focusedTests": "26/26 passed",
     "evidenceValidation": "passed",
-    "ci": "M682 dedicated workflow passed; Engine validation still in progress",
-    "engineValidation": "in_progress",
+    "ci": "all four workflows passed on c813c8b",
+    "engineValidation": "passed",
+    "cardBatchFastFeedback": "passed",
+    "milestone1000": "passed",
     "discordLive": "not-run"
   },
-  "effectiveWorkMinutes": 0,
+  "effectiveWorkMinutes": 43,
   "targetEffectiveWorkMinutes": 60,
   "targetMet": false,
   "ciWaitExcluded": true,
@@ -80,7 +84,8 @@
     "number": 608,
     "url": "https://github.com/dareka222778/yugioh-speed-rpg/pull/608",
     "state": "open",
-    "draft": true
+    "draft": true,
+    "mergeable": true
   },
   "production": "not-changed",
   "merge": "not-authorized",
@@ -88,8 +93,14 @@
   "blockers": [
     "Integração no resolver central e certificação engine-v9 exigem handoff explícito; este bloco permanece adapter isolado."
   ],
-  "nextTask": "Aguardar Engine validation e extended-soak; se verdes, fechar checkpoint e liberar apenas a reserva M682. Integração central permanece bloqueada por handoff.",
+  "nextTask": "Aguardar handoff central solicitado no PR #17 para integração; manter PR #608 draft e não fazer merge/deploy sem autorização.",
   "nextWindow": "2026-11-27T22:30:00-03:00",
-  "scopeReleasedToAuxiliary": [],
+  "scopeReleasedToAuxiliary": [
+    "src/fiendEffectNegationTagAdapter.ts",
+    "tests/fiendEffectNegationTagAdapter.test.cjs",
+    "docs/evidence/m682-fiend-effect-negation.json",
+    "scripts/audit-fiend-effect-negation-m682.cjs",
+    ".github/workflows/m682-fiend-effect-negation.yml"
+  ],
   "adapterBehaviorVerifiedCards": 2
 }
