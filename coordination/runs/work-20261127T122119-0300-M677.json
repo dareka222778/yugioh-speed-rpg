@@ -43,9 +43,13 @@
     }
   ],
   "blocksCompleted": [
-    "coordenação e reserva CAS registradas"
+    "coordenação e reserva CAS registradas",
+    "adapter de busca FLIP implementado para 2 cartas em branch isolada",
+    "34 cenários de comportamento criados",
+    "evidência e auditoria de não-certificação criadas",
+    "workflow dedicado com typecheck, build, testes focados, check:cards, suíte completa e auditoria TagDuel criado"
   ],
-  "implementedCards": 0,
+  "implementedCards": 2,
   "behaviorVerifiedCards": 0,
   "newCertifications": 0,
   "automaticCertifications": 0,
@@ -71,7 +75,7 @@
   "blockers": [
     "Handoff cooperativo para integração futura no resolver central ainda depende de liberação explícita dos arquivos compartilhados; esta sessão permanece isolada."
   ],
-  "nextTask": "Implementar os dois efeitos FLIP com busca privada por assento ativo, seleção por UID, topo do Deck e ramo opcional de mão sob Necrovalley; testar negação, alvo inválido, idempotência e regras 2v2.",
+  "nextTask": "Executar CI e corrigir qualquer falha. Em paralelo, revisar a próxima família histórica do worklist; não integrar ao resolver central até handoff explícito.",
   "nextWindow": "2026-11-27T17:30:00-03:00",
   "scopeReleasedToAuxiliary": []
 }

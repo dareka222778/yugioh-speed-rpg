@@ -1,0 +1,71 @@
+{
+  "format": 1,
+  "mission": "M677",
+  "runId": "work-20261127T122119-0300-M677",
+  "cards": [
+    {
+      "id": "24140059",
+      "name": "A Cat of Ill Omen",
+      "konamiId": 5520,
+      "firstTcgRelease": "2003-07-18",
+      "effect": "FLIP: Choose 1 Trap from your Deck and place it on top of your Deck, or, if Necrovalley is on the field, you can add that Trap to your hand instead.",
+      "officialDatabase": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5520&request_locale=en",
+      "crossCheck": "https://www.yugiohcardguide.com/single/a-cat-of-ill-omen.html"
+    },
+    {
+      "id": "23927567",
+      "name": "An Owl of Luck",
+      "konamiId": 5523,
+      "firstTcgRelease": "2003-07-18",
+      "effect": "FLIP: Select 1 Field Spell Card from your Deck and place it on top of your Deck. If Necrovalley is on the field, you can add the selected Field Spell Card to your hand instead.",
+      "officialDatabase": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5523&request_locale=en",
+      "crossCheck": "https://www.yugiohcardguide.com/single/an-owl-of-luck.html"
+    }
+  ],
+  "scenarioCount": 34,
+  "behaviorVerifiedCards": 2,
+  "adapterOnly": true,
+  "engineCertifiedCardsBefore": 969,
+  "engineCertifiedCardsAfter": 969,
+  "newCertifications": 0,
+  "automaticCertifications": 0,
+  "inventoryGrants": 0,
+  "distributionAuthorizationChanged": false,
+  "verifiedBehaviors": [
+    "gatilho FLIP só para monstro face-up no campo da equipe controladora",
+    "assento ativo da equipe determina o Deck privado usado; origem física do monstro não transfere o Deck de busca",
+    "A Cat of Ill Omen seleciona somente Trap; An Owl of Luck seleciona somente Field Spell",
+    "seleção por UID físico na resolução, contra o Deck atual; não captura Deck antigo na ativação",
+    "colocação no topo usa índice zero, preservando UID e ordem das demais cartas",
+    "adicionar à mão só quando Necrovalley está face-up em qualquer Field Zone",
+    "sem descarte automático ao passar de seis cartas; a verificação continua reservada à End Phase",
+    "negação, ausência de alvo válido, duplicação, plano adulterado e fonte removida",
+    "privacidade do Deck/mão, sem IDs privados no log público ou consumo de RNG",
+    "conservação de UID/inventário e limites Deck 20–30, mão 6/End Phase, 3+3, Field Zone separada, Extra 5"
+  ],
+  "rules": {
+    "mainDeckMin": 20,
+    "mainDeckMax": 30,
+    "handLimit": 6,
+    "handCheck": "end",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZoneSeparate": true,
+    "extraDeckMax": 5
+  },
+  "integration": {
+    "centralResolver": "pending-cooperative-handoff",
+    "flipTriggerHook": "not-integrated",
+    "privateSelectionDelivery": "not-integrated",
+    "discordLive": "not-run"
+  },
+  "limitations": [
+    "os dois IDs reais permanecem fora do catálogo engine-v9 e não recebem certificação nesta frente",
+    "os testes usam monstros já habilitados como fixtures com lookup injetado; os efeitos reais ficam no adapter até integração cooperativa",
+    "o ramo Necrovalley usa predicate injetado com uma Field Spell fixture para testar a condição; a predicate de produção reconhece apenas o ID 47355498 face-up na Field Zone",
+    "o recibo contém UID/ID privado e deve ser entregue somente ao assento ativo; nenhum comando Discord foi ligado"
+  ],
+  "production": "not-changed",
+  "merge": "not-authorized",
+  "deploy": "not-authorized"
+}

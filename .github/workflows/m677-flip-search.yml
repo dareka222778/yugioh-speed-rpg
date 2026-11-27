@@ -1,0 +1,39 @@
+name: M677 Flip search TagDuel adapter
+on:
+  push:
+    branches:
+      - feat/work-m677-flip-search-tag-adapter-20261127
+    paths:
+      - 'src/flipSearchTagAdapter.ts'
+      - 'tests/flipSearchTagAdapter.test.cjs'
+      - 'docs/evidence/m677-flip-search.json'
+      - 'scripts/audit-flip-search-m677.cjs'
+      - '.github/workflows/m677-flip-search.yml'
+  pull_request:
+    branches:
+      - feat/rea-engine-recovery-20261026
+    paths:
+      - 'src/flipSearchTagAdapter.ts'
+      - 'tests/flipSearchTagAdapter.test.cjs'
+      - 'docs/evidence/m677-flip-search.json'
+      - 'scripts/audit-flip-search-m677.cjs'
+      - '.github/workflows/m677-flip-search.yml'
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - run: node --test tests/flipSearchTagAdapter.test.cjs
+      - run: node scripts/audit-flip-search-m677.cjs
+      - run: npm run check:cards
+      - run: npm test
+      - run: npm run audit:tag-classic
