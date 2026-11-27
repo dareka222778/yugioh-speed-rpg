@@ -201,9 +201,9 @@ test('only a monster controlled by the active team may declare this event',()=>{
 test('stale turn and non-Battle Phase events are rejected',()=>{
  const {session,adapter}=setup(),monster=deploy(session),event=eventFor(session,monster,'stale-turn',{turn:session.duel.core.turn-1});
  assert.throws(()=>adapter.captureAttackDeclaration(session,event),/fase ou turno/);
- const {session:other,adapter:otherAdapter}=setup(),otherMonster=deploy(other);
+ const {session:other,adapter:otherAdapter}=setup(),otherMonster=deploy(other),wrongPhase=eventFor(other,otherMonster,'wrong-phase');
  other.duel.core.phase='main';
- assert.throws(()=>otherAdapter.captureAttackDeclaration(other,eventFor(other,otherMonster,'wrong-phase')),/fase ou turno/);
+ assert.throws(()=>otherAdapter.captureAttackDeclaration(other,wrongPhase),/fase ou turno/);
 });
 test('an identical event replay returns the stored receipt without paying twice',()=>{
  const {session,adapter}=setup();register(session,adapter,1);const monster=deploy(session);
@@ -214,8 +214,8 @@ test('an identical event replay returns the stored receipt without paying twice'
 });
 test('a stored event can be replayed after the response window without revalidation',()=>{
  const {session,adapter}=setup();register(session,adapter,1);const monster=deploy(session);
- const first=capture(session,adapter,monster,'late-replay');session.duel.core.phase='response';
- const replay=adapter.captureAttackDeclaration(session,eventFor(session,monster,'late-replay'));
+ const first=capture(session,adapter,monster,'late-replay'),replayEvent=eventFor(session,monster,'late-replay');session.duel.core.phase='response';
+ const replay=adapter.captureAttackDeclaration(session,replayEvent);
  assert.equal(replay.replayed,true);assert.deepEqual(replay.paidUids,first.paidUids);
 });
 test('an event ID cannot be reused for another attacker',()=>{
@@ -229,8 +229,8 @@ test('a source in the opponent team taxes any eligible monster, not only its own
  assert.equal(result.allowed,true);assert.equal(result.reason,'paid');
 });
 test('the card sent from the top retains its physical owner UID in the shared Graveyard',()=>{
- const {session,adapter}=setup();register(session,adapter,1);const seat=session.duel.active[0],top=holder(session.duel,seat).deck[0];
- const monster=deploy(session),result=capture(session,adapter,monster,'owner-uid');
+ const {session,adapter}=setup();register(session,adapter,1);const seat=session.duel.active[0],monster=deploy(session),top=holder(session.duel,seat).deck[0];
+ const result=capture(session,adapter,monster,'owner-uid');
  assert.equal(result.paidUids[0],top.uid);assert.match(top.uid,new RegExp('^m'+seat+':'));
  assert.ok(grave(session.duel,0).some(card=>card.uid===top.uid));
 });
@@ -239,8 +239,8 @@ test('inventory identity and quantity are conserved after payment',()=>{
  capture(session,adapter,monster,'inventory');assertInventoryEqual(before,session.duel);
 });
 test('a seven-card hand is preserved; this adapter never enforces the End Phase limit early',()=>{
- const {session,adapter}=setup();register(session,adapter,1);const seat=session.duel.active[0],held=holder(session.duel,seat);
- held.hand.push(held.deck.shift());const handBefore=held.hand.map(card=>card.uid),monster=deploy(session);
+ const {session,adapter}=setup();register(session,adapter,1);const seat=session.duel.active[0],monster=deploy(session),held=holder(session.duel,seat);
+ held.hand.push(held.deck.shift());const handBefore=held.hand.map(card=>card.uid);
  capture(session,adapter,monster,'hand-limit');
  assert.deepEqual(held.hand.map(card=>card.uid),handBefore);
 });
