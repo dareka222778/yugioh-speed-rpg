@@ -5,7 +5,7 @@
   "owner": "Work principal",
   "priority": "P1",
   "priorityRequestedBy": "User",
-  "status": "reserved-and-implementing",
+  "status": "ci-running",
   "startedAt": "2026-11-27T17:01:05-03:00",
   "endedAt": null,
   "repository": "dareka222778/yugioh-speed-rpg",
@@ -14,7 +14,7 @@
   "branch": "feat/work-m682-fiend-effect-negation-20261127",
   "baseBranch": "feat/rea-engine-recovery-20261026",
   "baseSha": "ab6a0befb3d745c23eefcf1692588dcdfbd5be31",
-  "headSha": null,
+  "headSha": "c813c8b0fc2178cec02a6a2184716258d8c47a7b",
   "reservedFiles": [
     "src/fiendEffectNegationTagAdapter.ts",
     "tests/fiendEffectNegationTagAdapter.test.cjs",
@@ -51,35 +51,45 @@
   "blocksCompleted": [
     "HEAD real da branch compartilhada consultado: ab6a0befb3d745c23eefcf1692588dcdfbd5be31; state.json estava atrasado em e05c3398cccac7c4a0e489499a995681637514ca.",
     "PRs e reservas ativos conferidos; escopo M682 isolado, sem sobreposição com arquivos reservados de terceiros.",
-    "IDs/CIDs e textos de efeito conferidos nas páginas oficiais Konami; Dark Ruler Ha Des e Dark Balter ausentes do metadata/certificações ativos; Skill Drain consta no arquivo de certificados mas não no metadata ativo."
+    "IDs/CIDs e textos de efeito conferidos nas páginas oficiais Konami; Dark Ruler Ha Des e Dark Balter ausentes do metadata/certificações ativos; Skill Drain consta no arquivo de certificados mas não no metadata ativo.",
+    "Implementado adapter isolado para Dark Ruler Ha Des e Dark Balter, com Skill Drain como regressão.",
+    "Corrigidas duas falhas dos testes: Skill Drain está no metadata efetivo via batch gerado; fixture usa normalIds[0] em vez de variável inexistente.",
+    "Evidência/auditoria ajustadas para não declarar Skill Drain órfã; 0 novas certificações e 0 inventário.",
+    "Commit c813c8b0fc2178cec02a6a2184716258d8c47a7b publicado na branch própria; PR #608 draft.",
+    "Workflow M682 dedicado aprovado; validação completa do engine continua em execução."
   ],
-  "implementedCards": 0,
-  "behaviorVerifiedCards": 0,
+  "implementedCards": 2,
+  "behaviorVerifiedCards": 2,
   "newCertifications": 0,
   "automaticCertifications": 0,
   "inventoryGrants": 0,
   "verification": {
-    "typecheck": "pending",
-    "build": "pending",
-    "focusedTests": "pending",
-    "evidenceValidation": "pending",
-    "ci": "pending",
-    "adapterBehaviorVerifiedCards": 0,
-    "behaviorCertifiedCards": 0,
+    "typecheck": "passed",
+    "build": "passed",
+    "focusedTests": "26/26 passed",
+    "evidenceValidation": "passed",
+    "ci": "M682 dedicated workflow passed; Engine validation still in progress",
+    "engineValidation": "in_progress",
     "discordLive": "not-run"
   },
   "effectiveWorkMinutes": 0,
   "targetEffectiveWorkMinutes": 60,
   "targetMet": false,
   "ciWaitExcluded": true,
-  "pr": null,
+  "pr": {
+    "number": 608,
+    "url": "https://github.com/dareka222778/yugioh-speed-rpg/pull/608",
+    "state": "open",
+    "draft": true
+  },
   "production": "not-changed",
   "merge": "not-authorized",
   "deploy": "not-authorized",
   "blockers": [
     "Integração no resolver central e certificação engine-v9 exigem handoff explícito; este bloco permanece adapter isolado."
   ],
-  "nextTask": "Implementar as três políticas de negação com custos, UID/epoch, propriedade física, regras 2v2 e testes determinísticos.",
-  "nextWindow": "2026-11-27T17:30:00-03:00",
-  "scopeReleasedToAuxiliary": []
+  "nextTask": "Aguardar Engine validation e extended-soak; se verdes, fechar checkpoint e liberar apenas a reserva M682. Integração central permanece bloqueada por handoff.",
+  "nextWindow": "2026-11-27T22:30:00-03:00",
+  "scopeReleasedToAuxiliary": [],
+  "adapterBehaviorVerifiedCards": 2
 }
