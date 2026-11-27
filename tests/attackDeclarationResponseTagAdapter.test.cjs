@@ -113,21 +113,21 @@ function moveBackrowToGrave(duel,uid){
  }
  throw new Error('Armadilha não encontrada para mover ao Cemitério.');
 }
-function setAttackWindow(duel,attackerUid){
- duel.core.current=1;duel.core.phase='response';duel.core.resume='battle';duel.core.priority=0;duel.core.passes=0;
- duel.core.pending={kind:'attack',actor:1,card:attackerUid,stage:'declare',cancelled:false};
- duel.cursor=0;duel.core.teamRotation.cursor=0;
+function setAttackWindow(duel,attackerUid,attackerTeam=1,defenderTeam=0){
+ duel.core.current=attackerTeam;duel.core.phase='response';duel.core.resume='battle';duel.core.priority=defenderTeam;duel.core.passes=0;
+ duel.core.pending={kind:'attack',actor:attackerTeam,card:attackerUid,stage:'declare',cancelled:false};
+ duel.cursor=duel.active[defenderTeam];duel.core.teamRotation.cursor=duel.cursor;
 }
 function makeAttack(effect='magic-cylinder'){
  const duel=makeDuel();
  const attackerUid=placeMonster(duel,1,attackerId);
  const fixtureIndex=effect==='magic-cylinder'?0:effect==='draining-shield'?1:2;
  const sourceUid=placeBackrow(duel,0,trapFixtures[fixtureIndex]);
- setAttackWindow(duel,attackerUid);
+ setAttackWindow(duel,attackerUid,1,0);
  return {session:adapter.createSession(duel),attackerUid,sourceUid,attackId:'attack-'+effect};
 }
-function activate(row,activationId='activation-1'){
- return adapter.activate(row.session,{activationId,attackId:row.attackId,sourceUid:row.sourceUid,targetUid:row.attackerUid,actorSeat:0});
+function activate(row,activationId='activation-1',actorSeat=0){
+ return adapter.activate(row.session,{activationId,attackId:row.attackId,sourceUid:row.sourceUid,targetUid:row.attackerUid,actorSeat});
 }
 function resolve(row,activationId='activation-1',options={}){
  return adapter.resolve(row.session,activationId,options);
@@ -223,7 +223,7 @@ test('Negate Attack nega o ataque e encerra a Battle Phase sem dano ou cura',()=
  assert.equal(row.session.duel.core.players[1].lp,lp1);
 });
 
-test('Magia Cylinder calcula dano no momento da resolução e encerra o duelo se o LP do atacante zerar',()=>{
+test('Magic Cylinder causa dano e encerra o duelo se o LP do atacante zerar',()=>{
  const row=makeAttack('magic-cylinder');activate(row);
  row.session.duel.core.players[1].lp=100;
  const result=resolve(row);
@@ -256,12 +256,12 @@ test('Armadilha baixada no turno atual não pode responder ao ataque',()=>{
 });
 
 test('não responde ao próprio ataque nem fora da janela de declaração',()=>{
- const row=makeAttack('magic-cylinder');
- row.session.duel.core.pending.actor=0;
- row.session.duel.core.current=0;
- row.session.duel.core.priority=0;
- row.session.duel.cursor=0;row.session.duel.core.teamRotation.cursor=0;
- assert.throws(()=>activate(row,'own-attack'));
+ const duel=makeDuel();
+ const attackerUid=placeMonster(duel,1,attackerId);
+ const sourceUid=placeBackrow(duel,1,trapFixtures[0]);
+ setAttackWindow(duel,attackerUid,1,1);
+ const own={session:adapter.createSession(duel),attackerUid,sourceUid,attackId:'own-attack'};
+ assert.throws(()=>activate(own,'own-attack',1));
  const other=makeAttack('magic-cylinder');
  other.session.duel.core.pending.stage='damage';
  assert.throws(()=>activate(other,'damage-window'));
@@ -340,7 +340,7 @@ test('respostas não concedem cartas e preservam todos os UIDs e proprietários 
  assert.equal(row.session.duel.core.players[0].grave.some(card=>card.uid===row.sourceUid),true);
 });
 
-test('Spell Speed 3 e respostas de ataque são isoladas do inventário e da mão',()=>{
+test('mão acima de seis durante a resolução não é descartada antecipadamente',()=>{
  const row=makeAttack('negate-attack');
  while(row.session.duel.core.players[0].hand.length<7)row.session.duel.core.players[0].hand.push(row.session.duel.core.players[0].deck.pop());
  assert.doesNotThrow(()=>adapter.createSession(row.session.duel));
