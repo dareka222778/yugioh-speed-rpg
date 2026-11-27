@@ -1,0 +1,97 @@
+{
+  "format": 1,
+  "mission": "M630",
+  "runId": "work-20261125T194311-0300-M630",
+  "priority": "P1",
+  "status": "adapter isolado implementado; PR #572 aberto; workflow focado acionado",
+  "historicalCutoff": "2004-10-01",
+  "cards": [
+    {
+      "name": "Ceasefire",
+      "passcode": "36468556",
+      "konamiDatabaseId": 4956,
+      "kind": "Normal Trap",
+      "firstTcgSet": "PSV-030",
+      "firstTcgRelease": "2002-10-20",
+      "officialEffect": "If a face-down Defense Position monster or an Effect Monster is on the field: Change all face-down Defense Position monsters on the field to face-up Defense Position (Flip monsters' effects are not activated at this time), also inflict 500 damage to your opponent for each Effect Monster on the field.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4956&ope=2&request_locale=en",
+      "adapterBehavior": [
+        "Requires a live response window, a Set Trap from an earlier turn, and either a face-down Defense Position monster or an Effect Monster on the field.",
+        "Cannot chain to a Counter Trap or activate in the Damage Step; respects Jinzo and other continuous Trap policies.",
+        "Flips every face-down Defense Position monster on both teams to face-up Defense Position without queuing Flip Effects.",
+        "Counts all Effect Monsters after the flip, then inflicts 500 damage per Effect Monster to the opposing shared LP pool.",
+        "Ends the duel if that damage reduces the opponent team to zero LP.",
+        "Returns the activated Trap to the physical owner's Graveyard, including when controlled by the teammate or stolen by the opposing team.",
+        "Preserves physical inventory and the owner's 20–30/Extra 5/3+3/Field Zone/End Phase hand rules."
+      ]
+    }
+  ],
+  "implementation": {
+    "branch": "feat/work-m630-ceasefire-tag-adapter-20261125",
+    "baseSha": "b411f7ee3001d74c2e901a53ed47d90c5645a9e7",
+    "files": [
+      "src/ceasefireTagAdapter.ts",
+      "tests/ceasefireTagAdapter.test.cjs",
+      "docs/evidence/m630-ceasefire-tag-adapter.json",
+      ".github/workflows/m630-ceasefire-tag-adapter.yml"
+    ],
+    "plannedScenarios": 31,
+    "integrationBoundary": "Pure isolated adapter over TagDuel response windows. Central resolver/Discord integration awaits explicit M61 handoff."
+  },
+  "rules": {
+    "mainDeckPerPhysicalSeat": "20–30",
+    "extraDeckPerPhysicalSeat": "0–5",
+    "monsterZonesPerTeam": 3,
+    "spellTrapZonesPerTeam": 3,
+    "fieldZone": "separate",
+    "handLimit": 6,
+    "handDiscard": "End Phase only"
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "source": "coordination/state.json at M630 reservation"
+  },
+  "conflictCheck": {
+    "matchingBranches": 0,
+    "matchingPullRequests": 0,
+    "matchingFiles": 0,
+    "metadata": false,
+    "certified": false,
+    "existingEffect": false,
+    "m629FilesDisjoint": true,
+    "m61CentralFilesExcluded": true,
+    "thirdPartyReservationsUntouched": true
+  },
+  "verification": {
+    "focusedScenarios": 31,
+    "focusedTestResult": "pending",
+    "typecheck": "pending",
+    "build": "pending",
+    "evidenceValidation": "pending",
+    "focusedWorkflowRun": null,
+    "cardBatchFast": "pending",
+    "milestone1000": "pending",
+    "engineValidation": "pending",
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "limitations": [
+    "Ceasefire permanece fora de cardMetadata, cardCertifications, releasedCardIds e allowlist; fixture usa Sakuretsu Armor como Trap habilitada substituta.",
+    "O adapter não está ligado ao resolver v9 nem aos comandos Discord; integração central aguarda handoff explícito M61.",
+    "A suíte é offline e não valida gateway, permissões, interações ou persistência real do Discord.",
+    "Nenhuma certificação, concessão de inventário, alteração de dados persistentes, merge ou deploy."
+  ],
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "ciTriggerCommit": true
+}
