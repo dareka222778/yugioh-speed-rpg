@@ -1,0 +1,83 @@
+{
+  "format": 1,
+  "mission": "M674",
+  "runId": "work-20261127T072422-0300-M674",
+  "title": "Harpie's Feather Duster / Heavy Storm / Giant Trunade — TagDuel mass backrow sweep",
+  "cutoff": "2004-09-30",
+  "cards": [
+    {
+      "name": "Harpie's Feather Duster",
+      "namePt": "Pena de Harpia",
+      "id": "18144506",
+      "konamiCid": 4678,
+      "firstTcgRelease": "2003-04-15",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4678&ope=2&request_locale=en",
+      "officialText": "Destroy all Spell and Trap Cards your opponent controls.",
+      "behavior": "Destrói todas as Magias/Armadilhas controladas pela equipe adversária, inclusive Field Zone, preservando as próprias cartas."
+    },
+    {
+      "name": "Heavy Storm",
+      "namePt": "Tempestade Pesada",
+      "id": "19613556",
+      "konamiCid": 4891,
+      "firstTcgRelease": "2002-06-26",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4891&ope=2&request_locale=en",
+      "officialText": "Destroy all Spell and Trap Cards on the field.",
+      "behavior": "Destrói as Magias/Armadilhas de ambas as equipes, exceto a própria Normal Spell em resolução."
+    },
+    {
+      "name": "Giant Trunade",
+      "namePt": "Grande Trunade",
+      "id": "42703248",
+      "konamiCid": 4910,
+      "firstTcgRelease": "2002-09-16",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4910&ope=2&request_locale=en",
+      "officialText": "Return all Spell and Trap Cards on the field to the hand.",
+      "behavior": "Devolve as Magias/Armadilhas de ambas as equipes às mãos privadas dos proprietários físicos; a própria Normal Spell vai ao Cemitério."
+    }
+  ],
+  "scenarioCount": 24,
+  "behaviorVerifiedCards": 3,
+  "engineCertifiedCardsBefore": 959,
+  "engineCertifiedCardsAfter": 959,
+  "newCertifications": 0,
+  "automaticCertifications": 0,
+  "inventoryGrants": 0,
+  "certificationStatus": "existing-engine-v9-certification; additional-tagduel-adapter-behavior-verified",
+  "runtimeIntegration": "pending-explicit-spell-resolver-hook",
+  "coverage": [
+    "Harpie's Feather Duster afeta somente a equipe adversária",
+    "Heavy Storm afeta ambas as equipes e não destrói a própria Normal Spell",
+    "Giant Trunade retorna cartas a seus proprietários físicos e não retorna a própria Normal Spell",
+    "Field Zone separada das três Spell/Trap Zones",
+    "cartas face-down e face-up incluídas",
+    "efeitos não-direcionados consideram o campo no momento da resolução",
+    "cartas removidas antes da resolução não são movidas novamente",
+    "cartas roubadas vão ao Cemitério/mão do proprietário físico, não do controlador",
+    "mãos privadas do assento ativo e parceiro preservadas",
+    "callback para efeitos específicos de saída de campo de Equip/contínuas",
+    "negação de ativação/efeito, idempotência e replay divergente",
+    "Deck 20–30, mão 6 com descarte somente na End Phase, zonas 3+3, Field Zone separada, Extra Deck 5",
+    "conservação de UIDs/inventário e zero concessões"
+  ],
+  "rules": {
+    "mainDeck": "20–30 por assento físico",
+    "handLimit": 6,
+    "handCheck": "End Phase",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "extraDeckMax": 5,
+    "fieldZone": "separada",
+    "tagDuel": "duas equipes, quatro assentos físicos, mãos/Decks privados, Cemitério compartilhado por equipe"
+  },
+  "production": "unchanged",
+  "merge": "not-authorized",
+  "discordLive": false,
+  "limitations": [
+    "Os três IDs já constam na base de certificações engine-v9 (959 no total). Este PR adiciona cobertura TagDuel específica, mas não cria certificações duplicadas nem aumenta a contagem do engine.",
+    "O adapter não está conectado ao resolver central; o host precisa encaminhar a ativação e o estado de negação de Spell para este adapter.",
+    "Efeitos específicos de Equip/contínuas que disparam quando a carta sai do campo dependem do callback onLeaveField fornecido pelo host.",
+    "Não há comandos, banco, gateway Discord, certificação engine-v9, merge ou deploy."
+  ],
+  "nextTask": "Solicitar handoff explícito do resolver de Magias; integrar uma carta por vez, executar regressões completas e certificar apenas após CI de engine."
+}
