@@ -1,0 +1,82 @@
+{
+  "mission": "M679",
+  "runId": "work-20261127T125056-0300-M679",
+  "title": "Battle-destruction retaliation TagDuel adapter — Yomi Ship + Helpoemer",
+  "branch": "feat/work-m679-battle-destruction-retaliation-20261127",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "15115048e30cbf00d30351d2fd5d0bccca3367e0",
+  "cards": [
+    {
+      "id": "51534754",
+      "name": "Yomi Ship",
+      "konamiDatabaseCid": 5521,
+      "firstTcgRelease": "2003-07-18",
+      "firstOcgRelease": "2002-05-16",
+      "officialText": "If this card is destroyed by battle and sent to the GY: Destroy the monster that destroyed this card.",
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5521&ope=2&request_locale=en"
+    },
+    {
+      "id": "76052811",
+      "name": "Helpoemer",
+      "konamiDatabaseCid": 5489,
+      "firstTcgRelease": "2003-07-18",
+      "firstOcgRelease": "2002-05-16",
+      "officialText": "Cannot be Special Summoned from the GY. At the end of your opponent's Battle Phase, if this card is in the GY because it was destroyed by battle: Make your opponent discard 1 random card. This card must be in the GY to activate and to resolve this effect.",
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5489&ope=2&request_locale=en"
+    }
+  ],
+  "adapterBehaviorVerifiedCards": 2,
+  "verificationState": "ci-passed",
+  "behaviorCertifiedCards": 0,
+  "newEngineV9Certifications": 0,
+  "automaticCertifications": 0,
+  "inventoryGranted": 0,
+  "playerDataChanged": false,
+  "tests": {
+    "file": "tests/battleDestructionRetaliationTagAdapter.test.cjs",
+    "count": 13,
+    "command": "npm run check && npm run build && node scripts/run-tests-isolated.cjs tests/battleDestructionRetaliationTagAdapter.test.cjs"
+  },
+  "coverage": [
+    "Yomi Ship captura somente destruição em batalha enviada ao Cemitério e destrói o UID específico do destruidor sem escolha de alvo",
+    "Yomi Ship usa binding UID/epoch; fonte ou destruidor que sai e retorna não é retargeted",
+    "Yomi Ship envia o destruidor ao Cemitério de seu proprietário físico; negação e destino substituído não alteram o campo",
+    "Helpoemer ativa no fim de cada Battle Phase do oponente enquanto a mesma instância permanecer no Cemitério",
+    "Helpoemer exige permanência no Cemitério para ativar e resolver e não pode ser Invocado-Especialmente do Cemitério",
+    "Helpoemer descarta uma carta aleatória da mão privada do assento adversário ativo usando HMAC persistido; parceiro inativo não é afetado",
+    "cópias múltiplas acumulam; janelas/eventos repetidos são idempotentes; recibos não revelam a carta descartada",
+    "Decks físicos 20–30, mão 6 verificada somente na End Phase, zonas 3+3, Field Zone separada e Extra 5"
+  ],
+  "rules": {
+    "mainDeck": "20–30 por assento físico",
+    "handLimit": 6,
+    "handCheck": "End Phase",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separada",
+    "extraDeckMax": 5
+  },
+  "integration": {
+    "centralResolver": false,
+    "commands": false,
+    "discordLive": false,
+    "production": false
+  },
+  "limitations": [
+    "Adapter/plan layer isolado; integração no resolver central depende de handoff explícito do proprietário.",
+    "A janela de fim da Battle Phase é fornecida pelo host; o scheduler central ainda não foi alterado.",
+    "Testes offline TagDuel; nenhuma sessão com gateway Discord ou implantação real foi executada.",
+    "As duas cartas não foram adicionadas ao catálogo engine-v9 nem certificadas."
+  ],
+  "ciRun": {
+    "id": 46031326035,
+    "url": "https://github.com/dareka222778/yugioh-speed-rpg/actions/runs/46031326035",
+    "conclusion": "success",
+    "checks": [
+      "npm run check",
+      "npm run build",
+      "evidence audit",
+      "13 focused TagDuel scenarios"
+    ]
+  }
+}

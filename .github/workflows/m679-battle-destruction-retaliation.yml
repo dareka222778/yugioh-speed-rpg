@@ -1,0 +1,39 @@
+name: M679 Battle-destruction retaliation TagDuel adapter
+on:
+  push:
+    branches:
+      - feat/work-m679-battle-destruction-retaliation-20261127
+    paths:
+      - 'src/battleDestructionRetaliationTagAdapter.ts'
+      - 'tests/battleDestructionRetaliationTagAdapter.test.cjs'
+      - 'docs/evidence/m679-battle-destruction-retaliation.json'
+      - 'scripts/audit-battle-destruction-retaliation-m679.cjs'
+      - '.github/workflows/m679-battle-destruction-retaliation.yml'
+  pull_request:
+    branches:
+      - feat/rea-engine-recovery-20261026
+      - 'feat/work-*'
+    paths:
+      - 'src/battleDestructionRetaliationTagAdapter.ts'
+      - 'tests/battleDestructionRetaliationTagAdapter.test.cjs'
+      - 'docs/evidence/m679-battle-destruction-retaliation.json'
+      - 'scripts/audit-battle-destruction-retaliation-m679.cjs'
+      - '.github/workflows/m679-battle-destruction-retaliation.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  focused:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - run: node scripts/audit-battle-destruction-retaliation-m679.cjs
+      - run: node scripts/run-tests-isolated.cjs tests/battleDestructionRetaliationTagAdapter.test.cjs
