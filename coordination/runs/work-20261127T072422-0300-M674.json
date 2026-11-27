@@ -1,0 +1,79 @@
+{
+  "format": 1,
+  "runId": "work-20261127T072422-0300-M674",
+  "mission": "M674",
+  "owner": "Work principal",
+  "priority": "P1",
+  "status": "reserved-and-implementing",
+  "startedAt": "2026-11-27T07:24:22.000-03:00",
+  "endedAt": null,
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedBaseHead": "516fe54a0898281d75bf0a41578c4063f2c19e8a",
+  "branch": "feat/work-m674-mass-backrow-spells-20261127",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "516fe54a0898281d75bf0a41578c4063f2c19e8a",
+  "headSha": null,
+  "reservedFiles": [
+    "src/massBackrowTagAdapter.ts",
+    "tests/massBackrowTagAdapter.test.cjs",
+    "docs/evidence/m674-mass-backrow.json",
+    "scripts/audit-mass-backrow-m674.cjs",
+    ".github/workflows/m674-mass-backrow.yml",
+    "coordination/runs/work-20261127T072422-0300-M674.json"
+  ],
+  "scope": "Adapter TagDuel isolado para Harpie's Feather Duster (18144506/CID 4678), Heavy Storm (19613556/CID 4891) e Giant Trunade (42703248/CID 4910): varredura não-direcionada de Spell/Trap Zones e Field Zone, destruição ou retorno à mão física do proprietário, conservação de UID/inventário e regras do proprietário. Sem resolver central, catálogo/certificações, comandos, banco, inventário ou produção.",
+  "cards": [
+    {
+      "id": "18144506",
+      "name": "Harpie's Feather Duster",
+      "konamiId": 4678,
+      "firstTcg": "2003-04-15",
+      "effect": "Destroy all Spell and Trap Cards your opponent controls."
+    },
+    {
+      "id": "19613556",
+      "name": "Heavy Storm",
+      "konamiId": 4891,
+      "firstTcg": "2002-06-26",
+      "effect": "Destroy all Spell and Trap Cards on the field."
+    },
+    {
+      "id": "42703248",
+      "name": "Giant Trunade",
+      "konamiId": 4910,
+      "firstTcg": "2002-09-16",
+      "effect": "Return all Spell and Trap Cards on the field to the hand."
+    }
+  ],
+  "blocksCompleted": [
+    "coordenação e reserva CAS registradas"
+  ],
+  "implementedCards": 0,
+  "behaviorVerifiedCards": 0,
+  "newCertifications": 0,
+  "automaticCertifications": 0,
+  "inventoryGrants": 0,
+  "verification": {
+    "typecheck": "pending",
+    "build": "pending",
+    "focusedTests": "pending",
+    "evidenceValidation": "pending",
+    "ci": "pending",
+    "behaviorVerifiedCards": 0,
+    "behaviorCertifiedCards": 0,
+    "discordLive": "not-run"
+  },
+  "effectiveWorkMinutes": 0,
+  "targetEffectiveWorkMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "pr": null,
+  "production": "not-changed",
+  "merge": "not-authorized",
+  "deploy": "not-authorized",
+  "blockers": [],
+  "nextTask": "Implementar adapter de varredura massiva e retorno à mão com propriedade física e Field Zone; adicionar cenários 2v2 e auditoria.",
+  "nextWindow": "2026-11-27T11:30:00-03:00",
+  "scopeReleasedToAuxiliary": []
+}
