@@ -2,7 +2,7 @@
   "format": 1,
   "sharedBranch": "feat/rea-engine-recovery-20261026",
   "observedHead": "ab6a0befb3d745c23eefcf1692588dcdfbd5be31",
-  "updatedAt": "2026-11-27T17:01:05-03:00",
+  "updatedAt": "2026-11-27T17:19:32.102-03:00",
   "activeReservations": [
     {
       "runId": "work-20261125T203259-0300-M635",
@@ -645,6 +645,23 @@
         "coordination/runs/work-20261127T170105-0300-M682.json"
       ],
       "scope": "Adapter TagDuel clássico 2v2 isolado para Dark Ruler Ha Des (53982768/CID 5301) e Dark Balter the Terrible (80071763/CID 5302): negação dos efeitos de Effect Monsters destruídos em batalha por Fiends controlados pela equipe (Ha Des) ou pelo próprio Balter; Balter também pode negar o efeito de Normal Spell mediante custo de 1000 LP. Inclui Skill Drain (82732705/CID 5740, já presente no arquivo de certificados mas fora do metadata ativo) apenas como interação de regressão: nega efeitos de monstros face-up no campo, sem impedir sua ativação; custo pago não é devolvido se o efeito do Balter for negado. Não implementa Fusion Summon/materials nem altera resolver central, catálogo, certificações, comandos, banco, inventário ou produção. Preserva Deck 20–30, mão 6 na End Phase, 3+3 zonas, Field Zone separada e Extra 5."
+    },
+    {
+      "runId": "work-20261127T170105-0300-M683",
+      "mission": "M683",
+      "priority": "P1",
+      "branch": "feat/work-m683-attack-declaration-responses-20261127",
+      "state": "queued-during-ci",
+      "conditionalHeadUpdate": true,
+      "reservedFiles": [
+        "src/attackDeclarationResponseTagAdapter.ts",
+        "tests/attackDeclarationResponseTagAdapter.test.cjs",
+        "docs/evidence/m683-attack-declaration-responses.json",
+        "scripts/audit-attack-declaration-responses-m683.cjs",
+        ".github/workflows/m683-attack-declaration-responses.yml",
+        "coordination/runs/work-20261127T170105-0300-M683.json"
+      ],
+      "scope": "Adapter TagDuel clássico 2v2 para respostas à declaração de ataque: Magic Cylinder (62279055/CID 5124) nega ataque e causa dano igual ao ATK do atacante; Draining Shield (43250041/CID 5994) nega ataque e recupera LP igual ao ATK; Negate Attack (14315573/CID 4804) nega ataque e encerra a Battle Phase. Alvo UID/epoch, trap baixada em turno anterior, Spell Speed 2/3, custo zero, dano/cura na equipe correta, LP zero, propriedade física e inventário conservados. Não integra resolver central, metadata, certificações, comandos, banco, Discord live ou produção. Dimension Wall excluída por primeira publicação OCG/TCG após o corte histórico de 30/09/2004."
     }
   ],
   "handoffRequests": [
@@ -732,5 +749,15 @@
     "sharedBaseHead": "ab6a0befb3d745c23eefcf1692588dcdfbd5be31",
     "nextTask": "Implementar as três políticas de negação com custos, UID/epoch, propriedade física, regras 2v2 e testes determinísticos.",
     "nextWindow": "2026-11-27T17:30:00-03:00"
+  },
+  "preparedNextRun": {
+    "runId": "work-20261127T170105-0300-M683",
+    "mission": "M683",
+    "branch": "feat/work-m683-attack-declaration-responses-20261127",
+    "status": "queued-during-ci",
+    "priority": "P1",
+    "preparedAt": "2026-11-27T17:19:32.102-03:00",
+    "sharedBaseHead": "2f36c7117505b110220209dfafa2d4d95e434450",
+    "nextTask": "Aguardar M682 sem ociosidade; então implementar adapter de respostas a ataque reutilizando resolveAttackResponse e testes de custo/dano/cura/encerramento."
   }
 }
