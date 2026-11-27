@@ -28,7 +28,7 @@ const defaultLookup:GravekeeperServantLookup=id=>id===GRAVEKEEPERS_SERVANT_ID?{k
 const teamForSeat=(seat:Seat):Team=>(seat%2) as Team;
 function physicalSeat(uid:string):Seat|null{const match=/^m([0-3]):/.exec(uid);return match?Number(match[1]) as Seat:null;}
 function assertId(value:string,max=128):void{
- if(typeof value!=='string'||!value.trim()||value.length>max||!/^[a-zA-Z0-9:_-]+$/.test(value))throw new Error('Identificador de ataque inválido.');
+ if(typeof value!=='string'||!value.trim()||value.length>max||!/^[a-zA-Z0-9:_-]+$/.test(value)||['__proto__','constructor','prototype'].includes(value))throw new Error('Identificador de ataque inválido.');
 }
 function assertClassic(duel:TagDuel):void{
  if(!duel||duel.mode!=='tag-classic')throw new Error('O adapter exige TagDuel clássico.');
@@ -153,7 +153,7 @@ export function createGravekeeperServantAdapter(
  }
  function captureAttackDeclaration(session:GravekeeperServantSession,event:AttackDeclarationEvent):GravekeeperServantAttackResult{
   assertSession(session);
-  const previous=session.receipts[event?.eventId];
+  const previous=event&&Object.prototype.hasOwnProperty.call(session.receipts,event.eventId)?session.receipts[event.eventId]:undefined;
   if(previous){
    if(!sameEvent(previous.event,event))throw new Error('ID de declaração reutilizado com dados diferentes.');
    return {...structuredClone(previous.result),replayed:true};
