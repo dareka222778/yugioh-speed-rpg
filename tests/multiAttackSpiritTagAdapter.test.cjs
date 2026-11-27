@@ -189,11 +189,12 @@ test('Asura may attack directly once when the opposing field is empty',()=>{
  assert.equal(first.allowed,true);assert.equal(second.allowed,false);assert.equal(second.reason,'direct-already-used');
 });
 
-test('Asura may attack a newly summoned monster after an earlier direct attack',()=>{
+test('Asura cannot attack a monster after it has already attacked directly',()=>{
  const {session}=setup(),asura=deploy(session,0,fixture.asura);
  assert.equal(attack(session,asura,null,'asura-direct-before-summon').allowed,true);
  const target=deploy(session,1,fixture.target1);
- assert.equal(attack(session,asura,target,'asura-target-after-direct').allowed,true);
+ const result=attack(session,asura,target,'asura-target-after-direct');
+ assert.equal(result.allowed,false);assert.equal(result.reason,'monster-after-direct');
 });
 
 test('Asura Priest is not eligible for Special Summon',()=>{
@@ -251,12 +252,25 @@ test('Asura does not return if it left the field before its End Phase effect res
  assert.equal(result.applied,false);assert.equal(result.reason,'not-on-field');
 });
 
-test('Asura return can be negated without moving the physical card',()=>{
+test('activation negation retries the mandatory Asura return until it resolves',()=>{
  const {session}=setup(),{monster}=summonSpirit(session);
  session.duel.core.turnEnding=true;
- const end=adapter.beginSpiritEndPhase(session,'asura-end-negated',session.duel.core.turn);
- const result=adapter.resolveSpiritReturn(session,end.activationIds[0],true);
- assert.equal(result.applied,false);assert.equal(result.reason,'negated');
+ const end=adapter.beginSpiritEndPhase(session,'asura-end-activation-negated',session.duel.core.turn);
+ const first=adapter.resolveSpiritReturn(session,end.activationIds[0],{activationNegated:true});
+ assert.equal(first.applied,false);assert.equal(first.reason,'activation-negated');assert.ok(first.nextActivationId);
+ const replay=adapter.resolveSpiritReturn(session,end.activationIds[0],{activationNegated:true});
+ assert.equal(replay.replayed,true);assert.equal(replay.nextActivationId,first.nextActivationId);
+ assert.ok(session.duel.core.players[0].monsters.some(c=>c.uid===monster.uid));
+ const retry=adapter.resolveSpiritReturn(session,first.nextActivationId);
+ assert.equal(retry.applied,true);assert.equal(retry.reason,'returned');
+});
+
+test('effect negation resolves Asura return without moving the physical card',()=>{
+ const {session}=setup(),{monster}=summonSpirit(session);
+ session.duel.core.turnEnding=true;
+ const end=adapter.beginSpiritEndPhase(session,'asura-end-effect-negated',session.duel.core.turn);
+ const result=adapter.resolveSpiritReturn(session,end.activationIds[0],{effectNegated:true});
+ assert.equal(result.applied,false);assert.equal(result.reason,'effect-negated');
  assert.ok(session.duel.core.players[0].monsters.some(c=>c.uid===monster.uid));
 });
 
