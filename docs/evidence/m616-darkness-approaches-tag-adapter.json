@@ -1,0 +1,84 @@
+{
+  "format": 1,
+  "runId": "work-20261125T100717-0300-M616",
+  "mission": "M616",
+  "priority": "P1",
+  "cards": [
+    {
+      "name": "Darkness Approaches",
+      "passcode": "80168720",
+      "konamiDatabaseId": 4902,
+      "kind": "Normal Spell",
+      "firstTcgSet": "MRL-040",
+      "firstTcgRelease": "2002-09-16",
+      "officialEffect": "Discard 2 cards from your hand. Select 1 face-up monster and change it to face-down Defense Position.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4902&ope=2&request_locale=en"
+    }
+  ],
+  "implementation": {
+    "branch": "feat/work-m616-darkness-approaches-tag-adapter-20261125",
+    "baseSha": "1295a7c0d2a1ae14d4b926bdebdf8bef1963175f",
+    "files": [
+      "src/darknessApproachesTagAdapter.ts",
+      "tests/darknessApproachesTagAdapter.test.cjs",
+      "docs/evidence/m616-darkness-approaches-tag-adapter.json",
+      ".github/workflows/m616-darkness-approaches-tag-adapter.yml"
+    ],
+    "behavior": [
+      "Ativa apenas na Main Phase aberta, da mão privada do assento físico ativo.",
+      "Paga exatamente dois cards quaisquer da mesma mão física como custo imediato; Spell/Trap também são custos válidos.",
+      "Seleciona um monstro face-up de qualquer equipe, com vínculo por UID e ID.",
+      "Na resolução, vira o alvo original para face-down Defense; se o alvo sair, ficar face-down ou mudar de identidade, não escolhe outro.",
+      "Negação ou alvo inválido não devolvem o custo; recibo serializável bloqueia replay.",
+      "Preserva dono físico, UID, inventário, Deck 20–30, Extra 5, zonas 3+3 e mão 6 com descarte de regra apenas na End Phase."
+    ],
+    "integrationBoundary": "Adapter isolado; não altera resolver central, catálogo, metadata, certificações, allowlist, comandos Discord, persistência ou produção. Integração central aguarda handoff M61.",
+    "plannedScenarios": 26
+  },
+  "rules": {
+    "mainDeckPerPhysicalSeat": "20–30",
+    "extraDeckPerPhysicalSeat": "0–5",
+    "monsterZonesPerTeam": 3,
+    "spellTrapZonesPerTeam": 3,
+    "fieldZone": "uma por equipe, separada das três Spell/Trap Zones",
+    "handLimit": 6,
+    "handDiscard": "somente na End Phase"
+  },
+  "verification": {
+    "plannedScenarios": 26,
+    "focusedScenarios": 26,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "focusedTestCommand": "node --test tests/darknessApproachesTagAdapter.test.cjs",
+    "typecheck": "pending",
+    "build": "pending",
+    "evidenceValidation": "pending",
+    "cardBatchFast": "pending",
+    "milestone1000": "pending",
+    "engineValidation": "pending",
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "limitations": [
+    "A identidade real Darkness Approaches permanece fora do catálogo; os testes usam uma Spell habilitada como fixture e passam a identidade real pelo adapter.",
+    "O adapter modela a saída da Normal Spell da mão para o Cemitério no limite de ativação; o resolver central ainda precisa preservar a janela de corrente e aplicar o target binding na resolução.",
+    "Sem integração central, gateway Discord real, backup verificável, certificação, merge ou deploy."
+  ],
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  }
+}
