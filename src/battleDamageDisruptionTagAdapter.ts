@@ -155,7 +155,7 @@ export function createBattleDamageDisruptionAdapter(lookup:BattleDamageLookup=de
   const cached=session.resolved[activationId];if(cached)return {...structuredClone(cached),replayed:true};
   const pending=session.pending[activationId];if(!pending)throw new Error('Gatilho de dano de batalha não preparado.');
   const working=structuredClone(session.duel),before=inventorySnapshot(working);
-  let effectiveNegation=negation,applied=false;
+  let effectiveNegation:'none'|'activation'|'effect'|'source-inactive'=negation,applied=false;
   if(negation==='none'){
    if(!sourceIsActive(working,session,pending.source))effectiveNegation='source-inactive';
    else{
