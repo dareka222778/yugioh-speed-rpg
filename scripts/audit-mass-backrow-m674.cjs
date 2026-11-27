@@ -22,7 +22,7 @@ assert.match(source,/sourceLocation/);
 assert.match(tests,/mão privada do parceiro/);
 assert.match(tests,/Field Zone é separada/);
 assert.match(tests,/proprietário físico/);
-assert.match(tests,/negação de ativação/);
+assert.match(tests,/ativação negada/);
 assert.match(tests,/replay divergente/);
 const certified=[...certificates.matchAll(/^\s*"(\d{8})"\s*:/gm)].map(match=>match[1]);
 assert.equal(new Set(certified).size,evidence.engineCertifiedCardsBefore);
