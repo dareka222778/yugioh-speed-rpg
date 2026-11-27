@@ -1,0 +1,93 @@
+{
+  "format": 1,
+  "mission": "M603",
+  "card": {
+    "name": "Swift Gaia the Fierce Knight",
+    "portugueseName": "Gaia, o Cavaleiro Impetuoso Célere",
+    "passcode": "16589042",
+    "konamiDatabaseId": 5243,
+    "stats": {
+      "level": 7,
+      "atk": 2300,
+      "def": 2100,
+      "race": "Warrior",
+      "attribute": "DARK"
+    },
+    "effect": "If this is the only card in your hand, you can Normal Summon it without Tributing.",
+    "tcgFirstPrint": "CT1-EN004, 2004-09-01",
+    "historicalCutoff": "2004-09-30"
+  },
+  "sources": [
+    {
+      "publisher": "Konami TCG database",
+      "url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5243&ope=2&request_locale=en",
+      "supports": [
+        "official card identity",
+        "stats",
+        "effect text",
+        "first TCG printing CT1-EN004 on 2004-09-01"
+      ]
+    },
+    {
+      "publisher": "Konami TCG database (Portuguese)",
+      "url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5243&ope=2&request_locale=pt",
+      "supports": [
+        "Portuguese card name and effect text"
+      ]
+    },
+    {
+      "publisher": "YGOPRODeck",
+      "url": "https://ygoprodeck.com/CARD/SWIFT-GAIA-THE-FIERCE-KNIGHT-1428",
+      "supports": [
+        "passcode 16589042",
+        "TCG release date 2004-09-01"
+      ]
+    }
+  ],
+  "rules": {
+    "procedure": "Optional Normal Summon without Tribute",
+    "condition": "This exact card must be the only card in the physical owner's private hand",
+    "timing": "Main Phase only",
+    "position": "Face-up Attack Position; this adapter does not model Set as Normal Summon",
+    "normalSummon": "Consumes the team's once-per-turn Normal Summon flag",
+    "tribute": "Zero Tributes, despite Level 7",
+    "tagDuel": "Partner's separate private hand does not count toward this player's hand condition",
+    "handLimit": "No early discard; the six-card hand limit is handled at End Phase",
+    "zones": "Three Monster Zones and three Spell/Trap Zones per team",
+    "deckRules": "20–30 Main Deck cards and at most five Extra Deck cards per physical seat"
+  },
+  "tests": [
+    "only card in physical hand",
+    "partner private hand is independent",
+    "inactive partner cannot summon on teammate's turn",
+    "Main Phase and Normal Summon availability",
+    "face-up Attack, Normal Summon consumed, zero Tributes",
+    "UID conservation and immutable input",
+    "stale hand snapshot rejected",
+    "seven-card hand not auto-discarded",
+    "wrong identity and full field rejected",
+    "stale turn/phase rejected",
+    "Main/Extra Deck and 3+3 zone invariants",
+    "production adapter pinned to official passcode"
+  ],
+  "scope": {
+    "newFilesOnly": true,
+    "catalogRegistration": false,
+    "certificateAdded": false,
+    "automaticCertification": false,
+    "resolverIntegration": false,
+    "discordIntegration": false,
+    "inventoryGranted": 0,
+    "persistentPlayerDataChanged": false,
+    "merge": false,
+    "deploy": false,
+    "liveDiscordValidation": false,
+    "testFixtureUsesCatalogValidId": true
+  },
+  "limitations": [
+    "Adapter is isolated and is not connected to the central Normal Summon action or trigger queue.",
+    "Summon-negation handling and other Normal Summon modifiers are not modeled.",
+    "No card certification is claimed; behavior requires resolver integration and end-to-end engine tests.",
+    "Because Swift Gaia is not yet registered in the runtime catalog, behavioral tests inject a catalog-valid fixture ID through the adapter factory. The production entrypoint remains pinned to 16589042 and is not yet usable in a real duel until catalog registration and resolver handoff."
+  ]
+}
