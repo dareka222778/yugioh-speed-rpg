@@ -1,0 +1,40 @@
+name: M625 Confiscation Tag Adapter
+on:
+  push:
+    branches:
+      - feat/work-m625-confiscation-tag-adapter-20261125
+    paths:
+      - src/tagPrivateHand.ts
+      - src/confiscationTagAdapter.ts
+      - tests/confiscationTagAdapter.test.cjs
+      - docs/evidence/m625-confiscation-tag-adapter.json
+      - .github/workflows/m625-confiscation-tag-adapter.yml
+  pull_request:
+    branches:
+      - feat/rea-engine-recovery-20261026
+    paths:
+      - src/confiscationTagAdapter.ts
+      - tests/confiscationTagAdapter.test.cjs
+      - docs/evidence/m625-confiscation-tag-adapter.json
+      - .github/workflows/m625-confiscation-tag-adapter.yml
+permissions:
+  contents: read
+concurrency:
+  group: m625-confiscation-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+jobs:
+  focused:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate evidence metadata
+        run: node -e "const e=require('./docs/evidence/m625-confiscation-tag-adapter.json'); if(e.format!==1 || e.mission!=='M625' || e.cards.length!==1 || e.cards[0].passcode!=='17375316' || e.verification.focusedScenarios!==29 || e.verification.newCertifications!==0 || e.verification.inventoryGranted!==0 || e.production.merge || e.production.deploy) process.exit(1)"
+      - run: node --test tests/confiscationTagAdapter.test.cjs
