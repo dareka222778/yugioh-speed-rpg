@@ -37,7 +37,7 @@ export type BalterSpellResolution={
  lpPaid:number;replayed:boolean;
 };
 export type BattleNegation={
- battleId:string;destroyerUid:string;destroyedUid:string;sourceUids:string[];
+ battleId:string;destroyerUid:string;destroyedUid:string;destroyedBinding?:TargetBinding;sourceUids:string[];
  status:'effect-negated'|'not-negated'|'not-effect-monster'|'not-battle-destruction';replayed:boolean;
 };
 export type FiendEffectNegationSession={
@@ -181,7 +181,7 @@ export function createFiendEffectNegationAdapter(lookup:FiendNegationLookup=defa
  }
  /** Skill Drain negates face-up monster effects, but never prohibits their activation. */
  function monsterEffectActivationAllowed(duel:TagDuel,uid:string):boolean{
-  assertFiendEffectNegationRules(duel);return !!findMonster(duel,uid);
+  assertFiendEffectNegationRules(duel);return !!findMonster(duel,uid)?.monster.faceUp;
  }
  function monsterEffectNegated(duel:TagDuel,uid:string):boolean{
   assertFiendEffectNegationRules(duel);return otherMonsterNegation(duel,uid,lookup);
@@ -315,6 +315,8 @@ export function createFiendEffectNegationAdapter(lookup:FiendNegationLookup=defa
   if(!attacker.monster.faceUp)throw new Error('O atacante precisa estar face-up para registrar a batalha.');
   const targetCard=getDuelCard(target.monster.id);
   const effectMonster=targetCard?.kind==='monster'&&(targetCard.monsterType==='effect'||!!getMonsterEffect(target.monster.id));
+  const destroyedBinding=bindTarget(session.duel.core,input.destroyedUid);
+  if(!destroyedBinding||destroyedBinding.zone!=='monsters')throw new Error('Vínculo do monstro destruído inválido.');
   if(!effectMonster){
    const result:BattleNegation={battleId:input.battleId,destroyerUid:input.destroyerUid,destroyedUid:input.destroyedUid,
     sourceUids:[],status:'not-effect-monster',replayed:false};session.battleNegations[input.battleId]=result;return {...result};
@@ -327,13 +329,18 @@ export function createFiendEffectNegationAdapter(lookup:FiendNegationLookup=defa
   }
   if(attacker.monster.uid===input.destroyerUid&&attacker.monster.faceUp&&lookup(attacker.monster.id)?.effect==='dark-balter'&&
    !otherMonsterNegation(session.duel,attacker.monster.uid,lookup))sourceUids.push(attacker.monster.uid);
-  const result:BattleNegation={battleId:input.battleId,destroyerUid:input.destroyerUid,destroyedUid:input.destroyedUid,
+  const result:BattleNegation={battleId:input.battleId,destroyerUid:input.destroyerUid,destroyedUid:input.destroyedUid,destroyedBinding,
    sourceUids:[...new Set(sourceUids)],status:sourceUids.length?'effect-negated':'not-negated',replayed:false};
   session.battleNegations[input.battleId]=result;return {...result};
  }
  function isDestroyedMonsterEffectNegated(session:FiendEffectNegationSession,uid:string):boolean{
   assertSession(session);assertId(uid,'UID do monstro');
-  return Object.values(session.battleNegations).some(row=>row.destroyedUid===uid&&row.status==='effect-negated');
+  return Object.values(session.battleNegations).some(row=>{
+   if(row.destroyedUid!==uid||row.status!=='effect-negated'||!row.destroyedBinding)return false;
+   const current=bindTarget(session.duel.core,uid);
+   return !!current&&current.epoch>=row.destroyedBinding.epoch&&current.epoch<=row.destroyedBinding.epoch+1&&
+    ['monsters','grave','banished'].includes(current.zone);
+  });
  }
  return {createSession,activeSources,monsterEffectActivationAllowed,monsterEffectNegated,activateSkillDrain,resolveSkillDrain,
   activateDarkBalterSpellNegation,resolveDarkBalterSpellNegation,recordBattleDestruction,isDestroyedMonsterEffectNegated};
