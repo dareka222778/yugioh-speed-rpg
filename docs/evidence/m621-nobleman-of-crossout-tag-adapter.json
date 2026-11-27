@@ -1,0 +1,88 @@
+{
+  "format": 1,
+  "runId": "work-20261125T111226-0300-M621",
+  "mission": "M621",
+  "priority": "P1",
+  "cards": [
+    {
+      "name": "Nobleman of Crossout",
+      "passcode": "71044499",
+      "konamiDatabaseId": 4963,
+      "kind": "Normal Spell",
+      "firstTcgSet": "PSV-034",
+      "firstTcgRelease": "2002-10-20",
+      "officialEffect": "Target 1 face-down monster on the field; destroy that target, and if you do, banish it, then, if it was a Flip monster, each player reveals their Main Deck, then banishes all cards from it with that monster's name.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4963&ope=2&request_locale=en"
+    }
+  ],
+  "implementation": {
+    "branch": "feat/work-m621-nobleman-crossout-tag-adapter-20261125",
+    "baseSha": "7d1e6a32bf4875becb19b950c7a90fe381ad59c1",
+    "files": [
+      "src/noblemanOfCrossoutTagAdapter.ts",
+      "tests/noblemanOfCrossoutTagAdapter.test.cjs",
+      "docs/evidence/m621-nobleman-of-crossout-tag-adapter.json",
+      ".github/workflows/m621-nobleman-of-crossout-tag-adapter.yml"
+    ],
+    "behavior": [
+      "Ativa apenas na Main Phase aberta, da mão privada do assento físico ativo.",
+      "Seleciona somente um monstro face-down de qualquer equipe; a identidade não aparece no plano de ativação.",
+      "Na resolução, revalida UID/zona/epoch e aplicabilidade de Magia; alvo que sai e retorna não é substituído.",
+      "Destrói/banisce o alvo para a zona da equipe proprietária física, preservando UID e properlySummoned.",
+      "Se o alvo for Flip, revela snapshots dos quatro Decks principais físicos e bane todas as cópias com o mesmo rulesCardName.",
+      "Usa as quatro zonas privadas de Deck, incluindo reservas; preserva ordem relativa das cartas não banidas.",
+      "Retorna os Decks revelados e UIDs banidos para publicação pública somente após a resolução.",
+      "Negação, alvo obsoleto e alvo protegido não revelam Decks; recibo serializável bloqueia replay."
+    ],
+    "integrationBoundary": "Adapter isolado. Não altera resolver central, catálogo, metadata, certificações, allowlist, comandos Discord, persistência ou produção. Integração central depende de handoff M61."
+  },
+  "rules": {
+    "mainDeckPerPhysicalSeat": "20–30",
+    "extraDeckPerPhysicalSeat": "0–5",
+    "monsterZonesPerTeam": 3,
+    "spellTrapZonesPerTeam": 3,
+    "fieldZone": "uma por equipe, separada das três Spell/Trap Zones",
+    "handLimit": 6,
+    "handDiscard": "somente na End Phase"
+  },
+  "verification": {
+    "plannedScenarios": 31,
+    "focusedScenarios": 31,
+    "focusedTestCommand": "node --test tests/noblemanOfCrossoutTagAdapter.test.cjs",
+    "typecheck": "pending",
+    "build": "pending",
+    "evidenceValidation": "pending",
+    "focusedWorkflowRun": null,
+    "cardBatchFast": "pending",
+    "milestone1000": "pending",
+    "engineValidation": "pending",
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "limitations": [
+    "O ID real ainda não está em cardMetadata/certificações/effects; os testes usam uma Normal Spell habilitada como fixture e um Flip monster já habilitado.",
+    "O adapter representa a sequência de banimento e revelação, mas ainda não está conectado aos hooks centrais de destruição/onDestroy e proteção de destruição; não deve ser certificado antes dessa integração.",
+    "A identidade do alvo permanece fora do plano público de ativação; os snapshots dos quatro Decks são retornados somente na resolução.",
+    "Sem gateway Discord real, backup verificável, merge ou deploy.",
+    "Nenhuma carta é concedida e nenhum dado persistente de jogador é alterado."
+  ],
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  }
+}
