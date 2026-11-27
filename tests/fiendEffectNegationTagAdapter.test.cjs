@@ -24,7 +24,7 @@ const effectMonsterId=enabled.find(id=>{
 });
 const fiends=enabled.filter(id=>{
  const card=getDuelCard(id);
- return card?.kind==='monster'&&card.race==='Fiend'&&card.monsterType==='normal';
+ return card?.kind==='monster'&&card.race==='Fiend';
 }).slice(0,3);
 const trapId=enabled.find(id=>getDuelCard(id)?.kind==='trap'&&id!==royalDecreeId&&getEffect(id)?.kind!=='continuous');
 const fusionIds=enabled.filter(id=>getDuelCard(id)?.fusion).slice(0,6);
