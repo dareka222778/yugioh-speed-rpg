@@ -1,0 +1,60 @@
+{
+  "format": 1,
+  "mission": "M675",
+  "runId": "work-20261127T075753-0300-M675",
+  "title": "Threatening Roar / Scrap-Iron Scarecrow — TagDuel attack-prevention adapters",
+  "cutoff": "2004-09-30",
+  "cards": [
+    {
+      "name": "Threatening Roar",
+      "id": "36361633",
+      "officialText": "Your opponent cannot declare an attack this turn.",
+      "behavior": "Aplica bloqueio de declaração de ataque à equipe adversária somente no turno atual; não cancela ataque já declarado."
+    },
+    {
+      "name": "Scrap-Iron Scarecrow",
+      "id": "98427577",
+      "officialText": "When your opponent's monster declares an attack: Target the attacking monster; negate the attack, then Set this card face-down instead of sending it to the Graveyard.",
+      "behavior": "Cancela somente a declaração de ataque vinculada ao UID original e volta face-down com setTurn atualizado, sem terminar a Battle Phase."
+    }
+  ],
+  "scenarioCount": 24,
+  "behaviorVerifiedCards": 2,
+  "engineCertifiedCardsBefore": 959,
+  "engineCertifiedCardsAfter": 959,
+  "newCertifications": 0,
+  "automaticCertifications": 0,
+  "inventoryGrants": 0,
+  "certificationStatus": "adapter-only; not engine-v9 certified",
+  "runtimeIntegration": "pending-explicit-attack-declaration-and-canDeclareAttack-hooks",
+  "coverage": [
+    "Threatening Roar bloqueia somente novas declarações da equipe adversária no turno de resolução",
+    "Threatening Roar não cancela ataque que já havia sido declarado",
+    "Scrap-Iron Scarecrow cancela a declaração de ataque original sem terminar a Battle Phase",
+    "Scrap-Iron Scarecrow volta face-down e só pode ser reutilizada após o próximo turno",
+    "janela de ataque, prioridade, assento ativo e turno são validados",
+    "UID/ownerSeat, mãos privadas, Deck 20–30, mão 6 na End Phase, zonas 3+3, Field Zone separada, Extra 5",
+    "negação, saída da fonte, replay idempotente, restauração JSON e conservação de inventário",
+    "zero concessões automáticas de inventário"
+  ],
+  "rules": {
+    "mainDeck": "20–30 por assento físico",
+    "handLimit": 6,
+    "handCheck": "End Phase",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "extraDeckMax": 5,
+    "fieldZone": "separada",
+    "tagDuel": "duas equipes, quatro assentos físicos, mãos/Decks privados, Cemitério compartilhado por equipe"
+  },
+  "production": "unchanged",
+  "merge": "not-authorized",
+  "discordLive": false,
+  "limitations": [
+    "Os dois efeitos foram verificados em adapter isolado com cartas Spell/Trap habilitadas como fixtures de origem; os IDs reais não foram admitidos no catálogo.",
+    "O adapter não está conectado ao resolver central. O host deve encaminhar a janela de ativação/resolução e consultar canDeclareAttack antes de cada declaração.",
+    "A sessão do adapter, incluindo attackLocks e receipts, deve ser persistida junto ao duelo para sobreviver a reinícios.",
+    "Não há integração de comandos, banco, gateway Discord, certificação engine-v9, merge ou deploy."
+  ],
+  "nextTask": "Solicitar handoff explícito do hook de resposta a ataque e do gate de declaração; integrar uma carta por vez e certificar somente após regressão completa."
+}
