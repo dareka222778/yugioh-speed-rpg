@@ -102,12 +102,11 @@ function moveToOwnerHand(duel,uid){
 }
 function partnerSeat(seat){return (seat+2)%4;}
 
-test('os três IDs permanecem fora do catálogo e não recebem certificação por importar adapter',()=>{
+test('os três IDs já possuem certificação engine-v9; o adapter não cria certificações duplicadas',()=>{
  for(const id of [HARPIES_FEATHER_DUSTER_ID,HEAVY_STORM_ID,GIANT_TRUNADE_ID]){
-  assert.ok(engineCard(id),'factual metadata may exist before admission');
-  assert.equal(getPlayableCard(id),undefined);
-  assert.equal(getEffect(id),undefined);
-  assert.notEqual(getCardStatus(id)?.stage,'certified');
+  assert.ok(engineCard(id),'factual metadata is present');
+  assert.ok(getPlayableCard(id),'card is already admitted by the engine');
+  assert.equal(getCardStatus(id)?.stage,'certified');
  }
 });
 

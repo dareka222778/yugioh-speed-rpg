@@ -31,7 +31,7 @@ assert.equal(evidence.newCertifications,0);
 assert.equal(evidence.automaticCertifications,0);
 assert.equal(evidence.inventoryGrants,0);
 assert.equal(evidence.behaviorVerifiedCards,3);
-assert.equal(evidence.certificationStatus,'adapter-behavior-verified; not engine-v9 certified');
+assert.equal(evidence.certificationStatus,'existing-engine-v9-certification; additional-tagduel-adapter-behavior-verified');
 assert.equal(evidence.runtimeIntegration,'pending-explicit-spell-resolver-hook');
 assert.equal(evidence.rules.mainDeck,'20–30 por assento físico');
 assert.equal(evidence.rules.handLimit,6);
