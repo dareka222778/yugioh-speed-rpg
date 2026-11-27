@@ -1,0 +1,80 @@
+{
+  "format": 1,
+  "runId": "work-202611271637320300-M680",
+  "mission": "M680",
+  "owner": "Work principal",
+  "priority": "P1",
+  "priorityRequestedBy": "User",
+  "status": "reserved-and-implementing",
+  "startedAt": "2026-11-27T16:37:32-03:00",
+  "endedAt": null,
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedBaseHead": "aec3d27eb054d5543fb95aa281590e5a84f8079a",
+  "branch": "feat/work-m680-graveyard-banish-costs-20261127",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "aec3d27eb054d5543fb95aa281590e5a84f8079a",
+  "headSha": null,
+  "reservedFiles": [
+    "src/graveyardBanishCostTagAdapter.ts",
+    "tests/graveyardBanishCostTagAdapter.test.cjs",
+    "docs/evidence/m680-graveyard-banish-costs.json",
+    "scripts/audit-graveyard-banish-costs-m680.cjs",
+    ".github/workflows/m680-graveyard-banish-costs.yml",
+    "coordination/runs/work-202611271637320300-M680.json"
+  ],
+  "scope": "Adapter TagDuel clássico isolado para Bazoo the Soul-Eater (40133511/CID 5250) e Skull Lair (06733059/CID 5264): custo de banir monstros do Cemitério compartilhado por equipe com UID/proprietário físico preservado; Bazoo ganha +300 ATK por monstro até o fim do próximo turno oponente, uma vez por turno; Skull Lair paga banimento como custo e destrói na resolução um monstro face-up cujo Level corresponda à quantidade banida, sem seleção antecipada de alvo. Preserva Deck 20–30, mão 6 na End Phase, zonas 3+3, Field Zone separada, Extra 5, privacidade e inventário. Sem resolver central, catálogo/certificações, comandos, banco, inventário concedido ou produção.",
+  "cards": [
+    {
+      "id": "40133511",
+      "name": "Bazoo the Soul-Eater",
+      "konamiCid": 5250,
+      "atk": 1600,
+      "def": 900,
+      "firstTcgRelease": "2003-03-01",
+      "firstOcgRelease": "2003-06-26",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5250&ope=2&request_locale=en"
+    },
+    {
+      "id": "06733059",
+      "name": "Skull Lair",
+      "konamiCid": 5264,
+      "firstTcgRelease": "2003-03-01",
+      "firstOcgRelease": "2001-07-21",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5264&ope=2&request_locale=en"
+    }
+  ],
+  "blocksCompleted": [
+    "HEAD compartilhado e coordenação relidos; reserva M680 criada por branch própria e CAS contra HEAD observado.",
+    "Pesquisa oficial de identidade/texto/IDs confirmada; nenhum dos dois IDs consta no catálogo/certificações atuais."
+  ],
+  "implementedCards": 0,
+  "behaviorVerifiedCards": 0,
+  "newCertifications": 0,
+  "automaticCertifications": 0,
+  "inventoryGrants": 0,
+  "verification": {
+    "typecheck": "pending",
+    "build": "pending",
+    "focusedTests": "pending",
+    "evidenceValidation": "pending",
+    "ci": "pending",
+    "adapterBehaviorVerifiedCards": 0,
+    "behaviorCertifiedCards": 0,
+    "discordLive": "not-run"
+  },
+  "effectiveWorkMinutes": 0,
+  "targetEffectiveWorkMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "pr": null,
+  "production": "not-changed",
+  "merge": "not-authorized",
+  "deploy": "not-authorized",
+  "blockers": [
+    "Integração e certificação engine-v9 aguardam handoff explícito dos arquivos centrais solicitado no PR #17."
+  ],
+  "nextTask": "Implementar custo comum de banimento do GY e os dois efeitos com resolução em etapas, UID/epoch, propriedade física e regressões 2v2.",
+  "nextWindow": "2026-11-27T17:30:00-03:00",
+  "scopeReleasedToAuxiliary": []
+}
