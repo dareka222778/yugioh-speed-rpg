@@ -79,9 +79,10 @@ function findMonster(duel:TagDuel,uid:string):{team:BanishCostTeam;monster:Monst
  return undefined;
 }
 function findBackrow(duel:TagDuel,team:BanishCostTeam,uid:string):Backrow|undefined{return duel.core.players[team].backrow.find(card=>card.uid===uid);}
-function sourceStillMonster(duel:TagDuel,uid:string,team:BanishCostTeam,binding:TargetBinding):boolean{
+function sourceStillMonster(duel:TagDuel,uid:string,binding:TargetBinding):boolean{
  const found=findMonster(duel,uid);
- return binding.zone==='monsters'&&targetBindingValid(duel.core,binding)&&!!found?.monster.faceUp&&found?.team===team;
+ // A controller change inside the Monster Zone preserves this instance's binding.
+ return binding.zone==='monsters'&&targetBindingValid(duel.core,binding)&&!!found?.monster.faceUp;
 }
 function sourceStillBackrow(duel:TagDuel,plan:SkullLairPlan):boolean{
  const source=findBackrow(duel,plan.sourceTeam,plan.sourceUid);
@@ -161,14 +162,14 @@ export function createGraveyardBanishCostAdapter(lookup:BanishCostLookup=default
   const plan=session.bazooPending[activationId];if(!plan)throw new Error('Ativação Bazoo não encontrada.');
   let status:BazooResolution['status'];
   if(options.negated)status='effect-negated';
-  else if(!sourceStillMonster(session.duel,plan.sourceUid,plan.sourceTeam,plan.sourceBinding))status='source-left-field';
+  else if(!sourceStillMonster(session.duel,plan.sourceUid,plan.sourceBinding))status='source-left-field';
   else{session.bazooBonuses[plan.sourceUid]={sourceUid:plan.sourceUid,sourceTeam:plan.sourceTeam,sourceBinding:plan.sourceBinding,amount:plan.atkGain,expiresAfterTurn:plan.expiresAfterTurn};status='boosted';}
   const result:BazooResolution={activationId,sourceUid:plan.sourceUid,atkGain:plan.atkGain,expiresAfterTurn:plan.expiresAfterTurn,status,replayed:false};
   delete session.bazooPending[activationId];session.bazooResolved[activationId]=result;assertSession(session);return result;
  }
  function bazooBonus(session:GraveyardBanishCostSession,uid:string):number{
   assertSession(session);const bonus=session.bazooBonuses[uid];if(!bonus)return 0;
-  if(session.duel.core.turn>bonus.expiresAfterTurn||!sourceStillMonster(session.duel,bonus.sourceUid,bonus.sourceTeam,bonus.sourceBinding)){delete session.bazooBonuses[uid];return 0;}
+  if(session.duel.core.turn>bonus.expiresAfterTurn||!sourceStillMonster(session.duel,bonus.sourceUid,bonus.sourceBinding)){delete session.bazooBonuses[uid];return 0;}
   return bonus.amount;
  }
  function effectiveAtk(session:GraveyardBanishCostSession,uid:string):number|undefined{

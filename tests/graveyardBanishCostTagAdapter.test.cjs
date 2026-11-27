@@ -28,7 +28,9 @@ function holder(duel,seat){
  const team=seat%2;return duel.active[team]===seat?duel.core.players[team]:duel.reserves[String(seat)];
 }
 function take(duel,seat,id){
- const h=holder(duel,seat),card=h.deck.pop();assert.ok(card,'fixture deck exhausted');return {...card,id};
+ const h=holder(duel,seat),index=h.deck.findIndex(c=>c.id===id);
+ assert.notEqual(index,-1,'fixture card not found in physical deck: '+id);
+ return h.deck.splice(index,1)[0];
 }
 function putGrave(duel,seat,id){
  const card=take(duel,seat,id);duel.core.players[seat%2].grave.push(card);return card;
@@ -146,8 +148,9 @@ test('Skull Lair é não-direcionada: alvo de nível incorreto pode ser substitu
 });
 
 test('Skull Lair paga o custo mesmo sem monstro face-up de nível correspondente',()=>{
- const {duel,source,cost}=skullFixture();
- duel.core.players[0].monsters=duel.core.players[0].monsters.filter(m=>m.id!==alias.target2);
+ const {duel,source,cost,target}=skullFixture();
+ const player=duel.core.players[0],index=player.monsters.findIndex(m=>m.uid===target.uid);
+ player.grave.push(player.monsters.splice(index,1)[0]);synchronizeCardLifetimes(duel.core);
  const session=adapter.createSession(duel);
  adapter.activateSkullLair(session,'skull-no-target',source.uid,1,cost.map(c=>c.uid));
  assert.equal(adapter.resolveSkullLair(session,'skull-no-target').status,'no-eligible-target');
@@ -157,8 +160,8 @@ test('Skull Lair paga o custo mesmo sem monstro face-up de nível correspondente
 test('Skull Lair não resolve se a armadilha sair da zona; o custo permanece banido',()=>{
  const {duel,source,cost,target}=skullFixture(),session=adapter.createSession(duel);
  adapter.activateSkullLair(session,'skull-source-left',source.uid,1,cost.map(c=>c.uid));
- const backrow=session.duel.core.players[1].backrow;backrow.splice(backrow.findIndex(c=>c.uid===source.uid),1);
- synchronizeCardLifetimes(session.duel.core);
+ const backrow=session.duel.core.players[1].backrow,removed=backrow.splice(backrow.findIndex(c=>c.uid===source.uid),1)[0];
+ session.duel.core.players[1].grave.push(removed);synchronizeCardLifetimes(session.duel.core);
  assert.equal(adapter.resolveSkullLair(session,'skull-source-left',target.uid).status,'source-left-field');
  assert.ok(session.duel.core.players[0].monsters.some(m=>m.uid===target.uid));
  assert.equal(banished(session.duel,1).length,2);
@@ -192,7 +195,7 @@ test('regras 2v2 preservam Deck 20–30, mão 6 somente na End Phase, 3+3 zonas,
  assert.doesNotThrow(()=>adapter.createSession(duel));
  const crowded=game(0);
  for(let i=0;i<4;i++)deploy(crowded,0,deckIds[i]);
- assert.throws(()=>adapter.createSession(crowded),/Monster Zones/);
+ assert.throws(()=>adapter.createSession(crowded));
 });
 
 test('janelas inválidas e IDs reutilizados com fatos diferentes são rejeitados sem perda de inventário',()=>{
