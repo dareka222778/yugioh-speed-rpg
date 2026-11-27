@@ -10,11 +10,11 @@ const {
 }=require('../dist/flipSearchTagAdapter.js');
 
 const NORMALS=[...new Set(tag.tagNormalCardIds)];
-assert.ok(NORMALS.length>=20,'fixtures need four physical 20-card decks');
+assert.ok(NORMALS.length>=31,'fixtures need four physical 20-card decks');
 const TRAP_ID='17814387';
 const FIELD_ID='50913601';
 const FIELD_SENTINEL_ID='86318356';
-const NON_FIELD_SPELL_ID='76103675';
+const NON_FIELD_SPELL_ID='38199696';
 let sequence=0;
 function scenario(name,run){test(name,run);}
 function member(seat){return 'm677-seat-'+seat;}
@@ -51,9 +51,10 @@ function addCandidate(state,seat,id){
   return uid;
 }
 function addFieldSentinel(state,team=1,ownerSeat=1){
-  const physical=holder(state,ownerSeat),index=physical.deck.findIndex(card=>card.id===FIELD_SENTINEL_ID);
-  assert.ok(index>=0,'field sentinel fixture must exist');
-  const [card]=physical.deck.splice(index,1);
+  const physical=holder(state,ownerSeat),deckIndex=physical.deck.findIndex(card=>card.id===FIELD_SENTINEL_ID);
+  const handIndex=physical.hand.findIndex(card=>card.id===FIELD_SENTINEL_ID);
+  assert.ok(deckIndex>=0||handIndex>=0,'field sentinel fixture must exist');
+  const [card]=deckIndex>=0?physical.deck.splice(deckIndex,1):physical.hand.splice(handIndex,1);
   state.core.players[team].field={...card,faceUp:true,setTurn:Math.max(0,state.core.turn-1)};
   return card.uid;
 }
@@ -65,8 +66,8 @@ function addBackrow(state,team,ownerSeat,id=TRAP_ID){
   return uid;
 }
 function moveHand(state,seat,count){
-  const physical=holder(state,seat);
-  physical.hand.push(...physical.deck.splice(0,count));
+  const physical=holder(state,seat),needed=Math.max(0,count-physical.hand.length);
+  physical.hand.push(...physical.deck.splice(0,needed));
 }
 function inventory(state){
   const cards=tag.tagInventory(state).filter(card=>card.entityKind!=='token');
@@ -102,7 +103,11 @@ function resolve(activation,choice=null,negated=false,hasNecro){
   return resolveFlipSearch(activation.state,activation.plan,choice,negated,hasNecro);
 }
 function findCandidate(state,seat,id){
-  return holder(state,seat).deck.find(card=>card.id===id);
+  const physical=holder(state,seat),inDeck=physical.deck.find(card=>card.id===id);
+  if(inDeck)return inDeck;
+  const index=physical.hand.findIndex(card=>card.id===id);
+  if(index<0)return undefined;
+  const [card]=physical.hand.splice(index,1);physical.deck.unshift(card);return card;
 }
 function removeFieldCandidate(state,seat,id){
   const physical=holder(state,seat),index=physical.deck.findIndex(card=>card.id===id);
@@ -179,12 +184,14 @@ scenario('Cat cannot select a Spell even when the Deck contains one',()=>{
   assert.throws(()=>resolve(activation,{selectedUid:field.uid,destination:'top'}),/Tipo de carta incompatível/);
 });
 scenario('Owl cannot select a Trap even when a Field Spell is also available',()=>{
-  const state=create(0,'owl-wrong-type'),source=addSource(state,0,2,'owl-field'),trap=addCandidate(state,0,TRAP_ID);
+  const state=create(0,'owl-wrong-type'),source=addSource(state,0,2,'owl-field'),field=findCandidate(state,0,FIELD_ID),trap=addCandidate(state,0,TRAP_ID);
+  assert.ok(field);
   const activation=activate(state,0,source);
   assert.throws(()=>resolve(activation,{selectedUid:trap,destination:'top'}),/Tipo de carta incompatível/);
 });
 scenario('Owl rejects a Normal Spell that is not a Field Spell',()=>{
-  const state=create(0,'owl-normal-spell'),source=addSource(state,0,2,'owl-field'),normal=addCandidate(state,0,NON_FIELD_SPELL_ID);
+  const state=create(0,'owl-normal-spell'),source=addSource(state,0,2,'owl-field'),field=findCandidate(state,0,FIELD_ID),normal=addCandidate(state,0,NON_FIELD_SPELL_ID);
+  assert.ok(field);
   const activation=activate(state,0,source);
   assert.throws(()=>resolve(activation,{selectedUid:normal,destination:'top'}),/Tipo de carta incompatível/);
 });
