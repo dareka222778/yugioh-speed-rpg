@@ -3,13 +3,13 @@
   "runId": "work-20261126T211424-0300-M662",
   "mission": "M662",
   "priority": "P1",
-  "status": "reserved-and-implementing",
+  "status": "ci-running",
   "startedAt": "2026-11-26T21:14:24-03:00",
   "endedAt": null,
   "sharedBranch": "feat/rea-engine-recovery-20261026",
   "baseHead": "eadeaf5ba54172fbdcb58a2ed45d23ff873c75a2",
   "branch": "feat/work-m662-neko-mane-king-end-phase-20261126",
-  "headSha": null,
+  "headSha": "8b31e07e184dfa7126ae70c3d19f90b7e0f88352",
   "scope": "Adapter TagDuel isolado para Neko Mane King (11021521 / Konami CID 5595): gatilho obrigatório somente durante o turno oponente quando a instância em posse da equipe é enviada ao Cemitério por efeito de carta controlado pela equipe adversária; captura evento e resolução em duas etapas, não interrompe uma cadeia em resolução, admite negação da ativação/efeito e agenda End Phase do turno atual de forma idempotente. Preserva assento/UID físico, propriedade, Deck 20–30, mão 6 na End Phase, zonas 3+3, Field Zone separada e Extra Deck 5. Sem resolver central, catálogo/certificações, comandos, banco, inventário ou produção.",
   "reservedFiles": [
     "src/nekoManeKingTagAdapter.ts",
@@ -20,17 +20,30 @@
   ],
   "certifiedCardsBefore": 969,
   "catalogCardsAtBase": 969,
-  "certifiedCardsAfter": null,
+  "certifiedCardsAfter": 969,
   "newCertifications": 0,
   "inventoryGrants": 0,
   "ci": {
-    "focused": "pending",
-    "repositoryRegression": "pending"
+    "focused": "success",
+    "cardBatchFast": "success",
+    "milestone1000": "success",
+    "engineValidation": "in_progress"
   },
-  "pr": null,
+  "pr": {
+    "number": 596,
+    "url": "https://github.com/dareka222778/yugioh-speed-rpg/pull/596",
+    "draft": true,
+    "base": "feat/rea-engine-recovery-20261026"
+  },
   "production": "não alterada",
   "discord": "não validado ao vivo",
   "handoff": "pedido cooperativo publicado no PR #17; aguardando liberação explícita de src/monsterEffects.ts e src/duelEngineCurrent.ts; nenhum arquivo central será editado",
-  "nextTask": "Implementar o adapter puro Neko Mane King com captura do envio ao GY e resolução separada do gatilho; cobrir equipe/turno, origem, causa, posse, negação, cadeia, idempotência e rotação 2v2; abrir PR draft após CI focada.",
-  "nextWindow": "2026-11-26T22:30:00-03:00"
+  "nextTask": "Aguardar o workflow Engine validation (test + extended-soak) no HEAD 8b31e07; se passar, registrar checkpoint e liberar a reserva M662. Em seguida, M663: Lord of D. + The Flute of Summoning Dragon, em branch própria e arquivos exclusivos.",
+  "nextWindow": "2026-11-26T22:30:00-03:00",
+  "localValidation": {
+    "typecheck": "passed",
+    "focusedScenarios": 26,
+    "focusedTests": "26/26 passed"
+  },
+  "lastActivityAt": "2026-11-26T21:35:00-03:00"
 }
