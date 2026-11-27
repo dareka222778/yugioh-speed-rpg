@@ -1,0 +1,89 @@
+{
+  "format": 1,
+  "runId": "work-20261127T123900-0300-M678",
+  "mission": "M678",
+  "owner": "Work principal",
+  "priority": "P1",
+  "priorityRequestedBy": "User",
+  "status": "reserved-and-implementing",
+  "startedAt": "2026-11-27T12:39:00.000-03:00",
+  "endedAt": null,
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedBaseHead": "c3e456519444a4beb5844427bdf617daed7c16b7",
+  "branch": "feat/work-m678-armed-dragon-levels-20261127",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "c3e456519444a4beb5844427bdf617daed7c16b7",
+  "headSha": null,
+  "reservedFiles": [
+    "src/armedDragonLevelTagAdapter.ts",
+    "tests/armedDragonLevelTagAdapter.test.cjs",
+    "docs/evidence/m678-armed-dragon-levels.json",
+    "scripts/audit-armed-dragon-levels-m678.cjs",
+    ".github/workflows/m678-armed-dragon-levels.yml",
+    "coordination/runs/work-20261127T123900-0300-M678.json"
+  ],
+  "scope": "Próxima família do worklist: Armed Dragon LV3 (00980973/CID 6105), LV5 (46384672/CID 6106) e LV7 (73879377/CID 6107). Adapter TagDuel isolado para evolução LV3→LV5 em Standby, LV5→LV7 na End Phase após destruição em batalha, descarte de monstro da mão como custo, destruição de alvo único/múltiplo por ATK do monstro enviado, restrição de Invocação de LV7 e busca privada no Deck/mão do participante ativo. Preserva UID/proprietário físico, Deck 20–30, mão 6 com descarte na End Phase, 3+3 zonas, Field Zone separada e Extra 5. Sem resolver central, catálogo/certificações, comandos, banco, inventário ou produção.",
+  "cards": [
+    {
+      "id": "00980973",
+      "name": "Armed Dragon LV3",
+      "konamiCid": 6105,
+      "atk": 1200,
+      "def": 900,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6105&request_locale=en",
+      "crossCheck": "https://yugipedia.com/wiki/Armed_Dragon_LV3"
+    },
+    {
+      "id": "46384672",
+      "name": "Armed Dragon LV5",
+      "konamiCid": 6106,
+      "atk": 2400,
+      "def": 1700,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6106&request_locale=en",
+      "crossCheck": "https://ftp.yugipedia.com/wiki/Armed_Dragon_LV5"
+    },
+    {
+      "id": "73879377",
+      "name": "Armed Dragon LV7",
+      "konamiCid": 6107,
+      "atk": 2800,
+      "def": 1000,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6107&request_locale=en",
+      "crossCheck": "https://ftp.yugipedia.com/wiki/Armed_Dragon_LV7"
+    }
+  ],
+  "blocksCompleted": [
+    "coordenação e reserva CAS registradas",
+    "próxima família histórica revisada; efeitos e três IDs confirmados no worklist"
+  ],
+  "implementedCards": 0,
+  "behaviorVerifiedCards": 0,
+  "newCertifications": 0,
+  "automaticCertifications": 0,
+  "inventoryGrants": 0,
+  "verification": {
+    "typecheck": "pending",
+    "build": "pending",
+    "focusedTests": "pending",
+    "evidenceValidation": "pending",
+    "ci": "pending",
+    "adapterBehaviorVerifiedCards": 0,
+    "behaviorCertifiedCards": 0,
+    "discordLive": "not-run"
+  },
+  "effectiveWorkMinutes": 0,
+  "targetEffectiveWorkMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "pr": null,
+  "production": "not-changed",
+  "merge": "not-authorized",
+  "deploy": "not-authorized",
+  "blockers": [
+    "Integração futura depende do handoff cooperativo pendente no PR #17 para src/monsterEffects.ts e src/duelEngineCurrent.ts; esta frente permanece isolada."
+  ],
+  "nextTask": "Mapear a semântica de ATK efetivo, custos de descarte e janelas de Standby/End Phase sem tocar no resolver central; implementar adapter e cenários.",
+  "nextWindow": "2026-11-27T17:30:00-03:00",
+  "scopeReleasedToAuxiliary": []
+}
