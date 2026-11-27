@@ -1,0 +1,35 @@
+{
+  "format": 1,
+  "mission": "M601",
+  "observedAt": "2026-11-24T19:27:18-03:00",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHead": "bbb03f6416d08b515adbad1940d094b9a9bed497",
+  "sourceFiles": {
+    "src/cardCertifications.ts": "3725be7ab73c4ce441cdf561037acfaeaa321f6e",
+    "src/releasedCardIds.ts": "2220c352edd047a7cdc5881cb18f88282827b9f1",
+    "src/cardRegistry.ts": "9d253d4137c8f5b12accd64c277c8859172bce36",
+    "src/effectRegistry.ts": "568324c1fbd7a2e43e260625c9af77e76c851cda"
+  },
+  "baseline": {
+    "certifiedFromExplicitCertificates": 969,
+    "enabledRegistryCards": 969,
+    "releasedAllowlist": 969,
+    "releasedButUncertified": 0,
+    "certifiedButNotReleased": 0,
+    "remainingTo1000": 31,
+    "newCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "releasedButUncertifiedIds": [],
+  "method": "A contagem autoritativa usa enabledCardIds produzido por buildCardRegistry e é reconciliada com todas as chaves de cardCertifications. releasedCardIds é uma allowlist de distribuição separada; a política cardDistributionAllowed exige carta jogável/certificada e presença na allowlist.",
+  "conclusion": "A leitura completa do objeto, incluindo dez chaves que compartilham linhas, confirma 969 certificados únicos e 969 IDs liberados. O baseline correto é 969/1.000; faltam 31. Nenhuma carta foi promovida automaticamente.",
+  "correction": "A contagem preliminar 959 resultou de uma expressão regular ancorada no início de linha, que omitiu dez chaves inline. A auditoria executável usa o registry compilado e não repete essa limitação.",
+  "changes": {
+    "runtime": false,
+    "catalog": false,
+    "certificates": false,
+    "distributionAllowlist": false,
+    "playerData": false,
+    "inventory": false
+  }
+}

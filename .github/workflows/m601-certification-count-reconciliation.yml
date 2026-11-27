@@ -1,0 +1,31 @@
+name: M601 certification count reconciliation
+on:
+  push:
+    branches:
+      - feat/work-m601-certification-count-reconciliation-20261124
+  pull_request:
+    branches:
+      - feat/rea-engine-recovery-20261026
+    paths:
+      - scripts/card-certification-audit.cjs
+      - tests/cardCertificationCountAudit.test.cjs
+      - docs/evidence/m601-certification-count-reconciliation.json
+      - .github/workflows/m601-certification-count-reconciliation.yml
+permissions:
+  contents: read
+jobs:
+  certification-count-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - run: npm run check:cards
+      - run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m601-certification-count-reconciliation.json', 'utf8'))"
+      - run: node --test tests/cardCertificationCountAudit.test.cjs
+      - run: node scripts/card-certification-audit.cjs
