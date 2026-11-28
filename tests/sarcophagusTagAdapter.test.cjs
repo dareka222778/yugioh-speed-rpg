@@ -1,7 +1,7 @@
 'use strict';
 const assert=require('node:assert/strict');
 const {test}=require('node:test');
-const {createTagDuel,tagInventory,tagNormalCardIds}=require('../dist/tagDuel');
+const {createTagDuel,tagInventory,tagNormalCardIds,stepTagDuel,tagDecisionMember}=require('../dist/tagDuel');
 const {getDuelCard,getEnabledCardIds}=require('../dist/effectRegistry');
 const {synchronizeCardLifetimes}=require('../dist/cardLifetime');
 const {
@@ -49,7 +49,14 @@ const players=()=>[
  {id:'p2',name:'Azul B',cards:[...deck],extra:[]},
  {id:'p3',name:'Vermelho B',cards:[...deck],extra:[]}
 ];
-function base(first=0){return createTagDuel(players(),{seed:'m694-sarcophagus',first,classic:true});}
+function base(first=1){return createTagDuel(players(),{seed:'m694-sarcophagus',first,classic:true});}
+function endCurrentTurn(duel){
+ let state=stepTagDuel(duel,tagDecisionMember(duel).id,{kind:'end'});
+ state=stepTagDuel(state,tagDecisionMember(state).id,{kind:'pass'});
+ state=stepTagDuel(state,tagDecisionMember(state).id,{kind:'pass'});
+ return state;
+}
+function advanceToNextOpponentEndPhase(duel){return endCurrentTurn(endCurrentTurn(duel));}
 function holder(duel,seat){
  const team=seat%2,held=duel.active[team]===seat?duel.core.players[team]:duel.reserves[seat];
  if(!held)throw new Error('Assento físico indisponível: '+seat);return held;
@@ -88,7 +95,7 @@ function placeFiller(duel,seat,id){
  duel.core.players[team].backrow.push({...card,setTurn:duel.core.turn-1,faceUp:true,resolved:true});
  synchronizeCardLifetimes(duel.core);return card;
 }
-function endEvent(duel,sourceUid,{eventId='end-1',sequence=1,actorSeat=1,negatedSourceUids}={}){
+function endEvent(duel,sourceUid,{eventId='end-1',sequence=1,actorSeat=duel.cursor,negatedSourceUids}={}){
  return {kind:'sarcophagus-end-phase',eventId,sequence,turn:duel.core.turn,actorSeat,phase:'end',sourceUid,
   ...(negatedSourceUids?{negatedSourceUids}:{})};
 }
@@ -138,7 +145,7 @@ test('owner rules stay intact: Deck 20–30, hand 6 at End Phase, 3+3 zones and 
  const invalid=structuredClone(duel),moved=invalid.core.players[0].deck.splice(0,4);
  invalid.core.players[0].backrow.push(...moved.map(card=>({...card,setTurn:0,faceUp:true})));
  synchronizeCardLifetimes(invalid.core);
- assert.throws(()=>assertSarcophagusRules(invalid),/mais de três Spell\/Trap Zones/i);
+ assert.throws(()=>assertSarcophagusRules(invalid),/limite de zonas/i);
 });
 test('Second and Third Sarcophagus cannot be activated or placed manually; Spirit cannot be summoned by another method',()=>{
  assert.throws(()=>assertSarcophagusCardPlacement(secondPlaceholder,'normal',lookups),/só pode ser colocado/);
@@ -150,8 +157,9 @@ test('Second and Third Sarcophagus cannot be activated or placed manually; Spiri
  assert.equal(assertSpiritOfPharaohSummonMethod('first-sarcophagus-effect'),undefined);
 });
 test('The First Sarcophagus triggers only in the opposing physical End Phase',()=>{
+ const sameTeam=base(0),sameTeamFirst=placeFirst(sameTeam,0);
+ assert.throws(()=>captureSarcophagusEndPhase(sameTeam,createSarcophagusLedger(),endEvent(sameTeam,sameTeamFirst.uid,{actorSeat:0}),lookups),/equipe oponente/);
  const duel=base(),first=placeFirst(duel,0);
- assert.throws(()=>captureSarcophagusEndPhase(duel,createSarcophagusLedger(),endEvent(duel,first.uid,{actorSeat:0}),lookups),/equipe oponente/);
  assert.throws(()=>captureSarcophagusEndPhase(duel,createSarcophagusLedger(),{...endEvent(duel,first.uid),phase:'main1'},lookups),/End Phase/);
  const captured=captureSarcophagusEndPhase(duel,createSarcophagusLedger(),endEvent(duel,first.uid),lookups);
  assert.equal(captured.status,'pending-resolution');assert.equal(captured.candidate.controllerTeam,0);
@@ -190,12 +198,13 @@ test('Third from Deck completes the three-card set, sends all Sarcophagi to GY, 
  const afterSecond=resolveSarcophagusEndPhase(duel,secondCapture.ledger,{
   eventId:'end-1',sourceUid:first.uid,pieceUid:second.uid,sourceLocation:'hand'
  },lookups);
- const third=moveToDeck(afterSecond.state,0,thirdPlaceholder);
- moveToDeck(afterSecond.state,0,spiritPlaceholder);
- const beforeCounter=afterSecond.state.core.random.counter;
- const thirdCapture=captureSarcophagusEndPhase(afterSecond.state,afterSecond.resolution.ledger,
-  endEvent(afterSecond.state,first.uid,{eventId:'end-2',sequence:2}),lookups);
- const resolved=resolveSarcophagusEndPhase(afterSecond.state,thirdCapture.ledger,{
+ const nextTurn=advanceToNextOpponentEndPhase(afterSecond.state);
+ const third=moveToDeck(nextTurn,2,thirdPlaceholder);
+ moveToDeck(nextTurn,2,spiritPlaceholder);
+ const beforeCounter=nextTurn.core.random.counter;
+ const thirdCapture=captureSarcophagusEndPhase(nextTurn,afterSecond.resolution.ledger,
+  endEvent(nextTurn,first.uid,{eventId:'end-2',sequence:2}),lookups);
+ const resolved=resolveSarcophagusEndPhase(nextTurn,thirdCapture.ledger,{
   eventId:'end-2',sourceUid:first.uid,pieceUid:choosePiece(thirdCapture,'deck'),sourceLocation:'deck',
   spiritUid:chooseSpirit(afterSecond.state,0,'deck'),spiritLocation:'deck'
  },lookups);
@@ -212,10 +221,11 @@ test('Spirit of the Pharaoh can revive only eligible normal Zombies and is cappe
  const duel=base(),first=placeFirst(duel,0),second=moveToHand(duel,0,secondPlaceholder);
  const c1=captureSarcophagusEndPhase(duel,createSarcophagusLedger(),endEvent(duel,first.uid),lookups);
  const r1=resolveSarcophagusEndPhase(duel,c1.ledger,{eventId:'end-1',sourceUid:first.uid,pieceUid:second.uid,sourceLocation:'hand'},lookups);
- moveToDeck(r1.state,0,thirdPlaceholder);moveToDeck(r1.state,0,spiritPlaceholder);
- const c2=captureSarcophagusEndPhase(r1.state,r1.resolution.ledger,endEvent(r1.state,first.uid,{eventId:'end-2',sequence:2}),lookups);
- const r2=resolveSarcophagusEndPhase(r1.state,c2.ledger,{eventId:'end-2',sourceUid:first.uid,
-  pieceUid:choosePiece(c2,'deck'),sourceLocation:'deck',spiritUid:chooseSpirit(r1.state),spiritLocation:'deck'},lookups);
+ const nextTurn=advanceToNextOpponentEndPhase(r1.state);
+ moveToDeck(nextTurn,2,thirdPlaceholder);moveToDeck(nextTurn,2,spiritPlaceholder);
+ const c2=captureSarcophagusEndPhase(nextTurn,r1.resolution.ledger,endEvent(nextTurn,first.uid,{eventId:'end-2',sequence:2}),lookups);
+ const r2=resolveSarcophagusEndPhase(nextTurn,c2.ledger,{eventId:'end-2',sourceUid:first.uid,
+  pieceUid:choosePiece(c2,'deck'),sourceLocation:'deck',spiritUid:chooseSpirit(nextTurn,2,'deck'),spiritLocation:'deck'},lookups);
  const zombieA=moveToGrave(r2.state,0,zombieNormals[0]),zombieB=moveToTeamGrave(r2.state,1,0,zombieNormals[1]);
  const targets=zombiesInGrave(r2.state).filter(uid=>uid===zombieA.uid||uid===zombieB.uid);
  const before=tagInventory(r2.state);
@@ -238,10 +248,11 @@ test('Spirit of the Pharaoh rejects non-Zombie Normal Monsters',()=>{
  const duel=base(),first=placeFirst(duel,0),second=moveToHand(duel,0,secondPlaceholder);
  const c1=captureSarcophagusEndPhase(duel,createSarcophagusLedger(),endEvent(duel,first.uid),lookups);
  const r1=resolveSarcophagusEndPhase(duel,c1.ledger,{eventId:'end-1',sourceUid:first.uid,pieceUid:second.uid,sourceLocation:'hand'},lookups);
- moveToDeck(r1.state,0,thirdPlaceholder);moveToDeck(r1.state,0,spiritPlaceholder);
- const c2=captureSarcophagusEndPhase(r1.state,r1.resolution.ledger,endEvent(r1.state,first.uid,{eventId:'end-2',sequence:2}),lookups);
- const r2=resolveSarcophagusEndPhase(r1.state,c2.ledger,{eventId:'end-2',sourceUid:first.uid,
-  pieceUid:choosePiece(c2,'deck'),sourceLocation:'deck',spiritUid:chooseSpirit(r1.state),spiritLocation:'deck'},lookups);
+ const nextTurn=advanceToNextOpponentEndPhase(r1.state);
+ moveToDeck(nextTurn,2,thirdPlaceholder);moveToDeck(nextTurn,2,spiritPlaceholder);
+ const c2=captureSarcophagusEndPhase(nextTurn,r1.resolution.ledger,endEvent(nextTurn,first.uid,{eventId:'end-2',sequence:2}),lookups);
+ const r2=resolveSarcophagusEndPhase(nextTurn,c2.ledger,{eventId:'end-2',sourceUid:first.uid,
+  pieceUid:choosePiece(c2,'deck'),sourceLocation:'deck',spiritUid:chooseSpirit(nextTurn,2,'deck'),spiritLocation:'deck'},lookups);
  const nonZombie=moveToGrave(r2.state,0,nonZombieNormal);
  assert.throws(()=>resolveSpiritOfPharaohTrigger(r2.state,r2.resolution.ledger,{
   kind:'spirit-of-pharaoh-trigger',eventId:'bad-zombie',sequence:3,actorSeat:r2.state.active[0],
@@ -253,10 +264,11 @@ test('if no Spirit of the Pharaoh exists in the private hand/Deck, the three Sar
  moveToGrave(duel,0,spiritPlaceholder);
  const c1=captureSarcophagusEndPhase(duel,createSarcophagusLedger(),endEvent(duel,first.uid),lookups);
  const r1=resolveSarcophagusEndPhase(duel,c1.ledger,{eventId:'end-1',sourceUid:first.uid,pieceUid:second.uid,sourceLocation:'hand'},lookups);
- moveToDeck(r1.state,0,thirdPlaceholder);
- const c2=captureSarcophagusEndPhase(r1.state,r1.resolution.ledger,endEvent(r1.state,first.uid,{eventId:'end-2',sequence:2}),lookups);
- const before=tagInventory(r1.state);
- const r2=resolveSarcophagusEndPhase(r1.state,c2.ledger,{eventId:'end-2',sourceUid:first.uid,
+ const nextTurn=advanceToNextOpponentEndPhase(r1.state);
+ moveToDeck(nextTurn,2,thirdPlaceholder);
+ const c2=captureSarcophagusEndPhase(nextTurn,r1.resolution.ledger,endEvent(nextTurn,first.uid,{eventId:'end-2',sequence:2}),lookups);
+ const before=tagInventory(nextTurn);
+ const r2=resolveSarcophagusEndPhase(nextTurn,c2.ledger,{eventId:'end-2',sourceUid:first.uid,
   pieceUid:choosePiece(c2,'deck'),sourceLocation:'deck'},lookups);
  assert.equal(r2.resolution.status,'placed');assert.equal(r2.resolution.summonedUid,null);
  assert.equal(r2.resolution.sentToGraveyardUids.length,3);
@@ -267,13 +279,14 @@ test('if the summon is negated after the Sarcophagi are paid, the Spirit remains
  const duel=base(),first=placeFirst(duel,0),second=moveToHand(duel,0,secondPlaceholder);
  const c1=captureSarcophagusEndPhase(duel,createSarcophagusLedger(),endEvent(duel,first.uid),lookups);
  const r1=resolveSarcophagusEndPhase(duel,c1.ledger,{eventId:'end-1',sourceUid:first.uid,pieceUid:second.uid,sourceLocation:'hand'},lookups);
- moveToDeck(r1.state,0,thirdPlaceholder);moveToDeck(r1.state,0,spiritPlaceholder);
- const c2=captureSarcophagusEndPhase(r1.state,r1.resolution.ledger,endEvent(r1.state,first.uid,{eventId:'end-2',sequence:2}),lookups);
- const spiritUid=chooseSpirit(r1.state);
- const r2=resolveSarcophagusEndPhase(r1.state,c2.ledger,{eventId:'end-2',sourceUid:first.uid,
+ const nextTurn=advanceToNextOpponentEndPhase(r1.state);
+ moveToDeck(nextTurn,2,thirdPlaceholder);moveToDeck(nextTurn,2,spiritPlaceholder);
+ const c2=captureSarcophagusEndPhase(nextTurn,r1.resolution.ledger,endEvent(nextTurn,first.uid,{eventId:'end-2',sequence:2}),lookups);
+ const spiritUid=chooseSpirit(nextTurn,2,'deck');
+ const r2=resolveSarcophagusEndPhase(nextTurn,c2.ledger,{eventId:'end-2',sourceUid:first.uid,
   pieceUid:choosePiece(c2,'deck'),sourceLocation:'deck',spiritUid,spiritLocation:'deck',summonEffectNegated:true},lookups);
  assert.equal(r2.resolution.status,'summon-negated');
- assert.ok(holder(r2.state,0).deck.some(card=>card.uid===spiritUid));
+ assert.ok(holder(r2.state,2).deck.some(card=>card.uid===spiritUid));
  assert.equal(r2.state.core.players[0].backrow.filter(card=>lookups.first(card.id)||lookups.second(card.id)||lookups.third(card.id)).length,0);
 });
 test('a full three-card Spell/Trap backrow blocks placement without creating a fourth zone',()=>{
@@ -297,18 +310,16 @@ test('when the leaving Sarcophagus is banished, every remaining Sarcophagus is s
  assert.ok(cleaned.state.core.players[0].grave.some(card=>card.uid===second.uid));
  assert.deepEqual(cleanupSarcophagusAfterLeave(cleaned.state,first.uid,0,lookups).movedUids,[]);
 });
-test('multiple First Sarcophagus copies can advance the sequence once each in the same opponent End Phase',()=>{
+test('multiple First Sarcophagus copies cannot bypass the three backrow slots',()=>{
  const duel=base(),first1=placeFirst(duel,0,firstA),first2=placeFirst(duel,2,firstB);
- moveToDeck(duel,0,secondPlaceholder);moveToDeck(duel,0,thirdPlaceholder);moveToDeck(duel,0,spiritPlaceholder);
+ moveToDeck(duel,0,secondPlaceholder);
  const c1=captureSarcophagusEndPhase(duel,createSarcophagusLedger(),endEvent(duel,first1.uid),lookups);
  const r1=resolveSarcophagusEndPhase(duel,c1.ledger,{eventId:'end-1',sourceUid:first1.uid,
   pieceUid:choosePiece(c1,'deck'),sourceLocation:'deck'},lookups);
- moveToDeck(r1.state,0,thirdPlaceholder);moveToDeck(r1.state,0,spiritPlaceholder);
- const c2=captureSarcophagusEndPhase(r1.state,r1.resolution.ledger,endEvent(r1.state,first2.uid,{eventId:'end-2',sequence:2}),lookups);
- assert.equal(c2.candidate.nextPiece,'third');
- const r2=resolveSarcophagusEndPhase(r1.state,c2.ledger,{eventId:'end-2',sourceUid:first2.uid,
-  pieceUid:choosePiece(c2,'deck'),sourceLocation:'deck',spiritUid:chooseSpirit(r1.state),spiritLocation:'deck'},lookups);
- assert.equal(r2.resolution.status,'summoned');assert.equal(r2.resolution.sentToGraveyardUids.length,4);
+ const nextTurn=advanceToNextOpponentEndPhase(r1.state);
+ const c2=captureSarcophagusEndPhase(nextTurn,r1.resolution.ledger,endEvent(nextTurn,first2.uid,{eventId:'end-2',sequence:2}),lookups);
+ assert.equal(c2.status,'zone-full');assert.equal(c2.candidate,null);
+ assert.equal(nextTurn.core.players[0].backrow.length,3);
 });
 test('the same First Sarcophagus cannot resolve twice in one turn; event and choice replay are idempotent',()=>{
  const duel=base(),first=placeFirst(duel,0),ledger=createSarcophagusLedger();
@@ -339,13 +350,14 @@ test('a full Monster Zone prevents the Spirit summon after the three Sarcophagi 
  addMonster(duel,0,normalDeck[0]);addMonster(duel,2,normalDeck[1]);addMonster(duel,0,normalDeck[2]);
  const c1=captureSarcophagusEndPhase(duel,createSarcophagusLedger(),endEvent(duel,first.uid),lookups);
  const r1=resolveSarcophagusEndPhase(duel,c1.ledger,{eventId:'end-1',sourceUid:first.uid,pieceUid:second.uid,sourceLocation:'hand'},lookups);
- moveToDeck(r1.state,0,thirdPlaceholder);moveToDeck(r1.state,0,spiritPlaceholder);
- const c2=captureSarcophagusEndPhase(r1.state,r1.resolution.ledger,endEvent(r1.state,first.uid,{eventId:'end-2',sequence:2}),lookups);
- const spiritUid=chooseSpirit(r1.state);
- const r2=resolveSarcophagusEndPhase(r1.state,c2.ledger,{eventId:'end-2',sourceUid:first.uid,
+ const nextTurn=advanceToNextOpponentEndPhase(r1.state);
+ moveToDeck(nextTurn,2,thirdPlaceholder);moveToDeck(nextTurn,2,spiritPlaceholder);
+ const c2=captureSarcophagusEndPhase(nextTurn,r1.resolution.ledger,endEvent(nextTurn,first.uid,{eventId:'end-2',sequence:2}),lookups);
+ const spiritUid=chooseSpirit(nextTurn,2,'deck');
+ const r2=resolveSarcophagusEndPhase(nextTurn,c2.ledger,{eventId:'end-2',sourceUid:first.uid,
   pieceUid:choosePiece(c2,'deck'),sourceLocation:'deck',spiritUid,spiritLocation:'deck'},lookups);
  assert.equal(r2.resolution.status,'no-monster-zone');assert.equal(r2.resolution.summonedUid,null);
- assert.ok(holder(r2.state,0).deck.some(card=>card.uid===spiritUid));
+ assert.ok(holder(r2.state,2).deck.some(card=>card.uid===spiritUid));
  assert.equal(r2.state.core.players[0].monsters.length,3);
 });
 

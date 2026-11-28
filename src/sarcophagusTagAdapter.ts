@@ -249,7 +249,7 @@ function assertEvent(state:TagDuel,event:SarcophagusEndPhaseEvent,lookups:Sarcop
  assertText(event.eventId,'ID do evento Sarcophagus');
  assertText(event.sourceUid,'UID da fonte Sarcophagus');
  if(!Number.isSafeInteger(event.sequence)||event.sequence<1||!Number.isSafeInteger(event.turn)||event.turn!==state.core.turn||
-  !isSeat(event.actorSeat)||event.phase!=='end'||state.active[event.actorSeat%2]!==event.actorSeat){
+  !isSeat(event.actorSeat)||event.phase!=='end'||event.actorSeat!==state.cursor||state.active[event.actorSeat%2]!==event.actorSeat){
   throw new Error('Assento, turno ou End Phase do evento Sarcophagus inválidos.');
  }
  if(event.negatedSourceUids!==undefined)assertUidList(event.negatedSourceUids,'Lista de fontes negadas');
