@@ -1,0 +1,46 @@
+name: M694 Sarcophagus TagDuel adapter
+on:
+  push:
+    branches:
+      - feat/work-m694-sarcophagus-tag-adapter-20261128
+    paths:
+      - 'src/sarcophagusTagAdapter.ts'
+      - 'tests/sarcophagusTagAdapter.test.cjs'
+      - 'docs/evidence/m694-sarcophagus.json'
+      - 'scripts/audit-sarcophagus-m694.cjs'
+      - '.github/workflows/m694-sarcophagus.yml'
+      - 'coordination/state.json'
+      - 'coordination/runs/work-20261128T022638-0300-M694.json'
+  pull_request:
+    paths:
+      - 'src/sarcophagusTagAdapter.ts'
+      - 'tests/sarcophagusTagAdapter.test.cjs'
+      - 'docs/evidence/m694-sarcophagus.json'
+      - 'scripts/audit-sarcophagus-m694.cjs'
+      - '.github/workflows/m694-sarcophagus.yml'
+      - 'coordination/state.json'
+      - 'coordination/runs/work-20261128T022638-0300-M694.json'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  sarcophagus:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Focused behavior tests
+        run: node --test tests/sarcophagusTagAdapter.test.cjs
+      - name: Full regression suite
+        run: npm test
+      - name: Evidence, coordination and scope audit
+        run: node scripts/audit-sarcophagus-m694.cjs
