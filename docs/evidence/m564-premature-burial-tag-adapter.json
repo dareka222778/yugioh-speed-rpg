@@ -1,0 +1,93 @@
+{
+  "mission": "M564",
+  "runId": "work-20261123T131054-0300-M564",
+  "owner": "Work principal",
+  "card": {
+    "name": "Premature Burial",
+    "localizedName": "Enterro Precoce",
+    "passcode": "70828912",
+    "konamiDatabaseId": 4966,
+    "type": "Equip Spell",
+    "officialCardDatabase": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4966&ope=2&request_locale=en",
+    "officialPortugueseDatabase": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4966&ope=2&request_locale=pt",
+    "officialText": "Activate this card by paying 800 LP, then target 1 monster in your GY; Special Summon it in Attack Position and equip it with this card. When this card is destroyed, destroy the equipped monster.",
+    "firstTcgPrinting": {
+      "date": "2002-10-20",
+      "set": "PSV-037",
+      "product": "Pharaoh's Servant"
+    }
+  },
+  "behavior": {
+    "activation": "Active physical representative Main Phase only; pays 800 LP immediately and moves Equip Spell from hand to face-up backrow.",
+    "targeting": "One activation-time monster target from own team's shared Graveyard, bound by TargetBinding zone+epoch.",
+    "resolution": "If target/source is no longer valid or Monster Zone fills, no summon; Equip Spell goes to GY if still present; 800 LP cost is never refunded.",
+    "summon": "Special Summon face-up Attack Position; Equip Spell backrow.equippedTo links by physical UID.",
+    "destruction": "Destroying Premature Burial destroys the equipped monster wherever control moved. Leaving field without destruction removes the link but does not destroy the monster. If monster leaves field, Equip Spell is sent to GY by equip rule.",
+    "ownership": "UID preserves physical owner of spell and monster, including inactive partner; controller team is tracked separately.",
+    "idempotency": "JSON-persisted activationId and equipped link; replay blocked.",
+    "limits": {
+      "mainDeck": "20–30 construction",
+      "handLimit": 6,
+      "discard": "End Phase",
+      "monsterZones": 3,
+      "spellTrapZones": 3,
+      "fieldZone": "separate",
+      "extraDeck": 5
+    }
+  },
+  "testCount": 27,
+  "testNames": [
+    "800 LP cost paid at activation and face-up Equip Spell occupies backrow",
+    "LP below 800 rejects without mutation",
+    "active representative hand and Main Phase source checks",
+    "inactive partner reserve hand rejected",
+    "pending chain/decision rejected",
+    "target must be from own shared Graveyard",
+    "token/non-monster/improper Fusion/Ritual filtering",
+    "Monster Zone and Spell/Trap Zone activation capacity",
+    "valid summon face-up Attack and equippedTo link",
+    "target removed after activation keeps cost and sends equip to GY",
+    "leave-and-return target epoch invalidation",
+    "negation does not refund LP",
+    "source destroyed before resolution",
+    "Monster Zone filled after activation",
+    "destroying Premature Burial destroys equipped monster",
+    "destruction after control change follows equipped UID",
+    "leaving without destruction does not destroy monster",
+    "equipped monster leaving field sends Equip Spell to GY",
+    "JSON save/restore of equip link and replay protection",
+    "activationId uniqueness",
+    "four physical turn rotations and partner ownership",
+    "3 backrow slots plus separate Field Zone and Extra Deck five",
+    "hand above six deferred and short in-duel Deck preserved",
+    "inventory conservation including inactive reserves",
+    "input immutability",
+    "malformed/duplicate physical UIDs rejected",
+    "return Equip Spell to original physical owner's hand after partner rotation"
+  ],
+  "certification": {
+    "newCards": 0,
+    "automatic": 0,
+    "reason": "Adapter-only preparation; card absent from shared cardCatalog/cardMetadata/cardCertifications. Resolver and catalog registration await M61 handoff."
+  },
+  "safety": {
+    "inventoryGranted": 0,
+    "persistentDatabaseTouched": false,
+    "playerDataTouched": false,
+    "productionDatabaseTouched": false,
+    "discordTokenUsed": false,
+    "liveDiscordUsed": false,
+    "centralResolverChanged": false,
+    "catalogChanged": false,
+    "manifestChanged": false,
+    "allowlistChanged": false,
+    "merge": false,
+    "deploy": false
+  },
+  "limitations": [
+    "Adapter não integrado ao resolver v9; Premature Burial não está certificada nem utilizável em decks.",
+    "Testes offline com TagDuel temporário; sem gateway/guild Discord real.",
+    "O adapter modela o pagamento de 800 LP e os efeitos de equip, mas não finaliza o duelo quando LP chega a zero; essa transição permanece responsabilidade do engine central.",
+    "Não altera resolver, metadata, certificações, manifesto, allowlist ou banco persistente."
+  ]
+}
