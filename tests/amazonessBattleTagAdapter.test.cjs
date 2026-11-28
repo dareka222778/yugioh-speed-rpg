@@ -176,10 +176,10 @@ test('Tiger gains 400 ATK for each face-up Amazoness monster controlled by its t
 test('Tiger aura is inactive while the source is face-down or negated',()=>{
  let negated=false;
  const session=setup(2,(duel,uid)=>negated&&uid.startsWith('m0:')),tiger=deploy(session,0,fixture.tiger,0),ally=deploy(session,0,fixture.ally,2);
- assert.equal(adapter.amazonessTigerAtkBonus(session.duel,tiger.uid,lookup),800);
- negated=true;assert.equal(adapter.amazonessTigerAtkBonus(session.duel,tiger.uid,lookup),0);
+ assert.equal(adapter.amazonessTigerAtkBonus(session.duel,tiger.uid,lookup,session.isNegated),800);
+ negated=true;assert.equal(adapter.amazonessTigerAtkBonus(session.duel,tiger.uid,lookup,session.isNegated),0);
  negated=false;session.duel.core.players[0].monsters.find(card=>card.uid===tiger.uid).faceUp=false;
- assert.equal(adapter.amazonessTigerAtkBonus(session.duel,tiger.uid,lookup),0);
+ assert.equal(adapter.amazonessTigerAtkBonus(session.duel,tiger.uid,lookup,session.isNegated),0);
 });
 
 test('Tiger prevents attacks on other face-up Amazoness monsters but not on itself',()=>{
@@ -193,17 +193,19 @@ test('Tiger attack restriction disappears when Tiger is face-down or negated',()
  let negated=false;
  const session=setup(2,(duel,uid)=>negated&&uid===tiger.uid);
  const tiger=deploy(session,0,fixture.tiger,0),ally=deploy(session,0,fixture.ally,2);
- assert.equal(adapter.amazonessTigerAllowsAttackTarget(session.duel,1,ally.uid,lookup),false);
- negated=true;assert.equal(adapter.amazonessTigerAllowsAttackTarget(session.duel,1,ally.uid,lookup),true);
+ assert.equal(adapter.amazonessTigerAllowsAttackTarget(session.duel,1,ally.uid,lookup,session.isNegated),false);
+ negated=true;assert.equal(adapter.amazonessTigerAllowsAttackTarget(session.duel,1,ally.uid,lookup,session.isNegated),true);
  negated=false;session.duel.core.players[0].monsters.find(card=>card.uid===tiger.uid).faceUp=false;
- assert.equal(adapter.amazonessTigerAllowsAttackTarget(session.duel,1,ally.uid,lookup),true);
+ assert.equal(adapter.amazonessTigerAllowsAttackTarget(session.duel,1,ally.uid,lookup,session.isNegated),true);
 });
 
 test('Tiger control limit is shared by teammates but not by the opposing team',()=>{
  const session=setup(2,()=>false,true),first=deploy(session,0,fixture.tiger,0),second=deploy(session,0,fixture.tiger,2);
  assert.equal(adapter.amazonessTigerCanBeControlled(session.duel,0,second.uid,lookup),false);
- assert.equal(adapter.amazonessTigerCanBeControlled(session.duel,0,first.uid,lookup),true);
+ assert.equal(adapter.amazonessTigerCanBeControlled(session.duel,0,first.uid,lookup),false);
  assert.equal(adapter.amazonessTigerCanBeControlled(session.duel,1,second.uid,lookup),true);
+ const single=setup(),lone=deploy(single,0,fixture.tiger,0);
+ assert.equal(adapter.amazonessTigerCanBeControlled(single.duel,0,lone.uid,lookup),true);
 });
 
 test('Swords Woman redirects only positive battle damage that its controller would take',()=>{
