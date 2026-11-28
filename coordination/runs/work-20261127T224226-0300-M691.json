@@ -1,0 +1,79 @@
+{
+  "format": 1,
+  "runId": "work-20261127T224226-0300-M691",
+  "mission": "M691",
+  "priority": "P1",
+  "status": "reserved-and-implementing",
+  "startedAt": "2026-11-27T22:42:26-03:00",
+  "endedAt": null,
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedBaseHead": "62748d20566f53b429aabb2e92d9c1df058509a4",
+  "headSha": "62748d20566f53b429aabb2e92d9c1df058509a4",
+  "branch": "feat/work-m691-grave-protector-20261127",
+  "reservedFiles": [
+    "src/graveProtectorBattleReplacementTagAdapter.ts",
+    "tests/graveProtectorBattleReplacementTagAdapter.test.cjs",
+    "docs/evidence/m691-grave-protector.json",
+    "scripts/audit-grave-protector-m691.cjs",
+    ".github/workflows/m691-grave-protector.yml",
+    "coordination/runs/work-20261127T224226-0300-M691.json"
+  ],
+  "baseline": {
+    "engineV9Certified": 969,
+    "remainingTo1000": 31,
+    "source": "milestone1000 run 46094324099"
+  },
+  "cards": [
+    {
+      "id": "11448373",
+      "konamiId": 6039,
+      "name": "Grave Protector",
+      "kind": "effect-monster",
+      "officialText": "Any monster destroyed by battle is shuffled into the Deck instead of going to the GY.",
+      "firstTCGRelease": "2004-06-01",
+      "firstOCGRelease": "2004-10-14",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6039&request_locale=en",
+      "eligibility": "TCG first print precedes 2004-10-01 cutoff",
+      "status": "adapter-tested-pending-engine-integration"
+    }
+  ],
+  "blocksCompleted": [],
+  "handoff": {
+    "targetPR": 17,
+    "commentId": 7231869252,
+    "status": "requested-awaiting-explicit-release",
+    "files": [
+      "src/duelEngineCurrent.ts",
+      "src/monsterEffects.ts"
+    ],
+    "response": "Sem liberação explícita no início do M691; adapter seguirá isolado."
+  },
+  "counts": {
+    "baselineEngineV9Certified": 969,
+    "remainingTo1000": 31,
+    "adapterBehaviorVerifiedCards": 0,
+    "newEngineCertifiedCards": 0,
+    "automaticCertifications": 0,
+    "inventoryGrants": 0
+  },
+  "verification": {
+    "typecheck": "pending",
+    "build": "pending",
+    "focusedTests": "pending",
+    "audit": "pending",
+    "engineValidation": "pending",
+    "liveDiscordValidation": false
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "effectiveWorkMinutes": 0,
+  "targetEffectiveWorkMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "nextTask": "Implementar substituição contínua de destino em batalha, preservando proprietário físico, embaralhamento privado, Fusion no Extra e Token sem inventário; integrar somente após handoff central."
+}
