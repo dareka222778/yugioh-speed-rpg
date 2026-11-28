@@ -1,0 +1,100 @@
+{
+  "runId": "work-20261128T085932-0300-M704",
+  "mission": "M704",
+  "priority": "P1",
+  "status": "reserved-and-implementing",
+  "branch": "feat/work-m704-standby-endphase-burn-20261128",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "startedAt": "2026-11-28T08:59:32-03:00",
+  "endedAt": null,
+  "effectiveWorkMinutes": 0,
+  "minimumEffectiveWorkMinutes": 60,
+  "sharedBaseHead": "35cb0d8762a2dcb988c760b00b5b82d64d670487",
+  "branchBaseHead": "35cb0d8762a2dcb988c760b00b5b82d64d670487",
+  "headSha": null,
+  "conditionalHeadUpdate": true,
+  "reservedFiles": [
+    "src/standbyEndPhaseBurnTagAdapter.ts",
+    "tests/standbyEndPhaseBurnTagAdapter.test.cjs",
+    "docs/evidence/m704-standby-endphase-burn.json",
+    "scripts/audit-standby-endphase-burn-m704.cjs",
+    ".github/workflows/m704-standby-endphase-burn.yml",
+    "coordination/runs/work-20261128T085932-0300-M704.json"
+  ],
+  "scope": "Adapter TagDuel 2v2 isolado para Solar Flare Dragon (45985838/CID 5974) e Bowganian (52090844/CID 5687): gatilhos de dano por efeito na End Phase e Standby Phase do assento físico ativo, respectivamente; proteção de ataque de Solar Flare Dragon quando a equipe controla outro Pyro face-up; bindings UID/epoch, controle por equipe, negação, múltiplas cópias, idempotência e preservação de inventário. Sem resolver central, metadata, catálogo/certificações, comandos, banco, concessão de inventário, merge ou produção.",
+  "nonOverlap": [
+    "M703: hand disruption; M702: Morphing Jar/Cyber Jar; M701: banishment returns; M700: IOC graveyard transitions; todas as reservas existentes permanecem intactas."
+  ],
+  "research": {
+    "historicalCutoff": "2004-09-30",
+    "officialCards": [
+      {
+        "id": "45985838",
+        "name": "Solar Flare Dragon",
+        "konamiCid": 5974,
+        "firstReleaseOCG": "2003-11-20",
+        "firstReleaseTCG": "2004-06-01",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5974&request_locale=en",
+        "text": "While you control another Pyro-Type monster, this card cannot be attacked. During each of your End Phases: Inflict 500 damage to your opponent."
+      },
+      {
+        "id": "52090844",
+        "name": "Bowganian",
+        "konamiCid": 5687,
+        "firstReleaseOCG": "2003-04-24",
+        "firstReleaseTCG": "2004-03-01",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5687&request_locale=en",
+        "text": "Once per turn, during your Standby Phase: Inflict 600 damage to your opponent."
+      }
+    ]
+  },
+  "baseline": {
+    "explicitCertificationEntries": 959,
+    "engineCertificationCountReportedByLatestCI": 969,
+    "candidateCards": 2,
+    "newEngineCertifiedCards": 0,
+    "inventoryGranted": 0
+  },
+  "coordination": {
+    "stateBlobBefore": "23dd148a71e331aa0ff02da918ac09a14f07143b",
+    "headGuard": "35cb0d8762a2dcb988c760b00b5b82d64d670487",
+    "headGuardResult": "pending",
+    "handoffRequest": {
+      "pr": 17,
+      "status": "requested-awaiting-explicit-release",
+      "files": [
+        "src/duelEngineCurrent.ts",
+        "src/monsterEffects.ts",
+        "src/effectRegistry.ts",
+        "src/cardMetadata.ts",
+        "src/cardCertifications.ts"
+      ]
+    }
+  },
+  "blocksCompleted": [
+    "HEAD compartilhado confirmado em 35cb0d8762a2dcb988c760b00b5b82d64d670487; branch isolada criada a partir deste SHA.",
+    "Reserva M704 P1 com seis caminhos exclusivos; nenhuma reserva de terceiros será alterada.",
+    "IDs 45985838 e 52090844 ausentes de cardMetadata.ts e cardCertifications.ts no snapshot observado; PRs/branches específicas não encontradas."
+  ],
+  "changes": [],
+  "tests": {
+    "focused": null,
+    "typecheck": null,
+    "build": null,
+    "fullRegression": null,
+    "discordLive": false
+  },
+  "pullRequest": null,
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false
+  },
+  "blockers": [
+    "Handoff explícito dos arquivos centrais para integração e certificação pendente.",
+    "Validação de gateway Discord ao vivo não executada."
+  ],
+  "nextTask": "Implementar o adapter de gatilhos Standby/End Phase, proteção de ataque Solar Flare, testes determinísticos de 2v2 e auditoria de não-admissão.",
+  "nextWindow": "2026-11-28T12:30:00-03:00",
+  "releasedToAuxiliary": []
+}
