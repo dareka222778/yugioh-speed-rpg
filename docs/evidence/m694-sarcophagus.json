@@ -101,7 +101,10 @@
     "inventoryGrants": false
   },
   "production": {
-    "prCreated": false,
+    "prCreated": true,
+    "prNumber": 618,
+    "prUrl": "https://github.com/dareka222778/yugioh-speed-rpg/pull/618",
+    "draft": true,
     "merge": false,
     "deploy": false,
     "backupVerified": false,
@@ -113,5 +116,32 @@
     "O efeito de Spirit of the Pharaoh é limitado às Monster Zones realmente livres; com o próprio Spirit em campo e três zonas, no máximo duas outras cartas podem ser Invocadas.",
     "A validação Discord em produção não é executada por este adapter isolado."
   ],
-  "nextStep": "Solicitar/liberar handoff dos arquivos centrais, integrar os quatro IDs no resolver e executar auditoria de admissão sem conceder inventário."
+  "nextStep": "Aguardar handoff explícito dos arquivos centrais reservados; depois integrar os quatro IDs ao resolver/catálogo e executar auditoria de admissão. Enquanto isso, seguir em branch independente com a próxima família elegível.",
+  "result": "CI passed; adapter-only; draft PR #618 open",
+  "verification": {
+    "workflowRun": 46114584875,
+    "workflowUrl": "https://github.com/dareka222778/yugioh-speed-rpg/actions/runs/46114584875",
+    "testedHeadSha": "a80f9fb523bdc811d704b9c6aedd02222c08520d",
+    "typecheck": "passed",
+    "build": "passed",
+    "focusedTests": {
+      "tests": 23,
+      "pass": 23,
+      "fail": 0
+    },
+    "fullRegression": {
+      "tests": 7385,
+      "pass": 7385,
+      "fail": 0
+    },
+    "evidenceAudit": "passed",
+    "workflow": "success",
+    "officialCards": 4,
+    "behaviorScenarios": 23,
+    "adapterBehaviorVerifiedCards": 4,
+    "newEngineCertifiedCards": 0,
+    "automaticCertifications": 0,
+    "inventoryGrants": 0,
+    "liveDiscordValidation": false
+  }
 }
