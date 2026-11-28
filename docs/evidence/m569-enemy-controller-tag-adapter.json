@@ -1,0 +1,63 @@
+{
+  "format": 1,
+  "mission": "M569",
+  "card": {
+    "name": "Enemy Controller",
+    "portugueseName": "Controlador de Inimigos",
+    "passcode": "98045062",
+    "konamiDatabaseId": 5505,
+    "type": "Quick-Play Spell",
+    "officialCardDatabase": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5505&ope=2&request_locale=en",
+    "officialText": "Activate 1 of these effects; target 1 face-up monster your opponent controls and change its battle position; OR Tribute 1 monster, then target 1 face-up monster your opponent controls and take control of that target until the End Phase.",
+    "firstTcgPrinting": {
+      "date": "2004-06-01",
+      "set": "AST-037",
+      "product": "Ancient Sanctuary"
+    }
+  },
+  "implementation": {
+    "file": "src/enemyControllerTagAdapter.ts",
+    "kind": "isolated pure TagDuel adapter",
+    "behavior": [
+      "Quick-Play Spell from hand during own Main/Battle priority, or set face-down in a prior turn and activated during own priority or an explicit chain-response window",
+      "position mode targets a face-up opposing monster and toggles ATK/DEF, respecting an existing position lock",
+      "control mode pays one non-token monster as Tribute at activation, then takes control of a face-up opposing monster until the End Phase",
+      "target binding prevents stale zone/epoch references; control is revalidated at resolution",
+      "temporary control uses returnTo/returnTurn consumed by the existing End Phase engine cleanup",
+      "physical owner UID is preserved; Tributes and the Spell go to their physical owners' Graveyards",
+      "negation/invalid target do not refund Tribute; activationId replay protection is JSON-persistent"
+    ],
+    "rules": {
+      "mainDeckConstruction": "20–30",
+      "handLimit": 6,
+      "handDiscard": "End Phase",
+      "monsterZones": 3,
+      "spellTrapZones": 3,
+      "fieldZone": "separate",
+      "extraDeck": 5
+    }
+  },
+  "tests": {
+    "file": "tests/enemyControllerTagAdapter.test.cjs",
+    "expectedScenarios": 37
+  },
+  "integration": {
+    "resolverV9": false,
+    "catalog": false,
+    "metadata": false,
+    "certifications": false,
+    "allowlist": false,
+    "discordCommand": false
+  },
+  "safety": {
+    "inventoryGranted": 0,
+    "persistentPlayerDataChanged": false,
+    "liveDiscord": false
+  },
+  "limitations": [
+    "Adapter permanece isolado; carta não certificada nem disponível em decks até integração ao resolver v9 e catálogo.",
+    "Tributar Tokens foi deliberadamente excluído porque a integração com tokenLedger não está liberada; testes não certificam esse caso.",
+    "Alvos que já têm retorno temporário de controle são rejeitados para não sobrescrever pilhas de retorno ainda não modeladas.",
+    "Testes offline; sem gateway/guild Discord real."
+  ]
+}
