@@ -1,0 +1,29 @@
+name: M703 hand disruption
+on:
+  push:
+    branches:
+      - feat/work-m703-hand-disruption-20261128
+  pull_request:
+    branches:
+      - feat/rea-engine-recovery-20261026
+    paths:
+      - 'src/handDisruptionTagAdapter.ts'
+      - 'tests/handDisruptionTagAdapter.test.cjs'
+      - 'docs/evidence/m703-hand-disruption.json'
+      - 'scripts/audit-hand-disruption-m703.cjs'
+      - '.github/workflows/m703-hand-disruption.yml'
+jobs:
+  focused:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - run: node --test tests/handDisruptionTagAdapter.test.cjs
+      - run: node scripts/audit-hand-disruption-m703.cjs

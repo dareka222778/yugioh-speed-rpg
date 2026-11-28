@@ -1,0 +1,65 @@
+{
+  "mission": "M703",
+  "title": "Interrupção de mão — Disturbance Strategy, Confiscation, Dragged Down e Mind Crush",
+  "historicalCutoff": "2004-09-30",
+  "cards": [
+    {
+      "id": "77561728",
+      "name": "Disturbance Strategy",
+      "konamiCid": 5546,
+      "firstReleaseOCG": "2003-10-23",
+      "effect": "Seu oponente embaralha toda a mão no Deck e compra a mesma quantidade.",
+      "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5546&ope=2&request_locale=en"
+    },
+    {
+      "id": "17375316",
+      "name": "Confiscation",
+      "konamiCid": 4900,
+      "firstReleaseOCG": "2002-10-24",
+      "effect": "Pague 1000 LP; veja a mão do oponente, escolha uma carta e descarte-a.",
+      "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4900&ope=2&request_locale=ae"
+    },
+    {
+      "id": "16435215",
+      "name": "Dragged Down into the Grave",
+      "konamiCid": 5352,
+      "firstReleaseOCG": "2004-05-13",
+      "effect": "Ambos revelam as mãos; cada um escolhe uma carta da mão do outro; ambas são descartadas e ambos compram uma.",
+      "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5352&ope=2&request_locale=ae"
+    },
+    {
+      "id": "15800838",
+      "name": "Mind Crush",
+      "konamiCid": 6147,
+      "firstReleaseOCG": "2004-02-26",
+      "effect": "Declare um nome; se estiver na mão adversária, descarte todas as cópias; caso contrário, descarte uma carta aleatória da sua mão.",
+      "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6147&ope=2&request_locale=en"
+    }
+  ],
+  "design": {
+    "tagDuelInterpretation": "Os efeitos bilaterais operam sobre os dois representantes físicos ativos das equipes; parceiros inativos preservam Deck/mão privados.",
+    "privacy": "Confiscation retorna visão privada somente ao time ativador; Dragged Down registra mãos reveladas publicamente; Disturbance Strategy e Mind Crush não vazam conteúdo da mão.",
+    "timing": "Confiscation paga 1000 LP na ativação, custo mantido mesmo se negada. Armadilhas exigem setTurn anterior ao turno atual.",
+    "random": "Disturbance Strategy usa shuffle persistido; Mind Crush usa randomIndex persistido apenas quando o nome declarado não está na mão adversária.",
+    "invariants": [
+      "Deck principal físico 20–30",
+      "Mão máxima 6 verificada somente na End Phase",
+      "3 Monster Zones + 3 Spell/Trap Zones",
+      "Field Zone separada",
+      "Extra Deck máximo 5",
+      "UID/proprietário físico preservado",
+      "Nenhum inventário concedido"
+    ]
+  },
+  "baseline": {
+    "explicitCertificationKeys": 969,
+    "candidateCards": 4,
+    "newEngineCertified": 0,
+    "inventoryGranted": 0
+  },
+  "limitations": [
+    "Adapter isolado; os quatro IDs permanecem fora de certificação engine-v9 até handoff central.",
+    "Adjudicação de deck-out é retornada ao host; não define vencedor.",
+    "Integração de comandos/Discord, regressão integral, merge e deploy não fazem parte deste escopo."
+  ]
+}
