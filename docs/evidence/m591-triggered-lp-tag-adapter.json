@@ -1,0 +1,100 @@
+{
+  "mission": "M591",
+  "runId": "work-20261124T135726-0300-M591",
+  "owner": "Work principal",
+  "priority": "P1",
+  "cards": [
+    {
+      "name": "Backfire",
+      "passcode": "82705573",
+      "konamiDatabaseId": 5986,
+      "kind": "Continuous Trap",
+      "firstTCGPrinting": "Ancient Sanctuary (AST-046), 2004-06-01",
+      "officialDatabaseUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5986&ope=2&request_locale=en",
+      "officialEffect": "If a face-up FIRE monster(s) you control is destroyed and sent to the GY: Inflict 500 damage to your opponent.",
+      "sourceVerified": "Konami official card database, checked 2026-11-24"
+    },
+    {
+      "name": "Balloon Lizard",
+      "passcode": "39892082",
+      "konamiDatabaseId": 5886,
+      "kind": "Effect Monster / EARTH / Reptile / Level 4 / 500 ATK / 1900 DEF",
+      "firstTCGPrinting": "Invasion of Chaos (IOC-072), 2004-03-01",
+      "officialDatabaseUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5886&ope=2&request_locale=en",
+      "officialEffect": "Put 1 counter on this card during each of your Standby Phases. When this card is destroyed, inflict damage to the controller of the card that destroyed it equal to the number of counters x 400 points.",
+      "sourceVerified": "Konami official card database, checked 2026-11-24"
+    }
+  ],
+  "design": {
+    "backfire": "One event snapshot may contain several simultaneously destroyed monsters; each face-up Backfire copy on that team's shared backrow emits one 500-damage packet if at least one face-up FIRE monster controlled by that team was sent to the GY. Face-down, non-FIRE, banished and non-GY destinations are excluded. Battle and effect destruction are both accepted.",
+    "balloonLizard": "One counter per own Standby Phase, only while the card is face-up in the active controller team's Monster Zone. Duplicate event delivery is idempotent. On destruction, damage is 400 per recorded counter to the snapshotted controller team of the destroying card, not to the destroyed card's owner. Counters are removed when the card leaves the Monster Zone.",
+    "physicalOwnership": "The adapter does not rewrite physical UIDs, hands, Decks, graveyards, or banished zones. The destroying-card controller is snapshotted by the event and cross-checked if that card remains on the shared field.",
+    "integration": "Pure adapter only; shared resolver integration is withheld pending explicit M61 handoff."
+  },
+  "tests": [
+    "Backfire face-up FIRE monster sent to GY",
+    "simultaneous FIRE destruction: 500 per Backfire copy, not per monster",
+    "face-down and non-FIRE exclusions",
+    "destination other than GY exclusion",
+    "battle and effect destruction",
+    "Backfire face-down and negated-source behavior",
+    "duplicate destruction event idempotency",
+    "duplicate UID and invalid team rejection",
+    "Balloon Lizard own Standby counter",
+    "duplicate Standby idempotency",
+    "inactive-team and stale Standby rejection",
+    "face-down Balloon Lizard exclusion",
+    "successive Standby accumulation",
+    "counter cleanup after leaving Monster Zone",
+    "400 damage per counter to destroyer controller team",
+    "zero-counter resolution",
+    "effect-negated trigger",
+    "duplicate destruction event",
+    "stale source-on-field rejection",
+    "destroyer existence and field-controller cross-check",
+    "invalid destroyer team",
+    "input immutability",
+    "Backfire copies on the opposing team's field do not trigger for this team's FIRE destruction",
+    "Balloon Lizard counters remain while the card stays on the field face-down"
+  ],
+  "testCount": 26,
+  "certification": {
+    "engineV9CertifiedBefore": 969,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "reason": "No resolver, metadata, certification, manifest, allowlist or catalog changes; adapter-only tests do not constitute an engine-v9 certification."
+  },
+  "rules": {
+    "mainDeck": "20-30 per physical seat",
+    "handLimit": 6,
+    "handLimitTiming": "End Phase only",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separate",
+    "extraDeckMax": 5,
+    "privateHandsAndDecks": true,
+    "sharedTeamGraveyardAndBanished": true
+  },
+  "security": {
+    "filesOnly": [
+      "src/triggeredLpTagAdapter.ts",
+      "tests/triggeredLpTagAdapter.test.cjs",
+      "docs/evidence/m591-triggered-lp-tag-adapter.json",
+      ".github/workflows/m591-triggered-lp-tag-adapter.yml"
+    ],
+    "noResolverChange": true,
+    "noCatalogChange": true,
+    "noManifestChange": true,
+    "noAllowlistChange": true,
+    "noInventoryGrant": true,
+    "noPersistentDatabaseChange": true,
+    "noPlayerDataChange": true
+  },
+  "limitations": [
+    "The adapters emit immutable damage packets; the central duel engine must apply them after an explicit M61 handoff.",
+    "Tests use structural TagDuel fixtures because these two cards are not yet enabled in the shared catalog.",
+    "This workflow does not simulate a full 2v2 duel through the live Discord gateway.",
+    "No card certification or inventory distribution is claimed."
+  ]
+}
