@@ -1,0 +1,38 @@
+name: M692 draw-trigger TagDuel adapter
+on:
+  push:
+    branches:
+      - feat/work-m692-draw-trigger-adapters-20261127
+    paths:
+      - 'src/drawTriggerTagAdapter.ts'
+      - 'tests/drawTriggerTagAdapter.test.cjs'
+      - 'docs/evidence/m692-draw-trigger.json'
+      - 'scripts/audit-draw-trigger-m692.cjs'
+      - '.github/workflows/m692-draw-trigger.yml'
+  pull_request:
+    paths:
+      - 'src/drawTriggerTagAdapter.ts'
+      - 'tests/drawTriggerTagAdapter.test.cjs'
+      - 'docs/evidence/m692-draw-trigger.json'
+      - 'scripts/audit-draw-trigger-m692.cjs'
+      - '.github/workflows/m692-draw-trigger.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  draw-triggers:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Run focused behavior tests
+        run: node --test tests/drawTriggerTagAdapter.test.cjs
+      - name: Audit evidence and non-admission
+        run: node scripts/audit-draw-trigger-m692.cjs
