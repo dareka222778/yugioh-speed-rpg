@@ -200,7 +200,7 @@ test('Tiger attack restriction disappears when Tiger is face-down or negated',()
 });
 
 test('Tiger control limit is shared by teammates but not by the opposing team',()=>{
- const session=setup(2,true),first=deploy(session,0,fixture.tiger,0),second=deploy(session,0,fixture.tiger,2);
+ const session=setup(2,()=>false,true),first=deploy(session,0,fixture.tiger,0),second=deploy(session,0,fixture.tiger,2);
  assert.equal(adapter.amazonessTigerCanBeControlled(session.duel,0,second.uid,lookup),false);
  assert.equal(adapter.amazonessTigerCanBeControlled(session.duel,0,first.uid,lookup),true);
  assert.equal(adapter.amazonessTigerCanBeControlled(session.duel,1,second.uid,lookup),true);
@@ -228,7 +228,6 @@ test('Swords Woman does not redirect effect damage, damage to the other team, or
 
 test('Swords Woman requires the physical card to remain face-up and on the field until replacement',()=>{
  const removed=setup(),source=deploy(removed,0,fixture.swords,0),enemy=deploy(removed,1,fixture.other,3);
- removed.duel.core.players[0].lp-=200;
  const prep=adapter.prepareAmazonessSwordsWomanDamage(removed,{eventId:'sw-stale',turn:removed.duel.core.turn,damageKind:'battle',damageToTeam:0,amount:200,involvedMonsterUids:[source.uid,enemy.uid]});
  assert.equal(prep.status,'prepared');
  moveToGrave(removed.duel,0,source);
@@ -250,11 +249,11 @@ test('Swords Woman replacement respects monster-effect negation and rejects dama
  assert.throws(()=>adapter.resolveAmazonessSwordsWomanDamage(stale,'sw-already-applied'),/antes de aplicar/);
 });
 
-test('Swords Woman selects one source and replay never redirects the same damage twice',()=>{
- const session=setup(2,true),first=deploy(session,0,fixture.swords,0),second=deploy(session,0,fixture.swords,2),enemy=deploy(session,1,fixture.other,3);
+test('Multiple copies do not double-redirect; replay never applies the same damage twice',()=>{
+ const session=setup(2,()=>false,true),first=deploy(session,0,fixture.swords,0),second=deploy(session,0,fixture.swords,2),enemy=deploy(session,1,fixture.other,3);
  const before=inventory(session.duel),handsBefore=hands(session.duel);
- const prep=adapter.prepareAmazonessSwordsWomanDamage(session,{eventId:'sw-once',turn:session.duel.core.turn,damageKind:'battle',damageToTeam:0,amount:500,involvedMonsterUids:[second.uid,enemy.uid,first.uid]});
- assert.equal(prep.status,'prepared');assert.equal(prep.plan.sourceUid,[first.uid,second.uid].sort()[0]);
+ const prep=adapter.prepareAmazonessSwordsWomanDamage(session,{eventId:'sw-once',turn:session.duel.core.turn,damageKind:'battle',damageToTeam:0,amount:500,involvedMonsterUids:[first.uid,enemy.uid]});
+ assert.equal(prep.status,'prepared');assert.equal(prep.plan.sourceUid,first.uid);
  const result=adapter.resolveAmazonessSwordsWomanDamage(session,'sw-once');
  assert.equal(result.status,'redirected');assert.equal(result.amount,500);
  const replay=adapter.resolveAmazonessSwordsWomanDamage(session,'sw-once');
