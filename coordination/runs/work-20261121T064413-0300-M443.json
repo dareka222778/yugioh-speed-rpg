@@ -1,0 +1,53 @@
+{
+  "runId": "work-20261121T064413-0300-M443",
+  "mission": "M443",
+  "owner": "Work",
+  "priority": 1,
+  "status": "active",
+  "startedAt": "2026-11-21T06:44:13-03:00",
+  "endedAt": null,
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "c4ea855260fdb0028aed517197b832c387cb20be",
+  "baseBranch": "feat/work-m402-absorbing-kid-battle-lp-20261120",
+  "baseSha": "aafa001ec3591597408680909b0cd6d88c01fe29",
+  "branch": "feat/work-m443-battle-lp-recovery-tag-duel-adapter-20261121",
+  "reservedFiles": [
+    "src/battleLifePointRecoveryTagDuelAdapter.ts",
+    "tests/battleLifePointRecoveryTagDuelAdapter.test.cjs",
+    "docs/evidence/m443-battle-lp-recovery-tag-duel-adapter.json",
+    ".github/workflows/m443-battle-lp-recovery-tag-duel-adapter.yml"
+  ],
+  "scope": "Adapter TagDuel 2v2 para Absorbing Kid from the Sky e Guardian Angel Joan: validar snapshot de batalha, destino real no Cemitério físico do proprietário, nível/ATK original do monstro destruído, controlador de equipe, recuperação de LP compartilhados e deduplicação do evento.",
+  "coordination": {
+    "m61Handoff": "pending",
+    "handoffRequestPr": 17,
+    "conflictingFilesUntouched": true,
+    "thirdPartyReservationsReleased": []
+  },
+  "catalog": {
+    "certifiedAtStart": 969,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "ci": {
+    "focused": "not-run",
+    "cardBatchFast": "not-run",
+    "milestone1000": "not-run",
+    "engineValidation": "not-run",
+    "extendedSoak": "not-run"
+  },
+  "production": {
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "backupVerified": false,
+    "discordLiveTest": false
+  },
+  "duration": {
+    "effectiveMinutes": 0,
+    "targetEffectiveMinutes": 60,
+    "targetMet": false,
+    "ciWaitExcluded": true
+  },
+  "nextTask": "Implementar adaptador TagDuel para a família de recuperação de LP por destruição de batalha, preservando controlador de equipe e proprietário físico."
+}

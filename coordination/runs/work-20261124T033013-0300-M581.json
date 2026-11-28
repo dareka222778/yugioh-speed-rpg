@@ -1,0 +1,120 @@
+{
+  "format": 1,
+  "runId": "work-20261124T033013-0300-M581",
+  "mission": "M581",
+  "owner": "Work principal",
+  "priority": "P1 — bloqueio de ataque por Equip Spell: Paralyzing Potion (exceto Machine) e Mask of the Accursed (todos os monstros), com dano de 500 na Standby Phase do controlador do equipamento ao controlador atual do monstro equipado.",
+  "state": "reserved-and-implementing",
+  "startedAt": "2026-11-24T03:30:13-03:00",
+  "endedAt": null,
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "948ca46adbff8990a7467fdb1018e842ddf00f46",
+  "branch": "feat/work-m581-equip-attack-lock-20261124",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "948ca46adbff8990a7467fdb1018e842ddf00f46",
+  "branchStartSha": "948ca46adbff8990a7467fdb1018e842ddf00f46",
+  "branchHeadSha": "948ca46adbff8990a7467fdb1018e842ddf00f46",
+  "reservationCommitSha": null,
+  "pullRequest": null,
+  "reservedFiles": [
+    "src/equipAttackLockTagAdapter.ts",
+    "tests/equipAttackLockTagAdapter.test.cjs",
+    "docs/evidence/m581-equip-attack-lock-tag-adapter.json",
+    ".github/workflows/m581-equip-attack-lock-tag-adapter.yml"
+  ],
+  "scope": "Adapter TagDuel isolado para duas Equip Spells históricas: Paralyzing Potion bloqueia ataque apenas de monstros que não sejam Machine; Mask of the Accursed bloqueia qualquer monstro equipado e causa 500 de dano ao controlador atual do monstro durante a Standby Phase do controlador do equipamento. Mantém controlador e proprietário físico distintos, aplica LP por equipe e não integra resolver central, catálogo, allowlist, comandos ou persistência.",
+  "conflictCheck": {
+    "overlap": false,
+    "checkedAt": "2026-11-24T03:30:13-03:00",
+    "checkedAgainst": [
+      "M580 possui reserva registrada para quatro caminhos Birdface/Keldo; nenhum desses caminhos será tocado.",
+      "Busca de PRs por Paralyzing Potion, Mask of the Accursed, Mass Driver e Attack and Receive não encontrou PRs existentes.",
+      "Busca de branches M581 vazia; árvore do HEAD não contém os quatro caminhos M581.",
+      "PRs M576/M577/M578/M579 preservadas; este trabalho usa somente quatro caminhos novos."
+    ]
+  },
+  "cards": [
+    {
+      "id": "50152549",
+      "name": "Paralyzing Potion",
+      "konamiDatabaseCid": 4878,
+      "officialText": "A non-Machine-Type monster equipped with this card cannot attack.",
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4878&ope=2&request_locale=pt",
+      "firstTcgRelease": "2002-06-26",
+      "firstOcgRelease": "2000-01-27",
+      "historicalEligibility": "eligible-before-2004-09-30"
+    },
+    {
+      "id": "56948373",
+      "name": "Mask of the Accursed",
+      "konamiDatabaseCid": 5107,
+      "officialText": "The equipped monster cannot attack. Once per turn, during your Standby Phase: Inflict 500 damage to the controller of the equipped monster.",
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5107&ope=2&request_locale=pt",
+      "firstTcgRelease": "2003-03-01",
+      "firstOcgRelease": "2001-04-19",
+      "historicalEligibility": "eligible-before-2004-09-30"
+    }
+  ],
+  "design": {
+    "attackLock": "O lock consulta somente Equip Spells face-up, resolvidas, ainda equipadas ao UID do monstro. Paralyzing Potion ignora Race Machine; Mask of the Accursed não tem exceção.",
+    "standby": "Cada cópia de Mask of the Accursed aplica 500 uma vez por turno durante a Standby Phase da equipe controladora do Equip Spell; o dano é aplicado à equipe que controla o monstro equipado naquele momento.",
+    "ownership": "O assento físico continua codificado no UID m0–m3. Controlador do equipamento e controlador atual do monstro são resolvidos pelas zonas de equipe, sem reatribuir propriedade física.",
+    "negation": "Negação explícita por UID suspende lock e dano; remoção do Equip Spell ou do monstro encerra o efeito.",
+    "safety": "Sem concessão de inventário, sem mutação de mão/Deck/Extra, sem descarte fora da End Phase e sem alteração persistente de jogadores."
+  },
+  "rules": {
+    "mainDeck": "20–30 por assento físico",
+    "handLimit": 6,
+    "handCheck": "End Phase",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separada",
+    "extraDeckMax": 5
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "ci": {
+    "focused": "pending",
+    "cardBatchFast": "pending",
+    "milestone1000": "pending",
+    "engineValidation": "pending",
+    "customWorkflow": "pending"
+  },
+  "production": {
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "safety": {
+    "runtimeCoreChanged": false,
+    "catalogChanged": false,
+    "certificationChanged": false,
+    "releasedCardIdsChanged": false,
+    "inventoryGranted": 0,
+    "persistentDatabaseChanged": false,
+    "playerDataChanged": false,
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "liveDiscordValidation": false
+  },
+  "nextTask": "Implementar adapter de Equip Spell com metadados do monstro certificado, bloqueio de ataque, exceção Machine, upkeep independente por cópia, negação, troca de controlador e regressões de conservação física.",
+  "nextWindow": "2026-11-24T08:30:00-03:00",
+  "duration": {
+    "startedAt": "2026-11-24T03:30:13-03:00",
+    "endedAt": null,
+    "elapsedMinutes": 0,
+    "effectiveWorkMinutes": 0,
+    "targetEffectiveMinutes": 60,
+    "targetMet": false,
+    "ciWaitExcluded": true
+  },
+  "status": "reserved-and-implementing",
+  "lastActivityAt": "2026-11-24T03:30:13-03:00"
+}

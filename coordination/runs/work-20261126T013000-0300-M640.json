@@ -1,0 +1,88 @@
+{
+  "format": 1,
+  "runId": "work-20261126T013000-0300-M640",
+  "mission": "M640",
+  "owner": "Work principal",
+  "priority": "P1",
+  "priorityRequestedBy": "User",
+  "status": "reserved-and-implementing",
+  "startedAt": "2026-11-26T01:30:00-03:00",
+  "endedAt": null,
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "58ff7d48eb71a78e5580fb8d0132b27d84b2bbf8",
+  "branch": "feat/work-m640-inexperienced-spy-tag-adapter-20261126",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "58ff7d48eb71a78e5580fb8d0132b27d84b2bbf8",
+  "branchHeadSha": null,
+  "pullRequest": null,
+  "reservedFiles": [
+    "src/inexperiencedSpyTagAdapter.ts",
+    "tests/inexperiencedSpyTagAdapter.test.cjs",
+    "docs/evidence/m640-inexperienced-spy.json",
+    ".github/workflows/m640-inexperienced-spy-tag-adapter.yml"
+  ],
+  "scope": "Adapter TagDuel isolado para The Inexperienced Spy: o jogador ativo escolhe uma carta de uma das mãos físicas adversárias, vê a identidade apenas em resposta privada destinada ao próprio assento e não expõe a carta ao parceiro. Sem resolver central, catálogo, certificação, comandos, banco ou produção.",
+  "cards": [
+    {
+      "id": "81820689",
+      "name": "The Inexperienced Spy",
+      "konamiId": 4848,
+      "officialText": "Select and see 1 card in your opponent's hand.",
+      "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4848&ope=2&request_locale=en",
+      "firstTCGRelease": "2002-03-29",
+      "certifiedAtStart": false
+    }
+  ],
+  "implementation": {
+    "files": [
+      "src/inexperiencedSpyTagAdapter.ts",
+      "tests/inexperiencedSpyTagAdapter.test.cjs",
+      "docs/evidence/m640-inexperienced-spy.json",
+      ".github/workflows/m640-inexperienced-spy-tag-adapter.yml"
+    ],
+    "scope": "Adapter de leitura privada, recibos idempotentes, conservação de UID e regressões de isolamento entre os quatro assentos."
+  },
+  "handoff": {
+    "targetPR": 17,
+    "status": "awaiting explicit owner release by M637; M640 does not touch the blocked files",
+    "blockedFiles": [
+      "src/monsterEffects.ts",
+      "src/duelEngineCurrent.ts"
+    ],
+    "thisRunDoesNotTouchBlockedFiles": true
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "verification": {
+    "focusedScenarios": 0,
+    "focusedTestResult": "pending",
+    "typecheck": "pending",
+    "build": "pending",
+    "evidenceValidation": "pending",
+    "adapterBehaviorVerifiedCards": 0,
+    "behaviorCertifiedCards": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "liveDiscordValidation": false
+  },
+  "effectiveWorkMinutes": 0,
+  "targetEffectiveWorkMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "nextTask": "Implementar leitura privada por assento, sem mutar a mão-alvo nem serializar o cardId em estado/log público; testar as duas mãos adversárias e negação.",
+  "nextWindow": "2026-11-26T05:30:00-03:00",
+  "scopeReleasedToAuxiliary": []
+}

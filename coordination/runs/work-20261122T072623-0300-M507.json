@@ -1,0 +1,115 @@
+{
+  "runId": "work-20261122T072623-0300-M507",
+  "mission": "M507",
+  "owner": "Work principal",
+  "priority": "P1 — verificar rotação física A1→B1→A2→B2 no laboratório 2v2 normal: cada mão/deck continua pertencendo ao assento físico, somente o assento ativo pode agir, a restauração JSON preserva o próximo ator e a projeção pública não revela UIDs privados.",
+  "startedAt": "2026-11-22T07:26:23-03:00",
+  "lastActivityAt": "2026-11-22T07:26:23-03:00",
+  "endedAt": null,
+  "state": "reserved-and-implementing",
+  "branch": "feat/work-m507-tag-normal-lab-rotation-matrix-20261122",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "18d0a38c78da0542dd241c01201f2f8bbd708445",
+  "sharedHeadAtReservation": "18d0a38c78da0542dd241c01201f2f8bbd708445",
+  "reservedFiles": [
+    "tests/tagNormalLabRotationMatrix.test.cjs",
+    "docs/evidence/m507-tag-normal-lab-rotation-matrix.json",
+    ".github/workflows/m507-tag-normal-lab-rotation-matrix.yml"
+  ],
+  "scope": [
+    "tests/tagNormalLabRotationMatrix.test.cjs",
+    "docs/evidence/m507-tag-normal-lab-rotation-matrix.json",
+    ".github/workflows/m507-tag-normal-lab-rotation-matrix.yml"
+  ],
+  "conflictCheck": {
+    "overlap": false,
+    "checkedAt": "2026-11-22T07:26:23-03:00",
+    "checkedReservations": [
+      "M501",
+      "M502",
+      "M503",
+      "M504",
+      "M505",
+      "M506",
+      "M61",
+      "M496–M500",
+      "M472–M486",
+      "M492–M494"
+    ],
+    "preserved": [
+      "M501 PR #449 released only for auxiliary sync/monitor in its three files",
+      "M502–M506 branches/PRs untouched",
+      "M61 resolver/catalog handoff untouched",
+      "all third-party reservations untouched"
+    ]
+  },
+  "workBlocks": [
+    "Read coordination/state.json and latest checkpoint M501; verified shared HEAD 18d0a38.",
+    "Verified PR #449 head b3251c0: focused, Card Batch Fast, Milestone 1000, Engine Validation and Extended Soak all success; PR remains draft and 1 ahead/6 behind shared.",
+    "Posted cooperative handoff request earlier; closed the Work-owned M501 reservation after successful CI and authorized auxiliary only to non-force sync/monitor/correct its three files.",
+    "Inspected src/tagDuel.ts normal-lab seat rotation, tagMemberHand, tagActions, publicTagDuel and 3+3/hand invariants; reserved independent rotation matrix test files."
+  ],
+  "tests": {
+    "focused": null,
+    "typescript": null,
+    "discordPayload": null,
+    "additionalCI": null,
+    "limitations": "No local checkout/runtime execution available in this run; remote GitHub Actions will validate the new branch."
+  },
+  "catalog": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "inventoryGranted": 0,
+  "mergePerformed": false,
+  "deployPerformed": false,
+  "production": {
+    "mainHead": "f78f3080b496d2697072b946088309f36e97b60e",
+    "sharedHeadAtReservation": "18d0a38c78da0542dd241c01201f2f8bbd708445",
+    "backupVerified": false,
+    "liveDiscordValidation": false,
+    "merge": false,
+    "deploy": false,
+    "deploymentRegistry": "GitHub deployments endpoint was rejected by the read-only fetch integration; production status remains unverified."
+  },
+  "handoffM61": {
+    "pr": 17,
+    "commentId": 7074991975,
+    "status": "requested-no-response"
+  },
+  "relatedPRs": {
+    "M501": {
+      "pr": 449,
+      "head": "b3251c0b5cc9014f7e78f2eec0558276de19d0c4",
+      "ci": "all reported success",
+      "draft": true
+    },
+    "M502": {
+      "pr": 450,
+      "state": "open-draft"
+    },
+    "M503": {
+      "pr": 451,
+      "state": "open-draft"
+    },
+    "M504": {
+      "pr": 452,
+      "state": "open-draft"
+    },
+    "M505": {
+      "pr": 453,
+      "state": "open-draft"
+    },
+    "M506": {
+      "pr": null,
+      "state": "reserved; PR not yet observed"
+    }
+  },
+  "pr": null,
+  "releaseToAuxiliary": [],
+  "nextTask": "Implement and validate M507 seat-rotation matrix: four starting seats, private hand ownership, active-seat authorization, JSON round-trip and public UID redaction. Then re-check shared HEAD and coordination before selecting another independent block.",
+  "nextWindow": "2026-11-22T11:30:00-03:00"
+}

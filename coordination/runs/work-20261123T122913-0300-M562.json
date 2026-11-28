@@ -1,0 +1,77 @@
+{
+  "runId": "work-20261123T122913-0300-M562",
+  "mission": "M562",
+  "owner": "Work principal",
+  "state": "reserved-and-implementing",
+  "priority": "P1 — Fiber Jar (78706415): implementar o FLIP global de embaralhar as quatro mãos físicas e os dois campos/Cemitérios compartilhados nos Decks dos proprietários, depois cada jogador compra cinco; preservar Fusion no Extra Deck, tokens, deck-out simultâneo, UIDs e rotação 2v2.",
+  "startedAt": "2026-11-23T12:29:13-03:00",
+  "lastActivityAt": "2026-11-23T12:29:13-03:00",
+  "endedAt": null,
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "df978bfe215b608680923fca199d3013daa30c76",
+  "branch": "feat/work-m562-fiber-jar-tag-adapter-20261123",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "df978bfe215b608680923fca199d3013daa30c76",
+  "sharedHeadAtReservation": "df978bfe215b608680923fca199d3013daa30c76",
+  "scope": [
+    "src/fiberJarTagAdapter.ts",
+    "tests/fiberJarTagAdapter.test.cjs",
+    "docs/evidence/m562-fiber-jar-tag-adapter.json",
+    ".github/workflows/m562-fiber-jar-tag-adapter.yml"
+  ],
+  "reservedFiles": [
+    "src/fiberJarTagAdapter.ts",
+    "tests/fiberJarTagAdapter.test.cjs",
+    "docs/evidence/m562-fiber-jar-tag-adapter.json",
+    ".github/workflows/m562-fiber-jar-tag-adapter.yml"
+  ],
+  "workBlocks": [
+    "Lidos coordination/state.json e checkpoint M550; conferidos HEAD, main, branches, PRs e CI.",
+    "Verificadas as reservas ativas M557–M561 e a ausência de Fiber Jar em PRs/branches; M61 continua sem liberação explícita.",
+    "Solicitada transferência cooperativa M61 no PR #17; M557 e M558 receberam diagnósticos de regras/CI sem editar seus arquivos.",
+    "Criada branch isolada M562 a partir do HEAD compartilhado exato; reserva registrada por commit condicionado ao HEAD."
+  ],
+  "tests": {
+    "focused": "pending",
+    "check": "pending",
+    "build": "pending",
+    "cardBatchFast": "pending",
+    "milestone1000": "pending",
+    "engineValidation": "pending",
+    "extendedSoak": "pending"
+  },
+  "catalog": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "inventoryGranted": 0,
+  "production": {
+    "mainHead": "197bbda07efc81658604bcd12308665571e26d59",
+    "backupVerified": false,
+    "liveDiscordValidation": false,
+    "merge": false,
+    "deploy": false,
+    "deploymentWorkflowFound": false,
+    "deploymentsApiExposed": false
+  },
+  "pr": null,
+  "limitations": [
+    "Adapter ainda não integrado ao resolver v9; Fiber Jar não está em cardMetadata/cardCertifications no HEAD compartilhado.",
+    "Testes serão offline; sem gateway/guild Discord real.",
+    "M61 sem handoff explícito; nenhum arquivo central, manifesto, allowlist, inventário ou dado persistente será alterado."
+  ],
+  "nextTask": "Implementar adapter Fiber Jar 2v2 com quatro mãos físicas, campo/GY compartilhados, retorno ao Deck/Extra do proprietário, shuffle determinístico injetável, compra de cinco por jogador e deck-out por equipe; depois criar a próxima família somente após conferir HEAD/state.",
+  "nextWindow": "2026-11-23T17:30:00-03:00",
+  "duration": {
+    "startedAt": "2026-11-23T12:29:13-03:00",
+    "endedAt": null,
+    "elapsedMinutes": null,
+    "effectiveWorkMinutes": null,
+    "targetEffectiveMinutes": 60,
+    "targetMet": false,
+    "ciWaitExcluded": true
+  }
+}

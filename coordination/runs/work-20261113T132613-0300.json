@@ -1,0 +1,454 @@
+{
+  "runId": "work-20261113T132613-0300",
+  "owner": "Work",
+  "priority": "P1 — validar Mountain nos três tipos oficiais (Dragon, Winged Beast e Thunder) em ambos os campos 2v2, incluindo ativação por parceiro e conservação de UIDs.",
+  "state": "completed; released-to-auxiliary-monitor-ci",
+  "startedAt": "2026-11-13T13:26:13-03:00",
+  "endedAt": "2026-11-13T13:37:54-03:00",
+  "timezone": "America/Sao_Paulo",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "fbe361b6c11b4040c3518383d74ff959114547ec",
+  "sharedHeadBeforeReservation": "fbe361b6c11b4040c3518383d74ff959114547ec",
+  "baseBranch": "feat/work-m71-ci-branch-routing-20261112",
+  "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+  "branch": "feat/work-m146-mountain-global-2v2-field-modifier-20261113",
+  "headAtStart": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+  "reservedFiles": [
+    "tests/tagClassicMountainGlobalSharedFieldModifiers.test.cjs"
+  ],
+  "blocksCompleted": [
+    "Leitura de coordination/state.json e do checkpoint work-20261113T125703-0300.json.",
+    "Verificação do HEAD compartilhado fbe361b6c11b4040c3518383d74ff959114547ec antes da reserva; base M71 173a0ea6b2df3b79d7d95367f7d8d77284776bcb; main 8f3f1768b1ee1f4b4a96d557eab5926d96525ad2.",
+    "Auditoria das branches M140–M145, PRs #96–#101 e estados de CI; M61/PR17 e M118/PR74 permanecem com handoff pendente e foram preservadas.",
+    "Criação e publicação de M146/PR102: Mountain global modifiers com Dragon, Winged Beast e Thunder em 2v2.",
+    "Criação e publicação de M147/PR103: Dragon Treasure e Dark Energy com filtros de raça e bônus de equipamento.",
+    "Criação e publicação de M148/PR104: Invigoration com filtro EARTH e modificador +400 ATK/-200 DEF.",
+    "Criação e publicação de M149/PR105: substituição Mountain→Yami, descarte do campo anterior e recálculo de modificadores.",
+    "Verificação de que o repositório não contém deploy.yml/deploy.yaml e não apresentou workflow de implantação; hospedagem e Discord ao vivo não foram validados."
+  ],
+  "changes": [
+    {
+      "branch": "feat/work-m146-mountain-global-2v2-field-modifier-20261113",
+      "head": "46c9ae23ed6b4eaab5bd40675312b490abe641f5",
+      "pr": 102,
+      "file": "tests/tagClassicMountainGlobalSharedFieldModifiers.test.cjs",
+      "summary": "Testa Mountain +200 ATK/DEF para Dragon, Winged Beast e Thunder nos dois campos 2v2; parceiro ativa a carta física setada; privacidade, JSON e conservação de 80 UIDs."
+    },
+    {
+      "branch": "feat/work-m147-dragon-treasure-dark-energy-2v2-20261113",
+      "head": "2842ce250df53b7886e45b6a74e23d12ccf3c093",
+      "pr": 103,
+      "file": "tests/tagClassicDragonTreasureDarkEnergySharedField.test.cjs",
+      "summary": "Testa Dragon Treasure (Dragon +300/+300) e Dark Energy (Fiend +300/+300), alvos de parceiro, filtro de raça, stats, JSON e conservação."
+    },
+    {
+      "branch": "feat/work-m148-invigoration-earth-equip-2v2-20261113",
+      "head": "3d4ee7edd5858fd50c914323cde6bc8d767f2f50",
+      "pr": 104,
+      "file": "tests/tagClassicInvigorationEarthEquipSharedField.test.cjs",
+      "summary": "Testa Invigoration (EARTH +400/-200), alvo do parceiro, exclusão de alvo LIGHT, stats, JSON e conservação."
+    },
+    {
+      "branch": "feat/work-m149-field-spell-replacement-2v2-20261113",
+      "head": "4b881526bbe1f3bd1401548a717e051df16b8fa2",
+      "pr": 105,
+      "file": "tests/tagClassicFieldSpellReplacementSharedTeam.test.cjs",
+      "summary": "Testa substituição Mountain→Yami, envio da carta anterior ao Cemitério compartilhado, remoção do bônus antigo e aplicação dos modificadores de Yami em ambos os lados."
+    }
+  ],
+  "catalog": {
+    "shared": {
+      "cards": 969,
+      "certificates": 969,
+      "revision": "3af4ee461ba728be019de373b6c9652c3a7fd21b94fd475aac6af22b5127ca99"
+    },
+    "development": {
+      "cards": 1014,
+      "certificates": 1014,
+      "revision": "72ba4830f7e62ceaff795c1fa5b7b5b690ee5ef1f675eaedb9b7ed7da5675b52"
+    },
+    "delta": {
+      "added": 45,
+      "removed": 0,
+      "changedCommonCards": 0,
+      "changedCommonEffects": 0,
+      "changedCommonMonsters": 0,
+      "changedCommonCertificates": 0
+    },
+    "newAdmissionsThisRun": 0,
+    "verifiedCounts": {
+      "sharedBranch": {
+        "cards": 969,
+        "certificates": 969
+      },
+      "m71TestBase": {
+        "cards": 969,
+        "certificates": 969
+      },
+      "pr14DevelopmentBranch": {
+        "cards": 1014,
+        "certificates": 1014,
+        "merged": false
+      },
+      "deltaToShared": 45,
+      "newAdmissions": 0,
+      "newCertificates": 0
+    },
+    "newCertificatesThisRun": 0
+  },
+  "validation": {
+    "pr102": {
+      "head": "46c9ae23ed6b4eaab5bd40675312b490abe641f5",
+      "cardBatchFast": "in_progress",
+      "engineValidation": "in_progress",
+      "milestone1000": "queued"
+    },
+    "pr103": {
+      "head": "2842ce250df53b7886e45b6a74e23d12ccf3c093",
+      "cardBatchFast": "success",
+      "engineValidation": "queued",
+      "milestone1000": "success"
+    },
+    "pr104": {
+      "head": "3d4ee7edd5858fd50c914323cde6bc8d767f2f50",
+      "cardBatchFast": "success",
+      "engineValidation": "in_progress",
+      "milestone1000": "in_progress"
+    },
+    "pr105": {
+      "head": "4b881526bbe1f3bd1401548a717e051df16b8fa2",
+      "cardBatchFast": "queued",
+      "engineValidation": "queued",
+      "milestone1000": "success"
+    },
+    "priorParallel": {
+      "M140": {
+        "cardBatchFast": "success",
+        "engineValidation": "queued",
+        "milestone1000": "success"
+      },
+      "M141": {
+        "cardBatchFast": "success",
+        "engineValidation": "in_progress",
+        "milestone1000": "success"
+      },
+      "M142": {
+        "cardBatchFast": "success",
+        "engineValidation": "in_progress",
+        "milestone1000": "success"
+      },
+      "M143": {
+        "cardBatchFast": "queued",
+        "engineValidation": "in_progress",
+        "milestone1000": "success"
+      },
+      "M144": {
+        "cardBatchFast": "success",
+        "engineValidation": "in_progress",
+        "milestone1000": "success"
+      },
+      "M145": {
+        "cardBatchFast": "success",
+        "engineValidation": "queued",
+        "milestone1000": "success"
+      }
+    },
+    "m61": {
+      "head": "78aa57851420e0f52211f7267faf1af681847ea3",
+      "engineValidation": "failure",
+      "cardBatchFast": "failure",
+      "errors": [
+        "TS2367 at src/duelEngineCurrent.ts:410: redundant comparison with targetGroup after narrowing",
+        "TS2339 at src/duelEngineCurrent.ts:410: rule property on never"
+      ],
+      "workflowRuns": [
+        43081735774,
+        43081735544
+      ]
+    },
+    "m118": {
+      "head": "53fa62774d428cb04cfd76018495693068a03a5b",
+      "cardBatchFast": "success",
+      "engineValidation": "success",
+      "milestone1000": "success",
+      "workflowRuns": [
+        43420156255,
+        43420156271,
+        43420156257
+      ],
+      "handoff": "awaiting-response"
+    },
+    "pr96": {
+      "head": "a29764d4ea27ff06dd6b0ea47e02c58a49069412",
+      "cardBatchFast": "success",
+      "engineValidation": "in_progress",
+      "milestone1000": "success"
+    },
+    "pr97": {
+      "head": "0b61325a518e1296825d8ad1c30554d72c57a15d",
+      "cardBatchFast": "success",
+      "engineValidation": "failure",
+      "milestone1000": "success",
+      "passedTests": 7369,
+      "failedTests": 1,
+      "failure": "Skelengel fixture expected 6 cards but started with 5; tests/tagClassicFlipRecoveryDrawPhysicalOwnership.test.cjs:138",
+      "commentId": 6859087003
+    },
+    "pr98": {
+      "head": "e35902f42bade97be71eb6c88aa0022a3fb6dd28",
+      "cardBatchFast": "success",
+      "engineValidation": "in_progress",
+      "milestone1000": "success"
+    },
+    "pr99": {
+      "head": "b9942091d0a695b732a684e4d162353dcf718e19",
+      "cardBatchFast": "success",
+      "engineValidation": "in_progress",
+      "milestone1000": "success"
+    },
+    "pr100": {
+      "head": "d153af18d5ee6e690ce2341c100e8109014f64dc",
+      "cardBatchFast": "success",
+      "engineValidation": "success",
+      "milestone1000": "success"
+    },
+    "pr101": {
+      "head": "55dfb23849316e98a5fd0b70810205d85f6bb02e",
+      "cardBatchFast": "success",
+      "engineValidation": "in_progress",
+      "milestone1000": "success"
+    }
+  },
+  "handoffRequests": {
+    "m61": {
+      "pr": 17,
+      "status": "awaiting-response",
+      "lastCommentId": 6859057163,
+      "ci": "engineValidation failure; cardBatchFast failure; TS2367 and TS2339 at src/duelEngineCurrent.ts:410",
+      "filesUntouched": true
+    },
+    "m118": {
+      "pr": 74,
+      "status": "awaiting-response",
+      "lastCommentId": 6859057742,
+      "ci": "cardBatchFast success; engineValidation success; milestone1000 success",
+      "filesUntouched": true
+    },
+    "m141": {
+      "pr": 97,
+      "status": "auxiliary-notified",
+      "commentId": 6859087003,
+      "filesUntouched": true
+    }
+  },
+  "deployment": {
+    "merge": "none",
+    "deploy": "none",
+    "mainHead": "8f3f1768b1ee1f4b4a96d557eab5926d96525ad2",
+    "deploymentWorkflow": "not found in .github/workflows/deploy.yml or deploy.yaml; repository workflow search returned no deployment workflow",
+    "hosting": "not verified",
+    "liveDiscordValidation": false
+  },
+  "releaseToAuxiliary": {
+    "branches": [
+      {
+        "branch": "feat/work-m146-mountain-global-2v2-field-modifier-20261113",
+        "head": "46c9ae23ed6b4eaab5bd40675312b490abe641f5",
+        "pr": 102,
+        "base": "feat/work-m71-ci-branch-routing-20261112",
+        "scope": [
+          "tests/tagClassicMountainGlobalSharedFieldModifiers.test.cjs"
+        ],
+        "state": "released-to-auxiliary-monitor-ci",
+        "ci": {
+          "cardBatchFast": "queued",
+          "engineValidation": "queued",
+          "milestone1000": "queued"
+        }
+      },
+      {
+        "branch": "feat/work-m147-dragon-treasure-dark-energy-2v2-20261113",
+        "head": "2842ce250df53b7886e45b6a74e23d12ccf3c093",
+        "pr": 103,
+        "base": "feat/work-m71-ci-branch-routing-20261112",
+        "scope": [
+          "tests/tagClassicDragonTreasureDarkEnergySharedField.test.cjs"
+        ],
+        "state": "released-to-auxiliary-monitor-ci",
+        "ci": {
+          "cardBatchFast": "queued",
+          "engineValidation": "queued",
+          "milestone1000": "queued"
+        }
+      },
+      {
+        "branch": "feat/work-m148-invigoration-earth-equip-2v2-20261113",
+        "head": "3d4ee7edd5858fd50c914323cde6bc8d767f2f50",
+        "pr": 104,
+        "base": "feat/work-m71-ci-branch-routing-20261112",
+        "scope": [
+          "tests/tagClassicInvigorationEarthEquipSharedField.test.cjs"
+        ],
+        "state": "released-to-auxiliary-monitor-ci",
+        "ci": {
+          "cardBatchFast": "queued",
+          "engineValidation": "queued",
+          "milestone1000": "queued"
+        }
+      },
+      {
+        "branch": "feat/work-m149-field-spell-replacement-2v2-20261113",
+        "head": "4b881526bbe1f3bd1401548a717e051df16b8fa2",
+        "pr": 105,
+        "base": "feat/work-m71-ci-branch-routing-20261112",
+        "scope": [
+          "tests/tagClassicFieldSpellReplacementSharedTeam.test.cjs"
+        ],
+        "state": "released-to-auxiliary-monitor-ci",
+        "ci": {
+          "cardBatchFast": "queued",
+          "engineValidation": "queued",
+          "milestone1000": "not-returned"
+        }
+      }
+    ],
+    "allowed": "Monitorar CI das PRs #102–#105 e corrigir somente os quatro arquivos de teste próprios listados; registrar resultados e devolver checkpoint.",
+    "forbidden": "Não fazer merge/deploy; não tocar M61/PR17, M118/PR74 nem branches M140–M145 de terceiros; não alterar runtime, catálogo, certificados, banco ou inventários."
+  },
+  "nextTask": "Auxiliar: acompanhar CI das PRs #102–#105 e corrigir apenas os testes próprios M146–M149 se falharem. Work na próxima janela: revalidar CI e handoffs M61/M118; avançar a próxima família 2v2 sem duplicações.",
+  "nextWorkAt": "2026-11-13T17:30:00-03:00",
+  "duration": {
+    "elapsedWallMinutes": 12,
+    "effectiveMinutesMeasured": false,
+    "minimum60MinutesConfirmed": false,
+    "note": "Janela observada de 11m41s (aprox. 12 minutos). Não é possível comprovar 60 minutos de trabalho efetivo; espera de CI não foi contabilizada."
+  },
+  "sharedHeadAfterReservation": "30ce0b9756820e4ee138a5bfdb9502d5c26454b1",
+  "sharedHeadBeforeRelease": "694f8a1dc66e957bddbc8c33155fbd7c8583944c",
+  "sharedHeadBeforeStateUpdate": "694f8a1dc66e957bddbc8c33155fbd7c8583944c",
+  "head": "46c9ae23ed6b4eaab5bd40675312b490abe641f5",
+  "pr": 102,
+  "parallelBranches": [
+    {
+      "branch": "feat/work-m147-dragon-treasure-dark-energy-2v2-20261113",
+      "head": "2842ce250df53b7886e45b6a74e23d12ccf3c093",
+      "pr": 103,
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "scope": [
+        "tests/tagClassicDragonTreasureDarkEnergySharedField.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": "queued",
+        "engineValidation": "queued",
+        "milestone1000": "queued"
+      }
+    },
+    {
+      "branch": "feat/work-m148-invigoration-earth-equip-2v2-20261113",
+      "head": "3d4ee7edd5858fd50c914323cde6bc8d767f2f50",
+      "pr": 104,
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "scope": [
+        "tests/tagClassicInvigorationEarthEquipSharedField.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": "queued",
+        "engineValidation": "queued",
+        "milestone1000": "queued"
+      }
+    },
+    {
+      "branch": "feat/work-m149-field-spell-replacement-2v2-20261113",
+      "head": "4b881526bbe1f3bd1401548a717e051df16b8fa2",
+      "pr": 105,
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "scope": [
+        "tests/tagClassicFieldSpellReplacementSharedTeam.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": "queued",
+        "engineValidation": "queued",
+        "milestone1000": "not-returned"
+      }
+    }
+  ],
+  "statusRefreshAt": "2026-11-13T13:41:32-03:00",
+  "observedParallelWork": {
+    "note": "M140–M145 são branches paralelas observadas; não foram reservadas, editadas ou liberadas pelo Work.",
+    "branches": [
+      {
+        "branch": "feat/work-m140-flip-target-monsters-2v2-20261113",
+        "head": "a29764d4ea27ff06dd6b0ea47e02c58a49069412",
+        "pr": 96,
+        "ci": {
+          "head": "a29764d4ea27ff06dd6b0ea47e02c58a49069412",
+          "cardBatchFast": "success",
+          "engineValidation": "in_progress",
+          "milestone1000": "success"
+        }
+      },
+      {
+        "branch": "feat/work-m141-flip-recovery-draw-2v2-20261113",
+        "head": "0b61325a518e1296825d8ad1c30554d72c57a15d",
+        "pr": 97,
+        "ci": {
+          "head": "0b61325a518e1296825d8ad1c30554d72c57a15d",
+          "cardBatchFast": "success",
+          "engineValidation": "failure",
+          "milestone1000": "success",
+          "passedTests": 7369,
+          "failedTests": 1,
+          "failure": "Skelengel fixture expected 6 cards but started with 5; tests/tagClassicFlipRecoveryDrawPhysicalOwnership.test.cjs:138",
+          "commentId": 6859087003
+        }
+      },
+      {
+        "branch": "feat/work-m142-jinzo-team-trap-negation-20261113",
+        "head": "e35902f42bade97be71eb6c88aa0022a3fb6dd28",
+        "pr": 98,
+        "ci": {
+          "head": "e35902f42bade97be71eb6c88aa0022a3fb6dd28",
+          "cardBatchFast": "success",
+          "engineValidation": "in_progress",
+          "milestone1000": "success"
+        }
+      },
+      {
+        "branch": "feat/work-m143-sangan-witch-2v2-search-owner-20261113",
+        "head": "b9942091d0a695b732a684e4d162353dcf718e19",
+        "pr": 99,
+        "ci": {
+          "head": "b9942091d0a695b732a684e4d162353dcf718e19",
+          "cardBatchFast": "success",
+          "engineValidation": "in_progress",
+          "milestone1000": "success"
+        }
+      },
+      {
+        "branch": "feat/work-m144-equip-shared-field-2v2-20261113",
+        "head": "d153af18d5ee6e690ce2341c100e8109014f64dc",
+        "pr": 100,
+        "ci": {
+          "head": "d153af18d5ee6e690ce2341c100e8109014f64dc",
+          "cardBatchFast": "success",
+          "engineValidation": "success",
+          "milestone1000": "success"
+        }
+      },
+      {
+        "branch": "feat/work-m145-yami-global-2v2-field-modifier-20261113",
+        "head": "55dfb23849316e98a5fd0b70810205d85f6bb02e",
+        "pr": 101,
+        "ci": {
+          "head": "55dfb23849316e98a5fd0b70810205d85f6bb02e",
+          "cardBatchFast": "success",
+          "engineValidation": "in_progress",
+          "milestone1000": "success"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "format": 1,
+  "runId": "work-20261127T221956-0300-M689",
+  "mission": "M689",
+  "priority": "P1",
+  "status": "reserved-and-implementing",
+  "startedAt": "2026-11-27T22:19:56-03:00",
+  "endedAt": null,
+  "branch": "feat/work-m689-conditional-insect-battle-20261127",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedBaseHead": "e7142ea8f08834b29896c042e7d79fa3477515ff",
+  "headSha": "e7142ea8f08834b29896c042e7d79fa3477515ff",
+  "reservedFiles": [
+    "src/conditionalInsectBattleTagAdapter.ts",
+    "tests/conditionalInsectBattleTagAdapter.test.cjs",
+    "docs/evidence/m689-conditional-insect-battle.json",
+    "scripts/audit-conditional-insect-battle-m689.cjs",
+    ".github/workflows/m689-conditional-insect-battle.yml",
+    "coordination/runs/work-20261127T221956-0300-M689.json"
+  ],
+  "baseline": {
+    "engineV9Certified": 969,
+    "remainingTo1000": 31,
+    "source": "milestone1000-plan artifact run 46091774623"
+  },
+  "blocksCompleted": [],
+  "handoff": {
+    "targetPR": 17,
+    "status": "awaiting-cooperative-release",
+    "files": [
+      "src/monsterEffects.ts",
+      "src/duelEngineCurrent.ts"
+    ]
+  },
+  "nextTask": "Implementar 8-Claws Scorpion (flip face-down uma vez por turno + ATK 2400 em dano de batalha contra face-down Defense) e Arsenal Bug (ATK/DEF tornam-se 1000 sem outro Insect face-up), com regras de combate isoladas."
+}

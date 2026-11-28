@@ -1,0 +1,71 @@
+{
+  "runId": "work-20261121T204700-0300-M476",
+  "mission": "M476",
+  "owner": "Work principal",
+  "status": "active",
+  "startedAt": "2026-11-21T20:47:00-03:00",
+  "endedAt": null,
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "d66c6ed3a3a6d20df2dac28684037f4f221a1b03",
+  "branch": "feat/work-m476-tag-last-seat-start-atomicity-20261121",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "d66c6ed3a3a6d20df2dac28684037f4f221a1b03",
+  "head": null,
+  "pr": null,
+  "priority": "P1 — validar a atomicidade da quarta aceitação do lobby 2v2: falha ao persistir a transição lobby→playing deve reverter o quarto lock, consentimento, estado do duelo e revisão em conjunto.",
+  "scope": [
+    "tests/tagLobbyLastSeatStartAtomicity2v2.test.cjs",
+    "docs/evidence/m476-tag-last-seat-start-atomicity.json",
+    ".github/workflows/m476-tag-last-seat-start-atomicity.yml"
+  ],
+  "conflictCheck": {
+    "overlap": false,
+    "preserved": [
+      "M472 PR #420",
+      "M473 PR #421",
+      "M474 PR #422",
+      "M475 PR #423",
+      "M61 src/monsterEffects.ts e src/duelEngineCurrent.ts",
+      "M469–M471 PRs #417–#419",
+      "M460–M468 PRs #408–#416",
+      "M431–M433 PRs #379–#381",
+      "M402–M458 e todas as reservas de terceiros"
+    ],
+    "note": "M476 usa apenas três caminhos novos; não altera src/tagStore.ts, src/tagDuel.ts, src/tagInteraction.ts ou banco persistente."
+  },
+  "blocksCompleted": [
+    "Preparado como frente independente durante as validações M472–M475.",
+    "Escopo restrito a teste de falha no último aceite; nenhum runtime ou catálogo."
+  ],
+  "ci": {
+    "status": "pending"
+  },
+  "certification": {
+    "baseline": 969,
+    "new": 0,
+    "remaining": 31,
+    "automatic": 0,
+    "inventoryGranted": 0
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "blockers": [
+    "Handoff M61 segue pendente; M476 não depende de arquivos centrais."
+  ],
+  "scopeReleasedToAuxiliary": [],
+  "nextTask": "Implementar teste de fault-injection no último aceite, workflow e PR draft; validar CI.",
+  "nextWindow": "2026-11-21T22:30:00-03:00",
+  "session": {
+    "startedAt": "2026-11-21T20:47:00-03:00",
+    "endedAt": null,
+    "elapsedMinutes": 0,
+    "effectiveWorkMinutes": 0,
+    "targetEffectiveMinutes": 60,
+    "targetMet": false,
+    "ciWaitExcluded": true
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "format": 1,
+  "commit": "6bad3cf37e23692f10d53ed4f7a5df4bfce01153",
+  "method": "authenticated Bot-Hosting.net panel, normal stop/stage/start/probe",
+  "fullCI": {"runId": 40960366867, "test": "success", "extended-soak": "success"},
+  "fastCI": {"runId": 40960366885, "conclusion": "success"},
+  "localSuite": {"tests": 6536, "pass": 6536, "fail": 0, "skipped": 0, "cancelled": 0, "todo": 0},
+  "stageCreated": "2026-10-29T21:59:07.034Z",
+  "previous": "b71c6936d951e63697ea5dadf1ab6bac8e3ea53f",
+  "backup": "data/deploy-backups/m31-1793311083357",
+  "catalog": "53752fee6f0dfcf2bdbb65627d3f376545d4351f6c461ac425d09177ada6960f",
+  "certified": 911,
+  "distributable": 911,
+  "sqliteIntegrity": "ok",
+  "protectedTablesIdentical": ["players", "player_cards", "decks", "deck_cards"],
+  "probe1v1": "passed",
+  "probe2v2": "passed",
+  "discordOnlineAfterRestart": "observed",
+  "inventoryGranted": 0,
+  "doesNotProve": "Human live Discord command and duel interaction validation remains pending."
+}

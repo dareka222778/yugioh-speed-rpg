@@ -1,0 +1,122 @@
+{
+  "format": 1,
+  "runId": "work-20261124T134217-0300-M590",
+  "mission": "M590",
+  "owner": "Work principal",
+  "priority": "P1",
+  "status": "reserved-and-implementing",
+  "startedAt": "2026-11-24T13:42:18-03:00",
+  "endedAt": null,
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "7bb3dbc89e72690e62e83ad1657c4098f866ca41",
+  "branch": "feat/work-m590-flip-random-dice-tag-adapter-20261124",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "7bb3dbc89e72690e62e83ad1657c4098f866ca41",
+  "branchHeadAtStart": "7bb3dbc89e72690e62e83ad1657c4098f866ca41",
+  "branchHeadSha": "7bb3dbc89e72690e62e83ad1657c4098f866ca41",
+  "pullRequest": null,
+  "reservedFiles": [
+    "src/flipRandomTagAdapter.ts",
+    "tests/flipRandomTagAdapter.test.cjs",
+    "docs/evidence/m590-flip-random-tag-adapter.json",
+    ".github/workflows/m590-flip-random-tag-adapter.yml"
+  ],
+  "cards": [
+    {
+      "name": "Dice Jar",
+      "passcode": "03549275",
+      "konamiDatabaseId": 5424,
+      "firstTCGPrinting": "Pharaonic Guardian (PGD-027), 2003-07-18",
+      "effect": "Both teams roll a six-sided die; ties repeat; the lower roll takes the higher roll ×500 damage, or 6000 if the higher roll is 6.",
+      "sources": [
+        "https://ftp.yugipedia.com/wiki/Dice_Jar",
+        "https://ygoprodeck.com/CARD/DICE-JAR-5424"
+      ],
+      "officialDatabaseUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5424&request_locale=en",
+      "sourceVerification": "secondary text/date cross-check; official database identifier captured, direct page retrieval not confirmed",
+      "certificationStatus": "not-certified; isolated adapter only"
+    },
+    {
+      "name": "Fire Sorcerer",
+      "passcode": "27132350",
+      "konamiDatabaseId": 5199,
+      "firstTCGPrinting": "Labyrinth of Nightmare (LON-EN036), 2003-03-01",
+      "effect": "FLIP: banish 2 random cards from your hand; inflict 800 damage to the opponent.",
+      "sources": [
+        "https://ftp.yugipedia.com/wiki/Fire_Sorcerer",
+        "https://ygoprodeck.com/CARD/FIRE-SORCERER-2321"
+      ],
+      "officialDatabaseUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5199&request_locale=en",
+      "sourceVerification": "secondary text/date cross-check; official database identifier captured, direct page retrieval not confirmed",
+      "certificationStatus": "not-certified; isolated adapter only"
+    }
+  ],
+  "scope": "Two FLIP effects share a typed event/plan pipeline, team LP resolution, physical owner/controller separation and inventory invariants. Dice Jar uses injected die pairs for deterministic reroll testing; Fire Sorcerer uses injected RNG-selected UIDs from the active controller's private hand. No central resolver integration before M61 handoff.",
+  "conflictCheck": {
+    "checkedAt": "2026-11-24T13:42:18-03:00",
+    "engineRevision": "3af4ee461ba728be019de373b6c9652c3a7fd21b94fd475aac6af22b5127ca99",
+    "engineCertifiedCount": 969,
+    "diceJarInEngine": false,
+    "fireSorcererInEngine": false,
+    "matchingBranches": 0,
+    "matchingPRs": 0,
+    "m61Handoff": "requested but not explicitly released",
+    "reservedThirdPartyFilesUntouched": true
+  },
+  "rules": {
+    "mainDeck": "20-30 per physical seat",
+    "handLimit": 6,
+    "handLimitTiming": "End Phase only",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separate",
+    "extraDeckMax": 5,
+    "privateHandsAndDecks": true,
+    "sharedTeamGraveyardAndBanished": true,
+    "physicalUidOwnership": "m0-m3"
+  },
+  "plannedTests": [
+    "trigger causes flip-summon/battle/card-effect",
+    "dice 1-6 validation",
+    "tie rerolls",
+    "winner 6 gives 6000",
+    "lower roll team loses",
+    "negation no-op",
+    "Fire Sorcerer banishes exactly two selected RNG UIDs",
+    "only active controller's private hand is used",
+    "insufficient hand does not partially resolve",
+    "stale plans and invalid selections rejected",
+    "source leaving field does not cancel trigger",
+    "LP terminal state",
+    "inventory conservation",
+    "20-30/6-End-Phase/3+3/Field/Extra 5 invariants"
+  ],
+  "ci": {
+    "focused": "not-started",
+    "cardBatchFast": "not-started",
+    "milestone1000": "not-started",
+    "engineValidation": "not-started"
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidated": false
+  },
+  "effectiveWorkMinutes": 0,
+  "targetEffectiveMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "nextTask": "Implementar adapter, testes, evidência e workflow; depois validar os quatro gates e continuar para outra família independente.",
+  "nextWindow": "2026-11-24T18:30:00-03:00",
+  "scopeReleasedToAuxiliary": []
+}

@@ -1,0 +1,81 @@
+{
+  "runId": "work-20261123T074023-0300-M550",
+  "mission": "M550",
+  "owner": "Work principal",
+  "state": "released-to-auxiliary",
+  "startedAt": "2026-11-23T07:40:23-03:00",
+  "lastActivityAt": "2026-11-23T07:48:18-03:00",
+  "endedAt": "2026-11-23T08:26:52-03:00",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "2fa45d0912bf7559ccb4d0462525745442a2a01e",
+  "sharedHeadAtFinalization": "50599e43cdc94207649b28354781257223165e1b",
+  "branch": "feat/work-m550-flip-cycle-tag-adapter-20261123",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "2fa45d0912bf7559ccb4d0462525745442a2a01e",
+  "headSha": "ea5135ca373d8590a8bb6e0a51cec037163f9ac1",
+  "priority": "P1 — preparar a família M60 de ciclo FLIP no TagDuel: Des Lacooda (comprar 1 no Flip Summon) e Stealth Bird (causar 1000 LP no Flip Summon), compartilhando a ignição Main Phase de auto-set por UID/epoch.",
+  "scope": [
+    "src/flipCycleTagAdapter.ts",
+    "tests/flipCycleTagAdapter.test.cjs",
+    "docs/evidence/m550-flip-cycle-tag-adapter.json",
+    ".github/workflows/m550-flip-cycle-tag-adapter.yml"
+  ],
+  "workBlocks": [
+    "Conferida a PR #502 e os quatro caminhos isolados de M550.",
+    "Verificados 22 cenários no arquivo focado e evidência comportamental.",
+    "Confirmados os quatro workflows no HEAD ea5135ca: M550 focused, Card Batch Fast, Milestone 1000 e Engine Validation — todos success.",
+    "Verificado que a mão pode ultrapassar seis após a compra e que o descarte fica para End Phase; dano letal, deck-out, controle versus proprietário físico, UID/epoch e conservação foram cobertos.",
+    "M551 (#503) foi auditada apenas em leitura; seus quatro workflows também passaram, mas sua reserva permanece ativa.",
+    "Nenhum arquivo central M61, catálogo, manifesto, allowlist, inventário ou banco persistente foi alterado."
+  ],
+  "tests": {
+    "focused": "success — run 45159415741",
+    "cardBatchFast": "success — run 45159415731",
+    "milestone1000": "success — run 45159415940",
+    "engineValidation": "success — run 45159415595",
+    "extendedSoak": "não aplicável ao workflow focado M550"
+  },
+  "catalog": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "inventoryGranted": 0,
+  "production": {
+    "mainHead": "197bbda07efc81658604bcd12308665571e26d59",
+    "backupVerified": false,
+    "liveDiscordValidation": false,
+    "merge": false,
+    "deploy": false,
+    "deploymentWorkflowFound": false,
+    "note": "Nenhum merge/deploy autorizado; sem backup verificável e sem validação em guild real."
+  },
+  "pr": {
+    "number": 502,
+    "url": "https://github.com/dareka222778/yugioh-speed-rpg/pull/502",
+    "headSha": "ea5135ca373d8590a8bb6e0a51cec037163f9ac1",
+    "state": "open",
+    "draft": true,
+    "mergeable": true
+  },
+  "releaseToAuxiliary": [
+    "M550: sincronização non-force e monitoramento/correções somente nos quatro caminhos próprios; reexecutar CI após sync; sem merge/deploy."
+  ],
+  "nextTask": "M557 — Morphing Jar: resolver FLIP global de descarte das mãos ativas e compra de cinco por equipe, com deck-out simultâneo e conservação de UIDs; M551 e M556 permanecem em reservas separadas.",
+  "nextWindow": "2026-11-23T12:30:00-03:00",
+  "duration": {
+    "elapsedMinutes": 46.5,
+    "effectiveWorkMinutes": null,
+    "targetEffectiveMinutes": 60,
+    "targetMet": false,
+    "ciWaitExcluded": true,
+    "measurement": "Intervalo observado entre início e encerramento administrativo; tempo efetivo de trabalho não foi mensurado e não é inferido."
+  },
+  "limitations": [
+    "Adapter M550 ainda não integrado ao resolver central; handoff M61 pendente.",
+    "Testes offline de adapter/estado TagDuel; sem gateway/guild Discord real.",
+    "969 certificações permanecem; M550 não adicionou certificações."
+  ]
+}

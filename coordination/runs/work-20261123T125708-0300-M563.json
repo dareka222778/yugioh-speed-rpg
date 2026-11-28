@@ -1,0 +1,163 @@
+{
+  "runId": "work-20261123T125708-0300-M563",
+  "mission": "M563",
+  "owner": "Work principal",
+  "priority": "P1 — adaptar The Shallow Grave (43434803) ao TagDuel clássico: os dois times escolhem na ativação um monstro de seu próprio Cemitério e o Invocam em Defesa com a face para baixo; preservar alvo/UID/proprietário físico, rotação, negação, zonas e resolução parcial se um alvo sair do Cemitério.",
+  "state": "reserved-and-implementing",
+  "startedAt": "2026-11-23T12:57:08-03:00",
+  "lastActivityAt": "2026-11-23T12:57:08-03:00",
+  "endedAt": null,
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "654de9fa841c458f0cd744efc08e961324faaa2c",
+  "branch": "feat/work-m563-the-shallow-grave-tag-adapter-20261123",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "654de9fa841c458f0cd744efc08e961324faaa2c",
+  "reservedFiles": [
+    "src/theShallowGraveTagAdapter.ts",
+    "tests/theShallowGraveTagAdapter.test.cjs",
+    "docs/evidence/m563-the-shallow-grave-tag-adapter.json",
+    ".github/workflows/m563-the-shallow-grave-tag-adapter.yml"
+  ],
+  "scope": [
+    "src/theShallowGraveTagAdapter.ts",
+    "tests/theShallowGraveTagAdapter.test.cjs",
+    "docs/evidence/m563-the-shallow-grave-tag-adapter.json",
+    ".github/workflows/m563-the-shallow-grave-tag-adapter.yml"
+  ],
+  "conflictCheck": {
+    "overlap": false,
+    "checkedAt": "2026-11-23T12:57:08-03:00",
+    "checkedAgainst": [
+      "M557 Morphing Jar: quatro caminhos próprios; não alterados.",
+      "M558 Cyber Jar: quatro caminhos próprios; não alterados.",
+      "M559 Gilasaurus: quatro caminhos próprios; não alterados.",
+      "M560 Spear Cretin: quatro caminhos próprios; não alterados.",
+      "M561 Bistro Butcher: quatro caminhos próprios; não alterados.",
+      "M562 Fiber Jar: quatro caminhos próprios; não alterados.",
+      "M61 (#17) mantém resolver, metadata, certificações e manifesto protegidos; nenhum desses arquivos integra M563.",
+      "Busca de branches/PRs e cardCatalog/cardMetadata/cardCertifications no HEAD compartilhado não encontrou The Shallow Grave (CID 4965 / passcode 43434803).",
+      "Os quatro caminhos M563 são novos e não se sobrepõem às reservas observadas."
+    ]
+  },
+  "card": {
+    "name": "The Shallow Grave",
+    "passcode": "43434803",
+    "konamiDatabaseId": 4965,
+    "officialCardDatabase": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4965&ope=2&request_locale=en",
+    "type": "Normal Spell",
+    "officialText": "Each player targets 1 monster in their own GY; each player Special Summons the target from their GY in face-down Defense Position.",
+    "firstTcgPrinting": {
+      "date": "2002-10-20",
+      "set": "PSV-036",
+      "product": "Pharaoh's Servant"
+    }
+  },
+  "design": {
+    "scope": "Adapter TagDuel isolado, teste, evidência e workflow; sem integração ao resolver central ou catálogo.",
+    "activation": "Normal Spell somente da mão do representante físico ativo durante Main Phase aberta; ambos os times devem selecionar um monstro elegível de seu próprio Cemitério na ativação.",
+    "targeting": "Os dois UIDs escolhidos são congelados no plano/recibo da ativação; cartas que entrarem no Cemitério depois não substituem alvos.",
+    "resolution": "Cada alvo é revalidado independentemente. Se um alvo saiu do Cemitério ou o time ficou sem Zona de Monstro, o outro lado ainda pode resolver.",
+    "summon": "Especial Summon em Defesa face-down; três Monster Zones compartilhadas por equipe.",
+    "ownership": "UID determina o assento físico original; controle fica com a equipe do Cemitério, sem reescrever proprietário.",
+    "eligibility": "Somente monstros reais no Cemitério da própria equipe; tokens e não-monstros excluídos; Fusion/Ritual exigem properlySummoned=true.",
+    "idempotency": "activationId persistido em JSON; replay bloqueado após resolução ou negação.",
+    "hand": "Nenhum descarte antecipado; mão acima de seis aguarda End Phase.",
+    "deck": "Decks não são alterados; 20–30 é limite de construção, não truncamento durante duelo.",
+    "ownerRules": {
+      "mainDeck": "20–30",
+      "handLimit": 6,
+      "discard": "End Phase",
+      "monsterZones": 3,
+      "spellTrapZones": 3,
+      "fieldZone": "separate",
+      "extraDeck": 5
+    }
+  },
+  "plannedTests": [
+    "fonte Normal Spell deve estar na mão do representante ativo durante Main Phase",
+    "fonte em reserva, Deck, GY ou outro UID é rejeitada",
+    "fase fora da Main Phase, chain/decision pendente e turno obsoleto são rejeitados",
+    "ambos os times escolhem um alvo do próprio Cemitério na ativação",
+    "alvo cruzado de equipe e UID duplicado são rejeitados",
+    "não-monstro, token e Fusion/Ritual sem proper summon são inelegíveis",
+    "Fusion/Ritual corretamente invocados permanecem elegíveis",
+    "ambos os alvos são congelados na ativação; carta tardia não pode substituí-los",
+    "os dois alvos retornam face-down Defense, com owner físico preservado",
+    "cartas de parceiros inativos preservam o assento físico m2/m3",
+    "um alvo removido após ativação não impede a resolução do outro",
+    "alvo movido para o Cemitério adversário não é roubado nem invocado",
+    "campo cheio na ativação impede a ativação; cheio somente na resolução impede apenas aquele lado",
+    "alvo que sai e retorna ao mesmo GY com novo epoch não contorna recibo de alvo",
+    "negação consome activationId sem mover alvos",
+    "fonte removida após ativação não cancela efeito já ativado",
+    "save/restore JSON preserva alvos e proteção contra replay",
+    "activationId duplicado, inválido ou obsoleto é rejeitado",
+    "todas as quatro rotações físicas 0–3 mantêm equipe e dono corretos",
+    "UIDs, identidades e inventário das reservas permanecem conservados",
+    "3 Monster + 3 Spell/Trap Zones e Field Zone separada",
+    "Extra Deck permanece limitado a cinco",
+    "mão acima de seis não é descartada antes da End Phase",
+    "Deck 20–30 permanece regra de construção e não altera Deck de duelo",
+    "entrada imutável, UIDs malformados e duplicados rejeitados",
+    "resolução é parcial quando apenas um alvo permanece válido"
+  ],
+  "catalog": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "inventoryGranted": 0,
+  "production": {
+    "mainHead": "197bbda07efc81658604bcd12308665571e26d59",
+    "backupVerified": false,
+    "liveDiscordValidation": false,
+    "merge": false,
+    "deploy": false,
+    "deploymentWorkflowFound": false,
+    "deploymentsApiExposed": false
+  },
+  "handoffRequests": [
+    {
+      "target": "PR #17 / M61",
+      "commentId": 7106460330,
+      "status": "awaiting-explicit-release",
+      "scope": [
+        "src/monsterEffects.ts",
+        "src/duelEngineCurrent.ts"
+      ]
+    }
+  ],
+  "tests": {
+    "focused": "pending",
+    "check": "pending",
+    "build": "pending",
+    "cardBatchFast": "pending",
+    "milestone1000": "pending",
+    "engineValidation": "pending",
+    "extendedSoak": "not-run"
+  },
+  "limitations": [
+    "Adapter não integrado ao resolver v9; The Shallow Grave permanece não certificada e não utilizável em decks.",
+    "Testes serão offline com estado TagDuel temporário; sem gateway/guild Discord real.",
+    "M61 sem liberação explícita; resolver, metadata, certificações, manifesto e allowlist não serão alterados."
+  ],
+  "pr": null,
+  "workBlocks": [
+    "Lidos state.json, checkpoint M562 e PRs/branches M557–M562; confirmado HEAD compartilhado e ausência do card em catalog/metadata/certificações.",
+    "Solicitado handoff parcial cooperativo M61 no PR #17; nenhum arquivo protegido será editado.",
+    "Reservados quatro caminhos novos M563 em branch independente, sem sobreposição com M557–M562."
+  ],
+  "nextTask": "Implementar adapter e suíte focada; depois consultar HEAD/coordenação e selecionar outra família independente, sem tocar reservas M557–M562/M61.",
+  "nextWindow": "2026-11-23T17:30:00-03:00",
+  "duration": {
+    "startedAt": "2026-11-23T12:57:08-03:00",
+    "endedAt": null,
+    "elapsedMinutes": null,
+    "effectiveWorkMinutes": null,
+    "targetEffectiveMinutes": 60,
+    "targetMet": false,
+    "ciWaitExcluded": true
+  }
+}

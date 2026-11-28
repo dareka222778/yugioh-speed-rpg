@@ -1,0 +1,181 @@
+{
+  "format": 1,
+  "runId": "work-20261123T223010-0300-M574",
+  "mission": "M574",
+  "owner": "Work principal",
+  "priority": "P1 — Draining Shield (43250041) e Enchanted Javelin (96355986): respostas de ataque que recuperam LP pelo ATK atual; Draining Shield também nega apenas ataque de monstro adversário, enquanto Enchanted Javelin não nega o ataque.",
+  "state": "reserved-and-implementing",
+  "startedAt": "2026-11-23T22:30:10-03:00",
+  "endedAt": "2026-11-23T23:07:48-03:00",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "c0da86800217e62719335f8a690113f82c087860",
+  "branch": "feat/work-m574-attack-lp-gain-tag-adapter-20261123",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "c0da86800217e62719335f8a690113f82c087860",
+  "reservationCommitSha": null,
+  "branchHeadSha": "2578811c4e2c3ee81c6c4f35e23b450ef51e32fa",
+  "pullRequest": 520,
+  "previousCheckpoint": "coordination/runs/work-20261123T184744-0300-M573.json",
+  "reservedFiles": [
+    "src/attackLpGainTagAdapter.ts",
+    "tests/attackLpGainTagAdapter.test.cjs",
+    "docs/evidence/m574-attack-lp-gain-tag-adapter.json",
+    ".github/workflows/m574-attack-lp-gain-tag-adapter.yml"
+  ],
+  "scope": "Adapter TagDuel isolado para Draining Shield e Enchanted Javelin; janela de declaração de ataque, ATK atual na resolução, cancelamento somente por Draining Shield, roteamento de LP pela equipe controladora, UID/proprietário físico preservados e evento compatível com Fire Princess. Sem tocar resolver central, catálogo, certificações, allowlist, comandos ou dados persistentes.",
+  "conflictCheck": {
+    "overlap": false,
+    "checkedAt": "2026-11-23T22:30:10-03:00",
+    "checkedAgainst": [
+      "M573 permanece reservado em branch própria; seus quatro caminhos não serão tocados enquanto a transferência solicitada no PR #519 não for confirmada.",
+      "M571/M572 usam quatro caminhos próprios distintos; M572 terá somente sua reserva liberada para monitoramento após CI verde.",
+      "M61 mantém duelEngineCurrent.ts, monsterEffects.ts, cardMetadata.ts, cardCertifications.ts e releasedCardIds.ts protegidos.",
+      "IDs 43250041 e 96355986 ausentes de metadata, certificações, allowlist, branches e PRs consultados."
+    ]
+  },
+  "cards": [
+    {
+      "id": "43250041",
+      "name": "Draining Shield",
+      "konamiDatabaseCid": 5994,
+      "kind": "Normal Trap",
+      "officialText": "If an opponent's monster declares an attack: Target the attacking monster; negate that attack, and if you do, gain LP equal to that target's ATK.",
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5994&ope=2&request_locale=en",
+      "firstTcgRelease": "2004-06-01",
+      "historicalEligibility": "eligible-before-2004-09-30"
+    },
+    {
+      "id": "96355986",
+      "name": "Enchanted Javelin",
+      "konamiDatabaseCid": 4992,
+      "kind": "Normal Trap",
+      "officialText": "Increase your Life Points by the ATK of 1 attacking monster.",
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4992&ope=2&request_locale=en",
+      "firstTcgRelease": "2002-10-20",
+      "historicalEligibility": "eligible-before-2004-09-30"
+    }
+  ],
+  "design": {
+    "window": "Somente resposta à declaração de ataque (Pending attack stage=declare), Trap Set desde turno anterior, prioridade atual do controlador e sem janela incompatível com Counter Trap.",
+    "drainingShield": "Exige atacante da equipe adversária; fixa o UID do atacante na ativação; se o ataque ainda for válido na resolução, nega esse ataque e recupera o ATK atual do alvo.",
+    "enchantedJavelin": "Não nega o ataque; não fixa alvo na ativação; recupera o ATK atual do monstro que continua atacando na resolução, inclusive quando o controlador do Trap é a equipe atacante e recebe prioridade numa corrente.",
+    "routing": "Recuperação aplicada aos LP compartilhados da equipe controladora do Trap; UID físico e assento proprietário permanecem rastreáveis; Trap vai ao Cemitério do time proprietário físico.",
+    "integration": "Evento de LP produzido com eventId idempotente e formato compatível com o adapter Fire Princess; nenhuma integração central ou certificação nesta etapa.",
+    "rules": {
+      "mainDeck": "20–30 por assento",
+      "handLimit": 6,
+      "handCheck": "End Phase",
+      "monsterZones": 3,
+      "spellTrapZones": 3,
+      "fieldZone": "separate",
+      "extraDeckMax": 5
+    }
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "ci": {
+    "focused": "success",
+    "cardBatchFast": "success",
+    "milestone1000": "success",
+    "engineValidation": "success",
+    "extendedSoak": "success",
+    "workflow": "success"
+  },
+  "production": {
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false,
+    "reason": "PR mantido draft; nenhuma autorização explícita de merge/deploy nem backup de produção verificável."
+  },
+  "safety": {
+    "runtimeCoreChanged": false,
+    "catalogChanged": false,
+    "certificationChanged": false,
+    "releasedCardIdsChanged": false,
+    "inventoryGranted": 0,
+    "persistentDatabaseChanged": false,
+    "playerDataChanged": false,
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "liveDiscordValidation": false
+  },
+  "handoff": {
+    "pr": 519,
+    "commentId": 7119188000,
+    "status": "requested-awaiting-explicit-release",
+    "conflictingMission": "M573",
+    "conflictingFiles": [
+      "src/summonNegationTagAdapter.ts",
+      "tests/summonNegationTagAdapter.test.cjs",
+      "docs/evidence/m573-summon-negation-tag-adapter.json",
+      ".github/workflows/m573-summon-negation-tag-adapter.yml"
+    ]
+  },
+  "nextTask": "M574 liberado; acompanhar M576/M577 sem alterar seus caminhos e aguardar liberação explícita M573.",
+  "nextWindow": "2026-11-24T03:30:00-03:00",
+  "duration": {
+    "startedAt": "2026-11-23T22:30:10-03:00",
+    "endedAt": "2026-11-23T23:07:48-03:00",
+    "effectiveWorkMinutes": 21,
+    "targetEffectiveMinutes": 60,
+    "ciWaitExcluded": true,
+    "note": "21 minutos efetivos de implementação e correção M574; espera de CI excluída. Todos os workflows observados no HEAD 2578811 ficaram verdes."
+  },
+  "implementationHeadSha": "2578811c4e2c3ee81c6c4f35e23b450ef51e32fa",
+  "commits": [
+    "2578811c4e2c3ee81c6c4f35e23b450ef51e32fa"
+  ],
+  "implementation": {
+    "source": "src/attackLpGainTagAdapter.ts",
+    "tests": "tests/attackLpGainTagAdapter.test.cjs",
+    "evidence": "docs/evidence/m574-attack-lp-gain-tag-adapter.json",
+    "workflow": ".github/workflows/m574-attack-lp-gain-tag-adapter.yml",
+    "testCases": 26,
+    "coverage": [
+      "ataque adversário e próprio",
+      "Draining Shield direcionado vs Enchanted Javelin não-direcionado",
+      "ATK atual na resolução",
+      "negação de ataque somente por Draining Shield",
+      "janela de declaração, turno de Set, prioridade e Damage Step",
+      "Spell Speed 3",
+      "mudança/saída do atacante e ativação negada",
+      "LP por equipe controladora e Cemitério do proprietário físico",
+      "UIDs, mãos privadas, decks 20–30, zonas 3+3 e Extra 5",
+      "LP seguro, IDs idempotentes e LIFO",
+      "redirecionamento do alvo de batalha sem invalidar a identidade do ataque",
+      "ATK zero não emite evento de ganho de LP nem registra evento processado"
+    ]
+  },
+  "followupFixes": [
+    {
+      "issue": "A identidade do ataque era invalidada quando o alvo da batalha mudava, embora o atacante e a declaração permanecessem os mesmos.",
+      "fix": "Removido o alvo defendido do snapshot de identidade; a resolução continua vinculada ao turno, equipe, UID atacante e contadores de ataque.",
+      "tests": 1
+    },
+    {
+      "issue": "Resoluções com ATK zero produziam evento LP de valor zero, que poderia disparar incorretamente efeitos como Fire Princess.",
+      "fix": "Evento compatível com Fire Princess e processedEventIds agora só são produzidos quando gainAmount > 0; Draining Shield ainda nega o ataque com ATK zero.",
+      "tests": 2
+    }
+  ],
+  "status": "completed-pr-open-draft-ci-green",
+  "lastActivityAt": "2026-11-23T23:07:48-03:00",
+  "reservation": {
+    "state": "released",
+    "releasedAt": "2026-11-23T23:07:48-03:00",
+    "releaseTo": "auxiliary-review-only",
+    "reservedFiles": [
+      "src/attackLpGainTagAdapter.ts",
+      "tests/attackLpGainTagAdapter.test.cjs",
+      "docs/evidence/m574-attack-lp-gain-tag-adapter.json",
+      ".github/workflows/m574-attack-lp-gain-tag-adapter.yml"
+    ]
+  }
+}

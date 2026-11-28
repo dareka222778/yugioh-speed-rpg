@@ -1,0 +1,72 @@
+{
+  "format": 1,
+  "runId": "work-20261120T095807-0300-M411",
+  "mission": "M411",
+  "owner": "Work principal",
+  "priority": "P1 — Tributo tipado 2v2: Anti-Aircraft Flower (Insect → 800 LP) e Arcane Archer of the Forest (Plant → destruição de Magia/Armadilha), preservando UIDs e separando proprietário físico de equipe controladora.",
+  "state": "active",
+  "startedAt": "2026-11-20T09:58:07-03:00",
+  "shared": {
+    "branch": "feat/rea-engine-recovery-20261026",
+    "headAtStart": "66fbe615d03f8748a1a646b9fbdec2a462b9f5bf",
+    "mainHead": "f78f3080b496d2697072b946088309f36e97b60e"
+  },
+  "branch": "feat/work-m411-typed-tribute-effects-20261120",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "66fbe615d03f8748a1a646b9fbdec2a462b9f5bf",
+  "reservedFiles": [
+    "src/typedTributeEffects.ts",
+    "tests/typedTributeEffects.test.cjs",
+    "docs/evidence/m411-typed-tribute-effects.json",
+    ".github/workflows/m411-typed-tribute-effects.yml"
+  ],
+  "objective": "Criar helpers puros e testes para custo de Tributo por tipo, dano de equipe e destruição de Spell/Trap, incluindo proteção contínua de Arcane Archer, sem editar o resolver reservado.",
+  "cards": [
+    {
+      "name": "Anti-Aircraft Flower",
+      "id": "65064143",
+      "konamiCardDatabaseId": 5890,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5890&ope=2&request_locale=en",
+      "behaviorStatus": "not-certified"
+    },
+    {
+      "name": "Arcane Archer of the Forest",
+      "id": "55001420",
+      "konamiCardDatabaseId": 5971,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5971&ope=2&request_locale=en",
+      "behaviorStatus": "not-certified"
+    }
+  ],
+  "blocksCompleted": [
+    "Leitura de coordination/state.json e checkpoint M399–M401.",
+    "HEAD compartilhado 66fbe615 e main f78f3080 verificados.",
+    "PRs #351–#358 auditadas; M402–M410 preservadas.",
+    "Handoff M61 renovado; runtime central permanece intocado.",
+    "Identidades e textos oficiais das duas cartas confirmados; elegibilidade OCG registrada no artefato M392."
+  ],
+  "ci": {
+    "focused": "not-run",
+    "cardBatchFast": "not-run",
+    "milestone1000": "not-run",
+    "engineValidation": "not-run",
+    "extendedSoak": "not-run"
+  },
+  "newCertifications": 0,
+  "safety": {
+    "runtimeCoreChanged": false,
+    "catalogChanged": false,
+    "certificationFilesChanged": false,
+    "inventoryGranted": 0,
+    "persistentDatabaseChanged": false,
+    "playerDataChanged": false,
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "realDiscordValidated": false
+  },
+  "nextTask": "Implementar helpers e testes focados; depois avançar à próxima família sem tocar nas reservas ativas.",
+  "nextWindow": "2026-11-20T13:30:00-03:00",
+  "limitations": [
+    "Helpers isolados não certificam cartas; integração ao resolver depende de handoff M61.",
+    "CI e execução em servidor Discord real ainda não realizadas."
+  ]
+}

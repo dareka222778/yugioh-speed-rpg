@@ -1,0 +1,91 @@
+{
+  "runId": "work-20261122T213136-0300-M537",
+  "mission": "M537",
+  "owner": "Work principal",
+  "status": "completed-released-to-auxiliary",
+  "startedAt": "2026-11-22T21:31:36-03:00",
+  "lastActivityAt": "2026-11-22T22:09:32-03:00",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "b5aa14a707e97837532c00d647a6a26978884c05",
+  "coordinationCommit": "bd16f0da36b062f5f4de5055ab35387573f89965",
+  "branch": "feat/work-m537-timeout-queue-isolation-20261122",
+  "headSha": "e55f7e8a84ad61dac8c8cfd3b580061eb343165d",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "bd16f0da36b062f5f4de5055ab35387573f89965",
+  "priority": "P1 — isolar as filas de timeout 1v1 e 2v2: uma falha ao drenar uma sessão NPC/tag não pode interromper a publicação de outras sessões, e uma falha ao enumerar um modo não pode impedir o outro.",
+  "scope": [
+    "src/timeoutSweep.ts",
+    "src/index.ts",
+    "tests/timeoutSweepIsolation.test.cjs",
+    "docs/evidence/m537-timeout-queue-isolation.json",
+    ".github/workflows/m537-timeout-queue-isolation.yml",
+    "scripts/mission29-reviewed-extensions.cjs",
+    "tests/runtimeStatus29.test.cjs"
+  ],
+  "reservedFiles": [
+    "src/timeoutSweep.ts",
+    "src/index.ts",
+    "tests/timeoutSweepIsolation.test.cjs",
+    "docs/evidence/m537-timeout-queue-isolation.json",
+    ".github/workflows/m537-timeout-queue-isolation.yml",
+    "scripts/mission29-reviewed-extensions.cjs",
+    "tests/runtimeStatus29.test.cjs"
+  ],
+  "workBlocks": [
+    "Inspecionado sweepDuelTimeouts: o try/catch envolve as duas filas; um erro de runTagBots em uma sessão interrompe a iteração 2v2, e erro ao enumerar 1v1 impede a fila 2v2.",
+    "Escopo M537 reservado em cinco caminhos; sem sobreposição com M536/M502/M526/M61.",
+    "M29 integrity gate diagnostic: Card Batch Fast initially failed because the exact new index hook was not yet normalized.",
+    "Added strict M29 reviewed normalization for only the exact M537 import and sweep body; original mission-8 baseline remains unchanged; negative tests cover partial, modified, duplicate, misplaced and unrelated edits."
+  ],
+  "tests": {
+    "focused": "3/3 passed (45090203046)",
+    "check": "passed",
+    "build": "passed",
+    "customWorkflow": "passed; 3/3 cases (45090966363)",
+    "cardBatchFast": "passed (45090966330)",
+    "milestone1000": "passed; 969/1000 (45090966387)",
+    "engineValidation": "passed (45090966428)",
+    "extendedSoak": "passed; 600s (45090966428)",
+    "limitations": "Orquestrador e helper validados offline; sem gateway Discord real."
+  },
+  "catalog": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "inventoryGranted": 0,
+  "production": {
+    "mainHead": "197bbda07efc81658604bcd12308665571e26d59",
+    "backupVerified": false,
+    "liveDiscordValidation": false,
+    "merge": false,
+    "deploy": false,
+    "deploymentWorkflowFound": false
+  },
+  "pr": {
+    "number": 481,
+    "url": "https://github.com/dareka222778/yugioh-speed-rpg/pull/481",
+    "headSha": "e55f7e8a84ad61dac8c8cfd3b580061eb343165d",
+    "draft": true,
+    "state": "open",
+    "mergeable": true
+  },
+  "limitations": [
+    "No real Discord gateway test; only offline handler/orchestrator and CI.",
+    "No merge/deploy; no production backup or deployment record verified."
+  ],
+  "nextTask": "Auxiliar acompanha PR #481; Work segue M538 e aguarda handoff M61 para integrar adapters ao resolver.",
+  "nextWindow": "2026-11-22T22:30:00-03:00",
+  "duration": {
+    "targetEffectiveMinutes": 60,
+    "effectiveWorkMinutes": 0,
+    "ciWaitExcluded": true
+  },
+  "endedAt": "2026-11-22T22:09:32-03:00",
+  "releaseToAuxiliary": [
+    "Auxiliar pode monitorar CI, sincronizar sem force push e corrigir somente os sete caminhos próprios de M537; sem merge/deploy."
+  ],
+  "handoffComment": "https://github.com/dareka222778/yugioh-speed-rpg/pull/481#issuecomment-7088833378"
+}

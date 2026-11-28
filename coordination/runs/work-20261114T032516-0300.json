@@ -1,0 +1,261 @@
+{
+  "runId": "work-20261114T032516-0300",
+  "owner": "Work",
+  "priority": "P1 — ampliar a validação comportamental 2v2 de destruição por ataque (Mirror Force), destruição global (Dark Hole) e banimento por Invocação (Bottomless Trap Hole), com propriedade física, prioridades, privacidade, zonas e conservação dos 80 UIDs; sem tocar no runtime reservado.",
+  "state": "completed; released-to-auxiliary-monitor-ci",
+  "startedAt": "2026-11-14T03:25:16-03:00",
+  "endedAt": "2026-11-14T03:39:10-03:00",
+  "timezone": "America/Sao_Paulo",
+  "duration": {
+    "elapsedWallMinutes": 14,
+    "effectiveMinutesMeasured": false,
+    "minimum60MinutesConfirmed": false,
+    "note": "Janela observada de aproximadamente 14 minutos. A exigência de 60 minutos efetivos não foi cumprida; tempo ocioso/espera de CI não foi contado como desenvolvimento."
+  },
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "cab1c0a48ef4653de66bcd70ea63b2e967a709ad",
+  "sharedHeadAfterClaim": "9a58808dc5ccaffd0bdce4827022f37cde000466",
+  "sharedHeadAfterScopeExtension": "b21ea902e5b34825712e383ebba7972355c5337e",
+  "sharedHeadBeforeCheckpoint": "b21ea902e5b34825712e383ebba7972355c5337e",
+  "baseBranch": "feat/work-m71-ci-branch-routing-20261112",
+  "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+  "workBranches": [
+    {
+      "mission": "M161",
+      "branch": "feat/work-m161-mirror-force-2v2-team-wide-20261114",
+      "head": "6ca3bc11c6a448d76b8e6a9cc728573a0c46e977",
+      "pr": 117,
+      "files": [
+        "tests/tagClassicMirrorForceOwnership2v2.test.cjs"
+      ],
+      "commits": [
+        "054ec4b333ee3756e93e7621fbe177b17d825a43",
+        "6ca3bc11c6a448d76b8e6a9cc728573a0c46e977"
+      ],
+      "summary": "Mirror Force: resposta do assento ativo defensor usando Trap do parceiro inativo; destrói somente monstros em Ataque da equipe adversária; preserva Defesa/aliados; verifica UID, privacidade e limite de 3 zonas por equipe.",
+      "ci": {
+        "cardBatchFast": "success",
+        "cardBatchFastRunId": 43567000920,
+        "milestone1000": "success",
+        "milestoneRunId": 43567000950,
+        "check": "success",
+        "npmTest": "success",
+        "engineValidation": "in_progress",
+        "engineRunId": 43567000915,
+        "extendedSoak": "in_progress",
+        "initialEngineRunFailed": "fixture excedia 3 zonas; corrigido no HEAD atual"
+      }
+    },
+    {
+      "mission": "M162",
+      "branch": "feat/work-m162-dark-hole-2v2-global-field-20261114",
+      "head": "0275807d28925ee2fd52d339762b7b6fe41c9d4a",
+      "pr": 118,
+      "files": [
+        "tests/tagClassicDarkHoleGlobalField2v2.test.cjs"
+      ],
+      "commits": [
+        "0275807d28925ee2fd52d339762b7b6fe41c9d4a"
+      ],
+      "summary": "Dark Hole: destrói monstros dos quatro proprietários físicos nos dois campos compartilhados, inclusive face-down/Defesa; preserva backrows setadas e sua privacidade; conserva os 80 UIDs.",
+      "ci": {
+        "cardBatchFast": "success",
+        "cardBatchFastRunId": 43566724675,
+        "milestone1000": "success",
+        "milestoneRunId": 43566724677,
+        "check": "success",
+        "npmTest": "success",
+        "engineValidation": "in_progress",
+        "engineRunId": 43566724653,
+        "extendedSoak": "in_progress"
+      }
+    },
+    {
+      "mission": "M163",
+      "branch": "feat/work-m163-bottomless-trap-hole-2v2-physical-owner-20261114",
+      "head": "b933b33a981ab5fd6ce83f9cc7a7dd2eab46f6d5",
+      "pr": 119,
+      "files": [
+        "tests/tagClassicBottomlessTrapHoleOwnership2v2.test.cjs"
+      ],
+      "commits": [
+        "3dc46ca8c960fdcc9ed033821813003cac704300",
+        "b933b33a981ab5fd6ce83f9cc7a7dd2eab46f6d5"
+      ],
+      "summary": "Bottomless Trap Hole: resposta do parceiro ativo a Invocação elegível >=1500 ATK, banimento do alvo correto e controle negativo abaixo do limiar; valida UIDs, equipe, Cemitério e privacidade.",
+      "ci": {
+        "cardBatchFast": "success",
+        "cardBatchFastRunId": 43567105635,
+        "milestone1000": "success",
+        "milestoneRunId": 43567105750,
+        "check": "success",
+        "npmTest": "success",
+        "engineValidation": "in_progress",
+        "engineRunId": 43567105671,
+        "extendedSoak": "in_progress",
+        "initialEngineRunFailed": "teste esperava incorretamente phase=response para summon abaixo de 1500; corrigido para resolução imediata em main"
+      }
+    }
+  ],
+  "pullRequests": [
+    {
+      "number": 117,
+      "state": "open",
+      "draft": true,
+      "mergeable": true,
+      "head": "6ca3bc11c6a448d76b8e6a9cc728573a0c46e977",
+      "base": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb"
+    },
+    {
+      "number": 118,
+      "state": "open",
+      "draft": true,
+      "mergeable": true,
+      "head": "0275807d28925ee2fd52d339762b7b6fe41c9d4a",
+      "base": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb"
+    },
+    {
+      "number": 119,
+      "state": "open",
+      "draft": true,
+      "mergeable": true,
+      "head": "b933b33a981ab5fd6ce83f9cc7a7dd2eab46f6d5",
+      "base": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb"
+    }
+  ],
+  "catalog": {
+    "sharedCards": 969,
+    "sharedCertificates": 969,
+    "developmentCards": 1014,
+    "developmentCertificates": 1014,
+    "delta": 45,
+    "target": 1000,
+    "remainingToTarget": 31,
+    "historyPending": 993,
+    "identityBlocked": 27,
+    "newAdmissions": 0,
+    "newCertificates": 0,
+    "automaticCertifications": 0,
+    "source": "Milestone 1000 workflow logs 43566721406, 43566724677 and 43567105750"
+  },
+  "priorPullRequests": {
+    "pr114": {
+      "engineValidation": "success",
+      "cardBatchFast": "success",
+      "milestone1000": "success"
+    },
+    "pr115": {
+      "engineValidation": "success",
+      "cardBatchFast": "success",
+      "milestone1000": "success"
+    },
+    "pr116": {
+      "engineValidation": "failure",
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "failedTest": "tagEconomicSpellDiscordInteraction.test.cjs",
+      "rootCause": "helper recebe requestId no parâmetro usado por store.getTag; separar sessionId de interactionId",
+      "auxiliaryCommentId": 6873218837
+    }
+  },
+  "handoffs": {
+    "m61": {
+      "pr": 17,
+      "commentId": 6873097667,
+      "status": "awaiting-response-no-reply",
+      "reservedFiles": [
+        "src/monsterEffects.ts",
+        "src/duelEngineCurrent.ts",
+        "src/classicEffects.ts",
+        "src/duelIntegrity.ts",
+        "scripts/mass-certification21.cjs"
+      ],
+      "knownTypeErrors": [
+        "TS2367",
+        "TS2339"
+      ]
+    },
+    "m118": {
+      "pr": 74,
+      "commentId": 6873098031,
+      "status": "awaiting-response-no-reply",
+      "reservedFiles": [
+        "src/tagDuel.ts",
+        "tests/tagClassicGiantTrunadePhysicalHandOwnership.test.cjs"
+      ],
+      "ci": "success"
+    },
+    "m151": {
+      "pr": 107,
+      "commentId": 6873098406,
+      "status": "awaiting-response-no-reply",
+      "reservedFiles": [
+        "tests/tagClassicPolymerizationSharedField2v2.test.cjs"
+      ],
+      "ci": "engine-validation-failure",
+      "knownFailure": "BEASTKING pertence ao assento físico 2, mas fixture chama deploy(state,0,BEASTKING)"
+    },
+    "m153": {
+      "pr": 109,
+      "status": "engine-validation-failure",
+      "knownFailure": "Reinforcements/Castle Walls oferecem alvo da equipe adversária; depende do runtime M61"
+    }
+  },
+  "production": {
+    "mainHead": "8f3f1768b1ee1f4b4a96d557eab5926d96525ad2",
+    "mainWorkflowFiles": [],
+    "sharedWorkflowFiles": [
+      "card-batch-admission.yml",
+      "card-batch-fast.yml",
+      "engine-validation.yml",
+      "milestone1000.yml"
+    ],
+    "deploymentWorkflowFound": false,
+    "hostingStatus": "not verified",
+    "merge": "none",
+    "deploy": "none",
+    "liveDiscordValidation": false
+  },
+  "safety": {
+    "runtimeChanged": false,
+    "catalogChanged": false,
+    "certificatesChanged": false,
+    "persistentDatabaseChanged": false,
+    "playerInventoriesChanged": false,
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "discordLiveTest": false
+  },
+  "auxiliaryRelease": {
+    "allowed": "Monitorar CI das PRs #117–#119 e corrigir somente os três arquivos de teste nas respectivas branches próprias; preservar logs e devolver checkpoint. Também manter M156–M160 conforme liberação anterior.",
+    "forbidden": "Não tocar M61/PR17, M118/PR74, M151/PR107, M153/runtime reservado, branches de terceiros, catálogo, certificados, bancos ou inventários; não fazer merge/deploy.",
+    "branches": [
+      {
+        "branch": "feat/work-m161-mirror-force-2v2-team-wide-20261114",
+        "pr": 117,
+        "head": "6ca3bc11c6a448d76b8e6a9cc728573a0c46e977",
+        "files": [
+          "tests/tagClassicMirrorForceOwnership2v2.test.cjs"
+        ]
+      },
+      {
+        "branch": "feat/work-m162-dark-hole-2v2-global-field-20261114",
+        "pr": 118,
+        "head": "0275807d28925ee2fd52d339762b7b6fe41c9d4a",
+        "files": [
+          "tests/tagClassicDarkHoleGlobalField2v2.test.cjs"
+        ]
+      },
+      {
+        "branch": "feat/work-m163-bottomless-trap-hole-2v2-physical-owner-20261114",
+        "pr": 119,
+        "head": "b933b33a981ab5fd6ce83f9cc7a7dd2eab46f6d5",
+        "files": [
+          "tests/tagClassicBottomlessTrapHoleOwnership2v2.test.cjs"
+        ]
+      }
+    ]
+  },
+  "nextTask": "Auxiliar: monitorar Engine Validation/extended soak das PRs #117–#119; corrigir somente testes nas branches liberadas. Work: conferir resultados finais; obter handoff M61/M118/M151; se liberado, corrigir TS2367/TS2339 e filtro de alvos; continuar revisão individual das 31 certificações pendentes sem importação automática.",
+  "nextWorkAt": "2026-11-14T08:30:00-03:00"
+}

@@ -1,0 +1,120 @@
+{
+  "format": 1,
+  "runId": "work-20261127T222547-0300-M690",
+  "mission": "M690",
+  "priority": "P1",
+  "status": "completed-awaiting-review",
+  "startedAt": "2026-11-27T22:25:47-03:00",
+  "endedAt": "2026-11-27T22:42:26-03:00",
+  "branch": "feat/work-m690-battle-topdeck-20261127",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedBaseHead": "4e0886292955e78d511174fee48f12d39d0f1db3",
+  "headSha": "a48733639792cfe2f9f594da24404101079177a3",
+  "reservedFiles": [
+    "src/battleTopdeckTagAdapter.ts",
+    "tests/battleTopdeckTagAdapter.test.cjs",
+    "docs/evidence/m690-battle-topdeck.json",
+    "scripts/audit-battle-topdeck-m690.cjs",
+    ".github/workflows/m690-battle-topdeck.yml",
+    "coordination/runs/work-20261127T222547-0300-M690.json"
+  ],
+  "baseline": {
+    "engineV9Certified": 969,
+    "remainingTo1000": 31,
+    "source": "milestone1000-plan artifact run 46092633050"
+  },
+  "cards": [
+    {
+      "id": "87523462",
+      "konamiId": 5522,
+      "name": "Winged Sage Falcos",
+      "kind": "effect-monster",
+      "officialSummary": "Quando destrói em batalha um monstro adversário face-up em Posição de Ataque e o envia ao Cemitério, pode colocá-lo no topo do Deck do oponente.",
+      "firstOCGRelease": "2003-10-23",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5522&request_locale=ae",
+      "status": "adapter-tested-pending-engine-integration"
+    },
+    {
+      "id": "98745000",
+      "konamiId": 5519,
+      "name": "Mystical Knight of Jackal",
+      "kind": "effect-monster",
+      "officialSummary": "Quando destrói um monstro adversário em batalha e o envia ao Cemitério do oponente, pode colocá-lo no topo do Deck do oponente.",
+      "firstOCGRelease": "2003-10-23",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5519&request_locale=ae",
+      "status": "adapter-tested-pending-engine-integration"
+    },
+    {
+      "id": "47025270",
+      "konamiId": 5596,
+      "name": "Helping Robo for Combat",
+      "kind": "effect-monster",
+      "officialSummary": "Quando destrói um monstro adversário em batalha, compra 1 carta e depois devolve 1 carta da mão ao fundo do Deck.",
+      "firstOCGRelease": "2004-01-22",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5596&request_locale=ae",
+      "status": "adapter-tested-pending-engine-integration"
+    }
+  ],
+  "blocksCompleted": [
+    "Leitura de coordination/state.json e checkpoint M689; confirmação do HEAD compartilhado e reservas de terceiros.",
+    "Pedido de handoff cooperativo no PR #17 para src/monsterEffects.ts e src/duelEngineCurrent.ts; nenhum arquivo central foi tocado.",
+    "Adapter isolado de três cartas: topdeck por UID/proprietário físico e compra/retorno privado de Helping Robo.",
+    "14 cenários de comportamento, incluindo posição, GY, negação, replay, reserva 2v2, mão 7 até End Phase e inventário.",
+    "Typecheck, build, testes focados, auditoria factual e fast feedback aprovados no SHA a487336."
+  ],
+  "handoff": {
+    "targetPR": 17,
+    "commentId": 7231720000,
+    "status": "requested-awaiting-explicit-release",
+    "files": [
+      "src/monsterEffects.ts",
+      "src/duelEngineCurrent.ts"
+    ],
+    "response": "Sem liberação explícita observada no início do M690; adapter seguirá isolado."
+  },
+  "nextTask": "M691: Grave Protector — substituição contínua do destino de monstros destruídos em batalha, com embaralhamento privado no Deck físico do dono e retorno de Fusion ao Extra Deck.",
+  "branchHeadSha": "a48733639792cfe2f9f594da24404101079177a3",
+  "pullRequest": {
+    "number": 614,
+    "url": "https://github.com/dareka222778/yugioh-speed-rpg/pull/614",
+    "state": "open",
+    "draft": true,
+    "merged": false
+  },
+  "verification": {
+    "typecheck": "success",
+    "build": "success",
+    "focusedTests": "14/14 success",
+    "evidenceAudit": "success",
+    "cardBatchFastFeedback": "success",
+    "milestone1000": "success",
+    "engineValidation": "in-progress",
+    "liveDiscordValidation": false
+  },
+  "counts": {
+    "baselineEngineV9Certified": 969,
+    "remainingTo1000": 31,
+    "adapterBehaviorVerifiedCards": 3,
+    "newEngineCertifiedCards": 0,
+    "automaticCertifications": 0,
+    "inventoryGrants": 0
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "effectiveWorkMinutes": 16,
+  "targetEffectiveWorkMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "scopeReleasedToAuxiliary": [
+    "src/battleTopdeckTagAdapter.ts",
+    "tests/battleTopdeckTagAdapter.test.cjs",
+    "docs/evidence/m690-battle-topdeck.json",
+    "scripts/audit-battle-topdeck-m690.cjs",
+    ".github/workflows/m690-battle-topdeck.yml"
+  ],
+  "nextWindow": "2026-11-28T03:30:00-03:00"
+}

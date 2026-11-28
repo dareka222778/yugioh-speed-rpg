@@ -1,0 +1,40 @@
+{
+  "format": 1,
+  "runId": "work-20261126T214800-0300-M664",
+  "mission": "M664",
+  "priority": "P1",
+  "status": "reserved-and-implementing",
+  "startedAt": "2026-11-26T21:48:00-03:00",
+  "endedAt": null,
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "baseHead": "b910d8faa27ad0a6dbe3978cd8efc25c8c3b49d1",
+  "branch": "feat/work-m664-flip-deck-ops-20261126",
+  "headSha": null,
+  "scope": "Adapter TagDuel isolado para Big Eye (16768387/CID 4177), Magical Merchant (32362575/CID 5663) e Des Feral Imp (78868119/CID 5359): inspeção privada e reordenação dos 5 cards do topo pelo assento controlador; escavação pública até a primeira Magia/Armadilha, envio dos demais ao GY compartilhado e adição à mão física; reciclagem de alvo do GY para o Deck do proprietário físico com shuffle validado. Preserva UID, ownerSeat, mãos privadas, 3+3 zonas, Field Zone separada, Deck inicial 20–30, Extra 5 e descarte de mão somente na End Phase. Sem resolver central, catálogo/certificações, comandos, banco, inventário ou produção.",
+  "reservedFiles": [
+    "src/flipDeckOperationsTagAdapter.ts",
+    "tests/flipDeckOperationsTagAdapter.test.cjs",
+    "docs/evidence/m664-flip-deck-operations.json",
+    "scripts/audit-flip-deck-operations-m664.cjs",
+    ".github/workflows/m664-flip-deck-operations.yml"
+  ],
+  "certifiedCardsBefore": 959,
+  "certificationCountMethod": "959 registros explícitos únicos em src/cardCertifications.ts no HEAD-base; a contagem final de engine-v9 deve ser reconciliada pela CI, pois títulos de workflows/checkpoints anteriores divergem.",
+  "catalogCardsAtBase": null,
+  "certifiedCardsAfter": null,
+  "newCertifications": 0,
+  "inventoryGrants": 0,
+  "ci": {
+    "focused": "pending",
+    "repositoryRegression": "pending",
+    "cardBatchFast": "pending",
+    "milestone1000": "pending",
+    "engineValidation": "pending"
+  },
+  "pr": null,
+  "production": "não alterada",
+  "discord": "não validado ao vivo",
+  "handoff": "sem conflito com reservas ativas: somente cinco caminhos novos. PR #17/M61 permanece aberto e sem handoff explícito para resolver central; esta frente não editará arquivos centrais.",
+  "nextTask": "Implementar os três fluxos de deck/flip com recibos idempotentes, privacidade por assento, conservação de UID/propriedade e 20+ cenários focados; executar typecheck/build/auditoria e abrir PR draft somente após validação.",
+  "nextWindow": "2026-11-26T22:30:00-03:00"
+}

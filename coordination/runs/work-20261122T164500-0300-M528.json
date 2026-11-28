@@ -1,0 +1,98 @@
+{
+  "runId": "work-20261122T164500-0300-M528",
+  "mission": "M528",
+  "parentRunId": "work-20261122T163436-0300-M527",
+  "owner": "Work principal",
+  "status": "code-complete; released-to-auxiliary",
+  "startedAt": "2026-11-22T16:45:00-03:00",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "a40f77538b2116042bd8fa4b326ee7b90c3a24ea",
+  "branch": "feat/work-m528-duel-timeout-restart-publication-20261122",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "a40f77538b2116042bd8fa4b326ee7b90c3a24ea",
+  "priority": "P1 — provar recuperação após reinício do processo para timeout 1v1: o evento duelFinished e a revisão terminal devem sobreviver ao restart; polling pós-restart não duplica evento; ACK correspondente persiste e remove o outbox; Decks, mãos, zonas, locks e dados econômicos permanecem íntegros.",
+  "reservedFiles": [
+    "tests/duelTimeoutRestartPublication.test.cjs",
+    "docs/evidence/m528-duel-timeout-restart-publication.json",
+    ".github/workflows/m528-duel-timeout-restart-publication.yml"
+  ],
+  "conflictCheck": {
+    "overlap": false,
+    "checkedAt": "2026-11-22T16:45:00-03:00",
+    "checkedAgainst": [
+      "M527 PR #473 — polling/ACK idempotente em um processo; arquivos próprios preservados",
+      "M520 PR #466 — handler 1v1; três caminhos próprios",
+      "M515–M526 PRs #462–#472 — timeouts/receipts; runtime/store somente leitura",
+      "M61 e todas as reservas de terceiros"
+    ],
+    "note": "Somente teste/evidência/workflow novos. O teste usa SQLite temporário e processos Node filhos; não altera src/duelStore.ts, src/duelEngine.ts, handlers, catálogo, manifesto, resolver, allowlist, certificados ou dados persistentes."
+  },
+  "workBlocks": [
+    "Reauditado shared HEAD a40f77538b2116042bd8fa4b326ee7b90c3a24ea e coordenação; M527 permanece ativo e CI focada 2/2 aprovada, Card Batch Fast/Engine Validation ainda executando.",
+    "M528 reservado em caminhos novos e independentes para teste de persistência de outbox entre processos.",
+    "CI focada M528 1/1 success após corrigir regex W.O.; npm run check/build, Card Batch Fast e Milestone 1000 success; Engine Validation e Extended Soak 600s ainda em execução.",
+    "Finalização de código e handoff em 2026-11-22T17:02:17-03:00: PR #474 aberta em draft; CI observada pelo Work; escopo próprio liberado ao auxiliar apenas para monitoramento/sincronização não-forçada e correções nos três arquivos da missão. Sem merge/deploy."
+  ],
+  "tests": {
+    "focused": "success 1/1 (45063169545)",
+    "check": "success",
+    "build": "success",
+    "cardBatchFast": "success (45063169579)",
+    "milestone1000": "success (45063169544; 969/1000)",
+    "engineValidation": "success (45063169542)",
+    "extendedSoak": "success (600s; 45063169542)"
+  },
+  "catalog": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "inventoryGranted": 0,
+  "mergePerformed": false,
+  "deployPerformed": false,
+  "production": {
+    "mainHead": "197bbda07efc81658604bcd12308665571e26d59",
+    "backupVerified": false,
+    "liveDiscordValidation": false,
+    "merge": false,
+    "deploy": false
+  },
+  "pr": {
+    "number": 474,
+    "url": "https://github.com/dareka222778/yugioh-speed-rpg/pull/474",
+    "state": "open",
+    "draft": true,
+    "merged": false,
+    "mergeable": true,
+    "headSha": "5c47e2dc23e807886d0cb683a94cd8d558e59d9a",
+    "baseSha": "781f09b58ebf7032fdf5abc3f5ab918446ede593"
+  },
+  "releaseToAuxiliary": [
+    {
+      "path": "tests/duelTimeoutRestartPublication.test.cjs",
+      "permission": "monitor/sync non-forced/correct only this mission's own file"
+    },
+    {
+      "path": "docs/evidence/m528-duel-timeout-restart-publication.json",
+      "permission": "monitor/sync non-forced/correct only this mission's own file"
+    },
+    {
+      "path": ".github/workflows/m528-duel-timeout-restart-publication.yml",
+      "permission": "monitor/sync non-forced/correct only this mission's own file"
+    }
+  ],
+  "nextTask": "Auxiliar: sincronizar PR #474 sem force e acompanhar revisão; sem merge/deploy.",
+  "nextWindow": "2026-11-22T17:30:00-03:00",
+  "duration": {
+    "targetEffectiveMinutes": 60,
+    "effectiveWorkMinutes": 4,
+    "targetMet": false,
+    "ciWaitExcluded": true,
+    "elapsedMinutes": 5
+  },
+  "lastActivityAt": "2026-11-22T17:02:17-03:00",
+  "branchHead": "5c47e2dc23e807886d0cb683a94cd8d558e59d9a",
+  "endedAt": "2026-11-22T17:02:17-03:00"
+}

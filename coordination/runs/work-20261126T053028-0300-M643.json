@@ -1,0 +1,85 @@
+{
+  "format": 1,
+  "runId": "work-20261126T053028-0300-M643",
+  "mission": "M643",
+  "owner": "Work principal",
+  "priority": "P1",
+  "priorityRequestedBy": "User",
+  "status": "completed-pr-open",
+  "startedAt": "2026-11-26T05:30:28-03:00",
+  "endedAt": "2026-11-26T05:47:30-03:00",
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "82e27d2fd7e3b7f077812eb3802f3e720e6a0515",
+  "branch": "feat/work-m643-forceful-sentry-tag-adapter-20261126",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "82e27d2fd7e3b7f077812eb3802f3e720e6a0515",
+  "branchHeadSha": "d04c7b3e6887023727fd26c37b808ad9b70b416e",
+  "pullRequest": {
+    "number": 582,
+    "url": "https://github.com/dareka222778/yugioh-speed-rpg/pull/582",
+    "state": "open",
+    "draft": true,
+    "merged": false
+  },
+  "reservedFiles": [
+    "src/forcefulSentryTagAdapter.ts",
+    "tests/forcefulSentryTagAdapter.test.cjs",
+    "docs/evidence/m643-forceful-sentry.json",
+    ".github/workflows/m643-forceful-sentry.yml"
+  ],
+  "scope": "Adapter isolado TagDuel clássico 2v2 para The Forceful Sentry: olhar uma mão física adversária, selecionar qualquer carta, devolvê-la ao Deck do proprietário físico e embaralhar com RNG persistido; Fusão retorna ao Extra Deck. Recibo privado somente ao assento ativador, sem estado/log público. Sem resolver central, catálogo, certificação, comandos, banco ou produção.",
+  "cards": [
+    {
+      "id": "42829885",
+      "konamiId": 4907,
+      "name": "The Forceful Sentry",
+      "officialText": "Look at your opponent's hand. Select 1 card from it and return it to the Deck. Then shuffle the Deck.",
+      "firstTCGRelease": "2002-09-16",
+      "firstOCGRelease": "2002-06-20",
+      "certifiedAtStart": false
+    }
+  ],
+  "handoff": {
+    "status": "escopo independente; nenhuma reserva conflitante tocada; PR17/arquivos centrais permanecem bloqueados até liberação explícita",
+    "blockedFiles": [
+      "src/monsterEffects.ts",
+      "src/duelEngineCurrent.ts"
+    ],
+    "thisRunDoesNotTouchBlockedFiles": true
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "verification": {
+    "focusedScenarios": 20,
+    "focusedTestResult": "20/20 passed in focused GitHub Actions workflow",
+    "typecheck": "passed",
+    "build": "passed",
+    "evidenceValidation": "passed",
+    "adapterBehaviorVerifiedCards": 1,
+    "behaviorCertifiedCards": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "liveDiscordValidation": false,
+    "prEngineValidation": "pending at checkpoint"
+  },
+  "effectiveWorkMinutes": 17,
+  "targetEffectiveWorkMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "nextTask": "Aguardar revisão do PR #582; integração ao resolver central e certificação somente após autorização e reserva própria. M644 segue em execução independente.",
+  "nextWindow": "2026-11-26T10:30:00-03:00",
+  "scopeReleasedToAuxiliary": []
+}

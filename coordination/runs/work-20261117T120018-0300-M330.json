@@ -1,0 +1,104 @@
+{
+  "runId": "work-20261117T120018-0300-M330",
+  "owner": "Work",
+  "mission": "M330",
+  "priority": "P1 — homologar Bottomless Trap Hole no Discord 2v2: resposta do defensor ativo a Invocação-Normal adversária de monstro com ATK ≥1500, usando cópia setada pelo parceiro inativo; destruir e banir somente a instância elegível, preservar UID/proprietário físico e demais monstros; controle negativo abaixo de 1500 ATK.",
+  "state": "reserved",
+  "startedAt": "2026-11-17T12:00:18-03:00",
+  "timezone": "America/Sao_Paulo",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "968aa1c3b6dcd510ef078321a98334532aee6708",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "968aa1c3b6dcd510ef078321a98334532aee6708",
+  "branch": "feat/work-m330-bottomless-trap-hole-discord-summon-2v2-20261117",
+  "scope": [
+    "tests/tagBottomlessTrapHoleDiscordSummon2v2.test.cjs"
+  ],
+  "reservedFiles": [
+    "tests/tagBottomlessTrapHoleDiscordSummon2v2.test.cjs"
+  ],
+  "reservation": {
+    "runId": "work-20261117T120018-0300-M330",
+    "owner": "Work",
+    "mission": "M330",
+    "priority": "P1 — homologar Bottomless Trap Hole no Discord 2v2: resposta do defensor ativo a Invocação-Normal adversária de monstro com ATK ≥1500, usando cópia setada pelo parceiro inativo; destruir e banir somente a instância elegível, preservar UID/proprietário físico e demais monstros; controle negativo abaixo de 1500 ATK.",
+    "state": "active",
+    "startedAt": "2026-11-17T12:00:18-03:00",
+    "branch": "feat/work-m330-bottomless-trap-hole-discord-summon-2v2-20261117",
+    "baseBranch": "feat/rea-engine-recovery-20261026",
+    "baseSha": "968aa1c3b6dcd510ef078321a98334532aee6708",
+    "sharedBranch": "feat/rea-engine-recovery-20261026",
+    "sharedHeadAtReservation": "968aa1c3b6dcd510ef078321a98334532aee6708",
+    "reservedFiles": [
+      "tests/tagBottomlessTrapHoleDiscordSummon2v2.test.cjs"
+    ],
+    "conflictPolicy": "Somente novo arquivo de teste; não tocar nas reservas M231/M232, M305, M319–M329 nem em runtime, catálogo, certificados, banco persistente, inventários, dados dos jogadores, main ou produção."
+  },
+  "observedParallelWork": [
+    {
+      "mission": "M231/M232",
+      "state": "active; arquivos diferentes",
+      "files": [
+        "tests/tagClassicSummonTrapLockTeamResponse2v2.test.cjs",
+        "tests/tagClassicActivationRestrictionsBattlePhase2v2.test.cjs"
+      ]
+    },
+    {
+      "mission": "M305",
+      "state": "active; arquivo diferente",
+      "files": [
+        "tests/tagSanctuaryInTheSkyDiscordFairyDamage2v2.test.cjs"
+      ]
+    },
+    {
+      "mission": "M319–M322",
+      "state": "reserved; arquivos diferentes"
+    },
+    {
+      "mission": "M323–M326",
+      "state": "PRs #278–#281; arquivos diferentes"
+    },
+    {
+      "mission": "M327–M329",
+      "state": "PR #282 aberta; arquivo diferente",
+      "files": [
+        "tests/tagBattleResponseTrapsDiscord2v2.test.cjs"
+      ]
+    }
+  ],
+  "handoffStatus": {
+    "status": "Sem conflito de arquivo; nenhuma transferência necessária. Reservas de terceiros preservadas."
+  },
+  "catalogAtStart": {
+    "sharedCertified": 969,
+    "developmentCertified": 1014,
+    "delta": 45,
+    "remainingTo1000": 31,
+    "historyPending": 993,
+    "identityBlocked": 27,
+    "newCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "ciAtStart": {
+    "pr282": {
+      "fast": "success",
+      "milestone1000": "success",
+      "engineValidation": "in_progress",
+      "npmTest": "in_progress",
+      "extendedSoak": "in_progress"
+    }
+  },
+  "deployment": {
+    "merge": false,
+    "deploy": false,
+    "liveDiscordValidation": false,
+    "hosting": "não verificado; workflow de deploy não listado"
+  },
+  "blocksCompleted": [
+    "Após publicar M327–M329, HEAD e coordination/state.json foram relidos; M327 CI está com Card Batch Fast e Milestone 1000 aprovados e Engine Validation/soak em execução.",
+    "Identificada família independente Bottomless Trap Hole: efeito e limiar 1500 ATK confirmados em effectModels/effectDefinitions; PRs #63/#119 são testes clássicos, sem PR Discord específica aberta.",
+    "Novo arquivo de teste não conflita com as reservas ativas."
+  ],
+  "nextTask": "Implementar M330 via Discord; após CI, conferir novo HEAD e coordenação e selecionar outra família independente.",
+  "nextWorkAt": "2026-11-17T17:30:00-03:00"
+}

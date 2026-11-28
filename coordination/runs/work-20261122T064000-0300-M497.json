@@ -1,0 +1,141 @@
+{
+  "runId": "work-20261122T064000-0300-M497",
+  "mission": "M497",
+  "owner": "Work principal",
+  "priority": "P1 — ampliar a cobertura de deck-out 2v2 para as quatro rotações físicas: validar quando o assento que entra é ativo ou reserva, que somente o Deck daquele assento é consultado e que o parceiro da mesma equipe não empresta cartas.",
+  "startedAt": "2026-11-22T06:40:00-03:00",
+  "lastActivityAt": "2026-11-22T06:40:00-03:00",
+  "endedAt": null,
+  "state": "reserved-and-implementing",
+  "branch": "feat/work-m497-tag-classic-deckout-rotation-matrix-2v2-20261122",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "cf8a93b9fb860a1f1f7ccce0402b48e4d8c218b3",
+  "sharedHeadAtReservation": "cf8a93b9fb860a1f1f7ccce0402b48e4d8c218b3",
+  "reservedFiles": [
+    "tests/tagClassicDeckOutRotationMatrix2v2.test.cjs",
+    "docs/evidence/m497-tag-classic-deckout-rotation-matrix-2v2.json",
+    ".github/workflows/m497-tag-classic-deckout-rotation-matrix-2v2.yml"
+  ],
+  "scope": [
+    "tests/tagClassicDeckOutRotationMatrix2v2.test.cjs",
+    "docs/evidence/m497-tag-classic-deckout-rotation-matrix-2v2.json",
+    ".github/workflows/m497-tag-classic-deckout-rotation-matrix-2v2.yml"
+  ],
+  "conflictCheck": {
+    "overlap": false,
+    "checkedAt": "2026-11-22T06:40:00-03:00",
+    "checkedReservations": [
+      "currentWorkReservation",
+      "currentWorkReservationM397",
+      "currentWorkReservationM398",
+      "currentWorkReservationM399",
+      "currentWorkReservationM400",
+      "currentWorkReservationM401",
+      "currentWorkReservationM402",
+      "currentWorkReservationM403",
+      "currentWorkReservationM404",
+      "currentWorkReservationM405",
+      "currentWorkReservationM406",
+      "currentWorkReservationM407",
+      "currentWorkReservationM427",
+      "currentWorkReservationM428",
+      "currentWorkReservationM429",
+      "currentWorkReservationM430",
+      "currentWorkReservationM431",
+      "currentWorkReservationM432",
+      "currentWorkReservationM433",
+      "currentWorkReservationM436",
+      "currentWorkReservationM437",
+      "currentWorkReservationM441",
+      "currentWorkReservationM442",
+      "currentWorkReservationM443",
+      "currentWorkReservationM444",
+      "currentWorkReservationM455",
+      "currentWorkReservationM456",
+      "currentWorkReservationM457",
+      "currentWorkReservationM458",
+      "currentWorkReservationM459",
+      "currentWorkReservationM469",
+      "currentWorkReservationM470",
+      "currentWorkReservationM471",
+      "currentWorkReservationM472",
+      "currentWorkReservationM473",
+      "currentWorkReservationM474",
+      "currentWorkReservationM475",
+      "currentWorkReservationM476",
+      "currentWorkReservationM477",
+      "currentWorkReservationM478",
+      "currentWorkReservationM479",
+      "currentWorkReservationM480",
+      "currentWorkReservationM481",
+      "currentWorkReservationM482",
+      "currentWorkReservationM483",
+      "currentWorkReservationM484",
+      "currentWorkReservationM485",
+      "currentWorkReservationM486",
+      "currentWorkReservationM487",
+      "currentWorkReservationM494",
+      "currentWorkReservationM495",
+      "currentWorkReservationM496"
+    ],
+    "preserved": [
+      "M496 PR #444 permanece em focused/fast success e Engine Validation/Extended Soak em execução; branch M496 não será tocada",
+      "M495 PR #443 liberada ao auxiliar e seus três caminhos preservados",
+      "M472–M487, M61 e todas as reservas de terceiros preservadas"
+    ]
+  },
+  "workBlocks": [
+    "Reconsultou o HEAD compartilhado e a coordenação depois do primeiro bloco.",
+    "M496 encontrou e corrigiu uma fixture que selecionava o perfil legado speed-rpg-v2 (mão 7/End Draw) em vez do perfil clássico do proprietário; npm check/build passaram e o focused test passou no novo SHA.",
+    "Identificou que M496 cobre assento 0 na transição 3→0; M497 amplia o mesmo invariante para os quatro assentos, incluindo incoming reserve seats 2/3."
+  ],
+  "tests": {
+    "focused": null,
+    "typescript": null,
+    "discordPayload": null,
+    "limitations": "Ainda não executados; serão disparados pela CI da PR."
+  },
+  "catalog": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "inventoryGranted": 0,
+  "mergePerformed": false,
+  "deployPerformed": false,
+  "production": {
+    "mainHead": "f78f3080b496d2697072b946088309f36e97b60e",
+    "sharedHeadAtReservation": "cf8a93b9fb860a1f1f7ccce0402b48e4d8c218b3",
+    "backupVerified": false,
+    "liveDiscordValidation": false,
+    "merge": false,
+    "deploy": false,
+    "deploymentRegistry": "Endpoint de deployments não foi aceito pela integração GitHub; produção não verificada."
+  },
+  "handoffM61": {
+    "pr": 17,
+    "commentId": 7074658790,
+    "status": "requested-no-response",
+    "files": [
+      "src/monsterEffects.ts",
+      "src/duelEngineCurrent.ts",
+      "src/cardMetadata.ts",
+      "src/cardCertifications.ts"
+    ]
+  },
+  "relatedM496": {
+    "pr": 444,
+    "head": "0425a17a0b7d80b26da39e19451ac620c2687409",
+    "focused": "success",
+    "cardBatchFast": "success",
+    "milestone1000": "success",
+    "engineValidation": "running",
+    "extendedSoak": "running"
+  },
+  "pr": null,
+  "releaseToAuxiliary": [],
+  "nextTask": "Publicar a matriz 4x4 e confirmar deck-out físico para cada assento de entrada; após CI, revisar M496/M497 e preparar handoff limitado ao auxiliar.",
+  "nextWindow": "2026-11-22T11:30:00-03:00"
+}

@@ -1,0 +1,69 @@
+{
+  "runId": "work-20261121T204000-0300-M474",
+  "mission": "M474",
+  "owner": "Work principal",
+  "status": "active",
+  "startedAt": "2026-11-21T20:40:00-03:00",
+  "endedAt": null,
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "865a34fcba80d4ecb61298368649587aa3e455ca",
+  "branch": "feat/work-m474-tag-draw-lock-release-20261121",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "865a34fcba80d4ecb61298368649587aa3e455ca",
+  "head": null,
+  "pr": null,
+  "priority": "P1 — validar o encerramento por empate natural em TagDuel 2v2: falha simultânea de compra não pode anunciar vencedor, deve persistir duelFinished com winner=null e liberar os quatro locks.",
+  "scope": [
+    "tests/tagDuelDrawLockRelease2v2.test.cjs",
+    "docs/evidence/m474-tag-draw-lock-release.json",
+    ".github/workflows/m474-tag-draw-lock-release.yml"
+  ],
+  "conflictCheck": {
+    "overlap": false,
+    "preserved": [
+      "M472 três caminhos próprios e PR #420",
+      "M473 três caminhos próprios e PR #421",
+      "M61 src/monsterEffects.ts e src/duelEngineCurrent.ts",
+      "M469–M471 PRs #417–#419",
+      "M460–M468 PRs #408–#416",
+      "M431–M433 PRs #379–#381",
+      "M402–M458 e todas as reservas de terceiros"
+    ],
+    "note": "M474 usa apenas três caminhos novos; não altera src/tagStore.ts, src/tagDuel.ts, src/tagInteraction.ts, catálogo ou allowlist."
+  },
+  "blocksCompleted": [
+    "Preparado como terceira frente independente enquanto M472/M473 executam CI.",
+    "Escopo restrito a empate natural e liberação de locks, sem runtime ou catálogo."
+  ],
+  "ci": {
+    "status": "pending"
+  },
+  "certification": {
+    "baseline": 969,
+    "new": 0,
+    "remaining": 31,
+    "automatic": 0,
+    "inventoryGranted": 0
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "blockers": [
+    "Handoff M61 segue pendente; M474 não depende de arquivos centrais."
+  ],
+  "scopeReleasedToAuxiliary": [],
+  "nextTask": "Criar fixture TagDuel clássico temporário com Card Destruction, resolver pelo handler Discord e verificar empate/locks; publicar PR draft e validar CI.",
+  "nextWindow": "2026-11-21T22:30:00-03:00",
+  "session": {
+    "startedAt": "2026-11-21T20:40:00-03:00",
+    "endedAt": null,
+    "elapsedMinutes": 0,
+    "effectiveWorkMinutes": 0,
+    "targetEffectiveMinutes": 60,
+    "targetMet": false,
+    "ciWaitExcluded": true
+  }
+}

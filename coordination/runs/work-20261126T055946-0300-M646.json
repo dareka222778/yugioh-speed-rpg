@@ -1,0 +1,81 @@
+{
+  "format": 1,
+  "runId": "work-20261126T055946-0300-M646",
+  "mission": "M646",
+  "owner": "Work principal",
+  "priority": "P1",
+  "priorityRequestedBy": "User",
+  "status": "reserved-and-implementing",
+  "startedAt": "2026-11-26T05:59:46-03:00",
+  "endedAt": null,
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "1059487502fa8b132a93f9130d5abd92c9518d9e",
+  "branch": "feat/work-m646-exchange-tag-adapter-20261126",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "1059487502fa8b132a93f9130d5abd92c9518d9e",
+  "branchHeadSha": "1059487502fa8b132a93f9130d5abd92c9518d9e",
+  "pullRequest": null,
+  "reservedFiles": [
+    "src/exchangeTagAdapter.ts",
+    "tests/exchangeTagAdapter.test.cjs",
+    "docs/evidence/m646-exchange.json",
+    ".github/workflows/m646-exchange.yml"
+  ],
+  "scope": "Adapter isolado TagDuel clássico 2v2 para Exchange (Troca): o assento ativo e um assento oponente escolhido revelam as mãos um ao outro e cada um escolhe uma carta da mão adversária para trocar; preservar proprietário físico/UID, privacidade restrita aos dois participantes, idempotência e resolução sem descarte automático. Sem resolver central, catálogo, certificação, comandos, banco ou produção.",
+  "cards": [
+    {
+      "id": "05556668",
+      "konamiId": 5218,
+      "name": "Exchange",
+      "namePt": "Troca",
+      "officialText": "Both players reveal their hands and add 1 card from each other's hand to their hand.",
+      "firstTCGRelease": "2002-10-15",
+      "firstOCGRelease": "2001-07-05",
+      "certifiedAtStart": false
+    }
+  ],
+  "handoff": {
+    "status": "escopo independente; reservas ativas pertencem a arquivos distintos; integração no resolver central aguarda liberação explícita",
+    "blockedFiles": [
+      "src/monsterEffects.ts",
+      "src/duelEngineCurrent.ts",
+      "src/effectRegistry.ts",
+      "src/commands/duel"
+    ],
+    "thisRunDoesNotTouchBlockedFiles": true
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "verification": {
+    "focusedScenarios": 0,
+    "focusedTestResult": "pending",
+    "typecheck": "pending",
+    "build": "pending",
+    "evidenceValidation": "pending",
+    "adapterBehaviorVerifiedCards": 0,
+    "behaviorCertifiedCards": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "liveDiscordValidation": false
+  },
+  "effectiveWorkMinutes": 0,
+  "targetEffectiveWorkMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "nextTask": "Implementar ativação Main Phase, reveal bilateral privado, seleção cruzada com compromisso de integridade, troca de UIDs e testes de conservação/negação/privacidade.",
+  "nextWindow": "2026-11-26T10:30:00-03:00",
+  "scopeReleasedToAuxiliary": []
+}

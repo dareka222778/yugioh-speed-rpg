@@ -1,0 +1,97 @@
+{
+  "runId": "work-20261122T121011-0300-M521",
+  "mission": "M521",
+  "parentRunId": "work-20261122T115710-0300-M520",
+  "owner": "Work principal",
+  "priority": "P1 — validar timeout persistido 2v2 no formato clássico: W.O. ao time oposto do assento que devia agir, liberação dos quatro locks, conservação de quatro Decks/mãos físicos e painel público sem UIDs privados; expiração do lobby também deve liberar todos os locks aceitos.",
+  "startedAt": "2026-11-22T12:10:11-03:00",
+  "lastActivityAt": "2026-11-22T12:16:44-03:00",
+  "endedAt": null,
+  "state": "reserved-and-implementing",
+  "branch": "feat/work-m521-tag-timeout-2v2-physical-ownership-20261122",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "3be7995eab1e92279d745c88f41c8d534cfcbff0",
+  "sharedHeadAtReservation": "3be7995eab1e92279d745c88f41c8d534cfcbff0",
+  "reservedFiles": [
+    "tests/tagTimeout2v2PhysicalOwnership.test.cjs",
+    "docs/evidence/m521-tag-timeout-2v2-physical-ownership.json",
+    ".github/workflows/m521-tag-timeout-2v2-physical-ownership.yml"
+  ],
+  "scope": [
+    "tests/tagTimeout2v2PhysicalOwnership.test.cjs",
+    "docs/evidence/m521-tag-timeout-2v2-physical-ownership.json",
+    ".github/workflows/m521-tag-timeout-2v2-physical-ownership.yml"
+  ],
+  "conflictCheck": {
+    "overlap": false,
+    "checkedAt": "2026-11-22T12:10:11-03:00",
+    "checkedAgainst": [
+      "M520 PR #466 — três caminhos 1v1, sem sobreposição",
+      "M515 PR #462 — três caminhos 1v1, sem sobreposição",
+      "M516 PR #463 — três caminhos 1v1, sem sobreposição",
+      "M517 PR #464 e M518 PR #465 — adapters de cartas, sem sobreposição",
+      "M519 branch A Man with Wdjat — preservada",
+      "M472–M484 e todas as reservas TagDuel — somente testes próprios; src/tagStore.ts/src/tagDuel.ts permanecem somente leitura",
+      "M61 e todas as reservas de terceiros"
+    ],
+    "note": "Somente teste/evidência/workflow novos. Lê src/tagStore.ts, src/tagDuel.ts, src/duelEngine.ts e builders públicos; não altera runtime, store, comandos, catálogo, manifest, resolver, allowlist, certificados, inventário ou dados persistentes."
+  },
+  "workBlocks": [
+    "Inspecionada src/tagStore.ts: getTag aplica LOBBY_MS=5 min e DECISION_TIMEOUT_MS ao jogo; timeoutTagDuel persiste resultado e save libera tag_members ao encerrar.",
+    "Inspecionada src/tagDuel.ts: rotação active/cursor/reserves preserva quatro assentos físicos e tagMemberHand separa mãos.",
+    "Auditoria de reservas confirmou PRs abertas não alteram src/tagStore.ts neste escopo; M472–M484 preservadas.",
+    "Reservado novo arquivo de teste 2v2 com SQLite temporário e quatro decks físicos; sem alterar arquivos de runtime.",
+    "CI focada M521 no HEAD 7ba4e7f2: 3/3 testes TAP passaram; npm ci/check/build e JSON evidence passaram.",
+    "Card Batch Fast e Milestone 1000 passaram no HEAD corrigido 7ba4e7f2.",
+    "Engine Validation completa está em execução no HEAD corrigido 7ba4e7f2; execução anterior 2dfb94 falhou por fixture de mão inicial incorreta (5 vs 4), corrigida sem alteração de regra."
+  ],
+  "tests": {
+    "focused": "success (3/3) on 7ba4e7f2",
+    "check": "success",
+    "build": "success",
+    "cardBatchFast": "success",
+    "milestone": "success",
+    "engineValidation": "in_progress on corrected head 7ba4e7f2",
+    "supersededRun": "Engine Validation on 2dfb94 failed npm test because opening-hand fixture incorrectly expected 5; corrected to 4 and rerun triggered on 7ba4e7f2.",
+    "limitations": "Store-level TagDuel tests, no live Discord guild. Full Engine Validation not yet complete."
+  },
+  "catalog": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "inventoryGranted": 0,
+  "mergePerformed": false,
+  "deployPerformed": false,
+  "production": {
+    "mainHead": "197bbda07efc81658604bcd12308665571e26d59",
+    "backupVerified": false,
+    "liveDiscordValidation": false,
+    "merge": false,
+    "deploy": false
+  },
+  "pr": {
+    "number": 467,
+    "url": "https://github.com/dareka222778/yugioh-speed-rpg/pull/467",
+    "state": "open",
+    "draft": true,
+    "merged": false,
+    "mergeable": true,
+    "base": "feat/rea-engine-recovery-20261026",
+    "baseSha": "cfdb780bb0edcb07912a1d4e96d1d4d617674c3d",
+    "head": "feat/work-m521-tag-timeout-2v2-physical-ownership-20261122",
+    "headSha": "7ba4e7f2d146abe0a9426e7b9b4d277170b6a008"
+  },
+  "releaseToAuxiliary": [],
+  "nextTask": "Criar testes de timeout de lobby 2v2 (5 min) e decisão 2v2 (30 min), validar W.O. por equipe, quatro locks, mãos/Decks físicos, UIDs privados e fila de publicação.",
+  "nextWindow": "2026-11-22T16:30:00-03:00",
+  "branchHead": "7ba4e7f2d146abe0a9426e7b9b4d277170b6a008",
+  "duration": {
+    "elapsedMinutes": 6,
+    "effectiveMinutesMeasured": false,
+    "minimum60MinutesConfirmed": false,
+    "note": "Sub-bloco começou 12:10:11; espera de CI excluída."
+  }
+}

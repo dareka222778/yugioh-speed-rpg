@@ -1,0 +1,138 @@
+{
+  "format": 1,
+  "runId": "work-20261124T183021-0300-M596",
+  "mission": "M596",
+  "owner": "Work principal",
+  "priority": "P1",
+  "status": "focused-and-batch-green; engine-validation-running",
+  "startedAt": "2026-11-24T18:30:21-03:00",
+  "endedAt": null,
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "ebcf887d0c239a48b8601be520a7a2ed909f2aee",
+  "branch": "feat/work-m596-triggered-burn-tag-adapters-20261124",
+  "baseSha": "f18a0510bbf5f2ccaa6c75b2608220b689e3dc23",
+  "branchHeadSha": "1d0856774dbf54b3b4db86de409d370cb193313a",
+  "pullRequest": 539,
+  "reservedFiles": [
+    "src/triggeredBurnTagAdapter.ts",
+    "tests/triggeredBurnTagAdapter.test.cjs",
+    "docs/evidence/m596-triggered-burn-tag-adapters.json",
+    ".github/workflows/m596-triggered-burn-tag-adapters.yml"
+  ],
+  "scope": "Adapters puros TagDuel para três efeitos contínuos de dano disparados por eventos: Dark Room of Nightmare (dano de efeito recebido pelo time adversário, excluindo a própria carta), Coffin Seller (monstros do time adversário enviados ao Cemitério compartilhado) e Skull Invitation (cada carta enviada ao Cemitério causa 300 ao seu proprietário físico por carta). Quatro caminhos novos; sem resolver, catálogo, certificações, inventário ou dados persistentes.",
+  "conflictCheck": {
+    "checkedAt": "2026-11-24T18:30:21-03:00",
+    "sharedHead": "ebcf887d0c239a48b8601be520a7a2ed909f2aee",
+    "matchingBranches": 0,
+    "matchingPRs": 0,
+    "matchingCodeIds": 0,
+    "m61Handoff": "pending; no integration attempted",
+    "m593FilesUntouched": true,
+    "m594FilesUntouched": true,
+    "m595FilesUntouched": true,
+    "thirdPartyReservationsUntouched": true
+  },
+  "cards": [
+    {
+      "name": "Dark Room of Nightmare",
+      "passcode": "85562745",
+      "konamiDatabaseId": 5531,
+      "kind": "Continuous Spell",
+      "firstTCGPrinting": "Pharaonic Guardian (PGD-082), 2003-07-18",
+      "officialDatabaseUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5531&ope=2&request_locale=en",
+      "officialEffect": "Each time your opponent takes damage from a card effect, except 'Dark Room of Nightmare', inflict 300 damage to your opponent."
+    },
+    {
+      "name": "Coffin Seller",
+      "passcode": "65830223",
+      "konamiDatabaseId": 5492,
+      "kind": "Continuous Trap",
+      "firstTCGPrinting": "Pharaonic Guardian (PGD-093), 2003-07-18",
+      "officialDatabaseUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5492&ope=2&request_locale=en",
+      "officialEffect": "Each time a monster(s) is sent to your opponent's GY: Inflict 300 damage to your opponent."
+    },
+    {
+      "name": "Skull Invitation",
+      "passcode": "98139712",
+      "konamiDatabaseId": 4961,
+      "kind": "Continuous Trap",
+      "firstTCGPrinting": "Pharaoh's Servant (PSV-056), 2002-10-20",
+      "officialDatabaseUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4961&ope=2&request_locale=en",
+      "officialEffect": "Each time a card(s) is sent to the Graveyard, inflict 300 damage to its owner for each card sent."
+    }
+  ],
+  "plannedTests": [
+    "Dark Room: effect damage to opponent triggers 300 per active copy",
+    "Dark Room: battle damage, cost, other damage, unresolved or negated event do not trigger",
+    "Dark Room: own team damage does not trigger its own Room; opposing controller routes shared LP correctly",
+    "Dark Room: source Dark Room is excluded to prevent recursion",
+    "Coffin Seller: one or more opponent-owned monsters sent to shared GY trigger 300 once per active copy and event",
+    "Coffin Seller: own-team monsters and non-monster cards do not trigger",
+    "Coffin Seller: owner team derives from physical UID across seat rotation",
+    "Skull Invitation: each physical card sent to GY causes 300 to its owner team per active copy",
+    "Skull Invitation: mixed-owner batch splits damage by physical owner and scales by card count",
+    "All cards: face-down/negated sources excluded; duplicate event receipts idempotent",
+    "All cards: stale LP snapshots, duplicate/malformed UIDs and uncommitted movement fail closed",
+    "All adapters: no mutation of hands, decks, 3+3 zones, separate Field Zone, Extra Deck or inventory"
+  ],
+  "rules": {
+    "mainDeck": "20-30 per physical seat",
+    "handLimit": 6,
+    "handLimitTiming": "End Phase only",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separate",
+    "extraDeckMax": 5,
+    "privateHandsAndDecks": true,
+    "sharedTeamGraveyardAndLP": true
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "effectiveWorkMinutes": 0,
+  "targetEffectiveMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "nextTask": "Aguardar Engine Validation; não alterar o resolver nem o manifesto. Revisar PR #539 e liberar escopo próprio após conclusão.",
+  "nextWindow": "2026-11-24T23:30:00-03:00",
+  "scopeReleasedToAuxiliary": [],
+  "pullRequestUrl": "https://github.com/dareka222778/yugioh-speed-rpg/pull/539",
+  "ci": {
+    "focused": {
+      "status": "success",
+      "runId": 45493081023,
+      "sha": "1d0856774dbf54b3b4db86de409d370cb193313a",
+      "tests": 39,
+      "passed": 39,
+      "failed": 0
+    },
+    "cardBatchFast": {
+      "status": "success",
+      "runId": 45493080902,
+      "sha": "1d0856774dbf54b3b4db86de409d370cb193313a"
+    },
+    "milestone1000": {
+      "status": "success",
+      "runId": 45493080819,
+      "sha": "1d0856774dbf54b3b4db86de409d370cb193313a"
+    },
+    "engineValidation": {
+      "status": "in_progress",
+      "runId": 45493080809,
+      "sha": "1d0856774dbf54b3b4db86de409d370cb193313a"
+    }
+  },
+  "lastActivityAt": "2026-11-24T18:43:26-03:00"
+}

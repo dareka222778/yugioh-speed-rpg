@@ -1,0 +1,79 @@
+{
+  "runId": "work-20261122T222846-0300-M540",
+  "mission": "M540",
+  "owner": "Work principal",
+  "status": "released-to-auxiliary",
+  "startedAt": "2026-11-22T22:28:46-03:00",
+  "lastActivityAt": "2026-11-23T02:34:04-03:00",
+  "endedAt": "2026-11-23T02:34:04-03:00",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "ebdde83eb9bbc6a041895b12304068c4eb1fd884",
+  "sharedHeadAtFinalization": "0b535adce3ecf6505c7d6b4e67d3f5306a81c5a1",
+  "branch": "feat/work-m540-cross-mode-timeout-rollback-20261122",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "ebdde83eb9bbc6a041895b12304068c4eb1fd884",
+  "headSha": "21b635ed767c8c5b7984c7f7771cfef2159c52fd",
+  "priority": "P1 — falha ao remover locks durante timeout não pode liberar o participante para o modo oposto; retry no mesmo deadline deve concluir o encerramento e liberar os locks.",
+  "scope": [
+    "tests/crossModeTimeoutRollback.test.cjs",
+    "docs/evidence/m540-cross-mode-timeout-rollback.json",
+    ".github/workflows/m540-cross-mode-timeout-rollback.yml"
+  ],
+  "workBlocks": [
+    "Retomada: reconsultados PR #485, HEAD da branch compartilhada e os SHAs reais de M540.",
+    "Verificados os quatro workflows do HEAD M540: teste focado M540, Card Batch Fast, Milestone 1000 e Engine Validation — todos concluídos com success.",
+    "Confirmado que o teste cobre rollback de timeout 1v1 e TagDuel, bloqueio do modo oposto até retry, preservação de UIDs e snapshots de dados de jogadores.",
+    "Solicitada transferência ao auxiliar exclusivamente dos três caminhos próprios para sincronização não-forçada; nenhuma reserva de M541, M542, M61 ou de terceiros foi liberada."
+  ],
+  "tests": {
+    "focused": "success — workflow M540 run 45096240775",
+    "cardBatchFast": "success — run 45096240717",
+    "milestone1000": "success — run 45096240762; 969/1000",
+    "engineValidation": "success — run 45096240754",
+    "extendedSoak": "não aplicável como workflow separado a esta PR de regressão focada",
+    "limitations": "SQLite temporário com stores reais; deadlines controlados; sem gateway/guild Discord real."
+  },
+  "catalog": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "inventoryGranted": 0,
+  "production": {
+    "mainHead": "197bbda07efc81658604bcd12308665571e26d59",
+    "backupVerified": false,
+    "liveDiscordValidation": false,
+    "merge": false,
+    "deploy": false,
+    "deploymentWorkflowFound": false,
+    "note": "Nenhum merge/deploy autorizado; nenhum backup verificável nesta execução."
+  },
+  "pr": {
+    "number": 485,
+    "url": "https://github.com/dareka222778/yugioh-speed-rpg/pull/485",
+    "headSha": "21b635ed767c8c5b7984c7f7771cfef2159c52fd",
+    "state": "open",
+    "draft": true,
+    "mergeable": false,
+    "comparison": {
+      "aheadBy": 5,
+      "behindBy": 3
+    },
+    "handoffComment": "https://github.com/dareka222778/yugioh-speed-rpg/pull/485#issuecomment-7092592660"
+  },
+  "releaseToAuxiliary": [
+    "M540: sincronizar a branch sem force push e corrigir somente os três caminhos próprios; reexecutar CI integral após sincronização; não fazer merge/deploy."
+  ],
+  "nextTask": "Auxiliar sincroniza M540 sem force push; Work prossegue em M543, teste cross-process de Accept concorrendo com expiração 1v1/TagDuel, sem tocar em runtime ou reservas ativas.",
+  "nextWindow": "2026-11-23T03:30:00-03:00",
+  "duration": {
+    "elapsedMinutes": 245,
+    "effectiveWorkMinutes": null,
+    "targetEffectiveMinutes": 60,
+    "targetMet": false,
+    "ciWaitExcluded": true,
+    "measurement": "O intervalo entre início e retomada inclui espera/ociosidade; o checkpoint anterior não quantificou o tempo efetivo original, portanto não o infiro. Nesta retomada, apenas a verificação de CI e a liberação foram executadas."
+  }
+}

@@ -1,0 +1,106 @@
+{
+  "format": 1,
+  "mission": "M428",
+  "runId": "work-20261120T193627-0300-M428",
+  "owner": "Work principal",
+  "branch": "feat/work-m428-tag-classic-flip-discord-2v2-20261120",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "2bdf2b7c0224c5525d036a7364099ce11cb949e3",
+  "sharedHeadAtReservation": "2bdf2b7c0224c5525d036a7364099ce11cb949e3",
+  "state": "released-to-auxiliary-monitor-ci",
+  "startedAt": "2026-11-20T19:36:27-03:00",
+  "priority": "P1 — validar a resolução real de efeitos FLIP clássicos em 2v2 e a projeção Discord pública/privada, preservando assento físico, Cemitério compartilhado e mãos privadas.",
+  "reservedFiles": [
+    "tests/tagClassicFlipEffectsDiscord2v2.test.cjs",
+    "docs/evidence/m428-tag-classic-flip-discord-2v2.json",
+    ".github/workflows/m428-tag-classic-flip-discord-2v2.yml"
+  ],
+  "scope": "Somente teste de integração 2v2, evidência e workflow Node 22. Sem alterações em runtime, catálogo, certificados, allowlist, banco, inventário, dados de jogadores ou produção.",
+  "conflictCheck": {
+    "preserved": [
+      "M61",
+      "M418",
+      "M424",
+      "M425",
+      "M426",
+      "M427",
+      "M402-M417",
+      "M408",
+      "M411"
+    ],
+    "overlap": false,
+    "note": "Usa tagDuel/tagUI existentes; não modifica tagDuel.ts, tagUI.ts, tagInteraction.ts, tagStore.ts nem helpers reservados por M418."
+  },
+  "cards": [
+    "Magician of Faith",
+    "Mask of Darkness",
+    "Hane-Hane"
+  ],
+  "newCertifications": 0,
+  "automaticCertifications": 0,
+  "inventoryGranted": 0,
+  "nextTask": "Auxiliar monitora Engine Validation/Extended Soak e sincroniza sem force; Work continua M61 handoff e integração de efeitos apenas após liberação.",
+  "endedAt": "2026-11-20T20:13:33.420-03:00",
+  "elapsedMinutes": 37.11,
+  "effectiveWorkMinutes": 10,
+  "effectiveMinutesThisExecution": 10,
+  "pr": 376,
+  "prBaseSha": "75dc1403897b135dc63fb003387af9a09fab84e5",
+  "head": "1f922f19b1cd21c6ffffb8de414a666892f83d0a71",
+  "sharedHeadAtCheckpoint": "75dc1403897b135dc63fb003387af9a09fab84e5",
+  "testCases": 3,
+  "blocksCompleted": [
+    "Corrigido o fixture de Extra Deck: substituído o ID 91152256 (não era uma Fusão suportada) por Cyber Saurus 89112729, certificado.",
+    "Removidos Man-Eater Bug e Skelengel para evitar duplicação da cobertura real de Discord já existente na PR #296.",
+    "Isolada a Fusão no Extra Deck físico do assento 2; os demais Extra Decks ficaram vazios para tornar a asserção de privacidade inequívoca.",
+    "3 testes focados passaram no HEAD final; npm run check/build passaram."
+  ],
+  "initialFailures": [
+    {
+      "cause": "ID 91152256 era uma carta Normal, não uma Fusão suportada pelo fixture",
+      "resolution": "usar Cyber Saurus 89112729"
+    },
+    {
+      "cause": "a asserção por nome encontrava Cyber Saurus também nos Extra Decks dos outros assentos",
+      "resolution": "somente seat 2 recebe a Fusão"
+    }
+  ],
+  "ci": {
+    "focused": {
+      "run": 44833214993,
+      "status": "success"
+    },
+    "cardBatchFast": {
+      "run": 44833215101,
+      "status": "success"
+    },
+    "milestone1000": {
+      "run": 44833215070,
+      "status": "success",
+      "artifact": 14677008129
+    },
+    "engineValidation": {
+      "run": 44833215028,
+      "status": "success"
+    },
+    "extendedSoak": {
+      "status": "success"
+    }
+  },
+  "scopeReleasedToAuxiliary": [
+    "tests/tagClassicFlipEffectsDiscord2v2.test.cjs",
+    "docs/evidence/m428-tag-classic-flip-discord-2v2.json",
+    ".github/workflows/m428-tag-classic-flip-discord-2v2.yml"
+  ],
+  "auxiliaryAuthorization": "Monitorar CI, sincronizar com a branch compartilhada por merge não-forçado e corrigir somente estes três arquivos M428; não alterar runtime, catálogo, certificados, coordenação, dados de jogadores ou produção.",
+  "nextWindow": "2026-11-20T22:30:00-03:00",
+  "limitations": [
+    "Integração offline do estado 2v2 e dos builders Discord; não foi executado gateway/servidor Discord ao vivo.",
+    "As três cartas já eram certificadas; nenhum novo certificado.",
+    "Engine Validation e Extended Soak ainda estavam em execução no checkpoint."
+  ],
+  "checkpointCommitSha": "93d914f6a97b31a165fd2758f156e97dfc231c62",
+  "sharedSessionEffectiveMinutes": 14,
+  "targetEffectiveMinutes": 60,
+  "targetMet": false
+}

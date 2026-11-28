@@ -1,0 +1,72 @@
+{
+  "runId": "work-20261122T170217-0300-M531",
+  "mission": "M531",
+  "owner": "Work principal",
+  "status": "reserved-and-implementing",
+  "startedAt": "2026-11-22T17:02:17-03:00",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "80a6a6e4013ad4bd6f7390bd0ade2e58ff1b1464",
+  "branch": "feat/work-m531-duel-lobby-creation-concurrency-20261122",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "80a6a6e4013ad4bd6f7390bd0ade2e58ff1b1464",
+  "priority": "P1 — provar atomicidade de convites 1v1 sob concorrência real: dois processos não podem criar convites pendentes para o mesmo criador; dois Accept simultâneos para o mesmo convite devem iniciar no máximo um duelo; rollback deve deixar zero sessões/locks órfãos, sem alterar cartas, Decks, economia ou dados persistentes.",
+  "reservedFiles": [
+    "tests/duelLobbyCreationConcurrency.test.cjs",
+    "docs/evidence/m531-duel-lobby-creation-concurrency.json",
+    ".github/workflows/m531-duel-lobby-creation-concurrency.yml"
+  ],
+  "conflictCheck": {
+    "overlap": false,
+    "checkedAt": "2026-11-22T17:02:17-03:00",
+    "checkedAgainst": [
+      "M527 PR #473 — timeout publication idempotency; três arquivos próprios liberados ao auxiliar.",
+      "M528 PR #474 — restart recovery; CI integral success; três arquivos próprios liberados ao auxiliar.",
+      "M529 PR #475 — outbox backpressure; Engine Validation/Soak ainda em andamento; três arquivos próprios liberados ao auxiliar.",
+      "M530 — concorrência entre pollers/ACKs, reservado em branch própria e preservado.",
+      "M506 — convite Discord, arquivo próprio; M61 e todas as reservas de terceiros preservadas."
+    ],
+    "note": "M531 adiciona apenas teste/evidência/workflow novos para concorrência de criação/aceite 1v1. src/duelStore.ts, src/duelEngine.ts, src/duelInteraction.ts e dados de jogadores são somente leitura; SQLite temporário."
+  },
+  "workBlocks": [
+    "Lido coordination/state.json e checkpoints M527–M530; verificado shared HEAD 80a6a6e4013ad4bd6f7390bd0ade2e58ff1b1464 e main HEAD 197bbda07efc81658604bcd12308665571e26d59.",
+    "Verificados PRs #473–#475 abertas em draft; M527 e M528 CI integral success; M529 focused/Card Batch/Milestone success com Engine Validation/Extended Soak em andamento; M530 reservado sem PR.",
+    "Inspecionados duelStore.challenge/acceptChallenge e testes existentes: há rollback sequencial, mas não cenário multi-processo para convites/aceites concorrentes.",
+    "Confirmado que M531 usa três caminhos inéditos; não altera runtime, catálogo, resolver, allowlist, certificados, inventário ou reservas ativas."
+  ],
+  "tests": {
+    "focused": null,
+    "check": null,
+    "build": null,
+    "cardBatchFast": null,
+    "milestone1000": null,
+    "engineValidation": null,
+    "extendedSoak": null,
+    "limitations": "Subprocessos Node independentes com SQLite temporário; Discord payload/handlers não são alterados e não há guild/token real."
+  },
+  "catalog": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "inventoryGranted": 0,
+  "production": {
+    "mainHead": "197bbda07efc81658604bcd12308665571e26d59",
+    "backupVerified": false,
+    "liveDiscordValidation": false,
+    "merge": false,
+    "deploy": false,
+    "deploymentWorkflowFound": false
+  },
+  "pr": null,
+  "releaseToAuxiliary": [],
+  "nextTask": "Implementar corrida multi-processo de dois convites para o mesmo criador e de dois Accept para o mesmo convite; provar no máximo uma sessão, rollback sem órfãos e preservação da economia.",
+  "nextWindow": "2026-11-22T17:30:00-03:00",
+  "duration": {
+    "targetEffectiveMinutes": 60,
+    "effectiveWorkMinutes": 0,
+    "targetMet": false,
+    "ciWaitExcluded": true
+  }
+}

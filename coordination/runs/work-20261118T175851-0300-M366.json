@@ -1,0 +1,204 @@
+{
+  "runId": "work-20261118T175851-0300-M366",
+  "mission": "M366",
+  "owner": "Work",
+  "priority": "P1 — comprovar o retorno físico de monstros devolvidos por efeitos FLIP em 2v2; a carta deve voltar à mão do assento dono, não à mão do representante ativo da equipe.",
+  "state": "released-to-auxiliary-monitor-ci",
+  "startedAt": "2026-11-18T17:58:51-03:00",
+  "endedAt": "2026-11-18T18:15:27.413-03:00",
+  "duration": {
+    "elapsedMinutes": 16.606883333333332,
+    "effectiveWorkMinutes": 12,
+    "targetEffectiveMinutes": 60,
+    "targetMet": false,
+    "ciWaitExcluded": true
+  },
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "304bf9b97a7d50d10d34387a75964d96d33d50b5",
+  "branch": "feat/work-m366-gravekeepers-guard-physical-owner-discord-2v2-20261118",
+  "head": "7e22c146e44e583eaad9b3d605f88a40414bc519",
+  "pr": 314,
+  "prUrl": "https://github.com/dareka222778/yugioh-speed-rpg/pull/314",
+  "draft": true,
+  "mergeable": true,
+  "scope": [
+    "tests/tagGravekeepersGuardPhysicalOwnerDiscord2v2.test.cjs"
+  ],
+  "cards": [
+    "Gravekeeper's Guard (37101832)"
+  ],
+  "changes": [
+    "Cenário face-up: alvo adversário do parceiro inativo retorna à mão física m3, enquanto os assentos ativos permanecem [0,1].",
+    "Cenário Fusion: Blue-Eyes Ultimate Dragon (23995348) retorna ao Extra Deck físico m3, não ao Extra Deck do representante ativo.",
+    "Cenário face-down: o alvo é legal e retorna à mão física sem revelar nome/UID no painel privado do representante nem no painel público.",
+    "Todos os cenários executam handlers e menus Discord com SQLite temporário e verificam 80 UIDs, privacidade e regras 2v2."
+  ],
+  "expectedBehavior": [
+    "Assentos 0/1 ativos; fonte Gravekeeper's Guard fisicamente no assento aliado inativo 2.",
+    "Representante ativo 0 executa Flip Summon pelo painel privado Discord; assento 2 não recebe ação e tentativa forjada é rejeitada antes do ACK.",
+    "A escolha de alvo inclui o monstro adversário do assento físico inativo 3 e exclui o monstro aliado do assento 0.",
+    "Após a corrente, o UID do alvo está na mão privada do assento 3 e ausente da mão do representante ativo 1.",
+    "Preservar 80 UIDs, mãos privadas, payload público sem UIDs, Deck 20–30, mão 6 com descarte na End Phase, zonas 3+3 e Extra Deck 5."
+  ],
+  "observedResolverDefect": {
+    "file": "src/duelEngineCurrent.ts",
+    "behavior": "resolveMonsterPending calcula owner como índice da equipe e faz s.players[owner].hand.push({uid,id}) (ou .extra para Fusion), ignorando o UID físico m0:–m3:.",
+    "expectedFix": "Usar ownedPrivateZone(s,target.m,owner,card(id).fusion?'extra':'hand') para rotear pelo UID físico.",
+    "handoffRequired": true
+  },
+  "results": {
+    "files": [
+      "tests/tagGravekeepersGuardPhysicalOwnerDiscord2v2.test.cjs"
+    ],
+    "runtimeFilesChanged": 0,
+    "catalogFilesChanged": 0,
+    "certificationsAdded": 0,
+    "inventoryGranted": 0,
+    "persistentDatabaseChanged": false,
+    "playerDataChanged": false,
+    "scenariosAdded": 3,
+    "behaviorallyCoveredCards": 1
+  },
+  "ci": {
+    "initialRun": {
+      "engineValidationRunId": 44397306943,
+      "npmRunCheck": "success",
+      "npmTest": "success",
+      "extendedSoak600s": "in_progress"
+    },
+    "reinforcedRun": {
+      "engineValidationRunId": 44398782737,
+      "status": "in_progress",
+      "npmTest": "pending"
+    },
+    "latestRun": {
+      "engineValidationRunId": 44399321187,
+      "status": "in_progress",
+      "testJob": "in_progress",
+      "extendedSoak600s": "in_progress",
+      "npmCi": "success",
+      "npmRunCheck": "success",
+      "cardBatchFastStep": "in_progress",
+      "npmTest": "pending"
+    },
+    "cardBatchFast": {
+      "runId": 44399321204,
+      "status": "in_progress"
+    },
+    "milestone1000": {
+      "runId": 44399321265,
+      "status": "in_progress",
+      "lastVerifiedArtifact": {
+        "artifactId": 14472001475,
+        "certified": 969,
+        "remainingTo1000": 31,
+        "historical": 1962,
+        "identityBlocked": 27,
+        "automaticCertifications": 0,
+        "inventoryGranted": 0,
+        "releaseGranted": 0
+      }
+    }
+  },
+  "catalog": {
+    "certified": 969,
+    "remainingTo1000": 31,
+    "historical": 1962,
+    "pending": 993,
+    "identityBlocked": 27,
+    "fullyUnreviewed": 966,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "releaseGranted": 0
+  },
+  "handoffRequests": [
+    {
+      "pr": 17,
+      "state": "withdrawn",
+      "reason": "normalização física já é aplicada por pauseOverflow -> prepareTeamOverflow -> normalizeTeamHands; nenhum runtime handoff necessário para M366"
+    }
+  ],
+  "preservedConcurrentWork": {
+    "activeRunId": "work-20261115T142521-0300",
+    "activeRunState": "active",
+    "untouchedScope": [
+      "tests/tagClassicSummonTrapLockTeamResponse2v2.test.cjs",
+      "tests/tagClassicActivationRestrictionsBattlePhase2v2.test.cjs",
+      "tests/tagClassicNeedleBallTeamLPCost2v2.test.cjs",
+      "tests/tagClassicFairyMeteorCrushPiercing2v2.test.cjs",
+      "tests/tagClassicDDAssailantBanishBoth2v2.test.cjs",
+      "tests/tagClassicBattleBanishVictimTeamZones2v2.test.cjs",
+      "tests/tagClassicEndPhaseHandLimit2v2.test.cjs",
+      "tests/tagClassicSharedZoneCapacity2v2.test.cjs",
+      "tests/tagClassicGraveRecoveryPhysicalOwner2v2.test.cjs"
+    ],
+    "thirdPartyReservationsReleased": false
+  },
+  "auxiliaryScope": {
+    "releasedToAuxiliary": [
+      "tests/tagGravekeepersGuardPhysicalOwnerDiscord2v2.test.cjs"
+    ],
+    "auxiliaryMay": "monitorar PR #314; corrigir somente fixture/setup/payload assertions se a CI apontar defeito no teste; pode sincronizar a branch com a shared por merge não-forçado após a CI.",
+    "forbidden": [
+      "src/duelEngineCurrent.ts",
+      "src/monsterEffects.ts",
+      "renderizadores",
+      "catalogo",
+      "certificações",
+      "inventários",
+      "banco persistente",
+      "dados dos jogadores",
+      "main",
+      "produção",
+      "reservas de terceiros",
+      "merge da PR",
+      "deploy"
+    ]
+  },
+  "parallelFindings": {
+    "m365": {
+      "pr": 313,
+      "ci": "Card Batch Fast, Milestone 1000, npm test e Extended Soak aprovados; Engine Validation ainda finalizando",
+      "releasedToAuxiliary": true
+    },
+    "m364": {
+      "pr": 312,
+      "branchHead": "266187b787584b95637e187445b82aab975f0492",
+      "ci": "npm test/check/soak aprovados; Dependency Audit gate falha por sharp high no lockfile atual",
+      "candidateSharp": "0.35.5 com audit de produção e typecheck aprovados; package manifests ainda não aplicados",
+      "handoffCommentId": 6991573026
+    }
+  },
+  "safety": {
+    "merge": false,
+    "deploy": false,
+    "liveDiscordValidated": false,
+    "productionUpdated": false,
+    "deploymentsApi": "não disponível pela integração conectada"
+  },
+  "nextTask": "Monitorar a nova CI de 3 cenários. Se passar, manter PR #314 draft para revisão. Próxima implementação de cartas: 3-Hump Lacooda (86988864), agrupando tributo de duas entre três cópias e compra de três; aguardar handoff explícito já solicitado para src/monsterEffects.ts e src/duelEngineCurrent.ts. Em paralelo, M364 aguarda liberação de package.json/package-lock.json para aplicar sharp 0.35.5.",
+  "nextWindow": "2026-11-18T22:30:00-03:00",
+  "verifiedInvariant": {
+    "resolverVersion": "engine-v9",
+    "observedFlow": "resolveMonsterPending pode inicialmente anexar cartas à zona privada da equipe; pauseOverflow chama prepareTeamOverflow, que chama normalizeTeamHands após cada elo da corrente.",
+    "normalization": "normalizeTeamHands roteia mão e Extra Deck pelo UID físico m0:–m3: para a mão ativa ou reserva do assento proprietário.",
+    "evidence": "O primeiro npm test do M366 passou; a versão reforçada agora afirma explicitamente que os assentos ativos permanecem [0,1], que o alvo m3 não fica em core.players[1].hand/extra e cobre Fusion e face-down.",
+    "runtimeDefectConfirmed": false,
+    "runtimeChangesRequired": false
+  },
+  "handoffWithdrawnComment": "PR #17: pedido de handoff para src/duelEngineCurrent.ts retirado após confirmar o caminho normalizeTeamHands.",
+  "sharedHeadAtRelease": "fdf5cddd6f4bc874ef71ba1b63aaa58edc560b5a",
+  "branchComparison": {
+    "base": "fdf5cddd6f4bc874ef71ba1b63aaa58edc560b5a",
+    "aheadBy": 3,
+    "behindBy": 1,
+    "status": "behind-one-shared-checkpoint"
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "liveDiscordValidated": false,
+    "productionUpdated": false,
+    "deploymentsApi": "não disponível pela integração conectada"
+  }
+}

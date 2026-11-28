@@ -1,0 +1,97 @@
+{
+  "format": 1,
+  "runId": "work-20261126T011345-0300-M639",
+  "mission": "M639",
+  "owner": "Work principal",
+  "priority": "P1",
+  "priorityRequestedBy": "User",
+  "status": "reserved-and-implementing",
+  "startedAt": "2026-11-26T01:13:45-03:00",
+  "endedAt": null,
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "3814c94da7c57f0ccd2548211365eef89d29faa8",
+  "branch": "feat/work-m639-reveal-attack-lock-tag-adapter-20261126",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "3814c94da7c57f0ccd2548211365eef89d29faa8",
+  "branchHeadSha": null,
+  "pullRequest": null,
+  "reservedFiles": [
+    "src/revealAndAttackLockTagAdapter.ts",
+    "tests/revealAndAttackLockTagAdapter.test.cjs",
+    "docs/evidence/m639-reveal-attack-lock.json",
+    ".github/workflows/m639-reveal-attack-lock.yml"
+  ],
+  "scope": "Adapter TagDuel isolado para Swords of Revealing Light e Dark-Piercing Light: revelar monstros face-down da equipe adversária, lock de ataques durante os três End Phases adversários para Swords, expiração idempotente, ownership físico e conservação de UID. Sem integração ao resolver central, catálogo, certificações, comandos, banco, inventário ou produção.",
+  "cards": [
+    {
+      "id": "72302403",
+      "name": "Swords of Revealing Light",
+      "konamiId": 4354,
+      "officialText": "After this card's activation, it remains on the field, but you must destroy it during the End Phase of your opponent's 3rd turn. When this card is activated: If your opponent controls a face-down monster, flip all monsters they control face-up. While this card is face-up on the field, your opponent's monsters cannot declare an attack.",
+      "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4354&ope=2&request_locale=en",
+      "firstTCGRelease": "2002-03-08",
+      "certifiedAtStart": false
+    },
+    {
+      "id": "68008297",
+      "name": "Dark-Piercing Light",
+      "konamiId": 4356,
+      "officialText": "Flip all face-down monsters on your opponent's side of the field face-up.",
+      "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4356&ope=2&request_locale=en",
+      "firstTCGRelease": "2002-12-20",
+      "certifiedAtStart": false
+    }
+  ],
+  "implementation": {
+    "files": [
+      "src/revealAndAttackLockTagAdapter.ts",
+      "tests/revealAndAttackLockTagAdapter.test.cjs",
+      "docs/evidence/m639-reveal-attack-lock.json",
+      ".github/workflows/m639-reveal-attack-lock.yml"
+    ],
+    "scope": "Adapter isolado e regressões offline; os eventos Flip resultantes são retornados ao host, não executados dentro da Chain pelo adapter."
+  },
+  "handoff": {
+    "targetPR": 17,
+    "status": "awaiting explicit owner release by M637; M639 does not touch the blocked files",
+    "blockedFiles": [
+      "src/monsterEffects.ts",
+      "src/duelEngineCurrent.ts"
+    ],
+    "thisRunDoesNotTouchBlockedFiles": true
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "verification": {
+    "focusedScenarios": 0,
+    "focusedTestResult": "pending",
+    "typecheck": "pending",
+    "build": "pending",
+    "evidenceValidation": "pending",
+    "adapterBehaviorVerifiedCards": 0,
+    "behaviorCertifiedCards": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "liveDiscordValidation": false
+  },
+  "effectiveWorkMinutes": 0,
+  "targetEffectiveWorkMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "nextTask": "Implementar e testar o adapter de revelação/lock; depois conferir novo HEAD e coordenação para selecionar uma segunda família sem colisão.",
+  "nextWindow": "2026-11-26T05:30:00-03:00",
+  "scopeReleasedToAuxiliary": []
+}

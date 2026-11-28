@@ -1,0 +1,39 @@
+{
+  "format": 1,
+  "runId": "work-20261127T022528-0300-M669",
+  "mission": "M669",
+  "priority": "P1",
+  "status": "reserved-and-implementing",
+  "startedAt": "2026-11-27T02:25:28-03:00",
+  "endedAt": null,
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedBaseHead": "aa828bf9384c223c9f7398ad9194e2cc045eaecf",
+  "branch": "feat/work-m669-owner-rules-invariants-20261127",
+  "headSha": null,
+  "changedFiles": [
+    "tests/tagOwnerRulesM669.test.cjs",
+    "docs/evidence/m669-owner-rules.json",
+    ".github/workflows/m669-owner-rules.yml",
+    "coordination/runs/work-20261127T022528-0300-M669.json"
+  ],
+  "scope": "Regressão isolada das regras do proprietário em TagDuel: Deck 20–30, Extra Deck 5, 3 Monster + 3 Spell/Trap Zones com Field Zone separada, mão 6 descartada somente na End Phase, privacidade de mãos físicas e conservação de inventário. Sem alterar resolver central, catálogo/certificações, comandos, banco ou produção.",
+  "blocksCompleted": [],
+  "newCards": 0,
+  "newCertifications": 0,
+  "automaticCertifications": 0,
+  "inventoryGrants": 0,
+  "verification": {
+    "typecheck": "pending",
+    "build": "pending",
+    "focusedTests": "pending",
+    "cardAudit": "pending",
+    "discordLive": "not-run"
+  },
+  "pr": null,
+  "production": "not-changed",
+  "merge": "not-authorized",
+  "deploy": "not-authorized",
+  "blockers": [],
+  "nextTask": "Concluir a suíte de invariantes do formato 2v2 clássico; executar CI dedicada e registrar o resultado real.",
+  "nextWindow": "2026-11-27T06:30:00-03:00"
+}

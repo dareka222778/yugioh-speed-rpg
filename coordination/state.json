@@ -1,0 +1,1488 @@
+{
+  "format": 1,
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "observedHead": "35cb0d8762a2dcb988c760b00b5b82d64d670487",
+  "updatedAt": "2026-11-28T08:59:32-03:00",
+  "activeReservations": [
+    {
+      "runId": "work-20261125T203259-0300-M635",
+      "mission": "M635",
+      "branch": "feat/work-m635-coordination-guard-20261125",
+      "state": "reservation registered; implementation starting",
+      "reservedFiles": [
+        "scripts/coordination-guard.cjs",
+        "tests/coordinationGuard.test.cjs",
+        "docs/evidence/m635-coordination-guard.json",
+        ".github/workflows/coordination-guard.yml"
+      ]
+    },
+    {
+      "runId": "work-20261126T002919-0300-M637",
+      "mission": "M637",
+      "branch": "feat/work-m637-tribute-lp-tag-adapter-20261126",
+      "state": "reserved-and-implementing",
+      "reservedFiles": [
+        "src/tributeLPEffectsTagAdapter.ts",
+        "tests/tributeLPEffectsTagAdapter.test.cjs",
+        "docs/evidence/m637-tribute-lp-effects.json",
+        ".github/workflows/m637-tribute-lp-effects.yml"
+      ],
+      "conditionalHeadUpdate": true
+    },
+    {
+      "runId": "work-20261126T005625-0300-M638",
+      "mission": "M638",
+      "branch": "feat/work-m638-lp-event-tag-adapter-20261126",
+      "state": "reserved-and-implementing",
+      "reservedFiles": [
+        "src/lpEventTagAdapter.ts",
+        "tests/lpEventTagAdapter.test.cjs",
+        "docs/evidence/m638-lp-event-tag-adapter.json",
+        ".github/workflows/m638-lp-event-tag-adapter.yml"
+      ],
+      "conditionalHeadUpdate": true
+    },
+    {
+      "runId": "work-20261126T011345-0300-M639",
+      "mission": "M639",
+      "branch": "feat/work-m639-reveal-attack-lock-tag-adapter-20261126",
+      "state": "reserved-and-implementing",
+      "priority": "P1",
+      "conditionalHeadUpdate": true,
+      "reservedFiles": [
+        "src/revealAndAttackLockTagAdapter.ts",
+        "tests/revealAndAttackLockTagAdapter.test.cjs",
+        "docs/evidence/m639-reveal-attack-lock.json",
+        ".github/workflows/m639-reveal-attack-lock.yml"
+      ]
+    },
+    {
+      "runId": "work-20261126T014700-0300-M641",
+      "mission": "M641",
+      "branch": "feat/work-m641-mind-haxorz-private-inspection-20261126",
+      "state": "reserved-and-implementing",
+      "priority": "P1",
+      "conditionalHeadUpdate": true,
+      "reservedFiles": [
+        "src/mindHaxorzTagAdapter.ts",
+        "tests/mindHaxorzTagAdapter.test.cjs",
+        "docs/evidence/m641-mind-haxorz.json",
+        ".github/workflows/m641-mind-haxorz-private-inspection.yml"
+      ]
+    },
+    {
+      "runId": "work-20261126T020100-0300-M642",
+      "mission": "M642",
+      "branch": "feat/work-m642-trap-dustshoot-tag-adapter-20261126",
+      "state": "reserved-and-implementing",
+      "priority": "P1",
+      "conditionalHeadUpdate": true,
+      "reservedFiles": [
+        "src/trapDustshootTagAdapter.ts",
+        "tests/trapDustshootTagAdapter.test.cjs",
+        "docs/evidence/m642-trap-dustshoot.json",
+        ".github/workflows/m642-trap-dustshoot.yml"
+      ]
+    },
+    {
+      "runId": "work-20261126T053900-0300-M644",
+      "mission": "M644",
+      "branch": "feat/work-m644-graceful-charity-tag-adapter-20261126",
+      "state": "reserved-and-implementing",
+      "priority": "P1",
+      "conditionalHeadUpdate": true,
+      "reservedFiles": [
+        "src/gracefulCharityTagAdapter.ts",
+        "tests/gracefulCharityTagAdapter.test.cjs",
+        "docs/evidence/m644-graceful-charity.json",
+        ".github/workflows/m644-graceful-charity.yml"
+      ]
+    },
+    {
+      "runId": "work-20261126T054800-0300-M645",
+      "mission": "M645",
+      "branch": "feat/work-m645-painful-choice-tag-adapter-20261126",
+      "state": "reserved-and-implementing",
+      "priority": "P1",
+      "conditionalHeadUpdate": true,
+      "reservedFiles": [
+        "src/painfulChoiceTagAdapter.ts",
+        "tests/painfulChoiceTagAdapter.test.cjs",
+        "docs/evidence/m645-painful-choice.json",
+        ".github/workflows/m645-painful-choice.yml"
+      ]
+    },
+    {
+      "runId": "work-20261126T055946-0300-M646",
+      "mission": "M646",
+      "branch": "feat/work-m646-exchange-tag-adapter-20261126",
+      "state": "reserved-and-implementing",
+      "priority": "P1",
+      "conditionalHeadUpdate": true,
+      "reservedFiles": [
+        "src/exchangeTagAdapter.ts",
+        "tests/exchangeTagAdapter.test.cjs",
+        "docs/evidence/m646-exchange.json",
+        ".github/workflows/m646-exchange.yml"
+      ]
+    },
+    {
+      "runId": "work-20261126T061823-0300-M647",
+      "mission": "M647",
+      "branch": "feat/work-m647-reload-tag-adapter-20261126",
+      "state": "reserved-and-implementing",
+      "priority": "P1",
+      "conditionalHeadUpdate": true,
+      "reservedFiles": [
+        "src/reloadTagAdapter.ts",
+        "tests/reloadTagAdapter.test.cjs",
+        "docs/evidence/m647-reload.json",
+        ".github/workflows/m647-reload.yml"
+      ]
+    },
+    {
+      "runId": "work-20261126T102800-0300-M649",
+      "mission": "M649",
+      "branch": "feat/work-m649-discard-cost-destruction-20261126",
+      "state": "reserved-and-implementing",
+      "priority": "P1",
+      "conditionalHeadUpdate": true,
+      "reservedFiles": [
+        "src/discardCostDestructionTagAdapter.ts",
+        "tests/discardCostDestructionTagAdapter.test.cjs",
+        "docs/evidence/m649-discard-cost-destruction.json",
+        ".github/workflows/m649-discard-cost-destruction.yml"
+      ]
+    },
+    {
+      "runId": "work-20261126T103741-0300-M650",
+      "mission": "M650",
+      "branch": "feat/work-m650-counter-trap-negation-20261126",
+      "state": "awaiting-ci",
+      "priority": "P1",
+      "conditionalHeadUpdate": true,
+      "reservedFiles": [
+        "src/counterTrapNegationTagAdapter.ts",
+        "tests/counterTrapNegationTagAdapter.test.cjs",
+        "docs/evidence/m650-counter-trap-negation.json",
+        ".github/workflows/m650-counter-trap-negation.yml"
+      ]
+    },
+    {
+      "runId": "work-20261126T105507-0300-M651",
+      "mission": "M651",
+      "branch": "feat/work-m651-control-change-20261126",
+      "state": "reserved-and-implementing",
+      "priority": "P1",
+      "conditionalHeadUpdate": true,
+      "reservedFiles": [
+        "src/controlChangeTagAdapter.ts",
+        "tests/controlChangeTagAdapter.test.cjs",
+        "docs/evidence/m651-control-change.json",
+        ".github/workflows/m651-control-change.yml"
+      ]
+    },
+    {
+      "runId": "work-20261126T114118-0300-M652",
+      "mission": "M652",
+      "branch": "feat/work-m652-equip-stat-leave-trigger-20261126",
+      "state": "reserved-and-implementing",
+      "priority": "P1",
+      "conditionalHeadUpdate": true,
+      "reservedFiles": [
+        "src/equipStatLeaveTagAdapter.ts",
+        "tests/equipStatLeaveTagAdapter.test.cjs",
+        "docs/evidence/m652-equip-stat-leave-trigger.json",
+        ".github/workflows/m652-equip-stat-leave-trigger.yml"
+      ]
+    },
+    {
+      "runId": "work-20261126T152846-0300-M653",
+      "mission": "M653",
+      "branch": "feat/work-m653-dice-stat-adapters-20261126",
+      "state": "reserved-and-implementing",
+      "priority": "P1",
+      "conditionalHeadUpdate": true,
+      "reservedFiles": [
+        "src/diceStatTagAdapter.ts",
+        "tests/diceStatTagAdapter.test.cjs",
+        "docs/evidence/m653-dice-stat-adapters.json",
+        ".github/workflows/m653-dice-stat-adapters.yml"
+      ],
+      "scope": "Adapter TagDuel isolado para Maximum Six, Graceful Dice e Skull Dice; sorteio HMAC persistido, modificadores de ATK/DEF e gatilho de Invocação-Tributo. Sem catálogo, certificações, resolver central, comandos, banco ou produção."
+    },
+    {
+      "runId": "work-20261126T154300-0300-M654",
+      "mission": "M654",
+      "branch": "feat/work-m654-triple-coin-destruction-20261126",
+      "state": "reserved-and-implementing",
+      "priority": "P1",
+      "conditionalHeadUpdate": true,
+      "reservedFiles": [
+        "src/coinTossTagAdapter.ts",
+        "tests/coinTossTagAdapter.test.cjs",
+        "docs/evidence/m654-triple-coin-destruction.json",
+        ".github/workflows/m654-triple-coin-destruction.yml"
+      ],
+      "scope": "Adapter TagDuel isolado para Barrel Dragon e Blowback Dragon: três moedas pelo HMAC persistido, sucesso com pelo menos duas caras, alvo após o resultado, destruição respeitando proprietário físico e uma ativação por turno. Sem catálogo/certificação/comandos/produção."
+    },
+    {
+      "runId": "work-20261126T155624-0300-M655",
+      "mission": "M655",
+      "branch": "feat/work-m655-continuous-position-policies-20261126",
+      "state": "reserved-and-implementing",
+      "priority": "P1",
+      "conditionalHeadUpdate": true,
+      "reservedFiles": [
+        "src/positionPolicyTagAdapter.ts",
+        "tests/positionPolicyTagAdapter.test.cjs",
+        "docs/evidence/m655-position-policies.json",
+        ".github/workflows/m655-position-policies.yml"
+      ],
+      "scope": "Adapter TagDuel isolado para Final Attack Orders e Light of Intervention: política contínua de posição, bloqueio de mudança de posição, conversão de Set em Invocação-Normal face-up em Defesa e conservação física. Sem resolver central, catálogo, certificações, comandos ou produção."
+    },
+    {
+      "runId": "work-20261126T161750-0300-M656",
+      "mission": "M656",
+      "branch": "feat/work-m656-battle-target-policies-20261126",
+      "state": "reserved-and-implementing",
+      "priority": "P1",
+      "conditionalHeadUpdate": true,
+      "reservedFiles": [
+        "src/battleTargetPolicyTagAdapter.ts",
+        "tests/battleTargetPolicyTagAdapter.test.cjs",
+        "docs/evidence/m656-battle-target-policies.json",
+        ".github/workflows/m656-battle-target-policies.yml",
+        "scripts/audit-battle-target-policy-m656.cjs"
+      ],
+      "scope": "Adapter TagDuel 2v2 isolado para Staunch Defender (92854392) e Dark Spirit of the Silent (93599951): política de alvo obrigatório e substituição de atacante. Sem resolver central, catálogo, certificações, comandos, banco, produção ou concessões de inventário."
+    },
+    {
+      "runId": "work-20261126T165145-0300-M657",
+      "mission": "M657",
+      "branch": "feat/work-m657-swarm-flip-adapter-20261126",
+      "state": "reserved-and-implementing",
+      "priority": "P1",
+      "conditionalHeadUpdate": true,
+      "reservedFiles": [
+        "src/swarmFlipTagAdapter.ts",
+        "tests/swarmFlipTagAdapter.test.cjs",
+        "docs/evidence/m657-swarm-flip-adapter.json",
+        ".github/workflows/m657-swarm-flip-adapter.yml",
+        "scripts/audit-swarm-flip-m657.cjs"
+      ],
+      "scope": "Adapter TagDuel isolado para Swarm of Scarabs (15383415) e Swarm of Locusts (41872150): gatilho de Flip Summon com alvo travado (monstro ou Magia/Armadilha, incluindo Field Zone), destruição sem retarget e mudança própria para face-down Defense uma vez por turno. Preserva UID/propriedade física, mãos, 3+3 zonas, deck 20–30 e Extra 5. Sem resolver central, catálogo, certificações, comandos, banco, inventário ou produção."
+    },
+    {
+      "runId": "work-20261126T171200-0300-M658",
+      "mission": "M658",
+      "branch": "feat/work-m658-small-monster-destruction-20261126",
+      "state": "reserved-and-implementing",
+      "priority": "P1",
+      "conditionalHeadUpdate": true,
+      "reservedFiles": [
+        "src/smallMonsterDestructionTagAdapter.ts",
+        "tests/smallMonsterDestructionTagAdapter.test.cjs",
+        "docs/evidence/m658-small-monster-destruction.json",
+        ".github/workflows/m658-small-monster-destruction.yml",
+        "scripts/audit-small-monster-destruction-m658.cjs"
+      ],
+      "scope": "Adapter TagDuel isolado para King Tiger Wanghu (83986578) e Blast Juggler (70138455): gatilho não-direcionado após Normal/Special Summon com limiar ATK 1400, e efeito de Standby de Blast Juggler com tributo como custo, dois alvos face-up ATK<=1000, bindings de zona/epoch e resolução parcial. Preserva 3+3 zonas, deck 20–30, mão 6 na End Phase, Extra 5, UID/propriedade física, mãos e inventário. Sem resolver central, catálogo/certificações, comandos, banco, Discord ou produção."
+    },
+    {
+      "runId": "work-20261126T205200-0300-M660",
+      "mission": "M660",
+      "branch": "feat/work-m660-draw-phase-skip-20261126",
+      "state": "reserved-and-implementing",
+      "priority": "P1",
+      "conditionalHeadUpdate": true,
+      "reservedFiles": [
+        "src/drawPhaseSkipTagAdapter.ts",
+        "tests/drawPhaseSkipTagAdapter.test.cjs",
+        "docs/evidence/m660-draw-phase-skip.json",
+        ".github/workflows/m660-draw-phase-skip.yml",
+        "scripts/audit-draw-phase-skip-m660.cjs"
+      ],
+      "scope": "Adapter TagDuel isolado para Offerings to the Doomed (19230407) e Time Seal (35316708): destruição de monstro face-up com target binding, agendamento do próximo Draw Phase por assento físico e consumo idempotente do skip. O cálculo considera rotação 0→1→2→3 e distingue próximo Draw Phase da equipe adversária do próximo Draw Phase do ativador. Mantém deck 20–30, mão 6 na End Phase, zonas 3+3, Field Zone separada, Extra 5, mãos privadas e inventário sem concessões."
+    },
+    {
+      "runId": "work-20261126T210030-0300-M661",
+      "mission": "M661",
+      "priority": "P1",
+      "branch": "feat/work-m661-spell-negation-tag-adapter-20261126",
+      "state": "reserved-and-implementing",
+      "conditionalHeadUpdate": true,
+      "reservedFiles": [
+        "src/spellNegationTagAdapter.ts",
+        "tests/spellNegationTagAdapter.test.cjs",
+        "docs/evidence/m661-spell-negation.json",
+        ".github/workflows/m661-spell-negation.yml",
+        "scripts/audit-spell-negation-m661.cjs"
+      ],
+      "scope": "Adapter TagDuel isolado para Spell Canceller (84636823) e Imperial Order (61740673): separa bloqueio de ativação de Magias, negação de efeitos de Magia no campo e manutenção obrigatória de 700 LP na Standby Phase da equipe controladora. Preserva LP compartilhado, assento/UID físico, mãos privadas, deck 20–30, mão 6 na End Phase, zonas 3+3, Field Zone separada e Extra 5. Sem resolver central, catálogo/certificação, comandos, banco, inventário ou produção."
+    },
+    {
+      "runId": "work-20261126T211424-0300-M662",
+      "mission": "M662",
+      "priority": "P1",
+      "branch": "feat/work-m662-neko-mane-king-end-phase-20261126",
+      "state": "ci-running",
+      "conditionalHeadUpdate": true,
+      "reservedFiles": [
+        "src/nekoManeKingTagAdapter.ts",
+        "tests/nekoManeKingTagAdapter.test.cjs",
+        "docs/evidence/m662-neko-mane-king.json",
+        ".github/workflows/m662-neko-mane-king.yml",
+        "scripts/audit-neko-mane-king-m662.cjs"
+      ],
+      "scope": "Adapter TagDuel isolado para Neko Mane King (11021521 / Konami CID 5595): gatilho obrigatório somente durante o turno oponente quando a instância em posse da equipe é enviada ao Cemitério por efeito de carta controlado pela equipe adversária; captura evento e resolução em duas etapas, não interrompe uma cadeia em resolução, admite negação da ativação/efeito e agenda End Phase do turno atual de forma idempotente. Preserva assento/UID físico, propriedade, Deck 20–30, mão 6 na End Phase, zonas 3+3, Field Zone separada e Extra Deck 5. Sem resolver central, catálogo/certificações, comandos, banco, inventário ou produção.",
+      "headSha": "8b31e07e184dfa7126ae70c3d19f90b7e0f88352"
+    },
+    {
+      "runId": "work-20261126T213648-0300-M663",
+      "mission": "M663",
+      "priority": "P1",
+      "branch": "feat/work-m663-lord-of-d-flute-20261126",
+      "state": "reserved-and-implementing",
+      "conditionalHeadUpdate": true,
+      "reservedFiles": [
+        "src/lordOfDFluteTagAdapter.ts",
+        "tests/lordOfDFluteTagAdapter.test.cjs",
+        "docs/evidence/m663-lord-of-d-flute.json",
+        "scripts/audit-lord-of-d-flute-m663.cjs",
+        ".github/workflows/m663-lord-of-d-flute.yml"
+      ],
+      "scope": "Adapter TagDuel isolado para Lord of D. (17985575 / Konami CID 4747) e The Flute of Summoning Dragon (43973174 / CID 4810): proteção global de Dragons no campo contra efeitos de carta que alvejam; ativação/resolução da Flute condicionada a Lord of D. face-up, Invocação-Especial de 1–2 Dragons da mão privada do assento ativo, até a capacidade real das 3 zonas, preservando UID e assento físico. Inclui cartas de nível 8 sem Tribute, set da equipe parceira, checagem de mão/Backrow, negação, perda da condição e idempotência. Sem resolver central, catálogo/certificações, comandos, banco, inventário ou produção."
+    },
+    {
+      "runId": "work-20261126T214800-0300-M664",
+      "mission": "M664",
+      "priority": "P1",
+      "branch": "feat/work-m664-flip-deck-ops-20261126",
+      "state": "reserved-and-implementing",
+      "conditionalHeadUpdate": true,
+      "reservedFiles": [
+        "src/flipDeckOperationsTagAdapter.ts",
+        "tests/flipDeckOperationsTagAdapter.test.cjs",
+        "docs/evidence/m664-flip-deck-operations.json",
+        "scripts/audit-flip-deck-operations-m664.cjs",
+        ".github/workflows/m664-flip-deck-operations.yml"
+      ],
+      "scope": "Adapter TagDuel isolado para Big Eye (16768387/CID 4177), Magical Merchant (32362575/CID 5663) e Des Feral Imp (78868119/CID 5359): inspeção privada e reordenação dos 5 cards do topo pelo assento controlador; escavação pública até a primeira Magia/Armadilha, envio dos demais ao GY compartilhado e adição à mão física; reciclagem de alvo do GY para o Deck do proprietário físico com shuffle validado. Preserva UID, ownerSeat, mãos privadas, 3+3 zonas, Field Zone separada, Deck inicial 20–30, Extra 5 e descarte de mão somente na End Phase. Sem resolver central, catálogo/certificações, comandos, banco, inventário ou produção."
+    },
+    {
+      "runId": "work-20261127T012829-0300-M665",
+      "mission": "M665",
+      "priority": "P1",
+      "branch": "feat/work-m665-battle-damage-disruption-20261127",
+      "state": "reserved-and-implementing",
+      "conditionalHeadUpdate": true,
+      "reservedFiles": [
+        "src/battleDamageDisruptionTagAdapter.ts",
+        "tests/battleDamageDisruptionTagAdapter.test.cjs",
+        "docs/evidence/m665-battle-damage-disruption.json",
+        "scripts/audit-battle-damage-disruption-m665.cjs",
+        ".github/workflows/m665-battle-damage-disruption.yml"
+      ],
+      "scope": "Adapter TagDuel 2v2 isolado para Robbin' Goblin (88279736 / Konami CID 4876) e Robbin' Zombie (83258273 / Konami CID 5920): gatilhos por dano de batalha positivo, descarte aleatório HMAC da mão física do assento atingido e envio do topo do Deck físico ao GY compartilhado. Evento vinculado ao assento defensor ativo; privacidade de mão, UID/propriedade física, idempotência, remoção/negação da fonte contínua e inventário sem concessões. Sem resolver central, catálogo/certificações, comandos, banco ou produção."
+    },
+    {
+      "runId": "work-20261127T014600-0300-M666",
+      "mission": "M666",
+      "priority": "P1",
+      "branch": "feat/work-m666-attack-limit-maintenance-20261127",
+      "state": "reserved-and-implementing",
+      "conditionalHeadUpdate": true,
+      "reservedFiles": [
+        "src/attackLimitMaintenanceTagAdapter.ts",
+        "tests/attackLimitMaintenanceTagAdapter.test.cjs",
+        "docs/evidence/m666-attack-limit-maintenance.json",
+        "scripts/audit-attack-limit-maintenance-m666.cjs",
+        ".github/workflows/m666-attack-limit-maintenance.yml"
+      ],
+      "scope": "Adapter TagDuel isolado para The Dark Door (30606547 / CID 5225) e Messenger of Peace (44656491 / CID 4938): limite de um atacante por equipe/Fase de Batalha, bloqueio de monstros face-up com ATK >=1500, manutenção de 100 LP por Standby da equipe controladora, pagamento opcional/sem LP suficiente destrói a fonte. Usa ATK efetivo, LP compartilhado, UID/assento físico e recibos idempotentes. Sem resolver central, catálogo/certificações, comandos, banco ou produção."
+    },
+    {
+      "runId": "work-20261127T015620-0300-M667",
+      "mission": "M667",
+      "priority": "P1",
+      "branch": "feat/work-m667-gravekeepers-servant-20261127",
+      "state": "reserved-and-implementing",
+      "conditionalHeadUpdate": true,
+      "headSha": "26c36385a84ef54a4652e7f0004cf6e176ebd39b",
+      "reservedFiles": [
+        "src/gravekeeperServantTagAdapter.ts",
+        "tests/gravekeeperServantTagAdapter.test.cjs",
+        "docs/evidence/m667-gravekeeper-servant.json",
+        "scripts/audit-gravekeeper-servant-m667.cjs",
+        ".github/workflows/m667-gravekeeper-servant.yml"
+      ],
+      "scope": "Adapter TagDuel isolado para Gravekeeper's Servant (16762927 / Konami CID 4893): custo de enviar do topo do Deck físico do representante ativo atacante ao Cemitério compartilhado, uma carta por cópia contínua ativa controlada pela equipe adversária; fontes face-up/resolvidas, negação/remoção, substituição de destino, deck insuficiente, rotação 2v2 e recibos idempotentes. Sem resolver central, catálogo/certificações, comandos, persistência, inventário ou produção."
+    },
+    {
+      "runId": "work-20261127T021947-0300-M668",
+      "mission": "M668",
+      "priority": "P1",
+      "branch": "feat/work-m668-direct-burn-ci-recovery-20261127",
+      "state": "reserved-and-implementing",
+      "conditionalHeadUpdate": true,
+      "headSha": "e6ea5d82bd18c9cbdee3b2c6fefe50e961d38da6",
+      "taskBaseBranch": "feat/work-m631-direct-burn-spells-tag-adapter-20261125",
+      "taskBaseHead": "dd79ac897f577168deca1bbf00a06b894a81fe68",
+      "reservedFiles": [
+        "tests/directBurnSpellTagAdapter.test.cjs",
+        "coordination/runs/work-20261127T021947-0300-M668.json"
+      ],
+      "scope": "Recuperação da CI falha do M631 (Final Flame/Raimei): corrigir fixtures 2v2 para sincronizar cursor, equipe ativa e teamRotation em todos os quatro assentos; preservar lógica de cartas e certificações. Sem alteração de resolver central, catálogo, inventário ou produção."
+    },
+    {
+      "runId": "work-20261127T022528-0300-M669",
+      "mission": "M669",
+      "priority": "P1",
+      "branch": "feat/work-m669-owner-rules-invariants-20261127",
+      "state": "reserved-and-implementing",
+      "conditionalHeadUpdate": true,
+      "headSha": "aa828bf9384c223c9f7398ad9194e2cc045eaecf",
+      "reservedFiles": [
+        "tests/tagOwnerRulesM669.test.cjs",
+        "docs/evidence/m669-owner-rules.json",
+        ".github/workflows/m669-owner-rules.yml",
+        "coordination/runs/work-20261127T022528-0300-M669.json"
+      ],
+      "scope": "Regressão isolada das regras do proprietário em TagDuel: Deck 20–30, Extra Deck 5, 3 Monster + 3 Spell/Trap Zones com Field Zone separada, mão 6 descartada somente na End Phase, privacidade de mãos físicas e conservação de inventário. Sem alterar resolver central, catálogo/certificações, comandos, banco ou produção."
+    },
+    {
+      "runId": "work-20261127T025834-0300-M670",
+      "mission": "M670",
+      "priority": "P1",
+      "branch": "feat/work-m670-warrior-support-20261127",
+      "state": "reserved-and-implementing",
+      "conditionalHeadUpdate": true,
+      "headSha": "385c3b12925578bc63e80582965106ffed840c98",
+      "reservedFiles": [
+        "src/warriorSupportTagAdapter.ts",
+        "tests/warriorSupportTagAdapter.test.cjs",
+        "docs/evidence/m670-warrior-support.json",
+        ".github/workflows/m670-warrior-support.yml",
+        "scripts/audit-warrior-support-m670.cjs",
+        "coordination/runs/work-20261127T025834-0300-M670.json"
+      ],
+      "scope": "Adapter TagDuel isolado para Marauding Captain (02460565/CID 5318) e Command Knight (10375182/CID 5017): gatilho de Normal Summon que recruta monstro de nível 4 ou menor da mão privada do assento físico; proteção de alvo de ataque para Warriors; aura cumulativa de +400 ATK a Warriors e autoproteção condicional de Command Knight. Sem alterar resolver central, catálogo/certificações, comandos, banco, inventário ou produção."
+    },
+    {
+      "runId": "work-20261127T062736-0300-M671",
+      "mission": "M671",
+      "priority": "P1",
+      "branch": "feat/work-m671-multi-attack-spirit-20261127",
+      "state": "reserved-and-implementing",
+      "conditionalHeadUpdate": true,
+      "headSha": "542c8db6c488e323dadda27a708b979189b65d53",
+      "reservedFiles": [
+        "src/multiAttackSpiritTagAdapter.ts",
+        "tests/multiAttackSpiritTagAdapter.test.cjs",
+        "docs/evidence/m671-multi-attack-spirit.json",
+        ".github/workflows/m671-multi-attack-spirit.yml",
+        "scripts/audit-multi-attack-spirit-m671.cjs",
+        "coordination/runs/work-20261127T062736-0300-M671.json"
+      ],
+      "scope": "Adapter TagDuel isolado para Mataza the Zapper (22609617 / Konami CID 5898) e Asura Priest (02134346 / Konami CID 5381): dois ataques por Battle Phase e bloqueio de troca de controle enquanto Mataza estiver face-up; Asura ataca cada monstro da equipe adversária uma vez, não pode ser Invocado-Especialmente e retorna à mão do proprietário físico na End Phase do turno de Normal/Flip Summon. Inclui vínculos por UID/epoch, rotação 2v2, idempotência, privacidade de mãos, Deck 20–30, mão 6 na End Phase, zonas 3+3 e Extra 5. Sem resolver central, catálogo/certificações, comandos, persistência, inventário ou produção."
+    },
+    {
+      "runId": "work-20261127T065449-0300-M672",
+      "mission": "M672",
+      "branch": "feat/work-m672-spell-counter-20261127",
+      "state": "reserved-and-implementing",
+      "priority": "P1",
+      "conditionalHeadUpdate": true,
+      "reservedFiles": [
+        "src/spellCounterTagAdapter.ts",
+        "tests/spellCounterTagAdapter.test.cjs",
+        "docs/evidence/m672-spell-counter-adapter.json",
+        ".github/workflows/m672-spell-counter-adapter.yml",
+        "scripts/audit-spell-counter-m672.cjs",
+        "coordination/runs/work-20261127T065449-0300-M672.json"
+      ],
+      "scope": "Adapter TagDuel 2v2 isolado para Royal Magical Library (70791313), Skilled Dark Magician (73752131) e Skilled White Magician (46363422): contadores de Magia adicionados somente quando uma Magia resolve, limite de três por instância, uso idempotente e custos por UID/epoch; Biblioteca remove três para comprar uma carta uma vez por turno; Magos Habilidosos tributam a si mesmos com três contadores para Invocar o monstro nomeado da mão/Deck/Cemitério permitido ao assento físico. Preserva mãos privadas, Deck 20–30, mão 6 com descarte somente na End Phase, zonas 3+3, Field Zone separada, Extra Deck 5, UID/propriedade física e inventário. Sem resolver central, catálogo, certificações, comandos, banco ou produção."
+    },
+    {
+      "runId": "work-20261127071240-0300-M673",
+      "mission": "M673",
+      "branch": "feat/work-m673-jowgen-lock-20261127",
+      "state": "reserved-and-implementing",
+      "priority": "P1",
+      "conditionalHeadUpdate": true,
+      "reservedFiles": [
+        "src/jowgenTagAdapter.ts",
+        "tests/jowgenTagAdapter.test.cjs",
+        "docs/evidence/m673-jowgen.json",
+        "scripts/audit-jowgen-m673.cjs",
+        ".github/workflows/m673-jowgen.yml",
+        "coordination/runs/work-20261127071240-0300-M673.json"
+      ],
+      "scope": "Adapter TagDuel 2v2 isolado para Jowgen the Spiritualist (41855169 / Konami CID 5247): trava Invocações-Especiais de ambas as equipes enquanto face-up; registra histórico de Invocação por UID/época; permite descartar uma carta aleatória da mão privada do assento ativo como custo para destruir todos os monstros Invocados por Invocação-Especial no campo. Preserva mãos privadas, Deck 20–30, mão 6 apenas na End Phase, zonas 3+3, Field Zone separada, Extra 5, propriedade física e inventário. Não altera resolver central, catálogo, certificações, comandos, banco ou produção."
+    },
+    {
+      "runId": "work-20261127T072422-0300-M674",
+      "mission": "M674",
+      "priority": "P1",
+      "branch": "feat/work-m674-mass-backrow-spells-20261127",
+      "state": "reserved-and-implementing",
+      "conditionalHeadUpdate": true,
+      "headSha": "516fe54a0898281d75bf0a41578c4063f2c19e8a",
+      "reservedFiles": [
+        "src/massBackrowTagAdapter.ts",
+        "tests/massBackrowTagAdapter.test.cjs",
+        "docs/evidence/m674-mass-backrow.json",
+        "scripts/audit-mass-backrow-m674.cjs",
+        ".github/workflows/m674-mass-backrow.yml",
+        "coordination/runs/work-20261127T072422-0300-M674.json"
+      ],
+      "scope": "Adapter TagDuel isolado para Harpie's Feather Duster (18144506/CID 4678), Heavy Storm (19613556/CID 4891) e Giant Trunade (42703248/CID 4910): varredura não-direcionada de Spell/Trap Zones e Field Zone, destruição ou retorno à mão física do proprietário, conservação de UID/inventário e regras do proprietário. Sem resolver central, catálogo/certificações, comandos, banco, inventário ou produção."
+    },
+    {
+      "runId": "work-20261127T115324-0300-M676",
+      "mission": "M676",
+      "branch": "feat/work-m676-targeted-trap-removal-20261127",
+      "state": "reserved-and-implementing",
+      "priority": "P1",
+      "conditionalHeadUpdate": true,
+      "headSha": "5a479acdc2fd224a81e61e19dcc56572cd115d97",
+      "reservedFiles": [
+        "src/targetedTrapRemovalTagAdapter.ts",
+        "tests/targetedTrapRemovalTagAdapter.test.cjs",
+        "docs/evidence/m676-targeted-trap-removal.json",
+        "scripts/audit-targeted-trap-removal-m676.cjs",
+        ".github/workflows/m676-targeted-trap-removal.yml",
+        "coordination/runs/work-20261127T115324-0300-M676.json"
+      ],
+      "scope": "Adapter TagDuel clássico isolado para Compulsory Evacuation Device (94192409/CID 5914) e Destruction Ring (21219755/CID 5912): retorno de alvo à mão/Extra Deck do proprietário físico; destruição como custo de monstro face-up da própria equipe e 1000 LP de dano a cada equipe. Preserva UID, assento físico, LP compartilhado, mão privada, regras 20–30/6 na End Phase/3+3/Extra 5. Sem resolver central, catálogo/certificações, comandos, banco, inventário ou produção."
+    },
+    {
+      "runId": "work-20261127T122119-0300-M677",
+      "mission": "M677",
+      "branch": "feat/work-m677-flip-search-tag-adapter-20261127",
+      "state": "reserved-and-implementing",
+      "priority": "P1",
+      "conditionalHeadUpdate": true,
+      "headSha": "742b85dcbab2ab9dc5afed3aa7806a810e1d33f1",
+      "reservedFiles": [
+        "src/flipSearchTagAdapter.ts",
+        "tests/flipSearchTagAdapter.test.cjs",
+        "docs/evidence/m677-flip-search.json",
+        "scripts/audit-flip-search-m677.cjs",
+        ".github/workflows/m677-flip-search.yml",
+        "coordination/runs/work-20261127T122119-0300-M677.json"
+      ],
+      "scope": "Adapter TagDuel clássico isolado para A Cat of Ill Omen (24140059/CID 5520) e An Owl of Luck (23927567/CID 5523): efeitos FLIP que selecionam Armadilha ou Magia de Campo do Deck físico do participante ativo; colocam no topo do Deck ou, se Necrovalley estiver face-up no campo, permitem adicionar à mão. Preserva UID/proprietário físico, privacidade de Deck/mão, 20–30 cartas por Deck, mão 6 com descarte somente na End Phase, 3+3 zonas, Field Zone separada e Extra Deck 5. Sem resolver central, catálogo/certificações, comandos, banco, inventário ou produção."
+    },
+    {
+      "runId": "work-20261127T123900-0300-M678",
+      "mission": "M678",
+      "branch": "feat/work-m678-armed-dragon-levels-20261127",
+      "state": "reserved-and-implementing",
+      "priority": "P1",
+      "conditionalHeadUpdate": true,
+      "headSha": "c3e456519444a4beb5844427bdf617daed7c16b7",
+      "reservedFiles": [
+        "src/armedDragonLevelTagAdapter.ts",
+        "tests/armedDragonLevelTagAdapter.test.cjs",
+        "docs/evidence/m678-armed-dragon-levels.json",
+        "scripts/audit-armed-dragon-levels-m678.cjs",
+        ".github/workflows/m678-armed-dragon-levels.yml",
+        "coordination/runs/work-20261127T123900-0300-M678.json"
+      ],
+      "scope": "Próxima família do worklist: Armed Dragon LV3 (00980973/CID 6105), LV5 (46384672/CID 6106) e LV7 (73879377/CID 6107). Adapter TagDuel isolado para evolução LV3→LV5 em Standby, LV5→LV7 na End Phase após destruição em batalha, descarte de monstro da mão como custo, destruição de alvo único/múltiplo por ATK do monstro enviado, restrição de Invocação de LV7 e busca privada no Deck/mão do participante ativo. Preserva UID/proprietário físico, Deck 20–30, mão 6 com descarte na End Phase, 3+3 zonas, Field Zone separada e Extra 5. Sem resolver central, catálogo/certificações, comandos, banco, inventário ou produção."
+    },
+    {
+      "runId": "work-202611271637320300-M680",
+      "mission": "M680",
+      "branch": "feat/work-m680-graveyard-banish-costs-20261127",
+      "state": "reserved-and-implementing",
+      "priority": "P1",
+      "conditionalHeadUpdate": true,
+      "headSha": "aec3d27eb054d5543fb95aa281590e5a84f8079a",
+      "reservedFiles": [
+        "src/graveyardBanishCostTagAdapter.ts",
+        "tests/graveyardBanishCostTagAdapter.test.cjs",
+        "docs/evidence/m680-graveyard-banish-costs.json",
+        "scripts/audit-graveyard-banish-costs-m680.cjs",
+        ".github/workflows/m680-graveyard-banish-costs.yml",
+        "coordination/runs/work-202611271637320300-M680.json"
+      ],
+      "scope": "Adapter TagDuel clássico isolado para Bazoo the Soul-Eater (40133511/CID 5250) e Skull Lair (06733059/CID 5264): custo de banir monstros do Cemitério compartilhado por equipe com UID/proprietário físico preservado; Bazoo ganha +300 ATK por monstro até o fim do próximo turno oponente, uma vez por turno; Skull Lair paga banimento como custo e destrói na resolução um monstro face-up cujo Level corresponda à quantidade banida, sem seleção antecipada de alvo. Preserva Deck 20–30, mão 6 na End Phase, zonas 3+3, Field Zone separada, Extra 5, privacidade e inventário. Sem resolver central, catálogo/certificações, comandos, banco, inventário concedido ou produção."
+    },
+    {
+      "runId": "work-202611271646560300-M681",
+      "mission": "M681",
+      "branch": "feat/work-m681-owner-hand-return-20261127",
+      "state": "reserved-and-implementing",
+      "priority": "P1",
+      "conditionalHeadUpdate": true,
+      "headSha": "e05c3398cccac7c4a0e489499a995681637514ca",
+      "reservedFiles": [
+        "src/ownerHandReturnTagAdapter.ts",
+        "tests/ownerHandReturnTagAdapter.test.cjs",
+        "docs/evidence/m681-owner-hand-return.json",
+        "scripts/audit-owner-hand-return-m681.cjs",
+        ".github/workflows/m681-owner-hand-return.yml",
+        "coordination/runs/work-202611271646560300-M681.json"
+      ],
+      "scope": "Adapter TagDuel clássico de retorno à mão física: Nightmare Penguin (81306586/CID 5803) — flip, devolve 1 carta controlada pelo oponente ao dono; aura +200 ATK para WATER face-up da equipe; Compulsory Evacuation Device (94192409/CID 5914) — trap direcionada que devolve 1 monstro ao dono. Destinos em mão privada/reserva do proprietário físico, Fusion para Extra Deck, tokens removidos, UID/epoch preservados e nenhuma exposição pública de identidade. Preserva Deck 20–30, mão 6 na End Phase, zonas 3+3, Field Zone separada e Extra 5."
+    },
+    {
+      "runId": "work-20261127T170105-0300-M683",
+      "mission": "M683",
+      "priority": "P1",
+      "branch": "feat/work-m683-attack-declaration-responses-20261127",
+      "state": "auxiliary-in-progress-awaiting-handoff",
+      "conditionalHeadUpdate": true,
+      "reservedFiles": [
+        "src/attackDeclarationResponseTagAdapter.ts",
+        "tests/attackDeclarationResponseTagAdapter.test.cjs",
+        "docs/evidence/m683-attack-declaration-responses.json",
+        "scripts/audit-attack-declaration-responses-m683.cjs",
+        ".github/workflows/m683-attack-declaration-responses.yml",
+        "coordination/runs/work-20261127T170105-0300-M683.json"
+      ],
+      "scope": "Adapter TagDuel clássico 2v2 para respostas à declaração de ataque: Magic Cylinder (62279055/CID 5124) nega ataque e causa dano igual ao ATK do atacante; Draining Shield (43250041/CID 5994) nega ataque e recupera LP igual ao ATK; Negate Attack (14315573/CID 4804) nega ataque e encerra a Battle Phase. Alvo UID/epoch, trap baixada em turno anterior, Spell Speed 2/3, custo zero, dano/cura na equipe correta, LP zero, propriedade física e inventário conservados. Não integra resolver central, metadata, certificações, comandos, banco, Discord live ou produção. Dimension Wall excluída por primeira publicação OCG/TCG após o corte histórico de 30/09/2004.",
+      "headSha": "e41d57d043479f9884a44f67fd69db8511077d32"
+    },
+    {
+      "runId": "work-20261127T173009-0300-M684",
+      "mission": "M684",
+      "priority": "P1",
+      "branch": "feat/work-m684-targeted-continuous-traps-20261127",
+      "state": "ci-running",
+      "conditionalHeadUpdate": true,
+      "reservedFiles": [
+        "src/targetedContinuousTrapTagAdapter.ts",
+        "tests/targetedContinuousTrapTagAdapter.test.cjs",
+        "docs/evidence/m684-targeted-continuous-traps.json",
+        "scripts/audit-targeted-continuous-traps-m684.cjs",
+        ".github/workflows/m684-targeted-continuous-traps.yml",
+        "coordination/runs/work-20261127T173009-0300-M684.json"
+      ],
+      "scope": "Adapter TagDuel clássico 2v2 isolado para Nightmare Wheel (54704216/CID 5298) e Shadow Spell (29267084/CID 4675): alvo físico UID/epoch, bloqueio de ataque/posição, redução de 700 ATK em Shadow Spell, dano de 500 LP na Standby Phase do controlador para Nightmare Wheel, destruição da Armadilha quando o alvo deixa o campo, idempotência, propriedade física e inventário conservado. Ambos ausentes do metadata/certificações no HEAD-base; fixtures usam Armadilhas já habilitadas via lookup porque não há autorização de admissão/certificação. Não integra resolver central nem altera catálogo, certificações, comandos, banco, inventário ou produção.",
+      "sharedBaseHead": "b4d9e249f539a3dab7babeef044f40f8b1f50cd3",
+      "baseSha": "b4d9e249f539a3dab7babeef044f40f8b1f50cd3",
+      "headSha": "b751ab9ea46313d01e22458b310f635ca3ac8d47",
+      "pr": 609
+    },
+    {
+      "runId": "work-20261127T212828-0300-M685",
+      "mission": "M685",
+      "priority": "P1",
+      "branch": "feat/work-m685-curse-of-darkness-20261127",
+      "state": "ci-running",
+      "conditionalHeadUpdate": true,
+      "reservedFiles": [
+        "src/curseOfDarknessTagAdapter.ts",
+        "tests/curseOfDarknessTagAdapter.test.cjs",
+        "docs/evidence/m685-curse-of-darkness.json",
+        "scripts/audit-curse-of-darkness-m685.cjs",
+        ".github/workflows/m685-curse-of-darkness.yml",
+        "coordination/runs/work-20261127T212828-0300-M685.json"
+      ],
+      "scope": "Adapter isolado para Curse of Darkness (84970821/CID 5917): aplicar 1000 LP à equipe do assento físico que ativou a Magia somente após a resolução bem-sucedida; distinguir ativação negada, efeito negado, idempotência por evento, supressão por negadores de Armadilha, UID/epoch, rotação 2v2 e conservação de inventário. Sem alterar resolver central, metadata, certificações, comandos, banco, inventário ou produção.",
+      "sharedBaseHead": "e06a207730841378ba317eea5ac29b0604621f5f",
+      "baseSha": "e06a207730841378ba317eea5ac29b0604621f5f",
+      "headSha": "fe478c208a9d296e5ee0c0ef19e731d25072dfae",
+      "pr": 610,
+      "lastUpdatedAt": "2026-11-27T21:52:55.580-03:00"
+    },
+    {
+      "runId": "work-20261127T214300-0300-M686",
+      "mission": "M686",
+      "priority": "P1",
+      "branch": "feat/work-m686-appropriate-20261127",
+      "state": "ci-running",
+      "conditionalHeadUpdate": true,
+      "reservedFiles": [
+        "src/appropriateTagAdapter.ts",
+        "tests/appropriateTagAdapter.test.cjs",
+        "docs/evidence/m686-appropriate.json",
+        "scripts/audit-appropriate-m686.cjs",
+        ".github/workflows/m686-appropriate.yml",
+        "coordination/runs/work-20261127T214300-0300-M686.json"
+      ],
+      "scope": "Adapter isolado para Appropriate (48539234/CID 4947): armar somente após o oponente comprar fora de qualquer Draw Phase; ignorar o evento de ativação; em compras posteriores, cada cópia ativa gera plano de comprar 2 cartas para o assento físico ativo da equipe controladora. Preservar mãos/Decks privados, UID físico, sequenciamento, idempotência, limite de Deck e deck-out. Sem alterar resolver central, metadata, certificações, comandos, banco, inventário ou produção.",
+      "sharedBaseHead": "e059f4b2e4f2ad0a7f67b40e18e00570810c2366",
+      "baseSha": "e059f4b2e4f2ad0a7f67b40e18e00570810c2366",
+      "headSha": "63979566106ccb88f279f70670631da0c0747227",
+      "pr": 611,
+      "lastUpdatedAt": "2026-11-27T21:52:55.580-03:00"
+    },
+    {
+      "runId": "work-20261127T221956-0300-M689",
+      "mission": "M689",
+      "branch": "feat/work-m689-conditional-insect-battle-20261127",
+      "state": "reserved-and-implementing",
+      "priority": "P1",
+      "conditionalHeadUpdate": true,
+      "sharedBaseHead": "e7142ea8f08834b29896c042e7d79fa3477515ff",
+      "headSha": "e7142ea8f08834b29896c042e7d79fa3477515ff",
+      "reservedFiles": [
+        "src/conditionalInsectBattleTagAdapter.ts",
+        "tests/conditionalInsectBattleTagAdapter.test.cjs",
+        "docs/evidence/m689-conditional-insect-battle.json",
+        "scripts/audit-conditional-insect-battle-m689.cjs",
+        ".github/workflows/m689-conditional-insect-battle.yml",
+        "coordination/runs/work-20261127T221956-0300-M689.json"
+      ],
+      "scope": "Adapter isolado de estatísticas condicionais de combate para 8-Claws Scorpion (14261867/CID 5421) e Arsenal Bug (06982734/CID 5033): flip face-down uma vez por turno, ATK 2400 somente na damage calculation contra alvo adversário face-down Defense, e override ATK/DEF 1000 quando não houver outro Insect face-up da equipe. Sem resolver central, catálogo/certificações, comandos, banco, inventário ou produção."
+    },
+    {
+      "runId": "work-20261127T225907-0300-M692",
+      "mission": "M692",
+      "branch": "feat/work-m692-draw-trigger-adapters-20261127",
+      "state": "reserved-and-implementing",
+      "priority": "P1",
+      "conditionalHeadUpdate": true,
+      "sharedHeadAtReservation": "d51dd3d8bd6e42a8ff7ed151bb7dd6a917384321",
+      "reservedFiles": [
+        "src/drawTriggerTagAdapter.ts",
+        "tests/drawTriggerTagAdapter.test.cjs",
+        "docs/evidence/m692-draw-trigger.json",
+        "scripts/audit-draw-trigger-m692.cjs",
+        ".github/workflows/m692-draw-trigger.yml",
+        "coordination/runs/work-20261127T225907-0300-M692.json"
+      ],
+      "scope": "Adapter TagDuel 2v2 isolado para Card of Safe Return (57953380) e Spirit of the Pot of Greed (04896788): gatilho opcional por Invocação-Especial do Cemitério fora da Etapa de Dano e por ativação de Pot of Greed; destinatário é o assento físico ativo da equipe correta, com mãos/Decks privados, sequência/idempotência, face-up/Attack Position, negação e Deck-out. Sem resolver central, catálogo, certificações, comandos, banco, inventário ou produção."
+    },
+    {
+      "runId": "work-20261127T231230-0300-M693",
+      "mission": "M693",
+      "branch": "feat/work-m693-pot-of-greed-synergy-20261127",
+      "state": "reserved-and-implementing",
+      "priority": "P1",
+      "conditionalHeadUpdate": true,
+      "sharedHeadAtReservation": "d2d84d948db56b5cdd7b6715d0346741443729c9",
+      "reservedFiles": [
+        "src/potOfGreedSynergyTagAdapter.ts",
+        "tests/potOfGreedSynergyTagAdapter.test.cjs",
+        "docs/evidence/m693-pot-of-greed-synergy.json",
+        "scripts/audit-pot-of-greed-synergy-m693.cjs",
+        ".github/workflows/m693-pot-of-greed-synergy.yml",
+        "coordination/runs/work-20261127T231230-0300-M693.json"
+      ],
+      "scope": "Pot of Greed synergy isolado: Jar Robber (33784505/CID 5674) como resposta Quick-Play direta à ativação de Pot of Greed, negando somente o efeito e comprando 1 para o assento físico ativador da Jar Robber; Avatar of the Pot (99284890/CID 5960) envia Pot of Greed da mão privada do assento ativo como custo e compra até 3. Eventos de chain/ignition com IDs idempotentes, janelas/ownership/zonas físicas, planos privados e Deck-out. Pot of Greed (55144522/CID 4844) é pré-requisito já catalogado, não alvo de nova certificação. Sem resolver central, comandos, catálogo, certificados, inventário ou produção."
+    },
+    {
+      "runId": "work-20261128T031134-0300-M695",
+      "mission": "M695",
+      "priority": "P1",
+      "branch": "feat/work-m695-zombie-tiger-union-tag-adapter-20261128",
+      "state": "reserved-and-implementing",
+      "conditionalHeadUpdate": true,
+      "sharedBaseHead": "c22d10b56fe8ec403057fac8087f1b35599a764f",
+      "headSha": "7666252f46381c9afe58fbb5972fbb094c2f5ae3",
+      "reservedFiles": [
+        "src/zombieTigerTagAdapter.ts",
+        "tests/zombieTigerTagAdapter.test.cjs",
+        "docs/evidence/m695-zombie-tiger.json",
+        "scripts/audit-zombie-tiger-m695.cjs",
+        ".github/workflows/m695-zombie-tiger.yml",
+        "coordination/runs/work-20261128T031134-0300-M695.json"
+      ],
+      "scope": "Decayed Commander + Zombie Tiger: private-hand Special Summon, Union equip/unequip, one Union per monster, 3 S/T zones, +500 stats, battle protection, deterministic random discard to the active opponent's private hand; no central resolver/catalog/inventory/production."
+    },
+    {
+      "runId": "work-20261128T032433-0300-M696",
+      "mission": "M696",
+      "branch": "feat/work-m696-raging-flame-sprite-20261128",
+      "state": "reserved-and-implementing",
+      "priority": "P1",
+      "conditionalHeadUpdate": true,
+      "reservedFiles": [
+        "src/ragingFlameSpriteTagAdapter.ts",
+        "tests/ragingFlameSpriteTagAdapter.test.cjs",
+        "docs/evidence/m696-raging-flame-sprite.json",
+        "scripts/audit-raging-flame-sprite-m696.cjs",
+        ".github/workflows/m696-raging-flame-sprite.yml",
+        "coordination/runs/work-20261128T032433-0300-M696.json"
+      ],
+      "scope": "Adapter isolado para Raging Flame Sprite (90810762/CID 6189): ataque direto enquanto face-up em Ataque e ganho cumulativo de +1000 ATK somente após dano de batalha positivo por ataque direto. Testes de assento físico/controlador, negação, LP delta, replay/idempotência e conservação. Sem resolver central, catálogo/certificação, comandos, banco, inventário ou produção."
+    },
+    {
+      "runId": "work-20261128T034620-0300-M697",
+      "mission": "M697",
+      "branch": "feat/work-m697-grave-destination-triggers-20261128",
+      "state": "reserved-and-implementing",
+      "priority": "P1",
+      "conditionalHeadUpdate": true,
+      "reservedFiles": [
+        "src/graveDestinationTriggerTagAdapter.ts",
+        "tests/graveDestinationTriggerTagAdapter.test.cjs",
+        "docs/evidence/m697-grave-destination-triggers.json",
+        "scripts/audit-grave-destination-triggers-m697.cjs",
+        ".github/workflows/m697-grave-destination-triggers.yml",
+        "coordination/runs/work-20261128T034620-0300-M697.json"
+      ],
+      "scope": "Adapter isolado para Skull-Mark Ladybug (64306248/CID 4770) e Peten the Dark Clown (52624755/CID 6085): gatilhos de envio ao Cemitério, LP compartilhado por equipe, timing opcional de Peten, custo de banimento e busca apenas na mão/Deck privados do proprietário físico. Testes de 2v2, conservação, replay, regras e ausência de concessões. Sem arquivos centrais, comandos, banco ou produção."
+    },
+    {
+      "runId": "work-20261128T035737-0300-M698",
+      "mission": "M698",
+      "branch": "feat/work-m698-delayed-graveyard-revival-20261128",
+      "state": "reserved-and-implementing",
+      "priority": "P1",
+      "sharedBaseHead": "55b2d9b0761fd8e1c9a51b8a31793e86a57e5236",
+      "conditionalHeadUpdate": true,
+      "reservedFiles": [
+        "src/delayedGraveyardRevivalTagAdapter.ts",
+        "tests/delayedGraveyardRevivalTagAdapter.test.cjs",
+        "docs/evidence/m698-delayed-graveyard-revival.json",
+        "scripts/audit-delayed-graveyard-revival-m698.cjs",
+        ".github/workflows/m698-delayed-graveyard-revival.yml",
+        "coordination/runs/work-20261128T035737-0300-M698.json"
+      ],
+      "scope": "Adapter TagDuel isolado para Twin-Headed Behemoth (43586926/CID 5030): revive na End Phase após destruição no campo enviada ao GY, uma vez por Duelo por UID, ATK/DEF 1000; e Vampire Lord (53839837/CID 5410): revive na próxima Standby Phase após destruição em posse da equipe por efeito do oponente. Preserva UID/proprietário físico, equipe controladora, mãos/Deck privados, Deck 20–30, mão 6 somente na End Phase, zonas 3+3, Field Zone separada, Extra 5 e inventário. Sem resolver central, catálogo/certificações, comandos, banco, inventário concedido ou produção.",
+      "handoffRequest": {
+        "pr": 17,
+        "commentId": 7235689389,
+        "status": "requested-awaiting-explicit-release",
+        "files": [
+          "src/duelEngineCurrent.ts",
+          "src/monsterEffects.ts",
+          "src/effectRegistry.ts",
+          "src/cardMetadata.ts",
+          "src/cardCertifications.ts"
+        ]
+      }
+    },
+    {
+      "runId": "work-20261128T074828-0300-M700",
+      "mission": "M700",
+      "branch": "feat/work-m700-ioc-graveyard-transitions-20261128",
+      "state": "reserved-and-implementing",
+      "priority": "P1",
+      "conditionalHeadUpdate": true,
+      "sharedBaseHead": "1ad0c38364df7703430fbc204c273ee3a59f3a0b",
+      "sharedHeadAtReservation": "1ad0c38364df7703430fbc204c273ee3a59f3a0b",
+      "reservedFiles": [
+        "src/iocGraveyardTransitionTagAdapter.ts",
+        "tests/iocGraveyardTransitionTagAdapter.test.cjs",
+        "docs/evidence/m700-ioc-graveyard-transitions.json",
+        "scripts/audit-ioc-graveyard-transitions-m700.cjs",
+        ".github/workflows/m700-ioc-graveyard-transitions.yml",
+        "coordination/runs/work-20261128T074828-0300-M700.json"
+      ],
+      "scope": "Adapter TagDuel 2v2 isolado para Burning Algae (41859700/CID 5877) e The Thing in the Crater (78243409/CID 5878): gatilho obrigatório ao enviar Burning Algae ao GY (oponente +1000 LP), gatilho opcional de The Thing ao ser destruído do campo e enviado ao GY (Invocação-Especial de Pyro da mão privada do assento ativo do proprietário), origem/destino por UID/epoch, privacidade por assento, LP compartilhado, capacidade 3+3, conservação de inventário e idempotência. Skull-Mark Ladybug permanece reservado pelo M697. Sem resolver central, catálogo, certificações, comandos, banco, concessão de inventário ou produção.",
+      "nonOverlap": [
+        "M697 mantém Skull-Mark Ladybug/Peten; M699 mantém branch própria e PR #621; nenhum arquivo de terceiro será alterado."
+      ],
+      "handoffRequest": {
+        "pr": 17,
+        "commentId": 7237927806,
+        "status": "requested-awaiting-explicit-release",
+        "files": [
+          "src/duelEngineCurrent.ts",
+          "src/monsterEffects.ts",
+          "src/effectRegistry.ts",
+          "src/cardMetadata.ts",
+          "src/cardCertifications.ts"
+        ]
+      },
+      "lastObservedHead": "1ad0c38364df7703430fbc204c273ee3a59f3a0b"
+    },
+    {
+      "runId": "work-20261128T081200-0300-M701",
+      "mission": "M701",
+      "branch": "feat/work-m701-banished-zone-returns-20261128",
+      "state": "reserved-and-preparing",
+      "priority": "P1",
+      "conditionalHeadUpdate": true,
+      "sharedBaseHead": "1ad0c38364df7703430fbc204c273ee3a59f3a0b",
+      "sharedHeadAtReservation": "1ad0c38364df7703430fbc204c273ee3a59f3a0b",
+      "reservedFiles": [
+        ".github/workflows/m701-banished-zone-returns.yml",
+        "coordination/runs/work-20261128T081200-0300-M701.json",
+        "docs/evidence/m701-banished-zone-returns.json",
+        "scripts/audit-banished-zone-returns-m701.cjs",
+        "src/banishedZoneReturnTagAdapter.ts",
+        "tests/banishedZoneReturnTagAdapter.test.cjs"
+      ],
+      "scope": "Família de retorno da zona banida: D.D. Scout Plane (03773196/CID 5822/IOC-012), Dimension Fusion (23557835/CID 5906/IOC-094) e Return from the Different Dimension (27174286/CID 6078/EP1-EN008). Implementar adapters isolados para retorno no End Phase, invocação em massa de banidos, custos LP e banimento atrasado, com 3+3 zonas, identidade física, conservação de inventário e testes. Sem catálogo/certificação/integração central/Discord ao vivo/deploy.",
+      "nonOverlap": [
+        "M700 mantém seus seis caminhos e PR #622; M697/M698 mantêm suas reservas; nenhum arquivo central será alterado."
+      ],
+      "research": {
+        "historicalCutoff": "2004-09-30",
+        "officialCards": [
+          {
+            "id": "03773196",
+            "name": "D.D. Scout Plane",
+            "konamiCid": 5822,
+            "set": "IOC-012",
+            "release": "2004-07-15",
+            "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5822&ope=2&request_locale=ae"
+          },
+          {
+            "id": "23557835",
+            "name": "Dimension Fusion",
+            "konamiCid": 5906,
+            "set": "IOC-094",
+            "release": "2004-07-15",
+            "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5906&ope=2&request_locale=ae"
+          },
+          {
+            "id": "27174286",
+            "name": "Return from the Different Dimension",
+            "konamiCid": 6078,
+            "set": "EP1-EN008",
+            "release": "2004-08-01 TCG",
+            "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6078&ope=2&request_locale=en"
+          }
+        ]
+      },
+      "handoffRequest": null
+    },
+    {
+      "runId": "work-20261128T082527-0300-M702",
+      "mission": "M702",
+      "branch": "feat/work-m702-jar-flip-disruption-20261128",
+      "state": "reserved-and-implementing",
+      "priority": "P1",
+      "sharedBaseHead": "0417a9fd69ef6e723639dbd7a5fb7cfa4e70e661",
+      "sharedHeadAtReservation": "0417a9fd69ef6e723639dbd7a5fb7cfa4e70e661",
+      "conditionalHeadUpdate": true,
+      "reservedFiles": [
+        "src/jarFlipDisruptionTagAdapter.ts",
+        "tests/jarFlipDisruptionTagAdapter.test.cjs",
+        "docs/evidence/m702-jar-flip-disruption.json",
+        "scripts/audit-jar-flip-disruption-m702.cjs",
+        ".github/workflows/m702-jar-flip-disruption.yml",
+        "coordination/runs/work-20261128T082527-0300-M702.json"
+      ],
+      "scope": "Adapter TagDuel 2v2 isolado para Morphing Jar (33508719/CID 4597) e Cyber Jar (34124316/CID 4913): FLIP de descarte/compra e destruição/revelação/invocação/adição à mão. Efeitos 'ambos os jogadores' aplicados aos dois representantes físicos ativos das equipes; mãos/Decks dos parceiros inativos permanecem privados e intactos. Identidade física por UID, GY do proprietário, 3+3 zonas, Field Zone separada, Deck 20–30, mão 6 apenas na End Phase e Extra 5. Sem resolver central, catálogo/certificação, comandos, banco, concessão de inventário ou produção.",
+      "nonOverlap": [
+        "M700: Burning Algae/The Thing in the Crater e seus seis arquivos; M701: D.D. Scout Plane/Dimension Fusion/Return from the Different Dimension e seus seis arquivos; nenhuma reserva de terceiros será tocada."
+      ],
+      "research": {
+        "historicalCutoff": "2004-09-30",
+        "officialCards": [
+          {
+            "id": "33508719",
+            "name": "Morphing Jar",
+            "konamiCid": 4597,
+            "firstRelease": "1999-10-17 OCG; 2002-10-01 TCG",
+            "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4597&ope=2&request_locale=en"
+          },
+          {
+            "id": "34124316",
+            "name": "Cyber Jar",
+            "konamiCid": 4913,
+            "firstRelease": "2000-07-13 OCG; 2002-09-16 TCG",
+            "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4913&ope=2&request_locale=en"
+          }
+        ]
+      },
+      "certificationBaseline": 969,
+      "newEngineCertified": 0,
+      "inventoryGranted": 0,
+      "handoffRequest": {
+        "pr": 17,
+        "commentId": 7238587508,
+        "status": "requested-awaiting-explicit-release",
+        "files": [
+          "src/duelEngineCurrent.ts",
+          "src/monsterEffects.ts",
+          "src/effectRegistry.ts",
+          "src/cardMetadata.ts",
+          "src/cardCertifications.ts"
+        ]
+      },
+      "lastObservedHead": "0417a9fd69ef6e723639dbd7a5fb7cfa4e70e661"
+    },
+    {
+      "runId": "work-20261128T084500-0300-M703",
+      "mission": "M703",
+      "branch": "feat/work-m703-hand-disruption-20261128",
+      "state": "reserved-and-implementing",
+      "priority": "P1",
+      "sharedBaseHead": "22c907a9889d416d7d82628a840ce975b3ca1553",
+      "sharedHeadAtReservation": "22c907a9889d416d7d82628a840ce975b3ca1553",
+      "conditionalHeadUpdate": true,
+      "reservedFiles": [
+        "src/handDisruptionTagAdapter.ts",
+        "tests/handDisruptionTagAdapter.test.cjs",
+        "docs/evidence/m703-hand-disruption.json",
+        "scripts/audit-hand-disruption-m703.cjs",
+        ".github/workflows/m703-hand-disruption.yml",
+        "coordination/runs/work-20261128T084500-0300-M703.json"
+      ],
+      "scope": "Adapter isolado de interrupção de mão para Disturbance Strategy (77561728/CID5546), Confiscation (17375316/CID4900), Dragged Down into the Grave (16435215/CID5352) e Mind Crush (15800838/CID6147). Os efeitos bilaterais aplicam-se aos dois representantes físicos ativos; parceiros inativos preservam Deck/mão privados. Disturbance embaralha a mão adversária no Deck e compra a mesma quantidade; Confiscation paga 1000 LP compartilhados e descarta uma carta escolhida, com visão privada do ativador; Dragged Down revela ambas as mãos, escolhe uma carta da mão oposta por jogador, descarta e compra 1; Mind Crush declara nome, descarta todas as cópias correspondentes ou uma carta aleatória do ativador. Sem integração central, certificação, comandos, banco, concessão de inventário ou produção.",
+      "nonOverlap": [
+        "M700: Burning Algae/The Thing in the Crater; M701: banimento/retorno; M702: Morphing Jar/Cyber Jar; nenhuma reserva de terceiros será tocada."
+      ],
+      "research": {
+        "historicalCutoff": "2004-09-30",
+        "officialCards": [
+          {
+            "id": "77561728",
+            "name": "Disturbance Strategy",
+            "konamiCid": 5546,
+            "firstReleaseOCG": "2003-10-23",
+            "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5546&ope=2&request_locale=en"
+          },
+          {
+            "id": "17375316",
+            "name": "Confiscation",
+            "konamiCid": 4900,
+            "firstReleaseOCG": "2002-10-24",
+            "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4900&ope=2&request_locale=ae"
+          },
+          {
+            "id": "16435215",
+            "name": "Dragged Down into the Grave",
+            "konamiCid": 5352,
+            "firstReleaseOCG": "2004-05-13",
+            "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5352&ope=2&request_locale=ae"
+          },
+          {
+            "id": "15800838",
+            "name": "Mind Crush",
+            "konamiCid": 6147,
+            "firstReleaseOCG": "2004-02-26",
+            "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6147&ope=2&request_locale=en"
+          }
+        ]
+      },
+      "certificationBaseline": 969,
+      "newEngineCertified": 0,
+      "inventoryGranted": 0,
+      "handoffRequest": {
+        "pr": 17,
+        "commentId": 7238744933,
+        "status": "requested-awaiting-explicit-release",
+        "files": [
+          "src/duelEngineCurrent.ts",
+          "src/monsterEffects.ts",
+          "src/effectRegistry.ts",
+          "src/cardMetadata.ts",
+          "src/cardCertifications.ts"
+        ]
+      }
+    },
+    {
+      "runId": "work-20261128T085932-0300-M704",
+      "mission": "M704",
+      "branch": "feat/work-m704-standby-endphase-burn-20261128",
+      "state": "reserved-and-implementing",
+      "priority": "P1",
+      "conditionalHeadUpdate": true,
+      "reservedFiles": [
+        "src/standbyEndPhaseBurnTagAdapter.ts",
+        "tests/standbyEndPhaseBurnTagAdapter.test.cjs",
+        "docs/evidence/m704-standby-endphase-burn.json",
+        "scripts/audit-standby-endphase-burn-m704.cjs",
+        ".github/workflows/m704-standby-endphase-burn.yml",
+        "coordination/runs/work-20261128T085932-0300-M704.json"
+      ],
+      "scope": "Adapter TagDuel 2v2 isolado para Solar Flare Dragon (45985838/CID 5974) e Bowganian (52090844/CID 5687): gatilhos de dano por efeito na End Phase e Standby Phase do assento físico ativo, respectivamente; proteção de ataque de Solar Flare Dragon quando a equipe controla outro Pyro face-up; bindings UID/epoch, controle por equipe, negação, múltiplas cópias, idempotência e preservação de inventário. Sem resolver central, metadata, catálogo/certificações, comandos, banco, concessão de inventário, merge ou produção.",
+      "sharedBaseHead": "35cb0d8762a2dcb988c760b00b5b82d64d670487"
+    }
+  ],
+  "handoffRequests": [
+    {
+      "runId": "work-20261126T002919-0300-M637",
+      "targetPR": 17,
+      "commentId": 7181835623,
+      "status": "requested-awaiting-explicit-release",
+      "files": [
+        "src/monsterEffects.ts",
+        "src/duelEngineCurrent.ts"
+      ]
+    },
+    {
+      "runId": "work-20261126T211424-0300-M662",
+      "targetPR": 17,
+      "status": "requested-awaiting-explicit-release",
+      "files": [
+        "src/monsterEffects.ts",
+        "src/duelEngineCurrent.ts"
+      ],
+      "requestedAt": "2026-11-26T21:14:24-03:00",
+      "commentId": 7206372250
+    },
+    {
+      "runId": "work-20261127T065449-0300-M672",
+      "targetPR": 17,
+      "commentId": 7215356459,
+      "status": "requested-awaiting-explicit-release",
+      "files": [
+        "src/monsterEffects.ts",
+        "src/duelEngineCurrent.ts"
+      ],
+      "requestedAt": "2026-11-27T06:54:49-03:00"
+    },
+    {
+      "runId": "work-20261127T122119-0300-M677",
+      "targetPR": 17,
+      "status": "requested-awaiting-explicit-release",
+      "files": [
+        "src/monsterEffects.ts",
+        "src/duelEngineCurrent.ts"
+      ],
+      "requestedAt": "2026-11-27T12:21:19-03:00",
+      "reason": "Integração futura dos dois efeitos FLIP no resolver central; nenhum arquivo compartilhado será alterado até liberação explícita.",
+      "commentId": 7222088476
+    },
+    {
+      "runId": "work-20261127T125056-0300-M679",
+      "targetPR": 17,
+      "commentId": 7226672675,
+      "status": "requested-awaiting-explicit-release",
+      "files": [
+        "src/monsterEffects.ts",
+        "src/duelEngineCurrent.ts"
+      ],
+      "requestedAt": "2026-11-27T19:36:02.589Z",
+      "reason": "Integração de Yomi Ship e Helpoemer no resolver TagDuel; adapter isolado passou CI no PR #605. Nenhum arquivo central será alterado antes de liberação explícita."
+    },
+    {
+      "runId": "work-20261127T170105-0300-M682",
+      "targetPR": 17,
+      "commentId": 7227614045,
+      "status": "requested-awaiting-explicit-release",
+      "files": [
+        "src/monsterEffects.ts",
+        "src/duelEngineCurrent.ts"
+      ],
+      "requestedAt": "2026-11-27T17:30:09-03:00"
+    },
+    {
+      "runId": "work-20261127T170105-0300-M683",
+      "targetPR": 17,
+      "commentId": 7227679443,
+      "status": "requested-awaiting-explicit-release",
+      "branch": "feat/work-m683-attack-declaration-responses-20261127",
+      "headSha": "e41d57d043479f9884a44f67fd69db8511077d32",
+      "files": [
+        "src/attackDeclarationResponseTagAdapter.ts",
+        "tests/attackDeclarationResponseTagAdapter.test.cjs",
+        "docs/evidence/m683-attack-declaration-responses.json",
+        "scripts/audit-attack-declaration-responses-m683.cjs",
+        ".github/workflows/m683-attack-declaration-responses.yml"
+      ],
+      "requestedAt": "2026-11-27T17:30:09-03:00"
+    },
+    {
+      "runId": "work-20261127T173009-0300-M684",
+      "targetPR": 17,
+      "commentId": 7227947654,
+      "status": "requested-awaiting-explicit-release",
+      "files": [
+        "src/monsterEffects.ts",
+        "src/duelEngineCurrent.ts"
+      ],
+      "requestedAt": "2026-11-27T17:54:41.454-03:00",
+      "reason": "Integração de bloqueio/ATK e callback Standby para Nightmare Wheel e Shadow Spell; adapter M684 permanece isolado até liberação."
+    },
+    {
+      "runId": "work-20261127T212828-0300-M685",
+      "targetPR": 17,
+      "commentId": 7231105381,
+      "status": "requested-awaiting-explicit-release",
+      "files": [
+        "src/duelEngineCurrent.ts"
+      ],
+      "requestedAt": "2026-11-27T21:41:30.816-03:00",
+      "reason": "Integração pós-resolução de Spell para Curse of Darkness; nenhum arquivo central será alterado sem liberação explícita."
+    },
+    {
+      "runId": "work-20261127T214300-0300-M686",
+      "targetPR": 17,
+      "commentId": 7231164975,
+      "status": "requested-awaiting-explicit-release",
+      "files": [
+        "src/duelEngineCurrent.ts"
+      ],
+      "requestedAt": "2026-11-27T21:43:00-03:00",
+      "reason": "Hook pós-compra resolvida para Appropriate; aguardar liberação central."
+    },
+    {
+      "runId": "work-20261127T214300-0300-M686",
+      "targetPR": 583,
+      "commentId": 7231164645,
+      "status": "requested-awaiting-explicit-release",
+      "files": [
+        "src/duelEngineCurrent.ts"
+      ],
+      "requestedAt": "2026-11-27T21:43:00-03:00",
+      "reason": "Contrato de evento de compra e integração com M644; arquivos de M644 não serão alterados."
+    },
+    {
+      "runId": "work-20261127T215551-0300-M687",
+      "targetPR": 17,
+      "commentId": 7231373691,
+      "status": "requested-awaiting-explicit-release",
+      "files": [
+        "src/monsterEffects.ts",
+        "src/duelEngineCurrent.ts"
+      ],
+      "requestedAt": "2026-11-27T22:12:55-03:00",
+      "reason": "Integração de três efeitos Amazoness; PR #612 e CI focada verde, sem alteração central até transferência."
+    },
+    {
+      "runId": "work-20261127T221255-0300-M688",
+      "targetPR": 17,
+      "commentId": 7231569899,
+      "status": "requested-awaiting-explicit-release",
+      "files": [
+        "src/monsterEffects.ts",
+        "src/duelEngineCurrent.ts"
+      ],
+      "requestedAt": "2026-11-27T22:19:56-03:00",
+      "reason": "Integração de piercing, dano de batalha, compra privada, topo do Deck e ganho de LP; PR #613 e CI focada verde, sem alteração central até transferência."
+    },
+    {
+      "runId": "work-20261127T222547-0300-M690",
+      "targetPR": 17,
+      "commentId": 7231720000,
+      "status": "requested-awaiting-explicit-release",
+      "files": [
+        "src/monsterEffects.ts",
+        "src/duelEngineCurrent.ts"
+      ],
+      "requestedAt": "2026-11-27T22:25:47-03:00",
+      "reason": "Integração pós-batalha, retorno ao topo do Deck físico, compra privada e retorno ao fundo do Deck; adapter isolado até liberação explícita."
+    },
+    {
+      "runId": "work-20261127T224226-0300-M691",
+      "targetPR": 17,
+      "commentId": 7231869252,
+      "status": "requested-awaiting-explicit-release",
+      "files": [
+        "src/duelEngineCurrent.ts",
+        "src/monsterEffects.ts"
+      ],
+      "requestedAt": "2026-11-27T22:42:26-03:00",
+      "reason": "Aplicar substituição contínua de destino antes de gatilhos de envio ao Cemitério, com Deck físico/Extra/Token e RNG privado."
+    },
+    {
+      "runId": "work-20261127T225907-0300-M692",
+      "targetPR": 17,
+      "commentId": 7232072777,
+      "status": "requested-awaiting-explicit-release",
+      "files": [
+        "src/duelEngineCurrent.ts",
+        "src/monsterEffects.ts",
+        "src/effectRegistry.ts"
+      ],
+      "requestedAt": "2026-11-27T22:59:07-03:00",
+      "reason": "Integração de eventos de Special Summon do Cemitério e ativação de Pot of Greed; adapter isolado até backup/checkpoint e transferência explícita."
+    },
+    {
+      "runId": "work-20261127T231230-0300-M693",
+      "targetPR": 17,
+      "commentId": 7232207787,
+      "status": "requested-awaiting-explicit-release",
+      "files": [
+        "src/duelEngineCurrent.ts",
+        "src/monsterEffects.ts",
+        "src/effectRegistry.ts"
+      ],
+      "requestedAt": "2026-11-27T23:12:30-03:00",
+      "reason": "Integração de Quick-Play Jar Robber e efeito de ignição de Avatar of the Pot; adapter isolado até backup/checkpoint e transferência explícita."
+    },
+    {
+      "runId": "work-20261128T022638-0300-M694",
+      "targetPR": 17,
+      "commentId": 7234844708,
+      "status": "requested-awaiting-explicit-release",
+      "files": [
+        "src/duelEngineCurrent.ts",
+        "src/monsterEffects.ts",
+        "src/effectRegistry.ts",
+        "src/cardMetadata.ts",
+        "src/cardCertifications.ts",
+        "src/effectDefinitions.ts",
+        "src/releasedCardIds.ts"
+      ],
+      "requestedAt": "2026-11-28T03:11:34-03:00",
+      "reason": "Adapter M694 em PR draft #618 e CI verde (23/23 focados, 7385/7385 regressão); solicitar transferência cooperativa para integrar os quatro IDs. Nenhum arquivo central será alterado até liberação explícita."
+    },
+    {
+      "runId": "work-20261128T032433-0300-M696",
+      "targetPR": 17,
+      "commentId": 7235345195,
+      "status": "requested-awaiting-explicit-release",
+      "files": [
+        "src/duelEngineCurrent.ts",
+        "src/monsterEffects.ts",
+        "src/effectRegistry.ts",
+        "src/cardMetadata.ts",
+        "src/cardCertifications.ts"
+      ],
+      "requestedAt": "2026-11-28T03:24:33-03:00",
+      "reason": "Integração e certificação de Raging Flame Sprite; arquivos centrais permanecem intocados até handoff explícito com SHA/checkpoint/backup."
+    },
+    {
+      "runId": "work-20261128T034620-0300-M697",
+      "targetPR": 17,
+      "commentId": 7235511692,
+      "status": "requested-awaiting-explicit-release",
+      "files": [
+        "src/duelEngineCurrent.ts",
+        "src/monsterEffects.ts",
+        "src/effectRegistry.ts",
+        "src/cardMetadata.ts",
+        "src/cardCertifications.ts"
+      ],
+      "requestedAt": "2026-11-28T03:46:20-03:00",
+      "reason": "Integração e certificação comportamental da família GY-trigger; arquivos centrais intocados até handoff explícito com SHA/checkpoint/backup."
+    },
+    {
+      "runId": "work-20261128T035737-0300-M698",
+      "mission": "M698",
+      "targetPR": 17,
+      "commentId": 7235689389,
+      "status": "requested-awaiting-explicit-release",
+      "requestedAt": "2026-11-28T03:57:37-03:00",
+      "files": [
+        "src/duelEngineCurrent.ts",
+        "src/monsterEffects.ts",
+        "src/effectRegistry.ts",
+        "src/cardMetadata.ts",
+        "src/cardCertifications.ts"
+      ]
+    },
+    {
+      "runId": "work-20261128T072745-0300-M699",
+      "targetPR": 17,
+      "commentId": 7237927806,
+      "status": "requested-awaiting-explicit-release",
+      "requestedAt": "2026-11-28T07:27:45-03:00",
+      "reason": "Integração central de quatro monstros IOC depende de transferência explícita. Adapter isolado não toca no resolver, catálogo ou certificações."
+    },
+    {
+      "runId": "work-20261128T072745-0300-M699",
+      "targetPR": 619,
+      "commentId": 7238110127,
+      "status": "requested-awaiting-explicit-release",
+      "requestedAt": "2026-11-28T10:49:59.143Z",
+      "reason": "Regressão completa do M699 detectou três falhas em tests/ragingFlameSpriteTagAdapter.test.cjs; arquivos permanecem reservados pelo M696."
+    },
+    {
+      "runId": "work-20261128T074828-0300-M700",
+      "targetPR": 17,
+      "commentId": 7238246464,
+      "status": "requested-awaiting-explicit-release",
+      "requestedAt": "2026-11-28T08:11:52-03:00",
+      "reason": "Integração central dos dois efeitos IOC; M700 permanece isolado até transferência explícita."
+    },
+    {
+      "runId": "work-20261128T074828-0300-M700",
+      "targetPR": 619,
+      "commentId": 7238303949,
+      "status": "requested-awaiting-explicit-release",
+      "requestedAt": "2026-11-28T08:11:52-03:00",
+      "reason": "M700 reproduziu três falhas externas nos testes reservados pelo M696; aguardando checkpoint/liberação."
+    },
+    {
+      "runId": "work-20261128T082527-0300-M702",
+      "targetPR": 17,
+      "commentId": 7238587508,
+      "status": "requested-awaiting-explicit-release",
+      "requestedAt": "2026-11-28T08:25:27-03:00",
+      "reason": "Integração central futura dos efeitos de Morphing Jar e Cyber Jar; M702 permanece em adapter isolado até transferência explícita."
+    },
+    {
+      "runId": "work-20261128T084500-0300-M703",
+      "targetPR": 17,
+      "commentId": 7238744933,
+      "status": "requested-awaiting-explicit-release",
+      "requestedAt": "2026-11-28T08:44:20-03:00",
+      "reason": "Integração central futura dos quatro efeitos de interrupção de mão; M703 permanece em adapter isolado até transferência explícita."
+    },
+    {
+      "runId": "work-20261128T085932-0300-M704",
+      "targetPR": 17,
+      "status": "requested-awaiting-explicit-release",
+      "requestedAt": "2026-11-28T08:59:32-03:00",
+      "reason": "Integração futura dos gatilhos Standby/End Phase e da proteção de ataque de Solar Flare Dragon/Bowganian; adapter isolado até liberação explícita.",
+      "files": [
+        "src/duelEngineCurrent.ts",
+        "src/monsterEffects.ts",
+        "src/effectRegistry.ts",
+        "src/cardMetadata.ts",
+        "src/cardCertifications.ts"
+      ]
+    }
+  ],
+  "notes": "M635/M637/M638/M639 permanecem ativos em escopos separados. M640 concluiu a implementação isolada de The Inexperienced Spy (PR #579). M641 implementa Mind Haxorz e M642 Trap Dustshoot em branches dependentes, sem tocar no resolver central, comandos ou arquivos reservados por terceiros. M643 iniciou adapter isolado de The Forceful Sentry em branch própria; não toca nos arquivos reservados por M635/M637/M638/M639/M641/M642 nem nos arquivos centrais bloqueados. M644 iniciou adapter isolado de Graceful Charity (compra 3, descarte 2) em branch própria, independente das reservas de inspeção de mão, LP e combate. M643 concluiu adapter isolado The Forceful Sentry; PR #582 aberta em rascunho, CI focada aprovada, sem certificação/integração/merge/deploy. Reserva M643 liberada; M644 permanece ativo. M645 iniciou adapter isolado de Painful Choice (escolha de cinco cartas do próprio Deck, revelação ao oponente físico escolhido e seleção de uma para a mão) em branch própria; escopo independente das reservas ativas. M646 iniciou adapter isolado para Exchange (Troca), com troca bilateral entre o assento ativo e um assento oponente escolhido; não toca em arquivos reservados por M635/M637/M638/M639/M641/M642/M644/M645 nem no resolver central, catálogo, comandos ou persistência. M647 iniciou adapter isolado para Reload (Quick-Play Spell), com embaralhamento via fluxo HMAC persistido do duelo e compra do mesmo número de cartas; não toca nas reservas ativas nem no resolver central. M648 iniciou adapter isolado para Rush Recklessly e The Reliable Guardian, Quick-Play Spells que concedem +700 ATK ou +700 DEF temporários a um monstro face-up; escopo novo de quatro arquivos, sem resolver central, catálogo, certificação, comandos, banco ou produção. M648 concluiu adapter isolado de Rush Recklessly e The Reliable Guardian: PR #585 draft aberta, CI dedicada passou (30 cenários, check/build/evidência), zero certificações novas; reserva liberada sem merge/deploy. M649 iniciou adapter isolado de custo de descarte + destruição para Tribute to the Doomed e Raigeki Break, sem tocar no resolver central ou em arquivos reservados. M650 iniciou adapter isolado Horn of Heaven + Trap Jammer em branch própria; tributo de monstro como custo e negação de Trap na Battle Phase. Arquivos exclusivos; sem resolver central, catálogo, certificações, comandos ou produção. M651 iniciou adapter isolado de mudança de controle para Snatch Steal + Creature Swap, sem alterar propriedade física nem os arquivos reservados por M638/M637. M652 iniciou adapter isolado de Equip Spells Axe of Despair + Black Pendant (ATK persistente, saída do campo, tributo opcional para reciclagem e dano de 500 LP), sem alterar resolver central, catálogo, certificações, comandos, banco ou produção. Reserva exclusiva de quatro arquivos; não conflita com M635/M637/M638/M639/M641/M642/M644/M645/M646/M647/M648/M649/M650/M651. Integração central aguarda handoff explícito M637.\nM653 reservado em 6b49948e401cc7adb338071f726c75a015d80375: família de efeitos com dado (Maximum Six, Graceful Dice, Skull Dice), branch própria e quatro arquivos exclusivos; nenhuma reserva conflitante. Não toca no resolver central, catálogo, certificações, comandos, persistência ou inventário. M637 continua responsável pelo handoff central pendente.\nM654 reservado em 6eeca3bee5e470c519ce33c6c9c0bbb7404ceec1: família de três lançamentos de moeda (Barrel Dragon e Blowback Dragon), branch própria e quatro arquivos exclusivos; nenhuma reserva conflitante. M653 permanece em CI/revisão; nenhum arquivo central compartilhado foi alterado.\nM655 reservado em b47096d0645eeb73f533ed2816118d5193de3c9e: família de políticas contínuas de posição (Final Attack Orders e Light of Intervention), branch própria e quatro arquivos exclusivos. Sem conflito com reservas existentes; não toca no resolver central, catálogo, certificações, comandos, persistência ou inventário. M637 mantém o handoff central pendente.\nM656 reservado com HEAD condicional em b64d77d21f2cb1b6656fe7e17f03034c007ab9cb: família independente de políticas de alvo/substituição de ataque para Staunch Defender e Dark Spirit of the Silent. Cinco arquivos exclusivos; sem conflito com reservas ativas M635/M637/M638/M639/M641/M642/M644–M655. M637 continua com handoff central pendente; nenhuma reserva de terceiros foi alterada.\nM657 reservado em 40dc6be1865f9e5d6f8bf5d774be5464b9b465c4: adapter independente para Swarm of Scarabs e Swarm of Locusts; cinco arquivos exclusivos, sem conflito com reservas ativas. O escopo limita-se a Flip Summon/target destruction e self-set once-per-turn; não toca nos arquivos centrais bloqueados nem no catálogo/certificação. M656 CI falhou com 23/30 cenários por `contador de ataques`; solicitação de transferência cooperativa publicada no PR #592 (comentário 7202131285), sem alterar arquivos de M656. Handoff central M637 continua pendente.\n\nM658 reservado em ec380d1bdf7602ee874e69e78b461e566a971591: King Tiger Wanghu + Blast Juggler, família de destruição por limiar de ATK; arquivos exclusivos, independente de M657. Blast Juggler usa StandbyWindow explícita e paga tributo antes da resolução; Wanghu captura grupo de summon. Nenhuma integração central/certificação nesta frente.\n\nM659 reservado em 0399a4c8b69a3c1261f6b5b9c8978c70602fd3ff: adapter isolado de battle-destruction recruiters para Giant Rat/Giant Germ/Nimble Momonga, branch própria e cinco arquivos exclusivos; sem conflito com reservas ativas. Integração central aguarda handoff M637; catálogo/certificação e produção não serão alterados nesta frente. Próxima janela Work: 2026-11-26T22:30:00-03:00.\n\nM659 encerrado em 2026-11-26T20:50:02-03:00 por sobreposição descoberta após auditoria: PR #369/M421 (Giant Germ/Nimble Momonga) e PR #370/M422 (Giant Rat/recrutadores por atributo) já estavam abertos. PR #595 fechado sem merge. Handoff cooperativo solicitado nos dois PRs (comentários 7205902802 e 7205903200); nenhuma reserva de terceiro foi alterada. Branch própria mantida como histórico, sem certificações, inventário ou produção. Próxima janela Work: 2026-11-26T22:30:00-03:00.\n\nM660 reservado com HEAD guard em 5ea3c2e92a2d010c978728c8a4d3258934183a85: Offerings to the Doomed + Time Seal, scheduler de skip de Draw Phase por assento físico e turno devido. Arquivos exclusivos; sem sobreposição com reservas ativas. PRs M421/M422 aguardam handoff e permanecem intocados. Próxima janela Work: 2026-11-26T22:30:00-03:00.\n\nM661 reservado com HEAD guard em 48bbf0051afcd078582e1415e01bfc65e4498180: Spell Canceller + Imperial Order, adapter isolado de bloqueio/negação de Magias e manutenção de 700 LP por Standby Phase da equipe controladora. Arquivos exclusivos; sem conflito com reservas ativas. Não toca no resolver central aguardando handoff M637, catálogo/certificações, comandos, banco, inventário ou produção. Próxima janela Work: 2026-11-26T22:30:00-03:00.\n\nM662 reservado com HEAD guard em eadeaf5ba54172fbdcb58a2ed45d23ff873c75a2: Neko Mane King (11021521), gatilho de envio ao GY por efeito do oponente durante o turno oponente, resolução diferida para End Phase e receipt idempotente. Branch própria e cinco arquivos exclusivos; não conflita com M661 nem com reservas existentes. Pedido de transferência cooperativa atualizado no PR #17; nenhum arquivo central será editado sem liberação explícita. Próxima janela Work: 2026-11-26T22:30:00-03:00.\n\nM662 progresso 2026-11-26T21:35:00-03:00: PR draft #596 aberto; adapter e 26 testes focados passaram localmente; CI focada, Card Batch Fast e Milestone1000 passaram. Engine validation (test + extended-soak) continua em execução; reserva mantida até regressão completa. Certificações permanecem 969 (+0), inventário +0, produção inalterada.\n\nM663 reservado com HEAD guard em 57698e917130ba7111cd92a92419bdcb0bf95a43: Lord of D. + The Flute of Summoning Dragon (CID 4747/4810, 08/08/2002). Adapter/testes isolados em cinco arquivos exclusivos; sem sobreposição com M639 attack-lock, M661 spell-negation ou M662 End Phase. Nenhuma certificação ou concessão de inventário. Próxima janela Work: 2026-11-26T22:30:00-03:00.\n\n\nM664 reservado com HEAD guard em b910d8faa27ad0a6dbe3978cd8efc25c8c3b49d1: Big Eye, Magical Merchant e Des Feral Imp; cinco caminhos exclusivos para adapter de inspeção/escavação/reciclagem de Deck em TagDuel. Não toca em resolver central, catálogo, certificações, comandos, banco, inventário ou produção. Contagem observável: 959 registros explícitos únicos em cardCertifications.ts; total engine-v9 será reconciliado pela CI. PR #17/M61 continua sem handoff; nenhum arquivo central será editado. Próxima janela Work: 2026-11-26T22:30:00-03:00.\n\nM665 reservado com HEAD guard em 8ef2f97d49a1f0f65d63cb50329503bfadff9c08: Robbin' Goblin + Robbin' Zombie, gatilhos de dano de batalha positivo em TagDuel. Cinco caminhos exclusivos; não toca no resolver central bloqueado por M637/M662, nem catálogo/certificações, comandos, banco, inventário ou produção. O efeito em 2v2 vincula o assento defensor ativo no momento do dano; mãos permanecem privadas. Próxima janela Work: 2026-11-27T06:30:00-03:00.\n\nM666 reservado com HEAD guard em 00af0bb97ab611e425d71c1830eccc2fe7ea683a: The Dark Door + Messenger of Peace, controle de ataque e manutenção contínua. Cinco caminhos exclusivos; sem conflito com M655/M656 e sem tocar no resolver central M61/M637/M662, catálogo/certificações, comandos, banco ou produção. Regra 2v2 proposta: The Dark Door limita a equipe inteira a um ataque por Battle Phase; Messenger aplica limiar global e manutenção uma vez por turno da equipe controladora. Próxima janela Work: 2026-11-27T06:30:00-03:00.\nM667 reservado em 26c36385a84ef54a4652e7f0004cf6e176ebd39b: adapter isolado para Gravekeeper's Servant (16762927/CID 4893, MRL-031 de 2002-09-16). Cinco caminhos exclusivos; não altera arquivos reservados por M665/M666 nem o resolver central bloqueado por M637/M662. Custo por ataque pago pelo Deck do representante físico ativo; cópias acumulam; destino substituído ou Deck insuficiente bloqueia a declaração sem mutação. Próxima janela Work: 2026-11-27T06:30:00-03:00.\nM668 reservado às 2026-11-27 02:19 BRT: recuperação de CI do M631, sem novo card admission. A falha real de 25/11 foi localizada em três fixtures que alteravam core.current sem sincronizar cursor/active/teamRotation; o código de produção já passa npm run check/build. Trabalho isolado em branch própria baseada no head M631 dd79ac8; atualização de feat/work-m631 será CAS contra esse head. Próxima janela Work: 2026-11-27T06:30:00-03:00.\nM670 reservado com guard de base 385c3b12925578bc63e80582965106ffed840c98: Warrior support para Marauding Captain e Command Knight em cinco arquivos exclusivos mais checkpoint; não toca em arquivos reservados por terceiros nem no resolver central bloqueado por M637/M662. Sem catálogo/certificação, comandos, inventário ou produção. Próxima janela Work: 2026-11-27T06:30:00-03:00.\nM672 reservado com HEAD guard em a56e805079728a850b0248ee0f61ef6a510f2830: família de contadores de Magia para Royal Magical Library, Skilled Dark Magician e Skilled White Magician; branch própria e seis arquivos exclusivos. Solicitado handoff cooperativo M61/M637 no PR #17 (comentário 7215356459); nenhum arquivo central, catálogo, certificação, comando, banco, inventário ou produção será alterado sem liberação explícita.\nM673 reservado com HEAD guard em da980ffee16105c4e9b2d45a9cc265ebf1e9558d: Jowgen global special-summon lock + wipe de especiais, em branch própria; arquivos exclusivos, sem tocar M661 (Spell Canceller) nem resolver central.\nM674 reservado em 2026-11-27T07:24:22-03:00 com HEAD guard 516fe54a0898281d75bf0a41578c4063f2c19e8a: adapter isolado de Harpie's Feather Duster, Heavy Storm e Giant Trunade para varredura/retorno de backrow em TagDuel; seis arquivos exclusivos, sem conflito com reservas ativas. Não toca no resolver central, catálogo/certificações, comandos, banco, inventário ou produção. Próxima janela Work: 2026-11-27T11:30:00-03:00.\nM676 reservado em 2026-11-27T11:53:24.000-03:00 com HEAD guard 5a479acdc2fd224a81e61e19dcc56572cd115d97: Compulsory Evacuation Device + Destruction Ring, adapter TagDuel isolado de retorno por alvo e custo de destruição com dano simétrico; seis caminhos exclusivos, sem conflito com reservas ativas. Não toca no resolver central bloqueado pelo handoff M637/M662/M672, catálogo/certificações, comandos, banco, inventário ou produção. Próxima janela Work: 2026-11-27T12:30:00-03:00.\nM677 reservado em 2026-11-27T12:21:19-03:00 com HEAD guard 742b85dcbab2ab9dc5afed3aa7806a810e1d33f1: A Cat of Ill Omen + An Owl of Luck, família de busca FLIP privada (Trap/Field Spell), topo do Deck ou mão sob Necrovalley face-up. Seis caminhos exclusivos; sem conflito com M676 targeted trap removal, M675 attack prevention ou demais reservas. Handoff cooperativo solicitado no PR #17 para src/monsterEffects.ts e src/duelEngineCurrent.ts; nenhuma alteração central até liberação explícita. Sem catálogo/certificações, comandos, banco, inventário, merge ou produção.\nM678 reservado em 2026-11-27T12:39:00-03:00 com HEAD guard c3e456519444a4beb5844427bdf617daed7c16b7: Armed Dragon LV3/LV5/LV7, cadeia LV e descarte por ATK. Escopo independente dos adapters M676/M677 e das reservas M654/M663; nenhum arquivo central compartilhado será alterado sem handoff explícito. Sem certificações automáticas, inventário, merge ou produção.\nM679 reservado em 2026-11-27T12:50:56-03:00 com HEAD guard 219badc42cac90d91572a86fe7ade5c6747c344b: Yomi Ship + Helpoemer, gatilhos de destruição em batalha enviados ao Cemitério; adapter isolado de destruição imediata sem alvo e descarte aleatório na Battle Phase do oponente. Seis caminhos exclusivos; sem conflito com reservas ativas. Não toca no resolver central, catálogo/certificações, comandos, banco, inventário ou produção. Próxima janela Work: 2026-11-27T17:30:00-03:00.\\nM679 concluído em branch isolada: adapter Yomi Ship + Helpoemer, 13 cenários focados e CI 46031326035 aprovada; PR draft #605 aberto. Reserva M679 liberada; integração central/certificação aguardam handoff explícito solicitado no PR #17 (comentário 7226672675). Nenhuma alteração de catálogo, inventário, dados de jogadores, merge ou produção. Próxima janela Work: 2026-11-27T17:30:00-03:00.\nM680 reservado em 2026-11-27T16:37:32-03:00 com HEAD guard aec3d27eb054d5543fb95aa281590e5a84f8079a: Bazoo the Soul-Eater + Skull Lair, família de custos de banimento do Cemitério; branch própria e seis caminhos exclusivos. Não toca no resolver central bloqueado pelo handoff M637/M662/M672/M677/M679, catálogo/certificações, comandos, banco, inventário ou produção.\nM681 reservado em 2026-11-27T16:46:56-03:00, HEAD guard e05c3398cccac7c4a0e489499a995681637514ca: Nightmare Penguin + Compulsory Evacuation Device, retorno à mão do dono físico. IDs 81306586 e 94192409 não constam das 969 certificações atuais; branch e seis caminhos exclusivos. Sem tocar nos arquivos reservados de M664/M677, no resolver central, catálogo/certificações, comandos, banco ou produção.\nM682: corrigidos os dois testes focados; commit c813c8b0fc2178cec02a6a2184716258d8c47a7b, PR #608 draft, workflow M682 focado verde; Engine validation ainda em execução. Skill Drain (82732705) está no metadata efetivo por imports de batches e possui certificado legado; o teste/auditoria foram corrigidos sem novo certificado. Handoff central solicitado no PR #17 (comentário 7227614045).\nM683: branch auxiliar feat/work-m683-attack-declaration-responses-20261127 no SHA e41d57d043479f9884a44f67fd69db8511077d32; adapter/testes presentes, evidência/auditoria/workflow ainda ausentes. Handoff cooperativo solicitado no PR #17 (comentário 7227679443); nenhum arquivo M683 foi alterado.\nM684: reserva P1 criada em HEAD condicional b4d9e249f539a3dab7babeef044f40f8b1f50cd3 para Nightmare Wheel + Shadow Spell; IDs ausentes em todo o grafo de imports de cardMetadata e no arquivo de certificados; 959 certificados explícitos verificados no baseline. Branch isolada, sem admissão, certificação, inventário, comandos ou produção.\nM682 update 2026-11-27T17:47:37.928-03:00: adapter de 2 cartas e 26 testes focados; commit c813c8b; PR #608 draft; workflow M682 focado verde, Engine validation ainda em execução. Skill Drain foi corretamente identificada como presente no metadata efetivo via batch gerado; nenhuma certificação nova.\nM684 update 2026-11-27T17:47:37.928-03:00: branch feat/work-m684-targeted-continuous-traps-20261127, HEAD d486a9ab; PR #609 draft, 5 arquivos/835 adições, 36 cenários focados; CI dedicada, Engine validation, Card Batch Fast e Milestone1000 em execução. Novas certificações 0, inventário 0, produção inalterada.\nM682 encerrado 2026-11-27T17:54:41.454-03:00: CI final verde no SHA c813c8b (M682 dedicated, Engine validation, Card batch fast feedback e Milestone1000). PR #608 continua draft, mergeable, sem merge/deploy; adapter/testes/evidência liberados para revisão auxiliar. Skill Drain está no metadata efetivo por batch gerado e certificado legado; 0 certificados novos.\nM684 update 2026-11-27T17:54:41.454-03:00: branch head b751ab9; PR #609 draft. O workflow dedicado foi corrigido para npm run check; typecheck/build passaram em 93e3bf. A primeira suíte focada teve 27/36 pass; nove falhas de fixture/rotação/expectativa foram corrigidas em b751ab, com 37 cenários no rerun enfileirado. 0 certificações novas e 0 inventário.\nHandoff M684 solicitado no PR #17 (comentário 7227947654) para monsterEffects.ts e duelEngineCurrent.ts; sem edição central até liberação.\nM685: PR #610 draft aberto; adapter isolado Curse of Darkness (84970821/CID 5917), 29 testes focados e auditoria de não-admissão. CI M685 e Engine validation em execução; 969 certificações no snapshot base, 0 novas certificações e 0 concessões de inventário. Handoff cooperativo solicitado no PR #17, comentário 7231105381, para src/duelEngineCurrent.ts; aguardar liberação explícita. Próxima janela Work: 2026-11-27T22:30:00-03:00.\nM686 reservado em branch própria a partir de e059f4; Appropriate (48539234/CID 4947) está ausente de metadata/certificações e não possui PR anterior. Pedidos de handoff cooperativo enviados ao PR #17 e PR #583 para o evento pós-compra; M644/M647 permanecem sem conflitos de arquivo.\nM686: PR #611 draft aberto; adapter Appropriate (48539234/CID 4947), 33 testes focados, 969 certificações preservadas e nenhuma concessão de inventário. Handoff cooperativo solicitado no PR #17 e PR #583 para o evento pós-compra; aguardar CI.\nM687 encerrado em 2026-11-27T22:12:55-03:00: adapter Amazoness Blowpiper/Swords Woman/Tiger; 21/21 testes e CI 46091878739 verde; PR #612 draft, sem merge. Reserva liberada; handoff central aguardando PR #17 comentário 7231373691. Certificações 969 (+0), inventário +0.\nM688 encerrado em 2026-11-27T22:19:56-03:00: Airknight Parshath/Aswan Apparition/Absorbing Kid adapter; 13/13 testes e CI 46092419702 verde; PR #613 draft, sem merge/deploy. Reserva liberada; handoff central aguardando PR #17 comentário 7231569899. Certificações 969 (+0), inventário +0.\n\nM690 reservado em branch isolada a partir do HEAD 4e0886292955e78d511174fee48f12d39d0f1db3; M689 permanece proprietário de sua reserva e currentWorkRun não foi sobrescrito.\nM690 concluído em branch própria; PR #614 draft aberto, CI focada verde, engine validation geral ainda em andamento; 0 certificações novas e 0 alterações de produção. M689 e todas as demais reservas foram preservadas.\nM691 reservado em branch própria a partir do HEAD 62748d20566f53b429aabb2e92d9c1df058509a4; M689 continua ativo e suas reservas permanecem intactas.\nM691 concluído em branch própria; PR #615 draft aberto, CI focada verde, validação geral do engine ainda em andamento; 0 certificações novas e 0 alterações de produção. M689 e demais reservas preservadas.\nM692 reservado em 2026-11-27T22:59:07-03:00 com HEAD guard d51dd3d8bd6e42a8ff7ed151bb7dd6a917384321: Card of Safe Return (57953380/CID 5123) e Spirit of the Pot of Greed (04896788/CID 5819), duas famílias de gatilhos de compra. Branch isolada feat/work-m692-draw-trigger-adapters-20261127; seis caminhos exclusivos. Handoff cooperativo solicitado no PR #17 (comentário 7232072777) para duelEngineCurrent.ts, monsterEffects.ts e effectRegistry.ts; M644/M647/M686 e demais reservas preservadas. Sem certificações, inventário, merge ou produção. Próxima janela Work: 2026-11-28T03:30:00-03:00.\nM693 reservado em 2026-11-27T23:12:30-03:00 com HEAD guard d2d84d948db56b5cdd7b6715d0346741443729c9: Jar Robber (33784505/CID 5674) e Avatar of the Pot (99284890/CID 5960), usando Pot of Greed (55144522/CID 4844) já catalogado. Branch feat/work-m693-pot-of-greed-synergy-20261127; seis caminhos exclusivos. Handoff cooperativo solicitado no PR #17 (comentário 7232207787) para duelEngineCurrent.ts, monsterEffects.ts e effectRegistry.ts. M692 (#616) permanece em CI; não liberei reservas de terceiros. Próxima janela Work: 2026-11-28T03:30:00-03:00.\nM694 reservado em 2026-11-28T02:26:38-03:00 com HEAD guard e1394ef0f6ef7faea5b02e42ee3b0ce43520a01c: Destiny Board + Spirit Message I/N/A/L, adapter isolado de vitória sequencial e limpeza por saída. Cinco arquivos funcionais e checkpoint próprios; sem sobreposição com as 47 reservas ativas. Não toca no resolver central, catálogo/certificações, comandos, banco, inventário ou produção. Próxima janela Work: 2026-11-28T03:30:00-03:00.\n\nM694 escopo refinado após auditoria de capacidade: Destiny Board exige cinco Spell/Trap Zones e não é compatível com o limite proprietário de três; substituído por família Sarcophagus de três zonas (4 identidades oficiais, nenhuma presente nos 969 do engine-v9). Branch renomeada logicamente para feat/work-m694-sarcophagus-tag-adapter-20261128; sem expansão de zonas.\n\nM694 finalizado como adapter isolado: PR #618 draft; CI 46114584875 success; 23/23 cenários focados e 7385/7385 regressão; 4 cartas com comportamento do adapter verificado, 0 novas certificações engine-v9. Reserva M694 liberada; handoff central solicitado no PR #17 (comentário 7234844708), sem merge/deploy/Discord live.\nM695 reservado em branch própria para Decayed Commander (10209545/CID 5584) + Zombie Tiger (47693640/CID 5585); ambos ausentes do catálogo engine-v9 e sem PR/branch anterior; escopo limitado a arquivos próprios.\nM696 reservado em 2026-11-28T03:24:33-03:00 com HEAD guard c8adc9ce715931fc6e7c63d22f897c46ac1d8be3: Raging Flame Sprite (90810762 / Konami CID 6189), OCG first release 2004-08-05; TCG first release 2004-12-01, elegibilidade histórica baseada na presença OCG até 2004-09-30. Ausente de cardMetadata/cardCertifications no snapshot observado e sem PR/branch anterior por nome. Branch própria feat/work-m696-raging-flame-sprite-20261128; cinco arquivos funcionais exclusivos mais checkpoint. M695 permanece ativo e preservado. Handoff cooperativo solicitado no PR #17 (comentário 7235345195) para duelEngineCurrent.ts, monsterEffects.ts, effectRegistry.ts, cardMetadata.ts e cardCertifications.ts; nenhum arquivo central será editado até liberação explícita. Sem certificação, inventário, merge, deploy ou Discord live.\n\nM697 reservado em 2026-11-28T03:46:20-03:00 com HEAD guard da6e355dda9ae026703b9404561f85cd9999e9b3: Skull-Mark Ladybug (64306248/CID4770) e Peten the Dark Clown (52624755/CID6085), ambos ausentes de metadata/certificações e sem PR/branch anterior no snapshot. Fontes oficiais Konami: CID4770 OCG 2003-07-17/TCG 2004-03-01; CID6085 OCG 2004-08-05/TCG 2004-08-01. Branch própria feat/work-m697-grave-destination-triggers-20261128. M695 e M696 preservados. Handoff complementar solicitado no PR #17, comentário 7235511692. Peten usa UID físico, banimento como custo, decisão privada do proprietário e alvo apenas da mão/Deck daquele assento; sem concessão de inventário.\n\n\nM699 reservado em 2026-11-28T07:27:45-03:00 com CAS contra HEAD b5e3dc49babde0ab914db0c303147b8d0af253b0: Gigantes/Fenrir/Inferno/Silpheed (CID 5831/5830/5829/5832; IDs 47606319/00218704/74823665/73001017; OCG 2003-04-24, TCG 2004-03-01). Família de Special Summon da mão por banimento de monstros do atributo no GY da equipe e quatro gatilhos de batalha distintos; branch própria e seis arquivos exclusivos. M695–M698 permanecem intactos. Handoff central solicitado no PR #17 (comentário 7237927806); sem resolver central, catálogo, certificações, comandos, banco, inventário ou produção.\n\n\nM699 finalizado em 2026-11-28T10:49:59.143Z: branch feat/work-m699-ioc-attribute-summons-20261128 @ 75675654046d44ea51d1dbd43bc5ac1dc17eda98; PR #621 draft aberto. Typecheck/build/34 focados/auditoria passaram; regressão 7416/7419 com três falhas exclusivas em tests/ragingFlameSpriteTagAdapter.test.cjs, sob reserva M696. Handoff solicitado no PR #619 comentário 7238110127; sem liberação. 969 certificações estáticas observadas, 31 restantes; M699 adiciona 0 certificações engine. Reserva M699 liberada sem tocar reservas de terceiros.\nM700 reservado com CAS contra HEAD 9881c50a37cfb1750f4e544c79943dfb16f3da72: Burning Algae + The Thing in the Crater. Skull-Mark Ladybug permanece reservado por M697. Handoff central no PR #17 comentário 7237927806 continua pendente.\n\nM702 reservado em 2026-11-28T08:25:27-03:00 com CAS contra HEAD 0417a9fd69ef6e723639dbd7a5fb7cfa4e70e661: Morphing Jar (33508719/CID4597) + Cyber Jar (34124316/CID4913), dois efeitos FLIP de alteração de mão/Deck e campo. Branch própria feat/work-m702-jar-flip-disruption-20261128; seis caminhos exclusivos. M700/M701 e demais reservas preservadas. Handoff central solicitado no PR #17 comentário 7238587508; sem resolver central, catálogo/certificações, comandos, banco, inventário concedido, merge ou produção.\n\nM703 reservado em 2026-11-28T08:44:20-03:00 com CAS contra HEAD 22c907a9889d416d7d82628a840ce975b3ca1553: Disturbance Strategy, Confiscation, Dragged Down into the Grave e Mind Crush; quatro IDs ausentes das certificações explícitas no snapshot. Branch própria feat/work-m703-hand-disruption-20261128; seis caminhos exclusivos. M700/M701/M702 e demais reservas preservadas. Handoff central solicitado no PR #17 comentário 7238744933; sem resolver central, catálogo/certificações, comandos, banco, inventário concedido, merge ou produção.\n\nM704 reservado em 2026-11-28T08:59:32-03:00 com CAS contra HEAD 35cb0d8762a2dcb988c760b00b5b82d64d670487: Solar Flare Dragon + Bowganian, família de dano recorrente nas fases Standby/End. Branch própria feat/work-m704-standby-endphase-burn-20261128; seis caminhos exclusivos. M703/M702/M701/M700 e demais reservas preservadas. Handoff cooperativo solicitado no PR #17; nenhum arquivo central será alterado sem liberação explícita. Sem metadata/certificações, inventário, comandos, banco, merge ou produção.\n",
+  "lastWorkRun": {
+    "runId": "work-20261128T072745-0300-M699",
+    "mission": "M699",
+    "status": "blocked-by-external-regression; draft PR #621 open; reservation released",
+    "branch": "feat/work-m699-ioc-attribute-summons-20261128",
+    "branchHeadSha": "75675654046d44ea51d1dbd43bc5ac1dc17eda98",
+    "startedAt": "2026-11-28T07:27:45-03:00",
+    "endedAt": "2026-11-28T10:49:59.143Z",
+    "effectiveWorkMinutes": 21,
+    "targetEffectiveWorkMinutes": 60,
+    "targetMet": false,
+    "pr": 621,
+    "prDraft": true,
+    "workflowRun": 46136747981,
+    "focusedTests": "34/34 passed",
+    "typecheck": "passed",
+    "build": "passed",
+    "audit": "passed",
+    "fullRegression": "7416/7419 passed; three failures in M696 reserved tests",
+    "newEngineCertifiedCards": 0,
+    "automaticCertifications": 0,
+    "inventoryGrants": 0,
+    "liveDiscordValidation": false,
+    "scopeReleasedToAuxiliary": [
+      "src/invasionChaosAttributeSummonTagAdapter.ts",
+      "tests/invasionChaosAttributeSummonTagAdapter.test.cjs",
+      "docs/evidence/m699-ioc-attribute-summons.json",
+      "scripts/audit-ioc-attribute-summons-m699.cjs",
+      ".github/workflows/m699-ioc-attribute-summons.yml",
+      "coordination/runs/work-20261128T072745-0300-M699.json",
+      "PR #621 (draft; do not merge until full regression and central integration are authorized)"
+    ],
+    "nextTask": "M700: implement isolated IOC graveyard-transition family for Burning Algae and The Thing in the Crater; do not touch Skull-Mark Ladybug reserved by M697."
+  },
+  "nextExecution": {
+    "scheduledAt": "2026-11-28T07:48:28-03:00",
+    "runId": "work-20261128T074828-0300-M700",
+    "branch": "feat/work-m700-ioc-graveyard-transitions-20261128",
+    "task": "Implementar a próxima família independente de gatilhos de envio ao Cemitério; manter arquivos centrais bloqueados.",
+    "status": "in-progress"
+  },
+  "currentWorkRun": {
+    "runId": "work-20261128T074828-0300-M700",
+    "mission": "M700",
+    "branch": "feat/work-m700-ioc-graveyard-transitions-20261128",
+    "status": "reserved-and-implementing",
+    "priority": "P1",
+    "sharedBaseHead": "9881c50a37cfb1750f4e544c79943dfb16f3da72",
+    "nextTask": "Implementar Burning Algae + The Thing in the Crater com testes de GY e mão privada.",
+    "nextWindow": "2026-11-28T12:30:00-03:00"
+  },
+  "preparedNextRun": {
+    "runId": "work-20261128T081200-0300-M701",
+    "mission": "M701",
+    "branch": "feat/work-m701-banished-zone-returns-20261128",
+    "status": "reserved-and-preparing",
+    "priority": "P1",
+    "sharedBaseHead": "1ad0c38364df7703430fbc204c273ee3a59f3a0b",
+    "headSha": null,
+    "nextTask": "Implementar retorno de monstros banidos para D.D. Scout Plane, Dimension Fusion e Return from the Different Dimension.",
+    "nextWindow": "2026-11-28T12:30:00-03:00"
+  },
+  "workPrincipalRun": {
+    "runId": "work-20261128T085932-0300-M704",
+    "mission": "M704",
+    "priority": "P1",
+    "branch": "feat/work-m704-standby-endphase-burn-20261128",
+    "sharedBaseHead": "35cb0d8762a2dcb988c760b00b5b82d64d670487",
+    "status": "reserved-and-implementing",
+    "conditionalHeadUpdate": true,
+    "nextTask": "Implementar o adapter de gatilhos Standby/End Phase, proteção de ataque Solar Flare, testes determinísticos de 2v2 e auditoria de não-admissão.",
+    "nextWindow": "2026-11-28T12:30:00-03:00"
+  }
+}

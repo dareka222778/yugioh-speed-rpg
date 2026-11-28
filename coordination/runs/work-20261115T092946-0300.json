@@ -1,0 +1,407 @@
+{
+  "runId": "work-20261115T092946-0300",
+  "owner": "Work",
+  "priority": "P1 — validar Amazoness Archer e Hysteric Fairy no 2v2 clássico: custos de dois Tributos no campo compartilhado, fonte física do parceiro, apenas monstros aliados como custo, resolução de dano/recuperação de PV da equipe e conservação de UIDs.",
+  "state": "active",
+  "startedAt": "2026-11-15T09:29:46-03:00",
+  "timezone": "America/Sao_Paulo",
+  "branch": "feat/work-m228-two-monster-tribute-2v2-20261115",
+  "baseBranch": "feat/work-m71-ci-branch-routing-20261112",
+  "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "117fe99895ea008b9ad065ceeabdb2e4f772b9e3",
+  "previousCheckpoint": "coordination/runs/work-20261115T055534-0300.json",
+  "scope": [
+    "tests/tagClassicTwoMonsterTributeTeamOwnership2v2.test.cjs",
+    "tests/tagClassicFlipTargetTeamOwnership2v2.test.cjs",
+    "tests/tagClassicFlipGroupDestruction2v2.test.cjs"
+  ],
+  "reservation": {
+    "runId": "work-20261115T092946-0300",
+    "owner": "Work",
+    "mission": "M228",
+    "priority": "P1 — validar Amazoness Archer e Hysteric Fairy no 2v2 clássico: custos de dois Tributos no campo compartilhado, fonte física do parceiro, apenas monstros aliados como custo, resolução de dano/recuperação de PV da equipe e conservação de UIDs.",
+    "state": "active",
+    "startedAt": "2026-11-15T09:29:46-03:00",
+    "branch": "feat/work-m228-two-monster-tribute-2v2-20261115",
+    "baseBranch": "feat/work-m71-ci-branch-routing-20261112",
+    "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+    "sharedBranch": "feat/rea-engine-recovery-20261026",
+    "sharedHeadAtReservation": "117fe99895ea008b9ad065ceeabdb2e4f772b9e3",
+    "reservedFiles": [
+      "tests/tagClassicTwoMonsterTributeTeamOwnership2v2.test.cjs"
+    ],
+    "conflictPolicy": "Somente o novo arquivo de teste; não tocar em M215–M227, M218–M220, M61/M118/M151/M153, runtime, catálogo, certificados, banco persistente, inventários, main ou produção."
+  },
+  "observedParallelWork": [
+    {
+      "mission": "M215",
+      "pr": 170,
+      "branch": "feat/work-m215-buster-blader-dragon-count-2v2-20261115",
+      "state": "open; independent"
+    },
+    {
+      "mission": "M216",
+      "pr": 171,
+      "branch": "feat/work-m216-yellow-luster-shield-team-defense-2v2-20261115",
+      "state": "open; independent"
+    },
+    {
+      "mission": "M217",
+      "pr": 177,
+      "branch": "feat/work-m217-goblin-thief-atomic-lp-2v2-20261115",
+      "state": "open; independent"
+    },
+    {
+      "mission": "M218",
+      "pr": 172,
+      "branch": "feat/work-m218-economic-count-selectors-2v2-20261115",
+      "state": "open; reserved by concurrent run"
+    },
+    {
+      "mission": "M219",
+      "pr": 173,
+      "branch": "feat/work-m219-opponent-hand-field-count-2v2-20261115",
+      "state": "open; reserved by concurrent run"
+    },
+    {
+      "mission": "M220",
+      "pr": 174,
+      "branch": "feat/work-m220-search-spells-physical-zones-2v2-20261115",
+      "state": "open; reserved by concurrent run"
+    },
+    {
+      "mission": "M225",
+      "pr": 181,
+      "branch": "feat/work-m225-movement-ownership-2v2-20261115",
+      "state": "open; CI success"
+    },
+    {
+      "mission": "M226",
+      "pr": 182,
+      "branch": "feat/work-m226-equip-filters-2v2-20261115",
+      "state": "open; Engine Validation failure"
+    },
+    {
+      "mission": "M227",
+      "pr": 183,
+      "branch": "feat/work-m227-field-battle-modifiers-2v2-20261115",
+      "state": "open; Engine Validation failure"
+    }
+  ],
+  "conflicts": "Nenhum arquivo reservado por esses agentes coincide com o arquivo exclusivo de M228. M61 continua handoff-pending; nenhum arquivo de runtime será tocado.",
+  "catalogAtStart": {
+    "sharedCards": 969,
+    "sharedCertificates": 969,
+    "developmentCards": 1014,
+    "developmentCertificates": 1014,
+    "delta": 45,
+    "newAdmissions": 0,
+    "newCertificates": 0,
+    "target": 1000,
+    "remaining": 31,
+    "historyPending": 993,
+    "identityBlocked": 27,
+    "automaticCertifications": 0,
+    "remainingTo1000": 31,
+    "historicalUnique": 1962,
+    "pendingHistorical": 993,
+    "fullyUnreviewed": 966,
+    "triageQueue": 31,
+    "newCertificationsThisRun": 0,
+    "inventoryGranted": 0,
+    "milestoneArtifactId": 14112394839,
+    "milestoneRunId": 43592911763,
+    "sharedBranch": {
+      "cards": 969,
+      "certificates": 969
+    },
+    "m71TestBase": {
+      "cards": 969,
+      "certificates": 969
+    },
+    "pr14DevelopmentBranch": {
+      "cards": 1014,
+      "certificates": 1014,
+      "merged": false
+    },
+    "deltaToShared": 45
+  },
+  "deployment": {
+    "merge": false,
+    "deploy": false,
+    "liveDiscordValidation": false,
+    "hosting": "not independently verified"
+  },
+  "status": "completed; three independent test-only PRs published; all three npm test steps passed; remaining acceptance/soak workflows continue asynchronously.",
+  "additionalBranches": [
+    {
+      "mission": "M229",
+      "branch": "feat/work-m229-flip-target-team-ownership-2v2-20261115",
+      "head": "81a9710363f2b62e64aae13b34524ca87c1e727b",
+      "pr": 185,
+      "files": [
+        "tests/tagClassicFlipTargetTeamOwnership2v2.test.cjs"
+      ],
+      "state": "active; CI running"
+    },
+    {
+      "mission": "M230",
+      "branch": "feat/work-m230-flip-group-destruction-2v2-20261115",
+      "head": "716b397754d7592047dd6d2fe3a523f75ab68ddf",
+      "pr": 186,
+      "files": [
+        "tests/tagClassicFlipGroupDestruction2v2.test.cjs"
+      ],
+      "state": "active; CI running"
+    }
+  ],
+  "pullRequests": [
+    {
+      "mission": "M228",
+      "branch": "feat/work-m228-two-monster-tribute-2v2-20261115",
+      "head": "ff345f04ddfc0ac42c6ec7105a66c9cd0bfdca11",
+      "pr": 184,
+      "file": "tests/tagClassicTwoMonsterTributeTeamOwnership2v2.test.cjs",
+      "cards": [
+        "Amazoness Archer",
+        "Hysteric Fairy"
+      ],
+      "tests": 5,
+      "state": "open",
+      "draft": true,
+      "ci": {
+        "pr": 184,
+        "run": 43715110770,
+        "cardBatchFast": "success",
+        "verifiedCatalogPlan": "success",
+        "npmTest": "passed; later acceptance/audit steps still running",
+        "engineValidation": "in_progress",
+        "extendedSoak": "success"
+      }
+    },
+    {
+      "mission": "M229",
+      "branch": "feat/work-m229-flip-target-team-ownership-2v2-20261115",
+      "head": "81a9710363f2b62e64aae13b34524ca87c1e727b",
+      "pr": 185,
+      "file": "tests/tagClassicFlipTargetTeamOwnership2v2.test.cjs",
+      "cards": [
+        "Old Vindictive Magician",
+        "Gale Lizard"
+      ],
+      "tests": 6,
+      "state": "open",
+      "draft": true,
+      "ci": {
+        "pr": 185,
+        "run": 43715178487,
+        "cardBatchFast": "success",
+        "verifiedCatalogPlan": "success",
+        "npmTest": "passed; later acceptance/audit steps still running",
+        "engineValidation": "in_progress",
+        "extendedSoak": "in_progress"
+      }
+    },
+    {
+      "mission": "M230",
+      "branch": "feat/work-m230-flip-group-destruction-2v2-20261115",
+      "head": "afe57af2f562cdfa5e664df45b2725c15af74ba4",
+      "pr": 186,
+      "file": "tests/tagClassicFlipGroupDestruction2v2.test.cjs",
+      "cards": [
+        "4-Starred Ladybug of Doom",
+        "Nobleman-Eater Bug"
+      ],
+      "tests": 3,
+      "state": "open",
+      "draft": true,
+      "ci": {
+        "pr": 186,
+        "run": 43715762042,
+        "cardBatchFast": "success",
+        "verifiedCatalogPlan": "success",
+        "npmTest": "passed; repeat-acceptance/critical-acceptance still running",
+        "engineValidation": "in_progress",
+        "extendedSoak": "in_progress"
+      }
+    }
+  ],
+  "findings": [
+    "M228 initial CI exposed that rulesVersion='speed-rpg-v2' selects the compatibility profile legacySeven (hand 7, check before draw, Extra 6). Removed that explicit legacy version from all three fixtures; the default new-duel profile retains the owner's hand 6, End Phase discard, Extra 5, Deck 20–30 and 3+3 zones.",
+    "M226 (#182) and M227 (#183) have the same fixture mistake; both agents were notified with exact failing run evidence and a safe correction suggestion. Their branches were not modified.",
+    "M229 no-target FLIP cases now settle the mandatory response window before asserting the empty target state.",
+    "M230 first CI found a four-monster opposing field (exceeding the three-zone limit) and a privacy assertion that reused the same card ID for visible and hidden copies. Split the face-down case into a second legal three-zone fixture with a distinct Level 4 identity. Duplicate-target rejection now accepts the engine's actual generic invalid-action error.",
+    "M230 first corrected CI also confirmed that a forged duplicate target is rejected by the action gate; no runtime fix was needed."
+  ],
+  "lastActivityAt": "2026-11-15T09:52:13-03:00",
+  "catalogAtCurrentCheck": {
+    "sharedCards": 969,
+    "sharedCertificates": 969,
+    "developmentCards": 1014,
+    "developmentCertificates": 1014,
+    "delta": 45,
+    "newAdmissions": 0,
+    "newCertificates": 0,
+    "target": 1000,
+    "remaining": 31,
+    "historyPending": 993,
+    "identityBlocked": 27,
+    "automaticCertifications": 0,
+    "remainingTo1000": 31,
+    "historicalUnique": 1962,
+    "pendingHistorical": 993,
+    "fullyUnreviewed": 966,
+    "triageQueue": 31,
+    "newCertificationsThisRun": 0,
+    "inventoryGranted": 0,
+    "milestoneArtifactId": 14112394839,
+    "milestoneRunId": 43592911763,
+    "sharedBranch": {
+      "cards": 969,
+      "certificates": 969
+    },
+    "m71TestBase": {
+      "cards": 969,
+      "certificates": 969
+    },
+    "pr14DevelopmentBranch": {
+      "cards": 1014,
+      "certificates": 1014,
+      "merged": false
+    },
+    "deltaToShared": 45
+  },
+  "endedAt": "2026-11-15T09:52:13-03:00",
+  "elapsedSeconds": 1347,
+  "elapsedMinutes": 22.45,
+  "effectiveWorkMinutes": 15,
+  "targetEffectiveMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "branches": [
+    {
+      "mission": "M228",
+      "branch": "feat/work-m228-two-monster-tribute-2v2-20261115",
+      "head": "ff345f04ddfc0ac42c6ec7105a66c9cd0bfdca11",
+      "pr": 184,
+      "file": "tests/tagClassicTwoMonsterTributeTeamOwnership2v2.test.cjs",
+      "cards": [
+        "Amazoness Archer",
+        "Hysteric Fairy"
+      ],
+      "tests": 5
+    },
+    {
+      "mission": "M229",
+      "branch": "feat/work-m229-flip-target-team-ownership-2v2-20261115",
+      "head": "81a9710363f2b62e64aae13b34524ca87c1e727b",
+      "pr": 185,
+      "file": "tests/tagClassicFlipTargetTeamOwnership2v2.test.cjs",
+      "cards": [
+        "Old Vindictive Magician",
+        "Gale Lizard"
+      ],
+      "tests": 6
+    },
+    {
+      "mission": "M230",
+      "branch": "feat/work-m230-flip-group-destruction-2v2-20261115",
+      "head": "afe57af2f562cdfa5e664df45b2725c15af74ba4",
+      "pr": 186,
+      "file": "tests/tagClassicFlipGroupDestruction2v2.test.cjs",
+      "cards": [
+        "4-Starred Ladybug of Doom",
+        "Nobleman-Eater Bug"
+      ],
+      "tests": 3
+    }
+  ],
+  "testsAdded": 14,
+  "cardsCovered": 6,
+  "runtimeChanges": [],
+  "catalogAtEnd": {
+    "target": 1000,
+    "certified": 969,
+    "remaining": 31,
+    "historical": 1962,
+    "pending": 993,
+    "identityBlocked": 27,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "parallelHandoff": {
+    "status": "No conflicting file handoff granted or required for M228–M230; all changes are new test files.",
+    "blocked": [
+      "M61 / PR #17: no response to repeated partial handoff requests; reserved runtime files untouched.",
+      "M118 / PR #74: no response; src/tagDuel.ts and its reserved test untouched.",
+      "M151 / PR #107: no response; reserved Fusion tests untouched.",
+      "M153 / PR #109: target-filter runtime fix remains reserved; untouched."
+    ]
+  },
+  "production": {
+    "mainHead": "713f02afc862ddb17411706c92c67624eaa1803f",
+    "sharedHeadBeforeCheckpoint": "0ec27be84ec363406dd1061cfdcc0b89ec0a031f",
+    "mainWorkflowDirectory": "404 Not Found",
+    "sharedWorkflows": [
+      "card-batch-admission.yml",
+      "card-batch-fast.yml",
+      "engine-validation.yml",
+      "milestone1000.yml"
+    ],
+    "deploymentWorkflow": "not found",
+    "deploymentsApi": "not available through current GitHub connector allowlist",
+    "hosting": "not independently verified",
+    "discordLiveValidation": false,
+    "merge": false,
+    "deploy": false,
+    "inventoryGrants": 0,
+    "persistentDatabaseChanged": false
+  },
+  "scopeReleasedToAuxiliary": {
+    "status": "released-to-auxiliary-monitor-ci",
+    "releasedAt": "2026-11-15T09:52:13-03:00",
+    "allowed": [
+      {
+        "pr": 184,
+        "branch": "feat/work-m228-two-monster-tribute-2v2-20261115",
+        "files": [
+          "tests/tagClassicTwoMonsterTributeTeamOwnership2v2.test.cjs"
+        ],
+        "permission": "monitor CI and edit only this test file"
+      },
+      {
+        "pr": 185,
+        "branch": "feat/work-m229-flip-target-team-ownership-2v2-20261115",
+        "files": [
+          "tests/tagClassicFlipTargetTeamOwnership2v2.test.cjs"
+        ],
+        "permission": "monitor CI and edit only this test file"
+      },
+      {
+        "pr": 186,
+        "branch": "feat/work-m230-flip-group-destruction-2v2-20261115",
+        "files": [
+          "tests/tagClassicFlipGroupDestruction2v2.test.cjs"
+        ],
+        "permission": "monitor CI and edit only this test file"
+      }
+    ],
+    "prohibited": [
+      "runtime",
+      "catalog batches",
+      "certificates",
+      "coordination reservations of other agents",
+      "player data",
+      "inventories",
+      "persistent database",
+      "main",
+      "merge",
+      "deploy"
+    ]
+  },
+  "nextTask": "Auxiliar: monitorar as PRs #184–#186 e, se necessário, corrigir somente os três arquivos de teste nas respectivas branches. Próximo Work: revisar M61/handoff e escolher uma das 31 identidades pendentes após liberação do runtime; não alterar reservas de terceiros.",
+  "nextWindow": "2026-11-15T14:30:00-03:00",
+  "sharedHeadBeforeFinalCheckpointCommit": "0ec27be84ec363406dd1061cfdcc0b89ec0a031f",
+  "reservationReleased": true
+}

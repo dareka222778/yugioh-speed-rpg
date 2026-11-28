@@ -1,0 +1,91 @@
+{
+  "format": 1,
+  "runId": "work-20261120T043227-0300-M402",
+  "owner": "Work principal",
+  "mission": "M402",
+  "priority": "P1 — implementar a família reutilizável de recuperação de LP por destruição em batalha, cobrindo Absorbing Kid from the Sky (Nível × 300) e Guardian Angel Joan (ATK original), com destino efetivo ao Cemitério e LP da equipe controladora.",
+  "state": "reserved",
+  "startedAt": "2026-11-20T04:32:27-03:00",
+  "shared": {
+    "branch": "feat/rea-engine-recovery-20261026",
+    "headAtReservation": "3199a0b0c4511519c3769d99beaf9f54f3d234ca",
+    "mainHead": "f78f3080b496d2697072b946088309f36e97b60e"
+  },
+  "branch": "feat/work-m402-absorbing-kid-battle-lp-20261120",
+  "reservedFiles": [
+    "src/absorbingKidFromTheSky.ts",
+    "tests/absorbingKidFromTheSky.test.cjs",
+    "docs/evidence/m402-absorbing-kid-from-the-sky.json",
+    ".github/workflows/m402-absorbing-kid-from-the-sky.yml"
+  ],
+  "conflictCheck": {
+    "activePrimaryRun": "work-20261115T142521-0300",
+    "preservedReservations": [
+      "M231-M236",
+      "M215-M220",
+      "M225-M227",
+      "M305-M305",
+      "M319-M322",
+      "M383",
+      "M61"
+    ],
+    "note": "Somente quatro caminhos novos; nenhum deles consta nas reservas ou nas PRs M399-M401. monsterEffects.ts e duelEngineCurrent.ts permanecem fora do escopo."
+  },
+  "handoff": {
+    "pr": 17,
+    "status": "awaiting-explicit-release",
+    "files": [
+      "src/monsterEffects.ts",
+      "src/duelEngineCurrent.ts"
+    ],
+    "changedFiles": []
+  },
+  "card": {
+    "name": "Absorbing Kid from the Sky",
+    "id": "49771608",
+    "konamiDatabaseCid": 6034,
+    "level": 4,
+    "attribute": "LIGHT",
+    "type": "Fairy/Effect",
+    "officialTextSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6034&ope=2&request_locale=en",
+    "firstTcgRelease": "2004-06-01"
+  },
+  "catalogAtStart": {
+    "target": 1000,
+    "certified": 969,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "safety": {
+    "runtimeCoreChanged": false,
+    "catalogChanged": false,
+    "certificationChanged": false,
+    "inventoryGranted": 0,
+    "persistentDatabaseChanged": false,
+    "playerDataChanged": false,
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "liveDiscordValidation": false
+  },
+  "blocksCompleted": [
+    "Coordination/state.json e checkpoint M399-M401 lidos; HEAD compartilhado e main comparados; CI final de M399-M401 confirmada; handoff M61 continua sem resposta.",
+    "M402 verificada sem branch ou PR preexistente; quatro arquivos novos reservados sem sobreposição com as reservas ativas.",
+    "Extensão da família M402 para Guardian Angel Joan, sem duplicação: branch/PR e os manifestos admitted/proposed/engine-v9 não contêm o ID 68007326; texto e primeira impressão TCG verificados no banco oficial Konami."
+  ],
+  "nextTask": "Implementar helper puro de recuperação de LP por destruição em batalha, testes de elegibilidade/destino/equipe/UID/overflow, evidência oficial e workflow focado. Aguardar handoff M61 para qualquer integração ao resolver.",
+  "nextWindow": "2026-11-20T08:30:00-03:00",
+  "relatedCards": [
+    {
+      "name": "Guardian Angel Joan",
+      "id": "68007326",
+      "konamiDatabaseCid": 5899,
+      "level": 7,
+      "attribute": "LIGHT",
+      "type": "Fairy/Effect",
+      "officialTextSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5899&ope=2&request_locale=en",
+      "firstTcgRelease": "2004-03-01",
+      "firstTcgSet": "Invasion of Chaos (IOC-087)"
+    }
+  ]
+}

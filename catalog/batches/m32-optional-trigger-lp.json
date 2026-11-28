@@ -1,0 +1,1595 @@
+{
+  "format": 1,
+  "batchId": "m32-optional-trigger-lp",
+  "engineVersion": "engine-v9",
+  "baseRevision": "488b7ef1792a32ec4a3758f104de76b1952f5ba4ebe229927f52c0e85bdd6995",
+  "candidates": [
+    {
+      "card": {
+        "id": "94230224",
+        "konamiId": 4496,
+        "name": "Bola de Agulhas",
+        "englishName": "Needle Ball",
+        "kind": "monster",
+        "monsterType": "effect",
+        "race": "Fiend",
+        "attribute": "DARK",
+        "level": 2,
+        "atk": 750,
+        "defense": 700,
+        "summary": "VIRAR: você pode pagar 2000 PV; cause 1000 de dano ao oponente.",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4496&request_locale=en"
+      },
+      "effect": {
+        "kind": "monsterEffect"
+      },
+      "monster": {
+        "effect": {
+          "trigger": "flip",
+          "cost": {
+            "kind": "lp",
+            "amount": 2000
+          },
+          "operation": {
+            "kind": "burn",
+            "amount": 1000
+          }
+        },
+        "activation": {
+          "policy": "optional",
+          "window": "flip"
+        }
+      },
+      "family": "optional-flip-lp-cost",
+      "textEvidence": {
+        "text": "This monster has one optional, non-targeting FLIP Trigger Effect, including when revealed by battle. At activation its controller pays exactly 2000 LP, requiring more than 2000 LP available; on resolution it inflicts 1000 effect damage to the opponent. Declining pays nothing. The cost remains paid if the effect is negated or its source leaves the field. Paying the cost does not inflict damage. There is no once-per-turn limit, target, secondary effect or duration. A battle-destroyed source can still activate after damage calculation if its controller survives and can pay the cost at that time.",
+        "sha256": "b045560b5138c7f08f6cad89df23ab565602cbf73e458251e24ae6eed8ab4cc4",
+        "complete": true,
+        "format": "full-rule-paraphrase",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4496&request_locale=en"
+      },
+      "cases": {
+        "negative": {
+          "fixture": {
+            "players": [
+              {
+                "lp": 4000,
+                "monsters": [
+                  {
+                    "uid": "needle",
+                    "id": "94230224",
+                    "owner": 0,
+                    "faceUp": false,
+                    "position": "def",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "lp": 4000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "expectError": true,
+              "action": {
+                "kind": "monsterEffect",
+                "card": "needle",
+                "discards": []
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 4000
+            }
+          ]
+        },
+        "json-restore": {
+          "fixture": {
+            "players": [
+              {
+                "lp": 4000,
+                "monsters": [
+                  {
+                    "uid": "needle",
+                    "id": "94230224",
+                    "owner": 0,
+                    "faceUp": false,
+                    "position": "def",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "lp": 4000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "match": {
+                "kind": "position",
+                "card": "needle",
+                "mode": "flip"
+              }
+            },
+            {
+              "restore": true
+            },
+            {
+              "match": {
+                "kind": "choose",
+                "target": "needle"
+              }
+            },
+            {
+              "restore": true
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 2000
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 3000
+            }
+          ]
+        },
+        "deterministic-replay": {
+          "fixture": {
+            "players": [
+              {
+                "lp": 4000,
+                "monsters": [
+                  {
+                    "uid": "needle",
+                    "id": "94230224",
+                    "owner": 0,
+                    "faceUp": false,
+                    "position": "def",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "lp": 4000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "match": {
+                "kind": "position",
+                "card": "needle",
+                "mode": "flip"
+              }
+            },
+            {
+              "restore": true
+            },
+            {
+              "match": {
+                "kind": "choose",
+                "target": "needle"
+              }
+            },
+            {
+              "restore": true
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 2000
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 3000
+            }
+          ]
+        },
+        "activation": {
+          "fixture": {
+            "players": [
+              {
+                "lp": 4000,
+                "monsters": [
+                  {
+                    "uid": "needle",
+                    "id": "94230224",
+                    "owner": 0,
+                    "faceUp": false,
+                    "position": "def",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "lp": 4000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "match": {
+                "kind": "position",
+                "card": "needle",
+                "mode": "flip"
+              }
+            },
+            {
+              "match": {
+                "kind": "choose",
+                "target": "needle"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 2000
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 3000
+            }
+          ]
+        },
+        "resolution": {
+          "fixture": {
+            "players": [
+              {
+                "lp": 4000,
+                "monsters": [
+                  {
+                    "uid": "needle",
+                    "id": "94230224",
+                    "owner": 0,
+                    "faceUp": false,
+                    "position": "def",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "lp": 4000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "match": {
+                "kind": "position",
+                "card": "needle",
+                "mode": "flip"
+              }
+            },
+            {
+              "match": {
+                "kind": "choose",
+                "target": "needle"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 2000
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 3000
+            }
+          ]
+        },
+        "negation": {
+          "fixture": {
+            "players": [
+              {
+                "lp": 4000,
+                "monsters": [
+                  {
+                    "uid": "needle",
+                    "id": "94230224",
+                    "owner": 0,
+                    "faceUp": false,
+                    "position": "def",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "drain",
+                    "id": "82732705",
+                    "faceUp": true,
+                    "resolved": true,
+                    "setTurn": 0
+                  }
+                ]
+              },
+              {
+                "lp": 4000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "match": {
+                "kind": "position",
+                "card": "needle",
+                "mode": "flip"
+              }
+            },
+            {
+              "match": {
+                "kind": "choose",
+                "target": "needle"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 2000
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4000
+            }
+          ]
+        },
+        "cost-paid-once": {
+          "fixture": {
+            "players": [
+              {
+                "lp": 2001,
+                "monsters": [
+                  {
+                    "uid": "needle",
+                    "id": "94230224",
+                    "owner": 0,
+                    "faceUp": false,
+                    "position": "def",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "lp": 4000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "match": {
+                "kind": "position",
+                "card": "needle",
+                "mode": "flip"
+              }
+            },
+            {
+              "match": {
+                "kind": "choose",
+                "target": "needle"
+              }
+            },
+            {
+              "restore": true
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 1
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 3000
+            }
+          ]
+        },
+        "cost-invalid": {
+          "fixture": {
+            "players": [
+              {
+                "lp": 2000,
+                "monsters": [
+                  {
+                    "uid": "needle",
+                    "id": "94230224",
+                    "owner": 0,
+                    "faceUp": false,
+                    "position": "def",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "lp": 4000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "match": {
+                "kind": "position",
+                "card": "needle",
+                "mode": "flip"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 2000
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4000
+            },
+            {
+              "path": [
+                "phase"
+              ],
+              "equals": "main"
+            }
+          ]
+        },
+        "negation-cost-retained": {
+          "fixture": {
+            "players": [
+              {
+                "lp": 4000,
+                "monsters": [
+                  {
+                    "uid": "needle",
+                    "id": "94230224",
+                    "owner": 0,
+                    "faceUp": false,
+                    "position": "def",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "drain",
+                    "id": "82732705",
+                    "faceUp": true,
+                    "resolved": true,
+                    "setTurn": 0
+                  }
+                ]
+              },
+              {
+                "lp": 4000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "match": {
+                "kind": "position",
+                "card": "needle",
+                "mode": "flip"
+              }
+            },
+            {
+              "match": {
+                "kind": "choose",
+                "target": "needle"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 2000
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4000
+            }
+          ]
+        },
+        "restore-after-cost": {
+          "fixture": {
+            "players": [
+              {
+                "lp": 4000,
+                "monsters": [
+                  {
+                    "uid": "needle",
+                    "id": "94230224",
+                    "owner": 0,
+                    "faceUp": false,
+                    "position": "def",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "lp": 4000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "match": {
+                "kind": "position",
+                "card": "needle",
+                "mode": "flip"
+              }
+            },
+            {
+              "restore": true
+            },
+            {
+              "match": {
+                "kind": "choose",
+                "target": "needle"
+              }
+            },
+            {
+              "restore": true
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 2000
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 3000
+            }
+          ]
+        },
+        "duplicate-delivery": {
+          "fixture": {
+            "players": [
+              {
+                "lp": 4000,
+                "monsters": [
+                  {
+                    "uid": "needle",
+                    "id": "94230224",
+                    "owner": 0,
+                    "faceUp": false,
+                    "position": "def",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "lp": 4000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "match": {
+                "kind": "position",
+                "card": "needle",
+                "mode": "flip"
+              }
+            },
+            {
+              "match": {
+                "kind": "choose",
+                "target": "needle"
+              }
+            },
+            {
+              "expectError": true,
+              "action": {
+                "kind": "choose",
+                "target": "needle"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 2000
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 3000
+            }
+          ]
+        },
+        "trigger-timing": {
+          "fixture": {
+            "players": [
+              {
+                "lp": 4000,
+                "monsters": [
+                  {
+                    "uid": "needle",
+                    "id": "94230224",
+                    "owner": 0,
+                    "faceUp": false,
+                    "position": "def",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "lp": 4000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "match": {
+                "kind": "position",
+                "card": "needle",
+                "mode": "flip"
+              }
+            },
+            {
+              "match": {
+                "kind": "choose",
+                "target": "needle"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 2000
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 3000
+            }
+          ]
+        },
+        "optional-accept": {
+          "fixture": {
+            "players": [
+              {
+                "lp": 4000,
+                "monsters": [
+                  {
+                    "uid": "needle",
+                    "id": "94230224",
+                    "owner": 0,
+                    "faceUp": false,
+                    "position": "def",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "lp": 4000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "match": {
+                "kind": "position",
+                "card": "needle",
+                "mode": "flip"
+              }
+            },
+            {
+              "match": {
+                "kind": "choose",
+                "target": "needle"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 2000
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 3000
+            }
+          ]
+        },
+        "optional-decline": {
+          "fixture": {
+            "players": [
+              {
+                "lp": 4000,
+                "monsters": [
+                  {
+                    "uid": "needle",
+                    "id": "94230224",
+                    "owner": 0,
+                    "faceUp": false,
+                    "position": "def",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "lp": 4000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "match": {
+                "kind": "position",
+                "card": "needle",
+                "mode": "flip"
+              }
+            },
+            {
+              "match": {
+                "kind": "choose",
+                "target": "__skip__"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 4000
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4000
+            }
+          ]
+        },
+        "restore-choice": {
+          "fixture": {
+            "players": [
+              {
+                "lp": 4000,
+                "monsters": [
+                  {
+                    "uid": "needle",
+                    "id": "94230224",
+                    "owner": 0,
+                    "faceUp": false,
+                    "position": "def",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "lp": 4000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "match": {
+                "kind": "position",
+                "card": "needle",
+                "mode": "flip"
+              }
+            },
+            {
+              "restore": true
+            },
+            {
+              "match": {
+                "kind": "choose",
+                "target": "needle"
+              }
+            },
+            {
+              "restore": true
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 2000
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 3000
+            }
+          ]
+        },
+        "lp-victory": {
+          "fixture": {
+            "players": [
+              {
+                "lp": 4000,
+                "monsters": [
+                  {
+                    "uid": "needle",
+                    "id": "94230224",
+                    "owner": 0,
+                    "faceUp": false,
+                    "position": "def",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "lp": 1000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "match": {
+                "kind": "position",
+                "card": "needle",
+                "mode": "flip"
+              }
+            },
+            {
+              "match": {
+                "kind": "choose",
+                "target": "needle"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 2000
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 0
+            },
+            {
+              "path": [
+                "phase"
+              ],
+              "equals": "finished"
+            },
+            {
+              "path": [
+                "winner"
+              ],
+              "equals": "a"
+            }
+          ]
+        },
+        "battle-reveal-accept": {
+          "fixture": {
+            "players": [
+              {
+                "lp": 4000,
+                "monsters": [
+                  {
+                    "uid": "needle",
+                    "id": "94230224",
+                    "owner": 0,
+                    "faceUp": false,
+                    "position": "def",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "lp": 4000,
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              }
+            ],
+            "current": 1,
+            "resume": "battle",
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "b",
+              "match": {
+                "kind": "attack",
+                "card": "attacker",
+                "target": "needle"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "match": {
+                "kind": "choose",
+                "target": "needle"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 2000
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 3000
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "needle"
+            }
+          ]
+        },
+        "battle-reveal-decline": {
+          "fixture": {
+            "players": [
+              {
+                "lp": 4000,
+                "monsters": [
+                  {
+                    "uid": "needle",
+                    "id": "94230224",
+                    "owner": 0,
+                    "faceUp": false,
+                    "position": "def",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "lp": 4000,
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              }
+            ],
+            "current": 1,
+            "resume": "battle",
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "b",
+              "match": {
+                "kind": "attack",
+                "card": "attacker",
+                "target": "needle"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "match": {
+                "kind": "choose",
+                "target": "__skip__"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 4000
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4000
+            }
+          ]
+        },
+        "battle-cost-insufficient": {
+          "fixture": {
+            "players": [
+              {
+                "lp": 2000,
+                "monsters": [
+                  {
+                    "uid": "needle",
+                    "id": "94230224",
+                    "owner": 0,
+                    "faceUp": false,
+                    "position": "def",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "lp": 4000,
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              }
+            ],
+            "current": 1,
+            "resume": "battle",
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "b",
+              "match": {
+                "kind": "attack",
+                "card": "attacker",
+                "target": "needle"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 2000
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4000
+            },
+            {
+              "path": [
+                "phase"
+              ],
+              "equals": "battle"
+            }
+          ]
+        },
+        "two-triggers-afford-one": {
+          "fixture": {
+            "players": [
+              {
+                "lp": 3500,
+                "monsters": [
+                  {
+                    "uid": "needle",
+                    "id": "94230224",
+                    "owner": 0,
+                    "faceUp": false,
+                    "position": "def",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "second",
+                    "id": "94230224",
+                    "owner": 0,
+                    "faceUp": false,
+                    "position": "def",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "sun",
+                    "id": "93747864",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ]
+              },
+              {
+                "lp": 4000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "match": {
+                "kind": "trap",
+                "card": "sun",
+                "target": ""
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "match": {
+                "kind": "choose",
+                "target": "needle"
+              }
+            },
+            {
+              "match": {
+                "kind": "choose",
+                "target": "needle"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 1500
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 3000
+            },
+            {
+              "path": [
+                "phase"
+              ],
+              "equals": "main"
+            }
+          ]
+        },
+        "source-hidden-after-cost": {
+          "fixture": {
+            "players": [
+              {
+                "lp": 4000,
+                "monsters": [
+                  {
+                    "uid": "needle",
+                    "id": "94230224",
+                    "owner": 0,
+                    "faceUp": false,
+                    "position": "def",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "lp": 4000,
+                "backrow": [
+                  {
+                    "uid": "moon",
+                    "id": "14087893",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "match": {
+                "kind": "position",
+                "card": "needle",
+                "mode": "flip"
+              }
+            },
+            {
+              "match": {
+                "kind": "choose",
+                "target": "needle"
+              }
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "spell",
+                "card": "moon",
+                "target": "needle"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 2000
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 3000
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "faceUp"
+              ],
+              "equals": false
+            }
+          ]
+        }
+      },
+      "scenarios": [
+        "battle-reveal-accept",
+        "battle-reveal-decline",
+        "battle-cost-insufficient",
+        "two-triggers-afford-one",
+        "source-hidden-after-cost"
+      ],
+      "requirements": [
+        "cost:lp",
+        "effect:monsterEffect",
+        "monster-operation:burn",
+        "trigger-cost:lp-optional-flip",
+        "trigger:flip"
+      ],
+      "fingerprint": "a7b605625c69671fc05d2b2b6a7f883d9a077982b850afa2b8ee5c2f1f6933b5",
+      "suites": [
+        "tests/generated-m32-optional-trigger-lp.test.cjs"
+      ]
+    }
+  ],
+  "reviews": [
+    {
+      "id": "94230224",
+      "canonicalId": "e36a4b4e-50ad-41bb-b1fa-275d1295359e",
+      "konamiId": 4496,
+      "reviewer": "Codex: full official card and FAQ (2020-04-01) reviewed 2026-10-30",
+      "reviewedAt": "2026-10-30",
+      "identityApproved": true,
+      "mechanicsApproved": true,
+      "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4496&request_locale=en",
+      "primaryFacts": {
+        "level": 2,
+        "atk": 750,
+        "defense": 700,
+        "race": "Fiend",
+        "attribute": "DARK"
+      },
+      "verifiedPrinting": {
+        "date": "1999-10-17",
+        "set": "Booster 5",
+        "region": "ocg",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4496&request_locale=ja"
+      },
+      "fullTextReviewed": true,
+      "secondaryEffectsReviewed": true,
+      "exceptionsReviewed": true,
+      "textSha256": "b045560b5138c7f08f6cad89df23ab565602cbf73e458251e24ae6eed8ab4cc4",
+      "semanticCoverage": {
+        "activation": "represented",
+        "conditions": "represented",
+        "costs": "represented",
+        "targets": "not-applicable",
+        "choices": "represented",
+        "operations": "represented",
+        "duration": "not-applicable",
+        "restrictions": "represented",
+        "negation": "represented"
+      },
+      "mechanicalFingerprint": "a7b605625c69671fc05d2b2b6a7f883d9a077982b850afa2b8ee5c2f1f6933b5"
+    }
+  ]
+}

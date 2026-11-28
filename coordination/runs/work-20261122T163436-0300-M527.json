@@ -1,0 +1,101 @@
+{
+  "runId": "work-20261122T163436-0300-M527",
+  "mission": "M527",
+  "owner": "Work principal",
+  "status": "code-complete; released-to-auxiliary",
+  "startedAt": "2026-11-22T16:34:36-03:00",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "c376248196fc4458c47e2ff7dbb55d438031afed",
+  "branch": "feat/work-m527-duel-timeout-publication-idempotency-20261122",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "c376248196fc4458c47e2ff7dbb55d438031afed",
+  "priority": "P1 — tornar idempotente a publicação de timeout 1v1: polling repetido deve manter uma única revisão terminal; ACK antigo não pode limpar a revisão atual; ACK correto/duplicado deve ser seguro. Cobrir convite 120 s e W.O. 30 min, locks, UIDs, Decks, mãos, privacidade e economia sem alterar runtime.",
+  "reservedFiles": [
+    "tests/duelTimeoutPublicationIdempotency.test.cjs",
+    "docs/evidence/m527-duel-timeout-publication-idempotency.json",
+    ".github/workflows/m527-duel-timeout-publication-idempotency.yml"
+  ],
+  "conflictCheck": {
+    "overlap": false,
+    "checkedAt": "2026-11-22T16:34:36-03:00",
+    "checkedAgainst": [
+      "M520 PR #466 — handler 1v1, três caminhos próprios; CI integral success; liberada ao auxiliar para monitorar/sincronizar sem force.",
+      "M521 PR #467 — store 2v2, três caminhos próprios; CI integral success; liberada ao auxiliar.",
+      "M522 PR #468 — handler 2v2, três caminhos próprios; CI integral success; liberada ao auxiliar.",
+      "M523 PR #469 — publicação idempotente TagDuel, caminhos próprios; sem sobreposição de nomes.",
+      "M524 PR #470 — matriz TagDuel, caminhos próprios; sem sobreposição.",
+      "M525 PR #471 e M526 PR #472 — correções em src/tagStore.ts/src/duelStore.ts; somente leitura neste bloco, nenhuma alteração desses arquivos.",
+      "M61, M402–M519 e todas as reservas de terceiros preservadas."
+    ],
+    "note": "Somente teste/evidência/workflow novos. Lê src/duelStore.ts, src/duelEngine.ts e src/duelUI.ts. Não altera runtime, stores, comandos, catálogo, manifesto, resolver, allowlist, certificados, inventário ou dados persistentes."
+  },
+  "workBlocks": [
+    "Lido coordination/state.json e checkpoint M522; confirmadas PRs #466–#468 abertas em draft e CI integral success.",
+    "Verificado shared HEAD c376248196fc4458c47e2ff7dbb55d438031afed; main HEAD 197bbda07efc81658604bcd12308665571e26d59; shared 761 commits à frente e 12 atrás.",
+    "Auditadas PRs #469–#472: M523/M524 CI integral success; M525/M526 falham nos gates de integridade M8/M15 por alterações em src/tagStore.ts/src/duelStore.ts; diagnósticos enviados aos responsáveis.",
+    "Identificada lacuna independente: expireDueDuels/markDuelPublished não possuem teste explícito de polling repetido e ACK obsoleto para 1v1.",
+    "Finalização de código e handoff em 2026-11-22T17:02:17-03:00: PR #473 aberta em draft; CI observada pelo Work; escopo próprio liberado ao auxiliar apenas para monitoramento/sincronização não-forçada e correções nos três arquivos da missão. Sem merge/deploy."
+  ],
+  "tests": {
+    "focused": "success 2/2",
+    "check": "success",
+    "build": "success",
+    "cardBatchFast": "success (45063136073)",
+    "milestone1000": "success (45063136055; 969/1000)",
+    "engineValidation": "success (45063136059)",
+    "extendedSoak": "success (600s; 45063136059)",
+    "limitations": "Teste offline com SQLite temporário e builders Discord; sem guild/token real."
+  },
+  "catalog": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "inventoryGranted": 0,
+  "production": {
+    "mainHead": "197bbda07efc81658604bcd12308665571e26d59",
+    "backupVerified": false,
+    "liveDiscordValidation": false,
+    "merge": false,
+    "deploy": false,
+    "deploymentWorkflowFound": false
+  },
+  "pr": {
+    "number": 473,
+    "url": "https://github.com/dareka222778/yugioh-speed-rpg/pull/473",
+    "state": "open",
+    "draft": true,
+    "merged": false,
+    "mergeable": true,
+    "headSha": "d77d113e557575a42f174cb633f1a43ad6547897",
+    "baseSha": "a40f77538b2116042bd8fa4b326ee7b90c3a24ea"
+  },
+  "releaseToAuxiliary": [
+    {
+      "path": "tests/duelTimeoutPublicationIdempotency.test.cjs",
+      "permission": "monitor/sync non-forced/correct only this mission's own file"
+    },
+    {
+      "path": "docs/evidence/m527-duel-timeout-publication-idempotency.json",
+      "permission": "monitor/sync non-forced/correct only this mission's own file"
+    },
+    {
+      "path": ".github/workflows/m527-duel-timeout-publication-idempotency.yml",
+      "permission": "monitor/sync non-forced/correct only this mission's own file"
+    }
+  ],
+  "nextTask": "Auxiliar: acompanhar PR #473, sincronizar sem force e manter draft até revisão; Work: M531 concorrência de lobby 1v1.",
+  "nextWindow": "2026-11-22T17:30:00-03:00",
+  "duration": {
+    "targetEffectiveMinutes": 60,
+    "effectiveWorkMinutes": 0,
+    "targetMet": false,
+    "ciWaitExcluded": true
+  },
+  "endedAt": "2026-11-22T17:02:17-03:00",
+  "lastActivityAt": "2026-11-22T17:02:17-03:00",
+  "mergePerformed": false,
+  "deployPerformed": false
+}

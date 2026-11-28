@@ -1,0 +1,29 @@
+{
+  "format": 1,
+  "scriptSHA256": "e245bd7e3a7abca1e414b79eadb99a0d0e0aaac0f08ea6ece61f4ede9d1e5943",
+  "scope": "30 isolated full NPC duels with rotating windows of up to 10 new cards per legal 20-30-card deck; no Discord or production writes",
+  "games": 30,
+  "completed": 30,
+  "steps": 3073,
+  "restores": 428,
+  "everyActionReplayedFromJSON": true,
+  "physicalIdentitiesPreserved": true,
+  "cardActionCounts": {
+    "14618326": 22,
+    "28357177": 17,
+    "28563545": 98,
+    "33066139": 22,
+    "46461247": 24,
+    "61831093": 26,
+    "65878864": 17,
+    "71283180": 31,
+    "75946257": 30,
+    "80316585": 96,
+    "81985784": 44,
+    "93920745": 53,
+    "09076207": 19
+  },
+  "allNewCardsObserved": true,
+  "finalStateSHA256": "bb92a4d154f4c56b7b7bcbb10920fe2774ddd18eaadc680c8fec1166c28c22c7",
+  "inventoryGranted": 0
+}

@@ -1,0 +1,62 @@
+{
+  "format": 1,
+  "runId": "work-20261127T221255-0300-M688",
+  "mission": "M688",
+  "priority": "P1",
+  "status": "completed-awaiting-review",
+  "startedAt": "2026-11-27T22:12:55-03:00",
+  "endedAt": "2026-11-27T22:19:56-03:00",
+  "branch": "feat/work-m688-battle-rewards-20261127",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedBaseHead": "09d396bafbf27ad76e81b521cc12e63128b5eca5",
+  "headSha": "aa57b7aef7a9c1c4a1f0e4fd5a6e1f9f",
+  "reservedFiles": [
+    "src/battleRewardTagAdapter.ts",
+    "tests/battleRewardTagAdapter.test.cjs",
+    "docs/evidence/m688-battle-rewards.json",
+    "scripts/audit-battle-rewards-m688.cjs",
+    ".github/workflows/m688-battle-rewards.yml",
+    "coordination/runs/work-20261127T221255-0300-M688.json"
+  ],
+  "baseline": {
+    "engineV9Certified": 969,
+    "remainingTo1000": 31,
+    "source": "milestone1000-plan artifact run 46091774623"
+  },
+  "blocksCompleted": [
+    "Adapter isolado para Airknight Parshath, Aswan Apparition e Absorbing Kid from the Sky",
+    "13 cenários Node executados; 13/13 passaram",
+    "Audit gate confirmou 969 certificados, 0 novos e 0 concessões",
+    "CI M688 concluiu success",
+    "Reserva M688 liberada; PR #613 permanece draft, sem merge/deploy."
+  ],
+  "handoff": {
+    "targetPR": 17,
+    "commentId": 7231569899,
+    "status": "requested-awaiting-explicit-release",
+    "files": [
+      "src/monsterEffects.ts",
+      "src/duelEngineCurrent.ts"
+    ],
+    "response": "Nenhuma liberação explícita observada até 2026-11-27T22:19:56-03:00"
+  },
+  "nextTask": "Implementar Airknight/Aswan/Absorbing Kid em adapter isolado; sem tocar em resolver central ou certificados.",
+  "pr": {
+    "number": 613,
+    "url": "https://github.com/dareka222778/yugioh-speed-rpg/pull/613",
+    "state": "open",
+    "draft": true,
+    "merged": false
+  },
+  "ci": {
+    "runId": 46092419702,
+    "conclusion": "success",
+    "url": "https://github.com/dareka222778/yugioh-speed-rpg/actions/runs/46092419702",
+    "checks": {
+      "typecheck": "success",
+      "build": "success",
+      "focusedTests": "success",
+      "audit": "success"
+    }
+  }
+}

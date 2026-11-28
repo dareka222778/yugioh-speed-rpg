@@ -1,0 +1,95 @@
+{
+  "runId": "work-20261128T082527-0300-M702",
+  "mission": "M702",
+  "priority": "P1",
+  "status": "reserved-and-implementing",
+  "branch": "feat/work-m702-jar-flip-disruption-20261128",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "startedAt": "2026-11-28T08:25:27-03:00",
+  "endedAt": null,
+  "effectiveMinutes": 0,
+  "minimumEffectiveMinutes": 60,
+  "sharedBaseHead": "0417a9fd69ef6e723639dbd7a5fb7cfa4e70e661",
+  "sharedHeadAtReservation": "0417a9fd69ef6e723639dbd7a5fb7cfa4e70e661",
+  "headSha": null,
+  "conditionalHeadUpdate": true,
+  "reservedFiles": [
+    "src/jarFlipDisruptionTagAdapter.ts",
+    "tests/jarFlipDisruptionTagAdapter.test.cjs",
+    "docs/evidence/m702-jar-flip-disruption.json",
+    "scripts/audit-jar-flip-disruption-m702.cjs",
+    ".github/workflows/m702-jar-flip-disruption.yml",
+    "coordination/runs/work-20261128T082527-0300-M702.json"
+  ],
+  "scope": "Adapter TagDuel 2v2 isolado para Morphing Jar (33508719/CID 4597) e Cyber Jar (34124316/CID 4913): FLIP de descarte/compra e destruição/revelação/invocação/adição à mão. Efeitos 'ambos os jogadores' aplicados aos dois representantes físicos ativos das equipes; mãos/Decks dos parceiros inativos permanecem privados e intactos. Identidade física por UID, GY do proprietário, 3+3 zonas, Field Zone separada, Deck 20–30, mão 6 apenas na End Phase e Extra 5. Sem resolver central, catálogo/certificação, comandos, banco, concessão de inventário ou produção.",
+  "nonOverlap": [
+    "M700: Burning Algae/The Thing in the Crater e seus seis arquivos; M701: D.D. Scout Plane/Dimension Fusion/Return from the Different Dimension e seus seis arquivos; nenhuma reserva de terceiros será tocada."
+  ],
+  "research": {
+    "historicalCutoff": "2004-09-30",
+    "officialCards": [
+      {
+        "id": "33508719",
+        "name": "Morphing Jar",
+        "konamiCid": 4597,
+        "firstRelease": "1999-10-17 OCG; 2002-10-01 TCG",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4597&ope=2&request_locale=en"
+      },
+      {
+        "id": "34124316",
+        "name": "Cyber Jar",
+        "konamiCid": 4913,
+        "firstRelease": "2000-07-13 OCG; 2002-09-16 TCG",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4913&ope=2&request_locale=en"
+      }
+    ]
+  },
+  "coordination": {
+    "stateBlobBefore": "7567d1616c4daab306df2f65935dc48b14890680",
+    "headGuard": "0417a9fd69ef6e723639dbd7a5fb7cfa4e70e661",
+    "headGuardResult": "pending",
+    "handoffRequest": {
+      "pr": 17,
+      "commentId": 7238587508,
+      "status": "requested-awaiting-explicit-release",
+      "files": [
+        "src/duelEngineCurrent.ts",
+        "src/monsterEffects.ts",
+        "src/effectRegistry.ts",
+        "src/cardMetadata.ts",
+        "src/cardCertifications.ts"
+      ]
+    }
+  },
+  "baseline": {
+    "explicitCertificationKeys": 969,
+    "newEngineCertified": 0,
+    "inventoryGranted": 0
+  },
+  "blocksCompleted": [
+    "HEAD compartilhado confirmado em 0417a9fd69ef6e723639dbd7a5fb7cfa4e70e661",
+    "Branches: M700 e M701 ativas; M700 PR #622 e CI com falha; M701 em preparação",
+    "PRs #619/#620/#622 e PR #17 inspecionados; handoff cooperativo solicitado no PR #17",
+    "IDs 33508719 e 34124316 ausentes das certificações explícitas do snapshot"
+  ],
+  "changes": [],
+  "tests": {
+    "focused": null,
+    "build": null,
+    "fullRegression": null,
+    "discordLive": false
+  },
+  "pullRequest": null,
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false
+  },
+  "blockers": [
+    "Handoff explícito para resolver central/catálogo/certificação pendente.",
+    "M700/M701 ativos em escopos independentes; arquivos reservados preservados."
+  ],
+  "nextTask": "Implementar adapter isolado de Morphing Jar e Cyber Jar, testes focados e auditoria de não-admissão; abrir PR draft e aguardar CI.",
+  "nextWindow": "2026-11-28T12:30:00-03:00",
+  "releasedToAuxiliary": []
+}

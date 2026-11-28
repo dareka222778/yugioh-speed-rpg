@@ -1,0 +1,157 @@
+{
+  "runId": "work-20261122T065200-0300-M500",
+  "mission": "M500",
+  "owner": "Work principal",
+  "priority": "P1 — proteger /dupla ver: a consulta de uma partida em andamento deve ser efêmera, localizar apenas a sessão do próprio usuário e entregar a mão privada do participante autenticado, nunca a mão do parceiro ou do adversário.",
+  "startedAt": "2026-11-22T06:52:00-03:00",
+  "lastActivityAt": "2026-11-22T06:52:00-03:00",
+  "endedAt": null,
+  "state": "reserved-and-implementing",
+  "branch": "feat/work-m500-tag-view-command-contract-20261122",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "dd41c63ae0b1a538ba2f2db899364d81e59af77d",
+  "sharedHeadAtReservation": "dd41c63ae0b1a538ba2f2db899364d81e59af77d",
+  "reservedFiles": [
+    "tests/tagDuelViewCommandContract.test.cjs",
+    "docs/evidence/m500-tag-view-command-contract.json",
+    ".github/workflows/m500-tag-view-command-contract.yml"
+  ],
+  "scope": [
+    "tests/tagDuelViewCommandContract.test.cjs",
+    "docs/evidence/m500-tag-view-command-contract.json",
+    ".github/workflows/m500-tag-view-command-contract.yml"
+  ],
+  "conflictCheck": {
+    "overlap": false,
+    "checkedAt": "2026-11-22T06:52:00-03:00",
+    "checkedReservations": [
+      "currentWorkReservation",
+      "currentWorkReservationM397",
+      "currentWorkReservationM398",
+      "currentWorkReservationM399",
+      "currentWorkReservationM400",
+      "currentWorkReservationM401",
+      "currentWorkReservationM402",
+      "currentWorkReservationM403",
+      "currentWorkReservationM404",
+      "currentWorkReservationM405",
+      "currentWorkReservationM406",
+      "currentWorkReservationM407",
+      "currentWorkReservationM427",
+      "currentWorkReservationM428",
+      "currentWorkReservationM429",
+      "currentWorkReservationM430",
+      "currentWorkReservationM431",
+      "currentWorkReservationM432",
+      "currentWorkReservationM433",
+      "currentWorkReservationM436",
+      "currentWorkReservationM437",
+      "currentWorkReservationM441",
+      "currentWorkReservationM442",
+      "currentWorkReservationM443",
+      "currentWorkReservationM444",
+      "currentWorkReservationM455",
+      "currentWorkReservationM456",
+      "currentWorkReservationM457",
+      "currentWorkReservationM458",
+      "currentWorkReservationM459",
+      "currentWorkReservationM469",
+      "currentWorkReservationM470",
+      "currentWorkReservationM471",
+      "currentWorkReservationM472",
+      "currentWorkReservationM473",
+      "currentWorkReservationM474",
+      "currentWorkReservationM475",
+      "currentWorkReservationM476",
+      "currentWorkReservationM477",
+      "currentWorkReservationM478",
+      "currentWorkReservationM479",
+      "currentWorkReservationM480",
+      "currentWorkReservationM481",
+      "currentWorkReservationM482",
+      "currentWorkReservationM483",
+      "currentWorkReservationM484",
+      "currentWorkReservationM485",
+      "currentWorkReservationM486",
+      "currentWorkReservationM487",
+      "currentWorkReservationM494",
+      "currentWorkReservationM495",
+      "currentWorkReservationM496",
+      "currentWorkReservationM497",
+      "currentWorkReservationM498",
+      "currentWorkReservationM499"
+    ],
+    "preserved": [
+      "M496–M499 permanecem em branches próprias e seus workflows são monitorados",
+      "M468 /dupla convidar, M498 /dupla treino e M499 /dupla campo preservados",
+      "M61 e todas as reservas de terceiros preservadas"
+    ]
+  },
+  "workBlocks": [
+    "Releu o handler /dupla ver e confirmou que o ramo usa deferReply ephemeral e visualTagPrivate(r,id).",
+    "M500 valida que a consulta usa a sessão vinculada ao usuário autenticado, não aceita destinatário arbitrário e não expõe UIDs de outras mãos."
+  ],
+  "tests": {
+    "focused": null,
+    "typescript": null,
+    "discordPayload": null,
+    "limitations": "Ainda não executados; serão disparados pela CI da PR."
+  },
+  "catalog": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "inventoryGranted": 0,
+  "mergePerformed": false,
+  "deployPerformed": false,
+  "production": {
+    "mainHead": "f78f3080b496d2697072b946088309f36e97b60e",
+    "sharedHeadAtReservation": "dd41c63ae0b1a538ba2f2db899364d81e59af77d",
+    "backupVerified": false,
+    "liveDiscordValidation": false,
+    "merge": false,
+    "deploy": false,
+    "deploymentRegistry": "Endpoint de deployments não foi aceito pela integração GitHub; produção não verificada."
+  },
+  "handoffM61": {
+    "pr": 17,
+    "commentId": 7074991975,
+    "status": "requested-no-response"
+  },
+  "relatedM496": {
+    "pr": 444,
+    "head": "0425a17a0b7d80b26da39e19451ac620c2687409",
+    "focused": "success",
+    "cardBatchFast": "success",
+    "milestone1000": "success",
+    "engineValidation": "running"
+  },
+  "relatedM497": {
+    "pr": 445,
+    "head": "9cf5bc46379ee4ba6ca2f98a10e14d5460b8c215",
+    "focused": "success",
+    "cardBatchFast": "success",
+    "milestone1000": "success",
+    "engineValidation": "running"
+  },
+  "relatedM498": {
+    "pr": 446,
+    "head": "441794dca3e73fd04d18b3f173145a46e8f1338a",
+    "focused": "success",
+    "cardBatchFast": "success",
+    "milestone1000": "success",
+    "engineValidation": "running"
+  },
+  "relatedM499": {
+    "pr": 447,
+    "head": "9e15a0bb26a79ed986ee5a31aad94aa5704ef44d",
+    "focused": "running"
+  },
+  "pr": null,
+  "releaseToAuxiliary": [],
+  "nextTask": "Testar /dupla ver como consulta privada do participante e confirmar que nenhuma mão alheia/UID privado aparece no payload.",
+  "nextWindow": "2026-11-22T11:30:00-03:00"
+}

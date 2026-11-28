@@ -1,0 +1,84 @@
+{
+  "runId": "work-20261123T184744-0300-M573",
+  "mission": "M573",
+  "owner": "Work principal",
+  "priority": "P1 — Solemn Judgment (41420027) e Horn of Heaven (98069388): negação de Invocação/ativação de Magia ou Armadilha, com custo de metade dos PV versus Tributo de monstro.",
+  "status": "reserved-and-implementing",
+  "startedAt": "2026-11-23T18:47:44-03:00",
+  "endedAt": null,
+  "branch": "feat/work-m573-summon-negation-tag-adapter-20261123",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "804cff3485d0bdbfe8dfebf7383754cc22f7542b",
+  "branchHeadSha": null,
+  "pullRequest": null,
+  "previousCheckpoint": "coordination/runs/work-20261123T182721-0300-M572.json",
+  "reservedFiles": [
+    "src/summonNegationTagAdapter.ts",
+    "tests/summonNegationTagAdapter.test.cjs",
+    "docs/evidence/m573-summon-negation-tag-adapter.json",
+    ".github/workflows/m573-summon-negation-tag-adapter.yml"
+  ],
+  "scope": "Adapter TagDuel isolado para Solemn Judgment e Horn of Heaven; testar janelas de Summon/Flip/Special Summon e ativação Spell/Trap, pagamento de metade dos PV, Tributo explícito do campo compartilhado, negação/destruição e conservação de UID. Sem alterar resolver central, catálogo, manifestos, certificações, allowlist, comandos ou dados persistentes.",
+  "cards": [
+    {
+      "id": "41420027",
+      "name": "Solemn Judgment",
+      "kind": "Counter Trap",
+      "officialKonamiCid": 4861,
+      "firstTcgRelease": "2002-06-26",
+      "behavior": "Paga metade dos PV para negar uma Invocação ou a ativação de uma Magia/Armadilha e destruir a carta, se possível."
+    },
+    {
+      "id": "98069388",
+      "name": "Horn of Heaven",
+      "kind": "Counter Trap",
+      "officialKonamiCid": 4864,
+      "firstTcgRelease": "2002-06-26",
+      "behavior": "Quando o oponente Invoca Normal ou Especialmente um monstro, Tributa 1 monstro do seu campo para negar a Invocação e destruir o monstro."
+    }
+  ],
+  "certificationAtStart": {
+    "engineV9Certified": 969,
+    "remainingTo1000": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "ciAtStart": {
+    "M571": {
+      "pr": 518,
+      "focused": "success",
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "engineValidation": "success",
+      "extendedSoak": "success"
+    },
+    "M572": {
+      "pr": 519,
+      "typescriptCheck": "success",
+      "build": "success",
+      "evidenceJson": "success",
+      "focusedTests": "failure-then-fix-in-progress",
+      "latestKnownPasses": 9,
+      "latestKnownFailures": 3,
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "engineValidation": "in_progress"
+    }
+  },
+  "handoff": {
+    "pr": 17,
+    "commentId": 7113961920,
+    "status": "awaiting-explicit-release",
+    "protectedFiles": [
+      "src/duelEngineCurrent.ts",
+      "src/monsterEffects.ts"
+    ]
+  },
+  "deployment": {
+    "status": "not_verified",
+    "reason": "GitHub connector não expõe consulta de deployments; nenhum merge/deploy será executado."
+  },
+  "nextTask": "Implementar adapter e testes M573; aguardar CI M572 em paralelo; após os testes focados, continuar com a próxima família independente.",
+  "nextWorkWindow": "2026-11-23T22:30:00-03:00"
+}

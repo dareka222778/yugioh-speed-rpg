@@ -1,0 +1,52 @@
+{
+  "runId": "work-20261121T052730-0300-M436",
+  "mission": "M436",
+  "priority": 1,
+  "status": "active",
+  "startedAt": "2026-11-21T05:27:30-03:00",
+  "endedAt": null,
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "e3a05baa9f5514a1dfbcc54192bf725f72c8acab",
+  "baseBranch": "feat/work-m395-andro-sphinx-20261119",
+  "baseSha": "3e33c409e187069daecac259fd24a4b9226fc9d7",
+  "branch": "feat/work-m436-andro-sphinx-tag-adapter-20261121",
+  "reservedFiles": [
+    "src/androSphinxTagAdapter.ts",
+    "tests/androSphinxTagAdapter.test.cjs",
+    "docs/evidence/m436-andro-sphinx-tag-adapter.json",
+    ".github/workflows/m436-andro-sphinx-tag-adapter.yml"
+  ],
+  "scope": "Adapter TagDuel 2v2 para Andro Sphinx (15013468): mapear mão física ativa, LP compartilhado, Pyramid of Light, três zonas, restrição de ataque no turno de summon e evento de dano após destruir monstro em Defesa.",
+  "coordination": {
+    "m61Handoff": "pending",
+    "requestComment": 7060030101,
+    "conflictingFilesUntouched": true,
+    "thirdPartyReservationsReleased": []
+  },
+  "catalog": {
+    "certifiedAtStart": 969,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "ci": {
+    "focused": "not-run",
+    "engineValidation": "not-run",
+    "cardBatchFast": "not-run",
+    "milestone1000": "not-run",
+    "extendedSoak": "not-run"
+  },
+  "production": {
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "backupVerified": false,
+    "discordLiveTest": false
+  },
+  "duration": {
+    "effectiveMinutes": 0,
+    "targetEffectiveMinutes": 60,
+    "targetMet": false,
+    "ciWaitExcluded": true
+  },
+  "nextTask": "Completar adapter e testes; depois iniciar adapter independente de Ancient Lamp se o HEAD e as reservas continuarem seguros."
+}

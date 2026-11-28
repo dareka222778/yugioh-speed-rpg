@@ -1,0 +1,128 @@
+{
+  "format": 1,
+  "runId": "work-20261125T2045Z-M636",
+  "mission": "M636",
+  "owner": "Work principal",
+  "priority": "P1",
+  "priorityRequestedBy": "User",
+  "status": "CI focused + engine validation green; PR #577 draft; scope released to auxiliary for review",
+  "startedAt": "2026-11-25T23:47:18.761Z",
+  "endedAt": "2026-11-26T00:29:19-03:00",
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "07af90e9212827d858b540016a520f3f1d3bc7e2",
+  "branch": "feat/work-m636-standby-lp-tag-adapter-20261125",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "07af90e9212827d858b540016a520f3f1d3bc7e2",
+  "branchBaseSha": "34508a6d0c9f4aef57b51970fb482f399f7be1cf",
+  "branchHeadSha": "7a1a94418d522332d00293a47c2acbebc416da52",
+  "pullRequest": 577,
+  "reservedFiles": [
+    "src/standbyLPGainTagAdapter.ts",
+    "tests/standbyLPGainTagAdapter.test.cjs",
+    "docs/evidence/m636-standby-lp-tag-adapter.json",
+    ".github/workflows/m636-standby-lp-tag-adapter.yml"
+  ],
+  "scope": "Adaptador isolado para a família de recuperação de LP na Standby Phase: Cure Mermaid (+800 face-up em qualquer posição) e Spirit of the Breeze (+1000 somente face-up Attack Position). Usa LP compartilhados por equipe no TagDuel, sem tocar standbyFlow central, metadados, certificações ou dados persistentes.",
+  "cards": [
+    {
+      "id": "85802526",
+      "name": "Cure Mermaid",
+      "konamiId": 5204,
+      "officialText": "As long as this card remains face-up on your side of the field, increase your Life Points by 800 points during each of your Standby Phases.",
+      "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5204&ope=2&request_locale=en",
+      "firstTcgRelease": "2003-03-01",
+      "certifiedAtStart": false
+    },
+    {
+      "id": "53530069",
+      "name": "Spirit of the Breeze",
+      "konamiId": 5200,
+      "officialText": "As long as this card remains in face-up Attack Position on your side of the field, increase your Life Points by 1000 points during each of your Standby Phases.",
+      "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5200&ope=2&request_locale=en",
+      "firstTcgRelease": "2003-03-01",
+      "certifiedAtStart": false
+    }
+  ],
+  "implementation": {
+    "files": [
+      "src/standbyLPGainTagAdapter.ts",
+      "tests/standbyLPGainTagAdapter.test.cjs",
+      "docs/evidence/m636-standby-lp-tag-adapter.json",
+      ".github/workflows/m636-standby-lp-tag-adapter.yml"
+    ],
+    "scope": "Isolated TagDuel adapter; no central resolver integration, catalog admission or certification."
+  },
+  "verification": {
+    "focusedScenarios": 11,
+    "focusedTestResult": "success (11/11)",
+    "typecheck": "success",
+    "build": "success",
+    "evidenceValidation": "success",
+    "adapterBehaviorVerifiedCards": 2,
+    "behaviorCertifiedCards": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "liveDiscordValidation": false
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "effectiveWorkMinutes": 0,
+  "targetEffectiveWorkMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "nextTask": "Auxiliar: revisar e monitorar PR #577; manter draft; não integrar nem implantar sem autorização vigente, CI adequada e backup verificável.",
+  "nextWindow": "2026-11-26T05:30:00-03:00",
+  "scopeReleasedToAuxiliary": [
+    "src/standbyLPGainTagAdapter.ts",
+    "tests/standbyLPGainTagAdapter.test.cjs",
+    "docs/evidence/m636-standby-lp-tag-adapter.json",
+    ".github/workflows/m636-standby-lp-tag-adapter.yml"
+  ],
+  "ci": {
+    "focused": {
+      "runId": 45724770957,
+      "jobId": 139591719431,
+      "status": "success",
+      "tests": 11,
+      "passed": 11,
+      "failed": 0
+    },
+    "cardBatchFast": {
+      "runId": 45724771032,
+      "status": "success"
+    },
+    "milestone1000": {
+      "runId": 45724771047,
+      "status": "success"
+    },
+    "engineValidation": {
+      "runId": 45724771104,
+      "status": "success",
+      "jobs": [
+        "test",
+        "extended-soak"
+      ]
+    }
+  },
+  "catalogAtEnd": {
+    "engineV9Certified": 969,
+    "newCertifications": 0,
+    "adapterBehaviorVerifiedCards": 2,
+    "behaviorCertifiedCards": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  }
+}

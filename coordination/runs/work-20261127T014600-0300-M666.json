@@ -1,0 +1,39 @@
+{
+  "format": 1,
+  "runId": "work-20261127T014600-0300-M666",
+  "mission": "M666",
+  "priority": "P1",
+  "status": "reserved-and-implementing",
+  "startedAt": "2026-11-27T01:46:41-03:00",
+  "endedAt": null,
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "baseHead": "00af0bb97ab611e425d71c1830eccc2fe7ea683a",
+  "branch": "feat/work-m666-attack-limit-maintenance-20261127",
+  "headSha": null,
+  "reservedFiles": [
+    "src/attackLimitMaintenanceTagAdapter.ts",
+    "tests/attackLimitMaintenanceTagAdapter.test.cjs",
+    "docs/evidence/m666-attack-limit-maintenance.json",
+    "scripts/audit-attack-limit-maintenance-m666.cjs",
+    ".github/workflows/m666-attack-limit-maintenance.yml"
+  ],
+  "scope": "Adapter TagDuel isolado para The Dark Door (30606547 / CID 5225) e Messenger of Peace (44656491 / CID 4938): limite de um atacante por equipe/Fase de Batalha, bloqueio de monstros face-up com ATK >=1500, manutenção de 100 LP por Standby da equipe controladora, pagamento opcional/sem LP suficiente destrói a fonte. Usa ATK efetivo, LP compartilhado, UID/assento físico e recibos idempotentes. Sem resolver central, catálogo/certificações, comandos, banco ou produção.",
+  "certifiedCardsBefore": 959,
+  "certifiedCardsAfter": null,
+  "newCertifications": 0,
+  "inventoryGrants": 0,
+  "verification": {
+    "sourceIdentity": "pending",
+    "focusedTests": "pending",
+    "typecheck": "pending",
+    "build": "pending",
+    "repositoryRegression": "pending",
+    "discordLive": "not-run"
+  },
+  "pr": null,
+  "production": "não alterada",
+  "discord": "não validado ao vivo",
+  "handoff": "Escopo isolado em cinco caminhos; nenhum arquivo reservado por M655/M656 ou M637/M662 será alterado. A política de manutenção por equipe em TagDuel requer aprovação na integração.",
+  "nextTask": "Implementar adaptador de restrição de ataques e manutenção, com testes de limite de ATK, um ataque por equipe, rotação, custo de 100 LP, recusa/falta de LP, remoção, negação e replay.",
+  "nextWindow": "2026-11-27T06:30:00-03:00"
+}

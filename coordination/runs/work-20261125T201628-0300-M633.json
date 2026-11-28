@@ -1,0 +1,133 @@
+{
+  "format": 1,
+  "runId": "work-20261125T201628-0300-M633",
+  "mission": "M633",
+  "owner": "Work principal",
+  "priority": "P1",
+  "priorityRequestedBy": "User",
+  "status": "focused adapter suite green after Field Spell fixture correction; PR #575 remains draft",
+  "startedAt": "2026-11-25T20:16:28-03:00",
+  "endedAt": null,
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "59fc80c5c7d27d8c71a0b765acfef2187d1062fa",
+  "branch": "feat/work-m633-dark-scorpion-battle-damage-20261125",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "59fc80c5c7d27d8c71a0b765acfef2187d1062fa",
+  "branchBaseSha": null,
+  "branchHeadSha": "100ab768c0de3b37e06530107c42984aff784739",
+  "pullRequest": 575,
+  "reservedFiles": [
+    "src/darkScorpionBattleDamageTagAdapter.ts",
+    "tests/darkScorpionBattleDamageTagAdapter.test.cjs",
+    "docs/evidence/m633-dark-scorpion-battle-damage.json",
+    ".github/workflows/m633-dark-scorpion-battle-damage.yml"
+  ],
+  "scope": "Adapter TagDuel isolado para Dark Scorpion Burglars (40933924 / CID 5425) e Dark Scorpion - Cliff the Trap Remover (06967870 / CID 5662): gatilho após dano de batalha efetivamente aplicado, envio de Magia do Deck adversário ao Cemitério com embaralhamento, escolha entre destruição de Magia/Armadilha ou mill de 2; sem integração central/certificação.",
+  "cards": [
+    {
+      "name": "Dark Scorpion Burglars",
+      "passcode": "40933924",
+      "konamiDatabaseId": 5425,
+      "type": "DARK / Warrior / Effect / Level 4",
+      "atk": 1000,
+      "def": 1000,
+      "firstTcgRelease": "2003-07-18",
+      "officialEffect": "When this card inflicts Battle Damage to your opponent: Your opponent sends 1 Spell Card from their Deck to the Graveyard.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5425&ope=2&request_locale=en"
+    },
+    {
+      "name": "Dark Scorpion - Cliff the Trap Remover",
+      "passcode": "06967870",
+      "konamiDatabaseId": 5662,
+      "type": "DARK / Warrior / Effect / Level 3",
+      "atk": 1200,
+      "def": 1000,
+      "firstTcgRelease": "2003-10-10",
+      "officialEffect": "When this card inflicts Battle Damage to your opponent, you can activate 1 of these effects: target 1 Spell/Trap on the field and destroy it; or send the top 2 cards of their Deck to the GY.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5662&ope=2&request_locale=en"
+    }
+  ],
+  "rules": {
+    "mainDeckPerPhysicalSeat": "20–30",
+    "extraDeckPerPhysicalSeat": "0–5",
+    "monsterZonesPerTeam": 3,
+    "spellTrapZonesPerTeam": 3,
+    "fieldZone": "separate",
+    "handLimit": 6,
+    "handDiscard": "only End Phase"
+  },
+  "implementation": {
+    "files": [
+      "src/darkScorpionBattleDamageTagAdapter.ts",
+      "tests/darkScorpionBattleDamageTagAdapter.test.cjs",
+      "docs/evidence/m633-dark-scorpion-battle-damage.json",
+      ".github/workflows/m633-dark-scorpion-battle-damage.yml"
+    ],
+    "plannedScenarios": 30,
+    "integrationBoundary": "Adapter isolado; sem resolver central, catálogo, certificações, allowlist, comandos Discord, banco ou produção."
+  },
+  "verification": {
+    "focusedScenarios": 0,
+    "focusedTestResult": "29/29 passed",
+    "typecheck": "pending",
+    "build": "pending",
+    "evidenceValidation": "pending",
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "liveDiscordValidation": false,
+    "latestRuns": [
+      {
+        "id": 45720886997,
+        "name": "Milestone 1000 - certified-card progress and triage",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/dareka222778/yugioh-speed-rpg/actions/runs/45720886997"
+      },
+      {
+        "id": 45720886815,
+        "name": "Engine validation",
+        "status": "in_progress",
+        "conclusion": null,
+        "url": "https://github.com/dareka222778/yugioh-speed-rpg/actions/runs/45720886815"
+      },
+      {
+        "id": 45720886766,
+        "name": "Card batch fast feedback",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/dareka222778/yugioh-speed-rpg/actions/runs/45720886766"
+      },
+      {
+        "id": 45720886677,
+        "name": "M633 Dark Scorpion Battle Damage Adapter",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/dareka222778/yugioh-speed-rpg/actions/runs/45720886677"
+      },
+      {
+        "id": 45720877293,
+        "name": "M633 Dark Scorpion Battle Damage Adapter",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/dareka222778/yugioh-speed-rpg/actions/runs/45720877293"
+      }
+    ]
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "effectiveWorkMinutes": 17,
+  "targetEffectiveWorkMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "nextTask": "Aguardar Engine Validation completa; revisar seleção privada de Burglars e não integrar sem revisão/autorizações.",
+  "nextWindow": "2026-11-25T22:30:00-03:00",
+  "scopeReleasedToAuxiliary": [],
+  "lastActivityAt": "2026-11-25T20:25:13-03:00",
+  "lastCheckpointSha": "100ab768c0de3b37e06530107c42984aff784739"
+}

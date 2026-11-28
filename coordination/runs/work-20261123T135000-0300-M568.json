@@ -1,0 +1,98 @@
+{
+  "runId": "work-20261123T135000-0300-M568",
+  "mission": "M568",
+  "owner": "Work principal",
+  "priority": "P1 — Creature Swap (31036355): troca simultânea de controle entre um monstro de cada equipe, escolhas feitas na resolução sem targeting, preservação de UID/proprietário/posição e bloqueio de mudança de posição até o fim do turno.",
+  "state": "reserved-preparing-during-M567-CI",
+  "startedAt": "2026-11-23T13:50:00-03:00",
+  "lastActivityAt": "2026-11-23T13:50:00-03:00",
+  "endedAt": null,
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "6d390f41a99b19881f5995631013f86825aed952",
+  "branch": "feat/work-m568-creature-swap-tag-adapter-20261123",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "6d390f41a99b19881f5995631013f86825aed952",
+  "reservedFiles": [
+    "src/creatureSwapTagAdapter.ts",
+    "tests/creatureSwapTagAdapter.test.cjs",
+    "docs/evidence/m568-creature-swap-tag-adapter.json",
+    ".github/workflows/m568-creature-swap-tag-adapter.yml"
+  ],
+  "scope": [
+    "src/creatureSwapTagAdapter.ts",
+    "tests/creatureSwapTagAdapter.test.cjs",
+    "docs/evidence/m568-creature-swap-tag-adapter.json",
+    ".github/workflows/m568-creature-swap-tag-adapter.yml"
+  ],
+  "conflictCheck": {
+    "overlap": false,
+    "checkedAt": "2026-11-23T13:50:00-03:00",
+    "checkedAgainst": [
+      "M566 Autonomous Action Unit usa arquivos próprios.",
+      "M567 Snatch Steal usa arquivos próprios; M568 é Spell Normal de troca simultânea, sem sobreposição.",
+      "M563–M565 permanecem em escopos próprios.",
+      "M61 mantém resolver, metadata, certificações e manifesto protegidos; M568 não os altera.",
+      "Busca por 31036355 em código, metadata, certificações, branches e PRs não encontrou implementação."
+    ]
+  },
+  "card": {
+    "name": "Creature Swap",
+    "portugueseName": "Troca de Criaturas",
+    "passcode": "31036355",
+    "konamiDatabaseId": 5162,
+    "type": "Normal Spell",
+    "officialCardDatabase": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5162&ope=2&request_locale=en",
+    "officialText": "Each player chooses 1 monster they control and switches control of those monsters with each other. Those monsters cannot change their battle positions for the rest of this turn.",
+    "firstTcgPrinting": {
+      "date": "2003-06-06",
+      "set": "LOD-081",
+      "product": "Legacy of Darkness"
+    }
+  },
+  "design": {
+    "activation": "Spell Normal da mão do representante físico ativo, Main Phase aberta; ambos os times devem controlar ao menos um monstro; escolhas não são targets e ocorrem na resolução.",
+    "resolution": "Cada equipe escolhe um UID atualmente sob seu controle; trocar os dois monstros entre equipes sem invocar, preservar UID/proprietário/posição/face-up e travar mudança de posição até End Phase.",
+    "rules": {
+      "deckConstruction": "20–30",
+      "handLimit": 6,
+      "discard": "End Phase",
+      "monsterZones": 3,
+      "spellTrapZones": 3,
+      "fieldZone": "separate",
+      "extraDeck": 5
+    },
+    "safety": "Sem concessão de inventário; movimentos de controle preservam proprietário físico e não mudam LP."
+  },
+  "catalog": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "inventoryGranted": 0,
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "tests": {
+    "focused": "pending",
+    "check": "pending",
+    "build": "pending",
+    "cardBatchFast": "pending",
+    "milestone1000": "pending",
+    "engineValidation": "pending"
+  },
+  "nextTask": "Finalizar M566/M567 CI e implementar Creature Swap com escolhas simultâneas, controle físico e positionLockedThrough até End Phase.",
+  "nextWindow": "2026-11-23T17:30:00-03:00",
+  "duration": {
+    "startedAt": "2026-11-23T13:50:00-03:00",
+    "endedAt": null,
+    "elapsedMinutes": null,
+    "effectiveWorkMinutes": 0,
+    "targetEffectiveMinutes": 60,
+    "ciWaitExcluded": true
+  }
+}

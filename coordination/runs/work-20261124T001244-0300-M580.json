@@ -1,0 +1,149 @@
+{
+  "format": 1,
+  "runId": "work-20261124T001244-0300-M580",
+  "mission": "M580",
+  "owner": "Work principal",
+  "priority": "P1 — gatilhos pós-batalha com roteamento por proprietário físico: Birdface pesquisa a mão privada do dono; Keldo embaralha cada alvo no Deck privado do seu dono.",
+  "state": "completed-pr-open-draft-ci-green-released-to-auxiliary",
+  "startedAt": "2026-11-24T00:12:44-03:00",
+  "endedAt": "2026-11-24T08:30:03-03:00",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "58e15838acfa2da4dd8149d427c363086c0e6bab",
+  "branch": "feat/work-m580-birdface-keldo-battle-destroyed-tag-adapter-20261124",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "58e15838acfa2da4dd8149d427c363086c0e6bab",
+  "branchStartSha": "58e15838acfa2da4dd8149d427c363086c0e6bab",
+  "branchHeadSha": "78e61540ff57ec7d976216d56438d09e34d92963",
+  "reservationCommitSha": null,
+  "pullRequest": 527,
+  "reservedFiles": [
+    "src/battleDestroyedSearchTagAdapter.ts",
+    "tests/battleDestroyedSearchTagAdapter.test.cjs",
+    "docs/evidence/m580-battle-destroyed-search-tag-adapter.json",
+    ".github/workflows/m580-battle-destroyed-search-tag-adapter.yml"
+  ],
+  "scope": "Adapter TagDuel isolado para Birdface e Keldo, ambos destruídos por batalha e enviados ao Cemitério. Compartilha validação do evento; roteia Deck/Mão por assento físico codificado no UID e embaralha com o fluxo HMAC persistido. Sem alteração de resolver central, catálogo, certificações, allowlist, comandos, banco ou dados persistentes.",
+  "conflictCheck": {
+    "overlap": false,
+    "checkedAt": "2026-11-24T00:12:44-03:00",
+    "checkedAgainst": [
+      "Busca de branches e PRs por Birdface e Keldo: nenhum PR/branch de implementação existente.",
+      "coordination/state.json activeParallelWork: não há reserva Birdface/Keldo; Agido aparece reservado, portanto não será tocado.",
+      "Flying Kamakiri, Giant Rat, Shining Angel, Mother Grizzly e UFO Turtle estão em escopos de PRs existentes e foram excluídos.",
+      "M61 continua aguardando handoff; arquivos centrais protegidos não serão editados.",
+      "Somente os quatro caminhos novos M580 estão reservados."
+    ]
+  },
+  "cards": [
+    {
+      "id": "45547649",
+      "name": "Birdface",
+      "konamiDatabaseCid": 5021,
+      "officialText": "When this card is destroyed by battle and sent to the GY: You can add 1 'Harpie Lady' from your Deck to your hand.",
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5021&ope=2&request_locale=en",
+      "firstTcgRelease": "2003-07-18",
+      "firstOcgRelease": "2003-04-24",
+      "historicalEligibility": "eligible-before-2004-09-30"
+    },
+    {
+      "id": "80441106",
+      "name": "Keldo",
+      "konamiDatabaseCid": 5351,
+      "officialText": "If this card is destroyed by battle and sent to the GY: Target 2 cards in your opponent's GY; shuffle them into the Deck.",
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5351&ope=2&request_locale=en",
+      "firstTcgRelease": "2003-12-01",
+      "firstOcgRelease": "2003-02-20",
+      "historicalEligibility": "eligible-before-2004-09-30"
+    }
+  ],
+  "design": {
+    "trigger": "A janela exige destroyedByBattle=true, sentToGrave=true e damageStepComplete=true; destruição por efeito, banimento ou fonte fora do Cemitério não ativa.",
+    "birdface": "A busca usa somente a Deck privada do assento físico do Birdface e adiciona Harpie Lady (76812113) à mão desse mesmo assento; a mão pode chegar a 7 até a End Phase.",
+    "keldo": "Escolhe exatamente dois cartões do Cemitério compartilhado da equipe adversária; cada alvo volta ao Deck do seu proprietário físico (UID m0–m3), com shuffleDuel/HMAC para cada Deck afetado.",
+    "ownership": "O controlador no campo não substitui o proprietário físico. Cartas de parceiro inativo retornam ao Deck/Mão de reserva desse parceiro; nenhum UID é recriado.",
+    "safety": "Sem descarte automático fora da End Phase; sem concessão de inventário; sem mutação de dados de jogador."
+  },
+  "rules": {
+    "mainDeck": "20–30 por assento físico",
+    "handLimit": 6,
+    "handCheck": "End Phase",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separada",
+    "extraDeckMax": 5
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "identityBlocked": 27,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "ci": {
+    "focused": {
+      "status": "success",
+      "sha": "78e61540ff57ec7d976216d56438d09e34d92963",
+      "tests": 16,
+      "passed": 16,
+      "failed": 0
+    },
+    "cardBatchFast": "success",
+    "milestone1000": "success",
+    "engineValidation": "success",
+    "customWorkflow": "success"
+  },
+  "production": {
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "safety": {
+    "runtimeCoreChanged": false,
+    "catalogChanged": false,
+    "certificationChanged": false,
+    "releasedCardIdsChanged": false,
+    "inventoryGranted": 0,
+    "persistentDatabaseChanged": false,
+    "playerDataChanged": false,
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "liveDiscordValidation": false
+  },
+  "nextTask": "Auxiliar pode monitorar/corrigir somente os quatro arquivos M580 na branch própria; merge permanece condicionado a revisão/autorização do proprietário e integração M61.",
+  "nextWindow": "2026-11-24T13:30:00-03:00",
+  "duration": {
+    "startedAt": "2026-11-24T00:12:44-03:00",
+    "endedAt": "2026-11-24T08:30:03-03:00",
+    "elapsedMinutes": 497,
+    "effectiveWorkMinutes": null,
+    "targetEffectiveMinutes": 60,
+    "targetMet": false,
+    "ciWaitExcluded": true,
+    "note": "Tempo efetivo histórico não pôde ser reconstruído; a espera de CI não foi contabilizada."
+  },
+  "status": "completed-pr-open-draft-ci-green-released-to-auxiliary",
+  "lastActivityAt": "2026-11-24T08:30:03-03:00",
+  "latestBranchHeadSha": "78e61540ff57ec7d976216d56438d09e34d92963",
+  "pullRequestUrl": "https://github.com/dareka222778/yugioh-speed-rpg/pull/527",
+  "catalogAtEnd": {
+    "engineV9Certified": 969,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "testCases": 16,
+  "blocksCompleted": [
+    "PR #527 conferida no GitHub: aberta, draft, mergeable; 16/16 testes focados e Engine Validation, Card Batch Fast e Milestone 1000 concluídos com sucesso.",
+    "Reserva própria M580 liberada ao auxiliar; nenhum merge, deploy, alteração de catálogo ou concessão de inventário."
+  ],
+  "scopeReleasedToAuxiliary": [
+    "src/battleDestroyedSearchTagAdapter.ts",
+    "tests/battleDestroyedSearchTagAdapter.test.cjs",
+    "docs/evidence/m580-battle-destroyed-search-tag-adapter.json",
+    ".github/workflows/m580-battle-destroyed-search-tag-adapter.yml"
+  ],
+  "handoff": "Reserva própria liberada ao auxiliar após CI verde; M61 permanece aguardando transferência explícita para qualquer integração central."
+}

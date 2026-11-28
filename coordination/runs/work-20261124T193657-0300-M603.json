@@ -1,0 +1,85 @@
+{
+  "format": 1,
+  "runId": "work-20261124T193657-0300-M603",
+  "mission": "M603",
+  "owner": "Work principal",
+  "priority": "P1",
+  "status": "PR open; CI in progress/queued; scope released to auxiliary",
+  "startedAt": "2026-11-24T19:36:57-03:00",
+  "endedAt": "2026-11-24T19:44:12-03:00",
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "a4fb791d7425f334a7d48b386bd2e71981223fe3",
+  "branch": "feat/work-m603-swift-gaia-normal-summon-20261124",
+  "baseSha": "a4fb791d7425f334a7d48b386bd2e71981223fe3",
+  "branchHeadSha": "99411d61e0ea21d1bcd49cdff439652784b330b9",
+  "pullRequest": 546,
+  "reservedFiles": [
+    "src/swiftGaiaNormalSummonTagAdapter.ts",
+    "tests/swiftGaiaNormalSummonTagAdapter.test.cjs",
+    "docs/evidence/m603-swift-gaia-normal-summon.json",
+    ".github/workflows/m603-swift-gaia-normal-summon.yml"
+  ],
+  "scope": "Implementar adapter TagDuel puro para Swift Gaia the Fierce Knight: permitir Normal Summon face-up Attack sem Tributo somente quando for a única carta na mão privada do proprietário físico ativo. Consumir a Normal Summon, preservar UIDs e validar Main Phase, zonas 3+3, Deck Principal 20–30, Extra 5 e mão 6 no fim do turno. Não integrar resolver central nem certificar carta sem handoff M61.",
+  "conflictCheck": {
+    "checkedAt": "2026-11-24T19:36:57-03:00",
+    "sharedHead": "a4fb791d7425f334a7d48b386bd2e71981223fe3",
+    "matchingBranchSearch": [],
+    "matchingPullRequests": [],
+    "codeSearchPasscode": [],
+    "priorRelatedWork": [
+      "M602 The Fiend Megacyber is a distinct conditional Special Summon from hand; separate files and rule."
+    ],
+    "m601FilesDisjoint": true,
+    "m602FilesDisjoint": true,
+    "m598FilesUntouched": true,
+    "m599FilesUntouched": true,
+    "m600FilesUntouched": true,
+    "m61Untouched": true,
+    "m600TransferRequestedOnPR": 543,
+    "m600ReleaseReceived": false,
+    "thirdPartyReservationsUntouched": true
+  },
+  "card": {
+    "name": "Swift Gaia the Fierce Knight",
+    "portugueseName": "Gaia, o Cavaleiro Impetuoso Célere",
+    "passcode": "16589042",
+    "konamiDatabaseId": 5243,
+    "stats": {
+      "level": 7,
+      "atk": 2300,
+      "def": 2100,
+      "race": "Warrior",
+      "attribute": "DARK"
+    },
+    "tcgFirstPrint": "CT1-EN004, 2004-09-01",
+    "effect": "If this is the only card in your hand, you can Normal Summon it without Tributing.",
+    "ruling": "Normal Summon without Tribute; not a Special Summon; only face-up Attack in this adapter."
+  },
+  "catalogAtStart": {
+    "certified": 969,
+    "remainingTo1000": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "effectiveWorkMinutes": 8,
+  "targetEffectiveMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "nextTask": "Monitorar CI focada; depois solicitar registro e integração do resolver somente após handoff M61.",
+  "nextWindow": "2026-11-24T23:30:00-03:00",
+  "scopeReleasedToAuxiliary": [
+    "src/swiftGaiaNormalSummonTagAdapter.ts",
+    "tests/swiftGaiaNormalSummonTagAdapter.test.cjs",
+    "docs/evidence/m603-swift-gaia-normal-summon.json",
+    ".github/workflows/m603-swift-gaia-normal-summon.yml"
+  ],
+  "lastActivityAt": "2026-11-24T19:44:12-03:00"
+}

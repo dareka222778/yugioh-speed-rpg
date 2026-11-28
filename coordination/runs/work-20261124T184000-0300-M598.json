@@ -1,0 +1,93 @@
+{
+  "format": 1,
+  "runId": "work-20261124T184000-0300-M598",
+  "mission": "M598",
+  "owner": "Work principal",
+  "priority": "P1",
+  "status": "reserved-awaiting-isolated-branch",
+  "startedAt": "2026-11-24T18:43:26-03:00",
+  "endedAt": null,
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "5ee37af8f9bee3f5edbb1e89c1ab93e79fa1c71c",
+  "branch": "feat/work-m598-chain-energy-hand-cost-tag-adapter-20261124",
+  "baseSha": null,
+  "branchHeadSha": null,
+  "pullRequest": null,
+  "reservedFiles": [
+    "src/chainEnergyTagAdapter.ts",
+    "tests/chainEnergyTagAdapter.test.cjs",
+    "docs/evidence/m598-chain-energy-tag-adapter.json",
+    ".github/workflows/m598-chain-energy-tag-adapter.yml"
+  ],
+  "scope": "Adapter puro TagDuel para Chain Energy: custo de 500 LP por carta da mão usada em Normal/Special Summon, Set ou ativação de carta/efeito a partir da mão. Valida membro ativo, UID físico e mão privada; não taxa cartas ativadas já Setadas nem cartas trazidas de Deck/Cemitério/Extra/campo. Quatro caminhos novos; sem resolver, catálogo, certificação, inventário ou dados persistentes.",
+  "conflictCheck": {
+    "checkedAt": "2026-11-24T18:43:26-03:00",
+    "sharedHead": "5ee37af8f9bee3f5edbb1e89c1ab93e79fa1c71c",
+    "matchingBranches": 0,
+    "matchingPRs": 0,
+    "matchingCodeIds": 0,
+    "m61Handoff": "pending; no integration attempted",
+    "m596FilesUntouched": true,
+    "m597FilesUntouched": true,
+    "m593FilesUntouched": true,
+    "m594FilesUntouched": true,
+    "m595FilesUntouched": true,
+    "thirdPartyReservationsUntouched": true
+  },
+  "card": {
+    "name": "Chain Energy",
+    "passcode": "79323590",
+    "konamiDatabaseId": 4908,
+    "kind": "Continuous Spell",
+    "firstTCGPrinting": "Magic Ruler (MRL-046), 2002-09-16",
+    "officialDatabaseUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4908&ope=2&request_locale=en",
+    "officialEffect": "Each player must pay 500 Life Points per card to Normal Summon, Special Summon, Set or activate cards from his/her respective hand."
+  },
+  "plannedTests": [
+    "Normal Summon, Special Summon, Set and card/effect activation from hand pay 500 LP per card",
+    "monster effects activated from hand are taxed; a later Special Summon from hand is a separate cost event",
+    "multi-card hand summon/set events scale per card",
+    "only active physical member's private hand is accepted; teammate private hand cannot be read or charged",
+    "cards activated from field, already Set cards, and cards moved from Deck/GY/Extra/field are not taxed",
+    "discard/send-to-GY/reveal costs are not misclassified as playing a card",
+    "multiple active Chain Energy copies contribute independently; face-down/negated copies do not",
+    "insufficient LP and exact-zero payment block the action; 501 LP permits a 500 cost",
+    "stale LP, duplicate UIDs, wrong member, wrong card type and replayed action IDs fail closed",
+    "adapter does not mutate LP, hands, Decks, 3+3 zones, Field Zone or Extra Deck"
+  ],
+  "rules": {
+    "mainDeck": "20-30 per physical seat",
+    "handLimit": 6,
+    "handLimitTiming": "End Phase only",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separate",
+    "extraDeckMax": 5,
+    "privateHandsAndDecks": true,
+    "sharedTeamGraveyardAndLP": true
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "production": {
+    "resolverIntegration": false,
+    "discordCommandIntegration": false,
+    "liveDiscordValidation": false,
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false
+  },
+  "effectiveWorkMinutes": 0,
+  "targetEffectiveMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "nextTask": "Implementar Chain Energy como custo de LP antes de ações com carta da mão, validar assento físico/mão privada, efeitos ativados da mão, summons da mão e não incidência em Deck/Cemitério/Extra/campo; testar pagamento insuficiente e custo repetido.",
+  "nextWindow": "2026-11-24T23:30:00-03:00",
+  "scopeReleasedToAuxiliary": []
+}

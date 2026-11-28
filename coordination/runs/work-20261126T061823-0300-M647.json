@@ -1,0 +1,81 @@
+{
+  "format": 1,
+  "runId": "work-20261126T061823-0300-M647",
+  "mission": "M647",
+  "owner": "Work principal",
+  "priority": "P1",
+  "priorityRequestedBy": "User",
+  "status": "reserved-and-implementing",
+  "startedAt": "2026-11-26T06:18:23-03:00",
+  "endedAt": null,
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "e7bb7cff082c07c1a304d99e29624048c02aef1f",
+  "branch": "feat/work-m647-reload-tag-adapter-20261126",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "e7bb7cff082c07c1a304d99e29624048c02aef1f",
+  "branchHeadSha": "e7bb7cff082c07c1a304d99e29624048c02aef1f",
+  "pullRequest": null,
+  "reservedFiles": [
+    "src/reloadTagAdapter.ts",
+    "tests/reloadTagAdapter.test.cjs",
+    "docs/evidence/m647-reload.json",
+    ".github/workflows/m647-reload.yml"
+  ],
+  "scope": "Adapter isolado TagDuel clássico 2v2 para Reload: ativação Quick-Play em prioridade aberta na Main/Battle Phase da própria equipe; cartas restantes da mão física retornam ao próprio Deck, embaralham pelo fluxo HMAC persistido e a mesma quantidade é comprada. Quick-Play baixada exige turno posterior. Sem resolver central, catálogo, certificação, comandos, banco ou produção.",
+  "cards": [
+    {
+      "id": "22589918",
+      "konamiId": 5849,
+      "name": "Reload",
+      "namePt": "Recarga",
+      "officialText": "Add all cards in your hand to your Deck and shuffle it. Then draw the same number of cards that you added to your Deck.",
+      "firstTCGRelease": "2004-03-01",
+      "firstOCGRelease": "2003-04-24",
+      "certifiedAtStart": false
+    }
+  ],
+  "handoff": {
+    "status": "escopo independente; reservas ativas pertencem a arquivos distintos; integração no resolver central aguarda liberação explícita",
+    "blockedFiles": [
+      "src/monsterEffects.ts",
+      "src/duelEngineCurrent.ts",
+      "src/effectRegistry.ts",
+      "src/commands/duel"
+    ],
+    "thisRunDoesNotTouchBlockedFiles": true
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "verification": {
+    "focusedScenarios": 0,
+    "focusedTestResult": "pending",
+    "typecheck": "pending",
+    "build": "pending",
+    "evidenceValidation": "pending",
+    "adapterBehaviorVerifiedCards": 0,
+    "behaviorCertifiedCards": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "liveDiscordValidation": false
+  },
+  "effectiveWorkMinutes": 0,
+  "targetEffectiveWorkMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "nextTask": "Implementar Reload com randomização HMAC persistida, preservação do inventário, restrição temporal de Quick-Play baixada e testes de negação/estado obsoleto.",
+  "nextWindow": "2026-11-26T10:30:00-03:00",
+  "scopeReleasedToAuxiliary": []
+}

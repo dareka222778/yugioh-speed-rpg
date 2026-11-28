@@ -1,0 +1,94 @@
+{
+  "format": 1,
+  "runId": "work-20261120T160001-0300-M426",
+  "mission": "M426",
+  "owner": "Work principal",
+  "priority": "P1 — implementar a família Swarm: Flip Summon com destruição direcionada de monstro ou Spell/Trap da equipe adversária e efeito ignition independente que coloca a própria carta face-down uma vez por turno.",
+  "state": "active",
+  "startedAt": "2026-11-20T16:00:01-03:00",
+  "endedAt": null,
+  "elapsedMinutes": null,
+  "effectiveWorkMinutes": 0,
+  "shared": {
+    "branch": "feat/rea-engine-recovery-20261026",
+    "headAtStart": "62ff974f7172da942bdd71fe9b4cdfbdc7794230",
+    "mainHead": "f78f3080b496d2697072b946088309f36e97b60e"
+  },
+  "branch": "feat/work-m426-flip-summon-insect-destruction-20261120",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "62ff974f7172da942bdd71fe9b4cdfbdc7794230",
+  "head": "62ff974f7172da942bdd71fe9b4cdfbdc7794230",
+  "reservedFiles": [
+    "src/flipSummonInsectDestruction.ts",
+    "tests/flipSummonInsectDestruction.test.cjs",
+    "docs/evidence/m426-flip-summon-insect-destruction.json",
+    ".github/workflows/m426-flip-summon-insect-destruction.yml"
+  ],
+  "objective": "Modelar separadamente o trigger que só ocorre em Flip Summon e a ação ignition de setar a própria carta; respeitar zonas 3+3, Field Zone separada, alvo por tipo de zona, privacidade e GY do proprietário físico.",
+  "blocksCompleted": [
+    "Lida coordenação M424/M425 e atualizados os respectivos HEADs, PRs e contagens de testes.",
+    "Verificadas fontes oficiais Konami CID 5418 e 5419: texto dos efeitos, primeiro OCG 2002-03-21 PH-21/PH-22 e primeiro TCG 2003-07-18 PGD-021/PGD-022.",
+    "Confirmado que os IDs 15383415 e 41872150 não estão no cardMetadata/effectDefinitions atuais; não foram adicionados ao allowlist releasedCardIds, que é uma lista explícita de distribuição beta, não uma lista histórica completa.",
+    "Criada branch M426 isolada a partir do HEAD compartilhado 62ff974."
+  ],
+  "cards": [
+    {
+      "name": "Swarm of Scarabs",
+      "passcode": "15383415",
+      "konamiCardDatabaseId": 5418,
+      "flipSummonTarget": "one opposing-team monster",
+      "oncePerTurn": "change itself to face-down Defense Position"
+    },
+    {
+      "name": "Swarm of Locusts",
+      "passcode": "41872150",
+      "konamiCardDatabaseId": 5419,
+      "flipSummonTarget": "one opposing-team Spell/Trap card including the separate Field Zone",
+      "oncePerTurn": "change itself to face-down Defense Position"
+    }
+  ],
+  "tests": {
+    "planned": 32,
+    "passed": null,
+    "failed": null
+  },
+  "certification": {
+    "newCertifications": 0,
+    "verifiedAtStart": 969,
+    "remainingAtStart": 31,
+    "automaticCertifications": 0
+  },
+  "handoff": {
+    "pr": 17,
+    "latestCommentId": 7048152993,
+    "status": "pending",
+    "requestedFiles": [
+      "src/monsterEffects.ts",
+      "src/duelEngineCurrent.ts"
+    ],
+    "changedFiles": []
+  },
+  "safety": {
+    "runtimeCoreChanged": false,
+    "catalogChanged": false,
+    "certificationFilesChanged": false,
+    "inventoryGranted": 0,
+    "persistentDatabaseChanged": false,
+    "playerDataChanged": false,
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "backupVerified": false,
+    "realDiscordValidated": false
+  },
+  "production": {
+    "deploymentCheck": "GitHub deployments collection is not exposed by the connector; no production/deploy claim."
+  },
+  "scopeReleasedToAuxiliary": [],
+  "auxiliaryAuthorization": "No authorization until final checkpoint; if released, monitor/correct only the four M426 files.",
+  "nextTask": "Implement Flip Summon targeting and once-per-turn self-set action as separate pure operations, then focused tests for monster/S-T/Field zones, owner GY, hidden identities and timing.",
+  "nextWindow": "2026-11-20T17:30:00-03:00",
+  "limitations": [
+    "Helpers remain isolated until M61 resolver handoff.",
+    "No certification until registered and exercised through the real duel/Discord path."
+  ]
+}

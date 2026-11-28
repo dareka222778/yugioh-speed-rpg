@@ -1,0 +1,66 @@
+{
+  "format": 1,
+  "runId": "work-20261127071240-0300-M673",
+  "mission": "M673",
+  "owner": "Work principal",
+  "priority": "P1",
+  "status": "reserved-and-implementing",
+  "startedAt": "2026-11-27T07:12:40.830-03:00",
+  "endedAt": null,
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedBaseHead": "da980ffee16105c4e9b2d45a9cc265ebf1e9558d",
+  "branch": "feat/work-m673-jowgen-lock-20261127",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "da980ffee16105c4e9b2d45a9cc265ebf1e9558d",
+  "headSha": null,
+  "reservedFiles": [
+    "src/jowgenTagAdapter.ts",
+    "tests/jowgenTagAdapter.test.cjs",
+    "docs/evidence/m673-jowgen.json",
+    "scripts/audit-jowgen-m673.cjs",
+    ".github/workflows/m673-jowgen.yml",
+    "coordination/runs/work-20261127071240-0300-M673.json"
+  ],
+  "scope": "Adapter TagDuel 2v2 isolado para Jowgen the Spiritualist (41855169 / Konami CID 5247): trava Invocações-Especiais de ambas as equipes enquanto face-up; registra histórico de Invocação por UID/época; permite descartar uma carta aleatória da mão privada do assento ativo como custo para destruir todos os monstros Invocados por Invocação-Especial no campo. Preserva mãos privadas, Deck 20–30, mão 6 apenas na End Phase, zonas 3+3, Field Zone separada, Extra 5, propriedade física e inventário. Não altera resolver central, catálogo, certificações, comandos, banco ou produção.",
+  "cards": [
+    {
+      "id": "41855169",
+      "name": "Jowgen the Spiritualist",
+      "konamiId": 5247,
+      "firstTcg": "2003-03-01",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5247&ope=2&request_locale=en",
+      "effect": "Neither player can Special Summon while this card is face-up; discard 1 random card from your hand to the GY to destroy all Special Summoned monsters on the field."
+    }
+  ],
+  "blocksCompleted": [],
+  "implementedCards": 1,
+  "behaviorVerifiedCards": 0,
+  "newCertifications": 0,
+  "automaticCertifications": 0,
+  "inventoryGrants": 0,
+  "verification": {
+    "typecheck": "pending",
+    "build": "pending",
+    "focusedTests": "pending",
+    "evidenceValidation": "pending",
+    "ci": "pending",
+    "adapterBehaviorVerifiedCards": 0,
+    "behaviorCertifiedCards": 0,
+    "discordLive": "not-run"
+  },
+  "effectiveWorkMinutes": 0,
+  "targetEffectiveWorkMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "pr": null,
+  "production": "not-changed",
+  "merge": "not-authorized",
+  "deploy": "not-authorized",
+  "blockers": [
+    "Adapter isolado; integração com o resolver de Invocação e histórico de special summons depende de handoff central explícito."
+  ],
+  "nextTask": "Implementar lock global de Invocação-Especial, rastreamento de instâncias especiais e custo aleatório privado do Jowgen; validar em 2v2.",
+  "nextWindow": "2026-11-27T11:30:00-03:00",
+  "scopeReleasedToAuxiliary": []
+}

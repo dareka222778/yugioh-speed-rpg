@@ -1,0 +1,75 @@
+{
+  "format": 1,
+  "runId": "work-20261124T133008-0300-M589",
+  "mission": "M589",
+  "parentMission": "M588",
+  "owner": "Work principal",
+  "priority": "P1",
+  "status": "completed-ci-green",
+  "startedAt": "2026-11-24T13:30:08-03:00",
+  "lastActivityAt": "2026-11-24T13:57:26-03:00",
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "07203aae3a03cc9269346a1d9b9eb42e24ae7051",
+  "sharedHeadAfterReservationCommit": "7bb3dbc89e72690e62e83ad1657c4098f866ca41",
+  "branch": "feat/work-m588-hand-discard-tag-adapters-20261124",
+  "branchBaseSha": "4e6743c1bb24d44ca93d8f4946b19625c2a7cfe8",
+  "branchHeadSha": "17960b1e99adf2985196ed81bd4f5518a8bbfcc3",
+  "pullRequest": 532,
+  "pullRequestUrl": "https://github.com/dareka222778/yugioh-speed-rpg/pull/532",
+  "draft": true,
+  "reservedFiles": [
+    "tests/handDiscardTagAdapters.test.cjs"
+  ],
+  "changes": [
+    "Corrigidas as duas expectativas de rejeição 3+3 para o erro genérico estável emitido por assertTagDuel antes da validação do adapter."
+  ],
+  "ci": {
+    "focused": {
+      "status": "success",
+      "runId": 45438945403,
+      "tests": 24,
+      "passed": 24,
+      "failed": 0
+    },
+    "cardBatchFast": {
+      "status": "success",
+      "runId": 45438945286
+    },
+    "milestone1000": {
+      "status": "success",
+      "runId": 45438945197
+    },
+    "engineValidation": {
+      "status": "success",
+      "runId": 45438945167,
+      "tests": "npm test passed; Extended Soak passed"
+    }
+  },
+  "catalog": {
+    "certified": 969,
+    "target": 1000,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "effectiveWorkMinutes": 12,
+  "targetEffectiveMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "nextTask": "M591: validar Backfire e Balloon Lizard com eventos de destruição/Standby 2v2 em adapter isolado; handoff M61 continua pendente.",
+  "nextWindow": "2026-11-24T18:30:00-03:00",
+  "scopeReleasedToAuxiliary": [
+    "src/handDiscardTagAdapters.ts",
+    "tests/handDiscardTagAdapters.test.cjs",
+    "docs/evidence/m588-hand-discard-tag-adapters.json",
+    ".github/workflows/m588-hand-discard-tag-adapters.yml"
+  ],
+  "endedAt": "2026-11-24T13:57:26-03:00"
+}

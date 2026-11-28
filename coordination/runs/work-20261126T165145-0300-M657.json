@@ -1,0 +1,35 @@
+{
+  "format": 1,
+  "runId": "work-20261126T165145-0300-M657",
+  "mission": "M657",
+  "priority": "P1",
+  "status": "reserved-and-implementing",
+  "startedAt": "2026-11-26T16:51:45-03:00",
+  "endedAt": null,
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "baseHead": "40dc6be1865f9e5d6f8bf5d774be5464b9b465c4",
+  "branch": "feat/work-m657-swarm-flip-adapter-20261126",
+  "headSha": null,
+  "scope": "Adapter TagDuel isolado para Swarm of Scarabs (15383415) e Swarm of Locusts (41872150): gatilho de Flip Summon com alvo travado (monstro ou Magia/Armadilha, incluindo Field Zone), destruição sem retarget e mudança própria para face-down Defense uma vez por turno. Preserva UID/propriedade física, mãos, 3+3 zonas, deck 20–30 e Extra 5. Sem resolver central, catálogo, certificações, comandos, banco, inventário ou produção.",
+  "reservedFiles": [
+    "src/swarmFlipTagAdapter.ts",
+    "tests/swarmFlipTagAdapter.test.cjs",
+    "docs/evidence/m657-swarm-flip-adapter.json",
+    ".github/workflows/m657-swarm-flip-adapter.yml",
+    "scripts/audit-swarm-flip-m657.cjs"
+  ],
+  "certifiedCardsBefore": 969,
+  "certifiedCardsAfter": null,
+  "newCertifications": 0,
+  "inventoryGrants": 0,
+  "ci": {
+    "baseHead": "40dc6be1865f9e5d6f8bf5d774be5464b9b465c4",
+    "focused": "pending",
+    "repositoryRegression": "pending"
+  },
+  "pr": null,
+  "production": "não alterada",
+  "discord": "não validado ao vivo",
+  "nextTask": "Implementar adapter e testes determinísticos; validar check/build/CI e abrir PR draft somente com evidência verde.",
+  "nextWindow": "2026-11-26T17:30:00-03:00"
+}

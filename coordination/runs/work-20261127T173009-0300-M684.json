@@ -1,0 +1,115 @@
+{
+  "format": 1,
+  "runId": "work-20261127T173009-0300-M684",
+  "mission": "M684",
+  "owner": "Work principal",
+  "priority": "P1",
+  "priorityRequestedBy": "User",
+  "status": "ci-running",
+  "startedAt": "2026-11-27T17:30:09-03:00",
+  "endedAt": null,
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedBaseHead": "b4d9e249f539a3dab7babeef044f40f8b1f50cd3",
+  "branch": "feat/work-m684-targeted-continuous-traps-20261127",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "b4d9e249f539a3dab7babeef044f40f8b1f50cd3",
+  "headSha": "b751ab9ea46313d01e22458b310f635ca3ac8d47",
+  "reservedFiles": [
+    "src/targetedContinuousTrapTagAdapter.ts",
+    "tests/targetedContinuousTrapTagAdapter.test.cjs",
+    "docs/evidence/m684-targeted-continuous-traps.json",
+    "scripts/audit-targeted-continuous-traps-m684.cjs",
+    ".github/workflows/m684-targeted-continuous-traps.yml",
+    "coordination/runs/work-20261127T173009-0300-M684.json"
+  ],
+  "scope": "Adapter TagDuel clássico 2v2 isolado para Nightmare Wheel (54704216/CID 5298) e Shadow Spell (29267084/CID 4675): alvo físico UID/epoch, bloqueio de ataque/posição, redução de 700 ATK em Shadow Spell, dano de 500 LP na Standby Phase do controlador para Nightmare Wheel, destruição da Armadilha quando o alvo deixa o campo, idempotência, propriedade física e inventário conservado. Ambos ausentes do metadata/certificações no HEAD-base; fixtures usam Armadilhas já habilitadas via lookup porque não há autorização de admissão/certificação. Não integra resolver central nem altera catálogo, certificações, comandos, banco, inventário ou produção.",
+  "cards": [
+    {
+      "id": "54704216",
+      "name": "Nightmare Wheel",
+      "konamiCid": 5298,
+      "firstOcgRelease": "2003-10-23",
+      "firstTcgRelease": "2003-07-18",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5298&ope=2&request_locale=en",
+      "newToMetadata": true,
+      "newToCertification": true
+    },
+    {
+      "id": "29267084",
+      "name": "Shadow Spell",
+      "konamiCid": 4675,
+      "firstOcgRelease": "2001-04-01",
+      "firstTcgRelease": "2004-03-01",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4675&ope=2&request_locale=en",
+      "newToMetadata": true,
+      "newToCertification": true
+    }
+  ],
+  "baseline": {
+    "certificationEntriesObserved": 959,
+    "metadataAbsent": true,
+    "certificationAbsent": true,
+    "source": "src/cardCertifications.ts and full cardMetadata import graph at shared HEAD"
+  },
+  "implementedCards": 2,
+  "adapterBehaviorVerifiedCards": 0,
+  "behaviorCertifiedCards": 0,
+  "newlyBehaviorCertifiedCards": 0,
+  "newEngineCertifications": 0,
+  "automaticCertifications": 0,
+  "inventoryGrants": 0,
+  "verification": {
+    "typecheck": "passed on 93e3bf",
+    "build": "passed on 93e3bf",
+    "focusedTests": "27/36 passed on 00b3c; 9 fixture/rotation assertions corrected in b751ab; rerun queued",
+    "evidenceAudit": "pending rerun",
+    "ci": "M684 dedicated + Engine validation + Card batch + Milestone1000 queued on b751ab",
+    "discordLive": "not-run",
+    "production": "not-changed"
+  },
+  "rules": {
+    "mainDeck": "20–30",
+    "handLimit": 6,
+    "handCheck": "End Phase",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZoneSeparate": true,
+    "extraDeckMax": 5,
+    "ownerPreserved": true,
+    "inventoryConserved": true
+  },
+  "effectiveWorkMinutes": 23,
+  "targetEffectiveWorkMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "pr": {
+    "number": 609,
+    "url": "https://github.com/dareka222778/yugioh-speed-rpg/pull/609",
+    "state": "open",
+    "draft": true,
+    "mergeable": true
+  },
+  "merge": "not-authorized",
+  "deploy": "not-authorized",
+  "production": "not-changed",
+  "blockers": [
+    "Handoff explícito dos hooks centrais ainda pendente; este bloco permanece adapter-only.",
+    "Novas cartas não podem ser admitidas/certificadas sem autorização e integração central."
+  ],
+  "nextTask": "Acompanhar CI no SHA b751ab; corrigir qualquer falha remanescente, validar auditoria e suíte completa; depois atualizar PR #609.",
+  "nextWindow": "2026-11-27T22:30:00-03:00",
+  "scopeReleasedToAuxiliary": [],
+  "branchStartSha": "b636d05f4acf8821a558e754eec5a0cf986250ce",
+  "blocksCompleted": [
+    "Verificado HEAD real b4d9e249f539a3dab7babeef044f40f8b1f50cd3, branches, PRs, workflows e ausência de deploy autorizado.",
+    "Auditado todo o grafo de imports de cardMetadata; Nightmare Wheel e Shadow Spell ausentes do metadata/certificações; baseline explícito 959.",
+    "Criada reserva M684 P1 com atualização condicionada ao HEAD; branch isolada iniciada após o commit de coordenação.",
+    "Implementado adapter de duas Continuous Traps com alvo UID/epoch, bloqueio, ATK -700, dano Standby, destruição ao perder alvo, idempotência e preservação de proprietário/inventário.",
+    "Adicionados 36 cenários focados, evidência JSON, auditoria de não-admissão e workflow dedicado.",
+    "Commit d486a9ab77f18542c070906002ba4479015db703 publicado; PR #609 draft aberto.",
+    "Workflow dedicado corrigido para usar npm run check; typecheck e build passaram no SHA 93e3bf.",
+    "Primeira suíte focada: 27/36 passaram; nove falhas identificadas (Field Spell fora do deck fixture, limite de zona já validado por assertTagDuel, -0, Jinzo/Royal Decree ausente e rotação TagDuel inconsistente).",
+    "Commit b751ab9ea46313d01e22458b310f635ca3ac8d47 corrige fixtures com Field Spell/Jinzo, sincroniza teamRotation, normaliza -0 e amplia regressão de negação contínua; 37 cenários no rerun."
+  ]
+}

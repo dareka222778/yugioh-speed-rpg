@@ -1,0 +1,94 @@
+{
+  "format": 1,
+  "runId": "work-20261125T153138-0300-M628",
+  "mission": "M628",
+  "owner": "Work principal",
+  "priority": "P1",
+  "priorityRequestedBy": "User",
+  "status": "reserved; implementação isolada iniciada; sem integração central enquanto M61 aguarda handoff",
+  "reservedAt": "2026-11-25T15:31:38-03:00",
+  "startedAt": "2026-11-25T15:31:38-03:00",
+  "endedAt": null,
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "aabfa8cbd8914b5bd1546abee71bc77bd8ea64a5",
+  "branch": "feat/work-m628-curse-of-royal-tag-adapter-20261125",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "aabfa8cbd8914b5bd1546abee71bc77bd8ea64a5",
+  "branchHeadSha": "aabfa8cbd8914b5bd1546abee71bc77bd8ea64a5",
+  "pullRequest": null,
+  "reservedFiles": [
+    "src/curseOfRoyalTagAdapter.ts",
+    "tests/curseOfRoyalTagAdapter.test.cjs",
+    "docs/evidence/m628-curse-of-royal-tag-adapter.json",
+    ".github/workflows/m628-curse-of-royal-tag-adapter.yml"
+  ],
+  "scope": "Adapter isolado para Curse of Royal: responder somente à ativação de Spell/Trap cujo descritor tipado confirme efeito de destruir exatamente uma Spell/Trap; negar ativação e efeito e destruir a carta ativada para o Cemitério do proprietário físico. Sem resolver central, catálogo, certificações, allowlist, comandos, dados ou inventário.",
+  "cards": [
+    {
+      "name": "Curse of Royal",
+      "passcode": "02926176",
+      "konamiDatabaseId": 5441,
+      "kind": "Counter Trap",
+      "firstTcgSet": "PGD-044",
+      "firstTcgRelease": "2003-07-18",
+      "officialEffect": "Negate the activation and the effect of a Spell or Trap Card that includes the effect of destroying 1 Spell or Trap Card and destroy it.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5441&ope=2&request_locale=en"
+    }
+  ],
+  "implementation": {
+    "files": [
+      "src/curseOfRoyalTagAdapter.ts",
+      "tests/curseOfRoyalTagAdapter.test.cjs",
+      "docs/evidence/m628-curse-of-royal-tag-adapter.json",
+      ".github/workflows/m628-curse-of-royal-tag-adapter.yml"
+    ],
+    "plannedScenarios": 24,
+    "integrationBoundary": "Adapter puro isolado. A camada chamadora fornece descritor tipado de efeito; integração ao Chain/resolver depende de handoff M61. Nenhuma alteração em resolver, catálogo, metadata, certificações, allowlist, comandos Discord, SQLite, inventário ou produção."
+  },
+  "rules": {
+    "mainDeckPerPhysicalSeat": "20–30",
+    "extraDeckPerPhysicalSeat": "0–5",
+    "monsterZonesPerTeam": 3,
+    "spellTrapZonesPerTeam": 3,
+    "fieldZone": "separada",
+    "handLimit": 6,
+    "handDiscard": "somente na End Phase"
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "source": "baseline informado pelos checkpoints M621–M627; será revalidado pelo CI M628"
+  },
+  "verification": {
+    "focusedScenarios": 24,
+    "focusedTestResult": "pending",
+    "typecheck": "pending",
+    "build": "pending",
+    "evidenceValidation": "pending",
+    "focusedWorkflowRun": null,
+    "cardBatchFast": "pending",
+    "milestone1000": "pending",
+    "engineValidation": "pending",
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "effectiveWorkMinutes": 0,
+  "targetEffectiveWorkMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "nextTask": "Implementar adapter e 24 cenários comportamentais; executar CI focada e avançar em outra família independente enquanto CI integral roda.",
+  "nextWindow": "2026-11-25T19:30:00-03:00",
+  "scopeReleasedToAuxiliary": []
+}

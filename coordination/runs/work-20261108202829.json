@@ -1,0 +1,23 @@
+{
+  "id": "work-20261108202829",
+  "agent": "Work",
+  "status": "active-isolated",
+  "startedAt": "2026-11-08T20:28:29.134Z",
+  "lastActivityAt": "2026-11-08T20:42:47.121Z",
+  "scope": [
+    "feat/work-m46-discard-costs-20261108"
+  ],
+  "branch": "feat/work-m46-discard-costs-20261108",
+  "implementation": "dab5a58c6f4af4ac1e89f15fff01ca78188e78c3",
+  "pr": 13,
+  "sharedOwner": "work-m45-20261108174539",
+  "handoff": "Requested; no confirmation. All development on isolated branch.",
+  "lastConsistentCheckpoint": {
+    "batch": "m46-discard-removal",
+    "localTestPass": 7454,
+    "locallyCertified": 975,
+    "sharedCertified": 969,
+    "live": false
+  },
+  "nextScheduledAt": "2026-11-08T22:30:00-03:00"
+}

@@ -1,0 +1,91 @@
+{
+  "format": 1,
+  "mission": "M429",
+  "runId": "work-20261120T195356-0300-M429",
+  "owner": "Work principal",
+  "startedAt": "2026-11-20T19:53:56-03:00",
+  "endedAt": "2026-11-20T20:13:33.420-03:00",
+  "elapsedMinutes": 19.62,
+  "sharedSessionEffectiveMinutes": 14,
+  "countedInCombinedSession": true,
+  "targetEffectiveMinutes": 60,
+  "targetMet": false,
+  "priority": "P1 — validar seis Magias clássicas de LP no handler Discord 2v2, com roteamento de equipe, mãos/Decks físicos e privacidade.",
+  "branch": "feat/work-m429-classic-lp-spells-discord-2v2-20261120",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "75dc1403897b135dc63fb003387af9a09fab84e5",
+  "head": "d206b9e43781c47a288042b1d461e14b73a4eb78",
+  "pr": 377,
+  "prUrl": "https://github.com/dareka222778/yugioh-speed-rpg/pull/377",
+  "state": "released-to-auxiliary-monitor-ci",
+  "files": [
+    "tests/tagClassicLpSpellsDiscord2v2.test.cjs",
+    "docs/evidence/m429-classic-lp-spells-discord-2v2.json",
+    ".github/workflows/m429-classic-lp-spells-discord-2v2.yml"
+  ],
+  "cards": [
+    "Sparks",
+    "Hinotama",
+    "Blue Medicine",
+    "Soul of the Pure",
+    "Tremendous Fire",
+    "Upstart Goblin"
+  ],
+  "blocksCompleted": [
+    "6 cenários executados pelo handleTagComponent offline.",
+    "Verificados valores exatos de LP para burn/heal e sequência Tremendous Fire.",
+    "Upstart Goblin compra do Deck físico do representante ativo e concede 1000 LP à equipe adversária.",
+    "Verificadas mãos privadas, Decks por assento, UID físico no Cemitério, payloads Discord e restauração JSON.",
+    "npm run check/build e 6 testes focados aprovados."
+  ],
+  "ci": {
+    "focused": {
+      "run": 44833477657,
+      "status": "success"
+    },
+    "cardBatchFast": {
+      "run": 44833477702,
+      "status": "success"
+    },
+    "milestone1000": {
+      "run": 44833477542,
+      "status": "success",
+      "artifact": 14676737112
+    },
+    "engineValidation": {
+      "run": 44833477681,
+      "status": "in_progress"
+    },
+    "extendedSoak": {
+      "status": "success"
+    }
+  },
+  "catalog": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "liveDiscordValidation": false,
+    "persistentDatabaseChanged": false,
+    "playerDataChanged": false
+  },
+  "scopeReleasedToAuxiliary": [
+    "tests/tagClassicLpSpellsDiscord2v2.test.cjs",
+    "docs/evidence/m429-classic-lp-spells-discord-2v2.json",
+    ".github/workflows/m429-classic-lp-spells-discord-2v2.yml"
+  ],
+  "auxiliaryAuthorization": "Monitorar CI, sincronizar por merge não-forçado e corrigir somente os três arquivos M429; não tocar runtime, catálogo, certificados, coordenação, dados ou produção.",
+  "limitations": [
+    "Handler Discord executado offline; nenhum gateway/servidor real.",
+    "As seis cartas já eram certificadas; M429 não adiciona certificações.",
+    "Engine Validation/Extended Soak ainda em execução."
+  ],
+  "nextTask": "Auxiliar monitora M429; Work segue para integração de runtime somente após handoff M61.",
+  "checkpointCommitSha": "93d914f6a97b31a165fd2758f156e97dfc231c62"
+}

@@ -1,0 +1,102 @@
+{
+  "format": 1,
+  "runId": "work-20261127T231230-0300-M693",
+  "mission": "M693",
+  "owner": "Work principal",
+  "priority": "P1",
+  "priorityRequestedBy": "User",
+  "status": "reserved-and-implementing",
+  "startedAt": "2026-11-27T23:12:30-03:00",
+  "endedAt": null,
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "d2d84d948db56b5cdd7b6715d0346741443729c9",
+  "branch": "feat/work-m693-pot-of-greed-synergy-20261127",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "d2d84d948db56b5cdd7b6715d0346741443729c9",
+  "branchHeadSha": "d2d84d948db56b5cdd7b6715d0346741443729c9",
+  "reservedFiles": [
+    "src/potOfGreedSynergyTagAdapter.ts",
+    "tests/potOfGreedSynergyTagAdapter.test.cjs",
+    "docs/evidence/m693-pot-of-greed-synergy.json",
+    "scripts/audit-pot-of-greed-synergy-m693.cjs",
+    ".github/workflows/m693-pot-of-greed-synergy.yml",
+    "coordination/runs/work-20261127T231230-0300-M693.json"
+  ],
+  "scope": "Pot of Greed synergy isolado: Jar Robber (33784505/CID 5674) como resposta Quick-Play direta à ativação de Pot of Greed, negando somente o efeito e comprando 1 para o assento físico ativador da Jar Robber; Avatar of the Pot (99284890/CID 5960) envia Pot of Greed da mão privada do assento ativo como custo e compra até 3. Eventos de chain/ignition com IDs idempotentes, janelas/ownership/zonas físicas, planos privados e Deck-out. Pot of Greed (55144522/CID 4844) é pré-requisito já catalogado, não alvo de nova certificação. Sem resolver central, comandos, catálogo, certificados, inventário ou produção.",
+  "cards": [
+    {
+      "id": "33784505",
+      "konamiId": 5674,
+      "name": "Jar Robber",
+      "kind": "quick-play-spell",
+      "officialText": "You can only activate this card when Pot of Greed is activated. Negate the effect of Pot of Greed and draw 1 card from your Deck.",
+      "firstOCGRelease": "2002-09-19",
+      "firstTCGRelease": "2003-10-10",
+      "certifiedAtStart": false,
+      "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5674&ope=2&request_locale=en"
+    },
+    {
+      "id": "99284890",
+      "konamiId": 5960,
+      "name": "Avatar of the Pot",
+      "kind": "effect-monster",
+      "officialText": "By sending 1 Pot of Greed from your hand to the Graveyard, draw 3 cards from your Deck.",
+      "firstOCGRelease": "2003-11-20",
+      "firstTCGRelease": "2004-06-01",
+      "certifiedAtStart": false,
+      "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5960&ope=2&request_locale=ae"
+    },
+    {
+      "id": "55144522",
+      "konamiId": 4844,
+      "name": "Pot of Greed",
+      "kind": "normal-spell-source",
+      "officialText": "Draw 2 cards.",
+      "certifiedAtStart": "already cataloged/certified; prerequisite only",
+      "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4844&ope=2&request_locale=ae"
+    }
+  ],
+  "baseline": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "source": "M691 checkpoint; current shared branch baseline"
+  },
+  "handoff": {
+    "targetPR": 17,
+    "commentId": 7232207787,
+    "status": "requested-awaiting-explicit-release",
+    "files": [
+      "src/duelEngineCurrent.ts",
+      "src/monsterEffects.ts",
+      "src/effectRegistry.ts"
+    ]
+  },
+  "verification": {
+    "focusedScenarios": 0,
+    "focusedTestResult": "pending",
+    "typecheck": "pending",
+    "build": "pending",
+    "evidenceAudit": "pending",
+    "workflow": "pending",
+    "adapterBehaviorVerifiedCards": 0,
+    "newEngineCertifiedCards": 0,
+    "automaticCertifications": 0,
+    "inventoryGrants": 0,
+    "liveDiscordValidation": false
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "effectiveWorkMinutes": 0,
+  "targetEffectiveWorkMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "nextTask": "Implementar validação do chain link direto de Jar Robber e custo físico privado de Avatar of the Pot, com fixtures 2v2 e testes de Deck-out/negação.",
+  "scopeReleasedToAuxiliary": [],
+  "nextWindow": "2026-11-28T03:30:00-03:00"
+}

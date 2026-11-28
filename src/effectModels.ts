@@ -2,13 +2,17 @@
  * Legacy kind names remain identifiers for API/backwards compatibility only.
  */
 import type {Effect} from './effectDefinitions';
-export type DestructionModel={operation:'destroyMonsters';scope:'all'|'opponent'|'selected';position?:'atk';faceUp?:boolean;minimumAtk?:number;destination:'grave'|'banished'};
+export type DestructionModel={operation:'destroyMonsters';scope:'all'|'opponent'|'selected';controller?:'opponent';position?:'atk'|'def';faceUp?:boolean;minimumAtk?:number;races?:readonly string[];equipped?:true;destination:'grave'|'banished'};
 export type ActivationModel={speed:1|2|3;window:'main'|'free'|'attackDeclared'|'summoned'|'spellActivated'|'trapActivated';damage:'never'|'beforeCalculation'|'counter';opponentOnly?:boolean;summonKinds?:readonly ('summon'|'flip'|'specialSummon')[];minimumSummonAtk?:number};
 export type SpellTrapModel={activation:ActivationModel;destruction?:DestructionModel};
 const main:ActivationModel={speed:1,window:'main',damage:'never'};
 const response=(window:ActivationModel['window']='free',damage:ActivationModel['damage']='never'):ActivationModel=>({speed:2,window,damage});
 const destroy=(scope:DestructionModel['scope'],extra:Partial<DestructionModel>={}):DestructionModel=>({operation:'destroyMonsters',scope,destination:'grave',...extra});
 const models:Partial<Record<Effect['kind'],SpellTrapModel>>={
+ destroyExtreme:{activation:main},destroyTargetPosition:{activation:main},
+ recoverMultiple:{activation:main},ritualSummon:{activation:main},destroyFiltered:{activation:main},
+ temporaryModifier:{activation:response('free','beforeCalculation')},
+ destroySpellTraps:{activation:main},
  darkHole:{activation:main,destruction:destroy('all')},
  raigeki:{activation:main,destruction:destroy('opponent')},
  torrentialTribute:{activation:{...response('summoned'),summonKinds:['summon','flip','specialSummon']},destruction:destroy('all')},
@@ -23,11 +27,11 @@ const models:Partial<Record<Effect['kind'],SpellTrapModel>>={
  sevenTools:{activation:{speed:3,window:'trapActivated',damage:'counter'}}
 };
 export function getEffectModel(kind:Effect['kind']):SpellTrapModel|undefined{return models[kind];}
-export function getDestructionModel(kind:Effect['kind']):DestructionModel|undefined{return models[kind]?.destruction;}
+export function getDestructionModel(value:Effect|Effect['kind']):DestructionModel|undefined{if(typeof value!=='string'&&value.kind==='conditionalDestruction'&&value.zone==='monsters')return destroy(value.scope,{controller:value.controller,faceUp:value.faceUp,equipped:value.equipped});if(typeof value!=='string'&&value.kind==='destroyFiltered')return destroy('all',{faceUp:true,...value.filter});if(typeof value!=='string'&&value.kind==='destroyTargetPosition')return destroy('selected',{position:value.position});return models[typeof value==='string'?value:value.kind]?.destruction;}
 
 /** Definitions with variable parameters carry their own activation policy. */
 export function getActivationModel(effect:Effect):ActivationModel|undefined{
- return effect.kind==='sequence'||effect.kind==='attackResponse'?effect.activation:getEffectModel(effect.kind)?.activation;
+ return effect.kind==='conditionalDestruction'||effect.kind==='moveSelected'||effect.kind==='positionChange'||effect.kind==='continuous'||effect.kind==='sequence'||effect.kind==='choiceSequence'||effect.kind==='attackResponse'?effect.activation:getEffectModel(effect.kind)?.activation;
 }
 
 export function economicOperations(effect:Effect):readonly import('./economicOperations').EconomicOperation[]|undefined{

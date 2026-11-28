@@ -1,0 +1,36 @@
+{
+  "format": 1,
+  "runId": "work-20261126T210030-0300-M661",
+  "mission": "M661",
+  "priority": "P1",
+  "status": "reserved-and-implementing",
+  "startedAt": "2026-11-26T21:00:30-03:00",
+  "endedAt": null,
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "baseHead": "48bbf0051afcd078582e1415e01bfc65e4498180",
+  "branch": "feat/work-m661-spell-negation-tag-adapter-20261126",
+  "headSha": null,
+  "scope": "Adapter TagDuel isolado para Spell Canceller (84636823) e Imperial Order (61740673): separa bloqueio de ativação de Magias, negação de efeitos de Magia no campo e manutenção obrigatória de 700 LP na Standby Phase da equipe controladora. Preserva LP compartilhado, assento/UID físico, mãos privadas, deck 20–30, mão 6 na End Phase, zonas 3+3, Field Zone separada e Extra 5. Sem resolver central, catálogo/certificação, comandos, banco, inventário ou produção.",
+  "reservedFiles": [
+    "src/spellNegationTagAdapter.ts",
+    "tests/spellNegationTagAdapter.test.cjs",
+    "docs/evidence/m661-spell-negation.json",
+    ".github/workflows/m661-spell-negation.yml",
+    "scripts/audit-spell-negation-m661.cjs"
+  ],
+  "certifiedCardsBefore": 965,
+  "catalogCardsAtBase": 969,
+  "certifiedCardsAfter": null,
+  "newCertifications": 0,
+  "inventoryGrants": 0,
+  "ci": {
+    "focused": "pending",
+    "repositoryRegression": "pending"
+  },
+  "pr": null,
+  "production": "não alterada",
+  "discord": "não validado ao vivo",
+  "handoff": "nenhum solicitado: escopo não toca nos arquivos centrais reservados por M637",
+  "nextTask": "Implementar a política isolada Spell Canceller/Imperial Order com testes de ativação, negação em campo, negação de fonte, manutenção de 700 LP, rotação 2v2, propriedade física e conservação de inventário; depois abrir PR draft e validar CI focada.",
+  "nextWindow": "2026-11-26T22:30:00-03:00"
+}

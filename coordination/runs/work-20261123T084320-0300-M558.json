@@ -1,0 +1,100 @@
+{
+  "runId": "work-20261123T084320-0300-M558",
+  "mission": "M558",
+  "owner": "Work principal",
+  "state": "reserved-and-implementing",
+  "priority": "P1 — Cyber Jar: no Flip Summon, destruir todos os monstros dos dois campos; cada equipe revela até cinco cartas do Deck ativo, Invoca monstros elegíveis de Nível 4 ou menor e adiciona o restante à mão, preservando UIDs e reservas.",
+  "startedAt": "2026-11-23T08:43:20-03:00",
+  "lastActivityAt": "2026-11-23T08:43:20-03:00",
+  "endedAt": null,
+  "branch": "feat/work-m558-cyber-jar-tag-adapter-20261123",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "b5860333d7c5196556636a9cbf2650376a5aea21",
+  "sharedHeadAtReservation": "b5860333d7c5196556636a9cbf2650376a5aea21",
+  "reservedFiles": [
+    "src/cyberJarTagAdapter.ts",
+    "tests/cyberJarTagAdapter.test.cjs",
+    "docs/evidence/m558-cyber-jar-tag-adapter.json",
+    ".github/workflows/m558-cyber-jar-tag-adapter.yml"
+  ],
+  "conflictCheck": {
+    "overlap": false,
+    "checkedAt": "2026-11-23T08:43:20-03:00",
+    "checkedAgainst": [
+      "M557 Morphing Jar usa quatro caminhos próprios; sem sobreposição.",
+      "M550/M551/M556 e M544–M548 mantêm caminhos próprios; sem sobreposição.",
+      "M61 (#17) mantém resolver, metadata, certificações e manifesto protegidos; M558 não os altera.",
+      "Busca de branches/PRs por Cyber Jar não encontrou implementação anterior.",
+      "Cyber Jar é documentado no banco oficial Konami, CID 4913, passcode 34124316, MRL-077 (2002-09-16)."
+    ]
+  },
+  "card": {
+    "name": "Cyber Jar",
+    "passcode": "34124316",
+    "konamiDatabaseId": 4913,
+    "attribute": "DARK",
+    "level": 3,
+    "race": "Rock",
+    "atk": 900,
+    "def": 900,
+    "firstTCGPrinting": {
+      "date": "2002-09-16",
+      "set": "MRL-077",
+      "product": "Spell Ruler"
+    },
+    "officialCardDatabase": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4913&ope=2&request_locale=en",
+    "officialText": "FLIP: Destroy all monsters on the field, then both players reveal the top 5 cards from their Decks, then Special Summon all revealed Level 4 or lower monsters in face-up Attack Position or face-down Defense Position, also add any remaining cards to their hand. (If either player has less than 5 cards in their Deck, reveal as many as possible.)"
+  },
+  "design": {
+    "trigger": "Flip Summon real only; effect-flip/normal summon rejected.",
+    "destroy": "All face-up and face-down monsters on both shared fields are destroyed; physical cards move to team GY; tokens cease to exist.",
+    "reveal": "Each active team reveals up to five cards from its current representative's Deck; fewer than five is valid and does not itself cause deck-out.",
+    "summon": "Level 4 or lower non-Fusion/non-Ritual monsters are Special Summoned up to three available Monster Zones; each can be face-up Attack or face-down Defense; non-eligible and excess cards go to hand.",
+    "ownership": "Only active representatives' Decks are used; partner reserve Decks/hands untouched; UID owner persists.",
+    "idempotency": "activationId persisted in JSON; replay rejected after success or negation.",
+    "limits": "3 Monster Zones, 3 Spell/Trap Zones, separate Field Zone, Extra Deck 5, hand limit 6 at End Phase."
+  },
+  "plannedTests": [
+    "real Flip Summon only",
+    "destroy face-up and face-down monsters on both teams",
+    "source is destroyed but its trigger still resolves",
+    "tokens vanish without entering GY",
+    "physical cards move to GY with UID intact",
+    "reveal up to five if Deck has fewer",
+    "eligible Level 4/3/2/1 monsters summoned",
+    "Level 5+ remains in hand",
+    "Spell/Trap remains in hand",
+    "Fusion and Ritual monsters remain in hand",
+    "face-up Attack position choice",
+    "face-down Defense position choice",
+    "more than three eligible monsters: excess to hand",
+    "reserve Decks and hands untouched",
+    "stolen Cyber Jar resolves for controller",
+    "effect negation leaves all zones unchanged",
+    "activation replay blocked after JSON roundtrip",
+    "duplicate UID rejected",
+    "invalid source rejected",
+    "active seat rotation respected",
+    "field zone separate from backrow",
+    "Extra Deck max five",
+    "3+3 zone boundaries",
+    "physical UID conservation excluding tokens",
+    "input immutability"
+  ],
+  "catalog": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "inventoryGranted": 0,
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "nextTask": "Implementar adapter Cyber Jar e suíte focada enquanto M557 CI executa; depois reconsultar HEAD/coordination.",
+  "nextWindow": "2026-11-23T12:30:00-03:00"
+}

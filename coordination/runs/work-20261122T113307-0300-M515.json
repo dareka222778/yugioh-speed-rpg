@@ -1,0 +1,119 @@
+{
+  "runId": "work-20261122T113307-0300-M515",
+  "mission": "M515",
+  "owner": "Work principal",
+  "priority": "P1 — fechar a lacuna de timeout 1v1: convite expira exatamente aos 120 s e decisão de duelo aos 30 min; o W.O. deve ir ao jogador que devia agir, persistir duelFinished e liberar ambos os locks atomicamente, sem tocar economia ou inventário.",
+  "startedAt": "2026-11-22T11:33:07-03:00",
+  "lastActivityAt": "2026-11-22T11:57:10-03:00",
+  "endedAt": "2026-11-22T11:57:10-03:00",
+  "state": "completed; released-to-auxiliary-monitor-ci",
+  "branch": "feat/work-m515-duel-timeout-boundary-atomicity-20261122",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "0e8c734607712c1bc73eae5e77b23b805b270c2c",
+  "sharedHeadAtReservation": "fdfdaad9f3bff0e52b5810cba51c2990bfe4db6e",
+  "reservedFiles": [
+    "tests/duelTimeoutBoundaryAtomicity.test.cjs",
+    "docs/evidence/m515-duel-timeout-boundary-atomicity.json",
+    ".github/workflows/m515-duel-timeout-boundary-atomicity.yml"
+  ],
+  "scope": [
+    "tests/duelTimeoutBoundaryAtomicity.test.cjs",
+    "docs/evidence/m515-duel-timeout-boundary-atomicity.json",
+    ".github/workflows/m515-duel-timeout-boundary-atomicity.yml"
+  ],
+  "conflictCheck": {
+    "overlap": false,
+    "checkedAt": "2026-11-22T11:33:07-03:00",
+    "checkedAgainst": [
+      "M501–M514",
+      "M61",
+      "M496–M500",
+      "M472–M494",
+      "M402–M471",
+      "all third-party reservations"
+    ],
+    "note": "Arquivos novos exclusivos para timeout 1v1. Não altera src/duelStore.ts, src/duelEngine.ts, src/index.ts, catálogo, manifesto, resolver, allowlist, certificações ou dados persistentes."
+  },
+  "workBlocks": [
+    "Lido coordination/state.json e checkpoint M507.",
+    "Verificado HEAD compartilhado fdfdaad9f3bff0e52b5810cba51c2990bfe4db6e e main f78f3080b496d2697072b946088309f36e97b60e.",
+    "Inspecionadas PRs #449–#461; PRs #449–#461 permanecem abertas em draft; CI dos HEADs examinados passou.",
+    "Identificada lacuna de cobertura de fronteira/rollback do timeout 1v1; escopo isolado sem sobreposição.",
+    "Retomada auditada: shared HEAD 0e8c734607712c1bc73eae5e77b23b805b270c2c; main HEAD 197bbda07efc81658604bcd12308665571e26d59; shared está 758 commits à frente e 12 atrás de main.",
+    "PR #462 está aberta em draft, mergeable=true, branch 4 commits à frente/0 atrás do shared HEAD; nenhum merge.",
+    "CI do HEAD 256eec1b: M515 focused success, Card Batch Fast success, Engine Validation success (test + Extended Soak), Milestone 1000 success.",
+    "Reservas próprias M515 liberadas ao auxiliar somente para monitoramento, sincronização não-forçada e correções nos três arquivos M515."
+  ],
+  "tests": {
+    "focused": "success (3/3)",
+    "check": "success",
+    "build": "success",
+    "engineValidation": "success",
+    "milestone": "success",
+    "cardBatchFast": "success",
+    "extendedSoak": "success",
+    "limitations": "Offline/CI only; no live Discord guild or production deployment verification."
+  },
+  "catalog": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "inventoryGranted": 0,
+  "mergePerformed": false,
+  "deployPerformed": false,
+  "production": {
+    "mainHead": "f78f3080b496d2697072b946088309f36e97b60e",
+    "backupVerified": false,
+    "liveDiscordValidation": false,
+    "merge": false,
+    "deploy": false,
+    "deploymentRegistry": "O endpoint público de deployments não está exposto pela integração de leitura; produção permanece não verificada."
+  },
+  "pr": {
+    "number": 462,
+    "url": "https://github.com/dareka222778/yugioh-speed-rpg/pull/462",
+    "state": "open",
+    "draft": true,
+    "merged": false,
+    "mergeable": true,
+    "base": "feat/rea-engine-recovery-20261026",
+    "head": "feat/work-m515-duel-timeout-boundary-atomicity-20261122",
+    "headSha": "256eec1bcbce441b7c9cbca4e1639b3dacac2cc7"
+  },
+  "releaseToAuxiliary": [
+    {
+      "branch": "feat/work-m515-duel-timeout-boundary-atomicity-20261122",
+      "head": "256eec1bcbce441b7c9cbca4e1639b3dacac2cc7",
+      "pr": 462,
+      "files": [
+        "tests/duelTimeoutBoundaryAtomicity.test.cjs",
+        "docs/evidence/m515-duel-timeout-boundary-atomicity.json",
+        ".github/workflows/m515-duel-timeout-boundary-atomicity.yml"
+      ],
+      "allowed": [
+        "monitor CI",
+        "non-forced sync",
+        "correct only the three M515 files"
+      ],
+      "forbidden": [
+        "merge",
+        "deploy",
+        "touch third-party reservations",
+        "runtime/catalog/certification/inventory/player data"
+      ]
+    }
+  ],
+  "nextTask": "M520: validar convite e ação 1v1 expirados pelo handler Discord real, sem alterar runtime.",
+  "nextWindow": "2026-11-22T16:30:00-03:00",
+  "actualSharedHeadAtCompletion": "0e8c734607712c1bc73eae5e77b23b805b270c2c",
+  "branchHead": "256eec1bcbce441b7c9cbca4e1639b3dacac2cc7",
+  "duration": {
+    "elapsedMinutes": 24,
+    "effectiveMinutesMeasured": false,
+    "minimum60MinutesConfirmed": false,
+    "note": "Tempo decorrido entre o início registrado e a conclusão; 60 minutos de trabalho efetivo não foram comprovados. CI aguardada não foi contabilizada."
+  }
+}

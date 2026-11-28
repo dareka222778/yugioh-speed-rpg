@@ -1,0 +1,44 @@
+{
+  "format": 1,
+  "runId": "work-20261127T062736-0300-M671",
+  "mission": "M671",
+  "priority": "P1",
+  "status": "reserved-and-implementing",
+  "startedAt": "2026-11-27T06:27:36-03:00",
+  "endedAt": null,
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedBaseHead": "542c8db6c488e323dadda27a708b979189b65d53",
+  "branch": "feat/work-m671-multi-attack-spirit-20261127",
+  "headSha": null,
+  "changedFiles": [
+    "src/multiAttackSpiritTagAdapter.ts",
+    "tests/multiAttackSpiritTagAdapter.test.cjs",
+    "docs/evidence/m671-multi-attack-spirit.json",
+    ".github/workflows/m671-multi-attack-spirit.yml",
+    "scripts/audit-multi-attack-spirit-m671.cjs",
+    "coordination/runs/work-20261127T062736-0300-M671.json"
+  ],
+  "scope": "Adapter TagDuel isolado para Mataza the Zapper (22609617 / Konami CID 5898) e Asura Priest (02134346 / Konami CID 5381): dois ataques por Battle Phase e bloqueio de troca de controle enquanto Mataza estiver face-up; Asura ataca cada monstro da equipe adversária uma vez, não pode ser Invocado-Especialmente e retorna à mão do proprietário físico na End Phase do turno de Normal/Flip Summon. Inclui vínculos por UID/epoch, rotação 2v2, idempotência, privacidade de mãos, Deck 20–30, mão 6 na End Phase, zonas 3+3 e Extra 5. Sem resolver central, catálogo/certificações, comandos, persistência, inventário ou produção.",
+  "blocksCompleted": [],
+  "implementedCards": 2,
+  "newCards": 0,
+  "newCertifications": 0,
+  "automaticCertifications": 0,
+  "inventoryGrants": 0,
+  "verification": {
+    "typecheck": "pending",
+    "build": "pending",
+    "focusedTests": "pending",
+    "cardAudit": "pending",
+    "discordLive": "not-run"
+  },
+  "pr": null,
+  "production": "not-changed",
+  "merge": "not-authorized",
+  "deploy": "not-authorized",
+  "blockers": [
+    "Handoff explícito M61 para resolver central ainda pendente; esta entrega permanecerá isolada e não será certificada."
+  ],
+  "nextTask": "Implementar o adapter de ataques múltiplos/Spirit com testes 2v2, preservar identidade física e abrir PR com CI dedicada.",
+  "nextWindow": "2026-11-27T06:30:00-03:00"
+}

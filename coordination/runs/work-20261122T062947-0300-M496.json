@@ -1,0 +1,132 @@
+{
+  "runId": "work-20261122T062947-0300-M496",
+  "mission": "M496",
+  "owner": "Work principal",
+  "priority": "P1 — validar o deck-out no TagDuel clássico 2v2 pelo deck físico do participante que está entrando: o parceiro ainda pode ter cartas, mas não pode emprestar seu Deck; confirmar equipe vencedora, conservação de UIDs, persistência e painel Discord terminal.",
+  "startedAt": "2026-11-22T06:29:47-03:00",
+  "lastActivityAt": "2026-11-22T06:29:47-03:00",
+  "endedAt": null,
+  "state": "reserved-and-implementing",
+  "branch": "feat/work-m496-tag-classic-deckout-physical-owner-2v2-20261122",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "86318185ca4d9a62e707d2b776ecad3cfc40b6ca",
+  "sharedHeadAtReservation": "86318185ca4d9a62e707d2b776ecad3cfc40b6ca",
+  "reservedFiles": [
+    "tests/tagClassicDeckOutPhysicalOwner2v2.test.cjs",
+    "docs/evidence/m496-tag-classic-deckout-physical-owner-2v2.json",
+    ".github/workflows/m496-tag-classic-deckout-physical-owner-2v2.yml"
+  ],
+  "scope": [
+    "tests/tagClassicDeckOutPhysicalOwner2v2.test.cjs",
+    "docs/evidence/m496-tag-classic-deckout-physical-owner-2v2.json",
+    ".github/workflows/m496-tag-classic-deckout-physical-owner-2v2.yml"
+  ],
+  "conflictCheck": {
+    "overlap": false,
+    "checkedAt": "2026-11-22T06:29:47-03:00",
+    "checkedReservations": [
+      "currentWorkReservation",
+      "currentWorkReservationM397",
+      "currentWorkReservationM398",
+      "currentWorkReservationM399",
+      "currentWorkReservationM400",
+      "currentWorkReservationM401",
+      "currentWorkReservationM402",
+      "currentWorkReservationM403",
+      "currentWorkReservationM404",
+      "currentWorkReservationM405",
+      "currentWorkReservationM406",
+      "currentWorkReservationM407",
+      "currentWorkReservationM427",
+      "currentWorkReservationM428",
+      "currentWorkReservationM429",
+      "currentWorkReservationM430",
+      "currentWorkReservationM431",
+      "currentWorkReservationM432",
+      "currentWorkReservationM433",
+      "currentWorkReservationM436",
+      "currentWorkReservationM437",
+      "currentWorkReservationM441",
+      "currentWorkReservationM442",
+      "currentWorkReservationM443",
+      "currentWorkReservationM444",
+      "currentWorkReservationM455",
+      "currentWorkReservationM456",
+      "currentWorkReservationM457",
+      "currentWorkReservationM458",
+      "currentWorkReservationM459",
+      "currentWorkReservationM469",
+      "currentWorkReservationM470",
+      "currentWorkReservationM471",
+      "currentWorkReservationM472",
+      "currentWorkReservationM473",
+      "currentWorkReservationM474",
+      "currentWorkReservationM475",
+      "currentWorkReservationM476",
+      "currentWorkReservationM477",
+      "currentWorkReservationM478",
+      "currentWorkReservationM479",
+      "currentWorkReservationM480",
+      "currentWorkReservationM481",
+      "currentWorkReservationM482",
+      "currentWorkReservationM483",
+      "currentWorkReservationM484",
+      "currentWorkReservationM485",
+      "currentWorkReservationM486",
+      "currentWorkReservationM487",
+      "currentWorkReservationM494",
+      "currentWorkReservationM495"
+    ],
+    "preserved": [
+      "M472–M487 e M61 permanecem intactos",
+      "M495 PR #443 liberada ao auxiliar apenas nos três caminhos M495",
+      "M492–M494 e todas as reservas de terceiros preservadas"
+    ]
+  },
+  "workBlocks": [
+    "Releu coordination/state.json e o checkpoint M495.",
+    "Verificou shared HEAD, main HEAD, PR #443, PRs recentes e workflows do branch compartilhado.",
+    "Confirmou que M495 já recebeu handoff ao auxiliar (#443 comentário 7075001477), portanto seus três arquivos não serão tocados.",
+    "Identificou lacuna: tagDuel.test.cjs cobre deck vazio do participante que sai, mas não a perda quando o participante físico que entra tem Deck vazio enquanto o parceiro mantém cartas."
+  ],
+  "tests": {
+    "focused": null,
+    "typescript": null,
+    "discordPayload": null,
+    "limitations": "Ainda não executados; serão disparados pela CI da PR."
+  },
+  "catalog": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "inventoryGranted": 0,
+  "mergePerformed": false,
+  "deployPerformed": false,
+  "production": {
+    "mainHead": "f78f3080b496d2697072b946088309f36e97b60e",
+    "sharedHeadAtReservation": "86318185ca4d9a62e707d2b776ecad3cfc40b6ca",
+    "backupVerified": false,
+    "liveDiscordValidation": false,
+    "merge": false,
+    "deploy": false,
+    "deploymentRegistry": "A consulta direta ao endpoint de deployments foi rejeitada pela integração GitHub; produção não verificada."
+  },
+  "handoffM61": {
+    "pr": 17,
+    "commentId": 7074658790,
+    "status": "requested-no-response",
+    "files": [
+      "src/monsterEffects.ts",
+      "src/duelEngineCurrent.ts",
+      "src/cardMetadata.ts",
+      "src/cardCertifications.ts"
+    ]
+  },
+  "pr": null,
+  "releaseToAuxiliary": [],
+  "nextTask": "Implementar o teste de deck-out do assento físico que entra, exercitando actTag/handleTagComponent, persistência e payload público; depois consultar HEAD e coordenação para uma segunda frente independente.",
+  "nextWindow": "2026-11-22T11:30:00-03:00"
+}

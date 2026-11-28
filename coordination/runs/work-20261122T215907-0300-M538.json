@@ -1,0 +1,134 @@
+{
+  "runId": "work-20261122T215907-0300-M538",
+  "mission": "M538",
+  "owner": "Work principal",
+  "status": "released-to-auxiliary",
+  "startedAt": "2026-11-22T21:59:07-03:00",
+  "lastActivityAt": "2026-11-22T22:22:57-03:00",
+  "endedAt": "2026-11-22T22:09:32-03:00",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "5c7b9f179afae742dbfeda1e21b4685685bbb513",
+  "sharedHeadBeforeFinalization": "05b9a2ea3d29d3e7c791452684cf31c430c0a3bc",
+  "branch": "feat/work-m538-cross-mode-lock-race-20261122",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "5c7b9f179afae742dbfeda1e21b4685685bbb513",
+  "headSha": "c9c4eadea9f3a7f311133e6489ad009a20df4a76",
+  "priority": "P1 — provar exclusão mútua real entre Accept 1v1 e Accept TagDuel sob concorrência entre processos: duas conexões SQLite independentes não podem adquirir simultaneamente os locks do mesmo jogador.",
+  "scope": [
+    "tests/duelCrossModeLockRace.test.cjs",
+    "docs/evidence/m538-duel-cross-mode-lock-race.json",
+    ".github/workflows/m538-duel-cross-mode-lock-race.yml"
+  ],
+  "conflictCheck": {
+    "overlap": false,
+    "checkedAt": "2026-11-22T21:59:07-03:00",
+    "checkedAgainst": [
+      "M536 #482: teste/evidência/workflow próprios; sem sobreposição com os três caminhos M538.",
+      "M537 #481: timeoutSweep.ts/index.ts e integridade M29; sem sobreposição com os três caminhos M538.",
+      "M61 #17: resolver/metadata/manifesto continuam reservados; nenhum desses arquivos foi tocado.",
+      "M502/M526 e todas as reservas de terceiros preservadas."
+    ],
+    "note": "M538 é somente teste/evidência/workflow; usa os stores existentes em processos isolados e não altera runtime."
+  },
+  "workBlocks": [
+    "Lido coordination/state.json e checkpoint M537; confirmado shared HEAD 5c7b9f179afae742dbfeda1e21b4685685bbb513, PRs #481/#482 e CI em andamento.",
+    "Inspecionadas as transações de acceptChallenge e acceptTag: ambas consultam o lock do modo oposto antes de inserir o próprio lock.",
+    "Criada regressão de cinco corridas cross-process: cinco lobbies independentes, dois processos Node e duas conexões SQLite por corrida, com startAt comum.",
+    "A regressão exige exatamente uma aceitação e um lock por convidado, estado persistido coerente, locks originais preservados e snapshot de inventário idêntico.",
+    "Publicada PR #483 draft; a versão inicial 1/1 passou e a versão reforçada 5 corridas também passou.",
+    "Solicitado novamente handoff M61 para integrar primeiro 3-Hump Lacooda; sem resposta/liberação até o checkpoint.",
+    "M536 #482 e M537 #481 concluíram Engine Validation e Extended Soak; ambas liberadas ao auxiliar para sincronização não-forçada e monitoramento."
+  ],
+  "tests": {
+    "focused": "1/1 teste TAP passou; cobre cinco corridas independentes (45092764672)",
+    "check": "passed in Engine Validation (45092764670; still running at checkpoint)",
+    "build": "passed in custom workflow (45092764672)",
+    "customWorkflow": "success; 1/1 TAP, cinco corridas (45092764672)",
+    "cardBatchFast": "success (45092764674)",
+    "milestone1000": "success; 969/1000 (45092764667)",
+    "engineValidation": "success (45092764670)",
+    "extendedSoak": "success; 600s (45092764670)",
+    "limitations": "SQLite temporário com processos/conexões independentes; sem banco de produção ou gateway Discord real."
+  },
+  "catalog": {
+    "sharedCards": 969,
+    "sharedCertificates": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "developmentBranchCertificates": 1014,
+    "developmentBranchNote": "PR #14/branch M47 está 39 commits à frente e 326 atrás da branch compartilhada; draft e não mergeável. Seus 1014 certificados de desenvolvimento não contam no catálogo compartilhado."
+  },
+  "inventoryGranted": 0,
+  "production": {
+    "mainHead": "197bbda07efc81658604bcd12308665571e26d59",
+    "backupVerified": false,
+    "liveDiscordValidation": false,
+    "merge": false,
+    "deploy": false,
+    "deploymentWorkflowFound": false,
+    "note": "Busca no repositório não encontrou workflow/configuração de deploy no branch default; deployments do provedor não estão expostos pela integração."
+  },
+  "prs": [
+    {
+      "number": 481,
+      "url": "https://github.com/dareka222778/yugioh-speed-rpg/pull/481",
+      "headSha": "e55f7e8a84ad61dac8c8cfd3b580061eb343165d",
+      "state": "open",
+      "draft": true,
+      "mergeable": true,
+      "ci": "Engine Validation and 600s Extended Soak success",
+      "releasedToAuxiliary": true
+    },
+    {
+      "number": 482,
+      "url": "https://github.com/dareka222778/yugioh-speed-rpg/pull/482",
+      "headSha": "580eb32e5de1300f0540bf852cc8a463a7931e47",
+      "state": "open",
+      "draft": true,
+      "mergeable": true,
+      "ci": "2/2 focused; Card Batch Fast, Milestone 1000, Engine Validation and 600s Extended Soak success",
+      "releasedToAuxiliary": true
+    },
+    {
+      "number": 483,
+      "url": "https://github.com/dareka222778/yugioh-speed-rpg/pull/483",
+      "headSha": "c9c4eadea9f3a7f311133e6489ad009a20df4a76",
+      "state": "open",
+      "draft": true,
+      "mergeable": false,
+      "ci": "focused, Card Batch Fast, Milestone 1000, Engine Validation and 600s Extended Soak all success; base branch advanced after coordination commits, non-force sync needed",
+      "releasedToAuxiliary": true
+    }
+  ],
+  "handoffs": {
+    "M536": "https://github.com/dareka222778/yugioh-speed-rpg/pull/482#issuecomment-7088833706",
+    "M537": "https://github.com/dareka222778/yugioh-speed-rpg/pull/481#issuecomment-7088833378",
+    "M538": "https://github.com/dareka222778/yugioh-speed-rpg/pull/483#issuecomment-7088914664",
+    "M61": "https://github.com/dareka222778/yugioh-speed-rpg/pull/17#issuecomment-7088878588"
+  },
+  "releaseToAuxiliary": [
+    "M536: monitor/sync non-force/correct only its three paths.",
+    "M537: monitor/sync non-force/correct only its seven paths.",
+    "M538: monitor Card Batch/Milestone/Engine Validation, sync non-force/correct only its three paths."
+  ],
+  "nextTask": "Auxiliar conclui Engine Validation/Extended Soak de #483 e sincroniza #481–#483 sem force push. Work na próxima janela verifica o novo shared HEAD/coordination e, se M61 liberar, integra 3-Hump Lacooda; caso contrário, segue em outra frente independente.",
+  "nextWindow": "2026-11-22T22:30:00-03:00",
+  "duration": {
+    "targetEffectiveMinutes": 60,
+    "effectiveWorkMinutes": 9,
+    "elapsedMinutes": 21.6,
+    "targetMet": false,
+    "ciWaitExcluded": true,
+    "measurement": "estimativa conservadora do trabalho ativo desta retomada; tempo ocioso de CI excluído."
+  },
+  "sharedHeadAfterFinalization": "336c45535400bc9ca48ad176b9d225dd91cdd14b",
+  "branchComparisonAtFinalization": {
+    "ahead": 5,
+    "behind": 4,
+    "mergeable": false,
+    "reason": "shared branch advanced after checkpoint/coordination commits; auxiliary may sync non-force"
+  }
+}

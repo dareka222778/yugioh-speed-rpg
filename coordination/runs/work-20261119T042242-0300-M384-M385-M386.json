@@ -1,0 +1,229 @@
+{
+  "runId": "work-20261119T042242-0300-M384-M385-M386",
+  "missions": [
+    {
+      "id": "M384",
+      "priority": "P1",
+      "branch": "feat/work-m384-deck-interaction-id-parser-20261119",
+      "head": "e654f55d5dca2051739c1727435cc6ae78ba1581",
+      "pr": 331,
+      "prUrl": "https://github.com/dareka222778/yugioh-speed-rpg/pull/331",
+      "scope": [
+        "src/deckInteractionId.ts",
+        "tests/deckInteractionIdUnit.test.cjs",
+        "tests/deckInteractionIdPayload.test.cjs",
+        ".github/workflows/m384-deck-interaction-id-unit.yml"
+      ],
+      "changes": [
+        "Parser/construtor estrito de custom IDs de Deck com allowlist imutável, 7 segmentos, tokens ASCII seguros, slot 1–3, números canônicos e limite 100 caracteres.",
+        "Teste real do payload deckMessage com SQLite temporário e sem starter deck/inventory rows.",
+        "9 grupos unitários + 1 teste de payload; primeira e segunda execuções encontraram defeitos em expectativas, corrigidos antes do último run."
+      ],
+      "ci": {
+        "focused": {
+          "run": 44480503213,
+          "status": "success"
+        },
+        "cardBatchFast": {
+          "run": 44480502926,
+          "status": "success"
+        },
+        "milestone1000": {
+          "run": 44480503016,
+          "status": "success"
+        },
+        "engineValidation": {
+          "run": 44480503169,
+          "status": "in_progress",
+          "details": "Extended Soak 600s success; npm run check, npm test and early engine audits success; remaining acceptance/preview steps still running."
+        }
+      },
+      "limit": "Parser ainda não integrado ao roteador por proteção M8 em src/index.ts/deckUI.ts; não certifica carta."
+    },
+    {
+      "id": "M385",
+      "priority": "P1",
+      "branch": "feat/work-m385-asura-priest-spirit-multiattack-20261119",
+      "head": "60d9929a66717d4ae6510cf5957aabc1d73dfc1c",
+      "pr": 332,
+      "prUrl": "https://github.com/dareka222778/yugioh-speed-rpg/pull/332",
+      "scope": [
+        "src/asuraPriestRules.ts",
+        "tests/asuraPriestRules.test.cjs",
+        ".github/workflows/m385-asura-priest-focused.yml"
+      ],
+      "changes": [
+        "Helper para alvos de ataque do Asura Priest em 2v2, com UID por alvo e por atacante, inclui monstros face-down e ambos os assentos adversários.",
+        "Regras de não Special Summon e retorno Spirit na End Phase do turno de Normal Summon/flip face-up.",
+        "13 grupos de testes unitários."
+      ],
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5381&ope=2&request_locale=en",
+      "ci": {
+        "focused": {
+          "run": 44481056550,
+          "status": "success"
+        },
+        "cardBatchFast": {
+          "run": 44481056480,
+          "status": "success"
+        },
+        "milestone1000": {
+          "run": 44481056492,
+          "status": "success"
+        },
+        "engineValidation": {
+          "run": 44481056496,
+          "status": "in_progress",
+          "details": "Card Batch Fast, Milestone 1000 and focused tests success; Engine Validation and Extended Soak still running."
+        }
+      },
+      "limit": "Helper não integrado ao resolver de combate/registro de efeitos; Asura Priest permanece não certificada."
+    },
+    {
+      "id": "M386",
+      "priority": "P1",
+      "branch": "feat/work-m386-apprentice-magician-counter-recruit-20261119",
+      "head": "eafc171d982900560025e5f62e08cc152d7cf120",
+      "pr": 333,
+      "prUrl": "https://github.com/dareka222778/yugioh-speed-rpg/pull/333",
+      "scope": [
+        "src/apprenticeMagician.ts",
+        "tests/apprenticeMagician.test.cjs",
+        ".github/workflows/m386-apprentice-magician-focused.yml"
+      ],
+      "changes": [
+        "Helper para alvos face-up que aceitam Spell Counter e incremento imutável de um contador.",
+        "Recrutamento de Spellcaster Nível 1–2 após destruição por batalha, face-down Defense, com revalidação UID e limite de 3 zonas compartilhadas.",
+        "sourceDeckOwnerSeat garante que só o Deck físico fornecido pelo resolver seja pesquisado; rejeita cartas do Deck do parceiro.",
+        "13 grupos de testes unitários."
+      ],
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5650&ope=2&request_locale=en",
+      "ci": {
+        "focused": {
+          "run": 44481574539,
+          "status": "success"
+        },
+        "cardBatchFast": {
+          "run": 44481574437,
+          "status": "success"
+        },
+        "milestone1000": {
+          "run": 44481574416,
+          "status": "success"
+        },
+        "engineValidation": {
+          "run": 44481574609,
+          "status": "in_progress",
+          "details": "Focused tests and Milestone 1000 success; Card Batch Fast now success; Engine Validation and Extended Soak still running."
+        }
+      },
+      "limit": "Helpers ainda não integrados ao resolver/registro; Apprentice Magician permanece não certificada."
+    }
+  ],
+  "startedAt": "2026-11-19T04:22:42-03:00",
+  "endedAt": "2026-11-19T04:45:33-03:00",
+  "elapsedMinutes": 23,
+  "effectiveWorkMinutes": 16,
+  "base": {
+    "branch": "feat/rea-engine-recovery-20261026",
+    "sha": "41fa11375d60223fe1ca499b8971112272dc4c31"
+  },
+  "sharedHeadBeforeCheckpoint": "41fa11375d60223fe1ca499b8971112272dc4c31",
+  "changes": [
+    "PR #331 M384: parser de custom IDs e validação do payload real do editor de Deck.",
+    "PR #332 M385: Asura Priest — multi-attack por UID, restrição de Special Summon e retorno Spirit.",
+    "PR #333 M386: Apprentice Magician — Spell Counter e recrutamento Spellcaster Level 1–2, Deck físico explicitamente identificado.",
+    "Três branches isoladas; nenhuma alteração em runtime central protegido, catálogo, certificados, banco persistente ou inventários."
+  ],
+  "cardCertification": {
+    "certified": 969,
+    "goal": 1000,
+    "remaining": 31,
+    "newlyCertified": 0,
+    "automaticCertifications": 0
+  },
+  "coordination": {
+    "activeParallelWork": "M383 permanece reservado e ativo em arquivos disjuntos; nove reservas do run principal preservadas; M61 handoff sem resposta; M384/M385/M386 liberadas ao auxiliar somente para monitorar/corrigir os próprios arquivos novos."
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "discordLiveValidation": false,
+    "backup": "Nenhum backup de produção foi necessário, pois não houve mutação persistente."
+  },
+  "blockers": [
+    "M61 handoff de src/monsterEffects.ts e src/duelEngineCurrent.ts continua pendente; por isso as três novas famílias ainda são primitives isoladas e não podem ser certificadas.",
+    "M384 não integra o roteador de Deck: src/index.ts e src/deckUI.ts continuam protegidos pelo baseline M8.",
+    "CI integral de M384/M385/M386 ainda não concluiu; soaks de 600s e etapas extensas em andamento."
+  ],
+  "next": {
+    "mission": "M383/M387",
+    "window": "2026-11-19T08:30:00-03:00",
+    "task": "Verificar resultados finais das CI/soaks; manter M383 em seus arquivos reservados; solicitar/receber handoff M61; integrar as primitives M367/M368/M385/M386 apenas após liberação; escolher próximo candidato histórico sem sobreposição."
+  },
+  "releasedScope": [
+    {
+      "mission": "M384",
+      "branch": "feat/work-m384-deck-interaction-id-parser-20261119",
+      "files": [
+        "src/deckInteractionId.ts",
+        "tests/deckInteractionIdUnit.test.cjs",
+        "tests/deckInteractionIdPayload.test.cjs",
+        ".github/workflows/m384-deck-interaction-id-unit.yml"
+      ],
+      "auxiliary": "Pode monitorar/corrigir somente estes quatro arquivos; não integrar em src/index.ts ou src/deckUI.ts."
+    },
+    {
+      "mission": "M385",
+      "branch": "feat/work-m385-asura-priest-spirit-multiattack-20261119",
+      "files": [
+        "src/asuraPriestRules.ts",
+        "tests/asuraPriestRules.test.cjs",
+        ".github/workflows/m385-asura-priest-focused.yml"
+      ],
+      "auxiliary": "Pode monitorar/corrigir somente estes três arquivos."
+    },
+    {
+      "mission": "M386",
+      "branch": "feat/work-m386-apprentice-magician-counter-recruit-20261119",
+      "files": [
+        "src/apprenticeMagician.ts",
+        "tests/apprenticeMagician.test.cjs",
+        ".github/workflows/m386-apprentice-magician-focused.yml"
+      ],
+      "auxiliary": "Pode monitorar/corrigir somente estes três arquivos."
+    }
+  ],
+  "prs": [
+    {
+      "number": 331,
+      "state": "open",
+      "draft": true,
+      "merged": false,
+      "mergeable": false,
+      "ahead": 10,
+      "behind": 2,
+      "reason": "branch baseada no HEAD compartilhado 41fa; dois commits de coordenação foram publicados depois do checkpoint; sincronizar sem force antes de revisão"
+    },
+    {
+      "number": 332,
+      "state": "open",
+      "draft": true,
+      "merged": false,
+      "mergeable": false,
+      "ahead": 3,
+      "behind": 2,
+      "reason": "branch baseada no HEAD compartilhado 41fa; dois commits de coordenação foram publicados depois do checkpoint; sincronizar sem force antes de revisão"
+    },
+    {
+      "number": 333,
+      "state": "open",
+      "draft": true,
+      "merged": false,
+      "mergeable": false,
+      "ahead": 6,
+      "behind": 2,
+      "reason": "branch baseada no HEAD compartilhado 41fa; dois commits de coordenação foram publicados depois do checkpoint; sincronizar sem force antes de revisão"
+    }
+  ]
+}

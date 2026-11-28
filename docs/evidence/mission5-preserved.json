@@ -1,0 +1,1433 @@
+{
+  "baseCommit": "6cf78e612a04254a0ddb43bb5752cabe394c2063",
+  "historicalModules": 123,
+  "files": [
+    {
+      "path": "src/resolvers/v1/attackResponses.ts",
+      "bytes": 898,
+      "sha256": "d8e048fec4c6a18c27af080fc33efcf3ab2b17e298121689263f2e6a3dbad94a"
+    },
+    {
+      "path": "src/resolvers/v1/cardCatalog.ts",
+      "bytes": 17906,
+      "sha256": "4dda4b4abcdb59225cb6514462d6e42f7c53fc0173c203faebeacf1e4eb1187b"
+    },
+    {
+      "path": "src/resolvers/v1/cardCertifications.ts",
+      "bytes": 23356,
+      "sha256": "48a611f7f3d9896bde366a98c76f774005049c3aaf4c426c675d1cd6301b3332"
+    },
+    {
+      "path": "src/resolvers/v1/cardLifetime.ts",
+      "bytes": 2680,
+      "sha256": "05d419ef5787d7b2eecee0aa50789b95b500fbf92eb0e8e0fc2e3a1628182b8c"
+    },
+    {
+      "path": "src/resolvers/v1/cardMetadata.ts",
+      "bytes": 8971,
+      "sha256": "25e4f02f61c875216f896f6f6c1ead5d287af61f1d045b2560cd9343f0291bec"
+    },
+    {
+      "path": "src/resolvers/v1/cardRegistry.ts",
+      "bytes": 5189,
+      "sha256": "0af48be3e184785c07adc2795a8035f5c15ff1804f2f2e76195e015b0bfdddd8"
+    },
+    {
+      "path": "src/resolvers/v1/chainEngine.ts",
+      "bytes": 992,
+      "sha256": "4140550785ef7ceed8a46f07c48e90564c2cf75ce548c6f2b85470a9577f91c1"
+    },
+    {
+      "path": "src/resolvers/v1/classicEffects.ts",
+      "bytes": 8691,
+      "sha256": "82f3c98a5c79fd632caa423072c3b9fa7a0acaf3b2bcbe6f35f103e77bfde790"
+    },
+    {
+      "path": "src/resolvers/v1/classicEngineCards.ts",
+      "bytes": 35526,
+      "sha256": "a2d7c091ccbb01ca33f1e2982bd902095c08f2526d13b54ebe88dd0039e9a968"
+    },
+    {
+      "path": "src/resolvers/v1/classicExpansion.ts",
+      "bytes": 3925,
+      "sha256": "731ac876d62dbf4faebd86be78f158330cad6e77683af6bb9c9f189795d44504"
+    },
+    {
+      "path": "src/resolvers/v1/duelEngine.ts",
+      "bytes": 59409,
+      "sha256": "7d736e61f9ff3947eca7b924ae36dba0448c3cb6b8bf3e14109142f88c98b77b"
+    },
+    {
+      "path": "src/resolvers/v1/duelIntegrity.ts",
+      "bytes": 11964,
+      "sha256": "30de9af00b7d75d9e2f426594b5ee7ddec68c30a1925384569a8139c9571dd50"
+    },
+    {
+      "path": "src/resolvers/v1/duelRandom.ts",
+      "bytes": 1602,
+      "sha256": "c88e43b7fd1b18444d8e1900d66709472bcff65f4b5d391e004f239cce0f1468"
+    },
+    {
+      "path": "src/resolvers/v1/duelTransitions.ts",
+      "bytes": 3752,
+      "sha256": "d5521ad12016512aa487d67ef02abeef37b90f990c8cd04d539ecbcc7e758119"
+    },
+    {
+      "path": "src/resolvers/v1/economicOperations.ts",
+      "bytes": 2385,
+      "sha256": "0c4503844af02fee57a26c03e7b0d39c7576a55d1182585ac8ae25e4613dc1e6"
+    },
+    {
+      "path": "src/resolvers/v1/effectDefinitions.ts",
+      "bytes": 5800,
+      "sha256": "398abce9287a500ee849de8acd2fd8954e6efc5ee015e32557700e3c4021edb4"
+    },
+    {
+      "path": "src/resolvers/v1/effectModels.ts",
+      "bytes": 3473,
+      "sha256": "eb8bdddee7bb7508fe381d44c6fe100c1a7d9e06d0d7314423dad97474a5442a"
+    },
+    {
+      "path": "src/resolvers/v1/effectOperations.ts",
+      "bytes": 1441,
+      "sha256": "678e9d2a184d83de109bc0a9b23f12bf975ae61ed7edbc5ae091e7887c4a14ce"
+    },
+    {
+      "path": "src/resolvers/v1/effectRegistry.ts",
+      "bytes": 1494,
+      "sha256": "a9793c588e747d9aa15ab348ea07fe65561177cf54d34512a88a0f6f6d629227"
+    },
+    {
+      "path": "src/resolvers/v1/effectTiming.ts",
+      "bytes": 919,
+      "sha256": "b15f3d05399c8e7439ee48c4b2072b2baeaecbe666cc7c17e46d0d6977933d85"
+    },
+    {
+      "path": "src/resolvers/v1/handFlow.ts",
+      "bytes": 1847,
+      "sha256": "b944b46b00384556b717dc5eb411de2fe4237a82934f4afe1d25ccba6e223490"
+    },
+    {
+      "path": "src/resolvers/v1/manifest.json",
+      "bytes": 3711,
+      "sha256": "dc509e4d0a92b3a864ba0c77e4b982242c19096371f3510794e64300e8bff4eb"
+    },
+    {
+      "path": "src/resolvers/v1/monsterEffects.ts",
+      "bytes": 7776,
+      "sha256": "74790e738d899fd573bdf82f75cbbd8fbd838434317a799368dc070ac22d92e0"
+    },
+    {
+      "path": "src/resolvers/v1/monsterEntry.ts",
+      "bytes": 1296,
+      "sha256": "0bf446ffd9101bb50fdd73bd6f315ff5e0e6c5049129b48dd8648e3bd3ee5081"
+    },
+    {
+      "path": "src/resolvers/v1/monsterExit.ts",
+      "bytes": 1104,
+      "sha256": "26977ba882361716752aa1153a4ccdaed6b0a3baacfa7a15d1d8cbfb00e8d6ec"
+    },
+    {
+      "path": "src/resolvers/v1/rulesProfile.ts",
+      "bytes": 1055,
+      "sha256": "1033fff5d538989149161aecea99bf10774703533f665893c0352229e6115b3b"
+    },
+    {
+      "path": "src/resolvers/v1/spellExceptions.ts",
+      "bytes": 1457,
+      "sha256": "df213cd70803c3fbb3e8757f038b7fccd943c88ccde22bbf4ab3dbf667cdd0df"
+    },
+    {
+      "path": "src/resolvers/v1/teamRotation.ts",
+      "bytes": 2472,
+      "sha256": "2bbcc7729b072ff0f5426803d6b96385ba01947c871930e4dfb385b0806610d1"
+    },
+    {
+      "path": "src/resolvers/v2/attackResponses.ts",
+      "bytes": 905,
+      "sha256": "61fb7ff6cf7857bad2ae7b8cc3349ba795264ea4e8c7623a39b70353df5be7ca"
+    },
+    {
+      "path": "src/resolvers/v2/cardCatalog.ts",
+      "bytes": 17906,
+      "sha256": "4dda4b4abcdb59225cb6514462d6e42f7c53fc0173c203faebeacf1e4eb1187b"
+    },
+    {
+      "path": "src/resolvers/v2/cardCertifications.ts",
+      "bytes": 23356,
+      "sha256": "48a611f7f3d9896bde366a98c76f774005049c3aaf4c426c675d1cd6301b3332"
+    },
+    {
+      "path": "src/resolvers/v2/cardLifetime.ts",
+      "bytes": 3202,
+      "sha256": "21ce83e3d038e6893cabafbe561c767c5ecfbb6a9f10609e972cf59a8f38de82"
+    },
+    {
+      "path": "src/resolvers/v2/cardMetadata.ts",
+      "bytes": 8971,
+      "sha256": "25e4f02f61c875216f896f6f6c1ead5d287af61f1d045b2560cd9343f0291bec"
+    },
+    {
+      "path": "src/resolvers/v2/cardPresentation.ts",
+      "bytes": 548,
+      "sha256": "f465be882118e0edd3a6d4c3af7f0f1427d5dbee022d51c16123badccd45e2f9"
+    },
+    {
+      "path": "src/resolvers/v2/cardRegistry.ts",
+      "bytes": 5189,
+      "sha256": "0af48be3e184785c07adc2795a8035f5c15ff1804f2f2e76195e015b0bfdddd8"
+    },
+    {
+      "path": "src/resolvers/v2/chainEngine.ts",
+      "bytes": 992,
+      "sha256": "4140550785ef7ceed8a46f07c48e90564c2cf75ce548c6f2b85470a9577f91c1"
+    },
+    {
+      "path": "src/resolvers/v2/classicEffects.ts",
+      "bytes": 8824,
+      "sha256": "4a1c448c7a0caff1628a01a26ba3119be1b1d37361bfa36a4882d5b3faa5b35d"
+    },
+    {
+      "path": "src/resolvers/v2/classicEngineCards.ts",
+      "bytes": 35526,
+      "sha256": "a2d7c091ccbb01ca33f1e2982bd902095c08f2526d13b54ebe88dd0039e9a968"
+    },
+    {
+      "path": "src/resolvers/v2/classicExpansion.ts",
+      "bytes": 3925,
+      "sha256": "731ac876d62dbf4faebd86be78f158330cad6e77683af6bb9c9f189795d44504"
+    },
+    {
+      "path": "src/resolvers/v2/duelEngineCurrent.ts",
+      "bytes": 60699,
+      "sha256": "f4dec32c46966494bf02baad0fde7471a34346e17c40b8fb967dd8526cf97611"
+    },
+    {
+      "path": "src/resolvers/v2/duelIntegrity.ts",
+      "bytes": 12892,
+      "sha256": "ad7f27a99d1dd7b2fdfaea94b518f03f097e03c8bb15c5d5cb764a26bac2b87d"
+    },
+    {
+      "path": "src/resolvers/v2/duelRandom.ts",
+      "bytes": 1602,
+      "sha256": "c88e43b7fd1b18444d8e1900d66709472bcff65f4b5d391e004f239cce0f1468"
+    },
+    {
+      "path": "src/resolvers/v2/duelTransitions.ts",
+      "bytes": 4587,
+      "sha256": "9b52b6b790722158931213d7353bf202dcdf85bdefa94919d7f2d050611bfd91"
+    },
+    {
+      "path": "src/resolvers/v2/economicOperations.ts",
+      "bytes": 2392,
+      "sha256": "5eff8125dc8b9d1b16dcf4f5d0e884ad50aa9c6329a5fe3f541670fd42cc6581"
+    },
+    {
+      "path": "src/resolvers/v2/effectDefinitions.ts",
+      "bytes": 5800,
+      "sha256": "398abce9287a500ee849de8acd2fd8954e6efc5ee015e32557700e3c4021edb4"
+    },
+    {
+      "path": "src/resolvers/v2/effectModels.ts",
+      "bytes": 3473,
+      "sha256": "eb8bdddee7bb7508fe381d44c6fe100c1a7d9e06d0d7314423dad97474a5442a"
+    },
+    {
+      "path": "src/resolvers/v2/effectOperations.ts",
+      "bytes": 1448,
+      "sha256": "3a323cf65e649c23c736035907581f5a1635495257cf99a8ebe22c77533cb6c5"
+    },
+    {
+      "path": "src/resolvers/v2/effectRegistry.ts",
+      "bytes": 1808,
+      "sha256": "5a851a4bb29f29b7b157e124b553104d2b54d658e4460218b07a515d5e60eb03"
+    },
+    {
+      "path": "src/resolvers/v2/effectTiming.ts",
+      "bytes": 926,
+      "sha256": "17789c7fdce8ff74dde0be94c31d7f2e3e479dff60a2b10a970e331ba3c7856f"
+    },
+    {
+      "path": "src/resolvers/v2/handFlow.ts",
+      "bytes": 1854,
+      "sha256": "681923bfba34cf8cdb24bdb678614db83a01dd70c18bd996011bf22e946a3c8b"
+    },
+    {
+      "path": "src/resolvers/v2/manifest.json",
+      "bytes": 4290,
+      "sha256": "5612adbc814919fdd1ddbd7254927cc0bb2dc1d2a5f875e950c566e533a3b331"
+    },
+    {
+      "path": "src/resolvers/v2/monsterEffects.ts",
+      "bytes": 7776,
+      "sha256": "74790e738d899fd573bdf82f75cbbd8fbd838434317a799368dc070ac22d92e0"
+    },
+    {
+      "path": "src/resolvers/v2/monsterEntry.ts",
+      "bytes": 1334,
+      "sha256": "f4ed821f550c8667300926d5c5ddace95894a20ada307c52cbc6ad04babe8b5d"
+    },
+    {
+      "path": "src/resolvers/v2/monsterExit.ts",
+      "bytes": 1373,
+      "sha256": "775116674c1d12854e09348cd5bc28b68dcb7356df7f0eeef4f11881a3639a09"
+    },
+    {
+      "path": "src/resolvers/v2/resolverIdentity.ts",
+      "bytes": 332,
+      "sha256": "46cf43498f8c2bf128684fb571e136f8246a0735ba805989aac698b51f37d3c7"
+    },
+    {
+      "path": "src/resolvers/v2/rulesProfile.ts",
+      "bytes": 1055,
+      "sha256": "1033fff5d538989149161aecea99bf10774703533f665893c0352229e6115b3b"
+    },
+    {
+      "path": "src/resolvers/v2/spellExceptions.ts",
+      "bytes": 1464,
+      "sha256": "cbf6e5897881faf017befb7b016469e3c41b9c2e88444d7231021f70c379631b"
+    },
+    {
+      "path": "src/resolvers/v2/standbyFlow.ts",
+      "bytes": 6928,
+      "sha256": "e9e48acdc7eeb666cbb1e109f7eef46b6a0a6201e6379569bd28a6a4062d7e8f"
+    },
+    {
+      "path": "src/resolvers/v2/teamRotation.ts",
+      "bytes": 2479,
+      "sha256": "5e67eaeab0f0ecdb46a1000c942572bf6e3a0e9fc2a94c150db996abbf9ac199"
+    },
+    {
+      "path": "src/resolvers/v2/tokens.ts",
+      "bytes": 6404,
+      "sha256": "605d5c9067f1cef8854604df1b33cda3cba0b7ea13745f5753812c3d4918a6e1"
+    },
+    {
+      "path": "src/cardBackAsset.ts",
+      "bytes": 206548,
+      "sha256": "8ea38a87c90ac59c6d3016867646f85b80c649cc27635ff9b1f88f8fb6390576"
+    },
+    {
+      "path": "src/cardRenderer.ts",
+      "bytes": 6390,
+      "sha256": "f777772fda8f1f6343e01f65e5ef09af540dd3345c7bec47b88480e684e9257b"
+    },
+    {
+      "path": "src/deckRenderer.ts",
+      "bytes": 5569,
+      "sha256": "137207781c9a0a57a339481679633c270bd49caeae03830f9698d96e43c8c77d"
+    },
+    {
+      "path": "src/duelRenderer.ts",
+      "bytes": 10764,
+      "sha256": "01d2253332cae7cf18106979e461af7524eda88794021134d2424755b0fb351c"
+    },
+    {
+      "path": "src/duelTheme.ts",
+      "bytes": 1553,
+      "sha256": "f4592cf36963b7185ad8727931967aadc94130393af376fa43069474dba6eb7b"
+    },
+    {
+      "path": "src/npcProgress.ts",
+      "bytes": 3568,
+      "sha256": "a2e0920444723718ba93a21a4408362b960fb36db5314f2b8c25fed4a9f1dd33"
+    },
+    {
+      "path": "src/npcRenderer.ts",
+      "bytes": 6152,
+      "sha256": "22b9d5daf4760309a8eaed388d92b7b7b9383e597fd70cede1f0cc48b7d64b88"
+    },
+    {
+      "path": "src/profile.ts",
+      "bytes": 3409,
+      "sha256": "68027e1dbeca81136783871795601f9b44800924e0c98d9a465e0c8b7f451f96"
+    },
+    {
+      "path": "src/rulesProfile.ts",
+      "bytes": 1055,
+      "sha256": "1033fff5d538989149161aecea99bf10774703533f665893c0352229e6115b3b"
+    },
+    {
+      "path": "src/tagRenderer.ts",
+      "bytes": 8569,
+      "sha256": "73d32326028439ef8d3d319b652d290a7bddebcad0a4a803ea5da62a09a82fc0"
+    },
+    {
+      "path": "src/database.ts",
+      "bytes": 5376,
+      "sha256": "623f959daace34df5ba41c7a3923cc8146c31c41749e6446dc0bc32c1d22398b"
+    },
+    {
+      "path": "src/cardCatalog.ts",
+      "bytes": 17906,
+      "sha256": "4dda4b4abcdb59225cb6514462d6e42f7c53fc0173c203faebeacf1e4eb1187b"
+    },
+    {
+      "path": "src/npcContent.ts",
+      "bytes": 2556,
+      "sha256": "879f8f0f85843a16fbf4798b75ee00261a0807a997c6968dd16e077a2762c129"
+    },
+    {
+      "path": "src/fontPaths.ts",
+      "bytes": 224280,
+      "sha256": "c33aa7db063e1dc0c32f6f9208235ba2fa44ceef9a180be2b815c8af0a5f938f"
+    },
+    {
+      "path": "docs/REA-MISSION-2.md",
+      "bytes": 9767,
+      "sha256": "b5a3b94f25c41d22f60a8c1bf88ece3c21b621481540f96fbd12794e1afc854c"
+    },
+    {
+      "path": "docs/REA-DEVELOPMENT-20261026.md",
+      "bytes": 8322,
+      "sha256": "bf57607a2c818fc47fb590fdd65e5fca62bd4fcc1651d6d4963a5ef45b7059eb"
+    },
+    {
+      "path": "docs/rea-acceptance-cases.json",
+      "bytes": 13716,
+      "sha256": "93bd062e75c0818a09635520b76ca36c1a41426c4d0f39393683894aec599b67"
+    },
+    {
+      "path": "catalog/proposed/normal-before-2004-09-30.json",
+      "bytes": 17637,
+      "sha256": "9b44e989313d46162bf261d2d49f799109f93698b9a019dac8f583071ac3c5a4"
+    },
+    {
+      "path": "src/resolvers/v3/attackResponses.ts",
+      "bytes": 905,
+      "sha256": "61fb7ff6cf7857bad2ae7b8cc3349ba795264ea4e8c7623a39b70353df5be7ca"
+    },
+    {
+      "path": "src/resolvers/v3/cardCatalog.ts",
+      "bytes": 17906,
+      "sha256": "4dda4b4abcdb59225cb6514462d6e42f7c53fc0173c203faebeacf1e4eb1187b"
+    },
+    {
+      "path": "src/resolvers/v3/cardCertifications.ts",
+      "bytes": 27016,
+      "sha256": "6e0c35675c9aba832c2f3019729bd5df9d7c4818455445195d9178b2030ba3f6"
+    },
+    {
+      "path": "src/resolvers/v3/cardLifetime.ts",
+      "bytes": 3202,
+      "sha256": "21ce83e3d038e6893cabafbe561c767c5ecfbb6a9f10609e972cf59a8f38de82"
+    },
+    {
+      "path": "src/resolvers/v3/cardMetadata.ts",
+      "bytes": 9059,
+      "sha256": "2cbf1325eedafc27eb5ee2ce33cacf88ae2d28a2ed735e5ad01a3c9ebbe9d67b"
+    },
+    {
+      "path": "src/resolvers/v3/cardPresentation.ts",
+      "bytes": 548,
+      "sha256": "f465be882118e0edd3a6d4c3af7f0f1427d5dbee022d51c16123badccd45e2f9"
+    },
+    {
+      "path": "src/resolvers/v3/cardRegistry.ts",
+      "bytes": 5189,
+      "sha256": "0af48be3e184785c07adc2795a8035f5c15ff1804f2f2e76195e015b0bfdddd8"
+    },
+    {
+      "path": "src/resolvers/v3/chainEngine.ts",
+      "bytes": 992,
+      "sha256": "4140550785ef7ceed8a46f07c48e90564c2cf75ce548c6f2b85470a9577f91c1"
+    },
+    {
+      "path": "src/resolvers/v3/classicEffects.ts",
+      "bytes": 8824,
+      "sha256": "4a1c448c7a0caff1628a01a26ba3119be1b1d37361bfa36a4882d5b3faa5b35d"
+    },
+    {
+      "path": "src/resolvers/v3/classicEngineCards.ts",
+      "bytes": 35526,
+      "sha256": "a2d7c091ccbb01ca33f1e2982bd902095c08f2526d13b54ebe88dd0039e9a968"
+    },
+    {
+      "path": "src/resolvers/v3/classicExpansion.ts",
+      "bytes": 3925,
+      "sha256": "731ac876d62dbf4faebd86be78f158330cad6e77683af6bb9c9f189795d44504"
+    },
+    {
+      "path": "src/resolvers/v3/duelEngineCurrent.ts",
+      "bytes": 60699,
+      "sha256": "f4dec32c46966494bf02baad0fde7471a34346e17c40b8fb967dd8526cf97611"
+    },
+    {
+      "path": "src/resolvers/v3/duelIntegrity.ts",
+      "bytes": 12890,
+      "sha256": "f04cb0ea80da1b7606e8ed93b6e74ba652393e8ad11bb05c1851d6201f3e3990"
+    },
+    {
+      "path": "src/resolvers/v3/duelRandom.ts",
+      "bytes": 1602,
+      "sha256": "c88e43b7fd1b18444d8e1900d66709472bcff65f4b5d391e004f239cce0f1468"
+    },
+    {
+      "path": "src/resolvers/v3/duelTransitions.ts",
+      "bytes": 4587,
+      "sha256": "9b52b6b790722158931213d7353bf202dcdf85bdefa94919d7f2d050611bfd91"
+    },
+    {
+      "path": "src/resolvers/v3/economicOperations.ts",
+      "bytes": 2392,
+      "sha256": "5eff8125dc8b9d1b16dcf4f5d0e884ad50aa9c6329a5fe3f541670fd42cc6581"
+    },
+    {
+      "path": "src/resolvers/v3/effectDefinitions.ts",
+      "bytes": 5800,
+      "sha256": "398abce9287a500ee849de8acd2fd8954e6efc5ee015e32557700e3c4021edb4"
+    },
+    {
+      "path": "src/resolvers/v3/effectModels.ts",
+      "bytes": 3473,
+      "sha256": "eb8bdddee7bb7508fe381d44c6fe100c1a7d9e06d0d7314423dad97474a5442a"
+    },
+    {
+      "path": "src/resolvers/v3/effectOperations.ts",
+      "bytes": 1448,
+      "sha256": "3a323cf65e649c23c736035907581f5a1635495257cf99a8ebe22c77533cb6c5"
+    },
+    {
+      "path": "src/resolvers/v3/effectRegistry.ts",
+      "bytes": 1808,
+      "sha256": "5a851a4bb29f29b7b157e124b553104d2b54d658e4460218b07a515d5e60eb03"
+    },
+    {
+      "path": "src/resolvers/v3/effectTiming.ts",
+      "bytes": 926,
+      "sha256": "17789c7fdce8ff74dde0be94c31d7f2e3e479dff60a2b10a970e331ba3c7856f"
+    },
+    {
+      "path": "src/resolvers/v3/handFlow.ts",
+      "bytes": 1854,
+      "sha256": "681923bfba34cf8cdb24bdb678614db83a01dd70c18bd996011bf22e946a3c8b"
+    },
+    {
+      "path": "src/resolvers/v3/historicalNormalBatch.ts",
+      "bytes": 8454,
+      "sha256": "fbc2ed12e412d72ca80d91a94f4451290b52c68374f0256a57620287e85d37d7"
+    },
+    {
+      "path": "src/resolvers/v3/manifest.json",
+      "bytes": 4448,
+      "sha256": "4af97f4c7e542d90da4b0f5d14fc0c9fd08d36571946ecba685545bb139853f6"
+    },
+    {
+      "path": "src/resolvers/v3/monsterEffects.ts",
+      "bytes": 7776,
+      "sha256": "74790e738d899fd573bdf82f75cbbd8fbd838434317a799368dc070ac22d92e0"
+    },
+    {
+      "path": "src/resolvers/v3/monsterEntry.ts",
+      "bytes": 1334,
+      "sha256": "f4ed821f550c8667300926d5c5ddace95894a20ada307c52cbc6ad04babe8b5d"
+    },
+    {
+      "path": "src/resolvers/v3/monsterExit.ts",
+      "bytes": 1373,
+      "sha256": "775116674c1d12854e09348cd5bc28b68dcb7356df7f0eeef4f11881a3639a09"
+    },
+    {
+      "path": "src/resolvers/v3/resolverIdentity.ts",
+      "bytes": 332,
+      "sha256": "9a047ab94d7b7a7cb79c3689fce05d8a562e07d8fe806fa6cff140b2e64e9035"
+    },
+    {
+      "path": "src/resolvers/v3/rulesProfile.ts",
+      "bytes": 1055,
+      "sha256": "1033fff5d538989149161aecea99bf10774703533f665893c0352229e6115b3b"
+    },
+    {
+      "path": "src/resolvers/v3/spellExceptions.ts",
+      "bytes": 1464,
+      "sha256": "cbf6e5897881faf017befb7b016469e3c41b9c2e88444d7231021f70c379631b"
+    },
+    {
+      "path": "src/resolvers/v3/standbyFlow.ts",
+      "bytes": 6982,
+      "sha256": "c39a137f0fe45978d2b6af5e359f6fc35e54b79588982a32150e42bac9226faf"
+    },
+    {
+      "path": "src/resolvers/v3/teamRotation.ts",
+      "bytes": 2479,
+      "sha256": "5e67eaeab0f0ecdb46a1000c942572bf6e3a0e9fc2a94c150db996abbf9ac199"
+    },
+    {
+      "path": "src/resolvers/v3/tokens.ts",
+      "bytes": 6458,
+      "sha256": "e35bc159c10d6621752d59cf6925d02f7a4c52eccaf6793d7c97bd626bbc9110"
+    },
+    {
+      "path": "catalog/proposed/normal-next-mission3.json",
+      "bytes": 17356,
+      "sha256": "17ea6f4fcb6f7febe2b7cfc5f49615c16e384d33a80a62b309dda5ce7fd0bd3a"
+    },
+    {
+      "path": "docs/REA-MISSION-3.md",
+      "bytes": 12497,
+      "sha256": "2f8308bcee921bbeca8d3e70bad222b43b9b16c4b3f9e085ea366da0e99b0103"
+    },
+    {
+      "path": "docs/DISCORD-HOMOLOGATION-MISSION-3.md",
+      "bytes": 4564,
+      "sha256": "e06a42102b85773f9a813745d7c3334ffe92b9623ca50077081b3108fe89fc9c"
+    },
+    {
+      "path": "src/resolvers/v4/attackResponses.ts",
+      "bytes": 905,
+      "sha256": "61fb7ff6cf7857bad2ae7b8cc3349ba795264ea4e8c7623a39b70353df5be7ca"
+    },
+    {
+      "path": "src/resolvers/v4/cardCatalog.ts",
+      "bytes": 17906,
+      "sha256": "4dda4b4abcdb59225cb6514462d6e42f7c53fc0173c203faebeacf1e4eb1187b"
+    },
+    {
+      "path": "src/resolvers/v4/cardCertifications.ts",
+      "bytes": 30536,
+      "sha256": "28762faa94c5e2f0a055f7dc3b021aa93a346e7123137ca22133ad48f24e872d"
+    },
+    {
+      "path": "src/resolvers/v4/cardLifetime.ts",
+      "bytes": 3202,
+      "sha256": "21ce83e3d038e6893cabafbe561c767c5ecfbb6a9f10609e972cf59a8f38de82"
+    },
+    {
+      "path": "src/resolvers/v4/cardMetadata.ts",
+      "bytes": 9150,
+      "sha256": "d302792f2fe58674663689bb24678afa3d3b493d1c0c7362239582b5b3805a86"
+    },
+    {
+      "path": "src/resolvers/v4/cardPresentation.ts",
+      "bytes": 548,
+      "sha256": "f465be882118e0edd3a6d4c3af7f0f1427d5dbee022d51c16123badccd45e2f9"
+    },
+    {
+      "path": "src/resolvers/v4/cardRegistry.ts",
+      "bytes": 5189,
+      "sha256": "0af48be3e184785c07adc2795a8035f5c15ff1804f2f2e76195e015b0bfdddd8"
+    },
+    {
+      "path": "src/resolvers/v4/chainEngine.ts",
+      "bytes": 992,
+      "sha256": "4140550785ef7ceed8a46f07c48e90564c2cf75ce548c6f2b85470a9577f91c1"
+    },
+    {
+      "path": "src/resolvers/v4/classicEffects.ts",
+      "bytes": 8824,
+      "sha256": "4a1c448c7a0caff1628a01a26ba3119be1b1d37361bfa36a4882d5b3faa5b35d"
+    },
+    {
+      "path": "src/resolvers/v4/classicEngineCards.ts",
+      "bytes": 35526,
+      "sha256": "a2d7c091ccbb01ca33f1e2982bd902095c08f2526d13b54ebe88dd0039e9a968"
+    },
+    {
+      "path": "src/resolvers/v4/classicExpansion.ts",
+      "bytes": 3925,
+      "sha256": "731ac876d62dbf4faebd86be78f158330cad6e77683af6bb9c9f189795d44504"
+    },
+    {
+      "path": "src/resolvers/v4/duelEngineCurrent.ts",
+      "bytes": 60699,
+      "sha256": "f4dec32c46966494bf02baad0fde7471a34346e17c40b8fb967dd8526cf97611"
+    },
+    {
+      "path": "src/resolvers/v4/duelIntegrity.ts",
+      "bytes": 12874,
+      "sha256": "a0de394d2af9a767dc221e3d53c71186e4ff08cb88c24f1a720ce36d2dadc166"
+    },
+    {
+      "path": "src/resolvers/v4/duelRandom.ts",
+      "bytes": 1602,
+      "sha256": "c88e43b7fd1b18444d8e1900d66709472bcff65f4b5d391e004f239cce0f1468"
+    },
+    {
+      "path": "src/resolvers/v4/duelTransitions.ts",
+      "bytes": 4587,
+      "sha256": "9b52b6b790722158931213d7353bf202dcdf85bdefa94919d7f2d050611bfd91"
+    },
+    {
+      "path": "src/resolvers/v4/economicOperations.ts",
+      "bytes": 2392,
+      "sha256": "5eff8125dc8b9d1b16dcf4f5d0e884ad50aa9c6329a5fe3f541670fd42cc6581"
+    },
+    {
+      "path": "src/resolvers/v4/effectDefinitions.ts",
+      "bytes": 5800,
+      "sha256": "398abce9287a500ee849de8acd2fd8954e6efc5ee015e32557700e3c4021edb4"
+    },
+    {
+      "path": "src/resolvers/v4/effectModels.ts",
+      "bytes": 3473,
+      "sha256": "eb8bdddee7bb7508fe381d44c6fe100c1a7d9e06d0d7314423dad97474a5442a"
+    },
+    {
+      "path": "src/resolvers/v4/effectOperations.ts",
+      "bytes": 1448,
+      "sha256": "3a323cf65e649c23c736035907581f5a1635495257cf99a8ebe22c77533cb6c5"
+    },
+    {
+      "path": "src/resolvers/v4/effectRegistry.ts",
+      "bytes": 1808,
+      "sha256": "5a851a4bb29f29b7b157e124b553104d2b54d658e4460218b07a515d5e60eb03"
+    },
+    {
+      "path": "src/resolvers/v4/effectTiming.ts",
+      "bytes": 926,
+      "sha256": "17789c7fdce8ff74dde0be94c31d7f2e3e479dff60a2b10a970e331ba3c7856f"
+    },
+    {
+      "path": "src/resolvers/v4/handFlow.ts",
+      "bytes": 1854,
+      "sha256": "681923bfba34cf8cdb24bdb678614db83a01dd70c18bd996011bf22e946a3c8b"
+    },
+    {
+      "path": "src/resolvers/v4/historicalNormalBatch.ts",
+      "bytes": 8454,
+      "sha256": "fbc2ed12e412d72ca80d91a94f4451290b52c68374f0256a57620287e85d37d7"
+    },
+    {
+      "path": "src/resolvers/v4/historicalNormalBatch4.ts",
+      "bytes": 8413,
+      "sha256": "61f154e0a49cb467195b48ec5e423f4dee30b7b585b2b0ed54977450a7c0e100"
+    },
+    {
+      "path": "src/resolvers/v4/manifest.json",
+      "bytes": 4634,
+      "sha256": "a7e47ffe52b4a3dd1bcbd4d1609521f9feeee4e2858df47fe567e54ff12cd1b8"
+    },
+    {
+      "path": "src/resolvers/v4/monsterEffects.ts",
+      "bytes": 7776,
+      "sha256": "74790e738d899fd573bdf82f75cbbd8fbd838434317a799368dc070ac22d92e0"
+    },
+    {
+      "path": "src/resolvers/v4/monsterEntry.ts",
+      "bytes": 1334,
+      "sha256": "f4ed821f550c8667300926d5c5ddace95894a20ada307c52cbc6ad04babe8b5d"
+    },
+    {
+      "path": "src/resolvers/v4/monsterExit.ts",
+      "bytes": 1373,
+      "sha256": "775116674c1d12854e09348cd5bc28b68dcb7356df7f0eeef4f11881a3639a09"
+    },
+    {
+      "path": "src/resolvers/v4/resolverIdentity.ts",
+      "bytes": 334,
+      "sha256": "8c1ae19074c734f676e819f839f3a4ffad90693a77104a4315d137d40f66eee8"
+    },
+    {
+      "path": "src/resolvers/v4/rulesProfile.ts",
+      "bytes": 1055,
+      "sha256": "1033fff5d538989149161aecea99bf10774703533f665893c0352229e6115b3b"
+    },
+    {
+      "path": "src/resolvers/v4/spellExceptions.ts",
+      "bytes": 1464,
+      "sha256": "cbf6e5897881faf017befb7b016469e3c41b9c2e88444d7231021f70c379631b"
+    },
+    {
+      "path": "src/resolvers/v4/standbyFlow.ts",
+      "bytes": 7006,
+      "sha256": "6a7ecbc00d7b5cf7830337930395170ee638ffc07c3c27131f6bdb8f6b35adfb"
+    },
+    {
+      "path": "src/resolvers/v4/teamRotation.ts",
+      "bytes": 2479,
+      "sha256": "5e67eaeab0f0ecdb46a1000c942572bf6e3a0e9fc2a94c150db996abbf9ac199"
+    },
+    {
+      "path": "src/resolvers/v4/tokens.ts",
+      "bytes": 6482,
+      "sha256": "7915da4ab34dc1c85e233259d964a846ea10aa5fabc2181322a0efd7cd038bce"
+    },
+    {
+      "path": "docs/REA-MISSION-4.md",
+      "bytes": 12354,
+      "sha256": "75fa3d1e22173c882a5f7695036edf7844df99a2188214e91bb7038fae2f1468"
+    }
+  ],
+  "certificates": [
+    {
+      "id": "10202894",
+      "sha256": "faf6c6c60c590324d613162f5b2376e3f6fdfb6452a9154da53ca097cb8bf3e1"
+    },
+    {
+      "id": "11384280",
+      "sha256": "74c575e4cd64b0db2a3c4c872718e3f667e9213662e9f54f2ddc8f6ef3858a7f"
+    },
+    {
+      "id": "12580477",
+      "sha256": "b8e687739557a9f363d5a758f06f828068dc9afc4423063a9edca3e61f979d74"
+    },
+    {
+      "id": "12607053",
+      "sha256": "b2f19bf611907bcd5f843f345c00cc4188494e4738240ba255f909d1eabf8277"
+    },
+    {
+      "id": "12829151",
+      "sha256": "d5ae65a504b0943b8338c1320eb21cadc13b69e6ca9038d24ab468a11147cee6"
+    },
+    {
+      "id": "13039848",
+      "sha256": "4f019ae770477180bb72ef0f5eb9dcc5f2bf499f61e24ff1319dcbc93b8a0ce5"
+    },
+    {
+      "id": "13193642",
+      "sha256": "4143adc656cae8d439d82be342e1c011a53517ada077ec9a6dfafb69f5f89287"
+    },
+    {
+      "id": "13429800",
+      "sha256": "dff739e20a83556e47348020a6308e44251de3d433c64c908ad0dcddc1084e03"
+    },
+    {
+      "id": "13723605",
+      "sha256": "5a93edecb937afa3da5577aca6828aa1987e07edc6f7b366f7f143fe96aa8266"
+    },
+    {
+      "id": "14087893",
+      "sha256": "230407c475581e809417977053c82416242cd92e3949fec1c59fdf4e4f13374a"
+    },
+    {
+      "id": "14315573",
+      "sha256": "b8a324c564c0a6a5d951e7b0e612dd9cb4c532c74bb535d7fbc9c61b9f08b3d2"
+    },
+    {
+      "id": "15025844",
+      "sha256": "90eaa3068f0cf884e50e1bd7ed26b726da92c6b2593e93e3c2c6fe72a0e58a99"
+    },
+    {
+      "id": "15042735",
+      "sha256": "eb20f9677dee5fab99b993a7312fb61f2d9ae87ae427014f2ab924f51cf1d32a"
+    },
+    {
+      "id": "15150371",
+      "sha256": "bb51cffec826de97a84b92cc048b040805bd0c22a1427fba1d33d7ccdc2939c1"
+    },
+    {
+      "id": "15303296",
+      "sha256": "1d24c3e553eda05cba83feb962818a76daf9d676a7b5b157fe0131c6c88a39ed"
+    },
+    {
+      "id": "15401633",
+      "sha256": "f0591d3a96fd3b7ff5b0bd1728185f6e11dc51dd790397edc38f8f2d6ef12bb4"
+    },
+    {
+      "id": "15480588",
+      "sha256": "ccf183880bb58bff04bd28fcbbb9cd2cd915177dbc5610ef5a82d8cf18011d17"
+    },
+    {
+      "id": "15507080",
+      "sha256": "8e722b0787a91cca1b9c48f15a7a8e6c1297ff66e47fa5e5c630b2920cf36fb8"
+    },
+    {
+      "id": "15510988",
+      "sha256": "103781cda6d9fc32e14cee6281bdcc9756690f475c9468c09ff4f533d2f77f5b"
+    },
+    {
+      "id": "16972957",
+      "sha256": "6189bfa732cbc27c3e107308c90dc72696b1c8876920028f8651eb676f1bdc7e"
+    },
+    {
+      "id": "17358176",
+      "sha256": "eac07b488164fb2ed4ecdc92ab9e246994538602355d53c3d115038c7f306ab2"
+    },
+    {
+      "id": "17814387",
+      "sha256": "2d499841eb41d3313d7f6b58d07742fa262abb1db2bda98cee40cfeb87f81b2d"
+    },
+    {
+      "id": "18710707",
+      "sha256": "75f24739cfc6c1ddde993edb1d08ad61238910b952be7eb5a13f061eec8a1712"
+    },
+    {
+      "id": "19159413",
+      "sha256": "1a15f2ba71bba0cfbe6cd7ebe9bbcb1e53a87ee755e14c37816a0e1e1146bda3"
+    },
+    {
+      "id": "19523799",
+      "sha256": "4be0b0274e74dc7bb4e1f10865a9e2e8c2adf441673b8326ba426ae99c846229"
+    },
+    {
+      "id": "20871001",
+      "sha256": "2c62f6afd80e0fe95b6ed39ee50278f90f6fe0e6c27c2d3abd9e5302984b64e8"
+    },
+    {
+      "id": "21263083",
+      "sha256": "fab4a640aad5694b9b727bf9fb367d1294e40f65f4dcaadec3e446a5b31bdfcf"
+    },
+    {
+      "id": "22026707",
+      "sha256": "9745a71e38a16af935137f59a2a4b3f7067f08223d59f29c59979e2740dab062"
+    },
+    {
+      "id": "23771716",
+      "sha256": "e6865732cd2e91e401e000891016b488187263ab0d7f9e2682cc4e936dcf81c7"
+    },
+    {
+      "id": "24068492",
+      "sha256": "2a32a8376afa231d13f050057ec554d3ad264ab6e8034bca5e5741ab3641c674"
+    },
+    {
+      "id": "24094653",
+      "sha256": "c4deb535bcb77a6c1731e1f02ba03ede88b4f1858ee4f4f5d6bb2fcf8e0cdb0a"
+    },
+    {
+      "id": "24611934",
+      "sha256": "2b81f88b508157987ab2a356b078e64bb2f28f9a730922ed6a1dc800b2c823ed"
+    },
+    {
+      "id": "25880422",
+      "sha256": "1c89fc170903a90acc620d1ca0850eaa99925618730b1c81cddaf2f58fa050fe"
+    },
+    {
+      "id": "26202165",
+      "sha256": "f48502fe4236cbc123d64b3e0e206acb4d08e95f1480b7980c3e86cef77a789e"
+    },
+    {
+      "id": "26378150",
+      "sha256": "97ae9074bbf304cbf9d0ac3bdc697cbe2705627c79941d28b82c38f2019fe8d0"
+    },
+    {
+      "id": "28279543",
+      "sha256": "e901ea82b086764c4e1485f08a99601bc587c196e63f3dc97bddccd3825ebf51"
+    },
+    {
+      "id": "28546905",
+      "sha256": "a220a22b30744a47a1200d24d6574f99f1448e2d30403e883d21e043ca7f55f0"
+    },
+    {
+      "id": "28933734",
+      "sha256": "afb5852a42f810780944f1ef07ada1039d8bd04371f74c7dadf050250c8f2d9d"
+    },
+    {
+      "id": "29401950",
+      "sha256": "19079bf15a91f4e44860b00c6398ea8ce990a08fb21c1ca66cd7c1ed97a3bd2c"
+    },
+    {
+      "id": "29948642",
+      "sha256": "a29b9265021b2bf26d99974e9733de355fff39b53b01c35811a8e55990fbea01"
+    },
+    {
+      "id": "30113682",
+      "sha256": "52d08c713ce9fccb763ea2958aa909ab69445e22bf61a0dc5bf95a64a99d8b4c"
+    },
+    {
+      "id": "30532390",
+      "sha256": "d1a2530adbfca128ddc10546df32c1f4eb57accb7abed860f7931babf8d4723e"
+    },
+    {
+      "id": "31122090",
+      "sha256": "e91f7f3f7cb1c589ff88333cb75429b5f0bb8b2d57350d49cb3307af516c4b85"
+    },
+    {
+      "id": "31560081",
+      "sha256": "5f31f4c97d348bc0be87a539a1b4b28144a4896170e982d499216bb059e5c4f8"
+    },
+    {
+      "id": "32452818",
+      "sha256": "ee14993453fc73c34d9e1739587c458574427c5c7c39d0f905d4759969f31a99"
+    },
+    {
+      "id": "33064647",
+      "sha256": "3716e674ca80472d86a63928430eeb8c23023c994a10a926bf2f4b62162efd41"
+    },
+    {
+      "id": "34460851",
+      "sha256": "9349a6b64bb041bc46284c2672d0d5903ad611183fcbfcd1f566023d17c35479"
+    },
+    {
+      "id": "36304921",
+      "sha256": "2f47461a8a58e0e873a9223fdb3c8bdfec8fa03a042497efd7dbff5a24719add"
+    },
+    {
+      "id": "37120512",
+      "sha256": "d699e549df750043d940ba96017993e4e95bd2812f2787eb44efeb68e963e3dc"
+    },
+    {
+      "id": "37243151",
+      "sha256": "1877c8f42b86901fb56173c80355457bab5c9f3ad7a4c4f4ec15bf73bd854154"
+    },
+    {
+      "id": "38142739",
+      "sha256": "a49e45095fd2d67607860b99d1d053e93d65fc20283760d4a12c8ca9ef165d06"
+    },
+    {
+      "id": "38199696",
+      "sha256": "d56175bf03f9c2dd3af9fe7672ce520a9c6b6ae620fce12e3a2bd3cdf90f23db"
+    },
+    {
+      "id": "39175982",
+      "sha256": "b33f3f25a94b9dcb60b651c3a038e9d9d1258e594ca8759a6844cb8d328aa8f3"
+    },
+    {
+      "id": "40374923",
+      "sha256": "f0bd12d7f01c6a9fa03aba8c57a5b7ce7536929f806250a937d082f01d4d98b4"
+    },
+    {
+      "id": "40640057",
+      "sha256": "1028690b11850e967740f6cbf299a3d8463f874f6e10bc0d81c6357552de6f4e"
+    },
+    {
+      "id": "41218256",
+      "sha256": "502f55887b6dcce4e18abaf47a2da13b7b55f5d2868f493b217795daa80ff52b"
+    },
+    {
+      "id": "41392891",
+      "sha256": "4480dbb7638027f2afe696b12cd0c9743326acca720c730bbfb0ccf630729e75"
+    },
+    {
+      "id": "41949033",
+      "sha256": "94684905ccb2d7d9baa231b3da0700ceb86c1be65f9b24f5f0d47962651bad27"
+    },
+    {
+      "id": "42703248",
+      "sha256": "52f1d9b6d77dd7f83df4fde6f8a63f9a5ab0349d5f4dc02a173861fdc6ed805b"
+    },
+    {
+      "id": "44095762",
+      "sha256": "f9136af2c5fb856102822b311905cbefd55c4b0c228aa06c52646d8d2292f611"
+    },
+    {
+      "id": "44209392",
+      "sha256": "ad1f847e60e295e859fb06c10a324ffc48366218401919c4424d9946bdaf5e38"
+    },
+    {
+      "id": "44287299",
+      "sha256": "0852a4a485f13ea54216d1000ac0e99857c160e6f4a9a1707f01e19679b1d8fe"
+    },
+    {
+      "id": "45121025",
+      "sha256": "b49fffebf804cab55a7b46b38f8927eec74e9ad59f256f573e6cabb4c1bc4462"
+    },
+    {
+      "id": "45231177",
+      "sha256": "a0ad6349cc9fd906b36ef95e1ce1632e2829518f38be3456acf80e80016c7ac4"
+    },
+    {
+      "id": "46130346",
+      "sha256": "f1d4e31bb80803813c13319eab6bb715bac8d8cf6ebb6ea2d02558bd29754951"
+    },
+    {
+      "id": "46457856",
+      "sha256": "a598f1e77652bff163680252f05f0cfcd4d50d76fe3f586d9d7c326dffd92bf8"
+    },
+    {
+      "id": "46474915",
+      "sha256": "6f3f85a8385e7298de8499dd121665e0223a6c7d46acc72c60c31a6c85409b67"
+    },
+    {
+      "id": "46718686",
+      "sha256": "f096a667233398a504a2b47c805ee678c369d4d4af5f9e5e4e33f63ab6502d11"
+    },
+    {
+      "id": "46918794",
+      "sha256": "45d3ed6c3593fb6e97899f4873e0e43ad499d10f5f935954bc9f08a05d009dc1"
+    },
+    {
+      "id": "46986414",
+      "sha256": "f01549fda77115683fde0b326fecf8d642cf47f92437bdbf3e737422d0022aba"
+    },
+    {
+      "id": "47060154",
+      "sha256": "e1bc7cc87870fee793d60a4b120aea7f431a3958da0d33f9f3ab0b5479d60eb6"
+    },
+    {
+      "id": "47695416",
+      "sha256": "7e1d95e308973b821228406c0973fa5ee878095c0538a5992d68f2581f55d4a6"
+    },
+    {
+      "id": "47852924",
+      "sha256": "7c61fe38690c5af60f7d3aeb79c3a3025345c7bf1258cf7fba2528a7b7870356"
+    },
+    {
+      "id": "48305365",
+      "sha256": "222e571783bd9cbe35a82c4455a003adcb9843f4ee1c883b3baa1e50ea9d18dd"
+    },
+    {
+      "id": "48365709",
+      "sha256": "42213d27dcc87cb3b143883ce037f45bc8dcb0ba56146a6c8977f1ec8d1ce235"
+    },
+    {
+      "id": "49218300",
+      "sha256": "cbae6272b9c1bb2545f87c5c1aa7e438a3bdbbafeea57f78b334e0b5922620aa"
+    },
+    {
+      "id": "49258578",
+      "sha256": "c680ff21efde796644818663182a4c3bd8d3eea6b37a56d7d2d289c3907764a2"
+    },
+    {
+      "id": "50005633",
+      "sha256": "a06463246b051d3c309810d16a3d9faeb9a8af03dd398c9054bbfb3ec31a1b37"
+    },
+    {
+      "id": "50913601",
+      "sha256": "4670ae55d6e8dfccac481ddaab5a65cca114ac8c5d2a1f50a2f915e282d5e091"
+    },
+    {
+      "id": "50930991",
+      "sha256": "830a5329d85c40463cb39ca3cc4682e39aa524417fa4335e1aa52c56aab78c15"
+    },
+    {
+      "id": "51482758",
+      "sha256": "c0977135b293f49e6dcfa298921d80c73bb7eb560c633e9e325a3698163deddf"
+    },
+    {
+      "id": "52097679",
+      "sha256": "8fa8bd75f86fe6a7c088bd951826f78328813424977a42de9675a9133107e162"
+    },
+    {
+      "id": "52800428",
+      "sha256": "98f6558310629e082b349aa252d40d832264d3d3d1560125489d6d6fd66091d7"
+    },
+    {
+      "id": "53129443",
+      "sha256": "5dc8472bae5b9bd56b30fe63fe70e0dd340240022b2be5850fa9d13008910493"
+    },
+    {
+      "id": "53293545",
+      "sha256": "9e9994aa07953e3af8a294d61f6eeddeea746b7567f5d6a6ca407cb446c3b099"
+    },
+    {
+      "id": "53581214",
+      "sha256": "c61d589e76572034604e73ccc2b9702555ab138d07c58ed1cb3df0635a045e4d"
+    },
+    {
+      "id": "53582587",
+      "sha256": "f8148b061b45a49d07a3ce569b9d31b9eeda0dac60a9a0b7f3ff711dcbd4d3db"
+    },
+    {
+      "id": "53832650",
+      "sha256": "ff5406398eef6c1d99c27c05fad98fe9dfbefd28aa412df41e7ef58a638f7568"
+    },
+    {
+      "id": "54098121",
+      "sha256": "bc1c6a1265eeb21b242e7735e527fa7774226e32695b578f13ce28a090b6766f"
+    },
+    {
+      "id": "54652250",
+      "sha256": "9fc4b4153ded45ee59fba90413bd0e14c647de02a795e7717855e0ddf6342478"
+    },
+    {
+      "id": "55144522",
+      "sha256": "a9838c3ac7ad174be05d86d0426dea8ac15398a155065cf258cf080236687213"
+    },
+    {
+      "id": "55444629",
+      "sha256": "3bf41a1a40b5aa2a1d4b2462a7f1a3acd87e47dedc244e947bcc3d171602fae1"
+    },
+    {
+      "id": "55550921",
+      "sha256": "782f1e5b8ef997e95cc6d0b3eb9d37b82fd3c0e5de93be759fa89c8245f22c52"
+    },
+    {
+      "id": "56120475",
+      "sha256": "efc64d73f2c2d9795c62ddcffbca5c128ac6c3787bb747db8ae7845f1f680592"
+    },
+    {
+      "id": "59197169",
+      "sha256": "0b18a627e633da991e6c59e572277d6535cd5aabb13a1bf79942f6df29f00872"
+    },
+    {
+      "id": "60694662",
+      "sha256": "fd7f2e7464b5a650d6410479771c88b8963550a105cdf8ff2ad5c634d8c72321"
+    },
+    {
+      "id": "61201220",
+      "sha256": "3a930495530a4e9e1ea51d6a6b0e767efc479855ac789d8389fd6dca2e95b23d"
+    },
+    {
+      "id": "62279055",
+      "sha256": "098829bbeb9b62704279b9e42f595611543db2ee9d587b74d2643315e3e3d073"
+    },
+    {
+      "id": "63308047",
+      "sha256": "c19661852c237eb7599e3099a6d2e18f75bf59478ad4554e9eae6af5610b948f"
+    },
+    {
+      "id": "64154377",
+      "sha256": "7d36c267aaa4209f1299ba17ceda3c01d2d7f3f6d43e64b8b8547713a7af31d8"
+    },
+    {
+      "id": "64511793",
+      "sha256": "6bd81cb9a2134479d9436f935ffe0ae0f79b75932f6721958ed3f93addb14e13"
+    },
+    {
+      "id": "66672569",
+      "sha256": "622caa0c787b9584dc32a8c1c2c8cc2e67d14976c54013c26ade043e5a8f4c84"
+    },
+    {
+      "id": "66788016",
+      "sha256": "9bc21ac96753284eacaec8fc3e73b0eafc13a7f13bca497026dffe702426f3b1"
+    },
+    {
+      "id": "67494157",
+      "sha256": "a6f26aa9cbbeedd409744f601b0a53bfbd51adccefec202b0483c5acddc1ae10"
+    },
+    {
+      "id": "67724379",
+      "sha256": "6f77fc5159e62c3b76c5254efeaa4979a4d6465b7896c4eac5712eee0156866f"
+    },
+    {
+      "id": "68516705",
+      "sha256": "5db765ee54be0bd78012dfcc162c844359becae595f3056cc9cdd7f31d34667c"
+    },
+    {
+      "id": "70368879",
+      "sha256": "8cba78a8cccafa05f56b7e0f63a8fdace14aa29fa5af863484a140895ac55dcc"
+    },
+    {
+      "id": "70781052",
+      "sha256": "614b3733c0481520f47e55faaaa58bda8283efc51617066d10c832ff7bec0f93"
+    },
+    {
+      "id": "72892473",
+      "sha256": "8fc6fd38f251e560e02f6ad625932af823dea52c7ea922d963b2e54a12b71ec2"
+    },
+    {
+      "id": "73481154",
+      "sha256": "b0a7bc3007cbca101b6aca93468b8905c6bde27d6cda6ffbb24a3529caf58166"
+    },
+    {
+      "id": "74677422",
+      "sha256": "4889c4a074ee2916c97fe15a118d48faa3c1d105a6096a5fae2cb047337a4bfd"
+    },
+    {
+      "id": "75356564",
+      "sha256": "0c9157438bd6a1ebb4a0831d7bd58e302cb14371f310e5137d0bbcacb8d797a6"
+    },
+    {
+      "id": "75499502",
+      "sha256": "f19ed2ef8df3f6922cb4a64792b3de271337a60f837681d2e15bd28a9f3694c1"
+    },
+    {
+      "id": "75850803",
+      "sha256": "3f9f5a86e86a26d7a384d036ac99e1e51781f99ecfea99615288a6235cddc708"
+    },
+    {
+      "id": "75889523",
+      "sha256": "adf1e6f6d982c0611983f642f0c195b33304e5816a5a0ed4904dda6b8ba80c7e"
+    },
+    {
+      "id": "76103675",
+      "sha256": "cbcffbf92cba533f829d46e8fd5adb7581e3360372654f955913c573ea96a40c"
+    },
+    {
+      "id": "76184692",
+      "sha256": "3557183ff53a9b2cae89db311e656c270a384504733a3d47366f05db55a1f46c"
+    },
+    {
+      "id": "76704943",
+      "sha256": "9e92aaf54089b686229ee6d840860dd51d0e6c1fa153f51df92ad596a195d44c"
+    },
+    {
+      "id": "77414722",
+      "sha256": "5b84d9dd399cfa4fbfac9a351d7e596a3b7cbc2b4683aedbf4e4d9812b438d5e"
+    },
+    {
+      "id": "77585513",
+      "sha256": "e90d74deaf87522f75ea927663ca480af1173a7107fed611e50423bea83aed78"
+    },
+    {
+      "id": "77603950",
+      "sha256": "cae6190fe03eb8ba59df3c852e33a379fb73d329e9379b929a27c995d03605e5"
+    },
+    {
+      "id": "78010363",
+      "sha256": "5ab3d417fe5af74bab46c8ecf222d2ac11fecffdcd00ba91e719d6ce9b0a94fd"
+    },
+    {
+      "id": "80770678",
+      "sha256": "189b057b35e09487ca033c057d1b353d2905eab59a253ad422a70b438067ba1d"
+    },
+    {
+      "id": "81057959",
+      "sha256": "0ecfdbcce65de9b3336e8224b3428b96081cf1b734e6013efba9c0da53e6a5dd"
+    },
+    {
+      "id": "83011277",
+      "sha256": "7c997443dc1a202e2889e82d39c3d8359b9dc0bad9f6e1ffe0defc56d180ed8f"
+    },
+    {
+      "id": "83678433",
+      "sha256": "7bade9be821430f6c1f641342e0f41eb5b615c2ce991245d0a36ab968d727a66"
+    },
+    {
+      "id": "83764718",
+      "sha256": "60734efedf53403a6dc4479bd37b5f9cc63fbcddc355d2acf9a64a0482a75d6b"
+    },
+    {
+      "id": "83968380",
+      "sha256": "a3857b921dbbb7d02b31df5c1917a1ee4df2fcfeaca47590f21513e7260d7320"
+    },
+    {
+      "id": "84257639",
+      "sha256": "6a756e501b28aaca83e9db378efccfa2d101c8f405623b8b41e5d22419423cea"
+    },
+    {
+      "id": "84285623",
+      "sha256": "cdd38af783c968d746102157191a0b7f02c44e31cd4b2f489fa54e866d935867"
+    },
+    {
+      "id": "85705804",
+      "sha256": "804c9c0a7dff1a194b1888d63ff7ea1457e4d71db37093dbedd6214e74a62eff"
+    },
+    {
+      "id": "86318356",
+      "sha256": "3f2f3965d2c17a8aba12a765a41cd8a9a0cc3f0ab0466fe6fe7ba3492ab424ab"
+    },
+    {
+      "id": "86325596",
+      "sha256": "fb95ef665ad52f3affc642ed55651398597a31e1c5a86c983585c8f13d32b127"
+    },
+    {
+      "id": "87796900",
+      "sha256": "45454bf8d272d79d5ddf12875ac211d27a488b294da172d62cf28d17c3753ac9"
+    },
+    {
+      "id": "88435542",
+      "sha256": "217c7cb21ae1c340c6c27c5eff170c31041e316bc775f33a58325d50ce2779c7"
+    },
+    {
+      "id": "88819587",
+      "sha256": "41b2574c29a8d4ab22455c10dcf338f4e5317a3ec12806ac9ffaeca99245ed6e"
+    },
+    {
+      "id": "89494469",
+      "sha256": "90f6de9364dad320c288f10965cd3102ff595ff141b50c4ff23fadbf3f647171"
+    },
+    {
+      "id": "89631139",
+      "sha256": "38c4b99f6124631a4b4d1fd1bfc9bf43633bdc0dceaae331b09ef54a4ad5036a"
+    },
+    {
+      "id": "90357090",
+      "sha256": "15888d575497eed95d3f74e2729381ec1401dccd935702f932670397bfcd66a3"
+    },
+    {
+      "id": "90963488",
+      "sha256": "12d56d9fc3138125c0c47cfe155887f350da4da53b661a2d8d60d33b22ecca6f"
+    },
+    {
+      "id": "91152256",
+      "sha256": "d42da4c70c26c97a6dcf36edaa65595622872bf96cf06631ebed51b5c40dd212"
+    },
+    {
+      "id": "91595718",
+      "sha256": "588d79cdf125a1fbd6c9b4e9dbb2f12f1187d3850816fbf4996a73d0b72b2741"
+    },
+    {
+      "id": "91939608",
+      "sha256": "d33a4f8cf2b77aa617e46cd22c9b8d272f54d317c15438d0c68faf760888676b"
+    },
+    {
+      "id": "93221206",
+      "sha256": "c68c3cb2c49ed3f792fa2284a5032344964a2f4c5853ba64e79ac6c46860e836"
+    },
+    {
+      "id": "97360116",
+      "sha256": "84acfac4f47266839221869ff338ddb193c992da4a53f6a5896f28fd4b8eb4d7"
+    },
+    {
+      "id": "97590747",
+      "sha256": "67b6a44b4ffaf2fb9baa2179e620193252be40c891e85d8291d338ca8418efd9"
+    },
+    {
+      "id": "97973387",
+      "sha256": "23054c344ee2b1f12e5601d12a7ba1dab281a8f5954c438db002f374a5c2c569"
+    },
+    {
+      "id": "98374133",
+      "sha256": "c3c436f51ce9d09b15e1c608c29cb60d0be32834a2aa3ae464b0324d9741268f"
+    },
+    {
+      "id": "99030164",
+      "sha256": "c6ae1a93306583651fc71f1d19ce99625a5c7535d9211c464b323c4a02fd3c14"
+    },
+    {
+      "id": "07089711",
+      "sha256": "dbd79d9f90f3c6f1c03b3a42af82820905f36a50a0ca3263c7f190c9b923589f"
+    },
+    {
+      "id": "03819470",
+      "sha256": "02e086597c3e0e2ad8047351e4a53830962c90901b8719421e57745ca566f210"
+    },
+    {
+      "id": "05318639",
+      "sha256": "d63c77a98ddf1e8e87f685194fa897143df90b5757cb16ec2322ad0ec0c4f814"
+    },
+    {
+      "id": "04031928",
+      "sha256": "cc7165403f5462a9dc048fdf342969643dba6c42fd42e8d0c79a53d0eb7b0d59"
+    },
+    {
+      "id": "04206964",
+      "sha256": "7ccf93167c978a7d2bbd479470460b1c395fbfef5ab7127f2cb3b14823351b8f"
+    },
+    {
+      "id": "04614116",
+      "sha256": "3aeaf0695b3cc239c75a72d58a694ba151a8df13de834b53480dd94d132295d9"
+    },
+    {
+      "id": "01435851",
+      "sha256": "65ad1ce7674b3d0ac980bbf4b38423aff2c4d38a95be36f89d1f014208678638"
+    },
+    {
+      "id": "00756652",
+      "sha256": "29d7b4df4b5b245d3331bce2b8e4c44dbf250c7a6d4aa7b942a29ba8a3fd34dc"
+    },
+    {
+      "id": "03573512",
+      "sha256": "f4f30470c5a4b13138ac1611ebc2037ab749b2262b462a7229d7da2d683940eb"
+    },
+    {
+      "id": "05053103",
+      "sha256": "f72ba2f674a15b062811baae6b65aa8f662d9da09ed2ce138507d442a3ee0743"
+    },
+    {
+      "id": "06368038",
+      "sha256": "60852ea23669fec8fbc81570d735cd30da5a9148da9d273c5ff502566dd2fbc7"
+    },
+    {
+      "id": "01184620",
+      "sha256": "8fcbe833afeeb48d5580d35afe7ca614ac97bc21205f66cc0543425a2df5b1eb"
+    },
+    {
+      "id": "01784619",
+      "sha256": "0358688dac57b4d8427eeb3d83c744ada69a8c41156ff6a7a56d4113e2835744"
+    },
+    {
+      "id": "04042268",
+      "sha256": "d3cdccb2bc1bd46d1632133f8bec12195daff243bc8661862a5db6f455dd172d"
+    },
+    {
+      "id": "05388481",
+      "sha256": "7cf9e4fa36e2d36f84f09c88aa3dc0642929eb5958b7508b7f4a1c8f360bc92e"
+    },
+    {
+      "id": "08783685",
+      "sha256": "d9f7be36486d1cf4c7230f19bcaea7aa16089014eb35fba12bab0191990b8d80"
+    },
+    {
+      "id": "09159938",
+      "sha256": "5b7b1b4001ff01d4cc5dbfa645b5763902e146beee66e6837015ea923b04272d"
+    },
+    {
+      "id": "09430387",
+      "sha256": "d146275a555b9eef6d948d4efaa78f3abe30dfd503df98075685befb9ecfa0d7"
+    },
+    {
+      "id": "08944575",
+      "sha256": "de1dd6e6c3f90bf3fffb7346c516abdeecef2d12e38469d6ea099a164f887d25"
+    },
+    {
+      "id": "03985011",
+      "sha256": "6495fce08e752c4bb9daea5b92b5e8ff5f2d9b18b38134b08d59d60ddcfda1e4"
+    },
+    {
+      "id": "03732747",
+      "sha256": "5ea380201498df5a745db28296dd613996daad5b1229b95aa92cac44171b968a"
+    }
+  ]
+}

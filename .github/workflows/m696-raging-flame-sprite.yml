@@ -1,0 +1,46 @@
+name: M696 Raging Flame Sprite TagDuel adapter
+on:
+  push:
+    branches:
+      - feat/work-m696-raging-flame-sprite-20261128
+    paths:
+      - 'src/ragingFlameSpriteTagAdapter.ts'
+      - 'tests/ragingFlameSpriteTagAdapter.test.cjs'
+      - 'docs/evidence/m696-raging-flame-sprite.json'
+      - 'scripts/audit-raging-flame-sprite-m696.cjs'
+      - '.github/workflows/m696-raging-flame-sprite.yml'
+      - 'coordination/runs/work-20261128T032433-0300-M696.json'
+  pull_request:
+    paths:
+      - 'src/ragingFlameSpriteTagAdapter.ts'
+      - 'tests/ragingFlameSpriteTagAdapter.test.cjs'
+      - 'docs/evidence/m696-raging-flame-sprite.json'
+      - 'scripts/audit-raging-flame-sprite-m696.cjs'
+      - '.github/workflows/m696-raging-flame-sprite.yml'
+      - 'coordination/runs/work-20261128T032433-0300-M696.json'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  raging-flame-sprite:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Type and lint checks
+        run: npm run check
+      - name: Build
+        run: npm run build
+      - name: Focused behavior suite
+        run: node --test tests/ragingFlameSpriteTagAdapter.test.cjs
+      - name: Full regression suite
+        run: npm test
+      - name: Evidence, ownership, and scope audit
+        run: node scripts/audit-raging-flame-sprite-m696.cjs

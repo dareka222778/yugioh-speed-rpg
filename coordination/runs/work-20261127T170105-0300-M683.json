@@ -1,0 +1,84 @@
+{
+  "format": 1,
+  "runId": "work-20261127T170105-0300-M683",
+  "mission": "M683",
+  "owner": "Work principal",
+  "priority": "P1",
+  "status": "queued-during-ci",
+  "preparedAtUtc": "2026-11-27T20:19:32.102Z",
+  "preparedAtLocal": "2026-11-27T17:19:32.102-03:00",
+  "startedAt": null,
+  "endedAt": null,
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedBaseHead": "2f36c7117505b110220209dfafa2d4d95e434450",
+  "branch": "feat/work-m683-attack-declaration-responses-20261127",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "2f36c7117505b110220209dfafa2d4d95e434450",
+  "headSha": null,
+  "reservedFiles": [
+    "src/attackDeclarationResponseTagAdapter.ts",
+    "tests/attackDeclarationResponseTagAdapter.test.cjs",
+    "docs/evidence/m683-attack-declaration-responses.json",
+    "scripts/audit-attack-declaration-responses-m683.cjs",
+    ".github/workflows/m683-attack-declaration-responses.yml",
+    "coordination/runs/work-20261127T170105-0300-M683.json"
+  ],
+  "scope": "Adapter TagDuel clássico 2v2 para respostas à declaração de ataque: Magic Cylinder (62279055/CID 5124) nega ataque e causa dano igual ao ATK do atacante; Draining Shield (43250041/CID 5994) nega ataque e recupera LP igual ao ATK; Negate Attack (14315573/CID 4804) nega ataque e encerra a Battle Phase. Alvo UID/epoch, trap baixada em turno anterior, Spell Speed 2/3, custo zero, dano/cura na equipe correta, LP zero, propriedade física e inventário conservados. Não integra resolver central, metadata, certificações, comandos, banco, Discord live ou produção. Dimension Wall excluída por primeira publicação OCG/TCG após o corte histórico de 30/09/2004.",
+  "cards": [
+    {
+      "id": "62279055",
+      "name": "Magic Cylinder",
+      "konamiCid": 5124,
+      "firstOcgRelease": "2000-12-23",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5124&ope=2&request_locale=en"
+    },
+    {
+      "id": "43250041",
+      "name": "Draining Shield",
+      "konamiCid": 5994,
+      "firstOcgRelease": "2003-11-20",
+      "firstTcgRelease": "2004-06-01",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5994&ope=2&request_locale=en"
+    },
+    {
+      "id": "14315573",
+      "name": "Negate Attack",
+      "konamiCid": 4804,
+      "firstOcgRelease": "2000-12-07",
+      "firstTcgRelease": "2003-11-04",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4804&ope=2&request_locale=en"
+    }
+  ],
+  "baseline": {
+    "certificationEntriesObserved": 959,
+    "metadataAbsent": true,
+    "certificationAbsent": true
+  },
+  "implementedCards": 0,
+  "adapterBehaviorVerifiedCards": 0,
+  "newlyBehaviorCertifiedCards": 0,
+  "newEngineCertifications": 0,
+  "automaticCertifications": 0,
+  "inventoryGrants": 0,
+  "verification": {
+    "typecheck": "pending",
+    "build": "pending",
+    "focusedTests": "pending",
+    "evidenceAudit": "pending",
+    "ci": "pending",
+    "discordLive": "not-run",
+    "production": "not-changed"
+  },
+  "effectiveWorkMinutes": 0,
+  "ciWaitExcluded": true,
+  "pr": null,
+  "merge": "not-authorized",
+  "deploy": "not-authorized",
+  "blockers": [
+    "M682 CI em execução; este bloco está apenas preparado e reservado em branch independente."
+  ],
+  "nextTask": "Aguardar M682 sem ociosidade; então implementar adapter de respostas a ataque reutilizando resolveAttackResponse e testes de custo/dano/cura/encerramento.",
+  "nextWindow": "2026-11-27T17:30:00-03:00",
+  "scopeReleasedToAuxiliary": []
+}

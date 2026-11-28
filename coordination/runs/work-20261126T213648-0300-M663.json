@@ -1,0 +1,36 @@
+{
+  "format": 1,
+  "runId": "work-20261126T213648-0300-M663",
+  "mission": "M663",
+  "priority": "P1",
+  "status": "reserved-and-implementing",
+  "startedAt": "2026-11-26T21:36:48-03:00",
+  "endedAt": null,
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "baseHead": "57698e917130ba7111cd92a92419bdcb0bf95a43",
+  "branch": "feat/work-m663-lord-of-d-flute-20261126",
+  "headSha": null,
+  "scope": "Adapter TagDuel isolado para Lord of D. (17985575 / Konami CID 4747) e The Flute of Summoning Dragon (43973174 / CID 4810): proteção global de Dragons no campo contra efeitos de carta que alvejam; ativação/resolução da Flute condicionada a Lord of D. face-up, Invocação-Especial de 1–2 Dragons da mão privada do assento ativo, até a capacidade real das 3 zonas, preservando UID e assento físico. Inclui cartas de nível 8 sem Tribute, set da equipe parceira, checagem de mão/Backrow, negação, perda da condição e idempotência. Sem resolver central, catálogo/certificações, comandos, banco, inventário ou produção.",
+  "reservedFiles": [
+    "src/lordOfDFluteTagAdapter.ts",
+    "tests/lordOfDFluteTagAdapter.test.cjs",
+    "docs/evidence/m663-lord-of-d-flute.json",
+    "scripts/audit-lord-of-d-flute-m663.cjs",
+    ".github/workflows/m663-lord-of-d-flute.yml"
+  ],
+  "certifiedCardsBefore": 969,
+  "catalogCardsAtBase": 969,
+  "certifiedCardsAfter": null,
+  "newCertifications": 0,
+  "inventoryGrants": 0,
+  "ci": {
+    "focused": "pending",
+    "repositoryRegression": "pending"
+  },
+  "pr": null,
+  "production": "não alterada",
+  "discord": "não validado ao vivo",
+  "handoff": "sem conflito de arquivos; nenhuma transferência necessária. Resolver central permanece reservado por M61/M637 e não será editado.",
+  "nextTask": "Implementar o adapter e 24 cenários focados; validar fontes oficiais Konami e identidade; abrir PR draft após typecheck e CI.",
+  "nextWindow": "2026-11-26T22:30:00-03:00"
+}

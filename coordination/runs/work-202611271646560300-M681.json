@@ -1,0 +1,76 @@
+{
+  "format": 1,
+  "runId": "work-202611271646560300-M681",
+  "mission": "M681",
+  "owner": "Work principal",
+  "priority": "P1",
+  "status": "reserved-and-implementing",
+  "startedAt": "2026-11-27T16:46:56-03:00",
+  "endedAt": null,
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedBaseHead": "e05c3398cccac7c4a0e489499a995681637514ca",
+  "branch": "feat/work-m681-owner-hand-return-20261127",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "e05c3398cccac7c4a0e489499a995681637514ca",
+  "headSha": null,
+  "reservedFiles": [
+    "src/ownerHandReturnTagAdapter.ts",
+    "tests/ownerHandReturnTagAdapter.test.cjs",
+    "docs/evidence/m681-owner-hand-return.json",
+    "scripts/audit-owner-hand-return-m681.cjs",
+    ".github/workflows/m681-owner-hand-return.yml",
+    "coordination/runs/work-202611271646560300-M681.json"
+  ],
+  "scope": "Adapter TagDuel clássico de retorno à mão física: Nightmare Penguin (81306586/CID 5803) — flip, devolve 1 carta controlada pelo oponente ao dono; aura +200 ATK para WATER face-up da equipe; Compulsory Evacuation Device (94192409/CID 5914) — trap direcionada que devolve 1 monstro ao dono. Destinos em mão privada/reserva do proprietário físico, Fusion para Extra Deck, tokens removidos, UID/epoch preservados e nenhuma exposição pública de identidade. Preserva Deck 20–30, mão 6 na End Phase, zonas 3+3, Field Zone separada e Extra 5.",
+  "cards": [
+    {
+      "id": "81306586",
+      "name": "Nightmare Penguin",
+      "konamiCid": 5803,
+      "firstTcgRelease": "2004-12-01",
+      "firstOcgRelease": "2004-08-05",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5803&ope=2&request_locale=en"
+    },
+    {
+      "id": "94192409",
+      "name": "Compulsory Evacuation Device",
+      "konamiCid": 5914,
+      "firstTcgRelease": "2004-07-15",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5914&ope=2&request_locale=en"
+    }
+  ],
+  "blocksCompleted": [
+    "Família seguinte preparada durante CI M680; HEAD e reservas relidos.",
+    "Ambos os IDs ausentes das 969 certificações atuais e do metadata engine; fontes oficiais e CIDs conferidos."
+  ],
+  "implementedCards": 0,
+  "behaviorVerifiedCards": 0,
+  "newCertifications": 0,
+  "automaticCertifications": 0,
+  "inventoryGrants": 0,
+  "verification": {
+    "typecheck": "pending",
+    "build": "pending",
+    "focusedTests": "pending",
+    "evidenceValidation": "pending",
+    "ci": "pending",
+    "adapterBehaviorVerifiedCards": 0,
+    "behaviorCertifiedCards": 0,
+    "discordLive": "not-run"
+  },
+  "effectiveWorkMinutes": 0,
+  "targetEffectiveWorkMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "pr": null,
+  "production": "not-changed",
+  "merge": "not-authorized",
+  "deploy": "not-authorized",
+  "blockers": [
+    "Integração central e certificação engine-v9 dependem de handoff explícito; M681 permanece isolado."
+  ],
+  "nextTask": "Implementar retorno genérico à mão física com owner/epoch, destino de Fusion no Extra, tokens removidos e privacidade de mão; cobrir Nightmare Penguin e Compulsory.",
+  "nextWindow": "2026-11-27T17:30:00-03:00",
+  "scopeReleasedToAuxiliary": []
+}

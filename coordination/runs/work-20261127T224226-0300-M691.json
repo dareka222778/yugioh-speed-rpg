@@ -1,0 +1,103 @@
+{
+  "format": 1,
+  "runId": "work-20261127T224226-0300-M691",
+  "mission": "M691",
+  "priority": "P1",
+  "status": "completed-awaiting-review",
+  "startedAt": "2026-11-27T22:42:26-03:00",
+  "endedAt": "2026-11-27T22:50:21-03:00",
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedBaseHead": "62748d20566f53b429aabb2e92d9c1df058509a4",
+  "headSha": "84b4bd7bdb909ba9d0635947579a37f572648809",
+  "branch": "feat/work-m691-grave-protector-20261127",
+  "reservedFiles": [
+    "src/graveProtectorBattleReplacementTagAdapter.ts",
+    "tests/graveProtectorBattleReplacementTagAdapter.test.cjs",
+    "docs/evidence/m691-grave-protector.json",
+    "scripts/audit-grave-protector-m691.cjs",
+    ".github/workflows/m691-grave-protector.yml",
+    "coordination/runs/work-20261127T224226-0300-M691.json"
+  ],
+  "baseline": {
+    "engineV9Certified": 969,
+    "remainingTo1000": 31,
+    "source": "milestone1000 run 46094324099"
+  },
+  "cards": [
+    {
+      "id": "11448373",
+      "konamiId": 6039,
+      "name": "Grave Protector",
+      "kind": "effect-monster",
+      "officialText": "Any monster destroyed by battle is shuffled into the Deck instead of going to the GY.",
+      "firstTCGRelease": "2004-06-01",
+      "firstOCGRelease": "2004-10-14",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6039&request_locale=en",
+      "eligibility": "TCG first print precedes 2004-10-01 cutoff",
+      "status": "adapter-tested-pending-engine-integration"
+    }
+  ],
+  "blocksCompleted": [
+    "Consulta do checkpoint e das reservas; confirmação de ausência de PR/reserva anterior para Grave Protector.",
+    "Pedido cooperativo no PR #17 para a substituição contínua antes de gatilhos de envio ao Cemitério; nenhum arquivo central foi alterado.",
+    "Adapter isolado com Deck físico, shuffleDuel privado, Fusion no Extra Deck e Token removido pelo token ledger.",
+    "16 cenários de comportamento, incluindo fonte na equipe adversária, dono em reserva, face-down, negação, múltiplas cópias, self-replacement e replay.",
+    "Typecheck, build, 16 testes, auditoria e fast feedback aprovados no SHA 84b4bd7."
+  ],
+  "handoff": {
+    "targetPR": 17,
+    "commentId": 7231869252,
+    "status": "requested-awaiting-explicit-release",
+    "files": [
+      "src/duelEngineCurrent.ts",
+      "src/monsterEffects.ts"
+    ],
+    "response": "Sem liberação explícita no início do M691; adapter seguirá isolado."
+  },
+  "counts": {
+    "baselineEngineV9Certified": 969,
+    "remainingTo1000": 31,
+    "adapterBehaviorVerifiedCards": 1,
+    "newEngineCertifiedCards": 0,
+    "automaticCertifications": 0,
+    "inventoryGrants": 0
+  },
+  "verification": {
+    "typecheck": "success",
+    "build": "success",
+    "focusedTests": "16/16 success",
+    "evidenceAudit": "success",
+    "cardBatchFastFeedback": "success",
+    "milestone1000": "success",
+    "engineValidation": "in-progress",
+    "liveDiscordValidation": false
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "effectiveWorkMinutes": 8,
+  "targetEffectiveWorkMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "nextTask": "M692: draw-trigger adapters for Card of Safe Return and Spirit of the Pot of Greed, preserving physical-seat privacy and the End Phase hand-limit rule.",
+  "branchHeadSha": "84b4bd7bdb909ba9d0635947579a37f572648809",
+  "pullRequest": {
+    "number": 615,
+    "url": "https://github.com/dareka222778/yugioh-speed-rpg/pull/615",
+    "state": "open",
+    "draft": true,
+    "merged": false
+  },
+  "scopeReleasedToAuxiliary": [
+    "src/graveProtectorBattleReplacementTagAdapter.ts",
+    "tests/graveProtectorBattleReplacementTagAdapter.test.cjs",
+    "docs/evidence/m691-grave-protector.json",
+    "scripts/audit-grave-protector-m691.cjs",
+    ".github/workflows/m691-grave-protector.yml"
+  ],
+  "nextWindow": "2026-11-28T03:30:00-03:00"
+}

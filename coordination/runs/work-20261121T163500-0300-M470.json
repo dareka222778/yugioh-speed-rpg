@@ -1,0 +1,74 @@
+{
+  "runId": "work-20261121T163500-0300-M470",
+  "mission": "M470",
+  "owner": "Work principal",
+  "status": "released-to-auxiliary-monitor-ci",
+  "startedAt": "2026-11-21T16:34:23.447-03:00",
+  "endedAt": "2026-11-21T16:37:46.548-03:00",
+  "durationMinutes": 3.4,
+  "effectiveWorkMinutes": 3,
+  "branch": "feat/work-m470-tag-lobby-expiry-discord-20261121",
+  "head": "80285daebd7503e0a89cb4080997bcb867965930",
+  "pr": 418,
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "6d936254a80ec2a3c39af2077295d8f1f44177b5",
+  "changes": [
+    "Limite exato de cinco minutos e um milissegundo antes",
+    "Expiração incrementa revisão uma vez e libera locks",
+    "dueTags/markTagPublished publicam expiração sem requeue",
+    "Accept obsoleto rejeitado"
+  ],
+  "ci": [
+    {
+      "name": "M470 focused",
+      "run": 44941761403,
+      "status": "success",
+      "tests": 2,
+      "passed": 2,
+      "failed": 0
+    },
+    {
+      "name": "Card Batch Fast",
+      "run": 44941761393,
+      "status": "success"
+    },
+    {
+      "name": "Milestone 1000",
+      "run": 44941761388,
+      "status": "success",
+      "certified": 969,
+      "remaining": 31,
+      "automaticCertifications": 0
+    },
+    {
+      "name": "Engine Validation test job",
+      "run": 44941761437,
+      "status": "in_progress"
+    },
+    {
+      "name": "Extended Soak 600s",
+      "run": 44941761437,
+      "status": "success",
+      "job": 136960289071
+    }
+  ],
+  "certification": {
+    "baseline": 969,
+    "new": 0,
+    "remaining": 31,
+    "automatic": 0,
+    "inventoryGranted": 0
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscord": false
+  },
+  "scopeReleasedToAuxiliary": [
+    "tests/tagLobbyExpiryDiscord2v2.test.cjs",
+    "docs/evidence/m470-tag-lobby-expiry-discord.json",
+    ".github/workflows/m470-tag-lobby-expiry-discord.yml"
+  ],
+  "nextTask": "Auxiliar acompanha o job test da Engine Validation, sincroniza a branch com o HEAD compartilhado atual por merge não-forçado/lease e mantém a PR #418 em draft. Corrigir somente os três arquivos M470."
+}

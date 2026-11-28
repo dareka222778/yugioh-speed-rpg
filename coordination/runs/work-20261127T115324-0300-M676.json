@@ -1,0 +1,78 @@
+{
+  "format": 1,
+  "runId": "work-20261127T115324-0300-M676",
+  "mission": "M676",
+  "owner": "Work principal",
+  "priority": "P1",
+  "priorityRequestedBy": "User",
+  "status": "reserved-and-implementing",
+  "startedAt": "2026-11-27T11:53:24.000-03:00",
+  "endedAt": null,
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedBaseHead": "5a479acdc2fd224a81e61e19dcc56572cd115d97",
+  "branch": "feat/work-m676-targeted-trap-removal-20261127",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "5a479acdc2fd224a81e61e19dcc56572cd115d97",
+  "headSha": null,
+  "reservedFiles": [
+    "src/targetedTrapRemovalTagAdapter.ts",
+    "tests/targetedTrapRemovalTagAdapter.test.cjs",
+    "docs/evidence/m676-targeted-trap-removal.json",
+    "scripts/audit-targeted-trap-removal-m676.cjs",
+    ".github/workflows/m676-targeted-trap-removal.yml",
+    "coordination/runs/work-20261127T115324-0300-M676.json"
+  ],
+  "scope": "Adapter TagDuel clássico isolado para Compulsory Evacuation Device (94192409/CID 5914) e Destruction Ring (21219755/CID 5912): retorno de alvo à mão/Extra Deck do proprietário físico; destruição como custo de monstro face-up da própria equipe e 1000 LP de dano a cada equipe. Preserva UID, assento físico, LP compartilhado, mão privada, regras 20–30/6 na End Phase/3+3/Extra 5. Sem resolver central, catálogo/certificações, comandos, banco, inventário ou produção.",
+  "cards": [
+    {
+      "id": "94192409",
+      "name": "Compulsory Evacuation Device",
+      "konamiCid": 5914,
+      "firstTcgRelease": "2004-03-01",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5914&ope=2&request_locale=en",
+      "officialText": "Target 1 monster on the field; return that target to the hand.",
+      "behavior": "Retorna o monstro vinculado à mão privada do proprietário físico; Fusão retorna ao Extra Deck físico; não retargeta se o alvo sair do campo."
+    },
+    {
+      "id": "21219755",
+      "name": "Destruction Ring",
+      "konamiCid": 5912,
+      "firstTcgRelease": "2004-03-01",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5912&ope=2&request_locale=ae",
+      "releaseEvidence": "https://exploretcgsets.com/yugioh/sets/ioc/?card=IOC-EN101",
+      "officialText": "Destroy 1 face-up monster on your side of the field to inflict 1000 points of damage to both players' Life Points.",
+      "behavior": "Destrói como custo um monstro face-up da equipe controladora; o custo permanece pago se a ativação/efeito for negado; ao resolver sem negação, causa 1000 LP às duas equipes."
+    }
+  ],
+  "blocksCompleted": [
+    "coordenação e reserva CAS registradas"
+  ],
+  "implementedCards": 0,
+  "behaviorVerifiedCards": 0,
+  "newCertifications": 0,
+  "automaticCertifications": 0,
+  "inventoryGrants": 0,
+  "verification": {
+    "typecheck": "pending",
+    "build": "pending",
+    "focusedTests": "pending",
+    "evidenceValidation": "pending",
+    "ci": "pending",
+    "adapterBehaviorVerifiedCards": 0,
+    "behaviorCertifiedCards": 0,
+    "discordLive": "not-run"
+  },
+  "effectiveWorkMinutes": 0,
+  "targetEffectiveWorkMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "pr": null,
+  "production": "not-changed",
+  "merge": "not-authorized",
+  "deploy": "not-authorized",
+  "blockers": [],
+  "nextTask": "Implementar adapter de remoção de monstros por Trap com custos, alvo imutável, roteamento por proprietário físico e cenários 2v2; auditar evidências e executar CI.",
+  "nextWindow": "2026-11-27T12:30:00-03:00",
+  "scopeReleasedToAuxiliary": []
+}

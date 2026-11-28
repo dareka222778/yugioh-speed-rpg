@@ -1,0 +1,262 @@
+{
+  "format": 1,
+  "runId": "work-20261113T223304-0300",
+  "owner": "Work",
+  "priority": "P1 — validar a família de Magias econômicas no duelo 2v2 e fechar a cadeia de integração Discord: escolhas de equipe, Quick-Play setada por parceiro, privacidade, UIDs físicos, payloads e idempotência de interações.",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadBeforeClaim": "e32c503d4a75af902f868a754c9e2c77c9434b05",
+  "sharedHeadAfterClaim": "cc5e4fc4be7406255bddaa908c5e94a4f85a486d",
+  "sharedHeadBeforeCheckpoint": "cc5e4fc4be7406255bddaa908c5e94a4f85a486d",
+  "baseBranch": "feat/work-m71-ci-branch-routing-20261112",
+  "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+  "startedAt": "2026-11-13T22:33:04-03:00",
+  "endedAt": "2026-11-13T22:44:10-03:00",
+  "timezone": "America/Sao_Paulo",
+  "duration": {
+    "elapsedWallSeconds": 666,
+    "effectiveMinutesMeasured": false,
+    "minimum60MinutesConfirmed": false,
+    "waitForCIExcluded": true
+  },
+  "blocksCompleted": [
+    "Lido coordination/state.json e o checkpoint anterior; conferidos HEAD, branches, PRs, CI e estado de produção.",
+    "Registrada prioridade M158 com ID único e claim de coordenação por compare-and-swap no HEAD esperado.",
+    "Solicitado handoff cooperativo em PR #17 (M61), #74 (M118) e #107 (M151); nenhum agente respondeu até o encerramento. Nenhum arquivo reservado foi alterado.",
+    "M158: adicionada suíte comportamental para Red Medicine, Mooyan Curry e Poison of the Old Man; valida ganho/dano de LP por equipe, escolhas, Quick-Play setada pelo parceiro, privacidade, UID físico e conservação das 80 cartas.",
+    "M159: adicionada suíte de integração da UI Discord para paginação de ações, rótulos/índices de escolhas, menu privado por assento e ocultação de carta setada no painel público.",
+    "M160: adicionada suíte offline de handler Discord com SQLite temporário, confirmação antes da mutação, resolução 2v2 e idempotência de interação duplicada.",
+    "Criadas PRs draft #114, #115 e #116 em branches isoladas; nenhuma alteração de runtime, catálogo, certificados, banco persistente ou inventário."
+  ],
+  "branches": [
+    {
+      "branch": "feat/work-m158-economic-spells-2v2-20261113",
+      "head": "958a1b36d5264b995d96e4f04d595236168c55e5",
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "pr": 114,
+      "files": [
+        "tests/tagClassicEconomicChoiceSpells2v2.test.cjs"
+      ],
+      "commits": [
+        "958a1b36d5264b995d96e4f04d595236168c55e5"
+      ],
+      "ci": {
+        "cardBatchFast": "success",
+        "cardBatchFastRunId": 43541777615,
+        "milestone1000": "success",
+        "milestoneRunId": 43541777612,
+        "engineValidation": "in_progress",
+        "engineRunId": 43541777726,
+        "testJob": "in_progress",
+        "npmTestStep": "success",
+        "extendedSoak": "in_progress"
+      },
+      "state": "released-to-auxiliary-monitor-ci"
+    },
+    {
+      "branch": "feat/work-m159-economic-spell-discord-ui-20261113",
+      "head": "58c72d2479b630c4ad2198bd23dd331af15ad7ff",
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "pr": 115,
+      "files": [
+        "tests/tagEconomicSpellDiscordMenu.test.cjs"
+      ],
+      "commits": [
+        "58c72d2479b630c4ad2198bd23dd331af15ad7ff"
+      ],
+      "ci": {
+        "cardBatchFast": "success",
+        "cardBatchFastRunId": 43542034914,
+        "milestone1000": "success",
+        "milestoneRunId": 43542035027,
+        "engineValidation": "in_progress",
+        "engineRunId": 43542035087,
+        "testJob": "in_progress",
+        "npmTestStep": "in_progress",
+        "extendedSoak": "in_progress"
+      },
+      "state": "released-to-auxiliary-monitor-ci"
+    },
+    {
+      "branch": "feat/work-m160-economic-spell-discord-interaction-20261113",
+      "head": "83a2fcff7a8265234c1fcd95a14e5daff4cb4335",
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "pr": 116,
+      "files": [
+        "tests/tagEconomicSpellDiscordInteraction.test.cjs"
+      ],
+      "commits": [
+        "3694b89310d9571251e5409d61fa4e62ade00804",
+        "83a2fcff7a8265234c1fcd95a14e5daff4cb4335"
+      ],
+      "ci": {
+        "cardBatchFast": "in_progress",
+        "cardBatchFastRunId": 43542328874,
+        "milestone1000": "success",
+        "milestoneRunId": 43542328862,
+        "engineValidation": "in_progress",
+        "engineRunId": 43542328882,
+        "testJob": "in_progress",
+        "extendedSoak": "in_progress"
+      },
+      "state": "released-to-auxiliary-monitor-ci"
+    }
+  ],
+  "ci": {
+    "pr112": {
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "engineValidation": "in_progress",
+      "extendedSoak": "in_progress"
+    },
+    "pr113": {
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "engineValidation": "in_progress",
+      "extendedSoak": "in_progress"
+    },
+    "pr114": {
+      "cardBatchFast": "success",
+      "cardBatchFastRunId": 43541777615,
+      "milestone1000": "success",
+      "milestoneRunId": 43541777612,
+      "engineValidation": "in_progress",
+      "engineRunId": 43541777726,
+      "testJob": "in_progress",
+      "npmTestStep": "success",
+      "extendedSoak": "in_progress"
+    },
+    "pr115": {
+      "cardBatchFast": "success",
+      "cardBatchFastRunId": 43542034914,
+      "milestone1000": "success",
+      "milestoneRunId": 43542035027,
+      "engineValidation": "in_progress",
+      "engineRunId": 43542035087,
+      "testJob": "in_progress",
+      "npmTestStep": "in_progress",
+      "extendedSoak": "in_progress"
+    },
+    "pr116": {
+      "cardBatchFast": "in_progress",
+      "cardBatchFastRunId": 43542328874,
+      "milestone1000": "success",
+      "milestoneRunId": 43542328862,
+      "engineValidation": "in_progress",
+      "engineRunId": 43542328882,
+      "testJob": "in_progress",
+      "extendedSoak": "in_progress"
+    },
+    "pr17": {
+      "cardBatchFast": "failure",
+      "engineValidation": "failure"
+    },
+    "pr74": {
+      "cardBatchFast": "success",
+      "engineValidation": "success",
+      "milestone1000": "success"
+    },
+    "pr107": {
+      "cardBatchFast": "success",
+      "engineValidation": "failure",
+      "milestone1000": "success"
+    },
+    "pr109": {
+      "cardBatchFast": "success",
+      "engineValidation": "failure",
+      "milestone1000": "success"
+    }
+  },
+  "catalog": {
+    "shared": 969,
+    "development": 1014,
+    "delta": 45,
+    "sharedTarget": 1000,
+    "remaining": 31,
+    "pendingHistorical": 993,
+    "identityBlocked": 27,
+    "automaticCertifications": 0,
+    "newAdmissions": 0,
+    "newCertificates": 0
+  },
+  "handoffs": {
+    "m61": {
+      "pr": 17,
+      "commentId": 6869460162,
+      "status": "awaiting-response",
+      "blockedFiles": [
+        "src/monsterEffects.ts",
+        "src/duelEngineCurrent.ts",
+        "src/classicEffects.ts",
+        "src/duelIntegrity.ts",
+        "scripts/mass-certification21.cjs"
+      ]
+    },
+    "m118": {
+      "pr": 74,
+      "commentId": 6869460652,
+      "status": "awaiting-response",
+      "blockedFiles": [
+        "src/tagDuel.ts",
+        "tests/tagClassicGiantTrunadePhysicalHandOwnership.test.cjs"
+      ]
+    },
+    "m151": {
+      "pr": 107,
+      "commentId": 6869461071,
+      "status": "awaiting-response",
+      "blockedFiles": [
+        "tests/tagClassicFusionSubstituteSharedField2v2.test.cjs"
+      ]
+    }
+  },
+  "production": {
+    "mainHead": "8f3f1768b1ee1f4b4a96d557eab5926d96525ad2",
+    "mainWorkflowRuns": 0,
+    "workflowFiles": [
+      "card-batch-admission.yml",
+      "card-batch-fast.yml",
+      "engine-validation.yml",
+      "milestone1000.yml"
+    ],
+    "deploymentWorkflowFound": false,
+    "hostingStatus": "not verified",
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "liveDiscordValidated": false
+  },
+  "releasedToAuxiliary": {
+    "branches": [
+      {
+        "branch": "feat/work-m158-economic-spells-2v2-20261113",
+        "head": "958a1b36d5264b995d96e4f04d595236168c55e5",
+        "pr": 114,
+        "scope": [
+          "tests/tagClassicEconomicChoiceSpells2v2.test.cjs"
+        ]
+      },
+      {
+        "branch": "feat/work-m159-economic-spell-discord-ui-20261113",
+        "head": "58c72d2479b630c4ad2198bd23dd331af15ad7ff",
+        "pr": 115,
+        "scope": [
+          "tests/tagEconomicSpellDiscordMenu.test.cjs"
+        ]
+      },
+      {
+        "branch": "feat/work-m160-economic-spell-discord-interaction-20261113",
+        "head": "83a2fcff7a8265234c1fcd95a14e5daff4cb4335",
+        "pr": 116,
+        "scope": [
+          "tests/tagEconomicSpellDiscordInteraction.test.cjs"
+        ]
+      }
+    ],
+    "allowed": "monitorar CI e corrigir apenas os respectivos arquivos de teste nas próprias branches",
+    "forbidden": "não tocar M61/M118/M151, runtime, catálogo, certificados, inventários, merge ou deploy"
+  },
+  "nextTask": "Work: conferir o término dos workflows M158–M160; solicitar handoff M61/M118/M151; se M61 liberar os cinco caminhos, corrigir o filtro de alvos adversários e seguir para a família FLIP. Caso contrário, continuar em uma família independente. Auxiliar: monitorar e corrigir somente os três arquivos de teste liberados.",
+  "nextWorkAt": "2026-11-14T03:30:00-03:00"
+}

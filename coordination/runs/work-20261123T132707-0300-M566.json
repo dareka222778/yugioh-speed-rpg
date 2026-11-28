@@ -1,0 +1,151 @@
+{
+  "runId": "work-20261123T132707-0300-M566",
+  "mission": "M566",
+  "owner": "Work principal",
+  "priority": "P1 — implementar Autonomous Action Unit (71453557) no TagDuel clássico: pagar 1500 LP, selecionar monstro do Cemitério da equipe adversária, Invocá-lo em Ataque face-up sob controle da equipe ativa e equipar; se o Equip Spell deixar o campo por qualquer motivo, destruir o monstro; se o monstro deixar o campo, enviar o Equip Spell ao Cemitério. Preservar UID/proprietário físico, rotação, zonas, replay e custo sem reembolso.",
+  "state": "reserved-and-implementing",
+  "startedAt": "2026-11-23T13:27:07-03:00",
+  "lastActivityAt": "2026-11-23T13:27:07-03:00",
+  "endedAt": null,
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "22e381ff494559621e4c7e677e81652d52af6252",
+  "branch": "feat/work-m566-autonomous-action-unit-tag-adapter-20261123",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "22e381ff494559621e4c7e677e81652d52af6252",
+  "reservedFiles": [
+    "src/autonomousActionUnitTagAdapter.ts",
+    "tests/autonomousActionUnitTagAdapter.test.cjs",
+    "docs/evidence/m566-autonomous-action-unit-tag-adapter.json",
+    ".github/workflows/m566-autonomous-action-unit-tag-adapter.yml"
+  ],
+  "scope": [
+    "src/autonomousActionUnitTagAdapter.ts",
+    "tests/autonomousActionUnitTagAdapter.test.cjs",
+    "docs/evidence/m566-autonomous-action-unit-tag-adapter.json",
+    ".github/workflows/m566-autonomous-action-unit-tag-adapter.yml"
+  ],
+  "conflictCheck": {
+    "overlap": false,
+    "checkedAt": "2026-11-23T13:27:07-03:00",
+    "checkedAgainst": [
+      "M563 The Shallow Grave usa theShallowGraveTagAdapter.ts e três caminhos próprios; sem sobreposição.",
+      "M564 Premature Burial usa prematureBurialTagAdapter.ts e três caminhos próprios; M566 não editará seus arquivos nem corrigirá sua CI.",
+      "M565 Call of the Haunted usa callOfTheHauntedTagAdapter.ts e três caminhos próprios; M566 não editará seus arquivos.",
+      "M562 Fiber Jar e M557–M561 mantêm quatro caminhos próprios por missão; sem sobreposição.",
+      "M61 (#17) mantém resolver, metadata, certificações e manifesto protegidos; M566 não os altera.",
+      "Busca por Autonomous Action Unit/71453557 em branches, PRs, cardMetadata e cardCertifications não encontrou implementação anterior."
+    ]
+  },
+  "card": {
+    "name": "Autonomous Action Unit",
+    "passcode": "71453557",
+    "konamiDatabaseId": 5606,
+    "type": "Equip Spell",
+    "officialCardDatabase": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5606&ope=2&request_locale=en",
+    "officialText": "Pay 1500 LP, then target 1 monster in your opponent's GY; Special Summon it to your field in Attack Position, and equip it with this card. When this card leaves the field, destroy the equipped monster.",
+    "firstTcgPrinting": {
+      "date": "2003-10-10",
+      "set": "MFC-032",
+      "product": "Magician's Force"
+    }
+  },
+  "design": {
+    "scope": "Adapter TagDuel isolado em branch própria, testes, evidência e workflow; sem registro no resolver/catálogo.",
+    "activation": "Equip Spell na mão do representante físico ativo, Main Phase sem chain/decisão pendente; pagar 1500 LP da equipe controladora e selecionar um monstro elegível no Cemitério compartilhado da equipe adversária.",
+    "resolution": "Negação, alvo inválido ou falta de espaço consomem a ativação; o custo não é reembolsado e o Equip Spell vai ao GY. Resolução válida Invoca o alvo em Ataque face-up no campo da equipe controladora e grava equippedTo.",
+    "link": "Quando Autonomous Action Unit deixa o campo por destruição, retorno à mão ou banimento, destruir o monstro equipado. Quando o monstro deixa o campo, enviar o Equip Spell ao GY e encerrar o vínculo.",
+    "ownership": "O monstro mantém UID e proprietário físico original, mas passa ao controle da equipe ativadora; o Equip Spell também mantém seu proprietário físico.",
+    "idempotency": "activationId persistido em JSON; replay bloqueado antes e depois da resolução.",
+    "limits": {
+      "mainDeck": "20–30 construction",
+      "handLimit": 6,
+      "discard": "End Phase",
+      "monsterZones": 3,
+      "spellTrapZones": 3,
+      "fieldZone": "separate",
+      "extraDeck": 5
+    }
+  },
+  "plannedTests": [
+    "custo de 1500 LP pago no registro da ativação; LP insuficiente rejeita sem mutação",
+    "fonte deve ser Autonomous Action Unit na mão do representante ativo e na Main Phase",
+    "corrente ou decisão pendente bloqueia ativação",
+    "alvo deve estar no GY compartilhado adversário; GY próprio rejeitado",
+    "UID de parceiro inativo adversário pode ser alvo e mantém proprietário físico",
+    "tokens, não-monstros e Fusion/Ritual não devidamente Invocados são rejeitados",
+    "Monster Zone ou Spell/Trap Zone cheia bloqueia ativação antes de pagar",
+    "resolução válida move alvo do GY adversário para o campo da equipe ativadora em Ataque face-up",
+    "alvo removido, epoch alterado, negação ou fonte ausente não invocam e não reembolsam LP",
+    "Monster Zone preenchida após ativação causa resolução sem espaço",
+    "deixar o campo por destruição, retorno à mão ou banimento destrói o monstro equipado",
+    "monstro equipado que deixa o campo envia o Equip Spell ao GY sem dupla destruição",
+    "vínculo segue UID após mudança de controle",
+    "retorno à mão roteia o Equip Spell ao proprietário físico original após rotação",
+    "activationId duplicado/replay bloqueado e memória sobrevive a JSON round-trip",
+    "quatro rotações físicas, 3+3 zonas, Field Zone separada e Extra Deck 5",
+    "mão acima de seis permanece até End Phase; Deck curto não é truncado",
+    "inventário físico e reservas são conservados; nenhuma concessão",
+    "inputs imutáveis, UIDs malformados/duplicados rejeitados"
+  ],
+  "catalog": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "inventoryGranted": 0,
+  "production": {
+    "mainHead": "197bbda07efc81658604bcd12308665571e26d59",
+    "backupVerified": false,
+    "liveDiscordValidation": false,
+    "merge": false,
+    "deploy": false,
+    "deploymentWorkflowFound": false,
+    "deploymentsApiExposed": false
+  },
+  "handoffRequests": [
+    {
+      "target": "PR #17 / M61",
+      "commentId": 7106460330,
+      "status": "awaiting-explicit-release",
+      "scope": [
+        "src/monsterEffects.ts",
+        "src/duelEngineCurrent.ts"
+      ]
+    }
+  ],
+  "tests": {
+    "focused": "pending",
+    "check": "pending",
+    "build": "pending",
+    "cardBatchFast": "pending",
+    "milestone1000": "pending",
+    "engineValidation": "pending",
+    "extendedSoak": "not-run"
+  },
+  "limitations": [
+    "Adapter não integrado ao resolver v9; a carta permanece não certificada e indisponível em decks.",
+    "Testes offline com TagDuel temporário; sem gateway/guild Discord real.",
+    "Sem alteração de catálogo, metadata, certificações, allowlist, inventário ou dados persistentes."
+  ],
+  "pr": null,
+  "workBlocks": [
+    "Releitura de coordination/state.json e último checkpoint independente M565.",
+    "Verificado HEAD compartilhado 22e381ff494559621e4c7e677e81652d52af6252, PRs #505–#511 e branches M562–M565.",
+    "Verificados status e workflows do HEAD compartilhado; Engine Validation em execução, Card Batch Fast/Milestone/Admission success.",
+    "Verificada fonte oficial Konami CID 5606 e passcode 71453557; busca de branch/PR/catálogo/certificações sem duplicata.",
+    "Reservados quatro caminhos novos M566; M563–M565 e M61 permanecem intocados."
+  ],
+  "nextTask": "Implementar adapter, suíte comportamental, evidência e workflow; rodar CI focada, corrigir falhas próprias, abrir PR draft e então conferir HEAD/coordenação para escolher próxima família independente.",
+  "nextWindow": "2026-11-23T17:30:00-03:00",
+  "duration": {
+    "startedAt": "2026-11-23T13:27:07-03:00",
+    "endedAt": null,
+    "elapsedMinutes": null,
+    "effectiveWorkMinutes": 0,
+    "targetEffectiveMinutes": 60,
+    "targetMet": false,
+    "ciWaitExcluded": true
+  }
+}

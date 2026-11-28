@@ -1,0 +1,589 @@
+{
+  "reviewedAt": "2026-10-27",
+  "cutoff": "2004-09-30",
+  "policy": "OCG-first/world eligibility; not a TCG-2004 roster. Certification is separate from distribution.",
+  "grantsInventory": false,
+  "shopReleased": false,
+  "cards": [
+    {
+      "id": "46718686",
+      "name": "Hitodenchak",
+      "konamiId": 4233,
+      "primary": {
+        "cid": 4233,
+        "atk": 600,
+        "def": 700,
+        "level": 2,
+        "raceJA": "水族",
+        "attributeJA": "水",
+        "ocgDate": "1999-02-04",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4233&request_locale=ja"
+      },
+      "passcode": {
+        "classification": "CORROBORADO: public imported canonical identity and secondary card references; Konami HTML does not expose passcodes",
+        "source": "https://yugipedia.com/wiki/Hitodenchak",
+        "importSource": "catalog/historical/2004-10-01/cards.json",
+        "sourceSha256": "b1e9d62dba087153912e3b5f7e4752a16f16dd7590767a9337918d493582ec1a"
+      },
+      "firstObserved": {
+        "tcg": null,
+        "ocg": "1999-02-04",
+        "world": "1999-02-04"
+      },
+      "tcgDateStatus": "Imported earliest observation; not independently established worldwide regional minimum",
+      "normalStatus": "CONFIRMADO: official OCG database, Normal monster",
+      "adaptation": "Existing normal-monster adapter; English display fallback, no claimed official Portuguese translation"
+    },
+    {
+      "id": "46457856",
+      "name": "Tomozaurus",
+      "konamiId": 4111,
+      "primary": {
+        "cid": 4111,
+        "atk": 500,
+        "def": 400,
+        "level": 2,
+        "raceJA": "恐竜族",
+        "attributeJA": "地",
+        "ocgDate": "1999-02-04",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4111&request_locale=ja"
+      },
+      "passcode": {
+        "classification": "CORROBORADO: public imported canonical identity and secondary card references; Konami HTML does not expose passcodes",
+        "source": "https://yugipedia.com/wiki/Tomozaurus",
+        "importSource": "catalog/historical/2004-10-01/cards.json",
+        "sourceSha256": "b1e9d62dba087153912e3b5f7e4752a16f16dd7590767a9337918d493582ec1a"
+      },
+      "firstObserved": {
+        "tcg": "2013-10-10",
+        "ocg": "1999-02-04",
+        "world": "1999-02-04"
+      },
+      "tcgDateStatus": "Imported earliest observation; not independently established worldwide regional minimum",
+      "normalStatus": "CONFIRMADO: official OCG database, Normal monster",
+      "adaptation": "Existing normal-monster adapter; English display fallback, no claimed official Portuguese translation"
+    },
+    {
+      "id": "15507080",
+      "name": "Sectarian of Secrets",
+      "konamiId": 4274,
+      "primary": {
+        "cid": 4274,
+        "atk": 700,
+        "def": 500,
+        "level": 2,
+        "raceJA": "魔法使い族",
+        "attributeJA": "闇",
+        "ocgDate": "1999-02-04",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4274&request_locale=ja"
+      },
+      "passcode": {
+        "classification": "CORROBORADO: public imported canonical identity and secondary card references; Konami HTML does not expose passcodes",
+        "source": "https://yugipedia.com/wiki/Sectarian_of_Secrets",
+        "importSource": "catalog/historical/2004-10-01/cards.json",
+        "sourceSha256": "b1e9d62dba087153912e3b5f7e4752a16f16dd7590767a9337918d493582ec1a"
+      },
+      "firstObserved": {
+        "tcg": "2006-04-28",
+        "ocg": "1999-02-04",
+        "world": "1999-02-04"
+      },
+      "tcgDateStatus": "Imported earliest observation; not independently established worldwide regional minimum",
+      "normalStatus": "CONFIRMADO: official OCG database, Normal monster",
+      "adaptation": "Existing normal-monster adapter; English display fallback, no claimed official Portuguese translation"
+    },
+    {
+      "id": "64511793",
+      "name": "Eyearmor",
+      "konamiId": 4191,
+      "primary": {
+        "cid": 4191,
+        "atk": 600,
+        "def": 500,
+        "level": 2,
+        "raceJA": "戦士族",
+        "attributeJA": "地",
+        "ocgDate": "1999-02-04",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4191&request_locale=ja"
+      },
+      "passcode": {
+        "classification": "CORROBORADO: public imported canonical identity and secondary card references; Konami HTML does not expose passcodes",
+        "source": "https://yugipedia.com/wiki/Eyearmor",
+        "importSource": "catalog/historical/2004-10-01/cards.json",
+        "sourceSha256": "b1e9d62dba087153912e3b5f7e4752a16f16dd7590767a9337918d493582ec1a"
+      },
+      "firstObserved": {
+        "tcg": null,
+        "ocg": "1999-02-04",
+        "world": "1999-02-04"
+      },
+      "tcgDateStatus": "Imported earliest observation; not independently established worldwide regional minimum",
+      "normalStatus": "CONFIRMADO: official OCG database, Normal monster",
+      "adaptation": "Existing normal-monster adapter; English display fallback, no claimed official Portuguese translation"
+    },
+    {
+      "id": "84285623",
+      "name": "Haniwa",
+      "konamiId": 4243,
+      "primary": {
+        "cid": 4243,
+        "atk": 500,
+        "def": 500,
+        "level": 2,
+        "raceJA": "岩石族",
+        "attributeJA": "地",
+        "ocgDate": "1999-02-04",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4243&request_locale=ja"
+      },
+      "passcode": {
+        "classification": "CORROBORADO: public imported canonical identity and secondary card references; Konami HTML does not expose passcodes",
+        "source": "https://yugipedia.com/wiki/Haniwa",
+        "importSource": "catalog/historical/2004-10-01/cards.json",
+        "sourceSha256": "b1e9d62dba087153912e3b5f7e4752a16f16dd7590767a9337918d493582ec1a"
+      },
+      "firstObserved": {
+        "tcg": "2005-11-01",
+        "ocg": "1999-02-04",
+        "world": "1999-02-04"
+      },
+      "tcgDateStatus": "Imported earliest observation; not independently established worldwide regional minimum",
+      "normalStatus": "CONFIRMADO: official OCG database, Normal monster",
+      "adaptation": "Existing normal-monster adapter; English display fallback, no claimed official Portuguese translation"
+    },
+    {
+      "id": "38142739",
+      "name": "Petit Angel",
+      "konamiId": 4214,
+      "primary": {
+        "cid": 4214,
+        "atk": 600,
+        "def": 900,
+        "level": 3,
+        "raceJA": "天使族",
+        "attributeJA": "光",
+        "ocgDate": "1999-02-04",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4214&request_locale=ja"
+      },
+      "passcode": {
+        "classification": "CORROBORADO: public imported canonical identity and secondary card references; Konami HTML does not expose passcodes",
+        "source": "https://yugipedia.com/wiki/Petit_Angel",
+        "importSource": "catalog/historical/2004-10-01/cards.json",
+        "sourceSha256": "b1e9d62dba087153912e3b5f7e4752a16f16dd7590767a9337918d493582ec1a"
+      },
+      "firstObserved": {
+        "tcg": "2002-03-08",
+        "ocg": "1999-02-04",
+        "world": "1999-02-04"
+      },
+      "tcgDateStatus": "Imported earliest observation; not independently established worldwide regional minimum",
+      "normalStatus": "CONFIRMADO: official OCG database, Normal monster",
+      "adaptation": "Existing normal-monster adapter; English display fallback, no claimed official Portuguese translation"
+    },
+    {
+      "id": "53581214",
+      "name": "Fire Reaper",
+      "konamiId": 4160,
+      "primary": {
+        "cid": 4160,
+        "atk": 700,
+        "def": 500,
+        "level": 2,
+        "raceJA": "アンデット族",
+        "attributeJA": "闇",
+        "ocgDate": "1999-02-04",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4160&request_locale=ja"
+      },
+      "passcode": {
+        "classification": "CORROBORADO: public imported canonical identity and secondary card references; Konami HTML does not expose passcodes",
+        "source": "https://yugipedia.com/wiki/Fire_Reaper",
+        "importSource": "catalog/historical/2004-10-01/cards.json",
+        "sourceSha256": "b1e9d62dba087153912e3b5f7e4752a16f16dd7590767a9337918d493582ec1a"
+      },
+      "firstObserved": {
+        "tcg": "2019-08-01",
+        "ocg": "1999-02-04",
+        "world": "1999-02-04"
+      },
+      "tcgDateStatus": "Imported earliest observation; not independently established worldwide regional minimum",
+      "normalStatus": "CONFIRMADO: official OCG database, Normal monster",
+      "adaptation": "Existing normal-monster adapter; English display fallback, no claimed official Portuguese translation"
+    },
+    {
+      "id": "90963488",
+      "name": "Nemuriko",
+      "konamiId": 4135,
+      "primary": {
+        "cid": 4135,
+        "atk": 800,
+        "def": 700,
+        "level": 3,
+        "raceJA": "魔法使い族",
+        "attributeJA": "闇",
+        "ocgDate": "1999-02-04",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4135&request_locale=ja"
+      },
+      "passcode": {
+        "classification": "CORROBORADO: public imported canonical identity and secondary card references; Konami HTML does not expose passcodes",
+        "source": "https://yugipedia.com/wiki/Nemuriko",
+        "importSource": "catalog/historical/2004-10-01/cards.json",
+        "sourceSha256": "b1e9d62dba087153912e3b5f7e4752a16f16dd7590767a9337918d493582ec1a"
+      },
+      "firstObserved": {
+        "tcg": "2002-03-08",
+        "ocg": "1999-02-04",
+        "world": "1999-02-04"
+      },
+      "tcgDateStatus": "Imported earliest observation; not independently established worldwide regional minimum",
+      "normalStatus": "CONFIRMADO: official OCG database, Normal monster",
+      "adaptation": "Existing normal-monster adapter; English display fallback, no claimed official Portuguese translation"
+    },
+    {
+      "id": "08783685",
+      "name": "Hourglass of Life",
+      "konamiId": 4235,
+      "primary": {
+        "cid": 4235,
+        "atk": 700,
+        "def": 600,
+        "level": 2,
+        "raceJA": "天使族",
+        "attributeJA": "光",
+        "ocgDate": "1999-02-04",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4235&request_locale=ja"
+      },
+      "passcode": {
+        "classification": "CORROBORADO: public imported canonical identity and secondary card references; Konami HTML does not expose passcodes",
+        "source": "https://yugipedia.com/wiki/Hourglass_of_Life",
+        "importSource": "catalog/historical/2004-10-01/cards.json",
+        "sourceSha256": "b1e9d62dba087153912e3b5f7e4752a16f16dd7590767a9337918d493582ec1a"
+      },
+      "firstObserved": {
+        "tcg": "2022-03-17",
+        "ocg": "1999-02-04",
+        "world": "1999-02-04"
+      },
+      "tcgDateStatus": "Imported earliest observation; not independently established worldwide regional minimum",
+      "normalStatus": "CONFIRMADO: official OCG database, Normal monster",
+      "adaptation": "Existing normal-monster adapter; English display fallback, no claimed official Portuguese translation"
+    },
+    {
+      "id": "22026707",
+      "name": "Curtain of the Dark Ones",
+      "konamiId": 4110,
+      "primary": {
+        "cid": 4110,
+        "atk": 600,
+        "def": 500,
+        "level": 2,
+        "raceJA": "魔法使い族",
+        "attributeJA": "闇",
+        "ocgDate": "1999-02-04",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4110&request_locale=ja"
+      },
+      "passcode": {
+        "classification": "CORROBORADO: public imported canonical identity and secondary card references; Konami HTML does not expose passcodes",
+        "source": "https://yugipedia.com/wiki/Curtain_of_the_Dark_Ones",
+        "importSource": "catalog/historical/2004-10-01/cards.json",
+        "sourceSha256": "b1e9d62dba087153912e3b5f7e4752a16f16dd7590767a9337918d493582ec1a"
+      },
+      "firstObserved": {
+        "tcg": "2013-09-01",
+        "ocg": "1999-02-04",
+        "world": "1999-02-04"
+      },
+      "tcgDateStatus": "Imported earliest observation; not independently established worldwide regional minimum",
+      "normalStatus": "CONFIRMADO: official OCG database, Normal monster",
+      "adaptation": "Existing normal-monster adapter; English display fallback, no claimed official Portuguese translation"
+    },
+    {
+      "id": "53832650",
+      "name": "Meotoko",
+      "konamiId": 4218,
+      "primary": {
+        "cid": 4218,
+        "atk": 700,
+        "def": 600,
+        "level": 2,
+        "raceJA": "獣族",
+        "attributeJA": "地",
+        "ocgDate": "1999-02-04",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4218&request_locale=ja"
+      },
+      "passcode": {
+        "classification": "CORROBORADO: public imported canonical identity and secondary card references; Konami HTML does not expose passcodes",
+        "source": "https://yugipedia.com/wiki/Meotoko",
+        "importSource": "catalog/historical/2004-10-01/cards.json",
+        "sourceSha256": "b1e9d62dba087153912e3b5f7e4752a16f16dd7590767a9337918d493582ec1a"
+      },
+      "firstObserved": {
+        "tcg": "2013-10-10",
+        "ocg": "1999-02-04",
+        "world": "1999-02-04"
+      },
+      "tcgDateStatus": "Imported earliest observation; not independently established worldwide regional minimum",
+      "normalStatus": "CONFIRMADO: official OCG database, Normal monster",
+      "adaptation": "Existing normal-monster adapter; English display fallback, no claimed official Portuguese translation"
+    },
+    {
+      "id": "09159938",
+      "name": "Dark Gray",
+      "konamiId": 4119,
+      "primary": {
+        "cid": 4119,
+        "atk": 800,
+        "def": 900,
+        "level": 3,
+        "raceJA": "獣族",
+        "attributeJA": "地",
+        "ocgDate": "1999-02-04",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4119&request_locale=ja"
+      },
+      "passcode": {
+        "classification": "CORROBORADO: public imported canonical identity and secondary card references; Konami HTML does not expose passcodes",
+        "source": "https://yugipedia.com/wiki/Dark_Gray",
+        "importSource": "catalog/historical/2004-10-01/cards.json",
+        "sourceSha256": "b1e9d62dba087153912e3b5f7e4752a16f16dd7590767a9337918d493582ec1a"
+      },
+      "firstObserved": {
+        "tcg": "2002-03-08",
+        "ocg": "1999-02-04",
+        "world": "1999-02-04"
+      },
+      "tcgDateStatus": "Imported earliest observation; not independently established worldwide regional minimum",
+      "normalStatus": "CONFIRMADO: official OCG database, Normal monster",
+      "adaptation": "Existing normal-monster adapter; English display fallback, no claimed official Portuguese translation"
+    },
+    {
+      "id": "18710707",
+      "name": "The Furious Sea King",
+      "konamiId": 4271,
+      "primary": {
+        "cid": 4271,
+        "atk": 800,
+        "def": 700,
+        "level": 3,
+        "raceJA": "水族",
+        "attributeJA": "水",
+        "ocgDate": "1999-02-04",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4271&request_locale=ja"
+      },
+      "passcode": {
+        "classification": "CORROBORADO: public imported canonical identity and secondary card references; Konami HTML does not expose passcodes",
+        "source": "https://yugipedia.com/wiki/The_Furious_Sea_King",
+        "importSource": "catalog/historical/2004-10-01/cards.json",
+        "sourceSha256": "b1e9d62dba087153912e3b5f7e4752a16f16dd7590767a9337918d493582ec1a"
+      },
+      "firstObserved": {
+        "tcg": "2002-03-08",
+        "ocg": "1999-02-04",
+        "world": "1999-02-04"
+      },
+      "tcgDateStatus": "Imported earliest observation; not independently established worldwide regional minimum",
+      "normalStatus": "CONFIRMADO: official OCG database, Normal monster",
+      "adaptation": "Existing normal-monster adapter; English display fallback, no claimed official Portuguese translation"
+    },
+    {
+      "id": "47695416",
+      "name": "Candle of Fate",
+      "konamiId": 4248,
+      "primary": {
+        "cid": 4248,
+        "atk": 600,
+        "def": 600,
+        "level": 2,
+        "raceJA": "悪魔族",
+        "attributeJA": "闇",
+        "ocgDate": "1999-02-04",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4248&request_locale=ja"
+      },
+      "passcode": {
+        "classification": "CORROBORADO: public imported canonical identity and secondary card references; Konami HTML does not expose passcodes",
+        "source": "https://yugipedia.com/wiki/Candle_of_Fate",
+        "importSource": "catalog/historical/2004-10-01/cards.json",
+        "sourceSha256": "b1e9d62dba087153912e3b5f7e4752a16f16dd7590767a9337918d493582ec1a"
+      },
+      "firstObserved": {
+        "tcg": null,
+        "ocg": "1999-02-04",
+        "world": "1999-02-04"
+      },
+      "tcgDateStatus": "Imported earliest observation; not independently established worldwide regional minimum",
+      "normalStatus": "CONFIRMADO: official OCG database, Normal monster",
+      "adaptation": "Existing normal-monster adapter; English display fallback, no claimed official Portuguese translation"
+    },
+    {
+      "id": "75889523",
+      "name": "Archfiend Marmot of Nefariousness",
+      "konamiId": 4208,
+      "primary": {
+        "cid": 4208,
+        "atk": 400,
+        "def": 600,
+        "level": 2,
+        "raceJA": "獣族",
+        "attributeJA": "地",
+        "ocgDate": "1999-02-04",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4208&request_locale=ja"
+      },
+      "passcode": {
+        "classification": "CORROBORADO: public imported canonical identity and secondary card references; Konami HTML does not expose passcodes",
+        "source": "https://yugipedia.com/wiki/Archfiend_Marmot_of_Nefariousness",
+        "importSource": "catalog/historical/2004-10-01/cards.json",
+        "sourceSha256": "b1e9d62dba087153912e3b5f7e4752a16f16dd7590767a9337918d493582ec1a"
+      },
+      "firstObserved": {
+        "tcg": "2005-06-01",
+        "ocg": "1999-02-04",
+        "world": "1999-02-04"
+      },
+      "tcgDateStatus": "Imported earliest observation; not independently established worldwide regional minimum",
+      "normalStatus": "CONFIRMADO: official OCG database, Normal monster",
+      "adaptation": "Existing normal-monster adapter; English display fallback, no claimed official Portuguese translation"
+    },
+    {
+      "id": "09430387",
+      "name": "LaLa Li-oon",
+      "konamiId": 4197,
+      "primary": {
+        "cid": 4197,
+        "atk": 600,
+        "def": 600,
+        "level": 2,
+        "raceJA": "雷族",
+        "attributeJA": "風",
+        "ocgDate": "1999-02-04",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4197&request_locale=ja"
+      },
+      "passcode": {
+        "classification": "CORROBORADO: public imported canonical identity and secondary card references; Konami HTML does not expose passcodes",
+        "source": "https://yugipedia.com/wiki/LaLa_Li-oon",
+        "importSource": "catalog/historical/2004-10-01/cards.json",
+        "sourceSha256": "b1e9d62dba087153912e3b5f7e4752a16f16dd7590767a9337918d493582ec1a"
+      },
+      "firstObserved": {
+        "tcg": null,
+        "ocg": "1999-02-04",
+        "world": "1999-02-04"
+      },
+      "tcgDateStatus": "Imported earliest observation; not independently established worldwide regional minimum",
+      "normalStatus": "CONFIRMADO: official OCG database, Normal monster",
+      "adaptation": "Existing normal-monster adapter; English display fallback, no claimed official Portuguese translation"
+    },
+    {
+      "id": "52800428",
+      "name": "Fiend's Hand",
+      "konamiId": 4141,
+      "primary": {
+        "cid": 4141,
+        "atk": 600,
+        "def": 600,
+        "level": 2,
+        "raceJA": "アンデット族",
+        "attributeJA": "闇",
+        "ocgDate": "1999-02-04",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4141&request_locale=ja"
+      },
+      "passcode": {
+        "classification": "CORROBORADO: public imported canonical identity and secondary card references; Konami HTML does not expose passcodes",
+        "source": "https://yugipedia.com/wiki/Fiend's_Hand",
+        "importSource": "catalog/historical/2004-10-01/cards.json",
+        "sourceSha256": "b1e9d62dba087153912e3b5f7e4752a16f16dd7590767a9337918d493582ec1a"
+      },
+      "firstObserved": {
+        "tcg": null,
+        "ocg": "1999-02-04",
+        "world": "1999-02-04"
+      },
+      "tcgDateStatus": "Imported earliest observation; not independently established worldwide regional minimum",
+      "normalStatus": "CONFIRMADO: official OCG database, Normal monster",
+      "adaptation": "Existing normal-monster adapter; English display fallback, no claimed official Portuguese translation"
+    },
+    {
+      "id": "39175982",
+      "name": "Winged Cleaver",
+      "konamiId": 4215,
+      "primary": {
+        "cid": 4215,
+        "atk": 700,
+        "def": 700,
+        "level": 2,
+        "raceJA": "昆虫族",
+        "attributeJA": "地",
+        "ocgDate": "1999-02-04",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4215&request_locale=ja"
+      },
+      "passcode": {
+        "classification": "CORROBORADO: public imported canonical identity and secondary card references; Konami HTML does not expose passcodes",
+        "source": "https://yugipedia.com/wiki/Winged_Cleaver",
+        "importSource": "catalog/historical/2004-10-01/cards.json",
+        "sourceSha256": "b1e9d62dba087153912e3b5f7e4752a16f16dd7590767a9337918d493582ec1a"
+      },
+      "firstObserved": {
+        "tcg": "2019-08-01",
+        "ocg": "1999-02-04",
+        "world": "1999-02-04"
+      },
+      "tcgDateStatus": "Imported earliest observation; not independently established worldwide regional minimum",
+      "normalStatus": "CONFIRMADO: official OCG database, Normal monster",
+      "adaptation": "Existing normal-monster adapter; English display fallback, no claimed official Portuguese translation"
+    },
+    {
+      "id": "15150371",
+      "name": "Archfiend Mirror",
+      "konamiId": 4267,
+      "primary": {
+        "cid": 4267,
+        "atk": 700,
+        "def": 600,
+        "level": 2,
+        "raceJA": "悪魔族",
+        "attributeJA": "闇",
+        "ocgDate": "1999-02-04",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4267&request_locale=ja"
+      },
+      "passcode": {
+        "classification": "CORROBORADO: public imported canonical identity and secondary card references; Konami HTML does not expose passcodes",
+        "source": "https://yugipedia.com/wiki/Archfiend_Mirror",
+        "importSource": "catalog/historical/2004-10-01/cards.json",
+        "sourceSha256": "b1e9d62dba087153912e3b5f7e4752a16f16dd7590767a9337918d493582ec1a"
+      },
+      "firstObserved": {
+        "tcg": null,
+        "ocg": "1999-02-04",
+        "world": "1999-02-04"
+      },
+      "tcgDateStatus": "Imported earliest observation; not independently established worldwide regional minimum",
+      "normalStatus": "CONFIRMADO: official OCG database, Normal monster",
+      "adaptation": "Existing normal-monster adapter; English display fallback, no claimed official Portuguese translation"
+    },
+    {
+      "id": "15510988",
+      "name": "Thunder Kid",
+      "konamiId": 4217,
+      "primary": {
+        "cid": 4217,
+        "atk": 700,
+        "def": 600,
+        "level": 2,
+        "raceJA": "雷族",
+        "attributeJA": "風",
+        "ocgDate": "1999-02-04",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4217&request_locale=ja"
+      },
+      "passcode": {
+        "classification": "CORROBORADO: public imported canonical identity and secondary card references; Konami HTML does not expose passcodes",
+        "source": "https://yugipedia.com/wiki/Thunder_Kid",
+        "importSource": "catalog/historical/2004-10-01/cards.json",
+        "sourceSha256": "b1e9d62dba087153912e3b5f7e4752a16f16dd7590767a9337918d493582ec1a"
+      },
+      "firstObserved": {
+        "tcg": "2006-11-11",
+        "ocg": "1999-02-04",
+        "world": "1999-02-04"
+      },
+      "tcgDateStatus": "Imported earliest observation; not independently established worldwide regional minimum",
+      "normalStatus": "CONFIRMADO: official OCG database, Normal monster",
+      "adaptation": "Existing normal-monster adapter; English display fallback, no claimed official Portuguese translation"
+    }
+  ]
+}

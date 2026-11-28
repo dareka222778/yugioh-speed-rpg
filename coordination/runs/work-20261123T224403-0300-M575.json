@@ -1,0 +1,119 @@
+{
+  "format": 1,
+  "runId": "work-20261123T224403-0300-M575",
+  "mission": "M575",
+  "parentRunId": "work-20261123T223010-0300-M574",
+  "owner": "Work principal",
+  "priority": "P1 — bloqueios contínuos de ataque: Messenger of Peace (44656491) proíbe ataques de monstros com ATK atual >=1500 e cobra 100 LP na Standby; Gravekeeper's Servant (16762927) exige que o atacante envie a carta do topo do próprio Deck físico ao Cemitério.",
+  "state": "reserved-and-implementing",
+  "startedAt": "2026-11-23T22:44:03-03:00",
+  "endedAt": null,
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "4f48cd49ad12c7d0d9c80b383dd8b97d6038fbeb",
+  "branch": "feat/work-m575-continuous-attack-cost-tag-adapter-20261123",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "4f48cd49ad12c7d0d9c80b383dd8b97d6038fbeb",
+  "reservationCommitSha": null,
+  "branchHeadSha": null,
+  "pullRequest": null,
+  "reservedFiles": [
+    "src/continuousAttackLockTagAdapter.ts",
+    "tests/continuousAttackLockTagAdapter.test.cjs",
+    "docs/evidence/m575-continuous-attack-lock-tag-adapter.json",
+    ".github/workflows/m575-continuous-attack-lock-tag-adapter.yml"
+  ],
+  "scope": "Adapter TagDuel isolado para restrições contínuas de ataque e custo de declaração; Messenger of Peace usa ATK atual e manutenção de 100 LP na Standby da equipe controladora; Gravekeeper's Servant cobra milagem do topo do Deck físico do assento atacante ativo. Sem alterar standbyFlow.ts, continuousEffects.ts, resolver central, catálogo ou dados persistentes.",
+  "conflictCheck": {
+    "overlap": false,
+    "checkedAt": "2026-11-23T22:44:03-03:00",
+    "checkedAgainst": [
+      "M573 permanece reservado e aguarda transferência explícita; nenhum caminho M573 será tocado.",
+      "M574 usa src/attackLpGainTagAdapter.ts e arquivos M574 distintos; M575 não altera esses caminhos.",
+      "M383 mantém standbyFlow.ts e continuousEffects.ts protegidos; M575 implementará adapter isolado sem editar esses módulos.",
+      "M61 mantém duelEngineCurrent.ts, monsterEffects.ts, cardMetadata.ts, cardCertifications.ts e releasedCardIds.ts protegidos.",
+      "IDs 44656491 e 16762927 ausentes de metadata, certificações, allowlist, branches e PRs consultados."
+    ]
+  },
+  "cards": [
+    {
+      "id": "44656491",
+      "name": "Messenger of Peace",
+      "konamiDatabaseCid": 4938,
+      "type": "Continuous Spell",
+      "officialText": "Monsters with 1500 or more ATK cannot declare an attack. During each of your Standby Phases, pay 100 LP or destroy this card.",
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4938&ope=2&request_locale=en",
+      "firstTcgRelease": "2002-09-16",
+      "historicalEligibility": "eligible-before-2004-09-30"
+    },
+    {
+      "id": "16762927",
+      "name": "Gravekeeper's Servant",
+      "konamiDatabaseCid": 4893,
+      "type": "Continuous Spell",
+      "officialText": "Unless your opponent sends 1 card from the top of their Deck to the Graveyard, they cannot declare an attack.",
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4893&ope=2&request_locale=en",
+      "firstTcgRelease": "2002-09-16",
+      "historicalEligibility": "eligible-before-2004-09-30"
+    }
+  ],
+  "design": {
+    "messenger": "Qualquer cópia face-up bloqueia ataque de monstro face-up cujo ATK atual seja >=1500; efeito aplica-se às duas equipes. Na Standby da equipe controladora, pagar 100 LP se LP>100; se não pagar ou não puder pagar, destruir a cópia.",
+    "gravekeeper": "Cada cópia face-up controlada pela equipe defensora exige 1 carta do topo do Deck físico do assento atacante ativo para o Cemitério compartilhado da equipe atacante; sem cartas suficientes, a declaração é bloqueada sem milagem parcial.",
+    "physicalDeck": "Deck ativo da equipe é o Deck do assento físico em duel.active[attackingTeam]; topo = índice 0; UID mantém o assento m0..m3 e a carta vai ao Cemitério da equipe.",
+    "maintenance": "Resolver apenas em pending.kind=standby, actor/current iguais à equipe controladora e taskId m575:messenger:<sourceUid>:<turn>; ledger impede pagamento/destruição duplicados.",
+    "integration": "Adapter não agenda tarefas em standbyFlow nem altera tagActions; produz resultado explícito para futura integração. Sem integração central nesta etapa.",
+    "rules": {
+      "mainDeck": "20–30 por assento",
+      "handLimit": 6,
+      "handCheck": "End Phase",
+      "monsterZones": 3,
+      "spellTrapZones": 3,
+      "fieldZone": "separate",
+      "extraDeckMax": 5
+    }
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "ci": {
+    "focused": "pending",
+    "check": "pending",
+    "build": "pending",
+    "cardBatchFast": "pending",
+    "milestone1000": "pending",
+    "engineValidation": "pending",
+    "extendedSoak": "pending"
+  },
+  "production": {
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "safety": {
+    "runtimeCoreChanged": false,
+    "catalogChanged": false,
+    "certificationChanged": false,
+    "releasedCardIdsChanged": false,
+    "inventoryGranted": 0,
+    "persistentDatabaseChanged": false,
+    "playerDataChanged": false,
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "liveDiscordValidation": false
+  },
+  "nextTask": "Implementar os dois comportamentos com regressões 2v2, validar janela de Standby e milagem do Deck ativo; em paralelo acompanhar CI M574 sem alterar sua branch.",
+  "nextWindow": "2026-11-24T03:30:00-03:00",
+  "duration": {
+    "startedAt": "2026-11-23T22:44:03-03:00",
+    "endedAt": null,
+    "effectiveWorkMinutes": null,
+    "targetEffectiveMinutes": 60,
+    "ciWaitExcluded": true
+  }
+}

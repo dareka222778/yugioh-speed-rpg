@@ -1,0 +1,105 @@
+{
+  "format": 1,
+  "runId": "work-20261124T141800-0300-M593",
+  "mission": "M593",
+  "owner": "Work principal",
+  "priority": "P1",
+  "status": "ci-green-awaiting-review",
+  "startedAt": "2026-11-24T14:18:00-03:00",
+  "endedAt": null,
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "b629571378f875ddc7157bf1e023001ad934438d",
+  "branch": "feat/work-m593-bad-reaction-to-simochi-lp-replacement-20261124",
+  "baseSha": "ebcf887d0c239a48b8601be520a7a2ed909f2aee",
+  "branchHeadSha": "5a76d9ce472ccd1f4be27cafc0f6982f81b2c8e5",
+  "pullRequest": 536,
+  "reservedFiles": [
+    "src/badReactionToSimochiTagAdapter.ts",
+    "tests/badReactionToSimochiTagAdapter.test.cjs",
+    "docs/evidence/m593-bad-reaction-to-simochi-tag-adapter.json",
+    ".github/workflows/m593-bad-reaction-to-simochi-tag-adapter.yml"
+  ],
+  "scope": "Adapter TagDuel puro para Bad Reaction to Simochi: substitui ganho de LP por dano igual somente quando o time adversário do controlador possui uma cópia face-up; cópias múltiplas não acumulam. Somente quatro caminhos novos; sem resolver, catálogo, certificações, inventário ou dados persistentes.",
+  "conflictCheck": {
+    "checkedAt": "2026-11-24T14:18:00-03:00",
+    "sharedHead": "b629571378f875ddc7157bf1e023001ad934438d",
+    "matchingBranches": 0,
+    "matchingPRs": 0,
+    "m61Handoff": "requested; no explicit release",
+    "m590FilesUntouched": true,
+    "m591FilesUntouched": true,
+    "m592FilesUntouched": true,
+    "thirdPartyReservationsUntouched": true
+  },
+  "card": {
+    "name": "Bad Reaction to Simochi",
+    "passcode": "40633297",
+    "konamiDatabaseId": 4694,
+    "firstTCGPrinting": "Legacy of Darkness (LOD-093), 2003-06-06",
+    "officialDatabaseUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4694&ope=2&request_locale=en",
+    "officialEffect": "As long as this card remains face-up on the field, any effect of increasing your opponent's Life Points is changed to inflict the same amount of points in damage to your opponent's Life Points."
+  },
+  "plannedTests": [
+    "face-up Simochi converts opponent team's effect LP gain to equal damage",
+    "no Simochi leaves gain unchanged",
+    "face-down Simochi no effect",
+    "Simochi does not convert its controller team's own gain",
+    "both teams have Simochi; only opposing controller's copy converts each gain",
+    "multiple Simochi copies are not cumulative",
+    "negated copies excluded",
+    "effect damage/battle damage/cost are not LP gain events",
+    "unresolved/negated gain event no-op",
+    "zero/negative/mismatched gain rejected",
+    "stale LP snapshot rejected",
+    "duplicate event id idempotency",
+    "duplicate source UID rejected",
+    "team routing in shared LP model",
+    "input and ledger immutability"
+  ],
+  "rules": {
+    "mainDeck": "20-30 per physical seat",
+    "handLimit": 6,
+    "handLimitTiming": "End Phase only",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separate",
+    "extraDeckMax": 5,
+    "privateHandsAndDecks": true,
+    "sharedTeamGraveyardAndLP": true
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "effectiveWorkMinutes": 0,
+  "targetEffectiveMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "nextTask": "Monitorar PR #536 e sincronizar sem force após revisão; não integrar no resolver sem handoff M61.",
+  "nextWindow": "2026-11-24T23:30:00-03:00",
+  "scopeReleasedToAuxiliary": [
+    "src/badReactionToSimochiTagAdapter.ts",
+    "tests/badReactionToSimochiTagAdapter.test.cjs",
+    "docs/evidence/m593-bad-reaction-to-simochi-tag-adapter.json",
+    ".github/workflows/m593-bad-reaction-to-simochi-tag-adapter.yml"
+  ],
+  "pullRequestUrl": "https://github.com/dareka222778/yugioh-speed-rpg/pull/536",
+  "ci": {
+    "focused": "success",
+    "cardBatchFast": "success",
+    "milestone1000": "success",
+    "engineValidation": "success"
+  },
+  "scopeReleasedAt": "2026-11-24T18:30:21-03:00"
+}

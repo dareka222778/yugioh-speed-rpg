@@ -1,0 +1,95 @@
+{
+  "format": 1,
+  "runId": "work-20261126T103741-0300-M650",
+  "mission": "M650",
+  "owner": "Work principal",
+  "priority": "P1",
+  "priorityRequestedBy": "User",
+  "status": "awaiting-ci",
+  "startedAt": "2026-11-26T10:37:41-03:00",
+  "endedAt": null,
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "01e278e2855b942860f49f0fecbeec00e7b0de7e",
+  "branch": "feat/work-m650-counter-trap-negation-20261126",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "bb61903d3b006e40dc84ca56c4b5925c72f4b0ff",
+  "branchHeadSha": "d4f2b42ceb41e899c39e0da3f5059f8a05657e41",
+  "pullRequest": 586,
+  "reservedFiles": [
+    "src/counterTrapNegationTagAdapter.ts",
+    "tests/counterTrapNegationTagAdapter.test.cjs",
+    "docs/evidence/m650-counter-trap-negation.json",
+    ".github/workflows/m650-counter-trap-negation.yml"
+  ],
+  "scope": "Adapter TagDuel clássico 2v2 para Horn of Heaven (98069388; CID Konami 4864) e Trap Jammer (19252988; CID Konami 5921). Horn tributa um monstro da equipe como custo para negar e destruir um monstro em processo de Invocação; Trap Jammer responde somente a ativação de Armadilha do oponente na Battle Phase, sem custo. Isolar em adapter, testar alvo por UID/epoch, propriedade física, custo de Tributo, negação, rotação e conservação de inventário. Sem resolver central, catálogo, certificações, comandos, banco ou produção.",
+  "cards": [
+    {
+      "id": "98069388",
+      "konamiId": 4864,
+      "name": "Horn of Heaven",
+      "namePt": "Corneta Celestial",
+      "type": "Counter Trap",
+      "officialText": "When a monster(s) would be Summoned: Tribute 1 monster; negate the Summon, and if you do, destroy that monster(s).",
+      "firstTCGRelease": "2002-06-26",
+      "firstTCGSet": "MRD-130",
+      "certifiedAtStart": false
+    },
+    {
+      "id": "19252988",
+      "konamiId": 5921,
+      "name": "Trap Jammer",
+      "namePt": "Bloqueador de Armadilhas",
+      "type": "Counter Trap",
+      "officialText": "When your opponent activates a Trap Card during the Battle Phase: Negate the activation, and if you do, destroy it.",
+      "firstTCGRelease": "2004-03-01",
+      "firstTCGSet": "IOC-EN110",
+      "certifiedAtStart": false
+    }
+  ],
+  "handoff": {
+    "status": "M649 está ativo em arquivos distintos; nenhuma transferência é necessária para este escopo independente. A integração central continua aguardando handoff explícito M637.",
+    "blockedFiles": [
+      "src/monsterEffects.ts",
+      "src/duelEngineCurrent.ts",
+      "src/effectRegistry.ts",
+      "src/commands/duel"
+    ],
+    "thisRunDoesNotTouchBlockedFiles": true,
+    "conflictingReservations": 0
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "releasedCardIds": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "verification": {
+    "focusedScenarios": 0,
+    "focusedTestResult": "failed-on-test-syntax; fixed in d4f2b42; rerun pending",
+    "typecheck": "pending",
+    "build": "pending",
+    "evidenceValidation": "pending",
+    "adapterBehaviorVerifiedCards": 0,
+    "behaviorCertifiedCards": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "liveDiscordValidation": false
+  },
+  "effectiveWorkMinutes": 15,
+  "targetEffectiveWorkMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "nextTask": "Obter CI verde para os 29 cenários; depois solicitar handoff M637 para integrar os adapters sem tocar em arquivos reservados.",
+  "nextWindow": "2026-11-26T12:30:00-03:00",
+  "scopeReleasedToAuxiliary": []
+}

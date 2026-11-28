@@ -1,0 +1,111 @@
+{
+  "format": 1,
+  "runId": "work-20261125T145456-0300-M624",
+  "mission": "M624",
+  "owner": "Work principal",
+  "priority": "P1",
+  "priorityRequestedBy": "User",
+  "status": "reserved; implementação em paralelo à CI M623",
+  "startedAt": "2026-11-25T14:54:56-03:00",
+  "endedAt": null,
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "442114c54cf434776b94bcaf8384363b0c373ca2",
+  "branch": "feat/work-m624-remove-trap-tag-adapter-20261125",
+  "baseSha": "442114c54cf434776b94bcaf8384363b0c373ca2",
+  "branchHeadSha": "442114c54cf434776b94bcaf8384363b0c373ca2",
+  "pullRequest": null,
+  "reservedFiles": [
+    "src/removeTrapTagAdapter.ts",
+    "tests/removeTrapTagAdapter.test.cjs",
+    "docs/evidence/m624-remove-trap-tag-adapter.json",
+    ".github/workflows/m624-remove-trap-tag-adapter.yml"
+  ],
+  "scope": "Adapter TagDuel clássico para Remove Trap (51482758): Spell Normal da mão privada do assento ativo, alvo qualquer Trap face-up em qualquer backrow, destruição para o GY do proprietário físico. Quatro caminhos novos; sem resolver central, catálogo, certificações, allowlist, inventário, comandos ou dados persistentes.",
+  "cards": [
+    {
+      "name": "Remove Trap",
+      "passcode": "51482758",
+      "konamiDatabaseId": 4838,
+      "kind": "Normal Spell",
+      "firstTcgSet": "LOB-060",
+      "firstTcgRelease": "2002-03-08",
+      "officialEffect": "Target 1 face-up Trap on the field; destroy it.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4838&ope=2&request_locale=en"
+    }
+  ],
+  "implementation": {
+    "files": [
+      "src/removeTrapTagAdapter.ts",
+      "tests/removeTrapTagAdapter.test.cjs",
+      "docs/evidence/m624-remove-trap-tag-adapter.json",
+      ".github/workflows/m624-remove-trap-tag-adapter.yml"
+    ],
+    "plannedScenarios": 25,
+    "integrationBoundary": "Adapter puro e isolado; não altera resolver v9, cardMetadata, cardCertifications, allowlist, comandos Discord, persistência ou produção. Integração aguarda handoff M61."
+  },
+  "rules": {
+    "mainDeckPerPhysicalSeat": "20–30",
+    "extraDeckPerPhysicalSeat": "0–5",
+    "monsterZonesPerTeam": 3,
+    "spellTrapZonesPerTeam": 3,
+    "fieldZone": "separada das três Spell/Trap Zones",
+    "handLimit": 6,
+    "handDiscard": "somente na End Phase"
+  },
+  "conflictCheck": {
+    "checkedAt": "2026-11-25T14:54:56-03:00",
+    "sharedHead": "442114c54cf434776b94bcaf8384363b0c373ca2",
+    "matchingBranches": 0,
+    "matchingPullRequests": 0,
+    "matchingCardId": "51482758",
+    "matchingKonamiId": 4838,
+    "metadata": false,
+    "certified": false,
+    "existingEffect": false,
+    "m623FilesDisjoint": true,
+    "m61CentralFilesExcluded": true,
+    "thirdPartyReservationsUntouched": true,
+    "result": "Nenhum branch/PR M624 ou reserva Remove Trap encontrada; quatro caminhos novos exclusivos."
+  },
+  "verification": {
+    "focusedScenarios": 25,
+    "focusedTestResult": "pending",
+    "typecheck": "pending",
+    "build": "pending",
+    "evidenceValidation": "pending",
+    "focusedWorkflowRun": null,
+    "cardBatchFast": "pending",
+    "milestone1000": "pending",
+    "engineValidation": "pending",
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "effectiveWorkMinutes": 0,
+  "targetEffectiveWorkMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "observedParallelWork": {
+    "m623": {
+      "branch": "feat/work-m623-dust-tornado-tag-adapter-20261125",
+      "pr": 566,
+      "status": "focused test corrections; CI re-run pending",
+      "touched": false
+    },
+    "m61": {
+      "pr": 17,
+      "status": "handoff solicitado; aguardando liberação explícita",
+      "touched": false
+    }
+  },
+  "nextTask": "Concluir M624 e CI; depois revisar M623/M624 contra o shared HEAD e solicitar sincronização não-forçada antes de qualquer merge.",
+  "nextWindow": "2026-11-25T19:30:00-03:00",
+  "scopeReleasedToAuxiliary": []
+}

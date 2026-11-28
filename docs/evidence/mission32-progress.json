@@ -1,0 +1,82 @@
+{
+  "format": 1,
+  "baselineCommit": "c48a64a42ae57b556ce25f00170bafecb0c03605",
+  "engine": "engine-v9",
+  "before": 916,
+  "added": 6,
+  "certified": 922,
+  "distributionAuthorized": 922,
+  "remainingHistorical": 1040,
+  "remainingTo1001": 79,
+  "remainingTo1271": 349,
+  "inventoryGranted": 0,
+  "catalogRevision": "40664314907b30712c09656b5c4bba3c29e9989b3ac1dc7477b18bad4bf6aa0c",
+  "cards": [
+    "40173854",
+    "24435369",
+    "64342551",
+    "95614612",
+    "90337190",
+    "24128274"
+  ],
+  "preparation": {
+    "run": 41004657316,
+    "checkout": "6e4419c5013ef38bff0caf081ea7e80672df3161",
+    "publicEngineScenarios": 92,
+    "testSummary": {
+      "node": "v22.23.4",
+      "tests": 6765,
+      "suites": 0,
+      "pass": 6765,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "exitCode": 0
+    },
+    "gate": "card-batch-automation.promote"
+  },
+  "integrationCI": "Consult Engine validation checks on final HEAD; draft PR #12 records the latest verified run.",
+  "withdrawal": {
+    "id": "79853073",
+    "name": "Cipher Soldier",
+    "admitted": false,
+    "reason": "Mandatory Trigger Effect with a Chain at damage calculation; continuous approximation withdrawn",
+    "evidence": "docs/evidence/mission32-withdrawal.json",
+    "supersededCounts": [
+      923,
+      7
+    ]
+  },
+  "familyQueue": {
+    "pending": 1040,
+    "completeSecondaryText": 1040,
+    "identityBlocked": 27,
+    "exactTextGroups": 1027,
+    "groupsWithMultiplePendingIdentities": 8,
+    "automaticCertifications": 0
+  },
+  "hosting": {
+    "newVersionDeployed": false,
+    "observedThisSession": false,
+    "priorReport": "c48a64a / 916",
+    "blockedBy": [
+      "No accessible authenticated hosting session",
+      "BOTHOSTING_API_KEY is not configured"
+    ]
+  },
+  "localEnvironment": {
+    "node": "v24.22.1",
+    "typeCheckingAndSQLite": "CI Node 22",
+    "npmOffline": "ENOTCACHED",
+    "npmNetwork": "EACCES"
+  },
+  "benchmarks": [
+    "docs/evidence/mission32-local-benchmark.json",
+    "docs/evidence/mission32-headless-1000.json"
+  ],
+  "goal1001Achieved": false,
+  "merge": false,
+  "discordAccess": false,
+  "persistentPlayerDataModified": false
+}

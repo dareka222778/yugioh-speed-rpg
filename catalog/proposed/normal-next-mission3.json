@@ -1,0 +1,639 @@
+{
+  "kind": "historical-review-proposal",
+  "cutoff": "2004-09-30",
+  "eligibilityBasis": "world-first-observed; regional release policy still requires review",
+  "source": "catalog/historical/2004-10-01/cards.json",
+  "sourceSha256": "b1e9d62dba087153912e3b5f7e4752a16f16dd7590767a9337918d493582ec1a",
+  "enablesCards": false,
+  "grantsInventory": false,
+  "enabledBefore": 150,
+  "enabledAfter": 150,
+  "totalEligibleUncertified": 489,
+  "candidates": [
+    {
+      "namespace": "passcode",
+      "id": "08944575",
+      "publicCanonicalId": "ebbab031-0fdf-4085-b02a-c4d0cb61d44c",
+      "konamiId": 4246,
+      "family": "normal-monster",
+      "confidence": "INFERIDO: imported factual metadata, not an effect certificate",
+      "facts": {
+        "names": {
+          "en": "The Drdek",
+          "ja": "デス・フット"
+        },
+        "level": 3,
+        "atk": 700,
+        "def": 800,
+        "race": "fiend",
+        "attribute": "dark"
+      },
+      "firstObserved": {
+        "tcg": null,
+        "ocg": "1999-02-04",
+        "world": "1999-02-04"
+      },
+      "requiredReview": [
+        "metadata-normalization",
+        "mechanical-fingerprint",
+        "regression-evidence",
+        "explicit-certificate",
+        "release-authorization"
+      ]
+    },
+    {
+      "namespace": "passcode",
+      "id": "53293545",
+      "publicCanonicalId": "f2a4c75f-9f25-4a4f-94ba-2f120554a0aa",
+      "konamiId": 4163,
+      "family": "normal-monster",
+      "confidence": "INFERIDO: imported factual metadata, not an effect certificate",
+      "facts": {
+        "names": {
+          "en": "Firegrass",
+          "pt": "Relva-Fogo",
+          "ja": "火炎草"
+        },
+        "level": 2,
+        "atk": 700,
+        "def": 600,
+        "race": "plant",
+        "attribute": "earth"
+      },
+      "firstObserved": {
+        "tcg": "2002-03-08",
+        "ocg": "1999-02-04",
+        "world": "1999-02-04"
+      },
+      "requiredReview": [
+        "metadata-normalization",
+        "mechanical-fingerprint",
+        "regression-evidence",
+        "explicit-certificate",
+        "release-authorization"
+      ]
+    },
+    {
+      "namespace": "passcode",
+      "id": "15401633",
+      "publicCanonicalId": "f4bce751-0e79-4868-a005-20f0e8d25638",
+      "konamiId": 4220,
+      "family": "normal-monster",
+      "confidence": "INFERIDO: imported factual metadata, not an effect certificate",
+      "facts": {
+        "names": {
+          "en": "Kagemusha of the Blue Flame",
+          "pt": "Kagemusha da Chama Azul",
+          "ja": "紫炎の影武者"
+        },
+        "level": 2,
+        "atk": 800,
+        "def": 400,
+        "race": "warrior",
+        "attribute": "earth"
+      },
+      "firstObserved": {
+        "tcg": "2002-03-08",
+        "ocg": "1999-02-04",
+        "world": "1999-02-04"
+      },
+      "requiredReview": [
+        "metadata-normalization",
+        "mechanical-fingerprint",
+        "regression-evidence",
+        "explicit-certificate",
+        "release-authorization"
+      ]
+    },
+    {
+      "namespace": "passcode",
+      "id": "85705804",
+      "publicCanonicalId": "f943e901-e9bc-41fa-93bb-a6750932c9ea",
+      "konamiId": 4306,
+      "family": "normal-monster",
+      "confidence": "INFERIDO: imported factual metadata, not an effect certificate",
+      "facts": {
+        "names": {
+          "en": "Kurama",
+          "pt": "Kurama",
+          "ja": "ドレイク"
+        },
+        "level": 3,
+        "atk": 800,
+        "def": 800,
+        "race": "wingedbeast",
+        "attribute": "wind"
+      },
+      "firstObserved": {
+        "tcg": "2002-03-08",
+        "ocg": "1999-02-04",
+        "world": "1999-02-04"
+      },
+      "requiredReview": [
+        "metadata-normalization",
+        "mechanical-fingerprint",
+        "regression-evidence",
+        "explicit-certificate",
+        "release-authorization"
+      ]
+    },
+    {
+      "namespace": "passcode",
+      "id": "12829151",
+      "publicCanonicalId": "22d33c51-2125-4045-a608-2400ea879ada",
+      "konamiId": 4358,
+      "family": "normal-monster",
+      "confidence": "INFERIDO: imported factual metadata, not an effect certificate",
+      "facts": {
+        "names": {
+          "en": "Kanan the Swordmistress",
+          "ja": "女剣士カナン"
+        },
+        "level": 4,
+        "atk": 1400,
+        "def": 1400,
+        "race": "warrior",
+        "attribute": "earth"
+      },
+      "firstObserved": {
+        "tcg": "2012-09-27",
+        "ocg": "1999-02-21",
+        "world": "1999-02-21"
+      },
+      "requiredReview": [
+        "metadata-normalization",
+        "mechanical-fingerprint",
+        "regression-evidence",
+        "explicit-certificate",
+        "release-authorization"
+      ]
+    },
+    {
+      "namespace": "passcode",
+      "id": "99030164",
+      "publicCanonicalId": "202f8b99-13e5-481f-99e3-c27e510d9a65",
+      "konamiId": 4204,
+      "family": "normal-monster",
+      "confidence": "INFERIDO: imported factual metadata, not an effect certificate",
+      "facts": {
+        "names": {
+          "en": "Happy Lover",
+          "ja": "ハッピー・ラヴァー"
+        },
+        "level": 2,
+        "atk": 800,
+        "def": 500,
+        "race": "fairy",
+        "attribute": "light"
+      },
+      "firstObserved": {
+        "tcg": "2007-02-06",
+        "ocg": "1999-03-01",
+        "world": "1999-03-01"
+      },
+      "requiredReview": [
+        "metadata-normalization",
+        "mechanical-fingerprint",
+        "regression-evidence",
+        "explicit-certificate",
+        "release-authorization"
+      ]
+    },
+    {
+      "namespace": "passcode",
+      "id": "15042735",
+      "publicCanonicalId": "314b9988-4492-4b3d-bb7b-70239659d92c",
+      "konamiId": 4180,
+      "family": "normal-monster",
+      "confidence": "INFERIDO: imported factual metadata, not an effect certificate",
+      "facts": {
+        "names": {
+          "en": "Hurricail",
+          "ja": "ハリケル"
+        },
+        "level": 2,
+        "atk": 900,
+        "def": 200,
+        "race": "spellcaster",
+        "attribute": "wind"
+      },
+      "firstObserved": {
+        "tcg": null,
+        "ocg": "1999-03-01",
+        "world": "1999-03-01"
+      },
+      "requiredReview": [
+        "metadata-normalization",
+        "mechanical-fingerprint",
+        "regression-evidence",
+        "explicit-certificate",
+        "release-authorization"
+      ]
+    },
+    {
+      "namespace": "passcode",
+      "id": "97973387",
+      "publicCanonicalId": "37737533-ea49-4d8b-86fe-968721a7f4d3",
+      "konamiId": 4213,
+      "family": "normal-monster",
+      "confidence": "INFERIDO: imported factual metadata, not an effect certificate",
+      "facts": {
+        "names": {
+          "en": "Droll Bird",
+          "ja": "スピック"
+        },
+        "level": 2,
+        "atk": 600,
+        "def": 500,
+        "race": "wingedbeast",
+        "attribute": "wind"
+      },
+      "firstObserved": {
+        "tcg": "2011-08-13",
+        "ocg": "1999-03-01",
+        "world": "1999-03-01"
+      },
+      "requiredReview": [
+        "metadata-normalization",
+        "mechanical-fingerprint",
+        "regression-evidence",
+        "explicit-certificate",
+        "release-authorization"
+      ]
+    },
+    {
+      "namespace": "passcode",
+      "id": "64154377",
+      "publicCanonicalId": "37ad9f61-412f-463b-89db-239552711a78",
+      "konamiId": 4260,
+      "family": "normal-monster",
+      "confidence": "INFERIDO: imported factual metadata, not an effect certificate",
+      "facts": {
+        "names": {
+          "en": "Embryonic Beast",
+          "ja": "未熟な悪魔"
+        },
+        "level": 2,
+        "atk": 500,
+        "def": 750,
+        "race": "fiend",
+        "attribute": "dark"
+      },
+      "firstObserved": {
+        "tcg": null,
+        "ocg": "1999-03-01",
+        "world": "1999-03-01"
+      },
+      "requiredReview": [
+        "metadata-normalization",
+        "mechanical-fingerprint",
+        "regression-evidence",
+        "explicit-certificate",
+        "release-authorization"
+      ]
+    },
+    {
+      "namespace": "passcode",
+      "id": "88435542",
+      "publicCanonicalId": "3a847dde-69ad-4d3e-815c-1facbca9a24a",
+      "konamiId": 4182,
+      "family": "normal-monster",
+      "confidence": "INFERIDO: imported factual metadata, not an effect certificate",
+      "facts": {
+        "names": {
+          "en": "Fire Eye",
+          "pt": "Olho de Fogo",
+          "ja": "ファイヤー・アイ"
+        },
+        "level": 2,
+        "atk": 800,
+        "def": 600,
+        "race": "pyro",
+        "attribute": "fire"
+      },
+      "firstObserved": {
+        "tcg": null,
+        "ocg": "1999-03-01",
+        "world": "1999-03-01"
+      },
+      "requiredReview": [
+        "metadata-normalization",
+        "mechanical-fingerprint",
+        "regression-evidence",
+        "explicit-certificate",
+        "release-authorization"
+      ]
+    },
+    {
+      "namespace": "passcode",
+      "id": "77603950",
+      "publicCanonicalId": "506336b7-1107-4463-b065-48d69cbe30dc",
+      "konamiId": 4185,
+      "family": "normal-monster",
+      "confidence": "INFERIDO: imported factual metadata, not an effect certificate",
+      "facts": {
+        "names": {
+          "en": "Phantom Dewan",
+          "ja": "サターナ"
+        },
+        "level": 2,
+        "atk": 700,
+        "def": 600,
+        "race": "spellcaster",
+        "attribute": "dark"
+      },
+      "firstObserved": {
+        "tcg": null,
+        "ocg": "1999-03-01",
+        "world": "1999-03-01"
+      },
+      "requiredReview": [
+        "metadata-normalization",
+        "mechanical-fingerprint",
+        "regression-evidence",
+        "explicit-certificate",
+        "release-authorization"
+      ]
+    },
+    {
+      "namespace": "passcode",
+      "id": "83678433",
+      "publicCanonicalId": "564e1ac2-9375-4db7-8b0e-6ca48ea7f99c",
+      "konamiId": 4228,
+      "family": "normal-monster",
+      "confidence": "INFERIDO: imported factual metadata, not an effect certificate",
+      "facts": {
+        "names": {
+          "en": "Midnight Fiend",
+          "ja": "ミッドナイト・デビル"
+        },
+        "level": 2,
+        "atk": 800,
+        "def": 600,
+        "race": "fiend",
+        "attribute": "dark"
+      },
+      "firstObserved": {
+        "tcg": null,
+        "ocg": "1999-03-01",
+        "world": "1999-03-01"
+      },
+      "requiredReview": [
+        "metadata-normalization",
+        "mechanical-fingerprint",
+        "regression-evidence",
+        "explicit-certificate",
+        "release-authorization"
+      ]
+    },
+    {
+      "namespace": "passcode",
+      "id": "76704943",
+      "publicCanonicalId": "5915b832-7221-422f-86a6-3c7b012da80a",
+      "konamiId": 4128,
+      "family": "normal-monster",
+      "confidence": "INFERIDO: imported factual metadata, not an effect certificate",
+      "facts": {
+        "names": {
+          "en": "Yamatano Dragon Scroll",
+          "ja": "ヤマタノ竜絵巻"
+        },
+        "level": 2,
+        "atk": 900,
+        "def": 300,
+        "race": "dragon",
+        "attribute": "wind"
+      },
+      "firstObserved": {
+        "tcg": null,
+        "ocg": "1999-03-01",
+        "world": "1999-03-01"
+      },
+      "requiredReview": [
+        "metadata-normalization",
+        "mechanical-fingerprint",
+        "regression-evidence",
+        "explicit-certificate",
+        "release-authorization"
+      ]
+    },
+    {
+      "namespace": "passcode",
+      "id": "03985011",
+      "publicCanonicalId": "7187f09d-a48a-4bfd-8ff1-0508e7951072",
+      "konamiId": 4189,
+      "family": "normal-monster",
+      "confidence": "INFERIDO: imported factual metadata, not an effect certificate",
+      "facts": {
+        "names": {
+          "en": "Lucky Trinket",
+          "ja": "ホーリー・パワー"
+        },
+        "level": 2,
+        "atk": 600,
+        "def": 800,
+        "race": "spellcaster",
+        "attribute": "light"
+      },
+      "firstObserved": {
+        "tcg": null,
+        "ocg": "1999-03-01",
+        "world": "1999-03-01"
+      },
+      "requiredReview": [
+        "metadata-normalization",
+        "mechanical-fingerprint",
+        "regression-evidence",
+        "explicit-certificate",
+        "release-authorization"
+      ]
+    },
+    {
+      "namespace": "passcode",
+      "id": "29948642",
+      "publicCanonicalId": "7bfd9f25-68a1-40fe-9c33-7af1db22cb5b",
+      "konamiId": 4165,
+      "family": "normal-monster",
+      "confidence": "INFERIDO: imported factual metadata, not an effect certificate",
+      "facts": {
+        "names": {
+          "en": "Dig Beak",
+          "pt": "Bico de Escavação",
+          "ja": "ディッグ・ビーク"
+        },
+        "level": 2,
+        "atk": 500,
+        "def": 800,
+        "race": "beast",
+        "attribute": "earth"
+      },
+      "firstObserved": {
+        "tcg": "2005-11-01",
+        "ocg": "1999-03-01",
+        "world": "1999-03-01"
+      },
+      "requiredReview": [
+        "metadata-normalization",
+        "mechanical-fingerprint",
+        "regression-evidence",
+        "explicit-certificate",
+        "release-authorization"
+      ]
+    },
+    {
+      "namespace": "passcode",
+      "id": "03732747",
+      "publicCanonicalId": "84100711-3c68-4304-b40c-cc370de4c0e2",
+      "konamiId": 4249,
+      "family": "normal-monster",
+      "confidence": "INFERIDO: imported factual metadata, not an effect certificate",
+      "facts": {
+        "names": {
+          "en": "Water Element",
+          "ja": "ウォーター・エレメント"
+        },
+        "level": 3,
+        "atk": 900,
+        "def": 700,
+        "race": "aqua",
+        "attribute": "water"
+      },
+      "firstObserved": {
+        "tcg": null,
+        "ocg": "1999-03-01",
+        "world": "1999-03-01"
+      },
+      "requiredReview": [
+        "metadata-normalization",
+        "mechanical-fingerprint",
+        "regression-evidence",
+        "explicit-certificate",
+        "release-authorization"
+      ]
+    },
+    {
+      "namespace": "passcode",
+      "id": "37243151",
+      "publicCanonicalId": "8594414a-e3df-4093-8e56-b001f8873a8f",
+      "konamiId": 4136,
+      "family": "normal-monster",
+      "confidence": "INFERIDO: imported factual metadata, not an effect certificate",
+      "facts": {
+        "names": {
+          "en": "Weather Control",
+          "ja": "ウェザー・コントロール"
+        },
+        "level": 2,
+        "atk": 600,
+        "def": 400,
+        "race": "fairy",
+        "attribute": "light"
+      },
+      "firstObserved": {
+        "tcg": null,
+        "ocg": "1999-03-01",
+        "world": "1999-03-01"
+      },
+      "requiredReview": [
+        "metadata-normalization",
+        "mechanical-fingerprint",
+        "regression-evidence",
+        "explicit-certificate",
+        "release-authorization"
+      ]
+    },
+    {
+      "namespace": "passcode",
+      "id": "13193642",
+      "publicCanonicalId": "8f4edd18-574a-4715-9596-75432d041bb7",
+      "konamiId": 4129,
+      "family": "normal-monster",
+      "confidence": "INFERIDO: imported factual metadata, not an effect certificate",
+      "facts": {
+        "names": {
+          "en": "Dark Plant",
+          "ja": "ダーク・プラント"
+        },
+        "level": 1,
+        "atk": 300,
+        "def": 400,
+        "race": "plant",
+        "attribute": "dark"
+      },
+      "firstObserved": {
+        "tcg": null,
+        "ocg": "1999-03-01",
+        "world": "1999-03-01"
+      },
+      "requiredReview": [
+        "metadata-normalization",
+        "mechanical-fingerprint",
+        "regression-evidence",
+        "explicit-certificate",
+        "release-authorization"
+      ]
+    },
+    {
+      "namespace": "passcode",
+      "id": "61201220",
+      "publicCanonicalId": "99495a4d-e537-4240-a63a-77e74553351a",
+      "konamiId": 4209,
+      "family": "normal-monster",
+      "confidence": "INFERIDO: imported factual metadata, not an effect certificate",
+      "facts": {
+        "names": {
+          "en": "Phantom Ghost",
+          "ja": "ゴースト"
+        },
+        "level": 2,
+        "atk": 600,
+        "def": 800,
+        "race": "zombie",
+        "attribute": "dark"
+      },
+      "firstObserved": {
+        "tcg": null,
+        "ocg": "1999-03-01",
+        "world": "1999-03-01"
+      },
+      "requiredReview": [
+        "metadata-normalization",
+        "mechanical-fingerprint",
+        "regression-evidence",
+        "explicit-certificate",
+        "release-authorization"
+      ]
+    },
+    {
+      "namespace": "passcode",
+      "id": "49258578",
+      "publicCanonicalId": "a173afb3-e465-40aa-a1ec-6b8ad36f8b48",
+      "konamiId": 4193,
+      "family": "normal-monster",
+      "confidence": "INFERIDO: imported factual metadata, not an effect certificate",
+      "facts": {
+        "names": {
+          "en": "Gate Deeg",
+          "ja": "ヘルゲート・ディーグ"
+        },
+        "level": 3,
+        "atk": 700,
+        "def": 800,
+        "race": "beast",
+        "attribute": "dark"
+      },
+      "firstObserved": {
+        "tcg": null,
+        "ocg": "1999-03-01",
+        "world": "1999-03-01"
+      },
+      "requiredReview": [
+        "metadata-normalization",
+        "mechanical-fingerprint",
+        "regression-evidence",
+        "explicit-certificate",
+        "release-authorization"
+      ]
+    }
+  ]
+}

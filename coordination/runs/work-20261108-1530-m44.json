@@ -1,0 +1,87 @@
+{
+  "id": "work-20261108-1530-m44",
+  "branch": "feat/rea-engine-recovery-20261026",
+  "base": "ae84ea9226ad8dc069f8302133f0c2dc864369c0",
+  "implementation": "5a39c34b405e6a15734ea42929078a1afc58a4db",
+  "certification": "213bd69ce2c1bdc6ccefd701beae106517492860",
+  "publisher": "3d17e92789cc5c3ee1cdad7031f777aa8fe47cb9",
+  "recordedAt": "2026-11-08T15:45:28.264Z",
+  "catalog": {
+    "previous": 965,
+    "certified": 969,
+    "remainingTo1000": 31,
+    "revision": "3af4ee461ba728be019de373b6c9652c3a7fd21b94fd475aac6af22b5127ca99",
+    "added": [
+      "17444133",
+      "44436472",
+      "92084010",
+      "38479725"
+    ]
+  },
+  "changes": [
+    "Optional double tribute by matching Attribute for Normal Summon/Set, face-down and negation semantics, public log preserves the new hidden card, PT-BR inspector.",
+    "CI isolates result JSON from warnings, produces mandatory full test counters and consumes just the validated queue atomically; publication rejects out-of-scope paths."
+  ],
+  "tests": {
+    "node": "22.23.4",
+    "fullOnPublisher": {
+      "pass": 7358,
+      "fail": 0,
+      "skipped": 0
+    },
+    "individualAdmissionCases": 44,
+    "additionalTagTests": {
+      "pass": 4,
+      "fail": 0,
+      "scope": "All four seats; shared field, inactive partner UID, hidden Tribute Set after restore."
+    },
+    "publishedFilesVerifiedAgainstLocalAdmission": 12,
+    "offlineDiscord": {
+      "duelsCompleted": [
+        "1v1",
+        "2v2"
+      ],
+      "decisions": [
+        27,
+        127
+      ],
+      "databaseReopened": true,
+      "renderedPNGs": 12,
+      "liveDiscord": false
+    },
+    "localGitPublication": "Simulated on disposable bare remote; single commit certifies plus clears exact queue."
+  },
+  "pr": {
+    "number": 12,
+    "draft": true,
+    "merged": false
+  },
+  "ci": {
+    "commit": "3d17e92789cc5c3ee1cdad7031f777aa8fe47cb9",
+    "checks": [
+      {
+        "name": "Card batch admission preparation",
+        "id": 42496289157,
+        "status": "success"
+      },
+      {
+        "name": "Milestone 1000 - certified-card progress and triage",
+        "id": 42496289196,
+        "status": "success"
+      },
+      {
+        "name": "Engine validation",
+        "id": 42496289185,
+        "status": "in_progress"
+      },
+      {
+        "name": "Card batch fast feedback",
+        "id": 42496289191,
+        "status": "success"
+      }
+    ],
+    "admissionRun": 42495985526
+  },
+  "production": "Bot-Hosting.net redirected to login. Deployed SHA/backup not verified; no deployment, merge, inventory grant or production DB mutation.",
+  "next": "Check complete engine CI on the latest SHA. Prioritize another verified pre-cutoff family; e.g. research face-down self-reset Flip Summon effects separately from FLIP triggers. Require an authenticated runtime probe and verified backup before deployment."
+}

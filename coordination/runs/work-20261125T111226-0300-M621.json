@@ -1,0 +1,167 @@
+{
+  "format": 1,
+  "runId": "work-20261125T111226-0300-M621",
+  "mission": "M621",
+  "owner": "Work principal",
+  "priority": "P1",
+  "priorityRequestedBy": "User",
+  "status": "M621: helper genérico de revelação dos quatro Decks exportado para reuso por M622; PR #564 draft; focused 31/31 verde no SHA anterior, recheck necessário após export; Card Batch/Engine Validation em andamento.",
+  "reservedAt": "2026-11-25T11:12:26-03:00",
+  "startedAt": "2026-11-25T11:12:26-03:00",
+  "endedAt": null,
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "ae86a77182c7971613a30e42482e0be8b2942446",
+  "branch": "feat/work-m621-nobleman-crossout-tag-adapter-20261125",
+  "baseSha": "ae86a77182c7971613a30e42482e0be8b2942446",
+  "branchHeadSha": "fd0d6d444a2c132c9e018fbc7f143432970de16d",
+  "pullRequest": 564,
+  "reservedFiles": [
+    "src/noblemanOfCrossoutTagAdapter.ts",
+    "tests/noblemanOfCrossoutTagAdapter.test.cjs",
+    "docs/evidence/m621-nobleman-of-crossout-tag-adapter.json",
+    ".github/workflows/m621-nobleman-of-crossout-tag-adapter.yml"
+  ],
+  "scope": "Adapter TagDuel clássico para Nobleman of Crossout: ativar da mão privada do assento físico ativo, mirar um monstro face-down em qualquer equipe, destruí-lo e bani-lo; se for Flip monster, revelar os quatro Decks principais físicos e banir de cada um todas as cartas com o mesmo nome de regras. Preservar privacidade até a resolução, UIDs, proprietário físico, Decks 20–30, Extra 5, zonas 3+3 e mão 6/End Phase.",
+  "cards": [
+    {
+      "name": "Nobleman of Crossout",
+      "passcode": "71044499",
+      "konamiDatabaseId": 4963,
+      "kind": "Normal Spell",
+      "firstTcgSet": "PSV-034",
+      "firstTcgRelease": "2002-10-20",
+      "officialEffect": "Target 1 face-down monster on the field; destroy that target, and if you do, banish it, then, if it was a Flip monster, each player reveals their Main Deck, then banishes all cards from it with that monster's name.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4963&ope=2&request_locale=en"
+    }
+  ],
+  "implementation": {
+    "files": [
+      "src/noblemanOfCrossoutTagAdapter.ts",
+      "tests/noblemanOfCrossoutTagAdapter.test.cjs",
+      "docs/evidence/m621-nobleman-of-crossout-tag-adapter.json",
+      ".github/workflows/m621-nobleman-of-crossout-tag-adapter.yml"
+    ],
+    "plannedScenarios": 28,
+    "integrationBoundary": "Adapter isolado; não altera resolver central, catálogo, metadata, certificações, allowlist, comandos Discord, persistência ou produção. Integração central depende de handoff M61."
+  },
+  "rules": {
+    "mainDeckPerPhysicalSeat": "20–30",
+    "extraDeckPerPhysicalSeat": "0–5",
+    "monsterZonesPerTeam": 3,
+    "spellTrapZonesPerTeam": 3,
+    "fieldZone": "uma por equipe, separada das três Spell/Trap Zones",
+    "handLimit": 6,
+    "handDiscard": "somente na End Phase"
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "conflictCheck": {
+    "checkedAt": "2026-11-25T11:12:26-03:00",
+    "sharedHead": "ae86a77182c7971613a30e42482e0be8b2942446",
+    "matchingBranches": 0,
+    "matchingPullRequests": 0,
+    "matchingFiles": 0,
+    "cardId": "71044499",
+    "konamiDatabaseId": 4963,
+    "metadata": false,
+    "certified": false,
+    "existingEffect": false,
+    "m620FilesDisjoint": true,
+    "m614M619FilesDisjoint": true,
+    "m61CentralFilesExcluded": true,
+    "thirdPartyReservationsUntouched": true,
+    "result": "Nobleman of Crossout ausente de metadata/certificações/effects e sem branch/PR M621; quatro caminhos novos e independentes."
+  },
+  "verification": {
+    "focusedScenarios": 28,
+    "focusedTestResult": "recheck_pending_after_helper_export",
+    "typecheck": "success",
+    "build": "success",
+    "evidenceValidation": "success",
+    "cardBatchFast": "in_progress",
+    "milestone1000": "success",
+    "engineValidation": "in_progress",
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "focusedScenariosPassed": 31,
+    "focusedWorkflowRun": null,
+    "cardBatchRunId": 45632449382,
+    "milestoneRunId": 45632449386,
+    "engineValidationRunId": 45632449447,
+    "previousFocusedWorkflowRun": 45632449442
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "effectiveWorkMinutes": 8,
+  "targetEffectiveWorkMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "observedParallelWork": {
+    "m614": {
+      "pr": 557,
+      "state": "active-handoff-requested",
+      "touched": false
+    },
+    "m615": {
+      "pr": 558,
+      "state": "open-draft",
+      "touched": false
+    },
+    "m616": {
+      "pr": 559,
+      "state": "separate-branch",
+      "touched": false
+    },
+    "m617": {
+      "pr": 560,
+      "state": "separate-branch",
+      "touched": false
+    },
+    "m618": {
+      "pr": 561,
+      "state": "separate-branch",
+      "touched": false
+    },
+    "m619": {
+      "pr": 562,
+      "state": "active-independent-reservation",
+      "touched": false
+    },
+    "m620": {
+      "pr": 563,
+      "state": "open-draft-awaiting-ci-visibility",
+      "touched": false
+    },
+    "m621": {
+      "pr": 564,
+      "state": "open-draft-helper-exported-recheck-pending",
+      "touched": true
+    },
+    "m622": {
+      "pr": null,
+      "state": "reserved-stacked-on-m621",
+      "touched": false
+    }
+  },
+  "m61Handoff": {
+    "pr": 17,
+    "status": "awaiting-explicit-release",
+    "centralFilesExcluded": true
+  },
+  "nextTask": "M622 Nobleman of Extermination: reutilizar revealAndBanishCopies de M621 para alvo face-down Spell/Trap e varredura por nome se Trap.",
+  "nextWindow": "2026-11-25T14:30:00-03:00",
+  "scopeReleasedToAuxiliary": [],
+  "lastActivityAt": "2026-11-25T11:19:59-03:00"
+}

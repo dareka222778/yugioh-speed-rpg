@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 1,
+  "mission": "M696",
+  "runId": "work-20261128T032433-0300-M696",
+  "priority": "P1",
+  "status": "implementation-committed; CI-pending",
+  "startedAt": "2026-11-28T03:24:33-03:00",
+  "finishedAt": null,
+  "durationSeconds": null,
+  "effectiveWorkMinutes": null,
+  "branch": "feat/work-m696-raging-flame-sprite-20261128",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedBranchHeadAtStart": "c8adc9ce715931fc6e7c63d22f897c46ac1d8be3",
+  "reservationCommit": "da6e355dda9ae026703b9404561f85cd9999e9b3",
+  "branchBaseSha": "da6e355dda9ae026703b9404561f85cd9999e9b3",
+  "branchHeadBeforeCommit": "da6e355dda9ae026703b9404561f85cd9999e9b3",
+  "branchHead": null,
+  "commitSha": null,
+  "conditionalHeadUpdate": {
+    "expectedSha": "c8adc9ce715931fc6e7c63d22f897c46ac1d8be3",
+    "result": "succeeded",
+    "stateCommit": "da6e355dda9ae026703b9404561f85cd9999e9b3",
+    "force": false
+  },
+  "coordination": {
+    "activeAgentAtStart": "M695",
+    "activeAgentBranch": "feat/work-m695-zombie-tiger-union-tag-adapter-20261128",
+    "activeAgentFilesPreserved": true,
+    "conflictAvoided": true,
+    "reservationFiles": [
+      "src/ragingFlameSpriteTagAdapter.ts",
+      "tests/ragingFlameSpriteTagAdapter.test.cjs",
+      "docs/evidence/m696-raging-flame-sprite.json",
+      "scripts/audit-raging-flame-sprite-m696.cjs",
+      ".github/workflows/m696-raging-flame-sprite.yml",
+      "coordination/runs/work-20261128T032433-0300-M696.json"
+    ],
+    "handoffRequest": {
+      "pr": 17,
+      "commentId": 7235345195,
+      "status": "requested-awaiting-explicit-release",
+      "files": [
+        "src/duelEngineCurrent.ts",
+        "src/monsterEffects.ts",
+        "src/effectRegistry.ts",
+        "src/cardMetadata.ts",
+        "src/cardCertifications.ts"
+      ]
+    }
+  },
+  "candidate": {
+    "id": "90810762",
+    "name": "Raging Flame Sprite",
+    "konamiCid": 6189,
+    "historicalCutoff": "2004-09-30",
+    "ocgFirstRelease": "2004-08-05",
+    "tcgFirstRelease": "2004-12-01",
+    "eligibleByHistoricalUnion": true,
+    "absentFromMetadataAndCertificationAtStart": true,
+    "existingPrOrBranchAtStart": false
+  },
+  "blocksCompleted": [
+    "Leitura de coordination/state.json, HEAD real, branches e reservas; M695 preservado.",
+    "Consulta de PRs/branches e verificação de ausência do candidato no metadata/certification snapshot.",
+    "Validação da identidade e texto do card na base oficial Konami (CID 6189).",
+    "Reserva M696 gravada na branch compartilhada com compare-and-swap contra c8adc9ce.",
+    "Pedido de handoff cooperativo publicado no PR #17; arquivos centrais permanecem intocados.",
+    "Adapter isolado, testes focados com 23 cenários, evidência e auditoria escritos."
+  ],
+  "changes": [
+    "src/ragingFlameSpriteTagAdapter.ts",
+    "tests/ragingFlameSpriteTagAdapter.test.cjs",
+    "docs/evidence/m696-raging-flame-sprite.json",
+    "scripts/audit-raging-flame-sprite-m696.cjs",
+    ".github/workflows/m696-raging-flame-sprite.yml",
+    "coordination/runs/work-20261128T032433-0300-M696.json"
+  ],
+  "counts": {
+    "engineV9CertifiedBefore": 969,
+    "target": 1000,
+    "remainingBefore": 31,
+    "adapterCards": 1,
+    "adapterScenarios": 23,
+    "newEngineCertified": 0,
+    "automaticCertifications": 0,
+    "inventoryGrants": 0
+  },
+  "tests": {
+    "typecheck": "pending",
+    "build": "pending",
+    "focused": {
+      "tests": 23,
+      "pass": null,
+      "fail": null
+    },
+    "fullRegression": {
+      "tests": null,
+      "pass": null,
+      "fail": null
+    },
+    "audit": "pending",
+    "workflowRun": null,
+    "workflowUrl": null
+  },
+  "pullRequest": {
+    "created": false,
+    "number": null,
+    "draft": true,
+    "merge": false
+  },
+  "deployment": {
+    "verified": false,
+    "deploy": false,
+    "backupVerified": false,
+    "discordLive": false
+  },
+  "blockers": [
+    "Integração/certificação depende de handoff explícito dos arquivos centrais solicitado no PR #17.",
+    "Ambiente de container sem DNS para clonar GitHub; validação será feita por GitHub Actions."
+  ],
+  "scopeReleasedToAuxiliary": [],
+  "nextTask": "Acompanhar CI; corrigir falhas do adapter sem tocar nos arquivos centrais; após handoff, integrar e certificar por comportamento.",
+  "nextExecution": {
+    "preserveExisting": "M695 permanece como próxima execução ativa registrada em coordination/state.json; M696 não a substitui.",
+    "nextWorkWindow": "2026-11-28T08:30:00-03:00"
+  },
+  "productionAuthorization": "Nenhuma autorização de merge/deploy inferida; não fazer merge ou deploy."
+}

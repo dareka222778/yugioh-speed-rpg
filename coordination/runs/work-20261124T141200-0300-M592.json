@@ -1,0 +1,121 @@
+{
+  "format": 1,
+  "runId": "work-20261124T141200-0300-M592",
+  "mission": "M592",
+  "owner": "Work principal",
+  "priority": "P1",
+  "status": "focused-ci-running-after-fix",
+  "startedAt": "2026-11-24T14:12:00-03:00",
+  "endedAt": null,
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "aefa935e6ce6238826ae3d51fd31e6352cf75b7f",
+  "branch": "feat/work-m592-attack-and-receive-tag-adapter-20261124",
+  "baseSha": "b629571378f875ddc7157bf1e023001ad934438d",
+  "branchHeadSha": "f4b156bb703a8012672cd11e11e5389f6d8bfc40",
+  "pullRequest": 535,
+  "reservedFiles": [
+    "src/attackAndReceiveTagAdapter.ts",
+    "tests/attackAndReceiveTagAdapter.test.cjs",
+    "docs/evidence/m592-attack-and-receive-tag-adapter.json",
+    ".github/workflows/m592-attack-and-receive-tag-adapter.yml"
+  ],
+  "scope": "Adapter TagDuel isolado para Attack and Receive: ativação após dano real de LP, dano de 700 + 300 por cópia anterior no Cemitério compartilhado da equipe, idempotência por fonte/evento e negação. Somente quatro caminhos novos; sem resolver, catálogo, certificações, banco, inventário ou dados persistentes.",
+  "conflictCheck": {
+    "checkedAt": "2026-11-24T14:12:00-03:00",
+    "sharedHead": "aefa935e6ce6238826ae3d51fd31e6352cf75b7f",
+    "matchingBranches": 0,
+    "matchingPRs": 0,
+    "attackAndReceivePresentInEngine": false,
+    "m61Handoff": "requested; no explicit release",
+    "m591FilesUntouched": true,
+    "m590FilesUntouched": true,
+    "thirdPartyReservationsUntouched": true
+  },
+  "card": {
+    "name": "Attack and Receive",
+    "passcode": "63689843",
+    "konamiDatabaseId": 4954,
+    "firstTCGPrinting": "Pharaoh's Servant (PSV-054), 2002-10-20",
+    "officialDatabaseUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4954&ope=2&request_locale=en",
+    "officialEffect": "You can only activate this card when you take damage to your Life Points. Inflict 700 points of damage to your opponent's Life Points. Also, inflict 300 points of damage to your opponent's Life Points for each 'Attack and Receive' card in your Graveyard."
+  },
+  "rules": {
+    "mainDeck": "20-30 per physical seat",
+    "handLimit": 6,
+    "handLimitTiming": "End Phase only",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separate",
+    "extraDeckMax": 5,
+    "privateHandsAndDecks": true,
+    "sharedTeamGraveyardAndBanished": true,
+    "sharedTeamLP": true
+  },
+  "plannedTests": [
+    "damage from battle and effect qualifies",
+    "LP payment/cost does not qualify",
+    "zero damage does not qualify",
+    "only damaged team may activate",
+    "source must be face-up in that team's backrow",
+    "count only prior Attack and Receive copies in shared team Graveyard",
+    "current resolving Trap is not counted while still in backrow",
+    "700 base plus 300 per prior copy",
+    "two different copies can respond to the same damage event",
+    "same source/event delivery is idempotent",
+    "activation negation no-op",
+    "effect negation no-op",
+    "wrong team/source and stale event rejection",
+    "duplicate Graveyard UID rejection",
+    "input state and ledger immutability",
+    "no LP mutation or inventory movement in adapter"
+  ],
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "effectiveWorkMinutes": 6,
+  "targetEffectiveMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "nextTask": "M593: adapter contínuo de Bad Reaction to Simochi para substituir ganho de LP do time adversário por dano equivalente; M592 aguarda CI verde.",
+  "nextWindow": "2026-11-24T18:30:00-03:00",
+  "scopeReleasedToAuxiliary": [],
+  "pullRequestUrl": "https://github.com/dareka222778/yugioh-speed-rpg/pull/535",
+  "lastActivityAt": "2026-11-24T14:17:40-03:00",
+  "ci": {
+    "focused": {
+      "status": "in_progress",
+      "runId": 45446945653,
+      "previousFailure": {
+        "runId": 45446853503,
+        "passed": 17,
+        "failed": 1,
+        "reason": "expectativa de erro /Equipe/ não correspondia à mensagem; corrigido com validação explícita do snapshot de equipe",
+        "fixedInSha": "f4b156bb703a8012672cd11e11e5389f6d8bfc40"
+      }
+    },
+    "cardBatchFast": {
+      "status": "in_progress",
+      "runId": 45446945517
+    },
+    "milestone1000": {
+      "status": "in_progress",
+      "runId": 45446945623
+    },
+    "engineValidation": {
+      "status": "in_progress",
+      "runId": 45446945568
+    }
+  }
+}

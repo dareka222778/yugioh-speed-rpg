@@ -1,0 +1,3538 @@
+{
+  "format": 1,
+  "batchId": "m34-summon-trap-lock",
+  "engineVersion": "engine-v9",
+  "baseRevision": "e4c9768fe2be1c67f5febcb5471a81f3be983630d57a55be3bb40c5025a54034",
+  "candidates": [
+    {
+      "card": {
+        "id": "53693416",
+        "konamiId": 6191,
+        "name": "Olho de Águia",
+        "englishName": "Eagle Eye",
+        "kind": "monster",
+        "monsterType": "effect",
+        "race": "Winged Beast",
+        "attribute": "WIND",
+        "level": 3,
+        "atk": 1300,
+        "defense": 1200,
+        "summary": "Quando este monstro é Invocado por Invocação-Normal, nenhum jogador pode ativar Armadilhas em resposta a essa Invocação.",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6191&request_locale=en"
+      },
+      "effect": {
+        "kind": "monsterEffect"
+      },
+      "monster": {
+        "effect": {
+          "trigger": "continuous",
+          "operation": {
+            "kind": "continuous",
+            "rules": [
+              {
+                "kind": "preventActivation",
+                "cardKind": "trap",
+                "controller": "both",
+                "window": "ownNormalSummon"
+              }
+            ]
+          }
+        },
+        "activation": {
+          "policy": "continuous",
+          "window": "continuous"
+        }
+      },
+      "family": "normal-summon-trap-lock",
+      "requirements": [
+        "effect:monsterEffect",
+        "trigger:continuous",
+        "monster-operation:continuous",
+        "continuous:preventActivation"
+      ],
+      "textEvidence": {
+        "text": "When this monster itself is successfully Normal Summoned, neither player can activate Trap Cards in the immediate response window to that Normal Summon. The prohibition does not apply to Flip Summons, Special Summons, other monsters being summoned, or later chain windows. It has no activation, cost, target, secondary operation or duration beyond the specified summoning window. Monster-effect negation stops this restriction while the source is face-up.",
+        "sha256": "7cd84884d941f4a19361cea17ed3baa58c5bfaa324b0f2d8751d621cf3d5a4c4",
+        "complete": true,
+        "format": "full-rule-paraphrase",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6191&request_locale=en"
+      },
+      "scenarios": [
+        "non-normal-summon-scope"
+      ],
+      "cases": {
+        "negative": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "summoned",
+                    "id": "53693416"
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "hole",
+                    "id": "04206964",
+                    "setTurn": 0,
+                    "faceUp": false
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "summoned",
+                "position": "atk",
+                "tributes": []
+              }
+            },
+            {
+              "actor": "b",
+              "expectError": true,
+              "action": {
+                "kind": "trap",
+                "card": "hole",
+                "target": "summoned"
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "backrow"
+              ],
+              "containsUID": "hole"
+            }
+          ]
+        },
+        "json-restore": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "summoned",
+                    "id": "53693416"
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "hole",
+                    "id": "04206964",
+                    "setTurn": 0,
+                    "faceUp": false
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "summoned",
+                "position": "atk",
+                "tributes": []
+              }
+            },
+            {
+              "restore": true
+            },
+            {
+              "actor": "b",
+              "expectError": true,
+              "action": {
+                "kind": "trap",
+                "card": "hole",
+                "target": "summoned"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "summoned"
+            }
+          ]
+        },
+        "deterministic-replay": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "summoned",
+                    "id": "53693416"
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "hole",
+                    "id": "04206964",
+                    "setTurn": 0,
+                    "faceUp": false
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "summoned",
+                "position": "atk",
+                "tributes": []
+              }
+            },
+            {
+              "actor": "b",
+              "expectError": true,
+              "action": {
+                "kind": "trap",
+                "card": "hole",
+                "target": "summoned"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "summoned"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "backrow"
+              ],
+              "containsUID": "hole"
+            },
+            {
+              "path": [
+                "phase"
+              ],
+              "equals": "main"
+            }
+          ]
+        },
+        "activation": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "summoned",
+                    "id": "53693416"
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "hole",
+                    "id": "04206964",
+                    "setTurn": 0,
+                    "faceUp": false
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "summoned",
+                "position": "atk",
+                "tributes": []
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "pending",
+                "kind"
+              ],
+              "equals": "none"
+            },
+            {
+              "path": [
+                "phase"
+              ],
+              "equals": "main"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "summoned"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "backrow"
+              ],
+              "containsUID": "hole"
+            }
+          ]
+        },
+        "resolution": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "summoned",
+                    "id": "53693416"
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "hole",
+                    "id": "04206964",
+                    "setTurn": 0,
+                    "faceUp": false
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "summoned",
+                "position": "atk",
+                "tributes": []
+              }
+            },
+            {
+              "actor": "b",
+              "expectError": true,
+              "action": {
+                "kind": "trap",
+                "card": "hole",
+                "target": "summoned"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "summoned"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "backrow"
+              ],
+              "containsUID": "hole"
+            },
+            {
+              "path": [
+                "phase"
+              ],
+              "equals": "main"
+            }
+          ]
+        },
+        "negation": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "summoned",
+                    "id": "53693416"
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "hole",
+                    "id": "04206964",
+                    "setTurn": 0,
+                    "faceUp": false
+                  },
+                  {
+                    "uid": "drain",
+                    "id": "82732705",
+                    "setTurn": 0,
+                    "faceUp": true,
+                    "resolved": true
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "summoned",
+                "position": "atk",
+                "tributes": []
+              }
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "trap",
+                "card": "hole",
+                "target": "summoned"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "summoned"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "hole"
+            }
+          ]
+        },
+        "source-loss": {
+          "fixture": {
+            "current": 1,
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "older",
+                    "id": "53693416",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "hole",
+                    "id": "04206964",
+                    "setTurn": 0,
+                    "faceUp": false
+                  }
+                ]
+              },
+              {
+                "hand": [
+                  {
+                    "uid": "summoned",
+                    "id": "48305365"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "b",
+              "match": {
+                "kind": "summon",
+                "card": "summoned",
+                "position": "atk",
+                "tributes": []
+              }
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "hole",
+                "target": "summoned"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "summoned"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "older"
+            }
+          ]
+        },
+        "continuous-negation": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "summoned",
+                    "id": "53693416"
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "hole",
+                    "id": "04206964",
+                    "setTurn": 0,
+                    "faceUp": false
+                  },
+                  {
+                    "uid": "drain",
+                    "id": "82732705",
+                    "setTurn": 0,
+                    "faceUp": true,
+                    "resolved": true
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "summoned",
+                "position": "atk",
+                "tributes": []
+              }
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "trap",
+                "card": "hole",
+                "target": "summoned"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "summoned"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "hole"
+            }
+          ]
+        },
+        "multiple-sources": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "summoned",
+                    "id": "53693416"
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "older",
+                    "id": "53693416",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "hole",
+                    "id": "04206964",
+                    "setTurn": 0,
+                    "faceUp": false
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "summoned",
+                "position": "atk",
+                "tributes": []
+              }
+            },
+            {
+              "actor": "b",
+              "expectError": true,
+              "action": {
+                "kind": "trap",
+                "card": "hole",
+                "target": "summoned"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "older"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "summoned"
+            }
+          ]
+        },
+        "dynamic-recalculation": {
+          "fixture": {
+            "current": 1,
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "older",
+                    "id": "53693416",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "hole",
+                    "id": "04206964",
+                    "setTurn": 0,
+                    "faceUp": false
+                  }
+                ]
+              },
+              {
+                "hand": [
+                  {
+                    "uid": "summoned",
+                    "id": "48305365"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "b",
+              "match": {
+                "kind": "summon",
+                "card": "summoned",
+                "position": "atk",
+                "tributes": []
+              }
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "hole",
+                "target": "summoned"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "summoned"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "older"
+            }
+          ]
+        },
+        "non-normal-summon-scope": {
+          "fixture": {
+            "current": 1,
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "older",
+                    "id": "53693416",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "hole",
+                    "id": "04206964",
+                    "setTurn": 0,
+                    "faceUp": false
+                  }
+                ]
+              },
+              {
+                "hand": [
+                  {
+                    "uid": "summoned",
+                    "id": "48305365"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "b",
+              "match": {
+                "kind": "summon",
+                "card": "summoned",
+                "position": "atk",
+                "tributes": []
+              }
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "hole",
+                "target": "summoned"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "summoned"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "older"
+            }
+          ]
+        }
+      },
+      "fingerprint": "1e59d78d0b5c77382757c872532d59373ecba0abc5e95bd21666e451f060ae32",
+      "suites": [
+        "tests/generated-m34-summon-trap-lock.test.cjs"
+      ]
+    },
+    {
+      "card": {
+        "id": "52571838",
+        "konamiId": 6194,
+        "name": "Arraia da Destruição",
+        "englishName": "Creeping Doom Manta",
+        "kind": "monster",
+        "monsterType": "effect",
+        "race": "Fish",
+        "attribute": "WATER",
+        "level": 3,
+        "atk": 1300,
+        "defense": 1200,
+        "summary": "Quando este monstro é Invocado por Invocação-Normal, nenhum jogador pode ativar Armadilhas em resposta a essa Invocação.",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6194&request_locale=en"
+      },
+      "effect": {
+        "kind": "monsterEffect"
+      },
+      "monster": {
+        "effect": {
+          "trigger": "continuous",
+          "operation": {
+            "kind": "continuous",
+            "rules": [
+              {
+                "kind": "preventActivation",
+                "cardKind": "trap",
+                "controller": "both",
+                "window": "ownNormalSummon"
+              }
+            ]
+          }
+        },
+        "activation": {
+          "policy": "continuous",
+          "window": "continuous"
+        }
+      },
+      "family": "normal-summon-trap-lock",
+      "requirements": [
+        "effect:monsterEffect",
+        "trigger:continuous",
+        "monster-operation:continuous",
+        "continuous:preventActivation"
+      ],
+      "textEvidence": {
+        "text": "When this monster itself is successfully Normal Summoned, neither player can activate Trap Cards in the immediate response window to that Normal Summon. The prohibition does not apply to Flip Summons, Special Summons, other monsters being summoned, or later chain windows. It has no activation, cost, target, secondary operation or duration beyond the specified summoning window. Monster-effect negation stops this restriction while the source is face-up.",
+        "sha256": "7cd84884d941f4a19361cea17ed3baa58c5bfaa324b0f2d8751d621cf3d5a4c4",
+        "complete": true,
+        "format": "full-rule-paraphrase",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6194&request_locale=en"
+      },
+      "scenarios": [
+        "non-normal-summon-scope"
+      ],
+      "cases": {
+        "negative": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "summoned",
+                    "id": "52571838"
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "hole",
+                    "id": "04206964",
+                    "setTurn": 0,
+                    "faceUp": false
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "summoned",
+                "position": "atk",
+                "tributes": []
+              }
+            },
+            {
+              "actor": "b",
+              "expectError": true,
+              "action": {
+                "kind": "trap",
+                "card": "hole",
+                "target": "summoned"
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "backrow"
+              ],
+              "containsUID": "hole"
+            }
+          ]
+        },
+        "json-restore": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "summoned",
+                    "id": "52571838"
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "hole",
+                    "id": "04206964",
+                    "setTurn": 0,
+                    "faceUp": false
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "summoned",
+                "position": "atk",
+                "tributes": []
+              }
+            },
+            {
+              "restore": true
+            },
+            {
+              "actor": "b",
+              "expectError": true,
+              "action": {
+                "kind": "trap",
+                "card": "hole",
+                "target": "summoned"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "summoned"
+            }
+          ]
+        },
+        "deterministic-replay": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "summoned",
+                    "id": "52571838"
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "hole",
+                    "id": "04206964",
+                    "setTurn": 0,
+                    "faceUp": false
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "summoned",
+                "position": "atk",
+                "tributes": []
+              }
+            },
+            {
+              "actor": "b",
+              "expectError": true,
+              "action": {
+                "kind": "trap",
+                "card": "hole",
+                "target": "summoned"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "summoned"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "backrow"
+              ],
+              "containsUID": "hole"
+            },
+            {
+              "path": [
+                "phase"
+              ],
+              "equals": "main"
+            }
+          ]
+        },
+        "activation": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "summoned",
+                    "id": "52571838"
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "hole",
+                    "id": "04206964",
+                    "setTurn": 0,
+                    "faceUp": false
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "summoned",
+                "position": "atk",
+                "tributes": []
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "pending",
+                "kind"
+              ],
+              "equals": "none"
+            },
+            {
+              "path": [
+                "phase"
+              ],
+              "equals": "main"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "summoned"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "backrow"
+              ],
+              "containsUID": "hole"
+            }
+          ]
+        },
+        "resolution": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "summoned",
+                    "id": "52571838"
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "hole",
+                    "id": "04206964",
+                    "setTurn": 0,
+                    "faceUp": false
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "summoned",
+                "position": "atk",
+                "tributes": []
+              }
+            },
+            {
+              "actor": "b",
+              "expectError": true,
+              "action": {
+                "kind": "trap",
+                "card": "hole",
+                "target": "summoned"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "summoned"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "backrow"
+              ],
+              "containsUID": "hole"
+            },
+            {
+              "path": [
+                "phase"
+              ],
+              "equals": "main"
+            }
+          ]
+        },
+        "negation": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "summoned",
+                    "id": "52571838"
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "hole",
+                    "id": "04206964",
+                    "setTurn": 0,
+                    "faceUp": false
+                  },
+                  {
+                    "uid": "drain",
+                    "id": "82732705",
+                    "setTurn": 0,
+                    "faceUp": true,
+                    "resolved": true
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "summoned",
+                "position": "atk",
+                "tributes": []
+              }
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "trap",
+                "card": "hole",
+                "target": "summoned"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "summoned"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "hole"
+            }
+          ]
+        },
+        "source-loss": {
+          "fixture": {
+            "current": 1,
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "older",
+                    "id": "52571838",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "hole",
+                    "id": "04206964",
+                    "setTurn": 0,
+                    "faceUp": false
+                  }
+                ]
+              },
+              {
+                "hand": [
+                  {
+                    "uid": "summoned",
+                    "id": "48305365"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "b",
+              "match": {
+                "kind": "summon",
+                "card": "summoned",
+                "position": "atk",
+                "tributes": []
+              }
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "hole",
+                "target": "summoned"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "summoned"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "older"
+            }
+          ]
+        },
+        "continuous-negation": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "summoned",
+                    "id": "52571838"
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "hole",
+                    "id": "04206964",
+                    "setTurn": 0,
+                    "faceUp": false
+                  },
+                  {
+                    "uid": "drain",
+                    "id": "82732705",
+                    "setTurn": 0,
+                    "faceUp": true,
+                    "resolved": true
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "summoned",
+                "position": "atk",
+                "tributes": []
+              }
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "trap",
+                "card": "hole",
+                "target": "summoned"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "summoned"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "hole"
+            }
+          ]
+        },
+        "multiple-sources": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "summoned",
+                    "id": "52571838"
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "older",
+                    "id": "52571838",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "hole",
+                    "id": "04206964",
+                    "setTurn": 0,
+                    "faceUp": false
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "summoned",
+                "position": "atk",
+                "tributes": []
+              }
+            },
+            {
+              "actor": "b",
+              "expectError": true,
+              "action": {
+                "kind": "trap",
+                "card": "hole",
+                "target": "summoned"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "older"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "summoned"
+            }
+          ]
+        },
+        "dynamic-recalculation": {
+          "fixture": {
+            "current": 1,
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "older",
+                    "id": "52571838",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "hole",
+                    "id": "04206964",
+                    "setTurn": 0,
+                    "faceUp": false
+                  }
+                ]
+              },
+              {
+                "hand": [
+                  {
+                    "uid": "summoned",
+                    "id": "48305365"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "b",
+              "match": {
+                "kind": "summon",
+                "card": "summoned",
+                "position": "atk",
+                "tributes": []
+              }
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "hole",
+                "target": "summoned"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "summoned"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "older"
+            }
+          ]
+        },
+        "non-normal-summon-scope": {
+          "fixture": {
+            "current": 1,
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "older",
+                    "id": "52571838",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "hole",
+                    "id": "04206964",
+                    "setTurn": 0,
+                    "faceUp": false
+                  }
+                ]
+              },
+              {
+                "hand": [
+                  {
+                    "uid": "summoned",
+                    "id": "48305365"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "b",
+              "match": {
+                "kind": "summon",
+                "card": "summoned",
+                "position": "atk",
+                "tributes": []
+              }
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "hole",
+                "target": "summoned"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "summoned"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "older"
+            }
+          ]
+        }
+      },
+      "fingerprint": "953bb338202e6125480453ea359bb83538b45d69d3442b358228157ff580a1d8",
+      "suites": [
+        "tests/generated-m34-summon-trap-lock.test.cjs"
+      ]
+    },
+    {
+      "card": {
+        "id": "26082229",
+        "konamiId": 6193,
+        "name": "Invasão das Chamas",
+        "englishName": "Invasion of Flames",
+        "kind": "monster",
+        "monsterType": "effect",
+        "race": "Pyro",
+        "attribute": "FIRE",
+        "level": 3,
+        "atk": 1300,
+        "defense": 1200,
+        "summary": "Quando este monstro é Invocado por Invocação-Normal, nenhum jogador pode ativar Armadilhas em resposta a essa Invocação.",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6193&request_locale=en"
+      },
+      "effect": {
+        "kind": "monsterEffect"
+      },
+      "monster": {
+        "effect": {
+          "trigger": "continuous",
+          "operation": {
+            "kind": "continuous",
+            "rules": [
+              {
+                "kind": "preventActivation",
+                "cardKind": "trap",
+                "controller": "both",
+                "window": "ownNormalSummon"
+              }
+            ]
+          }
+        },
+        "activation": {
+          "policy": "continuous",
+          "window": "continuous"
+        }
+      },
+      "family": "normal-summon-trap-lock",
+      "requirements": [
+        "effect:monsterEffect",
+        "trigger:continuous",
+        "monster-operation:continuous",
+        "continuous:preventActivation"
+      ],
+      "textEvidence": {
+        "text": "When this monster itself is successfully Normal Summoned, neither player can activate Trap Cards in the immediate response window to that Normal Summon. The prohibition does not apply to Flip Summons, Special Summons, other monsters being summoned, or later chain windows. It has no activation, cost, target, secondary operation or duration beyond the specified summoning window. Monster-effect negation stops this restriction while the source is face-up.",
+        "sha256": "7cd84884d941f4a19361cea17ed3baa58c5bfaa324b0f2d8751d621cf3d5a4c4",
+        "complete": true,
+        "format": "full-rule-paraphrase",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6193&request_locale=en"
+      },
+      "scenarios": [
+        "non-normal-summon-scope"
+      ],
+      "cases": {
+        "negative": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "summoned",
+                    "id": "26082229"
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "hole",
+                    "id": "04206964",
+                    "setTurn": 0,
+                    "faceUp": false
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "summoned",
+                "position": "atk",
+                "tributes": []
+              }
+            },
+            {
+              "actor": "b",
+              "expectError": true,
+              "action": {
+                "kind": "trap",
+                "card": "hole",
+                "target": "summoned"
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "backrow"
+              ],
+              "containsUID": "hole"
+            }
+          ]
+        },
+        "json-restore": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "summoned",
+                    "id": "26082229"
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "hole",
+                    "id": "04206964",
+                    "setTurn": 0,
+                    "faceUp": false
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "summoned",
+                "position": "atk",
+                "tributes": []
+              }
+            },
+            {
+              "restore": true
+            },
+            {
+              "actor": "b",
+              "expectError": true,
+              "action": {
+                "kind": "trap",
+                "card": "hole",
+                "target": "summoned"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "summoned"
+            }
+          ]
+        },
+        "deterministic-replay": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "summoned",
+                    "id": "26082229"
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "hole",
+                    "id": "04206964",
+                    "setTurn": 0,
+                    "faceUp": false
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "summoned",
+                "position": "atk",
+                "tributes": []
+              }
+            },
+            {
+              "actor": "b",
+              "expectError": true,
+              "action": {
+                "kind": "trap",
+                "card": "hole",
+                "target": "summoned"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "summoned"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "backrow"
+              ],
+              "containsUID": "hole"
+            },
+            {
+              "path": [
+                "phase"
+              ],
+              "equals": "main"
+            }
+          ]
+        },
+        "activation": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "summoned",
+                    "id": "26082229"
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "hole",
+                    "id": "04206964",
+                    "setTurn": 0,
+                    "faceUp": false
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "summoned",
+                "position": "atk",
+                "tributes": []
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "pending",
+                "kind"
+              ],
+              "equals": "none"
+            },
+            {
+              "path": [
+                "phase"
+              ],
+              "equals": "main"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "summoned"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "backrow"
+              ],
+              "containsUID": "hole"
+            }
+          ]
+        },
+        "resolution": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "summoned",
+                    "id": "26082229"
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "hole",
+                    "id": "04206964",
+                    "setTurn": 0,
+                    "faceUp": false
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "summoned",
+                "position": "atk",
+                "tributes": []
+              }
+            },
+            {
+              "actor": "b",
+              "expectError": true,
+              "action": {
+                "kind": "trap",
+                "card": "hole",
+                "target": "summoned"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "summoned"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "backrow"
+              ],
+              "containsUID": "hole"
+            },
+            {
+              "path": [
+                "phase"
+              ],
+              "equals": "main"
+            }
+          ]
+        },
+        "negation": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "summoned",
+                    "id": "26082229"
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "hole",
+                    "id": "04206964",
+                    "setTurn": 0,
+                    "faceUp": false
+                  },
+                  {
+                    "uid": "drain",
+                    "id": "82732705",
+                    "setTurn": 0,
+                    "faceUp": true,
+                    "resolved": true
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "summoned",
+                "position": "atk",
+                "tributes": []
+              }
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "trap",
+                "card": "hole",
+                "target": "summoned"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "summoned"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "hole"
+            }
+          ]
+        },
+        "source-loss": {
+          "fixture": {
+            "current": 1,
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "older",
+                    "id": "26082229",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "hole",
+                    "id": "04206964",
+                    "setTurn": 0,
+                    "faceUp": false
+                  }
+                ]
+              },
+              {
+                "hand": [
+                  {
+                    "uid": "summoned",
+                    "id": "48305365"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "b",
+              "match": {
+                "kind": "summon",
+                "card": "summoned",
+                "position": "atk",
+                "tributes": []
+              }
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "hole",
+                "target": "summoned"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "summoned"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "older"
+            }
+          ]
+        },
+        "continuous-negation": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "summoned",
+                    "id": "26082229"
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "hole",
+                    "id": "04206964",
+                    "setTurn": 0,
+                    "faceUp": false
+                  },
+                  {
+                    "uid": "drain",
+                    "id": "82732705",
+                    "setTurn": 0,
+                    "faceUp": true,
+                    "resolved": true
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "summoned",
+                "position": "atk",
+                "tributes": []
+              }
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "trap",
+                "card": "hole",
+                "target": "summoned"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "summoned"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "hole"
+            }
+          ]
+        },
+        "multiple-sources": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "summoned",
+                    "id": "26082229"
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "older",
+                    "id": "26082229",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "hole",
+                    "id": "04206964",
+                    "setTurn": 0,
+                    "faceUp": false
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "summoned",
+                "position": "atk",
+                "tributes": []
+              }
+            },
+            {
+              "actor": "b",
+              "expectError": true,
+              "action": {
+                "kind": "trap",
+                "card": "hole",
+                "target": "summoned"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "older"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "summoned"
+            }
+          ]
+        },
+        "dynamic-recalculation": {
+          "fixture": {
+            "current": 1,
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "older",
+                    "id": "26082229",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "hole",
+                    "id": "04206964",
+                    "setTurn": 0,
+                    "faceUp": false
+                  }
+                ]
+              },
+              {
+                "hand": [
+                  {
+                    "uid": "summoned",
+                    "id": "48305365"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "b",
+              "match": {
+                "kind": "summon",
+                "card": "summoned",
+                "position": "atk",
+                "tributes": []
+              }
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "hole",
+                "target": "summoned"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "summoned"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "older"
+            }
+          ]
+        },
+        "non-normal-summon-scope": {
+          "fixture": {
+            "current": 1,
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "older",
+                    "id": "26082229",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "hole",
+                    "id": "04206964",
+                    "setTurn": 0,
+                    "faceUp": false
+                  }
+                ]
+              },
+              {
+                "hand": [
+                  {
+                    "uid": "summoned",
+                    "id": "48305365"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "b",
+              "match": {
+                "kind": "summon",
+                "card": "summoned",
+                "position": "atk",
+                "tributes": []
+              }
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "hole",
+                "target": "summoned"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "summoned"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "older"
+            }
+          ]
+        }
+      },
+      "fingerprint": "d1f03bdd3f535e15b67a5cb572c8c66c40ebb2ba4d84f39262961e5dea0dcdd2",
+      "suites": [
+        "tests/generated-m34-summon-trap-lock.test.cjs"
+      ]
+    },
+    {
+      "card": {
+        "id": "89698120",
+        "konamiId": 6192,
+        "name": "Especialista em Espionagem Tática",
+        "englishName": "Tactical Espionage Expert",
+        "kind": "monster",
+        "monsterType": "effect",
+        "race": "Warrior",
+        "attribute": "EARTH",
+        "level": 3,
+        "atk": 1300,
+        "defense": 1200,
+        "summary": "Quando este monstro é Invocado por Invocação-Normal, nenhum jogador pode ativar Armadilhas em resposta a essa Invocação.",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6192&request_locale=en"
+      },
+      "effect": {
+        "kind": "monsterEffect"
+      },
+      "monster": {
+        "effect": {
+          "trigger": "continuous",
+          "operation": {
+            "kind": "continuous",
+            "rules": [
+              {
+                "kind": "preventActivation",
+                "cardKind": "trap",
+                "controller": "both",
+                "window": "ownNormalSummon"
+              }
+            ]
+          }
+        },
+        "activation": {
+          "policy": "continuous",
+          "window": "continuous"
+        }
+      },
+      "family": "normal-summon-trap-lock",
+      "requirements": [
+        "effect:monsterEffect",
+        "trigger:continuous",
+        "monster-operation:continuous",
+        "continuous:preventActivation"
+      ],
+      "textEvidence": {
+        "text": "When this monster itself is successfully Normal Summoned, neither player can activate Trap Cards in the immediate response window to that Normal Summon. The prohibition does not apply to Flip Summons, Special Summons, other monsters being summoned, or later chain windows. It has no activation, cost, target, secondary operation or duration beyond the specified summoning window. Monster-effect negation stops this restriction while the source is face-up.",
+        "sha256": "7cd84884d941f4a19361cea17ed3baa58c5bfaa324b0f2d8751d621cf3d5a4c4",
+        "complete": true,
+        "format": "full-rule-paraphrase",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6192&request_locale=en"
+      },
+      "scenarios": [
+        "non-normal-summon-scope"
+      ],
+      "cases": {
+        "negative": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "summoned",
+                    "id": "89698120"
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "hole",
+                    "id": "04206964",
+                    "setTurn": 0,
+                    "faceUp": false
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "summoned",
+                "position": "atk",
+                "tributes": []
+              }
+            },
+            {
+              "actor": "b",
+              "expectError": true,
+              "action": {
+                "kind": "trap",
+                "card": "hole",
+                "target": "summoned"
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "backrow"
+              ],
+              "containsUID": "hole"
+            }
+          ]
+        },
+        "json-restore": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "summoned",
+                    "id": "89698120"
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "hole",
+                    "id": "04206964",
+                    "setTurn": 0,
+                    "faceUp": false
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "summoned",
+                "position": "atk",
+                "tributes": []
+              }
+            },
+            {
+              "restore": true
+            },
+            {
+              "actor": "b",
+              "expectError": true,
+              "action": {
+                "kind": "trap",
+                "card": "hole",
+                "target": "summoned"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "summoned"
+            }
+          ]
+        },
+        "deterministic-replay": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "summoned",
+                    "id": "89698120"
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "hole",
+                    "id": "04206964",
+                    "setTurn": 0,
+                    "faceUp": false
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "summoned",
+                "position": "atk",
+                "tributes": []
+              }
+            },
+            {
+              "actor": "b",
+              "expectError": true,
+              "action": {
+                "kind": "trap",
+                "card": "hole",
+                "target": "summoned"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "summoned"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "backrow"
+              ],
+              "containsUID": "hole"
+            },
+            {
+              "path": [
+                "phase"
+              ],
+              "equals": "main"
+            }
+          ]
+        },
+        "activation": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "summoned",
+                    "id": "89698120"
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "hole",
+                    "id": "04206964",
+                    "setTurn": 0,
+                    "faceUp": false
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "summoned",
+                "position": "atk",
+                "tributes": []
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "pending",
+                "kind"
+              ],
+              "equals": "none"
+            },
+            {
+              "path": [
+                "phase"
+              ],
+              "equals": "main"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "summoned"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "backrow"
+              ],
+              "containsUID": "hole"
+            }
+          ]
+        },
+        "resolution": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "summoned",
+                    "id": "89698120"
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "hole",
+                    "id": "04206964",
+                    "setTurn": 0,
+                    "faceUp": false
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "summoned",
+                "position": "atk",
+                "tributes": []
+              }
+            },
+            {
+              "actor": "b",
+              "expectError": true,
+              "action": {
+                "kind": "trap",
+                "card": "hole",
+                "target": "summoned"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "summoned"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "backrow"
+              ],
+              "containsUID": "hole"
+            },
+            {
+              "path": [
+                "phase"
+              ],
+              "equals": "main"
+            }
+          ]
+        },
+        "negation": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "summoned",
+                    "id": "89698120"
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "hole",
+                    "id": "04206964",
+                    "setTurn": 0,
+                    "faceUp": false
+                  },
+                  {
+                    "uid": "drain",
+                    "id": "82732705",
+                    "setTurn": 0,
+                    "faceUp": true,
+                    "resolved": true
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "summoned",
+                "position": "atk",
+                "tributes": []
+              }
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "trap",
+                "card": "hole",
+                "target": "summoned"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "summoned"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "hole"
+            }
+          ]
+        },
+        "source-loss": {
+          "fixture": {
+            "current": 1,
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "older",
+                    "id": "89698120",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "hole",
+                    "id": "04206964",
+                    "setTurn": 0,
+                    "faceUp": false
+                  }
+                ]
+              },
+              {
+                "hand": [
+                  {
+                    "uid": "summoned",
+                    "id": "48305365"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "b",
+              "match": {
+                "kind": "summon",
+                "card": "summoned",
+                "position": "atk",
+                "tributes": []
+              }
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "hole",
+                "target": "summoned"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "summoned"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "older"
+            }
+          ]
+        },
+        "continuous-negation": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "summoned",
+                    "id": "89698120"
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "hole",
+                    "id": "04206964",
+                    "setTurn": 0,
+                    "faceUp": false
+                  },
+                  {
+                    "uid": "drain",
+                    "id": "82732705",
+                    "setTurn": 0,
+                    "faceUp": true,
+                    "resolved": true
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "summoned",
+                "position": "atk",
+                "tributes": []
+              }
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "trap",
+                "card": "hole",
+                "target": "summoned"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "summoned"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "hole"
+            }
+          ]
+        },
+        "multiple-sources": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "summoned",
+                    "id": "89698120"
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "older",
+                    "id": "89698120",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "hole",
+                    "id": "04206964",
+                    "setTurn": 0,
+                    "faceUp": false
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "summoned",
+                "position": "atk",
+                "tributes": []
+              }
+            },
+            {
+              "actor": "b",
+              "expectError": true,
+              "action": {
+                "kind": "trap",
+                "card": "hole",
+                "target": "summoned"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "older"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "summoned"
+            }
+          ]
+        },
+        "dynamic-recalculation": {
+          "fixture": {
+            "current": 1,
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "older",
+                    "id": "89698120",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "hole",
+                    "id": "04206964",
+                    "setTurn": 0,
+                    "faceUp": false
+                  }
+                ]
+              },
+              {
+                "hand": [
+                  {
+                    "uid": "summoned",
+                    "id": "48305365"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "b",
+              "match": {
+                "kind": "summon",
+                "card": "summoned",
+                "position": "atk",
+                "tributes": []
+              }
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "hole",
+                "target": "summoned"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "summoned"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "older"
+            }
+          ]
+        },
+        "non-normal-summon-scope": {
+          "fixture": {
+            "current": 1,
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "older",
+                    "id": "89698120",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "hole",
+                    "id": "04206964",
+                    "setTurn": 0,
+                    "faceUp": false
+                  }
+                ]
+              },
+              {
+                "hand": [
+                  {
+                    "uid": "summoned",
+                    "id": "48305365"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "b",
+              "match": {
+                "kind": "summon",
+                "card": "summoned",
+                "position": "atk",
+                "tributes": []
+              }
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "hole",
+                "target": "summoned"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "summoned"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "older"
+            }
+          ]
+        }
+      },
+      "fingerprint": "ef27d4d4bc00ad6c3c5e5f0688608b63f9a7f4d0fefba1dab925958d301fdbb1",
+      "suites": [
+        "tests/generated-m34-summon-trap-lock.test.cjs"
+      ]
+    }
+  ],
+  "reviews": [
+    {
+      "id": "53693416",
+      "canonicalId": "0f01c411-9a1b-4d99-9e52-1af0ea8c56d9",
+      "konamiId": 6191,
+      "reviewer": "Codex: RDS 2004 OCG printing and exact one-sentence effect reviewed",
+      "reviewedAt": "2026-10-30",
+      "identityApproved": true,
+      "mechanicsApproved": true,
+      "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6191&request_locale=en",
+      "primaryFacts": {
+        "level": 3,
+        "atk": 1300,
+        "defense": 1200,
+        "race": "Winged Beast",
+        "attribute": "WIND"
+      },
+      "verifiedPrinting": {
+        "date": "2004-08-05",
+        "set": "Rise of Destiny",
+        "region": "ocg",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6191&request_locale=en"
+      },
+      "fullTextReviewed": true,
+      "secondaryEffectsReviewed": true,
+      "exceptionsReviewed": true,
+      "textSha256": "7cd84884d941f4a19361cea17ed3baa58c5bfaa324b0f2d8751d621cf3d5a4c4",
+      "semanticCoverage": {
+        "activation": "represented",
+        "conditions": "represented",
+        "costs": "not-applicable",
+        "targets": "not-applicable",
+        "choices": "not-applicable",
+        "operations": "represented",
+        "duration": "represented",
+        "restrictions": "represented",
+        "negation": "represented"
+      },
+      "mechanicalFingerprint": "1e59d78d0b5c77382757c872532d59373ecba0abc5e95bd21666e451f060ae32"
+    },
+    {
+      "id": "52571838",
+      "canonicalId": "1c55d8b4-0dce-4a22-a3c4-98b8190ff96a",
+      "konamiId": 6194,
+      "reviewer": "Codex: RDS 2004 OCG printing and exact one-sentence effect reviewed",
+      "reviewedAt": "2026-10-30",
+      "identityApproved": true,
+      "mechanicsApproved": true,
+      "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6194&request_locale=en",
+      "primaryFacts": {
+        "level": 3,
+        "atk": 1300,
+        "defense": 1200,
+        "race": "Fish",
+        "attribute": "WATER"
+      },
+      "verifiedPrinting": {
+        "date": "2004-08-05",
+        "set": "Rise of Destiny",
+        "region": "ocg",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6194&request_locale=en"
+      },
+      "fullTextReviewed": true,
+      "secondaryEffectsReviewed": true,
+      "exceptionsReviewed": true,
+      "textSha256": "7cd84884d941f4a19361cea17ed3baa58c5bfaa324b0f2d8751d621cf3d5a4c4",
+      "semanticCoverage": {
+        "activation": "represented",
+        "conditions": "represented",
+        "costs": "not-applicable",
+        "targets": "not-applicable",
+        "choices": "not-applicable",
+        "operations": "represented",
+        "duration": "represented",
+        "restrictions": "represented",
+        "negation": "represented"
+      },
+      "mechanicalFingerprint": "953bb338202e6125480453ea359bb83538b45d69d3442b358228157ff580a1d8"
+    },
+    {
+      "id": "26082229",
+      "canonicalId": "aa66a93f-30f1-410a-b87f-7caf19d44492",
+      "konamiId": 6193,
+      "reviewer": "Codex: RDS 2004 OCG printing and exact one-sentence effect reviewed",
+      "reviewedAt": "2026-10-30",
+      "identityApproved": true,
+      "mechanicsApproved": true,
+      "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6193&request_locale=en",
+      "primaryFacts": {
+        "level": 3,
+        "atk": 1300,
+        "defense": 1200,
+        "race": "Pyro",
+        "attribute": "FIRE"
+      },
+      "verifiedPrinting": {
+        "date": "2004-08-05",
+        "set": "Rise of Destiny",
+        "region": "ocg",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6193&request_locale=en"
+      },
+      "fullTextReviewed": true,
+      "secondaryEffectsReviewed": true,
+      "exceptionsReviewed": true,
+      "textSha256": "7cd84884d941f4a19361cea17ed3baa58c5bfaa324b0f2d8751d621cf3d5a4c4",
+      "semanticCoverage": {
+        "activation": "represented",
+        "conditions": "represented",
+        "costs": "not-applicable",
+        "targets": "not-applicable",
+        "choices": "not-applicable",
+        "operations": "represented",
+        "duration": "represented",
+        "restrictions": "represented",
+        "negation": "represented"
+      },
+      "mechanicalFingerprint": "d1f03bdd3f535e15b67a5cb572c8c66c40ebb2ba4d84f39262961e5dea0dcdd2"
+    },
+    {
+      "id": "89698120",
+      "canonicalId": "b09e2a07-047c-4ed6-92ba-f69d59b1800a",
+      "konamiId": 6192,
+      "reviewer": "Codex: RDS 2004 OCG printing and exact one-sentence effect reviewed",
+      "reviewedAt": "2026-10-30",
+      "identityApproved": true,
+      "mechanicsApproved": true,
+      "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6192&request_locale=en",
+      "primaryFacts": {
+        "level": 3,
+        "atk": 1300,
+        "defense": 1200,
+        "race": "Warrior",
+        "attribute": "EARTH"
+      },
+      "verifiedPrinting": {
+        "date": "2004-08-05",
+        "set": "Rise of Destiny",
+        "region": "ocg",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6192&request_locale=en"
+      },
+      "fullTextReviewed": true,
+      "secondaryEffectsReviewed": true,
+      "exceptionsReviewed": true,
+      "textSha256": "7cd84884d941f4a19361cea17ed3baa58c5bfaa324b0f2d8751d621cf3d5a4c4",
+      "semanticCoverage": {
+        "activation": "represented",
+        "conditions": "represented",
+        "costs": "not-applicable",
+        "targets": "not-applicable",
+        "choices": "not-applicable",
+        "operations": "represented",
+        "duration": "represented",
+        "restrictions": "represented",
+        "negation": "represented"
+      },
+      "mechanicalFingerprint": "ef27d4d4bc00ad6c3c5e5f0688608b63f9a7f4d0fefba1dab925958d301fdbb1"
+    }
+  ]
+}

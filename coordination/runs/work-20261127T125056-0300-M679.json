@@ -1,0 +1,82 @@
+{
+  "format": 1,
+  "runId": "work-20261127T125056-0300-M679",
+  "mission": "M679",
+  "owner": "Work principal",
+  "priority": "P1",
+  "priorityRequestedBy": "User",
+  "status": "reserved-and-implementing",
+  "startedAt": "2026-11-27T12:50:56-03:00",
+  "endedAt": null,
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedBaseHead": "15115048e30cbf00d30351d2fd5d0bccca3367e0",
+  "branch": "feat/work-m679-battle-destruction-retaliation-20261127",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "15115048e30cbf00d30351d2fd5d0bccca3367e0",
+  "headSha": null,
+  "reservedFiles": [
+    "src/battleDestructionRetaliationTagAdapter.ts",
+    "tests/battleDestructionRetaliationTagAdapter.test.cjs",
+    "docs/evidence/m679-battle-destruction-retaliation.json",
+    "scripts/audit-battle-destruction-retaliation-m679.cjs",
+    ".github/workflows/m679-battle-destruction-retaliation.yml",
+    "coordination/runs/work-20261127T125056-0300-M679.json"
+  ],
+  "scope": "Adapter TagDuel clássico isolado para Yomi Ship (51534754/CID 5521) e Helpoemer (76052811/CID 5489): captura de destruição em batalha enviada ao Cemitério físico; Yomi Ship destrói sem alvo o monstro específico que o destruiu, com UID/epoch e destino pelo proprietário; Helpoemer ativa no fim da Battle Phase do oponente se permanecer no Cemitério e descarta uma carta aleatória da mão privada do assento adversário ativo por HMAC persistido. Preserva propriedade física, privacidade, Deck 20–30, mão 6 com descarte somente na End Phase, 3+3 zonas, Field Zone separada e Extra 5. Sem resolver central, catálogo/certificações, comandos, banco, inventário ou produção.",
+  "cards": [
+    {
+      "id": "51534754",
+      "name": "Yomi Ship",
+      "konamiCid": 5521,
+      "atk": 800,
+      "def": 1400,
+      "firstWorldRelease": "2002-05-16",
+      "firstTcgRelease": "2003-07-18",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5521&ope=2&request_locale=en"
+    },
+    {
+      "id": "76052811",
+      "name": "Helpoemer",
+      "konamiCid": 5489,
+      "atk": 2000,
+      "def": 1400,
+      "firstWorldRelease": "2002-05-16",
+      "firstTcgRelease": "2003-07-18",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5489&ope=2&request_locale=en"
+    }
+  ],
+  "blocksCompleted": [
+    "HEAD, coordenação, reservas ativas, PRs e CI reais inspecionados",
+    "escopo isolado sem sobreposição de arquivos; IDs, datas e textos oficiais conferidos"
+  ],
+  "implementedCards": 0,
+  "behaviorVerifiedCards": 0,
+  "newCertifications": 0,
+  "automaticCertifications": 0,
+  "inventoryGrants": 0,
+  "verification": {
+    "typecheck": "pending",
+    "build": "pending",
+    "focusedTests": "pending",
+    "evidenceValidation": "pending",
+    "ci": "pending",
+    "adapterBehaviorVerifiedCards": 0,
+    "behaviorCertifiedCards": 0,
+    "discordLive": "not-run"
+  },
+  "effectiveWorkMinutes": 0,
+  "targetEffectiveWorkMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "pr": null,
+  "production": "not-changed",
+  "merge": "not-authorized",
+  "deploy": "not-authorized",
+  "blockers": [
+    "Integração no resolver central depende de handoff explícito; esta frente permanece isolada."
+  ],
+  "nextTask": "Implementar o adapter com snapshots de destruição, binding por UID/epoch, descarte aleatório HMAC e testes 2v2 de propriedade/privacidade.",
+  "nextWindow": "2026-11-27T17:30:00-03:00",
+  "scopeReleasedToAuxiliary": []
+}

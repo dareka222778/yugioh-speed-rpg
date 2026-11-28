@@ -1,0 +1,55 @@
+{
+  "format": 1,
+  "runId": "work-20261124T235910-0300-M609",
+  "mission": "M609",
+  "parentRunId": "work-20261124T235910-0300-M608",
+  "owner": "Work principal",
+  "priority": "P1",
+  "status": "reserved; implementation in progress",
+  "startedAt": "2026-11-24T23:59:10-03:00",
+  "endedAt": null,
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "84410024c9ed8c98210163d130c706a2e6ae52e5",
+  "branch": "feat/work-m609-inaba-white-rabbit-spirit-direct-attack-20261124",
+  "baseSha": "84410024c9ed8c98210163d130c706a2e6ae52e5",
+  "branchHeadSha": "84410024c9ed8c98210163d130c706a2e6ae52e5",
+  "pullRequest": null,
+  "reservedFiles": [
+    "src/inabaWhiteRabbitSpiritTagAdapter.ts",
+    "tests/inabaWhiteRabbitSpiritTagAdapter.test.cjs",
+    "docs/evidence/m609-inaba-white-rabbit-spirit-direct-attack.json",
+    ".github/workflows/m609-inaba-white-rabbit-spirit-direct-attack.yml"
+  ],
+  "scope": "Adapter TagDuel isolado para Inaba White Rabbit (77084837 / CID 5374): restrição de Invocação-Especial, retorno obrigatório à mão do proprietário físico na End Phase da Invocação-Normal/Flip, e permissão de ataque direto; sem alterar dano, resolver central, catálogo, certificações, comandos, dados persistentes ou produção.",
+  "card": {
+    "name": "Inaba White Rabbit",
+    "passcode": "77084837",
+    "konamiDatabaseId": 5374,
+    "tcgFirstPrint": "LOD-065",
+    "tcgFirstRelease": "2003-06-06",
+    "effect": "This card cannot be Special Summoned. This card returns to the owner's hand during the End Phase of the turn that this card is Normal Summoned or flipped face-up. This monster attacks your opponent's Life Points directly.",
+    "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5374&ope=2&request_locale=en"
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "effectiveWorkMinutes": 0,
+  "targetEffectiveMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "nextTask": "Implementar e testar o ciclo Spirit de Inaba: summon/flip, sem special summon, ataque direto, retorno na End Phase ao dono físico, controle roubado, epoch, hand 6 e UID.",
+  "nextWindow": "2026-11-25T04:30:00-03:00",
+  "scopeReleasedToAuxiliary": []
+}

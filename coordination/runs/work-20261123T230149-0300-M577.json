@@ -1,0 +1,149 @@
+{
+  "format": 1,
+  "runId": "work-20261123T230149-0300-M577",
+  "parentRunId": "work-20261123T223010-0300-M574",
+  "mission": "M577",
+  "owner": "Work principal",
+  "priority": "P1 — Continuous battle traps: Mirror Wall (22359980) halves opponent attacking monsters' ATK while face-up; Fairy Box (21598948) can reduce the attacking monster to 0 ATK after a correct coin call. Both have per-copy Standby Phase maintenance costs.",
+  "state": "reserved-and-implementing",
+  "startedAt": "2026-11-23T23:01:49-03:00",
+  "endedAt": null,
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "d8f289447e9125a410506c0d218485fadf919ba0",
+  "branch": "feat/work-m577-mirror-wall-fairy-box-tag-adapter-20261123",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "d8f289447e9125a410506c0d218485fadf919ba0",
+  "reservationCommitSha": null,
+  "branchHeadSha": "05dcab0b48fe63e2015b1893db39783aa2caffc2",
+  "pullRequest": 522,
+  "reservedFiles": [
+    "src/continuousBattleTrapTagAdapter.ts",
+    "tests/continuousBattleTrapTagAdapter.test.cjs",
+    "docs/evidence/m577-continuous-battle-trap-tag-adapter.json",
+    ".github/workflows/m577-continuous-battle-trap-tag-adapter.yml"
+  ],
+  "scope": "Adapter TagDuel isolado para Mirror Wall e Fairy Box: cálculo de ATK em ataque adversário, resolução determinística de chamada/moeda injetadas e upkeep por cópia (2000/500 LP ou envio ao Cemitério). Sem alterar resolver central, tagActions, comandos, catálogo, metadata, certificações, allowlist, dados persistentes ou inventário.",
+  "conflictCheck": {
+    "overlap": false,
+    "checkedAt": "2026-11-23T23:01:49-03:00",
+    "checkedAgainst": [
+      "M574 mantém src/attackLpGainTagAdapter.ts e três arquivos próprios; M577 usa quatro caminhos distintos.",
+      "M575 mantém src/continuousAttackLockTagAdapter.ts e três arquivos próprios; M577 não altera esses caminhos.",
+      "M576 mantém src/continuousAttackRestrictionTagAdapter.ts e três arquivos próprios; M577 não altera esses caminhos.",
+      "M573 mantém src/summonNegationTagAdapter.ts e três arquivos próprios; pedido de handoff continua aguardando liberação explícita.",
+      "M61 mantém duelEngineCurrent.ts, monsterEffects.ts, cardMetadata.ts, cardCertifications.ts e releasedCardIds.ts protegidos.",
+      "M383 mantém standbyFlow.ts e continuousEffects.ts protegidos; M577 não os altera.",
+      "IDs 22359980 e 21598948 não aparecem em metadata, certificações, allowlist, branches ou PRs consultados."
+    ]
+  },
+  "cards": [
+    {
+      "id": "22359980",
+      "name": "Mirror Wall",
+      "konamiDatabaseCid": 4993,
+      "kind": "Continuous Trap",
+      "officialText": "Halve the ATK of your opponent's attacking monsters. Once per turn, during your Standby Phase, pay 2000 LP or destroy this card.",
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4993&ope=2&request_locale=en",
+      "firstTcgRelease": "2002-10-20",
+      "firstTcgSet": "PSV-016",
+      "historicalEligibility": "eligible-before-2004-09-30"
+    },
+    {
+      "id": "21598948",
+      "name": "Fairy Box",
+      "konamiDatabaseCid": 5113,
+      "kind": "Continuous Trap",
+      "officialText": "When your opponent's monster declares an attack: Toss a coin and call it. If you call it right, the attacking monster's ATK becomes 0 until the end of the Battle Phase. Once per turn, during your Standby Phase, pay 500 LP, or destroy this card.",
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5113&ope=2&request_locale=en",
+      "firstTcgRelease": "2003-03-01",
+      "firstTcgSet": "LON-024",
+      "historicalEligibility": "eligible-before-2004-09-30"
+    }
+  ],
+  "design": {
+    "mirrorWall": "Enquanto face-up, reduz pela metade o ATK de cada monstro atacante do oponente. O cálculo usa o ATK atual e aplica o modificador uma vez por cópia face-up que esteja afetando a equipe; nenhuma mutação persistente do monstro é feita.",
+    "fairyBox": "No ataque adversário, cada resolução recebe chamada e resultado da moeda como entradas determinísticas; se a chamada estiver correta, o ATK do atacante passa a 0 até o fim da Battle Phase. Nenhuma aleatoriedade de produção é inventada pelo teste.",
+    "upkeep": "Cada cópia tem upkeep independente na Standby Phase do controlador: Mirror Wall custa 2000 LP, Fairy Box custa 500 LP; se não pagar ou LP insuficiente, a cópia vai ao Cemitério. A resolução é idempotente por UID+turno.",
+    "routing": "LP é compartilhado pela equipe controladora; a carta física vai ao Cemitério do proprietário físico; a redução afeta apenas monstros atacantes da equipe adversária.",
+    "integration": "Adapter isolado com helpers explícitos para cálculo, coin-call e manutenção; nenhuma alteração ao resolver central, tagActions ou integração Discord nesta etapa.",
+    "rules": {
+      "mainDeck": "20–30 por assento",
+      "handLimit": 6,
+      "handCheck": "End Phase",
+      "monsterZones": 3,
+      "spellTrapZones": 3,
+      "fieldZone": "separate",
+      "extraDeckMax": 5
+    }
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "ci": {
+    "focused": "success-on-e286-prior-head; latest-05dc-pending",
+    "cardBatchFast": "in_progress-on-e286-prior-head",
+    "milestone1000": "success-on-e286-prior-head",
+    "engineValidation": "in_progress-on-e286-prior-head",
+    "latestCommitWorkflow": "pending"
+  },
+  "production": {
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "safety": {
+    "runtimeCoreChanged": false,
+    "catalogChanged": false,
+    "certificationChanged": false,
+    "releasedCardIdsChanged": false,
+    "inventoryGranted": 0,
+    "persistentDatabaseChanged": false,
+    "playerDataChanged": false,
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "liveDiscordValidation": false
+  },
+  "nextTask": "Aguardar CI no HEAD 05dc; corrigir falhas de TypeScript/teste e confirmar custo de manutenção antes de considerar M577 estável.",
+  "nextWindow": "2026-11-24T03:30:00-03:00",
+  "duration": {
+    "startedAt": "2026-11-23T23:01:49-03:00",
+    "endedAt": null,
+    "effectiveWorkMinutes": 6,
+    "targetEffectiveMinutes": 60,
+    "ciWaitExcluded": true,
+    "note": "6 minutos efetivos iniciais M577; o último commit de ajuste de custo ainda aguarda CI específica."
+  },
+  "status": "pr-open-draft-latest-commit-ci-pending",
+  "lastActivityAt": "2026-11-23T23:07:48-03:00",
+  "implementationHeadSha": "05dcab0b48fe63e2015b1893db39783aa2caffc2",
+  "commits": [
+    "ef0365784c9788a3e97ba43799f0e81cf079d2e5",
+    "f18d414732f34dc65d97538ca67c2baf36aed4a4",
+    "1b9ab25eefc99abdfff16b605f957214feb020ed",
+    "e2862b0b789363d9966f8d2d51370491767fbf40",
+    "05dcab0b48fe63e2015b1893db39783aa2caffc2"
+  ],
+  "implementation": {
+    "source": "src/continuousBattleTrapTagAdapter.ts",
+    "tests": "tests/continuousBattleTrapTagAdapter.test.cjs",
+    "evidence": "docs/evidence/m577-continuous-battle-trap-tag-adapter.json",
+    "workflow": ".github/workflows/m577-continuous-battle-trap-tag-adapter.yml",
+    "testCases": 9,
+    "coverage": [
+      "Mirror Wall: metade do ATK atual do monstro atacante adversário sem mutar o monstro",
+      "Fairy Box: chamada/moeda injetadas, ATK zero até Battle Phase e proteção contra resolução duplicada",
+      "Fairy Box: janela de declaração, Set no turno e exclusão de Damage Step",
+      "upkeep por cópia e por turno: 2000 LP/500 LP, pagamento idempotente",
+      "LP precisa permanecer estritamente acima do custo, seguindo StandbyFlow",
+      "recusa/LP insuficiente destrói e envia a carta ao Cemitério do proprietário físico",
+      "LP debitado da equipe controladora; mãos, UIDs e inventário conservados",
+      "regras 20–30, mão 6 no End Phase, zonas 3+3, Field Zone separada, Extra 5"
+    ]
+  }
+}

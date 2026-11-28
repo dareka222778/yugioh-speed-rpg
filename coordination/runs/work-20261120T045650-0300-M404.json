@@ -1,0 +1,94 @@
+{
+  "format": 1,
+  "runId": "work-20261120T045650-0300-M404",
+  "owner": "Work principal",
+  "mission": "M404",
+  "priority": "P1 — agrupar Skull-Mark Ladybug (ganho de LP ao ser enviada ao Cemitério por qualquer origem) e Nimble Momonga (destruição por batalha, +1000 LP e recrutamento opcional de cópias físicas do Deck do proprietário em face-down Defense, limitado às 3 zonas disponíveis).",
+  "state": "reserved",
+  "startedAt": "2026-11-20T04:56:50-03:00",
+  "shared": {
+    "branch": "feat/rea-engine-recovery-20261026",
+    "headAtReservation": "52ba26917541589742c998d99aaa4e201d1819fd",
+    "mainHead": "f78f3080b496d2697072b946088309f36e97b60e"
+  },
+  "branch": "feat/work-m404-gy-sent-lp-recovery-20261120",
+  "reservedFiles": [
+    "src/gySentLpRecovery.ts",
+    "tests/gySentLpRecovery.test.cjs",
+    "docs/evidence/m404-gy-sent-lp-recovery.json",
+    ".github/workflows/m404-gy-sent-lp-recovery.yml"
+  ],
+  "conflictCheck": {
+    "activePrimaryRun": "work-20261115T142521-0300",
+    "preservedReservations": [
+      "M231-M236",
+      "M215-M220",
+      "M225-M227",
+      "M305-M305",
+      "M319-M322",
+      "M383",
+      "M61",
+      "M402",
+      "M403"
+    ],
+    "note": "Quatro caminhos novos; branches, PRs, admitted, proposed e engine-v9 não contêm os IDs 64306248 ou 22567609. Não toca no resolver central nem nos arquivos de M402/M403."
+  },
+  "handoff": {
+    "pr": 17,
+    "status": "awaiting-explicit-release",
+    "files": [
+      "src/monsterEffects.ts",
+      "src/duelEngineCurrent.ts"
+    ],
+    "changedFiles": []
+  },
+  "cards": [
+    {
+      "name": "Skull-Mark Ladybug",
+      "id": "64306248",
+      "konamiDatabaseCid": 4770,
+      "level": 4,
+      "attribute": "EARTH",
+      "type": "Insect/Effect",
+      "officialTextSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4770&ope=2&request_locale=en",
+      "firstTcgRelease": "2004-03-01",
+      "firstTcgSet": "Invasion of Chaos (IOC-079)"
+    },
+    {
+      "name": "Nimble Momonga",
+      "id": "22567609",
+      "konamiDatabaseCid": 4922,
+      "level": 2,
+      "attribute": "EARTH",
+      "type": "Beast/Effect",
+      "officialTextSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4922&ope=2&request_locale=en",
+      "firstTcgRelease": "2002-09-16",
+      "firstTcgSet": "Spell Ruler (MRL-086)"
+    }
+  ],
+  "catalogAtStart": {
+    "target": 1000,
+    "certified": 969,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "safety": {
+    "runtimeCoreChanged": false,
+    "catalogChanged": false,
+    "certificationChanged": false,
+    "inventoryGranted": 0,
+    "persistentDatabaseChanged": false,
+    "playerDataChanged": false,
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "liveDiscordValidation": false
+  },
+  "blocksCompleted": [
+    "M402: 51/51 testes focados aprovados; Card Batch Fast aprovado; Engine Validation/Extended Soak ainda em andamento.",
+    "M403: branch/PR criada e fonte oficial de Fire Princess verificada; CI focada ainda aguardada.",
+    "M404: Skull-Mark Ladybug e Nimble Momonga verificadas em fonte oficial e sem duplicação em branches, PRs e manifestos do catálogo."
+  ],
+  "nextTask": "Implementar helper puro para LP gain ao enviar Skull-Mark Ladybug ao GY e para Nimble Momonga: LP gain obrigatório, recrutamento opcional de cópias físicas do Deck do proprietário, face-down Defense, no máximo 3 zonas e sem conceder inventário.",
+  "nextWindow": "2026-11-20T08:30:00-03:00"
+}

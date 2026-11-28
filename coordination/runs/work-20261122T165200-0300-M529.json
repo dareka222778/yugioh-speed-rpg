@@ -1,0 +1,97 @@
+{
+  "runId": "work-20261122T165200-0300-M529",
+  "mission": "M529",
+  "parentRunId": "work-20261122T163436-0300-M527",
+  "owner": "Work principal",
+  "status": "code-complete; released-to-auxiliary",
+  "startedAt": "2026-11-22T16:52:00-03:00",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "38e9d11d528a6bc7aa6ef4014c599d8adf6e837b",
+  "branch": "feat/work-m529-duel-timeout-outbox-backpressure-20261122",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "38e9d11d528a6bc7aa6ef4014c599d8adf6e837b",
+  "priority": "P1 — provar drenagem bounded do outbox terminal 1v1: 205 revisões expiradas devem ser entregues em lotes de no máximo 100, sem perda, duplicação ou starvation; ACK por revisão deve drenar 100+100+5 e sobreviver a ACK repetido.",
+  "reservedFiles": [
+    "tests/duelTimeoutOutboxBackpressure.test.cjs",
+    "docs/evidence/m529-duel-timeout-outbox-backpressure.json",
+    ".github/workflows/m529-duel-timeout-outbox-backpressure.yml"
+  ],
+  "conflictCheck": {
+    "overlap": false,
+    "checkedAt": "2026-11-22T16:52:00-03:00",
+    "checkedAgainst": [
+      "M527 #473 — idempotência de polling/ACK 1v1; arquivos próprios",
+      "M528 #474 — persistência entre processos; arquivos próprios",
+      "M520–M526 #466–#472 — timeout/receipt; somente leitura",
+      "M61 e reservas de terceiros"
+    ],
+    "note": "Somente três caminhos novos. Testa a API expireDueDuels/markDuelPublished em SQLite temporário, sem alterar stores/runtime, catálogo, manifesto, resolver, allowlist, certificados, inventário ou dados persistentes."
+  },
+  "workBlocks": [
+    "Reverificado HEAD compartilhado 38e9d11d528a6bc7aa6ef4014c599d8adf6e837b e coordenação; M527/M528 continuam ativos aguardando Engine Validation/soak.",
+    "M529 reservado em escopo novo para backpressure do outbox 1v1; não sobrepõe M527/M528.",
+    "PR #475 aberta em draft; Card Batch Fast, Milestone 1000, Engine Validation e teste focado enfileirados.",
+    "Finalização de código e handoff em 2026-11-22T17:02:17-03:00: PR #475 aberta em draft; CI observada pelo Work; escopo próprio liberado ao auxiliar apenas para monitoramento/sincronização não-forçada e correções nos três arquivos da missão. Sem merge/deploy."
+  ],
+  "tests": {
+    "focused": "success (45063576160)",
+    "check": "success",
+    "build": "success",
+    "cardBatchFast": "success (45063576154)",
+    "milestone1000": "success (45063576169; 969/1000)",
+    "engineValidation": "in_progress (45063576215)",
+    "extendedSoak": "in_progress (45063576215)"
+  },
+  "catalog": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "inventoryGranted": 0,
+  "mergePerformed": false,
+  "deployPerformed": false,
+  "production": {
+    "mainHead": "197bbda07efc81658604bcd12308665571e26d59",
+    "backupVerified": false,
+    "liveDiscordValidation": false,
+    "merge": false,
+    "deploy": false
+  },
+  "pr": {
+    "number": 475,
+    "url": "https://github.com/dareka222778/yugioh-speed-rpg/pull/475",
+    "state": "open",
+    "draft": true,
+    "merged": false,
+    "mergeable": true,
+    "headSha": "02a6f91c812c93c2aef3726c1d9a526b7481abed",
+    "baseSha": "e5a91b2b5177624b9d737e233ccf10eafd0d0cd4"
+  },
+  "releaseToAuxiliary": [
+    {
+      "path": "tests/duelTimeoutOutboxBackpressure.test.cjs",
+      "permission": "monitor/sync non-forced/correct only this mission's own file"
+    },
+    {
+      "path": "docs/evidence/m529-duel-timeout-outbox-backpressure.json",
+      "permission": "monitor/sync non-forced/correct only this mission's own file"
+    },
+    {
+      "path": ".github/workflows/m529-duel-timeout-outbox-backpressure.yml",
+      "permission": "monitor/sync non-forced/correct only this mission's own file"
+    }
+  ],
+  "nextTask": "Auxiliar: monitorar Engine Validation/Extended Soak da PR #475, sincronizar sem force e corrigir somente seus três arquivos.",
+  "nextWindow": "2026-11-22T17:30:00-03:00",
+  "duration": {
+    "targetEffectiveMinutes": 60,
+    "effectiveWorkMinutes": 0,
+    "targetMet": false,
+    "ciWaitExcluded": true
+  },
+  "lastActivityAt": "2026-11-22T17:02:17-03:00",
+  "branchHead": "02a6f91c812c93c2aef3726c1d9a526b7481abed",
+  "endedAt": "2026-11-22T17:02:17-03:00"
+}

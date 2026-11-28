@@ -1,0 +1,149 @@
+{
+  "format": 1,
+  "runId": "work-20261123T225051-0300-M576",
+  "parentRunId": "work-20261123T223010-0300-M574",
+  "mission": "M576",
+  "owner": "Work principal",
+  "priority": "P1 — restrições contínuas de batalha: The Dark Door (30606547) limita a um monstro atacante por equipe em cada Battle Phase; Level Limit - Area B (03136426) força todos os monstros face-up de Level 4+ para Defense Position.",
+  "state": "reserved-and-implementing",
+  "startedAt": "2026-11-23T22:50:51-03:00",
+  "endedAt": null,
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "b639c13d46ce725380220f99921d3c8eaa0e4738",
+  "branch": "feat/work-m576-dark-door-level-limit-tag-adapter-20261123",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "b639c13d46ce725380220f99921d3c8eaa0e4738",
+  "reservationCommitSha": null,
+  "branchHeadSha": "735bf6077173252a440690d8c840ba7f5e9fa977",
+  "pullRequest": 521,
+  "reservedFiles": [
+    "src/continuousAttackRestrictionTagAdapter.ts",
+    "tests/continuousAttackRestrictionTagAdapter.test.cjs",
+    "docs/evidence/m576-continuous-attack-restriction-tag-adapter.json",
+    ".github/workflows/m576-continuous-attack-restriction-tag-adapter.yml"
+  ],
+  "scope": "Adapter TagDuel isolado para duas Continuous Spells: The Dark Door registra o primeiro UID atacante por equipe/Battle Phase e permite ataques subsequentes do mesmo monstro, bloqueando outros; Level Limit - Area B aplica Defense Position a monstros face-up Level 4+ de ambas as equipes. Sem alterar resolver central, tagActions, comandos, catálogo, metadata, certificações, allowlist, dados persistentes ou inventário.",
+  "conflictCheck": {
+    "overlap": false,
+    "checkedAt": "2026-11-23T22:50:51-03:00",
+    "checkedAgainst": [
+      "M574 mantém src/attackLpGainTagAdapter.ts e três arquivos próprios; M576 usa quatro caminhos distintos.",
+      "M575 mantém src/continuousAttackLockTagAdapter.ts e três arquivos próprios; M576 não altera nem reutiliza esses caminhos, embora os temas sejam adjacentes.",
+      "M573 mantém src/summonNegationTagAdapter.ts e três arquivos próprios; pedido de handoff continua aguardando liberação explícita.",
+      "M61 mantém duelEngineCurrent.ts, monsterEffects.ts, cardMetadata.ts, cardCertifications.ts e releasedCardIds.ts protegidos.",
+      "M383 mantém standbyFlow.ts e continuousEffects.ts protegidos; M576 não os altera.",
+      "IDs 30606547 e 03136426 não aparecem em metadata, certificações, allowlist, branches ou PRs consultados."
+    ]
+  },
+  "cards": [
+    {
+      "id": "30606547",
+      "name": "The Dark Door",
+      "konamiDatabaseCid": 5225,
+      "kind": "Continuous Spell",
+      "officialText": "Only 1 monster can attack during each Battle Phase.",
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5225&ope=2&request_locale=en",
+      "firstTcgRelease": "2003-03-01",
+      "firstTcgSet": "LON-093",
+      "historicalEligibility": "eligible-before-2004-09-30"
+    },
+    {
+      "id": "03136426",
+      "name": "Level Limit - Area B",
+      "konamiDatabaseCid": 6054,
+      "kind": "Continuous Spell",
+      "officialText": "Change all face-up Level 4 or higher monsters to Defense Position.",
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6054&ope=2&request_locale=en",
+      "firstTcgRelease": "2004-06-01",
+      "firstTcgSet": "AST-092",
+      "historicalEligibility": "eligible-before-2004-09-30"
+    }
+  ],
+  "design": {
+    "darkDoor": "Uma vez que um monstro de uma equipe declara ataque na Battle Phase compartilhada, somente aquele UID pode declarar outros ataques nessa fase; outros monstros da mesma equipe são bloqueados. O registro sobrevive à saída do primeiro monstro e reseta apenas quando a Battle Phase/turno da equipe muda.",
+    "levelLimitAreaB": "Enquanto a Continuous Spell estiver face-up, qualquer monstro face-up de Level 4 ou maior em qualquer equipe deve estar em Defense Position. A aplicação inclui monstros que já estavam face-up e novos monstros que se tornam face-up; monstros face-down não são alterados até serem revelados.",
+    "routing": "As restrições são aplicadas por equipe no TagDuel 2v2; The Dark Door limita um UID por equipe, não um UID global entre as duas equipes. Level Limit - Area B afeta ambos os lados.",
+    "integration": "Adapter isolado com helpers explícitos para consulta/enforcement e regressões; nenhuma alteração ao resolver central, tagActions ou integração Discord nesta etapa.",
+    "rules": {
+      "mainDeck": "20–30 por assento",
+      "handLimit": 6,
+      "handCheck": "End Phase",
+      "monsterZones": 3,
+      "spellTrapZones": 3,
+      "fieldZone": "separate",
+      "extraDeckMax": 5
+    }
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "ci": {
+    "focused": "success",
+    "cardBatchFast": "success",
+    "milestone1000": "success",
+    "engineValidation": "in_progress",
+    "extendedSoak": "in_progress"
+  },
+  "production": {
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "safety": {
+    "runtimeCoreChanged": false,
+    "catalogChanged": false,
+    "certificationChanged": false,
+    "releasedCardIdsChanged": false,
+    "inventoryGranted": 0,
+    "persistentDatabaseChanged": false,
+    "playerDataChanged": false,
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "liveDiscordValidation": false
+  },
+  "nextTask": "Aguardar Engine Validation; corrigir apenas falhas objetivas no adapter M576, sem tocar em M575/M61.",
+  "nextWindow": "2026-11-24T03:30:00-03:00",
+  "duration": {
+    "startedAt": "2026-11-23T22:50:51-03:00",
+    "endedAt": null,
+    "effectiveWorkMinutes": 11,
+    "targetEffectiveMinutes": 60,
+    "ciWaitExcluded": true,
+    "note": "11 minutos efetivos de implementação M576; CI em andamento e espera ociosa excluída."
+  },
+  "lastActivityAt": "2026-11-23T23:07:48-03:00",
+  "status": "pr-open-draft-engine-validation-running",
+  "implementationHeadSha": "735bf6077173252a440690d8c840ba7f5e9fa977",
+  "commits": [
+    "ca0347453731a9206021a5af313f90636ba4d9cb",
+    "0aa1a546a8896a568d48f309808b25ab4bc5a9c0",
+    "fb63b6d4bb884fb56df0a2bca84471a3b36ca537",
+    "9f84b98d2c18e52dc9a63f057cf8b5f5a667de8f",
+    "c74a0914bc4c6e5e886e2a94571d3f6c198c5a88",
+    "735bf6077173252a440690d8c840ba7f5e9fa977"
+  ],
+  "implementation": {
+    "source": "src/continuousAttackRestrictionTagAdapter.ts",
+    "tests": "tests/continuousAttackRestrictionTagAdapter.test.cjs",
+    "evidence": "docs/evidence/m576-continuous-attack-restriction-tag-adapter.json",
+    "workflow": ".github/workflows/m576-continuous-attack-restriction-tag-adapter.yml",
+    "testCases": 9,
+    "coverage": [
+      "The Dark Door: um UID atacante distinto por equipe/Battle Phase; o mesmo UID pode atacar novamente",
+      "ledger persiste quando o primeiro atacante deixa o campo e reinicia em nova Battle Phase",
+      "histórico de ataques é registrado mesmo antes de The Dark Door ser revelada",
+      "cópias face-down não aplicam efeito até serem reveladas",
+      "Level Limit - Area B força monstros face-up Level 4+ de ambas as equipes para DEF",
+      "monstros face-down e Level 3 permanecem inalterados até revelação",
+      "efeito reaplica após tentativa de mudar Level 4+ para ATK",
+      "cópias múltiplas mantêm efeito até a última sair",
+      "UIDs, mãos, decks 20–30, zonas 3+3 e Extra 5 preservados"
+    ]
+  }
+}

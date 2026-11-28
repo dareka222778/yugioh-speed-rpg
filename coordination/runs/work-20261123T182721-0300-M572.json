@@ -1,0 +1,133 @@
+{
+  "runId": "work-20261123T182721-0300-M572",
+  "mission": "M572",
+  "owner": "Work principal",
+  "priority": "P1 — Magic Drain (59344077) e Cursed Seal of the Forbidden Spell (58851034): duas Counter Traps de negação de ativação de Magias, com custos distintos; descarte opcional do oponente em Magic Drain e descarte obrigatório + bloqueio de nome até o fim do Duelo em Cursed Seal.",
+  "status": "implementation-complete-ci-success-released-to-auxiliary",
+  "startedAt": "2026-11-23T18:27:21-03:00",
+  "endedAt": "2026-11-23T22:30:10-03:00",
+  "branch": "feat/work-m572-spell-counter-traps-tag-adapter-20261123",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "c89a553dab8220d517bc7d08afe11ca67644ca91",
+  "reservationCommitSha": null,
+  "branchHeadSha": "b60c05fb498155b6f29cebc96e445ac922eee9d2",
+  "pullRequest": 519,
+  "previousCheckpoint": "coordination/runs/work-20261123T175719-0300-M571.json",
+  "reservedFiles": [
+    "src/spellCounterTrapTagAdapter.ts",
+    "tests/spellCounterTrapTagAdapter.test.cjs",
+    "docs/evidence/m572-spell-counter-traps-tag-adapter.json",
+    ".github/workflows/m572-spell-counter-traps-tag-adapter.yml"
+  ],
+  "scope": "Adapter TagDuel isolado para Magic Drain e Cursed Seal; testar resposta a ativações de Spell em corrente real, custo de descarte pela mão privada do representante ativo, negação de ativação, destruição no GY do proprietário físico e bloqueio por nome persistido no estado do adapter. Sem alterar runtime central, catálogo, manifesto, certificações, allowlist, comandos ou dados persistentes.",
+  "cards": [
+    {
+      "id": "59344077",
+      "name": "Magic Drain",
+      "kind": "Counter Trap",
+      "officialKonamiCid": 5133,
+      "firstTcgRelease": "2002-10-20",
+      "behavior": "Quando o oponente ativa uma Magia, ele pode descartar uma Magia da mão para negar o efeito de Magic Drain; caso não pague, a ativação da Magia é negada e a carta é destruída."
+    },
+    {
+      "id": "58851034",
+      "name": "Cursed Seal of the Forbidden Spell",
+      "kind": "Counter Trap",
+      "officialKonamiCid": 5853,
+      "firstTcgRelease": "2004-03-01",
+      "behavior": "Ao ativar uma Magia, descartar uma Magia como custo; negar a ativação e destruir a carta. Se ambas as etapas forem bem-sucedidas, o oponente não pode ativar Magias com aquele nome pelo restante do Duelo."
+    }
+  ],
+  "certificationAtStart": {
+    "engineV9Certified": 969,
+    "remainingTo1000": 31,
+    "legacyCardCertificationsEntries": 959,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "ciAtStart": {
+    "M566": {
+      "pr": 512,
+      "focused": "success",
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "engineValidation": "success"
+    },
+    "M567": {
+      "pr": 513,
+      "focused": "failure",
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "engineValidation": "failure",
+      "owner": "auxiliary-correction-only"
+    },
+    "M568": {
+      "pr": 514,
+      "focused": "success",
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "engineValidation": "success"
+    },
+    "M569": {
+      "pr": 515,
+      "focused": "success",
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "engineValidation": "success"
+    },
+    "M570": {
+      "pr": 516,
+      "focused": "success",
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "engineValidation": "in_progress"
+    },
+    "M571": {
+      "pr": 518,
+      "focused": "success",
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "engineValidation": "in_progress",
+      "engineJobs": [
+        "test:success",
+        "extended-soak:success"
+      ]
+    }
+  },
+  "handoff": {
+    "pr": 17,
+    "commentId": 7113961920,
+    "status": "requested-awaiting-explicit-release",
+    "protectedFiles": [
+      "src/duelEngineCurrent.ts",
+      "src/monsterEffects.ts"
+    ]
+  },
+  "deployment": {
+    "status": "not_verified",
+    "reason": "As funções GitHub disponíveis não expõem consulta de deployments; nenhum merge/deploy será executado."
+  },
+  "nextTask": "Concluir M572 com testes e CI; revalidar M571/M570; integrar apenas após handoff M61 explícito; avançar para próxima família independente enquanto CI estiver em execução.",
+  "nextWorkWindow": "2026-11-23T22:30:00-03:00",
+  "ciAtEnd": {
+    "focused": "success",
+    "cardBatchFast": "success",
+    "milestone1000": "success",
+    "engineValidation": "success",
+    "extendedSoak": "success",
+    "workflowRuns": [
+      45273275859,
+      45273275864,
+      45273275988,
+      45273276040
+    ],
+    "verifiedAt": "2026-11-23T22:30:10-03:00"
+  },
+  "releasedToAuxiliary": "Monitorar a PR #519, sincronizar sem force e corrigir somente os quatro arquivos M572 se CI futura falhar. Sem merge/deploy; M573 e M61 permanecem reservados.",
+  "duration": {
+    "effectiveWorkMinutes": null,
+    "targetEffectiveMinutes": 60,
+    "ciWaitExcluded": true,
+    "note": "A execução anterior não registrou minutos efetivos; não inferir duração a partir da espera de CI."
+  }
+}

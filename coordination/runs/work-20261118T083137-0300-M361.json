@@ -1,0 +1,211 @@
+{
+  "format": 1,
+  "mission": "M361",
+  "runId": "work-20261118T083137-0300-M361",
+  "owner": "Work",
+  "priority": "P1 — impedir ramificações por suíte/mission-specific no executor isolado, evitando conflitos de CI entre PRs paralelas e preservando o runner genérico.",
+  "startedAt": "2026-11-18T08:31:37-03:00",
+  "endedAt": "2026-11-18T08:49:18-03:00",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "808d5f5587a2a5d8e331d16088605bd207e41142",
+  "branch": "feat/work-m361-ci-runner-genericity-guard-20261118",
+  "branchHead": "f35960472637f46146a90c3bc9f850db44f8edc7",
+  "prNumber": 309,
+  "prUrl": "https://github.com/dareka222778/yugioh-speed-rpg/pull/309",
+  "scope": [
+    "tests/ciRunnerGenericity.test.cjs"
+  ],
+  "blocksCompleted": [
+    "Leitura de coordination/state.json e checkpoint M353; confirmação do HEAD compartilhado, branch main, branches M358–M361, PRs e workflows.",
+    "Criação de teste de regressão que mantém scripts/run-tests-isolated.cjs genérico: sem files.includes por suíte, sem IDs Mxxx e com uma única invocação do processo de testes.",
+    "Publicação da PR #309 em draft; Card Batch Fast e Milestone 1000 passaram; Engine Validation e Extended Soak permanecem em execução.",
+    "Revisão das PRs #306–#308: identificadas duas fixtures que inserem CardRef como Monster incompleta e uma asserção de privacidade inválida por IDs repetidos entre decks; diagnósticos enviados aos responsáveis.",
+    "Solicitação de handoff cooperativo para 3-Hump Lacooda no PR #17; nenhuma edição em src/monsterEffects.ts ou src/duelEngineCurrent.ts sem liberação."
+  ],
+  "ci": {
+    "cardBatchFast": "success",
+    "milestone1000": "success",
+    "engineValidation": "in_progress",
+    "npmTest": "in_progress within Engine Validation",
+    "extendedSoak600s": "in_progress"
+  },
+  "relatedPullRequests": {
+    "301": {
+      "state": "open",
+      "draft": true,
+      "mergeable": true,
+      "engineValidation": "success",
+      "extendedSoak600s": "success",
+      "npmTest": "success"
+    },
+    "306": {
+      "state": "open",
+      "draft": true,
+      "engineValidation": "failure",
+      "failure": "tag.assertTagDuel — fixture inseriu CardRef em Monster Zone sem entered/changed/attacked/atkBoost/defBoost",
+      "diagnosticComment": 6977483325
+    },
+    "307": {
+      "state": "open",
+      "draft": true,
+      "engineValidation": "failure",
+      "failure": "tag.assertTagDuel — fixture inseriu CardRef em Monster Zone sem campos obrigatórios de Monster",
+      "diagnosticComment": 6977483778
+    },
+    "308": {
+      "state": "open",
+      "draft": true,
+      "engineValidation": "failure",
+      "failure": "assertion sobre replacement.id é inválida porque os quatro decks reutilizam os mesmos IDs; imagens de seat 0 já são byte a byte idênticas",
+      "diagnosticComment": 6977484278
+    },
+    "309": {
+      "state": "open",
+      "draft": true,
+      "mergeable": true,
+      "mergeableState": "unstable (CI pending)",
+      "baseSha": "808d5f5587a2a5d8e331d16088605bd207e41142",
+      "currentSharedHead": "a109bc1ec632e5f78171024a3e512e4fd254a295",
+      "head": "f35960472637f46146a90c3bc9f850db44f8edc7"
+    }
+  },
+  "handoffRequests": [
+    {
+      "pr": 17,
+      "commentId": 6977352222,
+      "mission": "M61 / 3-Hump Lacooda (86988864)",
+      "files": [
+        "src/monsterEffects.ts",
+        "src/duelEngineCurrent.ts"
+      ],
+      "status": "awaiting-explicit-release",
+      "rule": "contar três cópias face-up, tributar exatamente duas, comprar três do Deck físico correto, preservar UID e owner"
+    }
+  ],
+  "catalogAtStart": {
+    "sharedCards": 969,
+    "sharedCertificates": 969,
+    "remainingTo1000": 31,
+    "identityBlocked": 27,
+    "automaticCertifications": 0,
+    "newCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "production": {
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "liveDiscordValidation": false,
+    "mainHead": "f78f3080b496d2697072b946088309f36e97b60e",
+    "sharedHeadAtStart": "808d5f5587a2a5d8e331d16088605bd207e41142",
+    "sharedWorkflows": [
+      "card-batch-admission.yml",
+      "card-batch-fast.yml",
+      "engine-validation.yml",
+      "milestone1000.yml"
+    ],
+    "mainWorkflows": "contents endpoint returned 404 for .github/workflows on main",
+    "deploymentStatus": "não verificável: endpoint de deployments não foi exposto pelo conector; nenhum workflow de deploy identificado"
+  },
+  "concurrency": {
+    "activeRun": "work-20261115T142521-0300",
+    "activeMission": "M231",
+    "preserved": true,
+    "noThirdPartyReservationReleased": true,
+    "requestedHandoffForRuntime": true
+  },
+  "scopeReleasedToAuxiliary": [
+    {
+      "branch": "feat/work-m361-ci-runner-genericity-guard-20261118",
+      "pr": 309,
+      "files": [
+        "tests/ciRunnerGenericity.test.cjs"
+      ],
+      "permission": "monitorar CI e corrigir somente este arquivo de teste"
+    }
+  ],
+  "duration": {
+    "elapsedMinutes": 17.7,
+    "effectiveWorkMinutes": 17.7,
+    "targetEffectiveMinutes": 60,
+    "targetMet": false,
+    "ciWaitExcluded": true
+  },
+  "nextTask": "Auxiliar: monitorar #309, sincronizar a branch com o shared atual por merge não-forçado e corrigir somente tests/ciRunnerGenericity.test.cjs. Work: aguardar resposta ao handoff M61 para 3-Hump Lacooda; após liberação, implementar e testar essa família; em seguida agrupar A Cat of Ill Omen + An Owl of Luck (search-to-top com ramo Necrovalley) e Abyss Soldier somente após handoff de runtime. Não tocar nas reservas M231–M236 ou M354–M360.",
+  "nextWindow": "2026-11-18T13:30:00-03:00",
+  "reservationReleased": true,
+  "sharedHeadAfterCheckpointCommit": "a109bc1ec632e5f78171024a3e512e4fd254a295",
+  "sharedHeadAtEndBeforeFinalizationCommit": "a109bc1ec632e5f78171024a3e512e4fd254a295",
+  "finalVerification": {
+    "sharedHeadBeforeFinalization": "a109bc1ec632e5f78171024a3e512e4fd254a295",
+    "mainHead": "f78f3080b496d2697072b946088309f36e97b60e",
+    "stateBlobBeforeFinalization": "b5339cd3bf48cdc2f7af58e98eaa7e464fb96095",
+    "checkpointBlobBeforeFinalization": "e98fddc19cdcf9c5bc6a6f698e9091489d9b9dfa",
+    "branchVerified": true,
+    "checkpointVerified": true,
+    "ciCheckedAt": "2026-11-18T11:49:18.369Z",
+    "handoffStillPending": true,
+    "sharedHeadBeforeFinalCheckpointCommit": "319398a8029a3111968b0281ed07d6c302c26a99",
+    "candidateReviewVerified": true,
+    "pr309MergeableState": "unstable/unknown while Engine Validation remains in progress"
+  },
+  "sharedHeadBeforeFinalCheckpointCommit": "319398a8029a3111968b0281ed07d6c302c26a99",
+  "catalogReview": {
+    "sourceBranches": [
+      "feat/work-m355-official-text-review-first-ten-20261118",
+      "feat/work-m356-official-text-review-next-ten-20261118",
+      "feat/work-m357-official-text-review-final-eleven-20261118"
+    ],
+    "sharedCatalogCards": 969,
+    "sharedCertificates": 969,
+    "target": 1000,
+    "remaining": 31,
+    "reviewedCandidates": 31,
+    "uniqueCandidateIds": 31,
+    "duplicateIds": [],
+    "alreadyInCertifiedManifest": [],
+    "allOfficialTextSourcesVerified": true,
+    "allCertificationStatusNotCertified": true,
+    "allAutomaticCertificationFalse": true,
+    "historicalEligibility": "pending OCG/TCG first-release audit for all 31",
+    "reusableFamilies": [
+      {
+        "family": "flip-search-topdeck-or-add",
+        "cards": [
+          {
+            "id": "24140059",
+            "name": "A Cat of Ill Omen"
+          },
+          {
+            "id": "23927567",
+            "name": "An Owl of Luck"
+          }
+        ],
+        "sharedRule": "Flip: search own Deck; place matching Trap/Field Spell on top; if Necrovalley is present, add it to hand instead.",
+        "runtimeGap": "current searchFiltered only adds a selected card to hand and shuffles; top-deck placement and Necrovalley branch need a new operation"
+      },
+      {
+        "family": "water-discard-any-card-bounce",
+        "cards": [
+          {
+            "id": "18318842",
+            "name": "Abyss Soldier"
+          }
+        ],
+        "sharedRule": "once-per-turn discard WATER, select one field card, return it to hand",
+        "runtimeGap": "discard cost + any-card bounce need explicit resolution path"
+      },
+      {
+        "family": "shared-field-count-tribute-draw",
+        "cards": [
+          {
+            "id": "86988864",
+            "name": "3-Hump Lacooda"
+          }
+        ],
+        "sharedRule": "three face-up copies required; tribute exactly two; draw three",
+        "runtimeGap": "awaiting explicit M61 handoff"
+      }
+    ],
+    "automaticCertifications": 0
+  }
+}

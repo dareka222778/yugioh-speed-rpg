@@ -1,0 +1,91 @@
+{
+  "runId": "work-20261124T085800-0300-M588",
+  "mission": "M588",
+  "owner": "Work principal",
+  "state": "ci-rerun-in-progress-after-focused-test-fixture-fix",
+  "priority": "P1",
+  "branch": "feat/work-m588-hand-discard-tag-adapters-20261124",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "4e6743c1bb24d44ca93d8f4946b19625c2a7cfe8",
+  "branchHeadSha": "bebfb826a8d0b07fa2eba23cc85311696d616cd8",
+  "startedAt": "2026-11-24T08:58:00-03:00",
+  "lastActivityAt": "2026-11-24T09:17:24-03:00",
+  "reservedFiles": [
+    "src/handDiscardTagAdapters.ts",
+    "tests/handDiscardTagAdapters.test.cjs",
+    "docs/evidence/m588-hand-discard-tag-adapters.json",
+    ".github/workflows/m588-hand-discard-tag-adapters.yml"
+  ],
+  "scope": "Thunder Dragon activation-cost discard and non-targeting search up to two copies; Electric Snake opponent-effect discard trigger and private Deck draw two. Physical owner UIDs, active-seat private zones, shared team GY/LP, End Phase hand limit, 3+3 zones, separate Field Zone and Extra 5 are preserved.",
+  "pullRequest": 532,
+  "pullRequestUrl": "https://github.com/dareka222778/yugioh-speed-rpg/pull/532",
+  "ci": {
+    "firstHead": "89045175cad32b80a4ca8174baaaaaaec0964518",
+    "firstAttempt": {
+      "focused": "failure",
+      "passed": 22,
+      "failed": 2,
+      "failures": [
+        "backrow fixture used Normal Monsters",
+        "no six enabled Fusion fixtures"
+      ]
+    },
+    "fixCommit": "bebfb826a8d0b07fa2eba23cc85311696d616cd8",
+    "currentHead": {
+      "focused": "in-progress",
+      "cardBatchFast": "in-progress",
+      "milestone1000": "success",
+      "engineValidation": "in-progress",
+      "customWorkflow": "in-progress"
+    }
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "catalogAtCheckpoint": {
+    "engineV9Certified": 969,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "nextTask": "Concluir CI do SHA bebfb826; corrigir somente os quatro caminhos próprios se surgir falha reproduzível. Depois, preparar a próxima família FLIP independente; integração/certificação continuam condicionadas ao handoff M61.",
+  "nextWindow": "2026-11-24T13:30:00-03:00",
+  "mergePerformed": false,
+  "deployPerformed": false,
+  "liveDiscordValidated": false,
+  "releaseToAuxiliary": false,
+  "endedAt": null,
+  "durationMinutes": null,
+  "effectiveWorkMinutes": 14,
+  "targetEffectiveMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcludedMinutes": 0,
+  "checkpointAt": "2026-11-24T09:17:24-03:00",
+  "sharedHeadBeforeCoordinationCommit": "4e6743c1bb24d44ca93d8f4946b19625c2a7cfe8",
+  "sharedHeadAfterCoordinationCommit": null,
+  "filesChanged": [
+    "src/handDiscardTagAdapters.ts",
+    "tests/handDiscardTagAdapters.test.cjs",
+    "docs/evidence/m588-hand-discard-tag-adapters.json",
+    ".github/workflows/m588-hand-discard-tag-adapters.yml"
+  ],
+  "changes": [
+    "Adapter Thunder Dragon: custo imediato, busca não-direcionada de 0–2 cópias do Deck privado do mesmo assento.",
+    "Adapter Electric Snake: trigger apenas por efeito adversário que descarte da mão ativa; compra exata de duas, com deck-out atômico.",
+    "Testes focados: 24 cenários; primeiro CI identificou dois problemas nos fixtures de zonas/Extra, ambos corrigidos no commit bebfb826.",
+    "Workflow próprio e evidência oficial Konami adicionados."
+  ],
+  "limits": [
+    "Os adapters ainda não estão registrados no resolver principal; não contam como certificação.",
+    "Sem teste Discord ao vivo, sem merge/deploy e sem consulta autenticada ao host.",
+    "A contagem permanece 969/1000; nenhum inventário foi concedido."
+  ],
+  "handoffM61": "Solicitação cooperativa anterior no PR #17 (comentário 7124844139) continua sem resposta; nenhum arquivo central foi tocado.",
+  "releasedToAuxiliary": false,
+  "scopeReleasedToAuxiliary": []
+}

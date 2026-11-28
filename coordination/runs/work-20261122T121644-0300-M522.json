@@ -1,0 +1,72 @@
+{
+  "runId": "work-20261122T121644-0300-M522",
+  "mission": "M522",
+  "parentRunId": "work-20261122T115710-0300-M520",
+  "owner": "Work principal",
+  "priority": "P1 — validar componentes Discord 2v2 expirados no handler real: Accept de lobby aos 5 min e menu act aos 30 min devem rejeitar ação, persistir timeout e liberar locks; confirmar painel terminal na fila pública, privacidade e ausência de alteração de Decks/inventário. Registrar lacuna de refresh imediato para transferência cooperativa, sem tocar no handler.",
+  "startedAt": "2026-11-22T12:16:44-03:00",
+  "lastActivityAt": "2026-11-22T12:16:44-03:00",
+  "endedAt": null,
+  "state": "reserved-and-implementing",
+  "branch": "feat/work-m522-tag-timeout-discord-boundary-2v2-20261122",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "cfdb780bb0edcb07912a1d4e96d1d4d617674c3d",
+  "sharedHeadAtReservation": "cfdb780bb0edcb07912a1d4e96d1d4d617674c3d",
+  "reservedFiles": [
+    "tests/tagTimeoutDiscordComponentBoundary2v2.test.cjs",
+    "docs/evidence/m522-tag-timeout-discord-component-boundary-2v2.json",
+    ".github/workflows/m522-tag-timeout-discord-component-boundary-2v2.yml"
+  ],
+  "scope": [
+    "tests/tagTimeoutDiscordComponentBoundary2v2.test.cjs",
+    "docs/evidence/m522-tag-timeout-discord-component-boundary-2v2.json",
+    ".github/workflows/m522-tag-timeout-discord-component-boundary-2v2.yml"
+  ],
+  "conflictCheck": {
+    "overlap": false,
+    "checkedAt": "2026-11-22T12:16:44-03:00",
+    "checkedAgainst": [
+      "M521 PR #467 — store-level 2v2 timeout, arquivos próprios preservados",
+      "M520 PR #466 — handler Discord 1v1, arquivos próprios preservados",
+      "M484 PR #432 — testes lobby/concession, somente três arquivos próprios",
+      "M472–M483 PRs #420–#431 — testes TagDuel em caminhos próprios",
+      "M515–M519, M61 e todas as reservas de terceiros"
+    ],
+    "note": "Somente teste/evidência/workflow novos; lê src/tagInteraction.ts, src/tagUI.ts, src/tagStore.ts e src/tagDuel.ts. Não altera handler, UI, store, engine, catálogo, manifesto, resolver, allowlist, certificados, inventário ou dados persistentes. A correção de refresh imediato permanece bloqueada até transferência explícita solicitada na PR #432."
+  },
+  "workBlocks": [
+    "Inspecionada handleTagComponent: getTag(id) inicial persiste timeout e libera locks; no ramo act, actTag ocorre antes do try/finally e pode rejeitar sem executar refresh.",
+    "Inspecionada tagPublicMessage: status finished/expired remove componentes; dueTags mantém painel terminal até markTagPublished.",
+    "Solicitada transferência cooperativa de src/tagInteraction.ts na PR #432, comentário 7081175808; nenhuma alteração de handler antes de liberação.",
+    "Reservados três caminhos novos para testes reais do handler Discord 2v2: Accept expirado e menu act expirado."
+  ],
+  "tests": {
+    "focused": null,
+    "check": null,
+    "build": null,
+    "engineValidation": null,
+    "cardBatchFast": null,
+    "limitations": "Teste offline com interações fake e builders reais; sem token/guild Discord. Handler refresh gap será documentado, não corrigido sem handoff."
+  },
+  "catalog": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "inventoryGranted": 0,
+  "mergePerformed": false,
+  "deployPerformed": false,
+  "production": {
+    "mainHead": "197bbda07efc81658604bcd12308665571e26d59",
+    "backupVerified": false,
+    "liveDiscordValidation": false,
+    "merge": false,
+    "deploy": false
+  },
+  "pr": null,
+  "releaseToAuxiliary": [],
+  "nextTask": "Criar teste de Accept de lobby expirado e menu act no deadline via handleTagComponent; validar defer, estado terminal, locks, dueTags e privacidade; aguardar transferência de src/tagInteraction.ts para corrigir refresh imediato.",
+  "nextWindow": "2026-11-22T16:30:00-03:00"
+}

@@ -1,0 +1,121 @@
+{
+  "runId": "work-20261118T173117-0300-M365",
+  "mission": "M365",
+  "owner": "Work",
+  "priority": "P1 — verificar e proteger o retorno à mão física de monstros devolvidos por efeitos de Flip em 2v2; Gravekeeper's Guard deve mirar somente a equipe adversária e devolver a carta ao assento físico proprietário, sem alterar mão do representante ativo.",
+  "state": "released-to-auxiliary-monitor-ci",
+  "startedAt": "2026-11-18T17:31:17-03:00",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "cbb7f9cdd0f82555ff9777b0c7a4a1ca5c41fd7d",
+  "branch": "feat/work-m365-gravekeepers-guard-flip-bounce-owner-discord-2v2-20261118",
+  "scope": [
+    "tests/tagGravekeepersGuardNoOpponentTargetDiscord2v2.test.cjs"
+  ],
+  "conflictPolicy": "Somente o novo arquivo de teste M365. Não editar src/duelEngineCurrent.ts, src/monsterEffects.ts, renderizadores, catálogo, certificações, inventários, banco persistente, dados de jogadores, main, produção ou arquivos reservados do run ativo/M358–M360/M61.",
+  "cards": [
+    "Gravekeeper's Guard (37101832)"
+  ],
+  "expectedBehavior": [
+    "Flip obrigatório de Gravekeeper's Guard pelo menu privado do representante ativo, embora a fonte pertença ao parceiro aliado inativo.",
+    "Quando a equipe adversária não possui monstros, o efeito resolve sem abrir escolha de alvo.",
+    "Monstros aliados nunca aparecem como alvos; nenhum card/UID é movido.",
+    "O parceiro físico inativo não recebe o menu e não pode forjar a ação."
+  ],
+  "handoffRequests": [
+    {
+      "pr": 307,
+      "commentId": 6990804111,
+      "files": [
+        "src/duelRenderer.ts",
+        "src/npcRenderer.ts",
+        "src/tagRenderer.ts"
+      ],
+      "purpose": "migração de tipos sharp 0.35.5",
+      "state": "awaiting-explicit-release"
+    },
+    {
+      "pr": 308,
+      "commentId": 6990805001,
+      "files": [
+        "src/cardInspector.ts",
+        "src/cardRenderer.ts",
+        "src/deckRenderer.ts"
+      ],
+      "purpose": "migração de tipos sharp 0.35.5",
+      "state": "awaiting-explicit-release"
+    },
+    {
+      "pr": 17,
+      "commentId": 6990805804,
+      "files": [
+        "src/monsterEffects.ts",
+        "src/duelEngineCurrent.ts"
+      ],
+      "purpose": "3-Hump Lacooda e efeitos 2v2",
+      "state": "awaiting-explicit-release"
+    }
+  ],
+  "duration": {
+    "targetEffectiveMinutes": 60,
+    "effectiveWorkMinutes": 0,
+    "targetMet": false,
+    "ciWaitExcluded": true
+  },
+  "nextTask": "Auxiliar: monitorar PR #313; manter o escopo no caso sem alvo adversário. Work: M366 valida separadamente o retorno à mão física do parceiro inativo.",
+  "nextWindow": "2026-11-18T22:30:00-03:00",
+  "actualScope": [
+    "tests/tagGravekeepersGuardNoOpponentTargetDiscord2v2.test.cjs"
+  ],
+  "head": "01869f12e1c66192abcf5b1b86803a9a5317e010",
+  "pr": 313,
+  "prUrl": "https://github.com/dareka222778/yugioh-speed-rpg/pull/313",
+  "draft": true,
+  "branchComparison": {
+    "base": "304bf9b97a7d50d10d34387a75964d96d33d50b5",
+    "aheadBy": 6,
+    "behindBy": 0
+  },
+  "ci": {
+    "cardBatchFast": {
+      "runId": 44394422640,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    "milestone1000": {
+      "runId": 44394422890,
+      "status": "completed",
+      "conclusion": "success",
+      "certified": 969,
+      "remainingTo1000": 31
+    },
+    "engineValidation": {
+      "runId": 44394422780,
+      "status": "in_progress",
+      "testJob": "success",
+      "extendedSoak600s": "success"
+    },
+    "npmTest": "success",
+    "extendedSoak600s": "success"
+  },
+  "handoff": {
+    "releasedToAuxiliary": [
+      "tests/tagGravekeepersGuardNoOpponentTargetDiscord2v2.test.cjs"
+    ],
+    "auxiliaryMay": "monitorar PR #313 e corrigir somente fixture/assertions do arquivo de teste, sem alterar o sentido do caso sem alvo adversário.",
+    "forbidden": [
+      "src/duelEngineCurrent.ts",
+      "src/monsterEffects.ts",
+      "renderizadores",
+      "catálogo",
+      "certificações",
+      "inventários",
+      "banco persistente",
+      "dados dos jogadores",
+      "main",
+      "produção",
+      "reservas de terceiros"
+    ]
+  },
+  "sharedHeadAtRelease": "304bf9b97a7d50d10d34387a75964d96d33d50b5",
+  "endedAt": "2026-11-18T18:06:39.348-03:00"
+}

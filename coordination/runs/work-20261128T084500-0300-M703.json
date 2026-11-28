@@ -1,0 +1,110 @@
+{
+  "runId": "work-20261128T084500-0300-M703",
+  "mission": "M703",
+  "priority": "P1",
+  "status": "reserved-and-implementing",
+  "branch": "feat/work-m703-hand-disruption-20261128",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "startedAt": "2026-11-28T08:44:20-03:00",
+  "endedAt": null,
+  "effectiveMinutes": 0,
+  "minimumEffectiveMinutes": 60,
+  "sharedBaseHead": "22c907a9889d416d7d82628a840ce975b3ca1553",
+  "sharedHeadAtReservation": "22c907a9889d416d7d82628a840ce975b3ca1553",
+  "headSha": null,
+  "conditionalHeadUpdate": true,
+  "reservedFiles": [
+    "src/handDisruptionTagAdapter.ts",
+    "tests/handDisruptionTagAdapter.test.cjs",
+    "docs/evidence/m703-hand-disruption.json",
+    "scripts/audit-hand-disruption-m703.cjs",
+    ".github/workflows/m703-hand-disruption.yml",
+    "coordination/runs/work-20261128T084500-0300-M703.json"
+  ],
+  "scope": "Adapter isolado de interrupção de mão para Disturbance Strategy (77561728/CID5546), Confiscation (17375316/CID4900), Dragged Down into the Grave (16435215/CID5352) e Mind Crush (15800838/CID6147). Os efeitos bilaterais aplicam-se aos dois representantes físicos ativos; parceiros inativos preservam Deck/mão privados. Disturbance embaralha a mão adversária no Deck e compra a mesma quantidade; Confiscation paga 1000 LP compartilhados e descarta uma carta escolhida, com visão privada do ativador; Dragged Down revela ambas as mãos, escolhe uma carta da mão oposta por jogador, descarta e compra 1; Mind Crush declara nome, descarta todas as cópias correspondentes ou uma carta aleatória do ativador. Sem integração central, certificação, comandos, banco, concessão de inventário ou produção.",
+  "nonOverlap": [
+    "M700: Burning Algae/The Thing in the Crater; M701: banimento/retorno; M702: Morphing Jar/Cyber Jar; nenhuma reserva de terceiros será tocada."
+  ],
+  "research": {
+    "historicalCutoff": "2004-09-30",
+    "officialCards": [
+      {
+        "id": "77561728",
+        "name": "Disturbance Strategy",
+        "konamiCid": 5546,
+        "firstReleaseOCG": "2003-10-23",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5546&ope=2&request_locale=en"
+      },
+      {
+        "id": "17375316",
+        "name": "Confiscation",
+        "konamiCid": 4900,
+        "firstReleaseOCG": "2002-10-24",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4900&ope=2&request_locale=ae"
+      },
+      {
+        "id": "16435215",
+        "name": "Dragged Down into the Grave",
+        "konamiCid": 5352,
+        "firstReleaseOCG": "2004-05-13",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5352&ope=2&request_locale=ae"
+      },
+      {
+        "id": "15800838",
+        "name": "Mind Crush",
+        "konamiCid": 6147,
+        "firstReleaseOCG": "2004-02-26",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6147&ope=2&request_locale=en"
+      }
+    ]
+  },
+  "coordination": {
+    "stateBlobBefore": "40420759c600ccb454b0c41dc1c84a7ba26ed2cb",
+    "headGuard": "22c907a9889d416d7d82628a840ce975b3ca1553",
+    "headGuardResult": "pending",
+    "handoffRequest": {
+      "pr": 17,
+      "commentId": 7238744933,
+      "status": "requested-awaiting-explicit-release",
+      "files": [
+        "src/duelEngineCurrent.ts",
+        "src/monsterEffects.ts",
+        "src/effectRegistry.ts",
+        "src/cardMetadata.ts",
+        "src/cardCertifications.ts"
+      ]
+    }
+  },
+  "baseline": {
+    "explicitCertificationKeys": 969,
+    "candidateCards": 4,
+    "newEngineCertified": 0,
+    "inventoryGranted": 0
+  },
+  "blocksCompleted": [
+    "HEAD compartilhado confirmado em 22c907a9889d416d7d82628a840ce975b3ca1553",
+    "Sem conflito de reserva para os quatro IDs; branches/PRs M703 inexistentes",
+    "Quatro IDs ausentes das certificações explícitas; fontes oficiais e datas históricas verificadas",
+    "Handoff cooperativo solicitado no PR #17 comentário 7238744933"
+  ],
+  "changes": [],
+  "tests": {
+    "focused": null,
+    "build": null,
+    "fullRegression": null,
+    "discordLive": false
+  },
+  "pullRequest": null,
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false
+  },
+  "blockers": [
+    "Handoff explícito para resolver central/catálogo/certificação pendente.",
+    "M700/M701/M702 ativos em escopos separados; arquivos reservados preservados."
+  ],
+  "nextTask": "Implementar adapter de quatro efeitos de interrupção de mão, testes de privacidade/LP/seleção/aleatoriedade e auditoria de não-admissão.",
+  "nextWindow": "2026-11-28T12:30:00-03:00",
+  "releasedToAuxiliary": []
+}

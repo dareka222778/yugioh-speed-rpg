@@ -1,0 +1,72 @@
+{
+  "runId": "work-20261122T165700-0300-M530",
+  "mission": "M530",
+  "parentRunId": "work-20261122T163436-0300-M527",
+  "owner": "Work principal",
+  "status": "reserved-and-implementing",
+  "startedAt": "2026-11-22T16:57:00-03:00",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "aaa7910c6f68c561725f67a614183ed5eb3fddbc",
+  "branch": "feat/work-m530-duel-timeout-concurrent-pollers-20261122",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "aaa7910c6f68c561725f67a614183ed5eb3fddbc",
+  "priority": "P1 — testar concorrência real entre dois processos que fazem polling do mesmo timeout 1v1 e ACKs simultâneos: no máximo uma revisão terminal e um duelFinished; locks liberados; nenhum busy snapshot pode deixar estado parcial; ACK concorrente idempotente e outbox finalmente vazio.",
+  "reservedFiles": [
+    "tests/duelTimeoutConcurrentPollers.test.cjs",
+    "docs/evidence/m530-duel-timeout-concurrent-pollers.json",
+    ".github/workflows/m530-duel-timeout-concurrent-pollers.yml"
+  ],
+  "conflictCheck": {
+    "overlap": false,
+    "checkedAt": "2026-11-22T16:57:00-03:00",
+    "checkedAgainst": [
+      "M527 #473 — polling sequencial/ACK stale",
+      "M528 #474 — persistência entre processos",
+      "M529 #475 — backpressure 205 itens",
+      "M520–M526 #466–#472",
+      "M61 e reservas de terceiros"
+    ],
+    "note": "Somente três caminhos novos; subprocessos Node com SQLite temporário; sem alterar stores/runtime, catálogo, manifesto, resolver, allowlist, certificados, inventário ou dados persistentes."
+  },
+  "workBlocks": [
+    "Reverificado shared HEAD aaa7910c6f68c561725f67a614183ed5eb3fddbc e coordenação; M527/M528 Engine Validation/soaks em andamento; M529 CI enfileirada.",
+    "M530 reservado em caminhos próprios para pollers e ACKs concorrentes em processos distintos."
+  ],
+  "tests": {
+    "focused": null,
+    "check": null,
+    "build": null,
+    "cardBatchFast": null,
+    "milestone1000": null,
+    "engineValidation": null,
+    "extendedSoak": null,
+    "limitations": "Subprocessos Node concorrentes e SQLite temporário; sem guild/token real."
+  },
+  "catalog": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "inventoryGranted": 0,
+  "mergePerformed": false,
+  "deployPerformed": false,
+  "production": {
+    "mainHead": "197bbda07efc81658604bcd12308665571e26d59",
+    "backupVerified": false,
+    "liveDiscordValidation": false,
+    "merge": false,
+    "deploy": false
+  },
+  "pr": null,
+  "releaseToAuxiliary": [],
+  "nextTask": "Executar dois pollers e dois ACKs concorrentes sobre um único duelo expirado; validar evento único, revisão única, locks e outbox.",
+  "nextWindow": "2026-11-22T17:30:00-03:00",
+  "duration": {
+    "targetEffectiveMinutes": 60,
+    "effectiveWorkMinutes": 0,
+    "targetMet": false,
+    "ciWaitExcluded": true
+  }
+}

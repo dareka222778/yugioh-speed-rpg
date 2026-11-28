@@ -1,0 +1,69 @@
+{
+  "format": 1,
+  "runId": "work-20261124T191943-0300-M601",
+  "mission": "M601",
+  "owner": "Work principal",
+  "priority": "P1",
+  "status": "CI all-green; PR draft open; scope released to auxiliary",
+  "startedAt": "2026-11-24T19:19:43-03:00",
+  "endedAt": "2026-11-24T19:44:12-03:00",
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "bbb03f6416d08b515adbad1940d094b9a9bed497",
+  "branch": "feat/work-m601-certification-count-reconciliation-20261124",
+  "baseSha": "bbb03f6416d08b515adbad1940d094b9a9bed497",
+  "branchHeadSha": "81d3b1131abf179b1a4872c119c6ecc4053ea371",
+  "pullRequest": 544,
+  "reservedFiles": [
+    "scripts/card-certification-audit.cjs",
+    "tests/cardCertificationCountAudit.test.cjs",
+    "docs/evidence/m601-certification-count-reconciliation.json",
+    ".github/workflows/m601-certification-count-reconciliation.yml"
+  ],
+  "scope": "Auditar a contagem efetiva de cartas certificadas usando enabledCardIds/buildCardRegistry, distinguir certificações de IDs da allowlist de distribuição e adicionar teste/CI para impedir que a allowlist seja reportada como certificação. Não altera catálogo, certificados, allowlist, runtime, comandos ou dados.",
+  "conflictCheck": {
+    "checkedAt": "2026-11-24T19:19:43-03:00",
+    "sharedHead": "bbb03f6416d08b515adbad1940d094b9a9bed497",
+    "conflictingReservations": [
+      "M598 Chain Energy",
+      "M599/M600 LP/burn adapters",
+      "M61 resolver handoff"
+    ],
+    "reservedPathsDisjoint": true,
+    "m600TransferRequestedOnPR": 543,
+    "m600FilesUntouched": true,
+    "m598FilesUntouched": true,
+    "m599FilesUntouched": true,
+    "m61Untouched": true,
+    "thirdPartyReservationsUntouched": true
+  },
+  "catalogAtStart": {
+    "certifiedFromCardCertifications": 969,
+    "enabledRegistryCards": 969,
+    "releasedAllowlist": 969,
+    "releasedButUncertified": 0,
+    "remainingTo1000": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "effectiveWorkMinutes": 15,
+  "targetEffectiveMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "nextTask": "Aguardar revisão do proprietário; sem merge/deploy.",
+  "nextWindow": "2026-11-24T23:30:00-03:00",
+  "scopeReleasedToAuxiliary": [
+    "scripts/card-certification-audit.cjs",
+    "tests/cardCertificationCountAudit.test.cjs",
+    "docs/evidence/m601-certification-count-reconciliation.json",
+    ".github/workflows/m601-certification-count-reconciliation.yml"
+  ],
+  "lastActivityAt": "2026-11-24T19:44:12-03:00"
+}
