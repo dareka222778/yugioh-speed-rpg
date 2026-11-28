@@ -1,0 +1,147 @@
+{
+  "schemaVersion": 1,
+  "mission": "M694",
+  "runId": "work-20261128T022638-0300-M694",
+  "status": "adapter-only; not admitted to engine-v9",
+  "createdAt": "2026-11-28T02:30:00-03:00",
+  "sourceAuthority": "Konami Yu-Gi-Oh! Neuron / TCG Card Database",
+  "sourceSnapshotDate": "2026-11-28",
+  "historicalCutoff": "2004-09-30",
+  "cards": [
+    {
+      "id": "31076103",
+      "konamiCid": 6063,
+      "name": "The First Sarcophagus",
+      "type": "Continuous Trap",
+      "ocgFirstRelease": "2004-02-26",
+      "tcgFirstRelease": "2004-06-01",
+      "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6063&ope=2&request_locale=en",
+      "behaviorSummary": "Uma vez por turno na End Phase do oponente, coloca Second e depois Third da mão/Deck face-up; com as três peças, envia o conjunto ao Cemitério e tenta Invocar Spirit of the Pharaoh; se uma peça deixa o campo, as demais controladas também são enviadas ao Cemitério."
+    },
+    {
+      "id": "04081094",
+      "konamiCid": 6062,
+      "name": "The Second Sarcophagus",
+      "type": "Continuous Spell",
+      "ocgFirstRelease": "2004-02-26",
+      "tcgFirstRelease": "2004-06-01",
+      "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6062&ope=2&request_locale=en",
+      "behaviorSummary": "Só pode ser colocada no campo pelo efeito de The First Sarcophagus."
+    },
+    {
+      "id": "78697395",
+      "konamiCid": 6061,
+      "name": "The Third Sarcophagus",
+      "type": "Continuous Spell",
+      "ocgFirstRelease": "2004-02-26",
+      "tcgFirstRelease": "2004-06-01",
+      "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6061&ope=2&request_locale=en",
+      "behaviorSummary": "Só pode ser colocada no campo pelo efeito de The First Sarcophagus."
+    },
+    {
+      "id": "25343280",
+      "konamiCid": 6024,
+      "name": "Spirit of the Pharaoh",
+      "type": "Effect Monster — LIGHT/Zombie/Level 6/2500 ATK/2000 DEF",
+      "ocgFirstRelease": "2004-02-26",
+      "tcgFirstRelease": "2004-06-01",
+      "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6024&ope=2&request_locale=en",
+      "behaviorSummary": "Não pode ser Invocado-Normalmente/Baixado e só é Invocado-Especialmente por The First Sarcophagus; ao ser Invocado, pode trazer até quatro Monstros Normais Zumbi de Nível 2 ou menos do Cemitério."
+    }
+  ],
+  "rulesAndConstraints": {
+    "mainDeck": "20–30 cartas por assento físico",
+    "handLimit": 6,
+    "handCheck": "End Phase; descarte até o limite",
+    "monsterZonesPerTeam": 3,
+    "spellTrapZonesPerTeam": 3,
+    "fieldZone": "separada das três zonas compartilhadas",
+    "extraDeckMaxPerPhysicalSeat": 5,
+    "tagDuel": "2v2; campo/Cemitério compartilhados por equipe; mão/Deck permanecem privados por assento",
+    "ownership": "UID m{seat}: preservado ao mover cartas entre zonas; controle da equipe é separado do proprietário físico",
+    "noInventoryGrants": true
+  },
+  "behaviorCoverage": {
+    "scenarios": 23,
+    "categories": [
+      "identidades e CIDs oficiais; ausência no engine-v9",
+      "regras Deck 20–30, mão 6 na End Phase, 3+3 zonas e Extra 5",
+      "restrição de colocação de Second/Third e Invocação de Spirit",
+      "End Phase da equipe oponente e rotação física",
+      "mão/Deck privados do assento ativo da equipe controladora",
+      "colocação face-up da mão sem embaralhamento",
+      "colocação do Deck com embaralhamento determinístico",
+      "sacrifício do conjunto e Invocação de Spirit",
+      "até quatro Zombies normais com limite real de Monster Zones",
+      "proprietário físico preservado em campo/Cemitério compartilhado",
+      "ausência de Spirit, negação de efeito e negação da Invocação",
+      "bloqueio por backrow cheia sem criar quarta zona",
+      "limpeza da família quando qualquer peça deixa o campo",
+      "múltiplas cópias de First avançando a sequência",
+      "idempotência, replay, escolha alterada e estado obsoleto",
+      "conservação de UIDs e inventário"
+    ],
+    "focusedTestCommand": "node --test tests/sarcophagusTagAdapter.test.cjs",
+    "fullSuiteCommand": "npm test",
+    "result": "pending CI"
+  },
+  "engineV9Baseline": {
+    "revision": "3af4ee461ba728be019de373b6c9652c3a7fd21b94fd475aac6af22b5127ca99",
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "candidateCardsFoundInRevision": 0
+  },
+  "admission": {
+    "adapterOnly": true,
+    "centralResolverIntegrated": false,
+    "catalogRevisionChanged": false,
+    "newEngineCertifiedCards": 0,
+    "automaticCertifications": false,
+    "inventoryGrants": false
+  },
+  "production": {
+    "prCreated": true,
+    "prNumber": 618,
+    "prUrl": "https://github.com/dareka222778/yugioh-speed-rpg/pull/618",
+    "draft": true,
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "limitations": [
+    "O adapter não altera o resolver central nem o catálogo; os quatro IDs continuam não admitidos e não contam como cartas certificadas.",
+    "A integração central depende de handoff explícito dos arquivos compartilhados atualmente reservados.",
+    "O efeito de Spirit of the Pharaoh é limitado às Monster Zones realmente livres; com o próprio Spirit em campo e três zonas, no máximo duas outras cartas podem ser Invocadas.",
+    "A validação Discord em produção não é executada por este adapter isolado."
+  ],
+  "nextStep": "Aguardar handoff explícito dos arquivos centrais reservados; depois integrar os quatro IDs ao resolver/catálogo e executar auditoria de admissão. Enquanto isso, seguir em branch independente com a próxima família elegível.",
+  "result": "CI passed; adapter-only; draft PR #618 open",
+  "verification": {
+    "workflowRun": 46114584875,
+    "workflowUrl": "https://github.com/dareka222778/yugioh-speed-rpg/actions/runs/46114584875",
+    "testedHeadSha": "a80f9fb523bdc811d704b9c6aedd02222c08520d",
+    "typecheck": "passed",
+    "build": "passed",
+    "focusedTests": {
+      "tests": 23,
+      "pass": 23,
+      "fail": 0
+    },
+    "fullRegression": {
+      "tests": 7385,
+      "pass": 7385,
+      "fail": 0
+    },
+    "evidenceAudit": "passed",
+    "workflow": "success",
+    "officialCards": 4,
+    "behaviorScenarios": 23,
+    "adapterBehaviorVerifiedCards": 4,
+    "newEngineCertifiedCards": 0,
+    "automaticCertifications": 0,
+    "inventoryGrants": 0,
+    "liveDiscordValidation": false
+  }
+}
