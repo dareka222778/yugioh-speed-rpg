@@ -1,0 +1,35 @@
+name: M580 Battle-destroyed search TagDuel adapter
+on:
+  push:
+    branches: [feat/work-m580-birdface-keldo-battle-destroyed-tag-adapter-20261124]
+    paths:
+      - 'src/battleDestroyedSearchTagAdapter.ts'
+      - 'tests/battleDestroyedSearchTagAdapter.test.cjs'
+      - 'docs/evidence/m580-battle-destroyed-search-tag-adapter.json'
+      - '.github/workflows/m580-battle-destroyed-search-tag-adapter.yml'
+  pull_request:
+    paths:
+      - 'src/battleDestroyedSearchTagAdapter.ts'
+      - 'tests/battleDestroyedSearchTagAdapter.test.cjs'
+      - 'docs/evidence/m580-battle-destroyed-search-tag-adapter.json'
+      - '.github/workflows/m580-battle-destroyed-search-tag-adapter.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  battle-destroyed-search:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m580-battle-destroyed-search-tag-adapter.json', 'utf8'))"
+      - name: Run M580 behavior regressions
+        run: node --test tests/battleDestroyedSearchTagAdapter.test.cjs
