@@ -75,9 +75,9 @@ test('Falcos requires a face-up Attack Position monster destroyed by battle',()=
 });
 
 test('Mystical Knight of Jackal accepts a face-down Defense Position target and returns it to owner Deck top',()=>{
- const session=setup(),source=deploy(session,0,fixture.jackal,2),target=deploy(session,1,fixture.enemy,3,{position:'def',faceUp:false});
+ const session=setup(),source=deploy(session,0,fixture.jackal,2),target=deploy(session,1,fixture.enemy,1,{position:'def',faceUp:false});
  moveToGrave(session.duel,1,target);
- const ownerDeck=session.duel.reserves['3'].deck,activeTeammateDeck=session.duel.core.players[1].deck,activeTop=activeTeammateDeck[0]?.uid;
+ const ownerDeck=session.duel.reserves['1'].deck,activeTeammateDeck=session.duel.core.players[1].deck,activeTop=activeTeammateDeck[0]?.uid;
  adapter.prepareBattleTopdeck(session,battle(session,'jackal-face-down',source,target),source.uid);
  const result=adapter.resolveBattleTopdeck(session,'jackal-face-down');
  assert.equal(result.ownerSeat,3);assert.equal(ownerDeck[0].uid,target.uid);assert.equal(activeTeammateDeck[0]?.uid,activeTop);
@@ -99,11 +99,11 @@ test('Topdeck target cannot be retargeted after leaving the Graveyard; replay is
  session.duel.core.players[1].banished.push(removed);synchronizeCardLifetimes(session.duel.core);
  assert.equal(adapter.resolveBattleTopdeck(session,'stale-target').status,'target-lost');
  assertInventorySame(before,session.duel);
- const fresh=setup(),source2=deploy(fresh,0,fixture.jackal,2),target2=deploy(fresh,1,fixture.enemy,3);
+ const fresh=setup(),source2=deploy(fresh,0,fixture.jackal,2),target2=deploy(fresh,1,fixture.enemy,1);
  moveToGrave(fresh.duel,1,target2);adapter.prepareBattleTopdeck(fresh,battle(fresh,'top-replay',source2,target2),source2.uid);
  assert.equal(adapter.resolveBattleTopdeck(fresh,'top-replay').status,'returned-to-owner-deck-top');
  assert.equal(adapter.resolveBattleTopdeck(fresh,'top-replay').status,'duplicate');
- assert.equal(fresh.duel.reserves['3'].deck.filter(card=>card.uid===target2.uid).length,1);
+ assert.equal(fresh.duel.reserves['1'].deck.filter(card=>card.uid===target2.uid).length,1);
 });
 
 test('A topdeck trigger resolves if its source leaves the field after activation',()=>{
@@ -127,8 +127,9 @@ test('Topdeck resolution observes negation and rejects a stale battle window',()
 test('Helping Robo draws to active physical hand, allows 7 until End Phase, then returns the chosen card to Deck bottom',()=>{
  const session=setup(),source=deploy(session,0,fixture.robo,2),target=deploy(session,1,fixture.enemy,3);
  moveToBanished(session.duel,1,target);
- const active=session.duel.core.players[0],extra=active.deck.shift();active.hand.push(extra);synchronizeCardLifetimes(session.duel.core);
- assert.equal(active.hand.length,6);
+ const active=session.duel.core.players[0];
+ while(active.hand.length<6){const extra=active.deck.shift();assert.ok(extra);active.hand.push(extra);}
+ synchronizeCardLifetimes(session.duel.core);assert.equal(active.hand.length,6);
  const before=inventory(session.duel),handsBefore=hands(session.duel),deckBefore=active.deck.length;
  adapter.prepareHelpingRoboForCombat(session,battle(session,'robo-cycle',source,target,{destroyedToGrave:false}),source.uid);
  const draw=adapter.resolveHelpingRoboDraw(session,'robo-cycle');
@@ -200,5 +201,5 @@ test('All M690 effects preserve the 2v2 inventory and private hand boundaries',(
  adapter.completeHelpingRoboForCombat(session,'robo-boundaries',draw.drawnUid);
  assertInventorySame(before,session.duel);
  assert.deepEqual(session.duel.reserves['0'].hand.map(card=>card.uid).sort(),handsBefore[0]);
- assert.deepEqual(session.duel.core.players[1].hand.map(card=>card.uid).sort(),handsBefore[1]);
+ assert.deepEqual(session.duel.core.players[1].hand.map(card=>card.uid).sort(),handsBefore[3]);
 });
