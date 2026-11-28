@@ -137,7 +137,7 @@ test('Card of Safe Return triggers from its team GY and draws into that team\'s 
  const resolved=resolveDrawTriggerEvent(duel,result.ledger,{eventId:event.eventId,acceptedSourceUids:[source.uid]},lookups);
  assert.equal(resolved.status,'triggered');assert.equal(resolved.plans[0].recipientSeat,1);
  const before=holder(duel,1).hand.length;applyPlans(duel,resolved.plans);assert.equal(holder(duel,1).hand.length,before+1);
- assert.equal(holder(duel,0).hand.length,5);
+ assert.equal(holder(duel,0).hand.length,4);
 });
 test('Card of Safe Return does not trigger when the summoned monster came from the opposing team GY',()=>{
  const duel=base(),source=placeSafeReturn(duel,1),origin=summonFromGrave(duel,0,1);
@@ -162,8 +162,8 @@ test('two Card of Safe Return copies produce two sequential, non-overlapping dra
  const origin=summonFromGrave(duel,1,0),event=safeEvent(duel,[origin]);
  const r=captureDrawTriggerEvent(duel,createDrawTriggerLedger(),event,lookups);
  const resolved=resolveDrawTriggerEvent(duel,r.ledger,{eventId:event.eventId,acceptedSourceUids:[a.uid,b.uid]},lookups);
- assert.equal(resolved.plans.length,2);assert.deepEqual(resolved.plans.map(p=>p.deckCountAtPlan),[13,12]);
- assert.deepEqual(resolved.plans.map(p=>p.handCountAtPlan),[5,6]);
+ assert.equal(resolved.plans.length,2);assert.deepEqual(resolved.plans.map(p=>p.deckCountAtPlan),[14,13]);
+ assert.deepEqual(resolved.plans.map(p=>p.handCountAtPlan),[4,5]);
  applyPlans(duel,resolved.plans);assert.equal(holder(duel,1).hand.length,7);
 });
 test('Card of Safe Return must be face-up and resolved to create a trigger',()=>{
@@ -187,7 +187,7 @@ test('a source owned by a reserve teammate draws to the currently active physica
 });
 test('the adapter never performs the End Phase hand-limit discard itself',()=>{
  const duel=base(),source=placeSafeReturn(duel,1),origin=summonFromGrave(duel,1,0),held=holder(duel,1);
- held.hand.push(...held.deck.splice(0,1));assert.equal(held.hand.length,6);const beforeDeck=held.deck.length;
+ held.hand.push(...held.deck.splice(0,2));assert.equal(held.hand.length,6);const beforeDeck=held.deck.length;
  const event=safeEvent(duel,[origin]),r=captureDrawTriggerEvent(duel,createDrawTriggerLedger(),event,lookups);
  const resolved=resolveDrawTriggerEvent(duel,r.ledger,{eventId:event.eventId,acceptedSourceUids:[source.uid]},lookups);
  applyPlans(duel,resolved.plans);assert.equal(held.hand.length,7);assert.equal(held.deck.length,beforeDeck-1);
@@ -277,8 +277,8 @@ test('multiple Spirits each plan one draw for the same Pot of Greed activator',(
  const r=captureDrawTriggerEvent(duel,createDrawTriggerLedger(),event,lookups);
  const resolved=resolveDrawTriggerEvent(duel,r.ledger,{eventId:event.eventId,acceptedSourceUids:[a.uid,b.uid]},lookups);
  assert.equal(resolved.plans.length,2);assert.deepEqual(resolved.plans.map(p=>p.recipientSeat),[0,0]);
- assert.deepEqual(resolved.plans.map(p=>p.deckCountAtPlan),[14,13]);applyPlans(duel,resolved.plans);
- assert.equal(holder(duel,0).hand.length,7);
+ assert.deepEqual(resolved.plans.map(p=>p.deckCountAtPlan),[15,14]);applyPlans(duel,resolved.plans);
+ assert.equal(holder(duel,0).hand.length,6);
 });
 test('a Pot of Greed source must belong to the physical seat that activated it',()=>{
  const duel=base(),spirit=placeSpirit(duel,1),pot=placePot(duel,1);
