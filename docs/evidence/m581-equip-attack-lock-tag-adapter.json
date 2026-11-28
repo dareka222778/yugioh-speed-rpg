@@ -1,0 +1,66 @@
+{
+  "format": 1,
+  "mission": "M581",
+  "title": "Equip attack lock — Paralyzing Potion / Mask of the Accursed",
+  "status": "isolated-adapter-awaiting-CI-and-review",
+  "cards": [
+    {
+      "id": "50152549",
+      "name": "Paralyzing Potion",
+      "konamiId": 4878,
+      "kind": "Equip Spell",
+      "firstTcgRelease": "2002-06-26",
+      "firstOcgRelease": "2000-01-27",
+      "officialText": "Um monstro que não seja do Tipo Máquina equipado com este card, não pode atacar.",
+      "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4878&ope=2&request_locale=pt",
+      "behavior": {
+        "blocksNonMachine": true,
+        "blocksMachine": false,
+        "standbyDamage": 0
+      }
+    },
+    {
+      "id": "56948373",
+      "name": "Mask of the Accursed",
+      "konamiId": 5107,
+      "kind": "Equip Spell",
+      "firstTcgRelease": "2003-03-01",
+      "firstOcgRelease": "2001-04-19",
+      "officialText": "O monstro equipado não pode atacar. Uma vez por turno, durante sua Fase de Apoio: cause 500 de dano ao controlador do monstro equipado.",
+      "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5107&ope=2&request_locale=pt",
+      "behavior": {
+        "blocksAllEquippedMonsters": true,
+        "standbyDamage": 500,
+        "recipient": "current-controller-of-equipped-monster",
+        "oncePerTurnPerCopy": true
+      }
+    }
+  ],
+  "design": {
+    "targetMetadata": "Race vem de getPlayableCard() para o monstro já certificado no campo; metadados ausentes falham fechados.",
+    "control": "Controlador do Equip Spell é a equipe da zona Backrow; controlador do monstro é a equipe da Monster Zone atual; proprietário físico permanece no prefixo UID m0–m3.",
+    "negation": "O host fornece explicitamente UIDs negados; o adapter não infere resolução de Chain.",
+    "damage": "500 LP por cópia de Mask of the Accursed, durante a Standby Phase do controlador do Equip Spell; se LP chega a zero, encerra o duelo conforme regra de equipe."
+  },
+  "testFile": "tests/equipAttackLockTagAdapter.test.cjs",
+  "expectedScenarioCount": 26,
+  "certification": {
+    "newCards": 0,
+    "certifiedCards": 0,
+    "automaticCertification": false,
+    "releaseAllowlistChanged": false
+  },
+  "safety": {
+    "inventoryGranted": 0,
+    "playerDataChanged": false,
+    "persistentDatabaseChanged": false,
+    "discordCommandChanged": false,
+    "productionDeploy": false
+  },
+  "limits": [
+    "Não conecta src/monsterEffects.ts, src/duelEngineCurrent.ts, src/effectRegistry.ts ou comandos Discord.",
+    "O estado de negação é fornecido pelo host; integração com Chain/negadores continua pendente.",
+    "A resolução de Standby é chamada explicitamente pelo host; o agendamento automático do turno ainda depende do handoff do resolver central.",
+    "Cartas permanecem fora do catálogo, certificação e allowlist até integração, suíte completa e revisão."
+  ]
+}
