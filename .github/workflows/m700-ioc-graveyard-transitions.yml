@@ -1,0 +1,53 @@
+name: M700 IOC graveyard transitions
+on:
+  push:
+    branches:
+      - feat/work-m700-ioc-graveyard-transitions-20261128
+    paths:
+      - 'src/iocGraveyardTransitionTagAdapter.ts'
+      - 'tests/iocGraveyardTransitionTagAdapter.test.cjs'
+      - 'docs/evidence/m700-ioc-graveyard-transitions.json'
+      - 'scripts/audit-ioc-graveyard-transitions-m700.cjs'
+      - '.github/workflows/m700-ioc-graveyard-transitions.yml'
+      - 'coordination/runs/work-20261128T074828-0300-M700.json'
+  pull_request:
+    paths:
+      - 'src/iocGraveyardTransitionTagAdapter.ts'
+      - 'tests/iocGraveyardTransitionTagAdapter.test.cjs'
+      - 'docs/evidence/m700-ioc-graveyard-transitions.json'
+      - 'scripts/audit-ioc-graveyard-transitions-m700.cjs'
+      - '.github/workflows/m700-ioc-graveyard-transitions.yml'
+      - 'coordination/runs/work-20261128T074828-0300-M700.json'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  ioc-graveyard-transitions:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Type check
+        run: npm run check
+      - name: Build
+        run: npm run build
+      - name: Card certification integrity
+        run: npm run check:cards
+      - name: Focused IOC behavior suite
+        run: node --test tests/iocGraveyardTransitionTagAdapter.test.cjs
+      - name: Classic Tag Duel rules and layout
+        run: npm run audit:tag-classic
+      - name: Classic Tag Duel session lifecycle
+        run: npm run audit:tag-classic-sessions
+      - name: Full regression suite
+        run: npm test
+      - name: Reservation, admission and evidence audit
+        if: always()
+        run: node scripts/audit-ioc-graveyard-transitions-m700.cjs

@@ -1,0 +1,101 @@
+{
+  "mission": "M700",
+  "runId": "work-20261128T074828-0300-M700",
+  "branch": "feat/work-m700-ioc-graveyard-transitions-20261128",
+  "sharedBaseHead": "1ad0c38364df7703430fbc204c273ee3a59f3a0b",
+  "historicalCutoff": "2004-09-30",
+  "cards": [
+    {
+      "id": "41859700",
+      "name": "Burning Algae",
+      "konamiCid": 5877,
+      "ocgFirstRelease": "2004-07-15",
+      "set": "IOC-062",
+      "eligibleByHistoricalUnion": true,
+      "officialOcgSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5877&ope=2&request_locale=ae",
+      "coverage": "implemented-pending-ci",
+      "verifiedSegments": [
+        "sent-from-deck",
+        "sent-from-private-hand",
+        "sent-from-banished",
+        "sent-from-monster-zone",
+        "opponent-team-shared-lp-plus-1000",
+        "physical-owner-team-after-control-change",
+        "effect-negation",
+        "duplicate-event-and-resolution-idempotency",
+        "stale-zone-binding",
+        "inventory-conservation"
+      ]
+    },
+    {
+      "id": "78243409",
+      "name": "The Thing in the Crater",
+      "konamiCid": 5878,
+      "ocgFirstRelease": "2004-07-15",
+      "set": "IOC-063",
+      "eligibleByHistoricalUnion": true,
+      "officialOcgSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5878&ope=2&request_locale=ae",
+      "coverage": "implemented-pending-ci",
+      "verifiedSegments": [
+        "destroyed-from-field-and-sent-to-owner-grave",
+        "optional-effect-resolution",
+        "pyro-only-from-active-owner-private-hand",
+        "partner-private-hand-isolation",
+        "opponent-turn-resolution",
+        "three-monster-zone-capacity",
+        "banishment-replacement-does-not-trigger",
+        "non-destruction-send-does-not-trigger",
+        "effect-negation",
+        "inventory-conservation"
+      ]
+    }
+  ],
+  "behaviorCoverage": {
+    "scenarios": 26,
+    "adapterBehaviorVerifiedCards": 0,
+    "completeCardRulesVerified": 0,
+    "status": "awaiting-focused-and-full-regression-CI",
+    "note": "Adapters and focused scenarios are authored; no behavior certification is claimed until CI completes. These cards remain outside the engine catalog and certification files."
+  },
+  "engineV9Baseline": {
+    "certified": 969,
+    "remainingTo1000": 31,
+    "source": "M699 checkpoint at 2026-11-28; not rerun in this M700 branch yet"
+  },
+  "explicitCertificateEntries": 959,
+  "counts": {
+    "candidateCards": 2,
+    "adapterBehaviorVerifiedCards": 0,
+    "newMetadataCards": 0,
+    "newEngineCertifiedCards": 0,
+    "automaticCertifications": 0,
+    "inventoryGrants": 0
+  },
+  "admission": {
+    "adapterOnly": true,
+    "centralResolverIntegrated": false,
+    "catalogRevisionChanged": false,
+    "certificationFileChanged": false,
+    "automaticCertifications": false,
+    "inventoryGrants": false
+  },
+  "tests": {
+    "focused": "pending CI",
+    "typecheck": "pending CI",
+    "build": "pending CI",
+    "cardCertificationAudit": "pending CI",
+    "fullRegression": "pending CI",
+    "discordLive": false
+  },
+  "handoff": {
+    "targetPR": 17,
+    "commentId": 7238246464,
+    "status": "requested-awaiting-explicit-release"
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  }
+}
