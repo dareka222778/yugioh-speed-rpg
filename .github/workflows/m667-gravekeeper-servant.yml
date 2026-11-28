@@ -1,0 +1,53 @@
+name: M667 Gravekeeper's Servant TagDuel adapter
+on:
+  push:
+    branches:
+      - feat/work-m667-gravekeepers-servant-20261127
+    paths:
+      - src/gravekeeperServantTagAdapter.ts
+      - tests/gravekeeperServantTagAdapter.test.cjs
+      - docs/evidence/m667-gravekeeper-servant.json
+      - scripts/audit-gravekeeper-servant-m667.cjs
+      - .github/workflows/m667-gravekeeper-servant.yml
+  pull_request:
+    branches:
+      - feat/rea-engine-recovery-20261026
+    paths:
+      - src/gravekeeperServantTagAdapter.ts
+      - tests/gravekeeperServantTagAdapter.test.cjs
+      - docs/evidence/m667-gravekeeper-servant.json
+      - scripts/audit-gravekeeper-servant-m667.cjs
+      - .github/workflows/m667-gravekeeper-servant.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: m667-gravekeeper-servant
+  cancel-in-progress: true
+jobs:
+  focused:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - run: node --test tests/gravekeeperServantTagAdapter.test.cjs
+      - run: node scripts/audit-gravekeeper-servant-m667.cjs
+      - run: npm run check:cards
+  repository-regression:
+    needs: focused
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npm run audit:tag-classic
