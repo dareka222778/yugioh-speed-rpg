@@ -1,0 +1,78 @@
+{
+  "mission": "M577",
+  "title": "Mirror Wall / Fairy Box continuous battle-trap adapter",
+  "cards": [
+    {
+      "id": "22359980",
+      "name": "Mirror Wall",
+      "konamiDatabaseCid": 4993,
+      "type": "Continuous Trap",
+      "officialText": "Halve the ATK of your opponent's attacking monsters. Once per turn, during your Standby Phase, pay 2000 LP or destroy this card.",
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4993&ope=2&request_locale=en",
+      "firstTcgRelease": "2002-10-20",
+      "firstTcgSet": "PSV-016",
+      "historicalEligibility": "eligible-before-2004-09-30"
+    },
+    {
+      "id": "21598948",
+      "name": "Fairy Box",
+      "konamiDatabaseCid": 5113,
+      "type": "Continuous Trap",
+      "officialText": "When your opponent's monster declares an attack: Toss a coin and call it. If you call it right, the attacking monster's ATK becomes 0 until the end of the Battle Phase. Once per turn, during your Standby Phase, pay 500 LP, or destroy this card.",
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5113&ope=2&request_locale=en",
+      "firstTcgRelease": "2003-03-01",
+      "firstTcgSet": "LON-024",
+      "historicalEligibility": "eligible-before-2004-09-30"
+    }
+  ],
+  "behavior": {
+    "mirrorWall": "Cada cópia face-up que estava ativa quando o monstro declarou ataque mantém seu próprio modificador de metade enquanto permanecer no campo; o mesmo monstro não é reduzido novamente pela mesma cópia em ataques posteriores. Duas cópias aplicam duas metades (1/4), e remover uma restaura a fração correspondente.",
+    "fairyBox": "Fairy Box pode ser virada de face-down em resposta à declaração de ataque (exceto Damage Step), resolvendo chamada/moeda injetadas; chamada correta define ATK 0 até o fim da Battle Phase.",
+    "upkeep": "Cada UID de cópia tem manutenção independente por turno: Mirror Wall 2000 LP, Fairy Box 500 LP. O custo só pode ser pago se a equipe tiver LP estritamente maior que o custo, seguindo StandbyFlow; recusa, igualdade ou LP insuficiente destrói a cópia e envia ao Cemitério do proprietário físico.",
+    "integration": "Adapter isolado. Não altera resolver central, tagActions, comandos Discord, catálogo, metadata, certificações, allowlist, dados persistentes ou inventário."
+  },
+  "invariantCoverage": [
+    "TagDuel 2v2 physical UIDs conserved and unique",
+    "private hands unchanged",
+    "Main Deck 20–30 per physical seat",
+    "End Phase hand limit 6",
+    "three shared Monster Zones + three Spell/Trap Zones per team",
+    "separate Field Zone and Extra Deck max 5",
+    "Mirror Wall affects only opponent attacking monster and does not mutate monster state",
+    "Fairy Box deterministic coin call, Battle Phase-scoped ATK zero, duplicate activation protection",
+    "Fairy Box attack window excludes Damage Step and same-turn Set",
+    "per-copy Standby Phase upkeep, idempotency by turn+UID",
+    "LP is charged to controller team and destroyed card goes to physical owner's Graveyard",
+    "no inventory grants or automatic certification",
+    "Mirror Wall: halving persiste após a janela de ataque enquanto a cópia permanece face-up",
+    "Mirror Wall: cada cópia aplica uma única metade; duas cópias resultam em um quarto",
+    "Mirror Wall: ativação Set pode ocorrer no Damage Step antes do cálculo de dano",
+    "Fairy Box: cópia Set pode ser virada na janela de ataque e resolver o efeito na mesma cadeia"
+  ],
+  "tests": {
+    "focusedFile": "tests/continuousBattleTrapTagAdapter.test.cjs",
+    "caseCount": 10,
+    "behaviorCertifiedCards": 0
+  },
+  "certification": {
+    "sharedCertifiedAtStart": 969,
+    "target": 1000,
+    "remainingAtStart": 31,
+    "newCertifications": 0,
+    "automaticCertification": false,
+    "status": "not-certified",
+    "reason": "M577 is an isolated behavior adapter; central resolver, metadata, certification fingerprints and released-card allowlist were not changed."
+  },
+  "safety": {
+    "runtimeCoreChanged": false,
+    "catalogChanged": false,
+    "cardCertificationsChanged": false,
+    "releasedCardIdsChanged": false,
+    "inventoryGranted": 0,
+    "playerDataChanged": false,
+    "persistentDatabaseChanged": false,
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "liveDiscordValidation": false
+  }
+}
