@@ -468,7 +468,7 @@ export function resolveInvasionChaosBattleTrigger(
  }
  const nextLedger:InvasionChaosLedger={
   ...ledger,pending:ledger.pending.filter(item=>item.eventId!==pending.eventId),
-  processed:[...ledger.processed,{eventId:pending.eventId,fingerprint:pending.fingerprint,sequence:pending.sequence,status:status==='skip-scheduled'?'resolved':status}]
+  processed:[...ledger.processed,{eventId:pending.eventId,fingerprint:pending.fingerprint,sequence:pending.sequence,status}]
  };
  assertInvasionChaosRules(state);
  const before=inventorySnapshot(input),after=inventorySnapshot(state);
