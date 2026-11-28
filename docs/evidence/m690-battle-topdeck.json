@@ -1,0 +1,105 @@
+{
+  "format": 1,
+  "mission": "M690",
+  "status": "isolated-adapter-only",
+  "baseline": {
+    "sharedBaseHead": "4e0886292955e78d511174fee48f12d39d0f1db3",
+    "engineV9Certified": 969,
+    "remainingTo1000": 31,
+    "source": "milestone1000-plan artifact run 46092633050"
+  },
+  "cards": [
+    {
+      "id": "87523462",
+      "konamiId": 5522,
+      "name": "Winged Sage Falcos",
+      "kind": "effect-monster",
+      "firstOCGRelease": "2003-10-23",
+      "officialSummary": "When this card destroys an opponent's face-up Attack Position monster by battle and sends it to their Graveyard, it can place that monster on top of their Deck.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5522&request_locale=ae",
+      "status": "adapter-tested-pending-engine-integration"
+    },
+    {
+      "id": "98745000",
+      "konamiId": 5519,
+      "name": "Mystical Knight of Jackal",
+      "kind": "effect-monster",
+      "firstOCGRelease": "2003-10-23",
+      "officialSummary": "When this card destroys an opponent's monster by battle and sends it to their Graveyard, it can return that monster to the top of their Deck.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5519&request_locale=ae",
+      "status": "adapter-tested-pending-engine-integration"
+    },
+    {
+      "id": "47025270",
+      "konamiId": 5596,
+      "name": "Helping Robo for Combat",
+      "kind": "effect-monster",
+      "firstOCGRelease": "2004-01-22",
+      "officialSummary": "When this card destroys an opponent's monster by battle, draw 1 card, then return 1 card from your hand to the bottom of the Deck.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5596&request_locale=ae",
+      "status": "adapter-tested-pending-engine-integration"
+    }
+  ],
+  "behaviorTests": {
+    "suite": "tests/battleTopdeckTagAdapter.test.cjs",
+    "authoredCases": 14,
+    "adapterBehaviorVerifiedCards": 3,
+    "engineBehaviorCertifiedCards": 0,
+    "execution": "pending-CI",
+    "coverage": [
+      "Falcos exige monstro destruído face-up em Posição de Ataque",
+      "Mystical Knight of Jackal aceita alvo em qualquer posição",
+      "topo do Deck do dono físico do monstro destruído, inclusive assento reserva",
+      "destruição por batalha, envio ao Cemitério adversário e vínculo UID/epoch",
+      "alvo removido antes da resolução e replay idempotente",
+      "resolução após a fonte deixar o campo e negação da fonte",
+      "Helping Robo: compra para a mão privada do assento ativo",
+      "Helping Robo: seleção de carta existente ou recém-comprada para o fundo do Deck",
+      "mão pode chegar a 7 durante a Battle Phase; descarte não é antecipado e permanece para End Phase",
+      "Deck vazio sinalizado sem concessão ou compra do companheiro",
+      "escolha inválida de outra mão física, janela expirada e replay",
+      "inventário, mãos privadas e Decks físicos preservados"
+    ]
+  },
+  "counts": {
+    "baselineEngineV9Certified": 969,
+    "remainingTo1000": 31,
+    "adapterBehaviorVerifiedCards": 3,
+    "newEngineCertifiedCards": 0,
+    "automaticCertifications": 0,
+    "inventoryGrants": 0
+  },
+  "ownerRules": {
+    "mainDeckMin": 20,
+    "mainDeckMax": 30,
+    "extraDeckMax": 5,
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "handLimit": 6,
+    "handCheck": "end",
+    "inventoryGrants": false
+  },
+  "limits": [
+    "As cartas permanecem fora do catálogo habilitado e de cardCertifications.ts; o adapter não aumenta a contagem engine-v9.",
+    "Falcos e Mystical Knight exigem que o alvo continue no Cemitério adversário até a resolução; o UID/epoch impede retargeting.",
+    "A fonte pode deixar o campo após ativar; se continuar face-up e for negada na resolução, o retorno é interrompido.",
+    "Helping Robo usa um passo explícito de seleção após a compra. Deck vazio retorna deck-empty; o resolver central ainda deve adjudicar deck-out. O adapter não aplica descarte imediato da mão."
+  ],
+  "integration": {
+    "status": "pending-handoff",
+    "targetPR": 17,
+    "handoffCommentId": 7231720000,
+    "files": [
+      "src/monsterEffects.ts",
+      "src/duelEngineCurrent.ts"
+    ],
+    "centralFilesModified": false,
+    "catalogModified": false,
+    "certificationsModified": false,
+    "discordCommandsModified": false,
+    "databaseModified": false,
+    "inventoryGranted": false,
+    "productionTouched": false
+  },
+  "nextBlock": "Após handoff central com backup verificável, integrar evento de destruição pós-batalha, topdeck por proprietário físico e compra/retorno privado de Helping Robo; testar Discord e só então revisar admissão/certificação individual."
+}
