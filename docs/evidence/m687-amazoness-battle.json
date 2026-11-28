@@ -1,0 +1,120 @@
+{
+  "format": 1,
+  "mission": "M687",
+  "status": "isolated-adapter-only",
+  "baseline": {
+    "sharedBaseHead": "09d396bafbf27ad76e81b521cc12e63128b5eca5",
+    "engineV9Certified": 969,
+    "remainingTo1000": 31,
+    "source": "GitHub Actions artifact milestone1000-plan.json, run 46089595301, artifact 15240033540"
+  },
+  "cards": [
+    {
+      "id": "73574678",
+      "konamiId": 5646,
+      "name": "Amazoness Blowpiper",
+      "kind": "monster",
+      "attribute": "EARTH",
+      "race": "Warrior",
+      "level": 3,
+      "atk": 800,
+      "defense": 1500,
+      "officialSummary": "Na Standby de seu controlador, escolhe um monstro adversário com a face para cima; ele perde 500 ATK até o fim do turno.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5646&request_locale=en",
+      "sourceRelease": "TCG 2003-10-10",
+      "status": "adapter-tested-pending-engine-integration"
+    },
+    {
+      "id": "94004268",
+      "konamiId": 5284,
+      "name": "Amazoness Swords Woman",
+      "kind": "monster",
+      "attribute": "EARTH",
+      "race": "Warrior",
+      "level": 4,
+      "atk": 1500,
+      "defense": 1600,
+      "officialSummary": "O dano de batalha que sua equipe receberia em batalhas envolvendo esta carta é redirecionado ao oponente.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5284&request_locale=en",
+      "sourceRelease": "TCG 2003-10-10",
+      "status": "adapter-tested-pending-engine-integration"
+    },
+    {
+      "id": "10979723",
+      "konamiId": 5647,
+      "name": "Amazoness Tiger",
+      "kind": "monster",
+      "attribute": "EARTH",
+      "race": "Beast",
+      "level": 4,
+      "atk": 1100,
+      "defense": 1500,
+      "officialSummary": "Limita o controlador a um Tiger, ganha 400 ATK por Amazoness aliada e impede ataques adversários contra outras Amazoness.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5647&request_locale=en",
+      "sourceRelease": "TCG 2003-10-10",
+      "status": "adapter-tested-pending-engine-integration"
+    }
+  ],
+  "deferred": [
+    {
+      "id": "29654737",
+      "konamiId": 5291,
+      "name": "Amazoness Chain Master",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5291&request_locale=en",
+      "reason": "O efeito exige olhar e transferir um monstro da mão privada do adversário para a mão física do controlador. O adapter não pode violar a separação de mãos do TagDuel; requer contrato de transferência explícito e revisão de privacidade."
+    }
+  ],
+  "behaviorTests": {
+    "suite": "tests/amazonessBattleTagAdapter.test.cjs",
+    "authoredCases": 21,
+    "adapterBehaviorVerifiedCards": 3,
+    "engineBehaviorCertifiedCards": 0,
+    "execution": "pending-CI",
+    "coverage": [
+      "Standby físico ativo e rotação de equipe",
+      "vínculo UID/epoch sem retarget",
+      "-500 ATK temporário e expiração",
+      "negação/remoção da fonte",
+      "aura Tiger +400 por Amazoness face-up",
+      "bloqueio de alvo de ataque e limite de controle",
+      "substituição de dano de batalha antes da aplicação original",
+      "dano de efeito não redirecionado",
+      "idempotência e replay",
+      "mãos privadas e inventário invariantes"
+    ]
+  },
+  "counts": {
+    "baselineEngineV9Certified": 969,
+    "remainingTo1000": 31,
+    "adapterBehaviorVerifiedCards": 3,
+    "newEngineCertifiedCards": 0,
+    "automaticCertifications": 0,
+    "inventoryGrants": 0
+  },
+  "ownerRules": {
+    "mainDeckMin": 20,
+    "mainDeckMax": 30,
+    "extraDeckMax": 5,
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "handLimit": 6,
+    "handCheck": "end",
+    "inventoryGrants": false
+  },
+  "integration": {
+    "status": "pending-handoff",
+    "targetPR": 17,
+    "commentId": 7231373691,
+    "files": [
+      "src/monsterEffects.ts",
+      "src/duelEngineCurrent.ts"
+    ],
+    "centralFilesModified": false,
+    "catalogModified": false,
+    "certificationsModified": false,
+    "discordCommandsModified": false,
+    "productionTouched": false
+  },
+  "limitation": "Os testes usam IDs físicos de monstros normais já habilitados como fixtures e um lookup de efeito Amazoness. As três cartas-alvo continuam fora de cardMetadata/cardCertifications; por isso este adapter não aumenta a contagem de 969 nem autoriza distribuição.",
+  "nextBlock": "Após handoff e backup verificável: integrar hooks de Standby, cálculo/substituição de dano e política contínua de ATK/alvo; adicionar metadata oficial e cenários do engine; somente então criar certificados explícitos."
+}
