@@ -32,13 +32,13 @@ const costs={
  wind:byAttribute('WIND')[1]
 };
 const excluded=new Set([...Object.values(placeholders),...Object.values(costs)]);
-const filler=monsters.filter(id=>!excluded.has(id)).slice(0,7);
-assert.equal(filler.length,7,'Fixture precisa de sete monstros adicionais.');
+const filler=monsters.filter(id=>!excluded.has(id)).slice(0,6);
+assert.equal(filler.length,6,'Fixture precisa de seis monstros adicionais.');
 const spells=enabled.filter(id=>getDuelCard(id)?.kind==='spell'&&!getDuelCard(id)?.field);
 const traps=enabled.filter(id=>getDuelCard(id)?.kind==='trap');
 const fields=enabled.filter(id=>getDuelCard(id)?.kind==='spell'&&getDuelCard(id)?.field);
 assert.ok(spells.length>=2&&traps.length>=2&&fields.length>=1,'Fixture precisa de Magias, Armadilhas e Magia de Campo.');
-const deck=[...Object.values(placeholders),...Object.values(costs),...filler,spells[0],spells[1],traps[0],traps[1]];
+const deck=[...Object.values(placeholders),...Object.values(costs),...filler,spells[0],spells[1],traps[0],traps[1],fields[0]];
 assert.equal(deck.length,20);
 assert.equal(new Set(deck).size,20);
 for(const id of deck)assert.ok(enabled.includes(id));
