@@ -3,13 +3,13 @@
   "runId": "work-20261127T215551-0300-M687",
   "mission": "M687",
   "priority": "P1",
-  "status": "reserved-and-implementing",
+  "status": "ci-passed-awaiting-handoff",
   "startedAt": "2026-11-27T21:55:51-03:00",
   "endedAt": null,
   "branch": "feat/work-m687-amazoness-tag-adapter-20261127",
   "sharedBranch": "feat/rea-engine-recovery-20261026",
   "sharedBaseHead": "1a07fbbc8f34ee5d84d1e5bb25b608bc4b7fbae2",
-  "headSha": "1a07fbbc8f34ee5d84d1e5bb25b608bc4b7fbae2",
+  "headSha": "0def3c65451ef4e7449c2824846475ba538da4e5",
   "reservedFiles": [
     "src/amazonessBattleTagAdapter.ts",
     "tests/amazonessBattleTagAdapter.test.cjs",
@@ -24,14 +24,39 @@
     "remainingTo1000": 31,
     "source": "milestone1000-plan artifact from successful run 46089595301"
   },
-  "blocksCompleted": [],
+  "blocksCompleted": [
+    "Adapter isolado para 3 efeitos Amazoness",
+    "21 cenários Node executados; 21/21 passaram",
+    "Audit gate confirmou 0 novas certificações e 0 concessões de inventário",
+    "CI M687 concluiu success"
+  ],
   "handoff": {
     "targetPR": 17,
-    "status": "not-requested-yet",
+    "commentId": 7231373691,
+    "status": "requested-awaiting-explicit-release",
     "files": [
       "src/monsterEffects.ts",
       "src/duelEngineCurrent.ts"
-    ]
+    ],
+    "response": "No explicit release or backup/branch transfer found as of 2026-11-27T22:12:55-03:00"
   },
-  "nextTask": "Implementar três efeitos Amazoness em adapter isolado; não admitir cartas nem alterar certificações antes da integração central e revisão individual."
+  "nextTask": "Implementar três efeitos Amazoness em adapter isolado; não admitir cartas nem alterar certificações antes da integração central e revisão individual.",
+  "pr": {
+    "number": 612,
+    "url": "https://github.com/dareka222778/yugioh-speed-rpg/pull/612",
+    "state": "open",
+    "draft": true,
+    "merged": false
+  },
+  "ci": {
+    "runId": 46091878739,
+    "conclusion": "success",
+    "url": "https://github.com/dareka222778/yugioh-speed-rpg/actions/runs/46091878739",
+    "checks": {
+      "typecheck": "success",
+      "build": "success",
+      "focusedTests": "success",
+      "audit": "success"
+    }
+  }
 }

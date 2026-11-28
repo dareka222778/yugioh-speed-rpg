@@ -1,0 +1,36 @@
+{
+  "format": 1,
+  "runId": "work-20261127T221255-0300-M688",
+  "mission": "M688",
+  "priority": "P1",
+  "status": "reserved-and-implementing",
+  "startedAt": "2026-11-27T22:12:55-03:00",
+  "endedAt": null,
+  "branch": "feat/work-m688-battle-rewards-20261127",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedBaseHead": "09d396bafbf27ad76e81b521cc12e63128b5eca5",
+  "headSha": "09d396bafbf27ad76e81b521cc12e63128b5eca5",
+  "reservedFiles": [
+    "src/battleRewardTagAdapter.ts",
+    "tests/battleRewardTagAdapter.test.cjs",
+    "docs/evidence/m688-battle-rewards.json",
+    "scripts/audit-battle-rewards-m688.cjs",
+    ".github/workflows/m688-battle-rewards.yml",
+    "coordination/runs/work-20261127T221255-0300-M688.json"
+  ],
+  "baseline": {
+    "engineV9Certified": 969,
+    "remainingTo1000": 31,
+    "source": "milestone1000-plan artifact run 46091774623"
+  },
+  "blocksCompleted": [],
+  "handoff": {
+    "targetPR": 17,
+    "status": "awaiting-cooperative-release",
+    "files": [
+      "src/monsterEffects.ts",
+      "src/duelEngineCurrent.ts"
+    ]
+  },
+  "nextTask": "Implementar Airknight/Aswan/Absorbing Kid em adapter isolado; sem tocar em resolver central ou certificados."
+}
