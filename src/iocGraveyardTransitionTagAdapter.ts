@@ -214,7 +214,7 @@ export function recordGraveyardTransition(
  assertRules(state);assertLedger(ledger);assertLookups(lookups);
  if(!event||event.kind!=='ioc-graveyard-send')throw new Error('Evento de envio ao GY inválido.');
  assertText(event.eventId,'ID do evento GY');assertText(event.cardUid,'UID do evento GY');
- if(!Number.isSafeInteger(event.sequence)||event.sequence<1||event.sequence<=ledger.lastSequence||
+ if(!Number.isSafeInteger(event.sequence)||event.sequence<1||
   !Number.isSafeInteger(event.turn)||event.turn!==state.core.turn||
   event.toZone!=='grave'||event.fromZone==='grave'||!event.binding||
   event.binding.uid!==event.cardUid||event.binding.zone!==event.fromZone||
@@ -227,6 +227,7 @@ export function recordGraveyardTransition(
   if(previous.fingerprint!==hash)throw new Error('Replay divergente de evento GY.');
   return {status:'duplicate',ledger};
  }
+ if(event.sequence<=ledger.lastSequence)throw new Error('Sequência de evento GY fora de ordem.');
  if(!movedToGrave(state,event.binding))return {status:'no-trigger',ledger:markProcessed(ledger,event,hash,'no-trigger')};
  const ownerSeat=ownerSeatOfUid(state,event.cardUid),ownerTeam=(ownerSeat%2) as GraveyardTransitionTeam;
  const card=state.core.players[ownerTeam].grave.find(item=>item.uid===event.cardUid);
