@@ -2,16 +2,17 @@
   "runId": "work-20261128T074828-0300-M700",
   "mission": "M700",
   "priority": "P1",
-  "status": "reserved-and-implementing",
+  "status": "adapter-and-focused-suite-authored; CI pending",
   "branch": "feat/work-m700-ioc-graveyard-transitions-20261128",
-  "sharedBaseHead": "9881c50a37cfb1750f4e544c79943dfb16f3da72",
-  "branchBaseHead": null,
+  "sharedBaseHead": "1ad0c38364df7703430fbc204c273ee3a59f3a0b",
+  "branchBaseHead": "1ad0c38364df7703430fbc204c273ee3a59f3a0b",
+  "codeCheckpointSha": "80199162e743679603ea7408768c682e2b596579",
   "startedAt": "2026-11-28T07:48:28-03:00",
   "endedAt": null,
-  "effectiveWorkMinutes": 0,
+  "effectiveWorkMinutes": null,
   "targetEffectiveWorkMinutes": 60,
   "targetMet": false,
-  "scope": "Adapter TagDuel 2v2 isolado para Burning Algae (41859700/CID 5877) e The Thing in the Crater (78243409/CID 5878): gatilho obrigatório ao enviar Burning Algae ao GY (oponente +1000 LP), gatilho opcional de The Thing ao ser destruído do campo e enviado ao GY (Invocação-Especial de Pyro da mão privada do assento ativo do proprietário), origem/destino por UID/epoch, privacidade por assento, LP compartilhado, capacidade 3+3, conservação de inventário e idempotência. Skull-Mark Ladybug permanece reservado pelo M697. Sem resolver central, catálogo, certificações, comandos, banco, concessão de inventário ou produção.",
+  "scope": "Adapter TagDuel 2v2 isolado para Burning Algae (41859700/CID 5877) e The Thing in the Crater (78243409/CID 5878): Burning Algae ganha 1000 LP para o time oponente quando enviada ao GY; The Thing opcionalmente Invoca por Especial 1 Pyro da mão privada do assento ativo do time proprietário quando destruída no campo e enviada ao GY. Origem/destino por UID/epoch, privacidade por assento, LP compartilhado, capacidade 3+3, conservação de inventário e idempotência. Skull-Mark Ladybug permanece reservado pelo M697. Sem resolver central, catálogo, certificações, comandos, banco, concessão de inventário ou produção.",
   "reservedFiles": [
     "src/iocGraveyardTransitionTagAdapter.ts",
     "tests/iocGraveyardTransitionTagAdapter.test.cjs",
@@ -20,20 +21,39 @@
     ".github/workflows/m700-ioc-graveyard-transitions.yml",
     "coordination/runs/work-20261128T074828-0300-M700.json"
   ],
-  "completedBlocks": [],
+  "changedPaths": [
+    ".github/workflows/m700-ioc-graveyard-transitions.yml",
+    "coordination/runs/work-20261128T074828-0300-M700.json",
+    "docs/evidence/m700-ioc-graveyard-transitions.json",
+    "scripts/audit-ioc-graveyard-transitions-m700.cjs",
+    "src/iocGraveyardTransitionTagAdapter.ts",
+    "tests/iocGraveyardTransitionTagAdapter.test.cjs"
+  ],
+  "completedBlocks": [
+    "Coordenação M700 retomada no branch já reservado; shared HEAD real verificado em 1ad0c38364df7703430fbc204c273ee3a59f3a0b e branch sem atraso (3 commits à frente antes deste lote).",
+    "Reserva M700 não conflita com os arquivos ativos dos demais agentes; arquivos centrais permanecem bloqueados até handoff explícito.",
+    "Adapter isolado Burning Algae + The Thing in the Crater revisado e endurecido contra motivo inválido, epoch negativo e crescimento do ledger além de 4096 eventos.",
+    "Suíte focada ampliada para 26 cenários, incluindo origem de Monster Zone, não-trigger de Deck, replay de resolução e limites do ledger.",
+    "Evidência histórica oficial registrada: ambos os candidatos IOC-062/IOC-063, CID 5877/5878, OCG 2004-07-15, antes do corte 2004-09-30.",
+    "Workflow próprio e auditoria de escopo adicionados; execução CI ainda pendente."
+  ],
   "counts": {
     "candidateCards": 2,
     "adapterBehaviorVerifiedCards": 0,
+    "engineV9Baseline": 969,
+    "remainingTo1000": 31,
+    "newMetadataCards": 0,
     "newEngineCertifiedCards": 0,
     "automaticCertifications": 0,
     "inventoryGrants": 0
   },
   "verification": {
-    "typecheck": null,
-    "build": null,
-    "focusedTests": null,
-    "fullRegression": null,
-    "audit": null,
+    "typecheck": "pending CI",
+    "build": "pending CI",
+    "cardCertificationAudit": "pending CI",
+    "focusedTests": "pending CI; 26 scenarios authored",
+    "fullRegression": "pending CI",
+    "audit": "pending CI",
     "workflowRun": null,
     "discordLive": false
   },
@@ -46,20 +66,26 @@
     "deploy": false,
     "backupVerified": false,
     "productionChanged": false,
-    "liveDiscordValidation": false
+    "liveDiscordValidation": false,
+    "verificationLimit": "Nenhuma implantação foi tentada; endpoint de deployments não é exposto pelo conector disponível."
   },
   "handoffs": {
     "central": {
       "pr": 17,
-      "commentId": 7237927806,
+      "commentId": 7238246464,
+      "status": "requested-awaiting-explicit-release"
+    },
+    "regression": {
+      "pr": 619,
+      "commentId": 7238110127,
       "status": "requested-awaiting-explicit-release"
     }
   },
   "scopeReleasedToAuxiliary": [],
-  "nextTask": "Implementar e testar os gatilhos de envio ao Cemitério; depois conferir HEAD/coordenação e avaliar a próxima família independente.",
-  "nextWindow": "2026-11-28T12:30:00-03:00",
+  "nextTask": "Após CI, conferir novo HEAD/coordenação e avançar para M701 com uma família independente de comportamento GY/IOC; não tocar nas reservas M697/M698 nem nos arquivos centrais.",
+  "nextWindow": "2026-11-28T08:30:00-03:00",
   "blockers": [
     "Integração central aguarda handoff explícito no PR #17.",
-    "Full regression do M699 bloqueada por três falhas nos testes reservados do M696."
+    "Full regression anterior do M699 registrou três falhas em testes reservados por M696; verificar se o branch M700 herda a mesma regressão."
   ]
 }
