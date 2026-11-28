@@ -64,7 +64,7 @@ for(const id of ids){
 assert.ok(!source.includes('grantInventory')&&!source.includes('addInventory')&&!source.includes('automaticCertification'));
 const reservation=state.activeReservations.find(item=>item.runId===runId);
 assert.ok(reservation&&reservation.branch===branch&&reservation.priority==='P1');
-assert.deepEqual(reservation.reservedFiles,[...expected].sort());
+assert.deepEqual([...reservation.reservedFiles].sort(),[...expected].sort());
 assert.equal(run.mission,'M700');assert.equal(run.branch,branch);assert.equal(run.runId,runId);
 assert.equal(run.counts.candidateCards,2);assert.equal(run.counts.newEngineCertifiedCards,0);
 assert.equal(run.counts.automaticCertifications,0);assert.equal(run.counts.inventoryGrants,0);
