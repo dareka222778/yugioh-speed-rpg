@@ -1,0 +1,59 @@
+{
+  "runId": "work-20261128T072745-0300-M699",
+  "mission": "M699",
+  "priority": "P1",
+  "status": "reserved-and-implementing",
+  "branch": "feat/work-m699-ioc-attribute-summons-20261128",
+  "sharedBaseHead": "b5e3dc49babde0ab914db0c303147b8d0af253b0",
+  "startedAt": "2026-11-28T07:27:45-03:00",
+  "endedAt": null,
+  "effectiveWorkMinutes": 0,
+  "targetEffectiveWorkMinutes": 60,
+  "targetMet": false,
+  "scope": "Adapter TagDuel 2v2 isolado para Gigantes (47606319/CID 5831), Fenrir (00218704/CID 5830), Inferno (74823665/CID 5829) e Silpheed (73001017/CID 5832): procedimentos de Invocação-Especial da mão por banimento de monstros do atributo correto no Cemitério da equipe; gatilhos de batalha (varredura de Magias/Armadilhas, skip de Draw, 1500 LP e descarte aleatório HMAC), identidade/assento físico, mão privada do oponente ativo, idempotência e conservação. Sem resolver central, catálogo, certificações, comandos, banco, inventário concedido ou produção.",
+  "reservedFiles": [
+    "src/invasionChaosAttributeSummonTagAdapter.ts",
+    "tests/invasionChaosAttributeSummonTagAdapter.test.cjs",
+    "docs/evidence/m699-ioc-attribute-summons.json",
+    "scripts/audit-ioc-attribute-summons-m699.cjs",
+    ".github/workflows/m699-ioc-attribute-summons.yml",
+    "coordination/runs/work-20261128T072745-0300-M699.json"
+  ],
+  "completedBlocks": [],
+  "counts": {
+    "candidateCards": 4,
+    "adapterBehaviorVerifiedCards": 0,
+    "newEngineCertifiedCards": 0,
+    "automaticCertifications": 0,
+    "inventoryGrants": 0
+  },
+  "verification": {
+    "focusedTests": null,
+    "fullRegression": null,
+    "workflowRun": null,
+    "ci": null,
+    "discordLive": false
+  },
+  "pullRequest": {
+    "number": null,
+    "draft": true,
+    "merge": false
+  },
+  "deployment": {
+    "deploy": false,
+    "backupVerified": false,
+    "productionChanged": false
+  },
+  "handoff": {
+    "pr": 17,
+    "commentId": 7237927806,
+    "status": "requested-awaiting-explicit-release"
+  },
+  "scopeReleasedToAuxiliary": [],
+  "nextTask": "Completar o adapter e testes; aguardar CI; depois conferir novo HEAD e coordenação e avaliar a próxima família independente.",
+  "nextWindow": "2026-11-28T12:30:00-03:00",
+  "blockers": [
+    "Arquivos centrais aguardam liberação cooperativa explícita.",
+    "Sem autorização de merge/deploy ou validação live do Discord."
+  ]
+}
