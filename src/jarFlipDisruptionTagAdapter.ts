@@ -240,7 +240,7 @@ function destroyAllMonsters(duel:JarFlipSession):{destroyedMonsterCount:number;d
   const fieldUids=new Set(duel.core.players.flatMap(player=>player.monsters.map(monster=>monster.uid)));
   for(const team of [0,1] as Team[]){
     const player=duel.core.players[team];
-    const orphaned=player.backrow.filter(card=>!!card.equippedTo&&!fieldUids.has(card.equippedTo));
+    const orphaned=player.backrow.filter(card=>card.equippedTo!==undefined&&!fieldUids.has(card.equippedTo));
     player.backrow=player.backrow.filter(card=>!orphaned.some(item=>item.uid===card.uid));
     for(const card of orphaned){
       const ownerTeam=(physicalSeat(card.uid)%2) as Team;
@@ -273,9 +273,10 @@ export function activateJarFlip(
   if(input.active[actorTeam]!==event.actorSeat)throw new Error('Somente o participante ativo da equipe pode registrar o gatilho FLIP.');
   if((input.jarFlipActivationIds??[]).includes(event.activationId))throw new Error('Este gatilho FLIP Jar já foi registrado.');
   const source=findSource(input,event.actorSeat,event.sourceUid,lookup);
+  const affected=Object.freeze(activeSeats(input)) as unknown as [Seat,Seat];
   const plan:JarFlipPlan=Object.freeze({
     ...event,actorTeam,sourceOwnerSeat:source.ownerSeat,sourceCardId:source.cardId,effect:source.effect,
-    affectedSeats:activeSeats(input),turn:input.core.turn,activationCurrent:input.core.current as Team,
+    affectedSeats:affected,turn:input.core.turn,activationCurrent:input.core.current as Team,
     activationPhase:input.core.phase,cursorAtActivation:input.cursor
   });
   const next=structuredClone(input) as JarFlipSession;
