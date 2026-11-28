@@ -1,0 +1,75 @@
+{
+  "runId": "work-20261128T081200-0300-M701",
+  "mission": "M701",
+  "priority": "P1",
+  "status": "reserved; implementation in progress",
+  "branch": "feat/work-m701-banished-zone-returns-20261128",
+  "sharedBaseHead": "0417a9fd69ef6e723639dbd7a5fb7cfa4e70e661",
+  "codeCheckpointSha": "0417a9fd69ef6e723639dbd7a5fb7cfa4e70e661",
+  "startedAt": "2026-11-28T08:12:00-03:00",
+  "endedAt": null,
+  "effectiveWorkMinutes": null,
+  "targetEffectiveWorkMinutes": 60,
+  "targetMet": false,
+  "scope": "Adapters TagDuel 2v2 para retorno da zona banida: D.D. Scout Plane (End Phase, banido neste turno), Dimension Fusion (custo 2000 LP, ambos os times invocam o máximo possível) e Return from the Different Dimension (metade dos LP, time ativador invoca o máximo possível e os monstros que permanecerem no campo são banidos no End Phase). Identidade física por UID/epoch, dono físico, LP compartilhado, zonas 3+3, Deck 20–30, mão 6 somente na End Phase, Extra 5 e conservação do inventário.",
+  "reservedFiles": [
+    ".github/workflows/m701-banished-zone-returns.yml",
+    "coordination/runs/work-20261128T081200-0300-M701.json",
+    "docs/evidence/m701-banished-zone-returns.json",
+    "scripts/audit-banished-zone-returns-m701.cjs",
+    "src/banishedZoneReturnTagAdapter.ts",
+    "tests/banishedZoneReturnTagAdapter.test.cjs"
+  ],
+  "changedPaths": [],
+  "completedBlocks": [
+    "Reserva M701 P1 criada com branch própria e atualização CAS do coordination/state.json; nenhum caminho de terceiros reservado foi tocado.",
+    "Família selecionada após conferência de PRs/metadata: D.D. Scout Plane, Dimension Fusion e Return from the Different Dimension.",
+    "Elegibilidade histórica verificada em fontes oficiais Konami até 2004-09-30; os dois Spell/Trap atualmente Forbidden permanecem apenas candidatos históricos, sem política de banlist automática."
+  ],
+  "counts": {
+    "candidateCards": 3,
+    "adapterBehaviorVerifiedCards": 0,
+    "engineV9Baseline": 969,
+    "remainingTo1000": 31,
+    "newMetadataCards": 0,
+    "newEngineCertifiedCards": 0,
+    "automaticCertifications": 0,
+    "inventoryGrants": 0
+  },
+  "verification": {
+    "typecheck": "pending",
+    "build": "pending",
+    "cardCertificationAudit": "pending",
+    "focusedTests": "pending",
+    "classicTagRules": "pending",
+    "classicTagSessions": "pending",
+    "fullRegression": "pending",
+    "audit": "pending",
+    "workflowRun": null,
+    "discordLive": false
+  },
+  "pullRequest": {
+    "number": null,
+    "draft": true,
+    "merge": false
+  },
+  "deployment": {
+    "deploy": false,
+    "backupVerified": false,
+    "productionChanged": false,
+    "liveDiscordValidation": false
+  },
+  "handoffs": {
+    "central": {
+      "pr": 17,
+      "status": "not-requested-yet; adapter remains isolated"
+    }
+  },
+  "limitations": [
+    "DuelPlayer.banished é CardRef[] e não representa banimento face-down; o adapter só pode certificar o modelo atual, sem estado face-down.",
+    "A integração com banishment hooks/resolver central permanece bloqueada até handoff explícito no PR #17.",
+    "Sem comandos Discord novos ou validação de gateway ao vivo."
+  ],
+  "nextTask": "Completar adapter, testes e auditoria M701; após CI, revalidar HEAD/coordenação e continuar com próxima família IOC sem tocar nas reservas M697/M698.",
+  "nextWindow": "2026-11-28T12:30:00-03:00"
+}
