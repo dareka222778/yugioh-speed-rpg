@@ -8,7 +8,7 @@ const {
  GIGANTES_ID,GIGANTES_KONAMI_CID,FENRIR_ID,FENRIR_KONAMI_CID,
  INFERNO_ID,INFERNO_KONAMI_CID,SILPHEED_ID,SILPHEED_KONAMI_CID,
  createExactInvasionChaosLookups,assertInvasionChaosRules,
- specialSummonInvasionChaosFromHand,createInvasionChaosLedger,
+ specialSummonInvasionChaosFromHand,isInvasionChaosSpecialSummonOnly,assertInvasionChaosNormalSummonForbidden,createInvasionChaosLedger,
  recordInvasionChaosBattleEvent,resolveInvasionChaosBattleTrigger,
  consumeInvasionChaosDrawSkip
 }=require('../dist/invasionChaosAttributeSummonTagAdapter');
@@ -166,6 +166,16 @@ test('candidate identities, Konami IDs and exact lookups are fixed; none is admi
  assert.equal(exact.inferno(INFERNO_ID),true);assert.equal(exact.silpheed(SILPHEED_ID),true);
 });
 
+
+test('all four IOC monsters are explicitly blocked from Normal Summon and Set',()=>{
+ for(const key of ['gigantes','fenrir','inferno','silpheed']){
+  assert.equal(isInvasionChaosSpecialSummonOnly(placeholders[key],lookups),true);
+  assert.throws(()=>assertInvasionChaosNormalSummonForbidden(placeholders[key],lookups),/não pode ser Invocado/i);
+ }
+ assert.equal(isInvasionChaosSpecialSummonOnly(filler[0],lookups),false);
+ assert.equal(assertInvasionChaosNormalSummonForbidden(filler[0],lookups),undefined);
+});
+
 test('owner rules remain Deck 20–30, hand 6 only at End Phase, zones 3+3 and Extra 5',()=>{
  const duel=base();assert.equal(assertInvasionChaosRules(duel),undefined);
  for(let i=0;i<7;i++)duel.core.players[0].hand.push(duel.core.players[0].deck.pop());
@@ -202,6 +212,16 @@ test('an incorrect attribute cannot be paid as a summon cost',()=>{
 test('a cost in the opposing GY cannot pay for the active team procedure',()=>{
  const duel=base(),candidate=moveToHand(duel,0,placeholders.gigantes),wrong=putCostInGrave(duel,1,costs.earth);
  assert.throws(()=>specialSummonInvasionChaosFromHand(duel,0,candidate.uid,[wrong.uid],lookups),/Cemitério compartilhado/i);
+});
+
+
+test('a teammate GY cost is legal on the shared field and retains the partner physical UID',()=>{
+ const duel=base(),candidate=moveToHand(duel,0,placeholders.gigantes),partnerCost=putCostInGrave(duel,2,costs.earth);
+ assert.ok(partnerCost.uid.startsWith('m2:'));
+ const result=specialSummonInvasionChaosFromHand(duel,0,candidate.uid,[partnerCost.uid],lookups);
+ assert.equal(result.status,'summoned');
+ assert.ok(result.state.core.players[0].banished.some(card=>card.uid===partnerCost.uid));
+ assert.ok(result.state.core.players[0].monsters.some(card=>card.uid===candidate.uid));
 });
 
 test('the active seat cannot summon a candidate from its partner private hand',()=>{
@@ -245,6 +265,7 @@ test('source destruction triggers only for battle destruction sent to the physic
 test('Gigantes resolves its mandatory non-targeting sweep across both teams and the Field Zone',()=>{
  const duel=base(),source=addMonster(duel,0,0,placeholders.gigantes);
  const backA=addBackrow(duel,0,0,spells[0]),backB=addBackrow(duel,1,1,traps[0]);
+ const partnerOwnedOnOpponentField=addBackrow(duel,0,1,spells[1]);
  const field=addField(duel,1,1,fields[0]),before=inventory(duel);
  const moved=destroySource(duel,source,{eventId:'gigantes-sweep',sequence:1});
  const recorded=recordInvasionChaosBattleEvent(moved.state,createInvasionChaosLedger(),moved.event,lookups);
@@ -257,6 +278,7 @@ test('Gigantes resolves its mandatory non-targeting sweep across both teams and 
  assert.ok(resolved.state.core.players[0].grave.some(card=>card.uid===backA.uid));
  assert.ok(resolved.state.core.players[1].grave.some(card=>card.uid===backB.uid));
  assert.ok(resolved.state.core.players[1].grave.some(card=>card.uid===field.uid));
+ assert.ok(resolved.state.core.players[0].grave.some(card=>card.uid===partnerOwnedOnOpponentField.uid));
  assert.deepEqual(inventory(resolved.state),before);
 });
 
@@ -346,6 +368,15 @@ test('Fenrir schedules the opponent next Draw Phase when the target is destroyed
  const consumed=consumeInvasionChaosDrawSkip(resolved.ledger,1,2);
  assert.equal(consumed.skip,true);assert.equal(consumed.sourceUid,source.uid);
  assert.equal(consumeInvasionChaosDrawSkip(consumed.ledger,1,2).skip,false);
+});
+
+
+test('Fenrir effect negation does not schedule a Draw Phase skip',()=>{
+ const duel=base(),source=addMonster(duel,0,0,placeholders.fenrir),target=addMonster(duel,1,1,filler[0]);
+ const moved=destroyTarget(duel,source,target,{eventId:'fenrir-negated',sequence:1});
+ const recorded=recordInvasionChaosBattleEvent(moved.state,createInvasionChaosLedger(),moved.event,lookups);
+ const resolved=resolveInvasionChaosBattleTrigger(moved.state,recorded.ledger,windowFor(moved.state,'fenrir-negated',{effectNegated:true}));
+ assert.equal(resolved.status,'effect-negated');assert.equal(resolved.ledger.drawSkips.length,0);
 });
 
 test('Fenrir triggered during the opponent turn schedules that opponent following turn, not the current one',()=>{
