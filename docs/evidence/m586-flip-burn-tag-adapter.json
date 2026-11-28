@@ -1,0 +1,46 @@
+{
+  "mission": "M586",
+  "status": "behavior-tests-pending-ci",
+  "cards": [
+    {
+      "name": "Des Koala",
+      "passcode": "69579761",
+      "konamiDatabaseCid": 5661,
+      "firstTcgRelease": "2003-10-10",
+      "set": "MFC-077",
+      "effect": "FLIP: Inflict 400 damage to your opponent for each card in their hand.",
+      "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5661&ope=2&request_locale=en"
+    },
+    {
+      "name": "Princess of Tsurugi",
+      "passcode": "51371017",
+      "konamiDatabaseCid": 4272,
+      "firstTcgRelease": "2002-06-26",
+      "set": "MRD-086",
+      "effect": "FLIP: Inflict 500 points of damage to your opponent's Life Points for each Spell and Trap Card on your opponent's side of the field.",
+      "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4272&ope=2&request_locale=en"
+    }
+  ],
+  "behavior": {
+    "flipSources": ["flip-summon", "battle", "card-effect"],
+    "desKoalaCount": "private hand of the opposing team's active seat at resolution",
+    "princessCount": "opposing team's three shared Spell/Trap zones plus separate Field Zone; face-down cards count",
+    "lp": "shared team LP; captured controller team determines opponent",
+    "ownership": "UID m0-m3 retained; controller and physical owner remain separate",
+    "handLimit": "6 cards checked only at End Phase; effect does not discard",
+    "zones": "3 monster + 3 spell/trap per team; Field Zone separate",
+    "deck": "20-30 main deck and maximum 5 Extra Deck per physical seat"
+  },
+  "testFile": "tests/flipBurnTagAdapter.test.cjs",
+  "expectedFocusedScenarios": 16,
+  "certifiedCardsAdded": 0,
+  "automaticCertifications": 0,
+  "inventoryGranted": 0,
+  "runtimeCoreChanged": false,
+  "catalogChanged": false,
+  "commandsChanged": false,
+  "playerDataChanged": false,
+  "mergePerformed": false,
+  "deployPerformed": false,
+  "liveDiscordValidation": false
+}
