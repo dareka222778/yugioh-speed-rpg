@@ -1,0 +1,65 @@
+{
+  "runId": "work-20261128T074828-0300-M700",
+  "mission": "M700",
+  "priority": "P1",
+  "status": "reserved-and-implementing",
+  "branch": "feat/work-m700-ioc-graveyard-transitions-20261128",
+  "sharedBaseHead": "9881c50a37cfb1750f4e544c79943dfb16f3da72",
+  "branchBaseHead": null,
+  "startedAt": "2026-11-28T07:48:28-03:00",
+  "endedAt": null,
+  "effectiveWorkMinutes": 0,
+  "targetEffectiveWorkMinutes": 60,
+  "targetMet": false,
+  "scope": "Adapter TagDuel 2v2 isolado para Burning Algae (41859700/CID 5877) e The Thing in the Crater (78243409/CID 5878): gatilho obrigatório ao enviar Burning Algae ao GY (oponente +1000 LP), gatilho opcional de The Thing ao ser destruído do campo e enviado ao GY (Invocação-Especial de Pyro da mão privada do assento ativo do proprietário), origem/destino por UID/epoch, privacidade por assento, LP compartilhado, capacidade 3+3, conservação de inventário e idempotência. Skull-Mark Ladybug permanece reservado pelo M697. Sem resolver central, catálogo, certificações, comandos, banco, concessão de inventário ou produção.",
+  "reservedFiles": [
+    "src/iocGraveyardTransitionTagAdapter.ts",
+    "tests/iocGraveyardTransitionTagAdapter.test.cjs",
+    "docs/evidence/m700-ioc-graveyard-transitions.json",
+    "scripts/audit-ioc-graveyard-transitions-m700.cjs",
+    ".github/workflows/m700-ioc-graveyard-transitions.yml",
+    "coordination/runs/work-20261128T074828-0300-M700.json"
+  ],
+  "completedBlocks": [],
+  "counts": {
+    "candidateCards": 2,
+    "adapterBehaviorVerifiedCards": 0,
+    "newEngineCertifiedCards": 0,
+    "automaticCertifications": 0,
+    "inventoryGrants": 0
+  },
+  "verification": {
+    "typecheck": null,
+    "build": null,
+    "focusedTests": null,
+    "fullRegression": null,
+    "audit": null,
+    "workflowRun": null,
+    "discordLive": false
+  },
+  "pullRequest": {
+    "number": null,
+    "draft": true,
+    "merge": false
+  },
+  "deployment": {
+    "deploy": false,
+    "backupVerified": false,
+    "productionChanged": false,
+    "liveDiscordValidation": false
+  },
+  "handoffs": {
+    "central": {
+      "pr": 17,
+      "commentId": 7237927806,
+      "status": "requested-awaiting-explicit-release"
+    }
+  },
+  "scopeReleasedToAuxiliary": [],
+  "nextTask": "Implementar e testar os gatilhos de envio ao Cemitério; depois conferir HEAD/coordenação e avaliar a próxima família independente.",
+  "nextWindow": "2026-11-28T12:30:00-03:00",
+  "blockers": [
+    "Integração central aguarda handoff explícito no PR #17.",
+    "Full regression do M699 bloqueada por três falhas nos testes reservados do M696."
+  ]
+}
