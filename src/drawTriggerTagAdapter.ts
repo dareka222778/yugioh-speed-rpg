@@ -209,7 +209,7 @@ function activeSourcesForSafeReturn(state:TagDuel,team:DrawTriggerTeam,lookup:Dr
   for(const card of state.core.players[team].backrow){
     if(lookup.cardOfSafeReturn(card.id)&&card.faceUp===true&&card.resolved===true&&!negated.has(card.uid)){
       ownerOfUid(state,card.uid);
-      result.push({sourceUid:card.uid,triggerKind:'card-of-safe-return',controllerTeam:team,recipientSeat:state.active[team]});
+      result.push({sourceUid:card.uid,triggerKind:'card-of-safe-return',controllerTeam:team,recipientSeat:state.active[team] as DrawTriggerSeat});
     }
   }
   return result.sort((a,b)=>a.sourceUid.localeCompare(b.sourceUid));
@@ -273,7 +273,7 @@ function assertLedger(ledger:DrawTriggerLedger):void{
   if(!ledger||ledger.version!==1||!Number.isSafeInteger(ledger.lastSequence)||ledger.lastSequence<0||
     !Array.isArray(ledger.pending)||ledger.pending.length>1||!Array.isArray(ledger.processed)||
     ledger.pending.some(item=>!item||!item.event||typeof item.fingerprint!=='string'||!/^[a-f0-9]{64}$/.test(item.fingerprint)||
-      !Array.isArray(item.candidates)||item.candidates.some(candidate=>!candidate||typeof candidate.sourceUid!=='string'||
+      !Array.isArray(item.candidates)||item.candidates.some((candidate:DrawTriggerCandidate)=>!candidate||typeof candidate.sourceUid!=='string'||
         !['card-of-safe-return','spirit-of-the-pot-of-greed'].includes(candidate.triggerKind)||
         !isTeam(candidate.controllerTeam)||!isSeat(candidate.recipientSeat)))||
     ledger.processed.some(item=>!item||typeof item.eventId!=='string'||!item.eventId.trim()||
