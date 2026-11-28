@@ -1,0 +1,27 @@
+name: M672 spell-counter TagDuel adapter
+on:
+  pull_request:
+    paths:
+      - "src/spellCounterTagAdapter.ts"
+      - "tests/spellCounterTagAdapter.test.cjs"
+      - "docs/evidence/m672-spell-counter-adapter.json"
+      - "scripts/audit-spell-counter-m672.cjs"
+      - ".github/workflows/m672-spell-counter-adapter.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - run: node --test tests/spellCounterTagAdapter.test.cjs
+      - run: node scripts/audit-spell-counter-m672.cjs
+      - run: npm run check:cards

@@ -5,7 +5,7 @@
   "owner": "Work principal",
   "priority": "P1",
   "priorityRequestedBy": "User",
-  "status": "reserved-and-implementing",
+  "status": "fix-committed-awaiting-retest",
   "startedAt": "2026-11-27T06:54:49-03:00",
   "endedAt": null,
   "repository": "dareka222778/yugioh-speed-rpg",
@@ -23,14 +23,14 @@
     "scripts/audit-spell-counter-m672.cjs",
     "coordination/runs/work-20261127T065449-0300-M672.json"
   ],
-  "scope": "Adapter TagDuel 2v2 isolado para Royal Magical Library (70791313), Skilled Dark Magician (73752131) e Skilled White Magician (46363422): contadores de Magia adicionados somente quando uma Magia resolve, limite de três por instância, uso idempotente e custos por UID/epoch; Biblioteca remove três para comprar uma carta uma vez por turno; Magos Habilidosos tributam a si mesmos com três contadores para Invocar o monstro nomeado da mão/Deck/Cemitério permitido ao assento físico. Preserva mãos privadas, Deck 20–30, mão 6 com descarte somente na End Phase, zonas 3+3, Field Zone separada, Extra Deck 5, UID/propriedade física e inventário. Sem resolver central, catálogo, certificações, comandos, banco ou produção.",
+  "scope": "Adapter TagDuel 2v2 isolado para Royal Magical Library (70791313), Skilled Dark Magician (73752131) e Skilled White Magician (46363422): contadores adicionados somente quando uma Magia ativada da mão/backrow resolve, limite de três por instância, idempotência e custos por UID/epoch; Biblioteca remove três para comprar uma carta; Magos Habilidosos tributam a si mesmos com três contadores para Invocar o monstro nomeado da mão/Deck físicos do assento ativo ou do Cemitério compartilhado da equipe. Preserva mãos privadas, Deck 20–30, mão 6 com descarte somente na End Phase, zonas 3+3, Field Zone separada, Extra 5, UID/propriedade física e inventário. Sem resolver central, catálogo, certificações, comandos, banco ou produção.",
   "cards": [
     {
       "id": "70791313",
       "name": "Royal Magical Library",
       "konamiId": 5658,
       "firstTcg": "2003-10-10",
-      "effect": "spell resolves -> 1 Spell Counter (max 3); once per turn remove 3 to draw 1"
+      "effect": "spell resolves -> 1 Spell Counter (max 3); remove 3 to draw 1"
     },
     {
       "id": "73752131",
@@ -60,22 +60,31 @@
     ],
     "thisRunDoesNotTouchBlockedFiles": true
   },
-  "blocksCompleted": [],
+  "blocksCompleted": [
+    "adapter isolado com três efeitos identificados",
+    "31 cenários de regressão 2v2",
+    "evidência de texto e corte histórico",
+    "auditoria de evidência e contagem de certificações",
+    "workflow focado para typecheck/build/test/audit/card-audit",
+    "corrigido contador de ataque inválido nos fixtures e no monstro Invocado-Especialmente",
+    "corrigida expectativa case-insensitive da mensagem de validação da zona de ativação"
+  ],
   "implementedCards": 3,
   "newCards": 0,
   "newCertifications": 0,
   "automaticCertifications": 0,
   "inventoryGrants": 0,
   "verification": {
-    "typecheck": "pending",
-    "build": "pending",
-    "focusedTests": "pending",
+    "typecheck": "passed",
+    "build": "passed",
+    "focusedTests": "30/31 passed; regex assertion corrected; retest pending",
     "evidenceValidation": "pending",
+    "ci": "retest pending",
     "adapterBehaviorVerifiedCards": 0,
     "behaviorCertifiedCards": 0,
     "discordLive": "not-run"
   },
-  "effectiveWorkMinutes": 0,
+  "effectiveWorkMinutes": 24,
   "targetEffectiveWorkMinutes": 60,
   "targetMet": false,
   "ciWaitExcluded": true,
@@ -84,9 +93,11 @@
   "merge": "not-authorized",
   "deploy": "not-authorized",
   "blockers": [
-    "Handoff explícito M61 para integração central solicitado no PR #17; sem liberação, os três efeitos permanecerão em adapter isolado e não serão certificados."
+    "Handoff explícito M61 para integração central solicitado no PR #17; sem liberação, os três efeitos permanecerão em adapter isolado e não serão certificados.",
+    "Primeiro CI encontrou attackCount:0 inválido na integridade do duelo; corrigido removendo o campo opcional até o primeiro ataque."
   ],
-  "nextTask": "Implementar adapter de contadores de Magia, suíte 2v2 e evidência; validar CI focada e abrir PR draft.",
+  "nextTask": "Executar CI focada, corrigir falhas reais e então iniciar a próxima família de cartas no mesmo ciclo.",
   "nextWindow": "2026-11-27T11:30:00-03:00",
-  "scopeReleasedToAuxiliary": []
+  "scopeReleasedToAuxiliary": [],
+  "behaviorVerifiedCards": 0
 }
