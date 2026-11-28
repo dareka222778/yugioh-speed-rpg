@@ -1,0 +1,83 @@
+{
+  "mission": "M595",
+  "runId": "work-20261124T142648-0300-M595",
+  "owner": "Work principal",
+  "priority": "P2",
+  "card": {
+    "name": "7 Completed",
+    "passcode": "86198326",
+    "konamiDatabaseId": 4806,
+    "kind": "Equip Spell",
+    "firstTCGPrinting": "Pharaoh's Servant (PSV-004), 2002-10-20",
+    "officialDatabaseUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4806&ope=2&request_locale=en",
+    "officialEffect": "Activate this card by choosing ATK or DEF; equip only to a Machine monster. It gains 700 ATK or DEF, depending on the choice.",
+    "sourceVerified": "Konami official card database, checked 2026-11-24"
+  },
+  "design": {
+    "choice": "ATK or DEF is a single activation-time choice; the adapter emits exactly one +700 modifier, never both.",
+    "target": "Any face-up Machine monster on either shared TagDuel field is eligible; a non-Machine, face-down, missing or ambiguous target is rejected without retargeting.",
+    "ownership": "The active physical member of the controller team must activate the source; the target may belong to either team.",
+    "stacking": "Distinct Equip Spell UIDs produce independent +700 plans; the adapter does not aggregate or mutate stats.",
+    "integration": "Pure adapter only; no metadata, resolver, equip persistence or Discord command integration until explicit M61 handoff."
+  },
+  "tests": [
+    "ATK choice +700",
+    "DEF choice +700 only",
+    "opposing team's Machine target allowed",
+    "non-Machine target rejected",
+    "face-down target rejected",
+    "missing target rejected without retargeting",
+    "duplicate target UID rejected",
+    "inactive teammate rejected",
+    "source ID validation",
+    "source face-up and not already equipped",
+    "invalid stat choice rejected",
+    "duplicate event idempotency after target leaves field",
+    "distinct source copies create independent plans",
+    "symmetric red-team activation",
+    "wrong current team rejected",
+    "non-classic mode rejected",
+    "duplicate source UID rejected",
+    "state, LP, zones, stats and ledger immutability"
+  ],
+  "testCount": 18,
+  "certification": {
+    "engineV9CertifiedBefore": 969,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "reason": "Adapter-only; no metadata, effect definition, resolver, certification, manifest, allowlist or catalog changes."
+  },
+  "rules": {
+    "mainDeck": "20-30 per physical seat",
+    "handLimit": 6,
+    "handLimitTiming": "End Phase only",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separate",
+    "extraDeckMax": 5,
+    "privateHandsAndDecks": true,
+    "sharedTeamGraveyardAndLP": true
+  },
+  "security": {
+    "filesOnly": [
+      "src/sevenCompletedTagAdapter.ts",
+      "tests/sevenCompletedTagAdapter.test.cjs",
+      "docs/evidence/m595-seven-completed-tag-adapter.json",
+      ".github/workflows/m595-seven-completed-tag-adapter.yml"
+    ],
+    "noResolverChange": true,
+    "noCatalogChange": true,
+    "noManifestChange": true,
+    "noAllowlistChange": true,
+    "noInventoryGrant": true,
+    "noPersistentDatabaseChange": true,
+    "noPlayerDataChange": true
+  },
+  "limitations": [
+    "The adapter does not admit 7 Completed into the playable catalog or persist Equip links/continuous modifiers.",
+    "Tests rely on already certified Machine targets (Jinzo and Cannon Soldier) and structural TagDuel fixtures.",
+    "No live Discord gateway validation or actual equipped-stat mutation is claimed.",
+    "No certification or inventory grant is claimed."
+  ]
+}

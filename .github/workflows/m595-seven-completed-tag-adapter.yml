@@ -1,0 +1,36 @@
+name: M595 7 Completed Equip choice adapter
+on:
+  push:
+    branches:
+      - feat/work-m595-seven-completed-equip-choice-20261124
+    paths:
+      - 'src/sevenCompletedTagAdapter.ts'
+      - 'tests/sevenCompletedTagAdapter.test.cjs'
+      - 'docs/evidence/m595-seven-completed-tag-adapter.json'
+      - '.github/workflows/m595-seven-completed-tag-adapter.yml'
+  pull_request:
+    paths:
+      - 'src/sevenCompletedTagAdapter.ts'
+      - 'tests/sevenCompletedTagAdapter.test.cjs'
+      - 'docs/evidence/m595-seven-completed-tag-adapter.json'
+      - '.github/workflows/m595-seven-completed-tag-adapter.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  seven-completed:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m595-seven-completed-tag-adapter.json', 'utf8'))"
+      - name: Run 7 Completed adapter tests
+        run: node --test tests/sevenCompletedTagAdapter.test.cjs
