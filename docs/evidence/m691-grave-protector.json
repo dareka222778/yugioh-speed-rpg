@@ -1,0 +1,100 @@
+{
+  "format": 1,
+  "mission": "M691",
+  "status": "isolated-adapter-only",
+  "baseline": {
+    "sharedBaseHead": "62748d20566f53b429aabb2e92d9c1df058509a4",
+    "engineV9Certified": 969,
+    "remainingTo1000": 31,
+    "source": "milestone1000 run 46094324099"
+  },
+  "card": {
+    "id": "11448373",
+    "konamiId": 6039,
+    "name": "Grave Protector",
+    "kind": "effect-monster",
+    "officialText": "Any monster destroyed by battle is shuffled into the Deck instead of going to the GY.",
+    "firstTCGRelease": "2004-06-01",
+    "firstOCGRelease": "2004-10-14",
+    "eligibility": "Eligible in the historical union through the TCG print on 2004-06-01; the OCG print shown by the official database is after the 2004-10-01 cutoff.",
+    "officialTCGSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6039&ope=2&request_locale=en",
+    "officialOCGSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6039&ope=2&request_locale=ae",
+    "status": "adapter-tested-pending-engine-integration"
+  },
+  "historicalMetadataDiscrepancy": {
+    "repositoryImport": {
+      "firstObservedTCG": "2004-05-01",
+      "firstObservedOCG": "2004-02-26"
+    },
+    "officialDatabase": {
+      "firstTCG": "2004-06-01",
+      "firstOCG": "2004-10-14"
+    },
+    "disposition": "Keep the card unadmitted until the historical import date discrepancy is reconciled; the official TCG date still falls before the cutoff."
+  },
+  "behaviorTests": {
+    "suite": "tests/graveProtectorBattleReplacementTagAdapter.test.cjs",
+    "authoredCases": 16,
+    "adapterBehaviorVerifiedCards": 1,
+    "engineBehaviorCertifiedCards": 0,
+    "execution": "pending-CI",
+    "coverage": [
+      "substituição global antes do envio normal ao Cemitério",
+      "fonte face-up e negação contínua",
+      "monstro face-down destruído em batalha",
+      "proprietário físico em assento reserva ou ativo",
+      "efeito global mesmo quando a fonte está na equipe adversária",
+      "Fusion retorna ao Extra Deck físico do proprietário",
+      "Token removido pelo ledger causal com motivo battle, sem entrar no inventário",
+      "múltiplas cópias não duplicam a substituição",
+      "Grave Protector pode ser o próprio monstro destruído enquanto ainda está face-up no evento",
+      "destruição por efeito e evento atrasado não substituem destino",
+      "shuffle privado persistido via DuelRandom e determinismo por seed",
+      "replay idempotente e colisão de eventId rejeitada",
+      "Deck 20–30, Extra 5, zonas 3+3, mão 6 com verificação na End Phase",
+      "inventário preservado sem concessões automáticas"
+    ]
+  },
+  "counts": {
+    "baselineEngineV9Certified": 969,
+    "remainingTo1000": 31,
+    "adapterBehaviorVerifiedCards": 1,
+    "newEngineCertifiedCards": 0,
+    "automaticCertifications": 0,
+    "inventoryGrants": 0
+  },
+  "ownerRules": {
+    "mainDeckMin": 20,
+    "mainDeckMax": 30,
+    "extraDeckMax": 5,
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "handLimit": 6,
+    "handCheck": "end",
+    "inventoryGrants": false
+  },
+  "limits": [
+    "O adapter deve ser chamado pelo resolvedor antes do envio de monstros destruídos em batalha ao Cemitério e antes de gatilhos que exigem esse destino.",
+    "O resultado não expõe ID/nome do monstro nem ordem do Deck; o embaralhamento usa o DuelRandom privado persistido.",
+    "Fusion retorna ao Extra Deck físico do proprietário; Tokens são removidos pelo token ledger e nunca concedidos como cartas.",
+    "A integração central não foi liberada; o adapter isolado não altera o resultado de partidas reais ainda.",
+    "A divergência entre datas do catálogo histórico e do banco oficial exige reconciliação antes da admissão/certificação."
+  ],
+  "integration": {
+    "status": "pending-handoff",
+    "targetPR": 17,
+    "handoffCommentId": 7231869252,
+    "files": [
+      "src/duelEngineCurrent.ts",
+      "src/monsterEffects.ts"
+    ],
+    "centralFilesModified": false,
+    "catalogModified": false,
+    "certificationsModified": false,
+    "discordCommandsModified": false,
+    "databaseModified": false,
+    "inventoryGranted": false,
+    "productionTouched": false
+  },
+  "nextBlock": "Após handoff com backup verificável, chamar a substituição antes de qualquer gatilho de envio ao GY, validar interação com M690, integrar comandos/Discord e reconciliar a data histórica antes de admitir a carta."
+}
