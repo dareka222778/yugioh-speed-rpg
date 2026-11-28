@@ -11,80 +11,71 @@
   "repository": "dareka222778/yugioh-speed-rpg",
   "sharedBranch": "feat/rea-engine-recovery-20261026",
   "sharedHeadAtReservation": "e1394ef0f6ef7faea5b02e42ee3b0ce43520a01c",
-  "branch": "feat/work-m694-destiny-board-20261128",
+  "branch": "feat/work-m694-sarcophagus-tag-adapter-20261128",
   "baseBranch": "feat/rea-engine-recovery-20261026",
   "baseSha": "e1394ef0f6ef7faea5b02e42ee3b0ce43520a01c",
   "branchHeadSha": "e1394ef0f6ef7faea5b02e42ee3b0ce43520a01c",
   "reservedFiles": [
-    "src/destinyBoardTagAdapter.ts",
-    "tests/destinyBoardTagAdapter.test.cjs",
-    "docs/evidence/m694-destiny-board.json",
-    "scripts/audit-destiny-board-m694.cjs",
-    ".github/workflows/m694-destiny-board.yml",
+    "src/sarcophagusTagAdapter.ts",
+    "tests/sarcophagusTagAdapter.test.cjs",
+    "docs/evidence/m694-sarcophagus.json",
+    "scripts/audit-sarcophagus-m694.cjs",
+    ".github/workflows/m694-sarcophagus.yml",
     "coordination/runs/work-20261128T022638-0300-M694.json"
   ],
-  "scope": "Adapter TagDuel 2v2 isolado para Destiny Board (94212438/CID 5224) e Spirit Message I/N/A/L (31893528/CID 5271; 67287533/CID 5272; 94772232/CID 5273; 30170981/CID 5274): sequência obrigatória I→N→A→L na End Phase da equipe oponente, seleção privada de mão/Deck do assento físico definido pelo contrato, embaralhamento quando vier do Deck, vitória somente com as cinco cartas face-up na ordem correta e limpeza imediata de todas as peças quando qualquer uma sair do campo. Sem resolver central, catálogo/certificações, comandos, banco, inventário ou produção.",
+  "scope": "Adapter TagDuel 2v2 isolado para The First Sarcophagus (31076103/CID 6063), The Second Sarcophagus (04081094/CID 6062), The Third Sarcophagus (78697395/CID 6061) e Spirit of the Pharaoh (25343280/CID 6024): colocação sequencial Second→Third apenas na End Phase oponente; origem privada da mão/Deck do assento físico ativo da equipe controladora; embaralhamento se vier do Deck; sacrifício simultâneo dos três Sarcophagi e Special Summon restrito de Spirit of the Pharaoh; gatilho de até 4 monstros Normais Zumbi de Nível 2 ou menos do Cemitério limitado pela capacidade real de 3 Monster Zones; limpeza de toda a família quando qualquer peça deixa o campo. Sem tocar no resolver central, catálogo/certificações, comandos, banco, inventário ou produção.",
   "cards": [
     {
-      "id": "94212438",
-      "konamiId": 5224,
-      "name": "Destiny Board",
+      "id": "31076103",
+      "konamiId": 6063,
+      "name": "The First Sarcophagus",
       "kind": "continuous-trap",
-      "firstOCGRelease": "2001-07-21",
-      "firstTCGRelease": "2003-03-01",
+      "firstOCGRelease": "2004-02-26",
+      "firstTCGRelease": "2004-06-01",
       "certifiedAtStart": false,
-      "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5224&ope=2&request_locale=en"
+      "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6063&ope=2&request_locale=en"
     },
     {
-      "id": "31893528",
-      "konamiId": 5271,
-      "name": "Spirit Message \"I\"",
+      "id": "04081094",
+      "konamiId": 6062,
+      "name": "The Second Sarcophagus",
       "kind": "continuous-spell",
-      "firstOCGRelease": "2001-07-21",
-      "firstTCGRelease": "2003-03-01",
+      "firstOCGRelease": "2004-02-26",
+      "firstTCGRelease": "2004-06-01",
       "certifiedAtStart": false,
-      "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5271&ope=2&request_locale=en"
+      "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6062&ope=2&request_locale=en"
     },
     {
-      "id": "67287533",
-      "konamiId": 5272,
-      "name": "Spirit Message \"N\"",
+      "id": "78697395",
+      "konamiId": 6061,
+      "name": "The Third Sarcophagus",
       "kind": "continuous-spell",
-      "firstOCGRelease": "2001-07-21",
-      "firstTCGRelease": "2003-03-01",
+      "firstOCGRelease": "2004-02-26",
+      "firstTCGRelease": "2004-06-01",
       "certifiedAtStart": false,
-      "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5272&ope=2&request_locale=en"
+      "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6061&ope=2&request_locale=en"
     },
     {
-      "id": "94772232",
-      "konamiId": 5273,
-      "name": "Spirit Message \"A\"",
-      "kind": "continuous-spell",
-      "firstOCGRelease": "2001-07-21",
-      "firstTCGRelease": "2003-03-01",
+      "id": "25343280",
+      "konamiId": 6024,
+      "name": "Spirit of the Pharaoh",
+      "kind": "effect-monster",
+      "firstOCGRelease": "2004-02-26",
+      "firstTCGRelease": "2004-06-01",
       "certifiedAtStart": false,
-      "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5273&ope=2&request_locale=en"
-    },
-    {
-      "id": "30170981",
-      "konamiId": 5274,
-      "name": "Spirit Message \"L\"",
-      "kind": "continuous-spell",
-      "firstOCGRelease": "2001-07-21",
-      "firstTCGRelease": "2003-03-01",
-      "certifiedAtStart": false,
-      "officialSource": "https://www.db.yugioh-card-game.com/yugiohdb/card_search.action?cid=5274&ope=2&request_locale=en"
+      "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6024&ope=2&request_locale=en"
     }
   ],
   "baseline": {
     "engineV9Certified": 969,
     "target": 1000,
     "remaining": 31,
-    "source": "catalog/engine-v9/3af4ee461ba728be019de373b6c9652c3a7fd21b94fd475aac6af22b5127ca99.json at shared HEAD"
+    "source": "catalog/engine-v9/3af4ee461ba728be019de373b6c9652c3a7fd21b94fd475aac6af22b5127ca99.json at shared HEAD",
+    "note": "Os quatro IDs foram consultados na revisão engine-v9 atual e nenhum está no catálogo; não contam como certificados até integração central e auditoria de admissão."
   },
   "handoff": {
     "targetPR": 17,
-    "status": "not-requested-yet; adapter-only phase does not touch central files",
+    "status": "blocked-pending-explicit-release; central integration will not be attempted while PR17/central reservations remain active",
     "files": [
       "src/duelEngineCurrent.ts",
       "src/monsterEffects.ts",
@@ -114,7 +105,7 @@
   "targetEffectiveWorkMinutes": 60,
   "targetMet": false,
   "ciWaitExcluded": true,
-  "nextTask": "Implementar o estado sequencial de Destiny Board com contratos explícitos de assento físico, seleção de Spirit Message, limpeza por saída e vitória de equipe; cobrir rotação 2v2 e persistência.",
+  "nextTask": "Implementar a cadeia Sarcophagus em adapter isolado, com sequência Second→Third, sacrifício simultâneo, summon do Spirit e teto físico de 3 zonas; depois executar auditoria e CI focadas.",
   "scopeReleasedToAuxiliary": [],
   "nextWindow": "2026-11-28T03:30:00-03:00"
 }
