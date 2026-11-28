@@ -1,0 +1,123 @@
+{
+  "mission": "M692",
+  "runId": "work-20261127T225907-0300-M692",
+  "priority": "P1",
+  "owner": "Work principal",
+  "scope": "Adapter TagDuel 2v2 isolado para Card of Safe Return e Spirit of the Pot of Greed. Não integra resolver central, catálogo, certificações, comandos, banco ou produção.",
+  "cards": [
+    {
+      "name": "Card of Safe Return",
+      "passcode": "57953380",
+      "konamiCid": 5123,
+      "kind": "Continuous Spell",
+      "firstOcgRelease": "2003-06-26",
+      "firstTcgRelease": "2003-03-01",
+      "officialEffect": "When a monster(s) is Special Summoned from your GY (except during the Damage Step): You can draw 1 card.",
+      "officialDatabaseUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5123&ope=2&request_locale=en",
+      "behavior": "A successful Special Summon event containing at least one monster from the controller team's shared GY creates one optional draw per active copy, once per summon event."
+    },
+    {
+      "name": "Spirit of the Pot of Greed",
+      "passcode": "04896788",
+      "konamiCid": 5819,
+      "kind": "LIGHT Level 1 Fairy/Effect Monster",
+      "firstOcgRelease": "2003-04-24",
+      "firstTcgRelease": "2004-07-15",
+      "officialEffect": "If a player activates Pot of Greed: Activate this effect; they can draw 1 card. This card must be in face-up Attack Position to activate and to resolve this effect.",
+      "officialDatabaseUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5819&ope=2&request_locale=en",
+      "behavior": "Each active face-up Attack Position copy can create one optional draw for the physical active seat of the player who activated Pot of Greed; the source must remain face-up Attack Position through resolution."
+    }
+  ],
+  "activationSource": {
+    "name": "Pot of Greed",
+    "passcode": "55144522",
+    "konamiCid": 4844,
+    "officialEffect": "Draw 2 cards.",
+    "officialDatabaseUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4844&ope=2&request_locale=en"
+  },
+  "design": {
+    "eventModel": "Stable event IDs and strictly increasing sequence numbers; successful GY Special Summon and Pot of Greed activation are distinct event kinds.",
+    "cardOfSafeReturn": "The summon event carries each summoned physical UID and its source GY team. One simultaneous group is one event, so each active copy draws once even if several monsters were summoned. The Damage Step is excluded.",
+    "spirit": "The event is emitted at Pot of Greed activation, not inferred from its successful draw. All active Spirits may trigger; the draw belongs to the activating player, not the Spirit controller.",
+    "privacy": "Draw plans contain only recipient physical seat and counts. They do not expose Deck card identities; active-seat routing respects TagDuel private hands and physical UID ownership.",
+    "choices": "Both effects are optional. Capture creates a pending choice; resolution accepts explicit source UIDs and revalidates face-up/resolved or face-up Attack Position, plus source-specific negation.",
+    "deckOut": "Multiple accepted copies plan sequential draws from the same physical Deck without overlapping. An empty Deck yields an explicit deck-out plan and prevents later plans.",
+    "rules": "Deck 20–30 per physical seat, hand limit 6 checked only in End Phase, 3 Monster + 3 Spell/Trap zones, independent Field Zone, Extra Deck max 5. Adapter plans only and never discards.",
+    "idempotency": "Event payloads are fingerprinted. Replayed capture/resolution is idempotent; event ID reuse with changed facts or choices is rejected.",
+    "admission": "Candidate cards are absent from cardMetadata/effectRegistry/cardCertifications. Focused tests use existing enabled physical cards as fixture aliases through injected lookups; this is not catalog admission or card certification."
+  },
+  "tests": {
+    "expectedScenarios": 31,
+    "focusedTestResult": "pending",
+    "covered": [
+      "Official IDs and non-admission",
+      "Card of Safe Return: own-team GY, opponent GY, Damage Step, non-damage Battle Phase",
+      "Simultaneous summons, multiple copies, sequential deck tops and deck-out",
+      "Face-up/resolved condition, source negation at capture and resolution, source removal",
+      "Reserve-owned source with active teammate as draw recipient",
+      "Optional decline, idempotency, divergent replay and monotonic event sequence",
+      "Spirit: either team, active physical Pot of Greed activator, Attack Position requirement",
+      "Spirit: position change/removal/negation before resolution, multiple copies and deck-out",
+      "Pot of Greed source ownership, Main Phase, hand/backrow activation identity",
+      "Deck 20–30, hand 6 at End Phase, zones 3+3 and Extra 5"
+    ]
+  },
+  "rules": {
+    "mainDeck": "20–30 per physical seat",
+    "handLimit": 6,
+    "handLimitTiming": "End Phase only",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separate",
+    "extraDeckMax": 5,
+    "privateHandsAndDecks": true,
+    "sharedTeamGraveyardAndLP": true,
+    "physicalOwnerUidPrefix": "m{seat}:"
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0
+  },
+  "catalogAtEnd": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0
+  },
+  "adapterBehaviorVerifiedCards": 0,
+  "newEngineCertifiedCards": 0,
+  "automaticCertifications": 0,
+  "inventoryGrants": 0,
+  "verification": {
+    "typecheck": "pending",
+    "build": "pending",
+    "focusedTests": "pending",
+    "evidenceAudit": "pending",
+    "workflow": "pending"
+  },
+  "handoff": {
+    "targetPR": 17,
+    "commentId": 7232072777,
+    "status": "requested-awaiting-explicit-release",
+    "files": [
+      "src/duelEngineCurrent.ts",
+      "src/monsterEffects.ts",
+      "src/effectRegistry.ts"
+    ]
+  },
+  "limitations": [
+    "Sem handoff central, os efeitos não são chamados pelo engine de produção.",
+    "Os IDs dos candidatos continuam fora do catálogo e dos certificados; nenhuma carta será contabilizada no marco de 1.000.",
+    "Sem integração de comandos ou validação de sessão real no Discord."
+  ],
+  "production": {
+    "resolverIntegration": false,
+    "discordCommandIntegration": false,
+    "liveDiscordValidation": false,
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false
+  }
+}

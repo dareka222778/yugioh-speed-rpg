@@ -1,0 +1,38 @@
+'use strict';
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const path=require('node:path');
+const root=path.join(__dirname,'..');
+const read=relative=>fs.readFileSync(path.join(root,relative),'utf8');
+const evidence=JSON.parse(read('docs/evidence/m692-draw-trigger.json'));
+const {getDuelCard,getEnabledCardIds}=require('../dist/effectRegistry');
+const certifications=read('src/cardCertifications.ts');
+const metadata=read('src/cardMetadata.ts');
+const adapter=read('src/drawTriggerTagAdapter.ts');
+const tests=read('tests/drawTriggerTagAdapter.test.cjs');
+const count=(certifications.match(/['"]\d{8}['"]\s*:/g)||[]).length;
+assert.equal(evidence.mission,'M692');
+assert.equal(evidence.cards.length,2);
+assert.equal(count,969,'the baseline certification count must remain unchanged');
+assert.equal(evidence.catalogAtStart.engineV9Certified,969);
+assert.equal(evidence.catalogAtEnd.engineV9Certified,969);
+assert.equal(evidence.catalogAtEnd.remaining,31);
+assert.equal(evidence.newEngineCertifiedCards,0);
+assert.equal(evidence.adapterBehaviorVerifiedCards,0);
+assert.equal(evidence.automaticCertifications,0);
+assert.equal(evidence.inventoryGrants,0);
+assert.equal((tests.match(/\btest\(/g)||[]).length,evidence.tests.expectedScenarios);
+for(const card of evidence.cards){
+ assert.equal(getDuelCard(card.passcode),undefined,card.name+' must remain unadmitted');
+ assert.equal(getEnabledCardIds().includes(card.passcode),false,card.name+' must remain disabled');
+ assert.equal(certifications.includes(card.passcode),false,card.name+' must not receive a certificate');
+ assert.equal(metadata.includes(card.passcode),false,card.name+' must not be admitted through metadata');
+ assert.ok(adapter.includes(card.passcode),card.name+' identity constant missing');
+}
+assert.equal(evidence.production.resolverIntegration,false);
+assert.equal(evidence.production.discordCommandIntegration,false);
+assert.equal(evidence.production.liveDiscordValidation,false);
+assert.equal(evidence.production.merge,false);
+assert.equal(evidence.production.deploy,false);
+assert.equal(evidence.production.backupVerified,false);
+console.log('M692 evidence audit passed: 969 existing certificates unchanged; 2 adapters remain unadmitted; no inventory or production mutation.');
