@@ -3,13 +3,13 @@
   "runId": "work-20261127T224226-0300-M691",
   "mission": "M691",
   "priority": "P1",
-  "status": "reserved-and-implementing",
+  "status": "completed-awaiting-review",
   "startedAt": "2026-11-27T22:42:26-03:00",
-  "endedAt": null,
+  "endedAt": "2026-11-27T22:50:21-03:00",
   "repository": "dareka222778/yugioh-speed-rpg",
   "sharedBranch": "feat/rea-engine-recovery-20261026",
   "sharedBaseHead": "62748d20566f53b429aabb2e92d9c1df058509a4",
-  "headSha": "62748d20566f53b429aabb2e92d9c1df058509a4",
+  "headSha": "84b4bd7bdb909ba9d0635947579a37f572648809",
   "branch": "feat/work-m691-grave-protector-20261127",
   "reservedFiles": [
     "src/graveProtectorBattleReplacementTagAdapter.ts",
@@ -38,7 +38,13 @@
       "status": "adapter-tested-pending-engine-integration"
     }
   ],
-  "blocksCompleted": [],
+  "blocksCompleted": [
+    "Consulta do checkpoint e das reservas; confirmação de ausência de PR/reserva anterior para Grave Protector.",
+    "Pedido cooperativo no PR #17 para a substituição contínua antes de gatilhos de envio ao Cemitério; nenhum arquivo central foi alterado.",
+    "Adapter isolado com Deck físico, shuffleDuel privado, Fusion no Extra Deck e Token removido pelo token ledger.",
+    "16 cenários de comportamento, incluindo fonte na equipe adversária, dono em reserva, face-down, negação, múltiplas cópias, self-replacement e replay.",
+    "Typecheck, build, 16 testes, auditoria e fast feedback aprovados no SHA 84b4bd7."
+  ],
   "handoff": {
     "targetPR": 17,
     "commentId": 7231869252,
@@ -52,17 +58,19 @@
   "counts": {
     "baselineEngineV9Certified": 969,
     "remainingTo1000": 31,
-    "adapterBehaviorVerifiedCards": 0,
+    "adapterBehaviorVerifiedCards": 1,
     "newEngineCertifiedCards": 0,
     "automaticCertifications": 0,
     "inventoryGrants": 0
   },
   "verification": {
-    "typecheck": "pending",
-    "build": "pending",
-    "focusedTests": "pending",
-    "audit": "pending",
-    "engineValidation": "pending",
+    "typecheck": "success",
+    "build": "success",
+    "focusedTests": "16/16 success",
+    "evidenceAudit": "success",
+    "cardBatchFastFeedback": "success",
+    "milestone1000": "success",
+    "engineValidation": "in-progress",
     "liveDiscordValidation": false
   },
   "production": {
@@ -71,9 +79,25 @@
     "backupVerified": false,
     "liveDiscordValidation": false
   },
-  "effectiveWorkMinutes": 0,
+  "effectiveWorkMinutes": 8,
   "targetEffectiveWorkMinutes": 60,
   "targetMet": false,
   "ciWaitExcluded": true,
-  "nextTask": "Implementar substituição contínua de destino em batalha, preservando proprietário físico, embaralhamento privado, Fusion no Extra e Token sem inventário; integrar somente após handoff central."
+  "nextTask": "M692: draw-trigger adapters for Card of Safe Return and Spirit of the Pot of Greed, preserving physical-seat privacy and the End Phase hand-limit rule.",
+  "branchHeadSha": "84b4bd7bdb909ba9d0635947579a37f572648809",
+  "pullRequest": {
+    "number": 615,
+    "url": "https://github.com/dareka222778/yugioh-speed-rpg/pull/615",
+    "state": "open",
+    "draft": true,
+    "merged": false
+  },
+  "scopeReleasedToAuxiliary": [
+    "src/graveProtectorBattleReplacementTagAdapter.ts",
+    "tests/graveProtectorBattleReplacementTagAdapter.test.cjs",
+    "docs/evidence/m691-grave-protector.json",
+    "scripts/audit-grave-protector-m691.cjs",
+    ".github/workflows/m691-grave-protector.yml"
+  ],
+  "nextWindow": "2026-11-28T03:30:00-03:00"
 }
