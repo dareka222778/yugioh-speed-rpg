@@ -1,0 +1,87 @@
+{
+  "mission": "M563",
+  "runId": "work-20261123T125708-0300-M563",
+  "owner": "Work principal",
+  "card": {
+    "name": "The Shallow Grave",
+    "passcode": "43434803",
+    "konamiDatabaseId": 4965,
+    "type": "Normal Spell",
+    "officialCardDatabase": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4965&ope=2&request_locale=en",
+    "officialText": "Each player targets 1 monster in their own GY; each player Special Summons the target from their GY in face-down Defense Position.",
+    "firstTcgPrinting": {
+      "date": "2002-10-20",
+      "set": "PSV-036",
+      "product": "Pharaoh's Servant"
+    }
+  },
+  "behavior": {
+    "activation": "Active representative Main Phase only; Normal Spell must be in that physical player's hand.",
+    "targets": "One activation-time target per team from that team's shared Graveyard.",
+    "resolution": "Each target is independently revalidated with TargetBinding zone+epoch; a stale target does not cancel the other team's summon.",
+    "summon": "Face-down Defense Position; three shared Monster Zones per team.",
+    "ownership": "Physical owner seat is retained from UID while control follows the Graveyard team.",
+    "idempotency": "JSON-persisted activationId; replay blocked after resolution or negation.",
+    "limits": {
+      "mainDeck": "20–30 construction",
+      "handLimit": 6,
+      "discard": "End Phase",
+      "monsterZones": 3,
+      "spellTrapZones": 3,
+      "fieldZone": "separate",
+      "extraDeck": 5
+    }
+  },
+  "testCount": 25,
+  "testNames": [
+    "Normal Spell source, active representative and Main Phase",
+    "inactive partner reserve hand rejected",
+    "wrong/missing/non-hand source rejected",
+    "pending chain/decision rejected",
+    "both teams need legal target and free zone",
+    "own-GY target selection and cross-team rejection",
+    "non-monster/token/improper Fusion/Ritual filtering",
+    "both targets summoned face-down with physical owner",
+    "targets frozen at activation",
+    "one target leaves GY and other resolves",
+    "crossed target not stolen",
+    "leave-and-return epoch invalidation",
+    "field fills after activation",
+    "negation receipt/no movement",
+    "source leaves hand after activation",
+    "JSON save/restore and replay protection",
+    "activationId uniqueness",
+    "malformed/duplicate UID rejection",
+    "four physical seat rotations",
+    "3 backrow plus separate Field Zone",
+    "3 Monster Zone and Extra Deck five bounds",
+    "hand above six deferred to End Phase",
+    "input immutability",
+    "inactive reserve inventory conservation and short in-duel Deck",
+    "Deck construction size is not applied as a mid-duel minimum"
+  ],
+  "certification": {
+    "newCards": 0,
+    "automatic": 0,
+    "reason": "Adapter-only preparation; card absent from shared cardCatalog/cardMetadata/cardCertifications. Resolver and catalog registration await M61 handoff."
+  },
+  "safety": {
+    "inventoryGranted": 0,
+    "persistentDatabaseTouched": false,
+    "playerDataTouched": false,
+    "productionDatabaseTouched": false,
+    "discordTokenUsed": false,
+    "liveDiscordUsed": false,
+    "centralResolverChanged": false,
+    "catalogChanged": false,
+    "manifestChanged": false,
+    "allowlistChanged": false,
+    "merge": false,
+    "deploy": false
+  },
+  "limitations": [
+    "Offline deterministic TagDuel fixtures only; no live Discord gateway/guild.",
+    "No central resolver or catalog registration; not yet playable/certified.",
+    "Special Summon restrictions beyond represented monster kind/type and Fusion/Ritual properlySummoned metadata are not inferred."
+  ]
+}
