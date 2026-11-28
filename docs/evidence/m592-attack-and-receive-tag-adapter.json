@@ -1,0 +1,82 @@
+{
+  "mission": "M592",
+  "runId": "work-20261124T141200-0300-M592",
+  "owner": "Work principal",
+  "priority": "P1",
+  "card": {
+    "name": "Attack and Receive",
+    "passcode": "63689843",
+    "konamiDatabaseId": 4954,
+    "kind": "Normal Trap",
+    "firstTCGPrinting": "Pharaoh's Servant (PSV-054), 2002-10-20",
+    "officialDatabaseUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4954&ope=2&request_locale=en",
+    "officialEffect": "You can only activate this card when you take damage to your Life Points. Inflict 700 points of damage to your opponent's Life Points. Also, inflict 300 points of damage to your opponent's Life Points for each 'Attack and Receive' card in your Graveyard.",
+    "sourceVerified": "Konami official card database, checked 2026-11-24"
+  },
+  "design": {
+    "activation": "Requires a finalized positive LP damage event to the activating team; both battle and effect damage qualify, while costs and zero-damage events do not.",
+    "damage": "700 base plus 300 for each prior Attack and Receive copy in the team's shared Graveyard at resolution. The current resolving copy is still in the backrow and is not counted.",
+    "team": "Damage is routed to the opposing team's shared LP; physical private hands/Decks and card UIDs are not changed.",
+    "idempotency": "A source UID can resolve at most once for a given damage event; distinct set copies may each respond to the same event.",
+    "integration": "Pure adapter only; shared resolver/chain timing integration remains pending explicit M61 handoff."
+  },
+  "tests": [
+    "positive battle damage",
+    "positive effect damage",
+    "prior copies in shared Graveyard",
+    "resolving Trap excluded from grave count",
+    "only damaged team may activate",
+    "zero/mismatched damage rejection",
+    "stale LP snapshot rejection",
+    "face-up source required",
+    "opposing-team source rejection",
+    "two copies respond independently",
+    "same source/event idempotency",
+    "activation/effect negation",
+    "negated activation replay protection",
+    "cost cause and invalid team rejection",
+    "missing source rejection",
+    "duplicate Graveyard UID rejection",
+    "terminal LP event rejection",
+    "input and ledger immutability"
+  ],
+  "testCount": 18,
+  "certification": {
+    "engineV9CertifiedBefore": 969,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "reason": "Adapter-only implementation; no resolver, metadata, certification, manifest, allowlist or catalog changes."
+  },
+  "rules": {
+    "mainDeck": "20-30 per physical seat",
+    "handLimit": 6,
+    "handLimitTiming": "End Phase only",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separate",
+    "extraDeckMax": 5,
+    "privateHandsAndDecks": true,
+    "sharedTeamGraveyardAndLP": true
+  },
+  "security": {
+    "filesOnly": [
+      "src/attackAndReceiveTagAdapter.ts",
+      "tests/attackAndReceiveTagAdapter.test.cjs",
+      "docs/evidence/m592-attack-and-receive-tag-adapter.json",
+      ".github/workflows/m592-attack-and-receive-tag-adapter.yml"
+    ],
+    "noResolverChange": true,
+    "noCatalogChange": true,
+    "noManifestChange": true,
+    "noAllowlistChange": true,
+    "noInventoryGrant": true,
+    "noPersistentDatabaseChange": true,
+    "noPlayerDataChange": true
+  },
+  "limitations": [
+    "Adapter emits a damage packet; the duel engine must apply it after M61 handoff.",
+    "Tests use structural TagDuel fixtures, not the full chain/response engine.",
+    "No live Discord gateway validation or certification is claimed."
+  ]
+}
