@@ -1,0 +1,46 @@
+name: M699 IOC attribute summons
+on:
+  push:
+    branches:
+      - feat/work-m699-ioc-attribute-summons-20261128
+    paths:
+      - 'src/invasionChaosAttributeSummonTagAdapter.ts'
+      - 'tests/invasionChaosAttributeSummonTagAdapter.test.cjs'
+      - 'docs/evidence/m699-ioc-attribute-summons.json'
+      - 'scripts/audit-ioc-attribute-summons-m699.cjs'
+      - '.github/workflows/m699-ioc-attribute-summons.yml'
+      - 'coordination/runs/work-20261128T072745-0300-M699.json'
+  pull_request:
+    paths:
+      - 'src/invasionChaosAttributeSummonTagAdapter.ts'
+      - 'tests/invasionChaosAttributeSummonTagAdapter.test.cjs'
+      - 'docs/evidence/m699-ioc-attribute-summons.json'
+      - 'scripts/audit-ioc-attribute-summons-m699.cjs'
+      - '.github/workflows/m699-ioc-attribute-summons.yml'
+      - 'coordination/runs/work-20261128T072745-0300-M699.json'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  ioc-attribute-summons:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Type check
+        run: npm run check
+      - name: Build
+        run: npm run build
+      - name: Focused behavior suite
+        run: node --test tests/invasionChaosAttributeSummonTagAdapter.test.cjs
+      - name: Evidence and ownership audit
+        run: node scripts/audit-ioc-attribute-summons-m699.cjs
+      - name: Full regression suite
+        run: npm test
