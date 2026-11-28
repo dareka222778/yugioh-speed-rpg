@@ -13,9 +13,10 @@ const [trapA,trapB,trapC]=trapIds;
 const normalIds=tagNormalCardIds.slice(0,17);
 assert.ok(trapA&&trapB&&trapC,'O catálogo-base precisa fornecer três Armadilhas físicas para fixtures isoladas.');
 assert.equal(normalIds.length,17);
-const fieldId=enabled.find(id=>getDuelCard(id)?.kind==='spell');
+const fieldId=enabled.find(id=>getDuelCard(id)?.kind==='spell'&&getDuelCard(id)?.field===true);
 const jinzoId=enabled.find(id=>getDuelCard(id)?.name==='Jinzo');
 assert.ok(fieldId&&jinzoId,'Fixtures precisam de uma Magia de Campo e Jinzo habilitados.');
+assert.equal(getDuelCard(fieldId)?.field,true,'A fixture da Field Zone precisa ser uma Magia de Campo real.');
 const mainDeck=[...normalIds.slice(0,15),trapA,trapB,trapC,fieldId,jinzoId];
 const players=()=>[
  {id:'p0',name:'Azul A',cards:[...mainDeck],extra:[]},
