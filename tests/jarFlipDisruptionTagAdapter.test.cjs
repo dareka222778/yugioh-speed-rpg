@@ -38,8 +38,8 @@ function holder(state,seat){
   const team=seat%2;
   return state.active[team]===seat?state.core.players[team]:state.reserves[String(seat)];
 }
-function addMonster(state,team,ownerSeat){
-  const physical=holder(state,ownerSeat),card=physical.deck.shift();
+function addMonster(state,team,ownerSeat,id){
+  const physical=holder(state,ownerSeat),card=id?takeCard(state,ownerSeat,id):physical.deck.shift();
   assert.ok(card,'monster fixture must exist in the physical Deck');
   state.core.players[team].monsters.push({
     ...card,position:'atk',faceUp:true,entered:state.core.turn,changed:state.core.turn,
@@ -47,8 +47,8 @@ function addMonster(state,team,ownerSeat){
   });
   return card;
 }
-function addSource(state,team,ownerSeat,effect){
-  const card=addMonster(state,team,ownerSeat);
+function addSource(state,team,ownerSeat,effect,id=NORMALS[0]){
+  const card=addMonster(state,team,ownerSeat,id);
   return {uid:card.uid,id:card.id,ownerSeat,lookup:id=>id===card.id?effect:undefined};
 }
 function takeCard(state,seat,id){
@@ -121,16 +121,28 @@ function cyberDecks(){
   return [
     deckWith([...LOW_IDS,SPELL_IDS[0]]),
     deckWith([LOW_IDS[0],...SPELL_IDS.slice(1,5)]),
-    NORMALS.slice(0,20),
-    NORMALS.slice(0,20)
+    deckWith([FIELD_ID,NORMALS[0]]),
+    deckWith([EQUIP_ID,NORMALS[1]])
   ];
+}
+function choicesForActive(state){
+  const choices={};
+  for(const seat of state.active){
+    let slots=3;
+    for(const card of holder(state,seat).deck.slice(0,5)){
+      const info=getPlayableCard(card.id);
+      const eligible=info&&info.kind==='monster'&&typeof info.level==='number'&&info.level<=4&&info.monsterType!=='ritual'&&!info.fusion;
+      if(eligible&&slots>0){choices[card.uid]='attack';slots--;}
+    }
+  }
+  return choices;
 }
 function prepareCyber(state){
   arrangeTop(state,0,[...LOW_IDS,SPELL_IDS[0]]);
   arrangeTop(state,1,[LOW_IDS[0],...SPELL_IDS.slice(1,5)]);
   const field=addField(state,0,2);
-  const source=addSource(state,0,2,'cyber-jar');
-  const opponent=addMonster(state,1,3);
+  const source=addSource(state,0,2,'cyber-jar',NORMALS[0]);
+  const opponent=addMonster(state,1,3,NORMALS[1]);
   const equip=addEquip(state,1,3,opponent.uid);
   return {source,opponent,field,equip};
 }
@@ -172,9 +184,9 @@ test('invalid seat, empty ID and duplicate activation are rejected',()=>{
   assert.throws(()=>activateJarFlip(state,{activationId:'bad',actorSeat:4,sourceUid:source.uid},source.lookup),/inválido/);
   assert.throws(()=>activateJarFlip(state,{activationId:' ',actorSeat:0,sourceUid:source.uid},source.lookup),/inválido/);
   const eventData=event(state,0,source,'m702-duplicate');
-  activateJarFlip(state,eventData,source.lookup);
   const first=activateJarFlip(state,eventData,source.lookup);
   assert.equal(first.status,'triggered');
+  assert.throws(()=>activateJarFlip(first.state,eventData,source.lookup),/já foi registrado/);
 });
 
 test('Morphing Jar discards and draws for the two active team representatives only',()=>{
@@ -250,10 +262,7 @@ test('Morphing Jar negation preserves hands, Decks, graves, logs and RNG',()=>{
 test('Cyber Jar destroys both shared fields and routes monsters by physical owner',()=>{
   const state=create(0,cyberDecks(),'cyber-owner-routing'),prepared=prepareCyber(state);
   const before=inventory(state),activation=activate(state,0,prepared.source);
-  const choices={};
-  for(const uid of holder(activation.state,0).deck.slice(0,4).map(card=>card.uid))choices[uid]='attack';
-  for(const uid of holder(activation.state,1).deck.slice(0,1).map(card=>card.uid))choices[uid]='attack';
-  const result=resolve(activation,choices);
+  const result=resolve(activation,choicesForActive(activation.state));
   assert.equal(result.status,'resolved');
   assert.ok(sourceInGrave(result.state,0,prepared.source.uid));
   assert.ok(sourceInGrave(result.state,1,prepared.opponent.uid));
@@ -292,9 +301,7 @@ test('Cyber Jar special summons low-level monsters and adds all remaining reveal
 
 test('Cyber Jar does not expose cards drawn into hands in the receipt beyond their public reveal',()=>{
   const state=create(0,cyberDecks(),'cyber-public-reveal'),prepared=prepareCyber(state);
-  const activation=activate(state,0,prepared.source),choices={};
-  for(const card of holder(activation.state,0).deck.slice(0,3))choices[card.uid]='attack';
-  for(const card of holder(activation.state,1).deck.slice(0,1))choices[card.uid]='attack';
+  const activation=activate(state,0,prepared.source),choices=choicesForActive(activation.state);
   const result=resolve(activation,choices);
   assert.ok(result.receipt.revealed.every(entry=>entry.cardIds.length===5));
   assert.equal(Object.prototype.hasOwnProperty.call(result.receipt,'handUids'),false);
@@ -337,9 +344,7 @@ test('Cyber Jar keeps inactive partner hands and Decks private and unchanged',()
   const state=create(0,cyberDecks(),'cyber-partners'),prepared=prepareCyber(state);
   const partnerZones=[zones(state,2),zones(state,3)];
   const partnerHands=[holder(state,2).hand.map(card=>card.uid),holder(state,3).hand.map(card=>card.uid)];
-  const activation=activate(state,0,prepared.source),choices={};
-  for(const card of holder(activation.state,0).deck.slice(0,4))choices[card.uid]='attack';
-  for(const card of holder(activation.state,1).deck.slice(0,1))choices[card.uid]='attack';
+  const activation=activate(state,0,prepared.source),choices=choicesForActive(activation.state);
   const result=resolve(activation,choices);
   assert.deepEqual([zones(result.state,2),zones(result.state,3)],partnerZones);
   assert.deepEqual(holder(result.state,2).hand.map(card=>card.uid),partnerHands[0]);
@@ -349,7 +354,7 @@ test('Cyber Jar keeps inactive partner hands and Decks private and unchanged',()
 test('Cyber Jar supports the active pair after a different tag rotation',()=>{
   const state=create(2,null,'cyber-rotated'),source=addSource(state,0,2,'cyber-jar');
   const before=inventory(state),activation=activate(state,2,source);
-  const result=resolve(activation,{});
+  const result=resolve(activation,choicesForActive(activation.state));
   assert.equal(result.status,'resolved');
   assert.equal(result.receipt.affectedSeats[0],2);
   assert.equal(result.receipt.affectedSeats[1],3);
@@ -371,10 +376,8 @@ test('a plan cannot be tampered with or resolved after the active pair rotates',
 
 test('resolved activation IDs are idempotent',()=>{
   const state=create(0,null,'idempotent'),source=addSource(state,0,2,'morphing-jar');
-  const result=resolve(activate(state,0,source));
-  const duplicate=resolveJarFlip(result.state,result.state.jarFlipResolvedIds?.length?{
-    ...result.state.jarFlipPending?.[0],...result.state.jarFlipResolvedIds?.[0]
-  }:null);
+  const activation=activate(state,0,source),result=resolve(activation);
+  const duplicate=resolveJarFlip(result.state,activation.plan,{},false);
   assert.equal(duplicate.status,'duplicate');
 });
 
@@ -389,9 +392,7 @@ test('Field Zone remains separate from three backrow slots during Cyber Jar',()=
   const state=create(0,cyberDecks(),'cyber-zones'),prepared=prepareCyber(state);
   assert.equal(state.core.players[0].backrow.length,0);
   assert.ok(state.core.players[0].field);
-  const activation=activate(state,0,prepared.source),choices={};
-  for(const card of holder(activation.state,0).deck.slice(0,4))choices[card.uid]='attack';
-  for(const card of holder(activation.state,1).deck.slice(0,1))choices[card.uid]='attack';
+  const activation=activate(state,0,prepared.source),choices=choicesForActive(activation.state);
   const result=resolve(activation,choices);
   assert.ok(result.state.core.players[0].field);
   assert.ok(result.state.core.players.every(player=>player.backrow.length<=3));
@@ -401,9 +402,7 @@ test('no FLIP resolution mutates the input or consumes random state',()=>{
   const state=create(0,cyberDecks(),'immutable'),prepared=prepareCyber(state);
   const original=JSON.stringify(state),activation=activate(state,0,prepared.source);
   const activationState=JSON.stringify(activation.state),random=activation.state.core.random.counter;
-  const choices={};
-  for(const card of holder(activation.state,0).deck.slice(0,4))choices[card.uid]='attack';
-  for(const card of holder(activation.state,1).deck.slice(0,1))choices[card.uid]='attack';
+  const choices=choicesForActive(activation.state);
   const result=resolve(activation,choices);
   assert.equal(JSON.stringify(state),original);
   assert.equal(activation.state.core.random.counter,random);
@@ -415,9 +414,7 @@ test('physical identities remain unchanged through both effects',()=>{
   const morphBefore=inventory(morph),morphResult=resolve(activate(morph,0,morphSource));
   assertConserved(morphResult.state,morphBefore);
   const cyber=create(0,cyberDecks(),'conserve-cyber'),prepared=prepareCyber(cyber);
-  const cyberBefore=inventory(cyber),activation=activate(cyber,0,prepared.source),choices={};
-  for(const card of holder(activation.state,0).deck.slice(0,4))choices[card.uid]='attack';
-  for(const card of holder(activation.state,1).deck.slice(0,1))choices[card.uid]='attack';
-  const cyberResult=resolve(activation,choices);
+  const cyberBefore=inventory(cyber),activation=activate(cyber,0,prepared.source);
+  const cyberResult=resolve(activation,choicesForActive(activation.state));
   assertConserved(cyberResult.state,cyberBefore);
 });
