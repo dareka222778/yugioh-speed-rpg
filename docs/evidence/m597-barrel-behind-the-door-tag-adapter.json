@@ -1,0 +1,68 @@
+{
+  "mission": "M597",
+  "runId": "work-20261124T183836-0300-M597",
+  "owner": "Work principal",
+  "priority": "P1",
+  "scope": "Pure TagDuel damage-redirection adapter for one Counter Trap; no resolver, catalog, certification, inventory or persistent-player mutation.",
+  "card": {
+    "name": "Barrel Behind the Door",
+    "passcode": "78783370",
+    "konamiDatabaseId": 5543,
+    "kind": "Counter Trap",
+    "firstTCGPrinting": "Pharaonic Guardian (PGD-095), 2003-07-18",
+    "officialDatabaseUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5543&ope=2&request_locale=en",
+    "officialEffect": "When a Spell/Trap Card, or monster effect, is activated that would inflict damage to you: Your opponent takes the damage instead."
+  },
+  "design": {
+    "timing": "Consumes a chain-resolution receipt for the Counter Trap activation and the source effect activation it responds to.",
+    "routing": "The original damage recipient must be the Counter Trap controller's shared team LP; the plan redirects the exact amount to the opposing team's shared LP.",
+    "nonNegation": "The source effect is not negated. The plan is a redirection directive; the source effect must resolve once and its damage must be applied once.",
+    "multipleCopies": "Each distinct Counter Trap activation has its own idempotency key. Multiple directives referencing the same source effect are not additive damage; the chain resolver still applies that source effect once.",
+    "safety": "Requires a Set face-down card that is face-up in the controller's backrow at resolution, valid physical UIDs, non-negated chain links, a positive unapplied damage amount and an exact shared LP snapshot."
+  },
+  "plannedTests": [
+    "Spell/Trap/monster activated effects redirect exact damage to the other team",
+    "symmetric routing for both teams and controller-vs-owner distinction",
+    "exclude battle damage, non-activated effects, no-damage and wrong recipient",
+    "require Set face-down and face-up Counter Trap resolution state",
+    "exclude negated/unresolved source or Counter Trap links",
+    "reject already-applied damage, malformed IDs/UIDs and stale LP snapshots",
+    "idempotent activation receipts and multiple copies without additive damage",
+    "preserve LP, private hands, decks, 3+3 zones, separate Field Zone and Extra Deck"
+  ],
+  "rules": {
+    "mainDeck": "20-30 per physical seat",
+    "handLimit": 6,
+    "handLimitTiming": "End Phase only",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separate",
+    "extraDeckMax": 5,
+    "privateHandsAndDecks": true,
+    "sharedTeamGraveyardAndLP": true
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "catalogAtEnd": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "production": {
+    "resolverIntegration": false,
+    "discordCommandIntegration": false,
+    "liveDiscordValidation": false,
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false
+  }
+}
