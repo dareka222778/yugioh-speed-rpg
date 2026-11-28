@@ -1,0 +1,120 @@
+{
+  "format": 1,
+  "runId": "work-20261128T022638-0300-M694",
+  "mission": "M694",
+  "owner": "Work principal",
+  "priority": "P1",
+  "priorityRequestedBy": "User",
+  "status": "reserved-and-implementing",
+  "startedAt": "2026-11-28T02:26:38-03:00",
+  "endedAt": null,
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "e1394ef0f6ef7faea5b02e42ee3b0ce43520a01c",
+  "branch": "feat/work-m694-destiny-board-20261128",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "e1394ef0f6ef7faea5b02e42ee3b0ce43520a01c",
+  "branchHeadSha": "e1394ef0f6ef7faea5b02e42ee3b0ce43520a01c",
+  "reservedFiles": [
+    "src/destinyBoardTagAdapter.ts",
+    "tests/destinyBoardTagAdapter.test.cjs",
+    "docs/evidence/m694-destiny-board.json",
+    "scripts/audit-destiny-board-m694.cjs",
+    ".github/workflows/m694-destiny-board.yml",
+    "coordination/runs/work-20261128T022638-0300-M694.json"
+  ],
+  "scope": "Adapter TagDuel 2v2 isolado para Destiny Board (94212438/CID 5224) e Spirit Message I/N/A/L (31893528/CID 5271; 67287533/CID 5272; 94772232/CID 5273; 30170981/CID 5274): sequência obrigatória I→N→A→L na End Phase da equipe oponente, seleção privada de mão/Deck do assento físico definido pelo contrato, embaralhamento quando vier do Deck, vitória somente com as cinco cartas face-up na ordem correta e limpeza imediata de todas as peças quando qualquer uma sair do campo. Sem resolver central, catálogo/certificações, comandos, banco, inventário ou produção.",
+  "cards": [
+    {
+      "id": "94212438",
+      "konamiId": 5224,
+      "name": "Destiny Board",
+      "kind": "continuous-trap",
+      "firstOCGRelease": "2001-07-21",
+      "firstTCGRelease": "2003-03-01",
+      "certifiedAtStart": false,
+      "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5224&ope=2&request_locale=en"
+    },
+    {
+      "id": "31893528",
+      "konamiId": 5271,
+      "name": "Spirit Message \"I\"",
+      "kind": "continuous-spell",
+      "firstOCGRelease": "2001-07-21",
+      "firstTCGRelease": "2003-03-01",
+      "certifiedAtStart": false,
+      "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5271&ope=2&request_locale=en"
+    },
+    {
+      "id": "67287533",
+      "konamiId": 5272,
+      "name": "Spirit Message \"N\"",
+      "kind": "continuous-spell",
+      "firstOCGRelease": "2001-07-21",
+      "firstTCGRelease": "2003-03-01",
+      "certifiedAtStart": false,
+      "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5272&ope=2&request_locale=en"
+    },
+    {
+      "id": "94772232",
+      "konamiId": 5273,
+      "name": "Spirit Message \"A\"",
+      "kind": "continuous-spell",
+      "firstOCGRelease": "2001-07-21",
+      "firstTCGRelease": "2003-03-01",
+      "certifiedAtStart": false,
+      "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5273&ope=2&request_locale=en"
+    },
+    {
+      "id": "30170981",
+      "konamiId": 5274,
+      "name": "Spirit Message \"L\"",
+      "kind": "continuous-spell",
+      "firstOCGRelease": "2001-07-21",
+      "firstTCGRelease": "2003-03-01",
+      "certifiedAtStart": false,
+      "officialSource": "https://www.db.yugioh-card-game.com/yugiohdb/card_search.action?cid=5274&ope=2&request_locale=en"
+    }
+  ],
+  "baseline": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "source": "catalog/engine-v9/3af4ee461ba728be019de373b6c9652c3a7fd21b94fd475aac6af22b5127ca99.json at shared HEAD"
+  },
+  "handoff": {
+    "targetPR": 17,
+    "status": "not-requested-yet; adapter-only phase does not touch central files",
+    "files": [
+      "src/duelEngineCurrent.ts",
+      "src/monsterEffects.ts",
+      "src/effectRegistry.ts"
+    ]
+  },
+  "verification": {
+    "focusedScenarios": 0,
+    "focusedTestResult": "pending",
+    "typecheck": "pending",
+    "build": "pending",
+    "evidenceAudit": "pending",
+    "workflow": "pending",
+    "adapterBehaviorVerifiedCards": 0,
+    "newEngineCertifiedCards": 0,
+    "automaticCertifications": 0,
+    "inventoryGrants": 0,
+    "liveDiscordValidation": false
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "effectiveWorkMinutes": 0,
+  "targetEffectiveWorkMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "nextTask": "Implementar o estado sequencial de Destiny Board com contratos explícitos de assento físico, seleção de Spirit Message, limpeza por saída e vitória de equipe; cobrir rotação 2v2 e persistência.",
+  "scopeReleasedToAuxiliary": [],
+  "nextWindow": "2026-11-28T03:30:00-03:00"
+}
