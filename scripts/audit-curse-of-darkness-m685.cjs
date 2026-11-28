@@ -1,0 +1,16 @@
+'use strict';
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const path=require('node:path');
+const evidence=JSON.parse(fs.readFileSync(path.join(__dirname,'../docs/evidence/m685-curse-of-darkness.json'),'utf8'));
+const {getDuelCard,getEnabledCardIds}=require('../dist/effectRegistry');
+const source=fs.readFileSync(path.join(__dirname,'../src/cardCertifications.ts'),'utf8');
+const id=evidence.cards[0].passcode,count=(source.match(/['"]\d{8}['"]\s*:/g)||[]).length;
+assert.equal(id,'84970821');assert.equal(evidence.cards[0].konamiCid,5917);
+assert.equal(getDuelCard(id),undefined,'A importação não pode admitir a carta automaticamente.');
+assert.equal(getEnabledCardIds().includes(id),false,'A carta não pode entrar no catálogo ativo sem integração e autorização.');
+assert.equal(source.includes(id),false,'A carta não pode receber certificação por importação.');
+assert.equal(count,evidence.catalogAtStart.engineV9Certified,'A contagem certificada observada deve permanecer reproduzível.');
+assert.equal(evidence.catalogAtStart.engineV9Certified,969);assert.equal(evidence.catalogAtEnd.engineV9Certified,969);
+assert.equal(evidence.newlyBehaviorCertifiedCards,0);assert.equal(evidence.automaticCertifications,0);assert.equal(evidence.inventoryGrants,0);
+console.log('M685 evidence audit passed: 969 certifications unchanged; Curse of Darkness remains unadmitted.');

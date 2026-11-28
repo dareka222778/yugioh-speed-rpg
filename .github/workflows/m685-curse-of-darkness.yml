@@ -1,0 +1,38 @@
+name: M685 Curse of Darkness TagDuel adapter
+on:
+  push:
+    branches:
+      - feat/work-m685-curse-of-darkness-20261127
+    paths:
+      - 'src/curseOfDarknessTagAdapter.ts'
+      - 'tests/curseOfDarknessTagAdapter.test.cjs'
+      - 'docs/evidence/m685-curse-of-darkness.json'
+      - 'scripts/audit-curse-of-darkness-m685.cjs'
+      - '.github/workflows/m685-curse-of-darkness.yml'
+  pull_request:
+    paths:
+      - 'src/curseOfDarknessTagAdapter.ts'
+      - 'tests/curseOfDarknessTagAdapter.test.cjs'
+      - 'docs/evidence/m685-curse-of-darkness.json'
+      - 'scripts/audit-curse-of-darkness-m685.cjs'
+      - '.github/workflows/m685-curse-of-darkness.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  curse-of-darkness:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Run focused behavior tests
+        run: node --test tests/curseOfDarknessTagAdapter.test.cjs
+      - name: Audit evidence and non-admission
+        run: node scripts/audit-curse-of-darkness-m685.cjs

@@ -1,0 +1,99 @@
+{
+  "runId": "work-20261127T212828-0300-M685",
+  "mission": "M685",
+  "priority": "P1",
+  "status": "ci-running",
+  "startedAt": "2026-11-27T21:28:28-03:00",
+  "lastUpdatedAt": "2026-11-27T21:41:12.047-03:00",
+  "endedAt": null,
+  "effectiveWorkMinutes": 12,
+  "targetWorkMinutes": 60,
+  "workBlocks": [
+    {
+      "scope": "Leitura de coordination/state.json, checkpoint M684, branches, PRs e CI",
+      "result": "HEAD compartilhado e06a207; estado inicial estava desatualizado em 226af; PRs #17/#609 e workflows reais verificados."
+    },
+    {
+      "scope": "Correção M684 em branch própria",
+      "branch": "feat/work-m684-targeted-continuous-traps-20261127",
+      "commit": "951a1f82b8908d493d0ee233b9441fc6b15e089e",
+      "result": "Fixture Field Zone corrigida para exigir getDuelCard(id).field===true; workflow focado passou; Engine validation ainda em execução."
+    },
+    {
+      "scope": "Adapter M685 Curse of Darkness",
+      "branch": "feat/work-m685-curse-of-darkness-20261127",
+      "codeSha": "6e8f1108084feafcc29a5f5fa233fffa3421450b",
+      "result": "Implementado adapter puro, 29 testes focados, auditoria de não-admissão, evidência e workflow dedicado; PR #610 aberto como draft."
+    }
+  ],
+  "branch": "feat/work-m685-curse-of-darkness-20261127",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "sharedBaseHead": "e06a207730841378ba317eea5ac29b0604621f5f",
+  "codeSha": "6e8f1108084feafcc29a5f5fa233fffa3421450b",
+  "headSha": "6e8f1108084feafcc29a5f5fa233fffa3421450b",
+  "pr": {
+    "number": 610,
+    "url": "https://github.com/dareka222778/yugioh-speed-rpg/pull/610",
+    "state": "open",
+    "draft": true,
+    "merged": false
+  },
+  "changes": {
+    "sourceLines": 180,
+    "focusedTests": 29,
+    "files": 5,
+    "cardAdaptersImplemented": 1,
+    "cardAdaptersCertified": 0
+  },
+  "catalog": {
+    "engineV9CertifiedAtBase": 969,
+    "engineV9CertifiedCurrent": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newlyBehaviorCertified": 0,
+    "automaticCertifications": 0
+  },
+  "validation": {
+    "focusedWorkflow": "in_progress",
+    "engineValidation": "in_progress",
+    "fastFeedback": "in_progress",
+    "milestone1000": "in_progress",
+    "localExecution": false,
+    "fullDiscordValidation": false
+  },
+  "rules": {
+    "deckMin": 20,
+    "deckMax": 30,
+    "handLimit": 6,
+    "handLimitTiming": "End Phase",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZoneSeparate": true,
+    "extraDeckMax": 5,
+    "physicalOwnerUIDs": true,
+    "privateHandsAndDecks": true
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "liveDiscordValidation": false,
+    "backupVerified": false,
+    "inventoryGrants": 0
+  },
+  "handoff": {
+    "targetPR": 17,
+    "commentId": 7231105381,
+    "status": "requested-awaiting-explicit-release",
+    "files": [
+      "src/duelEngineCurrent.ts"
+    ],
+    "scope": "hook pós-resolução de Spell com eventId, UID/ID da Magia, assento físico ativador, activationNegated, resolved e effectNegated"
+  },
+  "blockers": [
+    "CI M685 ainda em execução",
+    "Integração central bloqueada até liberação explícita do PR #17",
+    "Sem autorização de merge/deploy ou backup verificado"
+  ],
+  "nextTask": "Aguardar CI M685 e Engine validation; corrigir falhas; atualizar contagem apenas após integração e comportamento certificado; verificar novo HEAD e coordenação antes da próxima família.",
+  "nextWindow": "2026-11-27T22:30:00-03:00"
+}
