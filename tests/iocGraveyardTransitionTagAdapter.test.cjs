@@ -332,3 +332,56 @@ test('both effects conserve every physical UID and never grant inventory',()=>{
  }));
  assert.deepEqual(inventory(thingResolved.state),thingBefore);
 });
+
+
+test('Burning Algae triggers when sent from a Monster Zone even without destruction',()=>{
+ const duel=base(),source=addMonster(duel,0,1,burningPlaceholder);
+ const moved=sendMonsterToGrave(duel,source,{eventId:'burning-monster-send',sequence:1,destroyed:false,reason:'send'});
+ const recorded=recordGraveyardTransition(moved.state,createGraveyardTransitionLedger(),moved.event,lookups);
+ assert.equal(recorded.status,'scheduled');
+ const resolved=resolveGraveyardTransition(moved.state,recorded.ledger,windowFor(moved.state,'burning-monster-send'));
+ assert.equal(resolved.state.core.players[1].lp,5000);
+});
+
+test('The Thing in the Crater does not trigger from Deck even if the event claims destruction',()=>{
+ const duel=base(),moved=sendFromZone(duel,0,thingPlaceholder,'deck',{
+  eventId:'thing-from-deck',sequence:1,destroyed:true,reason:'effect'
+ });
+ const recorded=recordGraveyardTransition(moved.state,createGraveyardTransitionLedger(),moved.event,lookups);
+ assert.equal(recorded.status,'no-trigger');
+});
+
+test('a resolved Burning Algae event cannot apply its LP gain twice',()=>{
+ const duel=base(),card=takeFromZone(duel,0,burningPlaceholder,'deck');
+ const moved=eventFor(duel,card,'deck',{eventId:'burning-once',sequence:1});
+ const recorded=recordGraveyardTransition(moved.state,createGraveyardTransitionLedger(),moved.event,lookups);
+ const window=windowFor(moved.state,'burning-once');
+ const first=resolveGraveyardTransition(moved.state,recorded.ledger,window);
+ const replay=resolveGraveyardTransition(first.state,first.ledger,window);
+ assert.equal(first.state.core.players[1].lp,5000);
+ assert.equal(replay.status,'no-target');
+ assert.equal(replay.state.core.players[1].lp,5000);
+});
+
+test('malformed reason and negative physical epoch are rejected before scheduling',()=>{
+ const duel=base(),card=takeFromZone(duel,0,burningPlaceholder,'deck');
+ const moved=eventFor(duel,card,'deck',{eventId:'bad-reason',sequence:1});
+ assert.throws(()=>recordGraveyardTransition(moved.state,createGraveyardTransitionLedger(),{
+  ...moved.event,reason:'untrusted'
+ },lookups),/motivo/i);
+ assert.throws(()=>recordGraveyardTransition(moved.state,createGraveyardTransitionLedger(),{
+  ...moved.event,binding:{...moved.event.binding,epoch:-1}
+ },lookups),/binding/i);
+});
+
+test('resolution refuses to grow a full processed-event ledger',()=>{
+ const duel=base(),pending={
+  eventId:'ledger-cap-pending',fingerprint:'a'.repeat(64),sequence:4097,turn:duel.core.turn,
+  kind:'burning-algae',cardUid:'m0:synthetic',ownerTeam:0,fromZone:'deck',destroyed:false
+ };
+ const processed=Array.from({length:4096},(_,i)=>({
+  eventId:'processed-'+i,fingerprint:'b'.repeat(64),sequence:i+1,status:'resolved'
+ }));
+ const ledger={version:1,lastSequence:4097,pending:[pending],processed};
+ assert.throws(()=>resolveGraveyardTransition(duel,ledger,windowFor(duel,pending.eventId)),/limite/i);
+});
