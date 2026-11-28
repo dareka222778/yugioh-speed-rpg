@@ -72,8 +72,10 @@ export type GraveyardResolutionWindow=Readonly<{
  kind:'ioc-graveyard-resolution';
  eventId:string;
  turn:number;
- activeTeam:GraveyardTransitionTeam;
- activeSeat:GraveyardTransitionSeat;
+ turnTeam:GraveyardTransitionTeam;
+ turnSeat:GraveyardTransitionSeat;
+ resolvingTeam:GraveyardTransitionTeam;
+ resolvingSeat:GraveyardTransitionSeat;
  acceptThingInCrater?:boolean;
  pyroUid?:string;
  effectNegated?:boolean;
@@ -252,14 +254,19 @@ export function resolveGraveyardTransition(
  assertRules(input);assertLedger(ledger);
  if(window?.kind!=='ioc-graveyard-resolution'||typeof window.eventId!=='string'||!window.eventId.trim()||
   !Number.isSafeInteger(window.turn)||window.turn!==input.core.turn||
-  !isTeam(window.activeTeam)||!isSeat(window.activeSeat)||window.activeTeam!==input.core.current||
-  window.activeSeat!==input.cursor||input.active[window.activeTeam]!==window.activeSeat||
+  !isTeam(window.turnTeam)||!isSeat(window.turnSeat)||window.turnTeam!==input.core.current||
+  window.turnSeat!==input.cursor||input.active[window.turnTeam]!==window.turnSeat||
+  !isTeam(window.resolvingTeam)||!isSeat(window.resolvingSeat)||
+  input.active[window.resolvingTeam]!==window.resolvingSeat||
   window.acceptThingInCrater!==undefined&&typeof window.acceptThingInCrater!=='boolean'||
   window.effectNegated!==undefined&&typeof window.effectNegated!=='boolean'){
   throw new Error('Janela de resolução GY IOC não corresponde ao assento ativo.');
  }
  const pending=ledger.pending.find(item=>item.eventId===window.eventId);
  if(!pending)return {status:'no-target',state:input,ledger,changedTeams:[],summonedUid:null,lpDelta:[0,0]};
+ if(window.resolvingTeam!==pending.ownerTeam||window.resolvingSeat!==input.active[pending.ownerTeam]){
+  throw new Error('Gatilho GY deve ser resolvido pelo assento ativo da equipe proprietária.');
+ }
  if(ledger.processed.length>=4096)throw new Error('Ledger IOC atingiu o limite de eventos processados.');
  if(window.pyroUid!==undefined&&(typeof window.pyroUid!=='string'||!window.pyroUid.trim())){
   throw new Error('UID Pyro inválido na janela de resolução IOC.');
