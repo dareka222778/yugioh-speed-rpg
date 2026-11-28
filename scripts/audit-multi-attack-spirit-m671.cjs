@@ -1,0 +1,30 @@
+'use strict';
+const fs=require('node:fs');
+const assert=require('node:assert/strict');
+const evidence=JSON.parse(fs.readFileSync('docs/evidence/m671-multi-attack-spirit.json','utf8'));
+const tests=fs.readFileSync('tests/multiAttackSpiritTagAdapter.test.cjs','utf8');
+assert.equal(evidence.mission,'M671');
+assert.equal(evidence.cutoff,'2004-09-30');
+assert.equal(evidence.cards.length,2);
+assert.equal(evidence.scenarioCount,[...tests.matchAll(/\btest\(/g)].length);
+assert.ok(evidence.scenarioCount>=20);
+assert.deepEqual(evidence.cards.map(card=>card.id),['22609617','02134346']);
+assert.deepEqual(evidence.cards.map(card=>card.konamiCid),[5898,5381]);
+for(const card of evidence.cards){
+ assert.ok(card.source.startsWith('https://www.db.yugioh-card.com/'));
+ assert.ok(card.firstTcgRelease<='2004-09-30');
+}
+assert.equal(evidence.rules.mainDeck,'20–30 por assento físico');
+assert.equal(evidence.rules.handLimit,6);
+assert.equal(evidence.rules.handCheck,'End Phase');
+assert.equal(evidence.rules.monsterZones,3);
+assert.equal(evidence.rules.spellTrapZones,3);
+assert.equal(evidence.rules.extraDeckMax,5);
+assert.equal(evidence.newCertifications,0);
+assert.equal(evidence.automaticCertifications,0);
+assert.equal(evidence.inventoryGrants,0);
+assert.equal(evidence.certificationStatus,'not-certified');
+assert.equal(evidence.runtimeIntegration,'pending-explicit-handoff');
+assert.equal(evidence.discordLive,false);
+assert.equal(evidence.production,'unchanged');
+console.log('M671 evidence OK: '+evidence.cards.length+' card behaviors, '+evidence.scenarioCount+' scenarios, 0 certifications, 0 inventory grants.');
