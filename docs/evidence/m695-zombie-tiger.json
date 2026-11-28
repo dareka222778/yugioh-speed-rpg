@@ -1,0 +1,68 @@
+{
+  "mission": "M695 — Decayed Commander / Zombie Tiger",
+  "status": "reserved; adapter implementation in progress",
+  "historicalCutoff": "2004-09-30",
+  "baseline": {
+    "engineV9Revision": "3af4ee461ba728be019de373b6c9652c3a7fd21b94fd475aac6af22b5127ca99",
+    "certifiedCards": 969,
+    "target": 1000,
+    "remaining": 31
+  },
+  "cards": [
+    {
+      "name": "Decayed Commander",
+      "id": "10209545",
+      "konamiCid": 5584,
+      "firstObserved": {
+        "ocg": "2002-07-18",
+        "tcg": "2003-10-10",
+        "world": "2002-07-18"
+      },
+      "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5584&ope=2&request_locale=en",
+      "text": "When this card is Normal Summoned: You can Special Summon 1 Zombie Tiger from your hand. If this card inflicts battle damage to your opponent by a direct attack: Discard 1 random card from their hand."
+    },
+    {
+      "name": "Zombie Tiger",
+      "id": "47693640",
+      "konamiCid": 5585,
+      "firstObserved": {
+        "ocg": "2002-07-18",
+        "tcg": "2003-10-10",
+        "world": "2002-07-18"
+      },
+      "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5585&ope=2&request_locale=en",
+      "text": "Once per turn, you can either equip this card to a Decayed Commander you control or unequip it and Special Summon it in Attack Position. While equipped, the monster gains 500 ATK/DEF. If it destroys an opponent's monster by battle, discard 1 random card from their hand. If the equipped monster would be destroyed by battle, destroy this card instead."
+    }
+  ],
+  "officialTextReviewed": true,
+  "identityReviewed": true,
+  "duplicateSearch": {
+    "branches": 0,
+    "pullRequests": 0,
+    "engineCatalogMembership": 0
+  },
+  "behaviorCoverage": {
+    "scenariosPlanned": 23,
+    "scenariosVerified": 0,
+    "adapterBehaviorVerifiedCards": 0,
+    "newEngineCertifiedCards": 0
+  },
+  "rules": {
+    "mainDeck": "20–30 per physical seat",
+    "handLimit": 6,
+    "handCheck": "End Phase",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "extraDeckMax": 5,
+    "tagMode": "classic 2v2; shared field/Graveyard; private hands/decks"
+  },
+  "safety": {
+    "noInventoryGrant": true,
+    "uidConservationRequired": true,
+    "privateHandDisclosure": false,
+    "merge": false,
+    "deploy": false,
+    "liveDiscordValidation": false
+  },
+  "nextStep": "Implement the isolated adapter and tests; request handoff before touching central resolver/catalog."
+}

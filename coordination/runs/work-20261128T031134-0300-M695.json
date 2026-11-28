@@ -1,0 +1,75 @@
+{
+  "id": "work-20261128T031134-0300-M695",
+  "mission": "Decayed Commander + Zombie Tiger — Union and battle-discard adapter for classic TagDuel 2v2",
+  "priority": "P1",
+  "status": "reserved-and-implementing",
+  "startedAt": "2026-11-28T03:11:34-03:00",
+  "updatedAt": "2026-11-28T03:11:34-03:00",
+  "endedAt": null,
+  "branch": "feat/work-m695-zombie-tiger-union-tag-adapter-20261128",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "c22d10b56fe8ec403057fac8087f1b35599a764f",
+  "branchHeadSha": "c22d10b56fe8ec403057fac8087f1b35599a764f",
+  "expectedSharedHead": "c22d10b56fe8ec403057fac8087f1b35599a764f",
+  "headCondition": "Compare-and-swap required for every shared coordination update; never force-push.",
+  "otherAgentStatus": "No overlapping reservation or prior PR/branch found for card IDs 10209545 and 47693640. Shared resolver/catalog files are reserved by other agents and are excluded from this branch.",
+  "reservedFiles": [
+    "src/zombieTigerTagAdapter.ts",
+    "tests/zombieTigerTagAdapter.test.cjs",
+    "docs/evidence/m695-zombie-tiger.json",
+    "scripts/audit-zombie-tiger-m695.cjs",
+    ".github/workflows/m695-zombie-tiger.yml",
+    "coordination/runs/work-20261128T031134-0300-M695.json"
+  ],
+  "scope": [
+    "Normal Summon trigger: Decayed Commander Special Summons Zombie Tiger only from the physical summoning seat's private hand.",
+    "Zombie Tiger Union equip/unequip, one Union per monster, once per turn, 3 shared Spell/Trap slots, +500 ATK/DEF while equipped.",
+    "Union battle-destruction replacement and cleanup when the equipped monster leaves the field.",
+    "Random discard on Decayed Commander direct battle damage and on equipped monster battle-destruction; use deterministic persisted RNG and the active physical opponent's private hand.",
+    "Preserve physical UIDs/owners and shared team Graveyard; no inventory creation or grants.",
+    "Rules invariants: deck 20–30 per seat, hand limit 6 at End Phase, 3 Monster + 3 Spell/Trap zones per team, Extra Deck 5."
+  ],
+  "excluded": [
+    "src/duelEngineCurrent.ts",
+    "src/monsterEffects.ts",
+    "src/effectRegistry.ts",
+    "src/cardMetadata.ts",
+    "src/cardCertifications.ts",
+    "src/effectDefinitions.ts",
+    "src/releasedCardIds.ts",
+    "Discord commands/persistence",
+    "merge/deploy/production"
+  ],
+  "baseline": {
+    "engineV9Revision": "3af4ee461ba728be019de373b6c9652c3a7fd21b94fd475aac6af22b5127ca99",
+    "certifiedCards": 969,
+    "target": 1000,
+    "remaining": 31,
+    "automaticCertifications": 0,
+    "inventoryGrants": 0
+  },
+  "verification": {
+    "focusedScenarios": 0,
+    "focusedTests": "not run",
+    "typecheck": "not run",
+    "build": "not run",
+    "fullRegression": "not run",
+    "adapterBehaviorVerifiedCards": 0,
+    "newEngineCertifiedCards": 0,
+    "discordLiveValidation": false
+  },
+  "production": {
+    "pr": null,
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "effectiveWorkMinutes": 0,
+  "targetEffectiveWorkMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "scopeReleasedToAuxiliary": [],
+  "nextTask": "Implement adapter and focused tests, then open draft PR; request central-file handoff separately and wait for explicit release.",
+  "nextWindow": "2026-11-28T03:30:00-03:00"
+}
