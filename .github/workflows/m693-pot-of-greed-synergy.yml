@@ -1,0 +1,38 @@
+name: M693 Pot of Greed synergy TagDuel adapter
+on:
+  push:
+    branches:
+      - feat/work-m693-pot-of-greed-synergy-20261127
+    paths:
+      - 'src/potOfGreedSynergyTagAdapter.ts'
+      - 'tests/potOfGreedSynergyTagAdapter.test.cjs'
+      - 'docs/evidence/m693-pot-of-greed-synergy.json'
+      - 'scripts/audit-pot-of-greed-synergy-m693.cjs'
+      - '.github/workflows/m693-pot-of-greed-synergy.yml'
+  pull_request:
+    paths:
+      - 'src/potOfGreedSynergyTagAdapter.ts'
+      - 'tests/potOfGreedSynergyTagAdapter.test.cjs'
+      - 'docs/evidence/m693-pot-of-greed-synergy.json'
+      - 'scripts/audit-pot-of-greed-synergy-m693.cjs'
+      - '.github/workflows/m693-pot-of-greed-synergy.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  pot-synergy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Run focused behavior tests
+        run: node --test tests/potOfGreedSynergyTagAdapter.test.cjs
+      - name: Audit evidence and non-admission
+        run: node scripts/audit-pot-of-greed-synergy-m693.cjs
