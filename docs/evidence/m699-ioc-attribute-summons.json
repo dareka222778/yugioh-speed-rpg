@@ -44,7 +44,7 @@
     }
   ],
   "behaviorCoverage": {
-    "scenarios": 31,
+    "scenarios": 34,
     "fullyAdapterVerifiedCards": 4,
     "partiallyAdapterVerifiedCards": 0,
     "coveredFamilies": [
@@ -60,7 +60,8 @@
       "3+3 shared zones and separate Field Zone",
       "Deck 20–30 / hand 6 at End Phase / Extra 5",
       "inventory conservation and idempotent receipts"
-    ]
+    ],
+    "note": "31 test call sites; the four-card loop expands one site into four runtime cases."
   },
   "rules": {
     "mainDeckMin": 20,
