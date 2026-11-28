@@ -1,8 +1,8 @@
 {
   "format": 1,
   "sharedBranch": "feat/rea-engine-recovery-20261026",
-  "observedHead": "226af690acf6344d5cc43898d4929e3dc742b857",
-  "updatedAt": "2026-11-27T17:54:41.454-03:00",
+  "observedHead": "e06a207730841378ba317eea5ac29b0604621f5f",
+  "updatedAt": "2026-11-27T21:28:28-03:00",
   "activeReservations": [
     {
       "runId": "work-20261125T203259-0300-M635",
@@ -667,6 +667,26 @@
       "baseSha": "b4d9e249f539a3dab7babeef044f40f8b1f50cd3",
       "headSha": "b751ab9ea46313d01e22458b310f635ca3ac8d47",
       "pr": 609
+    },
+    {
+      "runId": "work-20261127T212828-0300-M685",
+      "mission": "M685",
+      "priority": "P1",
+      "branch": "feat/work-m685-curse-of-darkness-20261127",
+      "state": "active",
+      "conditionalHeadUpdate": true,
+      "reservedFiles": [
+        "src/curseOfDarknessTagAdapter.ts",
+        "tests/curseOfDarknessTagAdapter.test.cjs",
+        "docs/evidence/m685-curse-of-darkness.json",
+        "scripts/audit-curse-of-darkness-m685.cjs",
+        ".github/workflows/m685-curse-of-darkness.yml",
+        "coordination/runs/work-20261127T212828-0300-M685.json"
+      ],
+      "scope": "Adapter isolado para Curse of Darkness (84970821/CID 5917): aplicar 1000 LP à equipe do assento físico que ativou a Magia somente após a resolução bem-sucedida; distinguir ativação negada, efeito negado, idempotência por evento, supressão por negadores de Armadilha, UID/epoch, rotação 2v2 e conservação de inventário. Sem alterar resolver central, metadata, certificações, comandos, banco, inventário ou produção.",
+      "sharedBaseHead": "e06a207730841378ba317eea5ac29b0604621f5f",
+      "baseSha": "e06a207730841378ba317eea5ac29b0604621f5f",
+      "headSha": "e06a207730841378ba317eea5ac29b0604621f5f"
     }
   ],
   "handoffRequests": [
@@ -780,15 +800,15 @@
   },
   "nextExecution": "2026-11-27T22:30:00-03:00",
   "currentWorkRun": {
-    "runId": "work-20261127T173009-0300-M684",
-    "mission": "M684",
-    "branch": "feat/work-m684-targeted-continuous-traps-20261127",
-    "status": "ci-running",
+    "runId": "work-20261127T212828-0300-M685",
+    "mission": "M685",
+    "branch": "feat/work-m685-curse-of-darkness-20261127",
+    "status": "active",
     "priority": "P1",
-    "sharedBaseHead": "b4d9e249f539a3dab7babeef044f40f8b1f50cd3",
-    "headSha": "b751ab9ea46313d01e22458b310f635ca3ac8d47",
-    "pr": 609,
-    "nextTask": "Acompanhar CI no SHA b751ab; corrigir qualquer falha remanescente, validar auditoria e suíte completa; depois atualizar PR #609.",
+    "sharedBaseHead": "e06a207730841378ba317eea5ac29b0604621f5f",
+    "headSha": "e06a207730841378ba317eea5ac29b0604621f5f",
+    "pr": null,
+    "nextTask": "Implementar adapter isolado, testes de resolução Spell, auditoria de evidência e CI dedicada; em paralelo, acompanhar a CI corretiva M684.",
     "nextWindow": "2026-11-27T22:30:00-03:00"
   },
   "preparedNextRun": {
