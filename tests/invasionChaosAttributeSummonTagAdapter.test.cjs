@@ -446,13 +446,12 @@ test('an invalid resolution window cannot apply a pending trigger',()=>{
 });
 
 test('all four adapters conserve every physical UID and never grant inventory',()=>{
- const duel=base(),before=inventory(duel);
  for(const key of ['gigantes','fenrir','inferno','silpheed']){
+  const duel=base('m699-inventory-'+key),before=inventory(duel);
   const {candidate,costCards}=summonCandidate(duel,key);
   const result=specialSummonInvasionChaosFromHand(duel,duel.cursor,candidate.uid,costCards.map(card=>card.uid),lookups);
   assert.equal(result.status,'summoned');
-  Object.assign(duel,result.state);
+  assert.deepEqual(inventory(result.state),before);
+  assert.equal(tagInventory(result.state).filter(card=>card.entityKind!=='token').length,before.length);
  }
- assert.deepEqual(inventory(duel),before);
- assert.equal(tagInventory(duel).filter(card=>card.entityKind!=='token').length,before.length);
 });
