@@ -45,4 +45,5 @@ jobs:
       - name: Full regression suite
         run: npm test
       - name: Reservation, admission and evidence audit
+        if: always()
         run: node scripts/audit-ioc-graveyard-transitions-m700.cjs
