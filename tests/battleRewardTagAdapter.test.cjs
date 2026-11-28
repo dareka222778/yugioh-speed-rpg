@@ -84,7 +84,7 @@ test('Airknight draw goes to the active physical seat hand, not the teammate own
 test('Airknight draw waits for a positive battle-damage event and rejects unrelated/effect damage',()=>{
  const session=setup(),source=deploy(session,0,fixture.airknight,0),defender=deploy(session,1,fixture.enemy,3);
  session.duel.core.phase='battle';
- assert.throws(()=>adapter.prepareAirknightParshathDraw(session,{...battle(session,'air-zero',source,defender),amount:0},source.uid),/Dano de batalha inválido/);
+ assert.throws(()=>adapter.prepareAirknightParshathDraw(session,{...battle(session,'air-zero',source,defender),amount:0},source.uid),/dano de batalha positivo/);
  assert.throws(()=>adapter.prepareAirknightParshathDraw(session,{...battle(session,'air-effect',source,defender),damageKind:'effect'},source.uid),/dano de batalha positivo/);
  assert.throws(()=>adapter.prepareAirknightParshathDraw(session,{...battle(session,'air-other',source,defender),attackerUid:defender.uid},source.uid),/não representa dano/);
 });
