@@ -1,0 +1,137 @@
+{
+  "schemaVersion": 1,
+  "mission": "M696",
+  "runId": "work-20261128T032433-0300-M696",
+  "status": "adapter-only; not admitted to engine-v9; CI pending",
+  "createdAt": "2026-11-28T03:24:33-03:00",
+  "sourceAuthority": "Konami Yu-Gi-Oh! Neuron / Official Card Game Card Database",
+  "sourceSnapshotDate": "2026-11-28",
+  "historicalCutoff": "2004-09-30",
+  "cards": [
+    {
+      "id": "90810762",
+      "konamiCid": 6189,
+      "name": "Raging Flame Sprite",
+      "type": "Effect Monster — FIRE/Pyro/Level 3/100 ATK/200 DEF",
+      "ocgFirstRelease": "2004-08-05",
+      "ocgFirstPrinting": "RDS-JP020",
+      "tcgFirstRelease": "2004-12-01",
+      "tcgFirstPrinting": "RDS-EN020",
+      "eligibleByHistoricalUnion": true,
+      "eligibilityReason": "A primeira impressão OCG ocorreu antes do corte de 2004-09-30; a primeira impressão TCG ocorreu depois. A elegibilidade é exclusivamente pela coleção OCG histórica, não por TCG.",
+      "officialOcgSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6189&ope=2&request_locale=ja",
+      "officialTcgSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6189&ope=2&request_locale=en",
+      "behaviorSummary": "Pode atacar diretamente. Sempre que causar dano de batalha positivo ao oponente por um ataque direto, ganha 1000 ATK; o ganho acumula em cada ataque direto bem-sucedido. O adapter só aplica o modificador após validar o delta de LP já aplicado pelo engine e não reaplica dano."
+    }
+  ],
+  "rulesAndConstraints": {
+    "mainDeck": "20–30 cartas por assento físico",
+    "handLimit": 6,
+    "handCheck": "End Phase; descarte até o limite, sem bloquear mãos acima de seis durante o turno",
+    "monsterZonesPerTeam": 3,
+    "spellTrapZonesPerTeam": 3,
+    "fieldZone": "separada das três zonas compartilhadas",
+    "extraDeckMaxPerPhysicalSeat": 5,
+    "tagDuel": "2v2 clássico; campo/LP compartilhados por equipe; mão/Deck/Extra permanecem privados por assento",
+    "ownership": "UID m{seat}: proprietário físico preservado; controlador é a equipe onde o monstro está no campo",
+    "noInventoryGrants": true
+  },
+  "behaviorCoverage": {
+    "scenarios": 23,
+    "categories": [
+      "identidade 90810762 e CID oficial 6189; candidato ausente do engine-v9",
+      "ataque direto permitido mesmo com monstros adversários no campo",
+      "face-down e Defense Position não recebem permissão de ataque direto",
+      "dano de batalha positivo por ataque direto adiciona exatamente +1000 ATK",
+      "ganho cumulativo em múltiplos ataques no mesmo turno; sem once-per-turn inventado",
+      "zero dano não concede ATK",
+      "dano em combate contra monstro não é classificado como ataque direto",
+      "evento que declara ataque direto mas nomeia alvo é rejeitado",
+      "fonte que deixou o campo antes do hook não recebe o ganho",
+      "binding físico antigo não afeta a mesma UID após sair e retornar",
+      "fonte negada não recebe o modificador",
+      "proprietário físico separado do controlador em campo compartilhado",
+      "evento de ataque da equipe errada não altera o monstro",
+      "delta de LP precisa corresponder ao dano já aplicado",
+      "assento físico ativo e turno precisam corresponder ao evento",
+      "replay do mesmo evento é idempotente",
+      "reuso do ID com evidência divergente é rejeitado",
+      "sequências de eventos estritamente crescentes",
+      "limites 3+3 e Field Zone separada",
+      "Deck físico abaixo de vinte é rejeitado",
+      "sexto Extra Deck físico é rejeitado",
+      "mão acima de seis é permitida antes da End Phase",
+      "conservação de todos os UIDs e identidades físicas"
+    ],
+    "focusedTestCommand": "node --test tests/ragingFlameSpriteTagAdapter.test.cjs",
+    "fullSuiteCommand": "npm test",
+    "result": "pending CI"
+  },
+  "engineV9Baseline": {
+    "revision": "3af4ee461ba728be019de373b6c9652c3a7fd21b94fd475aac6af22b5127ca99",
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "candidateCardsFoundInRevision": 0
+  },
+  "admission": {
+    "adapterOnly": true,
+    "centralResolverIntegrated": false,
+    "catalogRevisionChanged": false,
+    "newEngineCertifiedCards": 0,
+    "adapterBehaviorVerifiedCards": 1,
+    "automaticCertifications": false,
+    "inventoryGrants": false
+  },
+  "production": {
+    "prCreated": false,
+    "prNumber": null,
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "coordination": {
+    "sharedBaseHead": "c8adc9ce715931fc6e7c63d22f897c46ac1d8be3",
+    "reservationCommit": "da6e355dda9ae026703b9404561f85cd9999e9b3",
+    "branch": "feat/work-m696-raging-flame-sprite-20261128",
+    "handoffRequestPR": 17,
+    "handoffCommentId": 7235345195,
+    "handoffStatus": "requested-awaiting-explicit-release",
+    "centralFilesUntouched": true
+  },
+  "limitations": [
+    "O adapter é isolado: não altera duelEngineCurrent.ts, monsterEffects.ts, effectRegistry.ts, cardMetadata.ts, cardCertifications.ts ou comandos Discord.",
+    "Raging Flame Sprite ainda não conta como carta certificada no engine-v9; o total permanece 969/1000 até integração central e auditoria de admissão.",
+    "A elegibilidade histórica vem da impressão OCG de 2004-08-05; a impressão TCG de 2004-12-01 está fora do corte TCG.",
+    "A validação live do Discord, backup de produção, merge e deploy não foram executados."
+  ],
+  "nextStep": "Aguardar handoff explícito dos arquivos centrais solicitado no PR #17; depois ligar o evento pós-dano direto ao resolver, admitir o ID 90810762 e certificar apenas após a suíte de regressão. Enquanto aguarda, continuar em famílias isoladas não reservadas.",
+  "result": "adapter-only; pending CI; 0 new engine certifications",
+  "verification": {
+    "workflowRun": null,
+    "workflowUrl": null,
+    "testedHeadSha": null,
+    "typecheck": "pending",
+    "build": "pending",
+    "focusedTests": {
+      "tests": 23,
+      "pass": null,
+      "fail": null
+    },
+    "fullRegression": {
+      "tests": null,
+      "pass": null,
+      "fail": null
+    },
+    "evidenceAudit": "pending",
+    "workflow": "pending",
+    "officialCards": 1,
+    "behaviorScenarios": 23,
+    "adapterBehaviorVerifiedCards": 1,
+    "newEngineCertifiedCards": 0,
+    "automaticCertifications": 0,
+    "inventoryGrants": 0,
+    "liveDiscordValidation": false
+  }
+}
