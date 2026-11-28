@@ -1,0 +1,123 @@
+{
+  "mission": "M693",
+  "runId": "work-20261127T231230-0300-M693",
+  "priority": "P1",
+  "owner": "Work principal",
+  "scope": "Pot of Greed synergy isolado: Jar Robber e Avatar of the Pot. Pot of Greed é somente fonte/pré-requisito já existente.",
+  "cards": [
+    {
+      "name": "Jar Robber",
+      "passcode": "33784505",
+      "konamiCid": 5674,
+      "kind": "Quick-Play Spell",
+      "firstOcgRelease": "2002-09-19",
+      "firstTcgRelease": "2003-10-10",
+      "officialEffect": "You can only activate this card when Pot of Greed is activated. Negate the effect of Pot of Greed and draw 1 card from your Deck.",
+      "officialDatabaseUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5674&ope=2&request_locale=en",
+      "behavior": "A resposta precisa ser o Chain Link 2 diretamente sobre a ativação de Pot of Greed. Nega o efeito, não a ativação, e compra 1 para o assento físico ativo da equipe que controla Jar Robber."
+    },
+    {
+      "name": "Avatar of the Pot",
+      "passcode": "99284890",
+      "konamiCid": 5960,
+      "kind": "EARTH Level 3 Rock/Effect Monster",
+      "firstOcgRelease": "2003-11-20",
+      "firstTcgRelease": "2004-06-01",
+      "officialEffect": "By sending 1 Pot of Greed from your hand to the Graveyard, draw 3 cards from your Deck.",
+      "officialDatabaseUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5960&ope=2&request_locale=ae",
+      "behavior": "Efeito de ignição na Main Phase. O custo Pot of Greed precisa vir da mão privada do assento físico ativo; o custo permanece no Cemitério mesmo se o efeito for negado. Compra até 3 do Deck físico desse assento."
+    }
+  ],
+  "prerequisite": {
+    "name": "Pot of Greed",
+    "passcode": "55144522",
+    "konamiCid": 4844,
+    "kind": "Normal Spell",
+    "status": "já catalogada/certificada; não é alvo de nova certificação",
+    "officialEffect": "Draw 2 cards.",
+    "officialDatabaseUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4844&ope=2&request_locale=ae"
+  },
+  "design": {
+    "jarRobber": "Valida ativação de Pot de Greed em Main Phase, origem física e assento ativo; Quick-Play da mão somente no turno do próprio time; Quick-Play setado só após turno anterior. Exige Chain Link 2 com previousLinkId igual ao ID da ativação. O plano marca negatesEffectOfActivationId e negatesActivation=false. Uma resposta por ativação.",
+    "avatar": "Valida Avatar face-up no campo da equipe ativa e custo Pot of Greed na mão física do assento ativo, não na mão do companheiro. O engine deve mover o custo ao GY no momento da ativação; a resolução exige esse UID no GY. Se negado, custo não retorna. O efeito pode resolver mesmo se Avatar sair do campo depois de ativado.",
+    "draws": "Planos privados contêm assento, quantidade, contagem de Deck/mão e status Deck-out; nunca expõem UIDs/identidades do topo. Avatar compra até 3 e sinaliza Deck-out se restarem menos de três; Jar Robber compra 1 e sinaliza Deck-out se o Deck estiver vazio.",
+    "tagDuel": "Campos compartilhados por equipe, mãos/Decks privados por assento físico, UID m{seat}:, rotação ativa e custos vinculados ao proprietário físico.",
+    "rules": "Deck 20–30 por assento; mão 6 verificada apenas na End Phase; 3 Monster Zones + 3 Spell/Trap Zones; Field Zone separada; Extra Deck 5. Nenhum descarte automático é executado pelo adapter.",
+    "idempotency": "IDs estáveis e sequence crescente; replay idempotente; ID reutilizado com payload/resultado diferente é rejeitado.",
+    "admission": "Jar Robber e Avatar of the Pot permanecem fora do catálogo/certificados. Os testes usam IDs de fixtures habilitadas por lookups injetados. Pot of Greed real já está catalogada e é validada como pré-requisito."
+  },
+  "tests": {
+    "expectedScenarios": 24,
+    "focusedTestResult": "pending",
+    "covered": [
+      "Jar Robber: resposta direta Chain Link 2, nega efeito e não ativação",
+      "Jar Robber: Quick-Play da mão versus setado em turno anterior, turno/assento ativo",
+      "Jar Robber: segunda resposta à mesma ativação, negação do próprio efeito, Deck-out",
+      "Pot of Greed: ativação de Main Phase, fonte física e Spell setado no mesmo turno",
+      "Avatar: custo Pot of Greed da mão física ativa, rejeita mão de teammate",
+      "Avatar: custo errado, source face-up, Defense Position, owner reserva/active seat",
+      "Avatar: custo permanece no GY sob negação, resolve mesmo se source sair do campo",
+      "Avatar: compra 3, compra parcial/Deck-out, Deck vazio e mão acima de 6 até End Phase",
+      "Idempotência, payload/choice divergente e sequence crescente",
+      "Deck 20–30, zonas 3+3, Field Zone separada e Extra 5"
+    ]
+  },
+  "rules": {
+    "mainDeck": "20–30 por assento físico",
+    "handLimit": 6,
+    "handLimitTiming": "End Phase only",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separate",
+    "extraDeckMax": 5,
+    "privateHandsAndDecks": true,
+    "sharedTeamGraveyardAndLP": true,
+    "physicalOwnerUidPrefix": "m{seat}:"
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0
+  },
+  "catalogAtEnd": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0
+  },
+  "adapterBehaviorVerifiedCards": 0,
+  "newEngineCertifiedCards": 0,
+  "automaticCertifications": 0,
+  "inventoryGrants": 0,
+  "verification": {
+    "typecheck": "pending",
+    "build": "pending",
+    "focusedTests": "pending",
+    "evidenceAudit": "pending",
+    "workflow": "pending"
+  },
+  "handoff": {
+    "targetPR": 17,
+    "commentId": 7232207787,
+    "status": "requested-awaiting-explicit-release",
+    "files": [
+      "src/duelEngineCurrent.ts",
+      "src/monsterEffects.ts",
+      "src/effectRegistry.ts"
+    ]
+  },
+  "limitations": [
+    "Sem handoff central, os efeitos não são chamados pelo engine de produção.",
+    "Os dois IDs continuam fora do catálogo e dos certificados; nenhuma nova carta será contabilizada no marco de 1.000.",
+    "Sem integração de comandos ou validação de sessão real no Discord."
+  ],
+  "production": {
+    "resolverIntegration": false,
+    "discordCommandIntegration": false,
+    "liveDiscordValidation": false,
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false
+  }
+}
