@@ -47,7 +47,12 @@ for(const [id,cid,idConstant,cidConstant] of identities){
  assert.ok(new Date(item.ocgFirstRelease+'T00:00:00Z')<new Date(evidence.historicalCutoff+'T23:59:59Z'));
  assert.ok(new Date(item.tcgFirstRelease+'T00:00:00Z')<new Date(evidence.historicalCutoff+'T23:59:59Z'));
 }
-assert.ok(state.activeReservations.some(item=>item.runId===runId&&item.branch===run.branch));
+const activeReservation=state.activeReservations.some(item=>item.runId===runId&&item.branch===run.branch);
+const releasedReservation=state.lastWorkRun?.runId===runId&&state.lastWorkRun.branch===run.branch&&
+ /completed-adapter/.test(state.lastWorkRun.status||'')&&
+ Array.isArray(state.lastWorkRun.scopeReleasedToAuxiliary)&&
+ state.lastWorkRun.scopeReleasedToAuxiliary.includes('src/sarcophagusTagAdapter.ts');
+assert.ok(activeReservation||releasedReservation,'M694 deve estar reservado ou liberado com checkpoint registrado.');
 assert.equal(run.mission,'M694');
 assert.equal(run.branch,'feat/work-m694-sarcophagus-tag-adapter-20261128');
 assert.equal(evidence.engineV9Baseline.certified,969);
