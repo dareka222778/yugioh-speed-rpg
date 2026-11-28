@@ -1,0 +1,92 @@
+{
+  "runId": "work-20261127T214300-0300-M686",
+  "mission": "M686",
+  "priority": "P1",
+  "status": "ci-running",
+  "startedAt": "2026-11-27T21:43:00-03:00",
+  "lastUpdatedAt": "2026-11-27T21:52:55.580-03:00",
+  "endedAt": null,
+  "effectiveWorkMinutes": 8,
+  "targetWorkMinutes": 60,
+  "branch": "feat/work-m686-appropriate-20261127",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "sharedBaseHead": "e059f4b2e4f2ad0a7f67b40e18e00570810c2366",
+  "codeSha": "2b66420c6c41bbd6246380fd31cf2f1ef37cc092",
+  "headSha": "2b66420c6c41bbd6246380fd31cf2f1ef37cc092",
+  "pr": {
+    "number": 611,
+    "url": "https://github.com/dareka222778/yugioh-speed-rpg/pull/611",
+    "state": "open",
+    "draft": true,
+    "merged": false
+  },
+  "workBlocks": [
+    {
+      "scope": "Pesquisa e reserva",
+      "result": "Appropriate (48539234/CID 4947) sem PR, metadata ou certificação no snapshot; handoff solicitado no PR #17 e PR #583."
+    },
+    {
+      "scope": "Adapter TagDuel isolado",
+      "result": "33 cenários de comportamento, ledger de ativação e draw events, roteamento por assento ativo, deck-out, idempotência e auditoria de não-admissão."
+    }
+  ],
+  "changes": {
+    "source": "src/appropriateTagAdapter.ts",
+    "tests": 33,
+    "files": 5,
+    "cardAdaptersImplemented": 1,
+    "cardAdaptersCertified": 0
+  },
+  "catalog": {
+    "engineV9CertifiedAtBase": 969,
+    "engineV9CertifiedCurrent": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newlyBehaviorCertified": 0,
+    "automaticCertifications": 0
+  },
+  "validation": {
+    "focusedWorkflow": "awaiting-run",
+    "engineValidation": "pending",
+    "audit": "pending",
+    "localExecution": false,
+    "fullDiscordValidation": false
+  },
+  "rules": {
+    "deckMin": 20,
+    "deckMax": 30,
+    "handLimit": 6,
+    "handLimitTiming": "End Phase",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZoneSeparate": true,
+    "extraDeckMax": 5,
+    "privateHandsAndDecks": true,
+    "physicalOwnerUIDs": true
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "liveDiscordValidation": false,
+    "backupVerified": false,
+    "inventoryGrants": 0
+  },
+  "handoff": {
+    "centralPR": 17,
+    "centralCommentId": 7231164975,
+    "drawPR": 583,
+    "drawCommentId": 7231164645,
+    "status": "requested-awaiting-explicit-release",
+    "files": [
+      "src/duelEngineCurrent.ts"
+    ],
+    "note": "M644/M647 active on draw flows; no shared resolver files touched."
+  },
+  "blockers": [
+    "CI dedicada aguardando execução após PR #611",
+    "Hook pós-compra central aguardando handoff PR #17/M644/M647",
+    "Sem autorização de merge/deploy ou backup verificável"
+  ],
+  "nextTask": "Observar CI #611, corrigir falhas, atualizar checkpoint; integrar somente após handoff explícito; verificar contagem certificada sem importação automática.",
+  "nextWindow": "2026-11-27T22:30:00-03:00"
+}
