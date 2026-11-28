@@ -80,7 +80,7 @@ test('Mystical Knight of Jackal accepts a face-down Defense Position target and 
  const ownerDeck=session.duel.reserves['1'].deck,activeTeammateDeck=session.duel.core.players[1].deck,activeTop=activeTeammateDeck[0]?.uid;
  adapter.prepareBattleTopdeck(session,battle(session,'jackal-face-down',source,target),source.uid);
  const result=adapter.resolveBattleTopdeck(session,'jackal-face-down');
- assert.equal(result.ownerSeat,3);assert.equal(ownerDeck[0].uid,target.uid);assert.equal(activeTeammateDeck[0]?.uid,activeTop);
+ assert.equal(result.ownerSeat,1);assert.equal(ownerDeck[0].uid,target.uid);assert.equal(activeTeammateDeck[0]?.uid,activeTop);
 });
 
 test('Topdeck effect rejects non-battle destruction, non-Graveyard destination and friendly targets',()=>{
