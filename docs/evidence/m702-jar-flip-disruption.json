@@ -1,0 +1,55 @@
+{
+  "mission": "M702",
+  "title": "Morphing Jar + Cyber Jar — FLIP de mão/Deck e reset de campo",
+  "historicalCutoff": "2004-09-30",
+  "cards": [
+    {
+      "id": "33508719",
+      "name": "Morphing Jar",
+      "konamiCid": 4597,
+      "firstRelease": {
+        "ocg": "1999-10-17",
+        "tcg": "2002-10-01"
+      },
+      "effect": "FLIP: ambos os jogadores descartam o máximo possível das mãos e compram 5 cartas.",
+      "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4597&ope=2&request_locale=en"
+    },
+    {
+      "id": "34124316",
+      "name": "Cyber Jar",
+      "konamiCid": 4913,
+      "firstRelease": {
+        "ocg": "2000-07-13",
+        "tcg": "2002-09-16"
+      },
+      "effect": "FLIP: destrói todos os monstros no campo; ambos revelam até 5 cartas do Deck; invoca monstros de Nível 4 ou menor em Ataque ou Defesa Baixada e adiciona as demais à mão.",
+      "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4913&ope=2&request_locale=en"
+    }
+  ],
+  "design": {
+    "tagDuelInterpretation": "Ambos os jogadores = representantes físicos atualmente ativos das duas equipes; parceiros inativos mantêm Deck/mão privados e intactos.",
+    "morphingJar": "Descarta a mão inteira dos dois assentos ativos para o Cemitério compartilhado da equipe proprietária; cada assento compra até cinco do próprio Deck. Deck insuficiente gera deckOutSeats para adjudicação pelo host, sem inventar vencedor.",
+    "cyberJar": "Destrói monstros dos dois campos compartilhados e envia cada carta ao Cemitério da equipe do proprietário físico (UID m0..m3); remove fichas pelo ledger; limpa Equipamentos órfãos; revela até cinco do Deck privado de cada assento ativo; invoca monstros elegíveis de Nível 4 ou menor respeitando três zonas, adicionando o restante à mão.",
+    "privacy": "Receipt público contém contagens e identidades reveladas por Cyber Jar; não contém UIDs ou conteúdo final de mãos.",
+    "invariants": [
+      "Deck principal físico 20–30",
+      "Mão máxima 6 verificada somente na End Phase",
+      "3 Monster Zones + 3 Spell/Trap Zones",
+      "Field Zone separada",
+      "Extra Deck máximo 5",
+      "Identidade física por UID preservada",
+      "Nenhum inventário concedido"
+    ]
+  },
+  "baseline": {
+    "explicitCertificationKeys": 969,
+    "newEngineCertified": 0,
+    "inventoryGranted": 0
+  },
+  "limitations": [
+    "Adapter isolado; os dois IDs continuam fora do catálogo jogável e sem certificação engine-v9.",
+    "Handoff explícito para resolver central, catálogo e certificações continua pendente no PR #17.",
+    "Morphing Jar informa deckOutSeats; a derrota por Deck vazio deve ser adjudicada pelo host após a resolução.",
+    "Integração Discord, regressão integral, merge e deploy não fazem parte deste escopo."
+  ]
+}
