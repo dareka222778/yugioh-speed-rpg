@@ -61,7 +61,7 @@ test('one active copy plans 1000 damage to the physical Spell activator team',()
  const {duel,sources,event}=setup(),r=resolveCurseOfDarknessSpell(duel,createCurseOfDarknessLedger(),event,lookup);
  assert.equal(r.status,'triggered');assert.equal(r.plans.length,1);assert.equal(r.plans[0].sourceUid,sources[0].uid);
  assert.equal(r.plans[0].targetTeam,0);assert.equal(r.plans[0].activatingSeat,0);assert.equal(r.plans[0].damage,1000);
- assert.equal(r.plans[0].lpBefore,8000);assert.equal(r.plans[0].lpAfter,7000);
+ assert.equal(r.plans[0].lpBefore,4000);assert.equal(r.plans[0].lpAfter,3000);
 });
 test('damage is routed to team one when its active physical seat activates the Spell',()=>{
  const {duel,event}=setup({first:1,sourceSeats:[0],actorTeam:1,spellOwnerSeat:1});
@@ -111,12 +111,12 @@ test('two active copies stack in deterministic UID order',()=>{
 });
 test('multiple copies clamp the final damage to remaining LP and mark lethal',()=>{
  const {duel,event}=setup({sourceSeats:[1,3]});duel.core.players[0].lp=1500;
- const r=resolveCurseOfDarknessSpell(duel,createCurseOfDarknessLedger(),{...event,currentLPByTeam:[1500,8000]},lookup);
+ const r=resolveCurseOfDarknessSpell(duel,createCurseOfDarknessLedger(),{...event,currentLPByTeam:[1500,4000]},lookup);
  assert.equal(r.status,'duel-ended');assert.deepEqual(r.plans.map(p=>p.damage),[1000,500]);assert.deepEqual(r.plans.map(p=>p.lpAfter),[500,0]);
 });
 test('zero LP cannot receive a new damage plan',()=>{
  const {duel,event}=setup();duel.core.players[0].lp=0;
- const r=resolveCurseOfDarknessSpell(duel,createCurseOfDarknessLedger(),{...event,currentLPByTeam:[0,8000]},lookup);
+ const r=resolveCurseOfDarknessSpell(duel,createCurseOfDarknessLedger(),{...event,currentLPByTeam:[0,4000]},lookup);
  assert.equal(r.status,'duel-ended');assert.equal(r.plans.length,0);
 });
 test('Jinzo suppresses every Curse copy',()=>{
@@ -172,7 +172,7 @@ test('malformed event identity and duplicate negation UIDs are rejected',()=>{
 });
 test('duplicate source UIDs are rejected instead of double-counted',()=>{
  const {duel,sources,event}=setup();duel.core.players[1].backrow.push({...sources[0]});
- assert.throws(()=>resolveCurseOfDarknessSpell(duel,createCurseOfDarknessLedger(),event,lookup),/identidade física/);
+ assert.throws(()=>resolveCurseOfDarknessSpell(duel,createCurseOfDarknessLedger(),event,lookup),/duplicado/);
 });
 test('the adapter never mutates LP, zones, hands, Decks, inventory or the input ledger',()=>{
  const {duel,event}=setup({sourceSeats:[1,3]}),before=structuredClone(duel),ledger=createCurseOfDarknessLedger(),beforeInventory=inventory(duel);
