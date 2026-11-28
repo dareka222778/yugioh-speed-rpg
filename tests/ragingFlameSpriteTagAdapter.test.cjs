@@ -276,7 +276,7 @@ test('a fourth Monster Zone or Spell/Trap Zone is rejected; Field Zone stays sep
   tooManyBackrow.core.players[team].backrow.push({...card,setTurn:0,faceUp:true,resolved:true});
  }
  synchronizeCardLifetimes(tooManyBackrow.core);
- assert.throws(()=>assertRagingFlameSpriteRules(tooManyBackrow),/limite de zonas|Spell\\/Trap Zones/i);
+ assert.throws(()=>assertRagingFlameSpriteRules(tooManyBackrow),/limite de zonas|Spell\/Trap Zones/i);
 });
 
 test('a physical Main Deck below twenty cards is rejected',()=>{
