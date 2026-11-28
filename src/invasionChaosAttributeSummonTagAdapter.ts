@@ -203,6 +203,17 @@ function assertLookups(lookups:InvasionChaosLookups):void{
  }
 }
 
+/** These four IOC monsters are Special-Summon-only; the procedure does not
+ * consume the team's Normal Summon and cannot be replaced by Normal Set. */
+export function isInvasionChaosSpecialSummonOnly(id:string,lookups:InvasionChaosLookups):boolean{
+ assertLookups(lookups);
+ return cardKey(id,lookups)!==null;
+}
+
+export function assertInvasionChaosNormalSummonForbidden(id:string,lookups:InvasionChaosLookups):void{
+ if(isInvasionChaosSpecialSummonOnly(id,lookups))throw new Error('Monstro IOC não pode ser Invocado por Invocação-Normal nem Baixado.');
+}
+
 function requiredCost(key:IocCardKey):Readonly<{attribute:IocAttribute;count:number}>{
  if(key==='gigantes')return {attribute:'EARTH',count:1};
  if(key==='fenrir')return {attribute:'WATER',count:2};
@@ -480,5 +491,6 @@ export function consumeInvasionChaosDrawSkip(
   drawSkips:ledger.drawSkips.filter(item=>!(item.team===team&&item.dueTurn===turn))
    .concat(remaining.map(item=>({...item,dueTurn:turn+2})))
  };
+ assertLedger(next);
  return {skip:true,ledger:next,sourceUid:first.sourceUid};
 }
