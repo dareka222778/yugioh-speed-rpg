@@ -1,0 +1,110 @@
+{
+  "mission": "M699",
+  "runId": "work-20261128T072745-0300-M699",
+  "branch": "feat/work-m699-ioc-attribute-summons-20261128",
+  "sharedBaseHead": "b5e3dc49babde0ab914db0c303147b8d0af253b0",
+  "branchBaseHead": "9881c50a37cfb1750f4e544c79943dfb16f3da72",
+  "historicalCutoff": "2004-09-30",
+  "cards": [
+    {
+      "name": "Gigantes",
+      "id": "47606319",
+      "konamiCid": 5831,
+      "konamiListedSetDate": "2004-07-15",
+      "set": "IOC-021",
+      "officialOcgSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5831&ope=2&request_locale=ae",
+      "behavior": "Special Summon from the active seat's private hand by banishing one EARTH monster from the team's shared GY; if destroyed by battle and sent to its owner's GY, destroy all Spell/Trap cards on both team fields, including the separate Field Zone."
+    },
+    {
+      "name": "Fenrir",
+      "id": "00218704",
+      "konamiCid": 5830,
+      "konamiListedSetDate": "2004-07-15",
+      "set": "IOC-020",
+      "officialOcgSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5830&ope=2&request_locale=ae",
+      "behavior": "Special Summon from the active seat's private hand by banishing two WATER monsters from the team's shared GY; when it destroys an opponent monster by battle, schedule that team's next Draw Phase skip."
+    },
+    {
+      "name": "Inferno",
+      "id": "74823665",
+      "konamiCid": 5829,
+      "konamiListedSetDate": "2004-07-15",
+      "set": "IOC-019",
+      "officialOcgSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5829&ope=2&request_locale=ae",
+      "behavior": "Special Summon from the active seat's private hand by banishing one FIRE monster from the team's shared GY; when it destroys an opponent monster by battle and sends it to the GY, inflict 1500 shared team LP damage."
+    },
+    {
+      "name": "Silpheed",
+      "id": "73001017",
+      "konamiCid": 5832,
+      "konamiListedSetDate": "2004-07-15",
+      "set": "IOC-022",
+      "officialOcgSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5832&ope=2&request_locale=ae",
+      "behavior": "Special Summon from the active seat's private hand by banishing one WIND monster from the team's shared GY; if destroyed by battle and sent to its owner's GY, the opposing active seat discards one random private-hand card using the persisted HMAC duel stream."
+    }
+  ],
+  "behaviorCoverage": {
+    "scenarios": 31,
+    "fullyAdapterVerifiedCards": 4,
+    "partiallyAdapterVerifiedCards": 0,
+    "coveredFamilies": [
+      "attribute-specific Special Summon procedures",
+      "Normal Summon/Set prohibition guard",
+      "shared-team GY costs with physical UID preservation",
+      "battle-destruction GY triggers",
+      "non-targeting Spell/Trap + Field Zone sweep",
+      "1500 shared LP damage",
+      "next Draw Phase skip ledger",
+      "HMAC random discard from active opponent private hand",
+      "TagDuel physical-seat rotation",
+      "3+3 shared zones and separate Field Zone",
+      "Deck 20–30 / hand 6 at End Phase / Extra 5",
+      "inventory conservation and idempotent receipts"
+    ]
+  },
+  "rules": {
+    "mainDeckMin": 20,
+    "mainDeckMax": 30,
+    "handLimit": 6,
+    "handCheck": "end",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZoneSeparate": true,
+    "extraDeckMax": 5
+  },
+  "counts": {
+    "explicitCertificationEntriesObserved": 969,
+    "uniqueExplicitCertificationIdsObserved": 969,
+    "engineV9BaselineReported": 969,
+    "newEngineCertifiedCards": 0,
+    "adapterBehaviorVerifiedCards": 4,
+    "automaticCertifications": 0,
+    "inventoryGrants": 0
+  },
+  "admission": {
+    "adapterOnly": true,
+    "centralResolverIntegrated": false,
+    "catalogRevisionChanged": false,
+    "metadataChanged": false,
+    "certificationFileChanged": false,
+    "commandsChanged": false,
+    "databaseChanged": false
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "productionChanged": false,
+    "liveDiscordValidation": false
+  },
+  "limitations": [
+    "Adapters e testes isolados; os quatro cards ainda não foram adicionados ao effectRegistry/cardMetadata/cardCertifications.",
+    "Fenrir Draw Phase skip precisa de integração ao fluxo central de compra para afetar partidas reais.",
+    "A resolução de Gigantes/Inferno/Silpheed depende de hooks centrais de batalha/saída do campo.",
+    "A CI remota ainda precisa executar typecheck, build, 31 testes focados, regressão integral e auditoria."
+  ],
+  "sources": {
+    "officialKonami": "https://www.db.yugioh-card.com/yugiohdb/card_search.action",
+    "historicalUnionCutoff": "2004-09-30"
+  }
+}
