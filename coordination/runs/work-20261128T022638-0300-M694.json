@@ -5,9 +5,9 @@
   "owner": "Work principal",
   "priority": "P1",
   "priorityRequestedBy": "User",
-  "status": "draft-pr-open; CI-green; awaiting-central-handoff; reservation-released",
+  "status": "completed-adapter; draft-PR-618-open; CI-green; reservation-released; central-handoff-pending",
   "startedAt": "2026-11-28T02:26:38-03:00",
-  "endedAt": null,
+  "endedAt": "2026-11-28T03:11:34-03:00",
   "repository": "dareka222778/yugioh-speed-rpg",
   "sharedBranch": "feat/rea-engine-recovery-20261026",
   "sharedHeadAtReservation": "e1394ef0f6ef7faea5b02e42ee3b0ce43520a01c",
@@ -112,7 +112,7 @@
   "targetEffectiveWorkMinutes": 60,
   "targetMet": false,
   "ciWaitExcluded": true,
-  "nextTask": "M695: adapter isolado para Decayed Commander + Zombie Tiger; depois solicitar handoff central para admissão, sem tocar em arquivos reservados.",
+  "nextTask": "M695 — Decayed Commander + Zombie Tiger Union/battle-discard adapter; central integration remains blocked pending explicit release.",
   "scopeReleasedToAuxiliary": [
     "src/sarcophagusTagAdapter.ts",
     "tests/sarcophagusTagAdapter.test.cjs",
@@ -129,5 +129,19 @@
   "testedHeadSha": "a80f9fb523bdc811d704b9c6aedd02222c08520d",
   "checkpointParentSha": "a80f9fb523bdc811d704b9c6aedd02222c08520d",
   "executionStartedAt": "2026-11-28T02:54:43-03:00",
-  "executionEffectiveWorkMinutes": 17
+  "executionEffectiveWorkMinutes": 17,
+  "checkpointCommitSha": "59ea3a48496c6476ea008c0d510feb1f09217b7b",
+  "release": {
+    "releasedAt": "2026-11-28T03:11:34-03:00",
+    "files": [
+      "src/sarcophagusTagAdapter.ts",
+      "tests/sarcophagusTagAdapter.test.cjs",
+      "docs/evidence/m694-sarcophagus.json",
+      "scripts/audit-sarcophagus-m694.cjs",
+      ".github/workflows/m694-sarcophagus.yml",
+      "coordination/runs/work-20261128T022638-0300-M694.json"
+    ],
+    "pr": 618,
+    "scopeReleasedToAuxiliary": "review/CI monitoring only; do not edit shared central files without explicit handoff"
+  }
 }
