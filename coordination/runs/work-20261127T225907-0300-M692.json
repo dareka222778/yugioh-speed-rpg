@@ -1,0 +1,104 @@
+{
+  "format": 1,
+  "runId": "work-20261127T225907-0300-M692",
+  "mission": "M692",
+  "owner": "Work principal",
+  "priority": "P1",
+  "priorityRequestedBy": "User",
+  "status": "reserved-and-implementing",
+  "startedAt": "2026-11-27T22:59:07-03:00",
+  "endedAt": null,
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "d51dd3d8bd6e42a8ff7ed151bb7dd6a917384321",
+  "branch": "feat/work-m692-draw-trigger-adapters-20261127",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "d51dd3d8bd6e42a8ff7ed151bb7dd6a917384321",
+  "branchHeadSha": "d51dd3d8bd6e42a8ff7ed151bb7dd6a917384321",
+  "reservedFiles": [
+    "src/drawTriggerTagAdapter.ts",
+    "tests/drawTriggerTagAdapter.test.cjs",
+    "docs/evidence/m692-draw-trigger.json",
+    "scripts/audit-draw-trigger-m692.cjs",
+    ".github/workflows/m692-draw-trigger.yml",
+    "coordination/runs/work-20261127T225907-0300-M692.json"
+  ],
+  "scope": "Adapter TagDuel 2v2 isolado para Card of Safe Return (57953380) e Spirit of the Pot of Greed (04896788): gatilho opcional por Invocação-Especial do Cemitério fora da Etapa de Dano e por ativação de Pot of Greed; destinatário é o assento físico ativo da equipe correta, com mãos/Decks privados, sequência/idempotência, face-up/Attack Position, negação e Deck-out. Sem resolver central, catálogo, certificações, comandos, banco, inventário ou produção.",
+  "cards": [
+    {
+      "id": "57953380",
+      "konamiId": 5123,
+      "name": "Card of Safe Return",
+      "kind": "continuous-spell",
+      "officialText": "When a monster(s) is Special Summoned from your GY (except during the Damage Step): You can draw 1 card.",
+      "firstOCGRelease": "2003-06-26",
+      "firstTCGRelease": "2003-03-01",
+      "certifiedAtStart": false,
+      "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5123&ope=2&request_locale=en"
+    },
+    {
+      "id": "04896788",
+      "konamiId": 5819,
+      "name": "Spirit of the Pot of Greed",
+      "kind": "effect-monster",
+      "officialText": "If a player activates Pot of Greed: Activate this effect; they can draw 1 card. This card must be in face-up Attack Position to activate and to resolve this effect.",
+      "firstOCGRelease": "2003-04-24",
+      "firstTCGRelease": "2004-07-15",
+      "certifiedAtStart": false,
+      "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5819&ope=2&request_locale=en"
+    },
+    {
+      "id": "55144522",
+      "konamiId": 4844,
+      "name": "Pot of Greed",
+      "kind": "normal-spell-trigger-source",
+      "officialText": "Draw 2 cards.",
+      "firstOCGRelease": "2002-08-08",
+      "certifiedAtStart": "not a target card; activation source only",
+      "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4844&ope=2&request_locale=en"
+    }
+  ],
+  "baseline": {
+    "engineV9Certified": 969,
+    "remainingTo1000": 31,
+    "source": "M691 checkpoint; milestone1000 workflow run 46095142131"
+  },
+  "handoff": {
+    "targetPR": 17,
+    "commentId": 7232072777,
+    "status": "requested-awaiting-explicit-release",
+    "files": [
+      "src/duelEngineCurrent.ts",
+      "src/monsterEffects.ts",
+      "src/effectRegistry.ts"
+    ],
+    "response": "awaiting explicit owner release; central files remain untouched"
+  },
+  "verification": {
+    "focusedScenarios": 0,
+    "focusedTestResult": "pending",
+    "typecheck": "pending",
+    "build": "pending",
+    "evidenceAudit": "pending",
+    "fastFeedback": "pending",
+    "engineValidation": "in-progress at base",
+    "adapterBehaviorVerifiedCards": 0,
+    "newEngineCertifiedCards": 0,
+    "automaticCertifications": 0,
+    "inventoryGrants": 0,
+    "liveDiscordValidation": false
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "effectiveWorkMinutes": 0,
+  "targetEffectiveWorkMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "nextTask": "Implementar o ledger idempotente e os planos privados de compra para as duas fontes, com fixtures 2v2, testes de negação/posição/Deck-out e auditoria de não-admissão.",
+  "scopeReleasedToAuxiliary": [],
+  "nextWindow": "2026-11-28T03:30:00-03:00"
+}
