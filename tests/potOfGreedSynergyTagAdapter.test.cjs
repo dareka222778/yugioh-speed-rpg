@@ -1,4 +1,5 @@
 'use strict';
+// Fixture note: classic TagDuel starts with four cards in each physical hand.
 const assert=require('node:assert/strict');
 const {test}=require('node:test');
 const {createTagDuel,tagInventory,tagNormalCardIds}=require('../dist/tagDuel');
@@ -242,7 +243,7 @@ test('Avatar does not discard to the six-card hand limit until the End Phase',()
  const event=avatarEvent(duel,0,avatar,cost),captured=capturePotSynergyEvent(duel,createPotSynergyLedger(),event,lookups);
  commitCost(duel,0,cost);
  const resolved=resolvePotSynergyEvent(duel,captured.ledger,{eventId:event.eventId,effectNegated:false},lookups);
- applyPlan(duel,resolved.plan);assert.equal(holder(duel,0).hand.length,9);
+ applyPlan(duel,resolved.plan);assert.equal(holder(duel,0).hand.length,8);
  assert.equal(require('../dist/rulesProfile').rulesFor(duel.core).handCheck,'end');
 });
 test('event capture and resolution are idempotent and reject changed payload/choice',()=>{
