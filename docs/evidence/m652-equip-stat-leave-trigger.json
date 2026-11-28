@@ -1,0 +1,63 @@
+{
+  "format": 1,
+  "mission": "M652",
+  "title": "Axe of Despair + Black Pendant Equip stat/Graveyard adapter",
+  "branch": "feat/work-m652-equip-stat-leave-trigger-20261126",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "cards": [
+    {
+      "id": "40619825",
+      "name": "Axe of Despair",
+      "namePt": "Machado do Desespero",
+      "admitted": false,
+      "certified": false,
+      "atk": 1000,
+      "graveEffect": "optional tribute 1 monster; return this card to the physical owner's Deck top"
+    },
+    {
+      "id": "65169794",
+      "name": "Black Pendant",
+      "namePt": "Pingente Negro",
+      "admitted": false,
+      "certified": false,
+      "atk": 500,
+      "graveEffect": "inflict 500 damage to the opposing team"
+    },
+    {
+      "id": "64047146",
+      "name": "Horn of the Unicorn",
+      "namePt": "Chifre do Unicórnio",
+      "admitted": false,
+      "certified": false,
+      "atk": 700,
+      "def": 700,
+      "graveEffect": "mandatory return to the physical owner's Deck top"
+    }
+  ],
+  "scenarioCount": 31,
+  "verification": {
+    "focusedTests": 31,
+    "adapterBehaviorVerifiedCards": 3,
+    "behaviorCertifiedCards": 0,
+    "playableCatalogAdmission": false,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "liveDiscordValidation": false
+  },
+  "constraints": {
+    "mainDeck": "20–30 per physical seat",
+    "handLimit": 6,
+    "handCheck": "End Phase",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "extraDeckMax": 5,
+    "fieldZoneIndependent": true,
+    "physicalOwnershipPreserved": true,
+    "privateHandIdsNotPublished": true
+  },
+  "limits": [
+    "Isolated adapter only; not registered in effectRegistry or Discord commands.",
+    "Cards remain unadmitted and do not count toward engine-v9 certification.",
+    "Discord live deployment not exercised."
+  ]
+}

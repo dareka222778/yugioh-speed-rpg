@@ -1,0 +1,51 @@
+name: M652 Equip stat and Graveyard triggers
+on:
+  push:
+    branches:
+      - feat/work-m652-equip-stat-leave-trigger-20261126
+    paths:
+      - "src/equipStatLeaveTagAdapter.ts"
+      - "tests/equipStatLeaveTagAdapter.test.cjs"
+      - "docs/evidence/m652-equip-stat-leave-trigger.json"
+      - ".github/workflows/m652-equip-stat-leave-trigger.yml"
+  pull_request:
+    branches:
+      - feat/rea-engine-recovery-20261026
+    paths:
+      - "src/equipStatLeaveTagAdapter.ts"
+      - "tests/equipStatLeaveTagAdapter.test.cjs"
+      - "docs/evidence/m652-equip-stat-leave-trigger.json"
+      - ".github/workflows/m652-equip-stat-leave-trigger.yml"
+permissions:
+  contents: read
+concurrency:
+  group: m652-equip-stat-leave
+  cancel-in-progress: true
+jobs:
+  adapter:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - run: node --test tests/equipStatLeaveTagAdapter.test.cjs
+      - run: npm test
+      - run: npm run audit:tag-classic
+      - name: Validate evidence without certifying cards
+        run: |
+          node - <<'NODE'
+          const fs = require('node:fs');
+          const evidence = JSON.parse(fs.readFileSync('docs/evidence/m652-equip-stat-leave-trigger.json', 'utf8'));
+          if (evidence.format !== 1 || evidence.mission !== 'M652') throw new Error('Invalid evidence header');
+          if (evidence.cards.length !== 3 || evidence.scenarioCount !== 31) throw new Error('Incomplete card/scenario evidence');
+          if (evidence.cards.some(card => card.admitted || card.certified)) throw new Error('Adapter CI must not admit or certify cards');
+          if (evidence.verification.adapterBehaviorVerifiedCards !== 3 || evidence.verification.behaviorCertifiedCards !== 0) throw new Error('Incorrect certification accounting');
+          if (evidence.verification.automaticCertifications !== 0 || evidence.verification.inventoryGranted !== 0) throw new Error('Unsafe side effect recorded');
+          console.log('M652 evidence valid; catalog and inventory unchanged.');
+          NODE
