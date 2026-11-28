@@ -1,0 +1,108 @@
+{
+  "mission": "M701",
+  "runId": "work-20261128T081200-0300-M701",
+  "branch": "feat/work-m701-banished-zone-returns-20261128",
+  "sharedBaseHead": "0417a9fd69ef6e723639dbd7a5fb7cfa4e70e661",
+  "historicalCutoff": "2004-09-30",
+  "cards": [
+    {
+      "id": "03773196",
+      "name": "D.D. Scout Plane",
+      "konamiCid": 5822,
+      "set": "IOC-012",
+      "release": "2004-07-15",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5822&ope=2&request_locale=ae",
+      "banlistStatus": "not-marked-forbidden-on-source",
+      "coverage": "pending-ci",
+      "segments": [
+        "banished-this-turn",
+        "still-banished-at-end-phase",
+        "once-per-turn-per-physical-uid",
+        "face-up-attack-return",
+        "three-monster-zone-capacity",
+        "inventory-conservation"
+      ]
+    },
+    {
+      "id": "23557835",
+      "name": "Dimension Fusion",
+      "konamiCid": 5906,
+      "set": "IOC-094",
+      "release": "2004-07-15 OCG; 2004-03-01 TCG",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5906&ope=2&request_locale=ae",
+      "banlistStatus": "forbidden",
+      "coverage": "pending-ci",
+      "segments": [
+        "pay-2000-shared-team-lp",
+        "both-teams-return-their-banished-monsters",
+        "as-many-as-possible-per-team",
+        "face-up-attack-position",
+        "owner-team-banished-pile",
+        "inventory-conservation"
+      ]
+    },
+    {
+      "id": "27174286",
+      "name": "Return from the Different Dimension",
+      "konamiCid": 6078,
+      "set": "EP1-EN008",
+      "release": "2004-08-01 TCG",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6078&ope=2&request_locale=en",
+      "banlistStatus": "forbidden",
+      "coverage": "pending-ci",
+      "segments": [
+        "pay-half-shared-team-lp-rounded-up",
+        "activating-team-only",
+        "as-many-as-possible",
+        "end-phase-banish-only-still-present",
+        "leaves-field-before-end-phase-is-not-banished",
+        "inventory-conservation"
+      ]
+    }
+  ],
+  "behaviorCoverage": {
+    "scenarios": 0,
+    "adapterBehaviorVerifiedCards": 0,
+    "completeCardRulesVerified": 0,
+    "status": "implementation-pending-CI"
+  },
+  "counts": {
+    "candidateCards": 3,
+    "adapterBehaviorVerifiedCards": 0,
+    "newMetadataCards": 0,
+    "newEngineCertifiedCards": 0,
+    "automaticCertifications": 0,
+    "inventoryGrants": 0
+  },
+  "engineV9Baseline": {
+    "certified": 969,
+    "remainingTo1000": 31,
+    "source": "M700 card-certification audit run 46138117891"
+  },
+  "admission": {
+    "adapterOnly": true,
+    "centralResolverIntegrated": false,
+    "catalogRevisionChanged": false,
+    "certificationFileChanged": false,
+    "automaticCertifications": false,
+    "inventoryGrants": false
+  },
+  "limitations": [
+    "CardRef não representa banimento face-down; nenhuma certificação será declarada para esse estado não modelado.",
+    "D.D. Scout Plane/Spell-Trap effects remain adapter-only until central handoff."
+  ],
+  "tests": {
+    "focused": "pending",
+    "typecheck": "pending",
+    "build": "pending",
+    "cardAudit": "pending",
+    "fullRegression": "pending",
+    "discordLive": false
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  }
+}
