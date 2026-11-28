@@ -5,6 +5,7 @@ import {RULES_PROFILE,rulesFor} from './rulesProfile';
 import {getDuelCard} from './effectRegistry';
 import {bindTarget,synchronizeCardLifetimes,targetBindingValid,type TargetBinding} from './cardLifetime';
 import {randomIndex} from './duelRandom';
+import {monsterEffectsNegated} from './continuousEffects';
 import {cleanEquips} from './classicEffects';
 
 export const GIGANTES_ID='47606319';
@@ -347,6 +348,12 @@ export function recordInvasionChaosBattleEvent(
   event.turn!==state.core.turn||!isTeam(event.kind==='ioc-attribute-source-destroyed'?event.controllerTeam:event.sourceControllerTeam)){
   throw new Error('Sequência, turno ou equipe do evento IOC inválidos.');
  }
+ if(event.kind==='ioc-attribute-source-destroyed'){
+  if(!event.sourceBinding||event.sourceBinding.uid!==event.sourceUid||event.sourceBinding.zone!=='monsters')throw new Error('Binding de origem IOC inválido.');
+ }else if(!event.sourceBinding||event.sourceBinding.uid!==event.sourceUid||event.sourceBinding.zone!=='monsters'||
+  !event.targetBinding||event.targetBinding.uid!==event.targetUid||event.targetBinding.zone!=='monsters'){
+  throw new Error('Bindings de batalha IOC inválidos.');
+ }
  const fingerprint=eventFingerprint(event);
  const previous=[...ledger.pending,...ledger.processed].find(item=>item.eventId===event.eventId);
  if(previous){
@@ -379,7 +386,7 @@ export function recordInvasionChaosBattleEvent(
    return {status:'no-trigger',ledger:markProcessed(ledger,event,fingerprint,'no-trigger')};
   }
   const source=state.core.players[event.sourceControllerTeam].monsters.find(card=>card.uid===event.sourceUid);
-  if(!source||!source.faceUp||source.position!=='atk')return {status:'no-trigger',ledger:markProcessed(ledger,event,fingerprint,'no-trigger')};
+  if(!source||!source.faceUp||source.position!=='atk'||monsterEffectsNegated(state.core,event.sourceUid))return {status:'no-trigger',ledger:markProcessed(ledger,event,fingerprint,'no-trigger')};
   kind=cardKey(source.id,lookups);sourceTeam=event.sourceControllerTeam;
   targetUid=event.targetUid;targetDestination=event.targetDestination;
   if(kind==='inferno'&&targetDestination!=='grave')kind=null;
@@ -440,7 +447,6 @@ export function resolveInvasionChaosBattleTrigger(
  }else{
   const opponentTeam=(1-pending.sourceTeam) as IocTeam;
   const dueTurn=pending.turn+(state.core.current===pending.sourceTeam?1:2);
-  state.core.random??=undefined;
   const drawSkips=[...ledger.drawSkips,{eventId:pending.eventId,sourceUid:pending.sourceUid,team:opponentTeam,dueTurn}];
   status='skip-scheduled';
   const processed:InvasionChaosLedger={...ledger,pending:ledger.pending.filter(item=>item.eventId!==pending.eventId),
