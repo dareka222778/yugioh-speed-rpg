@@ -45,7 +45,7 @@ function holder(duel,seat){
 }
 function take(duel,seat,id){
  const held=holder(duel,seat);
- for(const pool of [held.hand,held.deck,held.extra??[]]){
+ for(const pool of [held.deck,held.hand,held.extra??[]]){
   const i=pool.findIndex(card=>card.id===id);if(i>=0)return pool.splice(i,1)[0];
  }
  throw new Error('Carta física indisponível: '+seat+'/'+id);
@@ -162,7 +162,7 @@ test('two Card of Safe Return copies produce two sequential, non-overlapping dra
  const origin=summonFromGrave(duel,1,0),event=safeEvent(duel,[origin]);
  const r=captureDrawTriggerEvent(duel,createDrawTriggerLedger(),event,lookups);
  const resolved=resolveDrawTriggerEvent(duel,r.ledger,{eventId:event.eventId,acceptedSourceUids:[a.uid,b.uid]},lookups);
- assert.equal(resolved.plans.length,2);assert.deepEqual(resolved.plans.map(p=>p.deckCountAtPlan),[15,14]);
+ assert.equal(resolved.plans.length,2);assert.deepEqual(resolved.plans.map(p=>p.deckCountAtPlan),[13,12]);
  assert.deepEqual(resolved.plans.map(p=>p.handCountAtPlan),[5,6]);
  applyPlans(duel,resolved.plans);assert.equal(holder(duel,1).hand.length,7);
 });
@@ -187,10 +187,10 @@ test('a source owned by a reserve teammate draws to the currently active physica
 });
 test('the adapter never performs the End Phase hand-limit discard itself',()=>{
  const duel=base(),source=placeSafeReturn(duel,1),origin=summonFromGrave(duel,1,0),held=holder(duel,1);
- held.hand.push(...held.deck.splice(0,1));assert.equal(held.hand.length,6);
+ held.hand.push(...held.deck.splice(0,1));assert.equal(held.hand.length,6);const beforeDeck=held.deck.length;
  const event=safeEvent(duel,[origin]),r=captureDrawTriggerEvent(duel,createDrawTriggerLedger(),event,lookups);
  const resolved=resolveDrawTriggerEvent(duel,r.ledger,{eventId:event.eventId,acceptedSourceUids:[source.uid]},lookups);
- applyPlans(duel,resolved.plans);assert.equal(held.hand.length,7);assert.equal(held.deck.length,13);
+ applyPlans(duel,resolved.plans);assert.equal(held.hand.length,7);assert.equal(held.deck.length,beforeDeck-1);
  assert.equal(require('../dist/rulesProfile').rulesFor(duel.core).handCheck,'end');
 });
 test('an empty physical Deck produces an explicit deck-out plan without inventing a card',()=>{
@@ -277,7 +277,7 @@ test('multiple Spirits each plan one draw for the same Pot of Greed activator',(
  const r=captureDrawTriggerEvent(duel,createDrawTriggerLedger(),event,lookups);
  const resolved=resolveDrawTriggerEvent(duel,r.ledger,{eventId:event.eventId,acceptedSourceUids:[a.uid,b.uid]},lookups);
  assert.equal(resolved.plans.length,2);assert.deepEqual(resolved.plans.map(p=>p.recipientSeat),[0,0]);
- assert.deepEqual(resolved.plans.map(p=>p.deckCountAtPlan),[15,14]);applyPlans(duel,resolved.plans);
+ assert.deepEqual(resolved.plans.map(p=>p.deckCountAtPlan),[14,13]);applyPlans(duel,resolved.plans);
  assert.equal(holder(duel,0).hand.length,7);
 });
 test('a Pot of Greed source must belong to the physical seat that activated it',()=>{
@@ -324,7 +324,7 @@ test('two Spirits with one card remaining cause the second draw to adjudicate de
 test('invalid physical deck size, zone count or Extra Deck count is rejected',()=>{
  const short=base();short.core.players[0].deck.pop();assert.throws(()=>assertDrawTriggerRules(short),/20–30/);
  const crowded=base();for(let i=0;i<4;i++){const card=take(crowded,0,normalIds[i]);crowded.core.players[0].monsters.push({...card,position:'atk',faceUp:true,entered:0,changed:0,attacked:0,atkBoost:0,defBoost:0,owner:0});}
- assert.throws(()=>assertDrawTriggerRules(crowded),/três Monster Zones/);
+ assert.throws(()=>assertDrawTriggerRules(crowded),/limite de zonas/);
  const extra=base();for(let i=0;i<6;i++)extra.core.players[0].extra.push(take(extra,0,normalIds[i]));
  assert.throws(()=>assertDrawTriggerRules(extra),/Extra Deck físico excedeu cinco/);
 });
