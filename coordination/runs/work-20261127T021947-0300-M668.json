@@ -1,0 +1,57 @@
+{
+  "format": 1,
+  "runId": "work-20261127T021947-0300-M668",
+  "mission": "M668",
+  "priority": "P1",
+  "status": "fix-committed-awaiting-ci",
+  "startedAt": "2026-11-27T02:19:47-03:00",
+  "endedAt": null,
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedBaseHead": "e6ea5d82bd18c9cbdee3b2c6fefe50e961d38da6",
+  "taskBaseBranch": "feat/work-m631-direct-burn-spells-tag-adapter-20261125",
+  "taskBaseHead": "dd79ac897f577168deca1bbf00a06b894a81fe68",
+  "branch": "feat/work-m668-direct-burn-ci-recovery-20261127",
+  "headSha": "807a5d9fa0191fea5c8c9fe8fba26a6874bc9abe",
+  "changedFiles": [
+    "tests/directBurnSpellTagAdapter.test.cjs",
+    "coordination/runs/work-20261127T021947-0300-M668.json"
+  ],
+  "scope": "Recuperar a CI de M631 sem mudar a lógica das cartas: manter cursor, active seat, core.current e teamRotation sincronizados em fixtures de todas as quatro rotações e ao alternar a equipe corrente.",
+  "finding": {
+    "failedRun": 45717719487,
+    "failedTests": 3,
+    "passingTests": 26,
+    "totalTests": 29,
+    "rootCause": "Fixtures mudavam core.current diretamente, deixando TagDuel.cursor e core.teamRotation desincronizados; assertTagDuel rejeitava o estado antes de testar as guardas esperadas.",
+    "productionTypecheck": "passed",
+    "productionBuild": "passed",
+    "evidenceValidation": "passed",
+    "cardBatchFastFeedback": "passed",
+    "milestone1000": "passed"
+  },
+  "fix": "Helper setActiveTeam atualiza cursor, core.current, priority, teamRotation.cursor/active/reserves; setup usa first%2 por padrão; expectativas de LP/GY passam a considerar a equipe do assento inicial.",
+  "newCards": 0,
+  "existingCardsUnderTest": [
+    "Final Flame (54899807)",
+    "Raimei (96300057)"
+  ],
+  "newCertifications": 0,
+  "automaticCertifications": 0,
+  "inventoryGrants": 0,
+  "verification": {
+    "focusedTests": "pending",
+    "engineValidation": "pending",
+    "mergeability": "not-rechecked",
+    "discordLive": "not-run"
+  },
+  "pr": {
+    "number": 573,
+    "url": "https://github.com/dareka222778/yugioh-speed-rpg/pull/573",
+    "state": "open-draft"
+  },
+  "production": "not-changed",
+  "merge": "not-authorized",
+  "deploy": "not-authorized",
+  "nextTask": "Aguardar a nova CI do M631; se passar, manter a PR em draft até autorização. Em paralelo, retomar M667 após CI e aguardar handoff do resolver central antes de qualquer integração.",
+  "nextWindow": "2026-11-27T06:30:00-03:00"
+}
