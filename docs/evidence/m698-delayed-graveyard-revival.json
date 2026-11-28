@@ -1,0 +1,99 @@
+{
+  "mission": "M698",
+  "runId": "work-20261128T035737-0300-M698",
+  "branch": "feat/work-m698-delayed-graveyard-revival-20261128",
+  "sharedBaseHead": "b5e3dc49babde0ab914db0c303147b8d0af253b0",
+  "historicalCutoff": "2004-09-30",
+  "cards": [
+    {
+      "id": "43586926",
+      "name": "Twin-Headed Behemoth",
+      "konamiCid": 5030,
+      "ocgFirstRelease": "2003-09-18",
+      "tcgFirstRelease": "2003-06-06",
+      "eligibleByHistoricalUnion": true,
+      "officialOcgSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5030&ope=2&request_locale=ae",
+      "officialTcgSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5030&ope=2&request_locale=en",
+      "coverage": "complete-adapter-behavior",
+      "verifiedSegments": [
+        "destroyed-on-field-to-owner-grave",
+        "end-phase-revival-same-turn",
+        "optional-activation",
+        "once-per-duel-per-physical-uid",
+        "ATK-DEF-become-1000",
+        "owner-field-and-zone-capacity",
+        "stale-grave-binding",
+        "inventory-conservation"
+      ]
+    },
+    {
+      "id": "53839837",
+      "name": "Vampire Lord",
+      "konamiCid": 5410,
+      "ocgFirstRelease": "2002-01-24",
+      "tcgFirstRelease": "2003-12-01",
+      "eligibleByHistoricalUnion": true,
+      "officialOcgSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5410&ope=2",
+      "officialTcgSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5410&ope=2&request_locale=en",
+      "coverage": "partial-adapter-behavior",
+      "verifiedSegments": [
+        "opponent-card-effect-destruction-only",
+        "in-possession-control-check",
+        "next-owner-team-standby-phase",
+        "physical-owner-and-inactive-partner",
+        "optional-activation",
+        "negation",
+        "stale-grave-binding",
+        "inventory-conservation"
+      ],
+      "unverifiedSegments": [
+        "battle-damage-card-type-declare-and-opponent-private-deck-send"
+      ]
+    }
+  ],
+  "behaviorCoverage": {
+    "scenarios": 31,
+    "fullyAdapterVerifiedCards": 1,
+    "partiallyAdapterVerifiedCards": 1,
+    "completeCardRulesVerified": 1,
+    "note": "Vampire Lord permanece parcial: o efeito de dano de batalha que declara tipo e envia carta do Deck privado do oponente ainda não foi implementado."
+  },
+  "engineV9Baseline": {
+    "certified": 969,
+    "remainingTo1000": 31,
+    "source": "último checkpoint M696; não reexecutado localmente neste ciclo"
+  },
+  "explicitCertificateEntries": 959,
+  "counts": {
+    "newMetadataCards": 0,
+    "newEngineCertifiedCards": 0,
+    "automaticCertifications": 0,
+    "inventoryGrants": 0
+  },
+  "admission": {
+    "adapterOnly": true,
+    "centralResolverIntegrated": false,
+    "catalogRevisionChanged": false,
+    "certificationFileChanged": false,
+    "automaticCertifications": false,
+    "inventoryGrants": false
+  },
+  "tests": {
+    "focused": "pending CI",
+    "typecheck": "pending CI",
+    "build": "pending CI",
+    "fullRegression": "pending CI",
+    "discordLive": false
+  },
+  "handoff": {
+    "targetPR": 17,
+    "commentId": 7235689389,
+    "status": "requested-awaiting-explicit-release"
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "mission": "M698",
+  "runId": "work-20261128T035737-0300-M698",
+  "branch": "feat/work-m698-delayed-graveyard-revival-20261128",
+  "status": "adapter-implementation-and-focused-suite-authored; CI pending",
+  "priority": "P1",
+  "startedAt": "2026-11-28T03:57:37-03:00",
+  "endedAt": null,
+  "effectiveWorkMinutes": null,
+  "targetEffectiveWorkMinutes": 60,
+  "targetMet": false,
+  "sharedBaseHead": "b5e3dc49babde0ab914db0c303147b8d0af253b0",
+  "branchHeadSha": null,
+  "changedPaths": [
+    ".github/workflows/m698-delayed-graveyard-revival.yml",
+    "coordination/runs/work-20261128T035737-0300-M698.json",
+    "docs/evidence/m698-delayed-graveyard-revival.json",
+    "scripts/audit-delayed-graveyard-revival-m698.cjs",
+    "src/delayedGraveyardRevivalTagAdapter.ts",
+    "tests/delayedGraveyardRevivalTagAdapter.test.cjs"
+  ],
+  "cards": [
+    {
+      "id": "43586926",
+      "name": "Twin-Headed Behemoth",
+      "coverage": "complete-adapter-behavior"
+    },
+    {
+      "id": "53839837",
+      "name": "Vampire Lord",
+      "coverage": "partial-adapter-behavior"
+    }
+  ],
+  "counts": {
+    "newMetadataCards": 0,
+    "newEngineCertifiedCards": 0,
+    "automaticCertifications": 0,
+    "inventoryGrants": 0
+  },
+  "engineV9Baseline": {
+    "certified": 969,
+    "remainingTo1000": 31,
+    "source": "último checkpoint M696; não reexecutado localmente neste ciclo"
+  },
+  "explicitCertificateEntries": 959,
+  "behaviorScenarios": 31,
+  "focusedTests": "not executed in local runtime; workflow will execute",
+  "fullRegression": "not executed in local runtime; workflow will execute",
+  "pullRequest": {
+    "number": null,
+    "draft": true,
+    "merge": false
+  },
+  "workflow": {
+    "runId": null,
+    "conclusion": "pending"
+  },
+  "deployment": {
+    "deploy": false,
+    "backupVerified": false,
+    "productionUnchanged": true,
+    "liveDiscordValidation": false
+  },
+  "handoff": {
+    "targetPR": 17,
+    "commentId": 7235689389,
+    "status": "requested-awaiting-explicit-release"
+  },
+  "scopeReleasedToAuxiliary": [],
+  "nextTask": "Aguardar handoff dos caminhos centrais; completar o efeito de dano de batalha de Vampire Lord com escolha privada no Deck do assento oponente; depois integrar/certificar somente após testes completos.",
+  "nextWindow": "2026-11-28T08:30:00-03:00"
+}

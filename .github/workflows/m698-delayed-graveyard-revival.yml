@@ -1,0 +1,46 @@
+name: M698 delayed graveyard revival
+on:
+  push:
+    branches:
+      - feat/work-m698-delayed-graveyard-revival-20261128
+    paths:
+      - 'src/delayedGraveyardRevivalTagAdapter.ts'
+      - 'tests/delayedGraveyardRevivalTagAdapter.test.cjs'
+      - 'docs/evidence/m698-delayed-graveyard-revival.json'
+      - 'scripts/audit-delayed-graveyard-revival-m698.cjs'
+      - '.github/workflows/m698-delayed-graveyard-revival.yml'
+      - 'coordination/runs/work-20261128T035737-0300-M698.json'
+  pull_request:
+    paths:
+      - 'src/delayedGraveyardRevivalTagAdapter.ts'
+      - 'tests/delayedGraveyardRevivalTagAdapter.test.cjs'
+      - 'docs/evidence/m698-delayed-graveyard-revival.json'
+      - 'scripts/audit-delayed-graveyard-revival-m698.cjs'
+      - '.github/workflows/m698-delayed-graveyard-revival.yml'
+      - 'coordination/runs/work-20261128T035737-0300-M698.json'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  delayed-graveyard-revival:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Type check
+        run: npm run check
+      - name: Build
+        run: npm run build
+      - name: Focused behavior suite
+        run: node --test tests/delayedGraveyardRevivalTagAdapter.test.cjs
+      - name: Full regression suite
+        run: npm test
+      - name: Evidence and ownership audit
+        run: node scripts/audit-delayed-graveyard-revival-m698.cjs
