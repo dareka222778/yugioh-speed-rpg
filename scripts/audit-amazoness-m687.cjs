@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 const fs=require('node:fs');
 const assert=require('node:assert/strict');
-const {enabledCardIds,engineCatalog,getDuelCard}=require('../dist/effectRegistry');
+const {getEnabledCardIds,engineCatalog,getDuelCard}=require('../dist/effectRegistry');
+const enabledCardIds=getEnabledCardIds();
 const evidence=JSON.parse(fs.readFileSync('docs/evidence/m687-amazoness-battle.json','utf8'));
 const certificates=fs.readFileSync('src/cardCertifications.ts','utf8');
 const adapter=fs.readFileSync('src/amazonessBattleTagAdapter.ts','utf8');
@@ -31,7 +32,7 @@ assert.equal(evidence.behaviorTests.adapterBehaviorVerifiedCards,3);
 assert.equal(evidence.behaviorTests.engineBehaviorCertifiedCards,0);
 console.log(JSON.stringify({
  mission:evidence.mission,
- catalogCards:engineCatalog.length,
+ catalogMetadataCards:engineCatalog.length,
  engineCertifiedCards:enabledCardIds.length,
  baselineCertifiedCards:evidence.baseline.engineV9Certified,
  adapterCandidates:evidence.cards.length,

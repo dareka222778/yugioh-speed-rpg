@@ -1,7 +1,7 @@
 import {createHash} from 'node:crypto';
 import {assertTagDuel,tagInventory,type TagDuel} from './tagDuel';
 import {getDuelCard} from './effectRegistry';
-import {bindTarget,targetBindingValid,type TargetBinding,synchronizeCardLifetimes} from './cardLifetime';
+import {bindTarget,targetBindingValid,type TargetBinding} from './cardLifetime';
 import {addTemporaryModifier,canAffectMonster,monsterEffectsNegated} from './continuousEffects';
 import {RULES_PROFILE,rulesFor} from './rulesProfile';
 import type {DuelState,Monster} from './duelEngine';
@@ -104,7 +104,7 @@ export type AmazonessStandbyPlan={
 };
 export type AmazonessStandbyResult={
  eventId:string;sourceUid:string;targetUid:string;turn:number;
- status:'applied'|'source-lost'|'source-inactive'|'source-negated'|'target-lost'|'target-unaffected'|'duplicate';
+ status:'applied'|'source-lost'|'source-control-changed'|'source-inactive'|'source-negated'|'target-lost'|'target-unaffected'|'duplicate';
  replayed:boolean;originalStatus?:AmazonessStandbyResult['status']
 };
 export type AmazonessBattleDamageEvent={
@@ -117,7 +117,7 @@ export type AmazonessSwordsWomanPlan={
 };
 export type AmazonessSwordsWomanPreparation={status:'not-applicable'}|{status:'prepared';plan:AmazonessSwordsWomanPlan};
 export type AmazonessSwordsWomanResult={
- eventId:string;sourceUid:string;damageToTeam:Team;status:'redirected'|'source-lost'|'source-inactive'|'source-negated'|'duplicate';
+ eventId:string;sourceUid:string;damageToTeam:Team;status:'redirected'|'source-lost'|'source-control-changed'|'source-inactive'|'source-negated'|'duplicate';
  amount:number;targetTeam?:Team;turn:number;replayed:boolean;originalStatus?:AmazonessSwordsWomanResult['status']
 };
 type Cached<T>={fingerprint:string;result:T};
@@ -151,7 +151,7 @@ export function prepareAmazonessBlowpiperStandby(session:AmazonessBattleSession,
  if(!target||target.team===team||!target.monster.faceUp)throw new Error('Blowpiper exige um monstro adversário com a face para cima.');
  const sourceBinding=bindTarget(session.duel.core,sourceUid),targetBinding=bindTarget(session.duel.core,targetUid);
  if(!sourceBinding||!targetBinding)throw new Error('Não foi possível vincular as identidades físicas.');
- const useKey=sourceUid+':'+sourceBinding.epoch+':'+event.turn,eventKey=key(event.eventId,sourceUid);
+ const useKey=sourceUid+':'+event.turn,eventKey=key(event.eventId,sourceUid);
  if(Object.hasOwn(session.standbyUses,useKey)||Object.hasOwn(session.pendingStandby,eventKey)||Object.hasOwn(session.standbyReceipts,eventKey))throw new Error('Este Blowpiper já foi usado neste Standby.');
  const payload={eventId:event.eventId,sourceUid,targetUid,controllerTeam:team,activeSeat:event.activeSeat,turn:event.turn,sourceBinding,targetBinding};
  const plan:AmazonessStandbyPlan={...payload,fingerprint:fingerprint(payload)};
@@ -168,6 +168,7 @@ export function resolveAmazonessBlowpiperStandby(session:AmazonessBattleSession,
  let status:AmazonessStandbyResult['status']='target-lost';
  const source=findMonster(working,plan.sourceUid);
  if(!source||!targetBindingValid(working.core,plan.sourceBinding))status='source-lost';
+ else if(source.team!==plan.controllerTeam)status='source-control-changed';
  else if(!source.monster.faceUp)status='source-inactive';
  else if(session.isNegated(working.core,plan.sourceUid))status='source-negated';
  else{
@@ -211,6 +212,7 @@ export function resolveAmazonessSwordsWomanDamage(session:AmazonessBattleSession
  const before=inventorySnapshot(session.duel),source=findMonster(session.duel,plan.sourceUid);
  let status:AmazonessSwordsWomanResult['status']='redirected';
  if(!source||!targetBindingValid(session.duel.core,plan.sourceBinding))status='source-lost';
+ else if(source.team!==plan.damageToTeam)status='source-control-changed';
  else if(!source.monster.faceUp)status='source-inactive';
  else if(session.isNegated(session.duel.core,plan.sourceUid))status='source-negated';
  else if(session.duel.core.players[plan.damageToTeam].lp!==plan.lpBefore)throw new Error('A substituição deve ocorrer antes de aplicar o dano original.');
@@ -220,7 +222,8 @@ export function resolveAmazonessSwordsWomanDamage(session:AmazonessBattleSession
  assertSession(session);assertInventoryUnchanged(before,session.duel);return structuredClone(result);
 }
 
-/** Only the face-up, non-negated Tiger supplies its team-wide attack restriction. */
+/** Only the face-up, non-negated Tiger supplies its team-wide attack restriction.
+ * This card-specific policy must be combined with the engine's ordinary attack legality checks. */
 export function amazonessTigerAtkBonus(duel:TagDuel,monsterUid:string,lookup:AmazonessLookup=defaultAmazonessLookup,isNegated:AmazonessNegationCheck=monsterEffectsNegated):number{
  assertAmazonessRules(duel);
  const target=findMonster(duel,monsterUid);
