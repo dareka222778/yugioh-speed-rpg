@@ -1,8 +1,8 @@
 {
   "format": 1,
   "sharedBranch": "feat/rea-engine-recovery-20261026",
-  "observedHead": "da6e355dda9ae026703b9404561f85cd9999e9b3",
-  "updatedAt": "2026-11-28T03:46:20-03:00",
+  "observedHead": "55b2d9b0761fd8e1c9a51b8a31793e86a57e5236",
+  "updatedAt": "2026-11-28T03:57:37-03:00",
   "activeReservations": [
     {
       "runId": "work-20261125T203259-0300-M635",
@@ -819,6 +819,36 @@
         "coordination/runs/work-20261128T034620-0300-M697.json"
       ],
       "scope": "Adapter isolado para Skull-Mark Ladybug (64306248/CID 4770) e Peten the Dark Clown (52624755/CID 6085): gatilhos de envio ao Cemitério, LP compartilhado por equipe, timing opcional de Peten, custo de banimento e busca apenas na mão/Deck privados do proprietário físico. Testes de 2v2, conservação, replay, regras e ausência de concessões. Sem arquivos centrais, comandos, banco ou produção."
+    },
+    {
+      "runId": "work-20261128T035737-0300-M698",
+      "mission": "M698",
+      "branch": "feat/work-m698-delayed-graveyard-revival-20261128",
+      "state": "reserved-and-implementing",
+      "priority": "P1",
+      "sharedBaseHead": "55b2d9b0761fd8e1c9a51b8a31793e86a57e5236",
+      "conditionalHeadUpdate": true,
+      "reservedFiles": [
+        "src/delayedGraveyardRevivalTagAdapter.ts",
+        "tests/delayedGraveyardRevivalTagAdapter.test.cjs",
+        "docs/evidence/m698-delayed-graveyard-revival.json",
+        "scripts/audit-delayed-graveyard-revival-m698.cjs",
+        ".github/workflows/m698-delayed-graveyard-revival.yml",
+        "coordination/runs/work-20261128T035737-0300-M698.json"
+      ],
+      "scope": "Adapter TagDuel isolado para Twin-Headed Behemoth (43586926/CID 5030): revive na End Phase após destruição no campo enviada ao GY, uma vez por Duelo por UID, ATK/DEF 1000; e Vampire Lord (53839837/CID 5410): revive na próxima Standby Phase após destruição em posse da equipe por efeito do oponente. Preserva UID/proprietário físico, equipe controladora, mãos/Deck privados, Deck 20–30, mão 6 somente na End Phase, zonas 3+3, Field Zone separada, Extra 5 e inventário. Sem resolver central, catálogo/certificações, comandos, banco, inventário concedido ou produção.",
+      "handoffRequest": {
+        "pr": 17,
+        "commentId": 7235689389,
+        "status": "requested-awaiting-explicit-release",
+        "files": [
+          "src/duelEngineCurrent.ts",
+          "src/monsterEffects.ts",
+          "src/effectRegistry.ts",
+          "src/cardMetadata.ts",
+          "src/cardCertifications.ts"
+        ]
+      }
     }
   ],
   "handoffRequests": [
