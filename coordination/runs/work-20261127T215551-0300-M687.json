@@ -1,0 +1,37 @@
+{
+  "format": 1,
+  "runId": "work-20261127T215551-0300-M687",
+  "mission": "M687",
+  "priority": "P1",
+  "status": "reserved-and-implementing",
+  "startedAt": "2026-11-27T21:55:51-03:00",
+  "endedAt": null,
+  "branch": "feat/work-m687-amazoness-tag-adapter-20261127",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedBaseHead": "1a07fbbc8f34ee5d84d1e5bb25b608bc4b7fbae2",
+  "headSha": "1a07fbbc8f34ee5d84d1e5bb25b608bc4b7fbae2",
+  "reservedFiles": [
+    "src/amazonessBattleTagAdapter.ts",
+    "tests/amazonessBattleTagAdapter.test.cjs",
+    "docs/evidence/m687-amazoness-battle.json",
+    "scripts/audit-amazoness-m687.cjs",
+    ".github/workflows/m687-amazoness.yml",
+    "coordination/runs/work-20261127T215551-0300-M687.json"
+  ],
+  "scope": "Adapter TagDuel isolado para Amazoness Blowpiper (73574678/CID 5646), Amazoness Swords Woman (94004268/CID 5284) e Amazoness Tiger (10979723/CID 5647): debuff de Standby -500 ATK com alvo UID/epoch, substituição de dano de batalha e aura +400/limite de alvo de ataque. Testes de negação, remoção, rotação, replay, regras 20–30/6 End Phase/3+3/Extra 5 e conservação. Amazoness Chain Master (29654737/CID 5291) fica fora por exigir transferência entre mãos privadas físicas sem suporte liberado. Sem resolver central, catálogo/certificações, comandos, banco, inventário ou produção.",
+  "baseline": {
+    "engineV9Certified": 969,
+    "remainingTo1000": 31,
+    "source": "milestone1000-plan artifact from successful run 46089595301"
+  },
+  "blocksCompleted": [],
+  "handoff": {
+    "targetPR": 17,
+    "status": "not-requested-yet",
+    "files": [
+      "src/monsterEffects.ts",
+      "src/duelEngineCurrent.ts"
+    ]
+  },
+  "nextTask": "Implementar três efeitos Amazoness em adapter isolado; não admitir cartas nem alterar certificações antes da integração central e revisão individual."
+}

@@ -1,8 +1,8 @@
 {
   "format": 1,
   "sharedBranch": "feat/rea-engine-recovery-20261026",
-  "observedHead": "7dacc654172a3e688f552affa036c3c3b612faad",
-  "updatedAt": "2026-11-27T21:52:55.580-03:00",
+  "observedHead": "1a07fbbc8f34ee5d84d1e5bb25b608bc4b7fbae2",
+  "updatedAt": "2026-11-27T21:55:51-03:00",
   "activeReservations": [
     {
       "runId": "work-20261125T203259-0300-M635",
@@ -711,6 +711,25 @@
       "headSha": "63979566106ccb88f279f70670631da0c0747227",
       "pr": 611,
       "lastUpdatedAt": "2026-11-27T21:52:55.580-03:00"
+    },
+    {
+      "runId": "work-20261127T215551-0300-M687",
+      "mission": "M687",
+      "branch": "feat/work-m687-amazoness-tag-adapter-20261127",
+      "state": "reserved-and-implementing",
+      "priority": "P1",
+      "conditionalHeadUpdate": true,
+      "sharedBaseHead": "1a07fbbc8f34ee5d84d1e5bb25b608bc4b7fbae2",
+      "headSha": "1a07fbbc8f34ee5d84d1e5bb25b608bc4b7fbae2",
+      "reservedFiles": [
+        "src/amazonessBattleTagAdapter.ts",
+        "tests/amazonessBattleTagAdapter.test.cjs",
+        "docs/evidence/m687-amazoness-battle.json",
+        "scripts/audit-amazoness-m687.cjs",
+        ".github/workflows/m687-amazoness.yml",
+        "coordination/runs/work-20261127T215551-0300-M687.json"
+      ],
+      "scope": "Adapter TagDuel isolado para Amazoness Blowpiper (73574678/CID 5646), Amazoness Swords Woman (94004268/CID 5284) e Amazoness Tiger (10979723/CID 5647): debuff de Standby -500 ATK com alvo UID/epoch, substituição de dano de batalha e aura +400/limite de alvo de ataque. Testes de negação, remoção, rotação, replay, regras 20–30/6 End Phase/3+3/Extra 5 e conservação. Amazoness Chain Master (29654737/CID 5291) fica fora por exigir transferência entre mãos privadas físicas sem suporte liberado. Sem resolver central, catálogo/certificações, comandos, banco, inventário ou produção."
     }
   ],
   "handoffRequests": [
@@ -857,15 +876,14 @@
   },
   "nextExecution": "2026-11-27T22:30:00-03:00",
   "currentWorkRun": {
-    "runId": "work-20261127T214300-0300-M686",
-    "mission": "M686",
-    "branch": "feat/work-m686-appropriate-20261127",
-    "status": "ci-running",
+    "runId": "work-20261127T215551-0300-M687",
+    "mission": "M687",
+    "branch": "feat/work-m687-amazoness-tag-adapter-20261127",
+    "status": "reserved-and-implementing",
     "priority": "P1",
-    "sharedBaseHead": "e059f4b2e4f2ad0a7f67b40e18e00570810c2366",
-    "headSha": "63979566106ccb88f279f70670631da0c0747227",
-    "pr": 611,
-    "nextTask": "Observar CI #611, corrigir falhas, atualizar checkpoint; integrar somente após handoff explícito; verificar contagem certificada sem importação automática.",
+    "sharedBaseHead": "1a07fbbc8f34ee5d84d1e5bb25b608bc4b7fbae2",
+    "headSha": "1a07fbbc8f34ee5d84d1e5bb25b608bc4b7fbae2",
+    "nextTask": "Implementar adapter isolado e suíte executável para Blowpiper, Swords Woman e Tiger; solicitar handoff central sem tocar nos arquivos reservados; validar CI e registrar limites de certificação.",
     "nextWindow": "2026-11-27T22:30:00-03:00"
   },
   "preparedNextRun": {
