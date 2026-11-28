@@ -40,7 +40,7 @@ function holder(duel,seat){
 }
 function take(duel,seat,id){
  const held=holder(duel,seat);
- for(const pool of [held.hand,held.deck,held.extra??[]]){
+ for(const pool of [held.deck,held.hand,held.extra??[]]){
   const i=pool.findIndex(card=>card.id===id);if(i>=0)return pool.splice(i,1)[0];
  }
  throw new Error('Carta física indisponível: '+seat+'/'+id);

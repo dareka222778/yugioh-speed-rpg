@@ -249,7 +249,7 @@ function assertAvatarEvent(state:TagDuel,event:AvatarOfThePotActivationEvent,loo
  if(!source||source.team!==event.actorSeat%2||source.card.faceUp!==true){
   throw new Error('Avatar of the Pot precisa estar face-up no campo da equipe ativa.');
  }
- const cost=findPhysical(state,event.costUid,lookups.potOfGreed);
+ const cost=findPhysical(state,event.costUid,lookups.potOfGreed,'Pot of Greed');
  if(ownerOfUid(state,cost.uid)!==event.actorSeat||!holder(state,event.actorSeat).hand.some(card=>card.uid===cost.uid)){
   throw new Error('O custo Pot of Greed deve vir da mão privada do assento ativo.');
  }
