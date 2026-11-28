@@ -52,6 +52,7 @@ for(const token of [
  'rules.monsterZones!==3','rules.spellTrapZones!==3','rules.extraDeckMax!==5',
  'RULES_PROFILE.monsterZones','RULES_PROFILE.spellTrapZones',
  'event.binding.epoch<0','processed.length>=4096',
+ 'window.resolvingTeam!==pending.ownerTeam','window.resolvingSeat!==input.active[pending.ownerTeam]',
  'ownerSeatOfUid(state,window.pyroUid)!==ownerActiveSeat',
  "info.race!=='Pyro'",'inventorySnapshot'
 ])assert.ok(source.includes(token),'Contrato comportamental ausente: '+token);
