@@ -3,13 +3,13 @@
   "runId": "work-20261127T222547-0300-M690",
   "mission": "M690",
   "priority": "P1",
-  "status": "reserved-and-implementing",
+  "status": "completed-awaiting-review",
   "startedAt": "2026-11-27T22:25:47-03:00",
-  "endedAt": null,
+  "endedAt": "2026-11-27T22:42:26-03:00",
   "branch": "feat/work-m690-battle-topdeck-20261127",
   "sharedBranch": "feat/rea-engine-recovery-20261026",
   "sharedBaseHead": "4e0886292955e78d511174fee48f12d39d0f1db3",
-  "headSha": "4e0886292955e78d511174fee48f12d39d0f1db3",
+  "headSha": "a48733639792cfe2f9f594da24404101079177a3",
   "reservedFiles": [
     "src/battleTopdeckTagAdapter.ts",
     "tests/battleTopdeckTagAdapter.test.cjs",
@@ -55,7 +55,13 @@
       "status": "adapter-tested-pending-engine-integration"
     }
   ],
-  "blocksCompleted": [],
+  "blocksCompleted": [
+    "Leitura de coordination/state.json e checkpoint M689; confirmação do HEAD compartilhado e reservas de terceiros.",
+    "Pedido de handoff cooperativo no PR #17 para src/monsterEffects.ts e src/duelEngineCurrent.ts; nenhum arquivo central foi tocado.",
+    "Adapter isolado de três cartas: topdeck por UID/proprietário físico e compra/retorno privado de Helping Robo.",
+    "14 cenários de comportamento, incluindo posição, GY, negação, replay, reserva 2v2, mão 7 até End Phase e inventário.",
+    "Typecheck, build, testes focados, auditoria factual e fast feedback aprovados no SHA a487336."
+  ],
   "handoff": {
     "targetPR": 17,
     "commentId": 7231720000,
@@ -66,5 +72,49 @@
     ],
     "response": "Sem liberação explícita observada no início do M690; adapter seguirá isolado."
   },
-  "nextTask": "Após adapter/testes e CI, aguardar transferência central com backup verificável para integrar eventos pós-batalha e só então avaliar certificação explícita."
+  "nextTask": "M691: Grave Protector — substituição contínua do destino de monstros destruídos em batalha, com embaralhamento privado no Deck físico do dono e retorno de Fusion ao Extra Deck.",
+  "branchHeadSha": "a48733639792cfe2f9f594da24404101079177a3",
+  "pullRequest": {
+    "number": 614,
+    "url": "https://github.com/dareka222778/yugioh-speed-rpg/pull/614",
+    "state": "open",
+    "draft": true,
+    "merged": false
+  },
+  "verification": {
+    "typecheck": "success",
+    "build": "success",
+    "focusedTests": "14/14 success",
+    "evidenceAudit": "success",
+    "cardBatchFastFeedback": "success",
+    "milestone1000": "success",
+    "engineValidation": "in-progress",
+    "liveDiscordValidation": false
+  },
+  "counts": {
+    "baselineEngineV9Certified": 969,
+    "remainingTo1000": 31,
+    "adapterBehaviorVerifiedCards": 3,
+    "newEngineCertifiedCards": 0,
+    "automaticCertifications": 0,
+    "inventoryGrants": 0
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "effectiveWorkMinutes": 16,
+  "targetEffectiveWorkMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "scopeReleasedToAuxiliary": [
+    "src/battleTopdeckTagAdapter.ts",
+    "tests/battleTopdeckTagAdapter.test.cjs",
+    "docs/evidence/m690-battle-topdeck.json",
+    "scripts/audit-battle-topdeck-m690.cjs",
+    ".github/workflows/m690-battle-topdeck.yml"
+  ],
+  "nextWindow": "2026-11-28T03:30:00-03:00"
 }
