@@ -174,6 +174,9 @@ function findSource(
   if(ownerSeat!==actorSeat)throw new Error('A carta ativada deve pertencer à mão privada do participante ativo.');
   const effect=lookup(source.id);
   if(!effect)throw new Error('Carta não pertence à família de interrupção de mão admitida.');
+  const metadata=getPlayableCard(source.id);
+  const expectedKind=(effect==='disturbance-strategy'||effect==='mind-crush')?'trap':'spell';
+  if(!metadata||metadata.kind!==expectedKind)throw new Error('Tipo da carta ativada não corresponde ao efeito registrado.');
   if((effect==='disturbance-strategy'||effect==='mind-crush')&&source.setTurn>=duel.core.turn){
     throw new Error('Armadilha não pode ser ativada no mesmo turno em que foi Baixada.');
   }
@@ -303,7 +306,7 @@ export function activateHandDisruption(
   const lpCostPaid=source.effect==='confiscation'?1000:0;
   const plan:HandDisruptionPlan=Object.freeze({
     ...event,actorTeam,targetSeat,sourceOwnerSeat:source.sourceOwnerSeat,sourceCardId:source.sourceCardId,
-    effect:source.effect,affectedSeats:Object.freeze([event.actorSeat,targetSeat]) as unknown as [Seat,Seat],
+    effect:source.effect,affectedSeats:Object.freeze(activeSeats(input)) as unknown as [Seat,Seat],
     ...(declaredName?{declaredName}:{}),lpCostPaid,turn:input.core.turn,
     activationCurrent:input.core.current as Team,cursorAtActivation:input.cursor
   });
