@@ -216,10 +216,12 @@ export function recordGraveyardTransition(
  assertText(event.eventId,'ID do evento GY');assertText(event.cardUid,'UID do evento GY');
  if(!Number.isSafeInteger(event.sequence)||event.sequence<1||
   !Number.isSafeInteger(event.turn)||event.turn!==state.core.turn||
-  event.toZone!=='grave'||event.fromZone==='grave'||!event.binding||
-  event.binding.uid!==event.cardUid||event.binding.zone!==event.fromZone||
+  event.toZone!=='grave'||!['deck','hand','monsters','backrow','extra','banished','field'].includes(event.fromZone)||
+  !event.binding||event.binding.uid!==event.cardUid||event.binding.zone!==event.fromZone||
+  !Number.isSafeInteger(event.binding.epoch)||event.binding.epoch<0||
+  !['battle','effect','cost','send','discard','mill','other'].includes(event.reason)||
   typeof event.destroyed!=='boolean'){
-  throw new Error('Origem, destino, turno ou binding do evento GY inválido.');
+  throw new Error('Origem, destino, turno, motivo ou binding do evento GY inválido.');
  }
  const hash=fingerprint(event);
  const previous=[...ledger.pending,...ledger.processed].find(item=>item.eventId===event.eventId);
@@ -258,6 +260,10 @@ export function resolveGraveyardTransition(
  }
  const pending=ledger.pending.find(item=>item.eventId===window.eventId);
  if(!pending)return {status:'no-target',state:input,ledger,changedTeams:[],summonedUid:null,lpDelta:[0,0]};
+ if(ledger.processed.length>=4096)throw new Error('Ledger IOC atingiu o limite de eventos processados.');
+ if(window.pyroUid!==undefined&&(typeof window.pyroUid!=='string'||!window.pyroUid.trim())){
+  throw new Error('UID Pyro inválido na janela de resolução IOC.');
+ }
  const state=structuredClone(input),before=inventorySnapshot(input),lpBefore=[
   state.core.players[0].lp,state.core.players[1].lp
  ] as const;
