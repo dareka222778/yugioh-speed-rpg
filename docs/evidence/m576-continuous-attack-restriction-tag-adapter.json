@@ -1,0 +1,76 @@
+{
+  "mission": "M576",
+  "title": "Continuous battle restrictions TagDuel adapter",
+  "cards": [
+    {
+      "id": "30606547",
+      "name": "The Dark Door",
+      "konamiDatabaseCid": 5225,
+      "type": "Continuous Spell",
+      "officialText": "Only 1 monster can attack during each Battle Phase.",
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5225&ope=2&request_locale=en",
+      "firstTcgRelease": "2003-03-01",
+      "firstTcgSet": "LON-093",
+      "historicalEligibility": "eligible-before-2004-09-30"
+    },
+    {
+      "id": "03136426",
+      "name": "Level Limit - Area B",
+      "konamiDatabaseCid": 6054,
+      "type": "Continuous Spell",
+      "officialText": "Change all face-up Level 4 or higher monsters to Defense Position.",
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6054&ope=2&request_locale=en",
+      "firstTcgRelease": "2004-06-01",
+      "firstTcgSet": "AST-092",
+      "historicalEligibility": "eligible-before-2004-09-30"
+    }
+  ],
+  "behavior": {
+    "darkDoor": "One distinct attacking monster UID per team Battle Phase; the same monster may attack repeatedly. The first attacker remains the phase's permitted monster even if it leaves the field. A new Battle Phase gets a new ledger.",
+    "levelLimitAreaB": "While any face-up copy exists in either team's backrow, all face-up Level 4+ monsters on both teams are changed to Defense Position. Face-down monsters are ignored until revealed; removing the final copy does not restore prior positions.",
+    "tagDuelScope": "The Dark Door ledger is per team's Battle Phase, matching the shared 2v2 team turn. Level Limit - Area B affects both teams.",
+    "integration": "Isolated adapter helpers only. No central resolver, tagActions, Discord commands, catalog, certification registry, or released-card allowlist changed."
+  },
+  "invariantCoverage": [
+    "2v2 physical UID uniqueness and conservation",
+    "private hands unchanged",
+    "Main Deck 20–30 per physical seat",
+    "End Phase hand limit 6",
+    "three shared Monster Zones and three shared Spell/Trap Zones per team",
+    "separate Field Zone and Extra Deck maximum five",
+    "The Dark Door permits repeated attacks by the same UID but blocks another UID",
+    "separate team Battle Phase ledgers and reset on a new Battle Phase",
+    "Level Limit - Area B affects face-up Level 4+ monsters on both teams",
+    "face-down monsters and Level 3 monsters are not changed",
+    "multiple Continuous Spell copies keep the effect active until the last copy leaves",
+    "no automatic inventory grants or catalog admission",
+    "The Dark Door face-down não aplica restrição até ser revelada",
+    "remoção de Continuous Spell envia UID físico ao Cemitério, preservando inventário"
+  ],
+  "tests": {
+    "focusedFile": "tests/continuousAttackRestrictionTagAdapter.test.cjs",
+    "caseCount": 9,
+    "behaviorCertifiedCards": 0
+  },
+  "certification": {
+    "sharedCertifiedAtStart": 969,
+    "target": 1000,
+    "remainingAtStart": 31,
+    "newCertifications": 0,
+    "automaticCertification": false,
+    "status": "not-certified",
+    "reason": "M576 is an isolated behavior adapter; central resolver, metadata, certification fingerprints and released-card allowlist were not changed."
+  },
+  "safety": {
+    "runtimeCoreChanged": false,
+    "catalogChanged": false,
+    "cardCertificationsChanged": false,
+    "releasedCardIdsChanged": false,
+    "inventoryGranted": 0,
+    "playerDataChanged": false,
+    "persistentDatabaseChanged": false,
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "liveDiscordValidation": false
+  }
+}

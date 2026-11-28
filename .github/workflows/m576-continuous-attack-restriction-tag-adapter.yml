@@ -1,0 +1,35 @@
+name: M576 Continuous battle restrictions TagDuel adapter
+on:
+  push:
+    branches: [feat/work-m576-dark-door-level-limit-tag-adapter-20261123]
+    paths:
+      - 'src/continuousAttackRestrictionTagAdapter.ts'
+      - 'tests/continuousAttackRestrictionTagAdapter.test.cjs'
+      - 'docs/evidence/m576-continuous-attack-restriction-tag-adapter.json'
+      - '.github/workflows/m576-continuous-attack-restriction-tag-adapter.yml'
+  pull_request:
+    paths:
+      - 'src/continuousAttackRestrictionTagAdapter.ts'
+      - 'tests/continuousAttackRestrictionTagAdapter.test.cjs'
+      - 'docs/evidence/m576-continuous-attack-restriction-tag-adapter.json'
+      - '.github/workflows/m576-continuous-attack-restriction-tag-adapter.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  continuous-battle-restrictions:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m576-continuous-attack-restriction-tag-adapter.json', 'utf8'))"
+      - name: Run M576 behavior regressions
+        run: node --test tests/continuousAttackRestrictionTagAdapter.test.cjs
