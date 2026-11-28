@@ -362,7 +362,7 @@ test('a stolen First Sarcophagus resolves for its controller team while preservi
  const second=moveToHand(duel,duel.active[0],secondPlaceholder);
  synchronizeCardLifetimes(duel.core);
  const captured=captureSarcophagusEndPhase(duel,createSarcophagusLedger(),endEvent(duel,stolen.uid),lookups);
- assert.equal(captured.candidate.controllerTeam,0);assert.equal(captured.candidate.recipientSeat,0);
+ assert.equal(captured.candidate.controllerTeam,0);assert.equal(captured.candidate.recipientSeat,duel.active[0]);
  const resolved=resolveSarcophagusEndPhase(duel,captured.ledger,{
   eventId:'end-1',sourceUid:stolen.uid,pieceUid:second.uid,sourceLocation:'hand'
  },lookups);
