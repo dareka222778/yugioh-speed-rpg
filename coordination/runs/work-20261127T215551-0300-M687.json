@@ -3,9 +3,9 @@
   "runId": "work-20261127T215551-0300-M687",
   "mission": "M687",
   "priority": "P1",
-  "status": "ci-passed-awaiting-handoff",
+  "status": "completed-awaiting-review",
   "startedAt": "2026-11-27T21:55:51-03:00",
-  "endedAt": null,
+  "endedAt": "2026-11-27T22:12:55-03:00",
   "branch": "feat/work-m687-amazoness-tag-adapter-20261127",
   "sharedBranch": "feat/rea-engine-recovery-20261026",
   "sharedBaseHead": "1a07fbbc8f34ee5d84d1e5bb25b608bc4b7fbae2",
@@ -28,7 +28,8 @@
     "Adapter isolado para 3 efeitos Amazoness",
     "21 cenários Node executados; 21/21 passaram",
     "Audit gate confirmou 0 novas certificações e 0 concessões de inventário",
-    "CI M687 concluiu success"
+    "CI M687 concluiu success",
+    "Reserva M687 liberada após CI verde; PR #612 permanece draft, sem merge/deploy."
   ],
   "handoff": {
     "targetPR": 17,
@@ -40,7 +41,7 @@
     ],
     "response": "No explicit release or backup/branch transfer found as of 2026-11-27T22:12:55-03:00"
   },
-  "nextTask": "Implementar três efeitos Amazoness em adapter isolado; não admitir cartas nem alterar certificações antes da integração central e revisão individual.",
+  "nextTask": "M688: recompensas de batalha (Airknight/Aswan/Absorbing Kid), branch independente.",
   "pr": {
     "number": 612,
     "url": "https://github.com/dareka222778/yugioh-speed-rpg/pull/612",
@@ -58,5 +59,7 @@
       "focusedTests": "success",
       "audit": "success"
     }
-  }
+  },
+  "effectiveWorkMinutes": 17,
+  "targetMet": false
 }
