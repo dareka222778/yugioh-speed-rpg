@@ -112,8 +112,10 @@ function sendMonsterToGrave(duel,monster,options={}){
  return eventFor(duel,monster,'monsters',{...options,controllerTeam:team});
 }
 function windowFor(duel,eventId,flags={}){
+ const resolvingTeam=flags.resolvingTeam??duel.core.current;
  return {kind:'ioc-graveyard-resolution',eventId,turn:duel.core.turn,
-  activeTeam:duel.core.current,activeSeat:duel.cursor,...flags};
+  turnTeam:duel.core.current,turnSeat:duel.cursor,
+  resolvingTeam,resolvingSeat:duel.active[resolvingTeam],...flags};
 }
 function activateSeat(duel,seat,turn){
  const team=seat%2,oldSeat=duel.active[team];
@@ -255,8 +257,11 @@ test('The Thing in the Crater uses the owner team active seat hand during the op
  const duel=activateSeat(base(),1,1),source=addMonster(duel,0,0,thingPlaceholder),pyro=moveToHand(duel,0,pyroSummon);
  const moved=sendMonsterToGrave(duel,source,{eventId:'thing-opponent-turn',sequence:1,destroyed:true,reason:'effect'});
  const recorded=recordGraveyardTransition(moved.state,createGraveyardTransitionLedger(),moved.event,lookups);
+ assert.throws(()=>resolveGraveyardTransition(moved.state,recorded.ledger,windowFor(moved.state,'thing-opponent-turn',{
+  resolvingTeam:1,acceptThingInCrater:true,pyroUid:pyro.uid
+ })),/equipe proprietária/i);
  const resolved=resolveGraveyardTransition(moved.state,recorded.ledger,windowFor(moved.state,'thing-opponent-turn',{
-  acceptThingInCrater:true,pyroUid:pyro.uid
+  resolvingTeam:0,acceptThingInCrater:true,pyroUid:pyro.uid
  }));
  assert.equal(resolved.status,'summoned');assert.ok(resolved.summonedUid.startsWith('m0:'));
 });
