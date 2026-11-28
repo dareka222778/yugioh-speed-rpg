@@ -1,0 +1,29 @@
+name: M702 Jar FLIP disruption
+on:
+  push:
+    branches:
+      - feat/work-m702-jar-flip-disruption-20261128
+  pull_request:
+    branches:
+      - feat/rea-engine-recovery-20261026
+    paths:
+      - 'src/jarFlipDisruptionTagAdapter.ts'
+      - 'tests/jarFlipDisruptionTagAdapter.test.cjs'
+      - 'docs/evidence/m702-jar-flip-disruption.json'
+      - 'scripts/audit-jar-flip-disruption-m702.cjs'
+      - '.github/workflows/m702-jar-flip-disruption.yml'
+jobs:
+  focused:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - run: node --test tests/jarFlipDisruptionTagAdapter.test.cjs
+      - run: node scripts/audit-jar-flip-disruption-m702.cjs
