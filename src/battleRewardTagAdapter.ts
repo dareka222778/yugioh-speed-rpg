@@ -79,9 +79,9 @@ function assertActiveBattleSeat(duel:TagDuel,team:Team,activeSeat:Seat,turn:numb
 }
 function assertDamageEvent(duel:TagDuel,event:BattleDamageEvent):{team:Team;attacker:MonsterOnField;defender:MonsterOnField}{
  assertId(event.eventId,'Evento');assertId(event.attackerUid,'Atacante');assertId(event.defenderUid,'Defensor');
- if(!Number.isSafeInteger(event.amount)||event.amount<=0||(event.damageToTeam!==0&&event.damageToTeam!==1))throw new Error('Dano de batalha inválido.');
+ if(event.damageKind!=='battle'||!Number.isSafeInteger(event.amount)||event.amount<=0||(event.damageToTeam!==0&&event.damageToTeam!==1))throw new Error('Somente dano de batalha positivo pode disparar esta recompensa.');
  const attacker=findMonster(duel,event.attackerUid),defender=findMonster(duel,event.defenderUid);
- if(!attacker||!defender||attacker.team===defender.team||defender.team!==event.damageToTeam)throw new Error('O evento não representa dano ao adversário.');
+ if(!attacker||!defender||attacker.team===defender.team||defender.team!==event.damageToTeam||!attacker.monster.faceUp||attacker.monster.position!=='atk')throw new Error('O evento não representa dano ao adversário por um atacante válido.');
  assertActiveBattleSeat(duel,attacker.team,event.activeSeat,event.turn);
  return {team:attacker.team,attacker,defender};
 }
@@ -101,7 +101,7 @@ export function createBattleRewardSession(input:TagDuel,lookup:BattleRewardLooku
  assertSession(session);return session;
 }
 
-export type BattleDamageEvent={eventId:string;turn:number;activeSeat:Seat;attackerUid:string;defenderUid:string;damageToTeam:Team;amount:number};
+export type BattleDamageEvent={eventId:string;turn:number;activeSeat:Seat;attackerUid:string;defenderUid:string;damageToTeam:Team;damageKind:'battle'|'effect';amount:number};
 export type AirknightDrawPlan={eventId:string;sourceUid:string;team:Team;activeSeat:Seat;turn:number;sourceBinding:TargetBinding;fingerprint:string};
 export type AirknightDrawResult={eventId:string;sourceUid:string;status:'drawn'|'deck-empty'|'source-lost'|'source-control-changed'|'source-inactive'|'source-negated'|'active-seat-changed'|'duplicate';activeSeat:Seat;drawnUid?:string;replayed:boolean;originalStatus?:AirknightDrawResult['status']};
 /** Airknight's piercing modifier applies only when it attacks a Defense Position monster. */
@@ -188,13 +188,13 @@ export function resolveAswanApparitionRecovery(session:BattleRewardSession,event
 
 export type BattleDestructionEvent={eventId:string;turn:number;activeSeat:Seat;attackerUid:string;defenderUid:string;destroyedUid:string;destroyedByBattle:boolean;destroyedToGrave:boolean};
 export type AbsorbingKidPlan={eventId:string;sourceUid:string;destroyedUid:string;team:Team;activeSeat:Seat;turn:number;level:number;lpGain:number;lpBefore:number;sourceBinding:TargetBinding;targetBinding:TargetBinding;fingerprint:string};
-export type AbsorbingKidResult={eventId:string;sourceUid:string;destroyedUid:string;status:'gained-life-points'|'source-lost'|'source-control-changed'|'source-inactive'|'source-negated'|'target-lost'|'duplicate';lpGain:number;team:Team;newLP?:number;replayed:boolean;originalStatus?:AbsorbingKidResult['status']};
+export type AbsorbingKidResult={eventId:string;sourceUid:string;destroyedUid:string;status:'gained-life-points'|'source-lost'|'source-control-changed'|'source-inactive'|'source-negated'|'target-lost'|'active-seat-changed'|'duplicate';lpGain:number;team:Team;newLP?:number;replayed:boolean;originalStatus?:AbsorbingKidResult['status']};
 /** The conservative adapter requires the Kid to remain face-up through its trigger resolution. */
 export function prepareAbsorbingKidGain(session:BattleRewardSession,event:BattleDestructionEvent,sourceUid:string):AbsorbingKidPlan{
  assertSession(session);assertId(event.eventId,'Evento');assertId(sourceUid,'Absorbing Kid');assertId(event.attackerUid,'Atacante');assertId(event.defenderUid,'Defensor');assertId(event.destroyedUid,'Destruído');
  if(event.turn!==session.duel.core.turn||session.duel.core.phase!=='battle'||event.activeSeat%2!==session.duel.core.current||session.duel.cursor!==event.activeSeat||session.duel.active[event.activeSeat%2]!==event.activeSeat||sourceUid!==event.attackerUid||event.destroyedUid!==event.defenderUid||!event.destroyedByBattle||!event.destroyedToGrave)throw new Error('Evento de destruição de batalha inválido.');
  const source=findMonster(session.duel,sourceUid),team=(event.activeSeat%2) as Team;
- if(!source||source.team!==team||!source.monster.faceUp||effectOf(source.monster.id,session.lookup)!=='absorbing-kid-from-the-sky'||session.isNegated(session.duel.core,sourceUid))throw new Error('Absorbing Kid não está ativo como atacante.');
+ if(!source||source.team!==team||!source.monster.faceUp||source.monster.position!=='atk'||effectOf(source.monster.id,session.lookup)!=='absorbing-kid-from-the-sky'||session.isNegated(session.duel.core,sourceUid))throw new Error('Absorbing Kid não está ativo como atacante.');
  const target=findGraveCard(session.duel,(1-team) as Team,event.destroyedUid),info=target&&getDuelCard(target.card.id) as CardInfo|undefined;
  if(!target||info?.kind!=='monster'||!Number.isSafeInteger(info.level)||!info.level||info.level<1||physicalSeat(target.card.uid)%2===team)throw new Error('O monstro destruído precisa estar no Cemitério adversário e ter Nível.');
  const sourceBinding=bindTarget(session.duel.core,sourceUid),targetBinding=bindTarget(session.duel.core,event.destroyedUid);
@@ -214,6 +214,7 @@ export function resolveAbsorbingKidGain(session:BattleRewardSession,eventId:stri
  else if(source.team!==plan.team)status='source-control-changed';
  else if(!source.monster.faceUp)status='source-inactive';
  else if(session.isNegated(session.duel.core,plan.sourceUid))status='source-negated';
+ else if(session.duel.core.turn!==plan.turn||session.duel.core.phase!=='battle'||session.duel.cursor!==plan.activeSeat||session.duel.active[plan.team]!==plan.activeSeat||session.duel.core.current!==plan.team)status='active-seat-changed';
  else if(!target||!targetBindingValid(session.duel.core,plan.targetBinding))status='target-lost';
  else if(session.duel.core.players[plan.team].lp!==plan.lpBefore)throw new Error('O ganho de LP deve ser aplicado uma única vez após a destruição.');
  else{session.duel.core.players[plan.team].lp+=plan.lpGain;newLP=session.duel.core.players[plan.team].lp;}

@@ -48,7 +48,7 @@ function putTrapInGrave(session,ownerSeat,trapId){
 }
 function battle(session,eventId,attacker,defender,damageToTeam=1){
  session.duel.core.phase='battle';
- return {eventId,turn:session.duel.core.turn,activeSeat:session.duel.cursor,attackerUid:attacker.uid,defenderUid:defender.uid,damageToTeam,amount:350};
+ return {eventId,turn:session.duel.core.turn,activeSeat:session.duel.cursor,attackerUid:attacker.uid,defenderUid:defender.uid,damageToTeam,damageKind:'battle',amount:350};
 }
 function inventory(duel){return new Map(tagInventory(duel).filter(card=>card.entityKind!=='token').map(card=>[card.uid,card.id]));}
 function assertInventorySame(before,duel){const after=inventory(duel);assert.equal(after.size,before.size);for(const [uid,id]of before)assert.equal(after.get(uid),id);}
@@ -85,6 +85,7 @@ test('Airknight draw waits for a positive battle-damage event and rejects unrela
  const session=setup(),source=deploy(session,0,fixture.airknight,0),defender=deploy(session,1,fixture.enemy,3);
  session.duel.core.phase='battle';
  assert.throws(()=>adapter.prepareAirknightParshathDraw(session,{...battle(session,'air-zero',source,defender),amount:0},source.uid),/Dano de batalha inválido/);
+ assert.throws(()=>adapter.prepareAirknightParshathDraw(session,{...battle(session,'air-effect',source,defender),damageKind:'effect'},source.uid),/dano de batalha positivo/);
  assert.throws(()=>adapter.prepareAirknightParshathDraw(session,{...battle(session,'air-other',source,defender),attackerUid:defender.uid},source.uid),/não representa dano/);
 });
 
@@ -96,7 +97,7 @@ test('Airknight draw is idempotent and never grants a card when the active Deck 
  const replay=adapter.resolveAirknightParshathDraw(session,'air-once');
  assert.equal(first.status,'drawn');assert.equal(replay.status,'duplicate');assert.equal(session.duel.core.players[0].hand.length,handAfter);assertInventorySame(before,session.duel);
  const empty=setup(),source2=deploy(empty,0,fixture.airknight,0),defender2=deploy(empty,1,fixture.enemy,3);
- empty.duel.core.players[0].deck.length=0;
+ const remaining=empty.duel.core.players[0].deck.splice(0);empty.duel.core.players[0].grave.push(...remaining);synchronizeCardLifetimes(empty.duel.core);
  const event2=battle(empty,'air-empty',source2,defender2,1);
  adapter.prepareAirknightParshathDraw(empty,event2,source2.uid);
  assert.equal(adapter.resolveAirknightParshathDraw(empty,'air-empty').status,'deck-empty');
