@@ -1,0 +1,74 @@
+{
+  "mission": "M686",
+  "runId": "work-20261127T214300-0300-M686",
+  "priority": "P1",
+  "owner": "Work principal",
+  "scope": "Adapter isolado para Appropriate (48539234/CID 4947): ativação somente após compra do oponente fora de Draw Phase; evento de ativação não dispara o efeito; cada compra posterior do oponente gera compra de duas cartas por cópia ativa, para o assento físico ativo da equipe controladora.",
+  "cards": [
+    {
+      "name": "Appropriate",
+      "passcode": "48539234",
+      "konamiCid": 4947,
+      "kind": "Continuous Trap",
+      "firstTcgPrinting": "Pharaoh's Servant (PSV-024), 2002-10-20",
+      "officialDatabaseUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4947&ope=2&request_locale=en",
+      "officialEffect": "Activate only when your opponent draws a card(s) outside of either Draw Phase. After that, each time your opponent draws a card(s) outside of either Draw Phase, immediately draw 2 cards."
+    }
+  ],
+  "design": {
+    "activation": "The enabling draw must be by the opposing team and outside Draw Phase. The activation's sequence is stored; that same event is excluded from the subsequent effect.",
+    "trigger": "Each later opponent draw event outside either Draw Phase triggers once per event, not once per card drawn. Each active copy produces its own two-card plan.",
+    "routing": "The draw recipient is the controller team's active physical seat at resolution time; card UID ownership never redirects the draw to a reserve teammate.",
+    "deckOut": "Each copy consumes the next two Deck cards sequentially. If fewer than two remain, the plan reports the partial draw and deck-out; later copies do not plan after a failed draw.",
+    "negation": "Jinzo blocks activation and suppresses Trap effects; source-specific negation is supported. The shared continuousTrapsNegated helper also covers Royal Decree, but Royal Decree is not enabled in the base fixture and is not claimed as directly tested.",
+    "integrity": "Draw events carry stable IDs/sequences, phase, physical drawing seat and exact UIDs already in that seat's private hand. Fingerprinted event replay is idempotent; changed facts are rejected. The adapter returns plans only and never moves cards or mutates inventory.",
+    "admission": "Appropriate is absent from catalog and certification sources. Tests use existing enabled Trap IDs as fixture aliases; no auto-admission or certification occurs."
+  },
+  "tests": [
+    "Activation condition, set-turn restriction, initial-event exclusion",
+    "Both teams, active physical seat rotation and owner/controller distinction",
+    "Draw Phase exclusion and own-team draw exclusion",
+    "Negated/unresolved activation and Jinzo activation block",
+    "One/two copies, sequential deck tops and single-event trigger semantics",
+    "One-card and empty-Deck deck-out plans",
+    "Source negation, source removal, face-down reset and set-turn epoch",
+    "Idempotent activation/draw replay and divergent replay rejection",
+    "Private-hand UID, active-seat, ledger and malformed event validation",
+    "No mutation and owner-rule invariants"
+  ],
+  "rules": {
+    "mainDeck": "20–30 per physical seat",
+    "handLimit": 6,
+    "handLimitTiming": "End Phase only",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separate",
+    "extraDeckMax": 5,
+    "privateHandsAndDecks": true,
+    "sharedTeamGraveyardAndLP": true,
+    "physicalOwnerUidPrefix": "m{seat}:"
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0
+  },
+  "catalogAtEnd": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0
+  },
+  "newlyBehaviorCertifiedCards": 0,
+  "automaticCertifications": 0,
+  "inventoryGrants": 0,
+  "production": {
+    "resolverIntegration": false,
+    "discordCommandIntegration": false,
+    "liveDiscordValidation": false,
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false
+  }
+}

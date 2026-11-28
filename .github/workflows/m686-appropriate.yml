@@ -1,0 +1,38 @@
+name: M686 Appropriate TagDuel adapter
+on:
+  push:
+    branches:
+      - feat/work-m686-appropriate-20261127
+    paths:
+      - 'src/appropriateTagAdapter.ts'
+      - 'tests/appropriateTagAdapter.test.cjs'
+      - 'docs/evidence/m686-appropriate.json'
+      - 'scripts/audit-appropriate-m686.cjs'
+      - '.github/workflows/m686-appropriate.yml'
+  pull_request:
+    paths:
+      - 'src/appropriateTagAdapter.ts'
+      - 'tests/appropriateTagAdapter.test.cjs'
+      - 'docs/evidence/m686-appropriate.json'
+      - 'scripts/audit-appropriate-m686.cjs'
+      - '.github/workflows/m686-appropriate.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  appropriate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Run focused behavior tests
+        run: node --test tests/appropriateTagAdapter.test.cjs
+      - name: Audit evidence and non-admission
+        run: node scripts/audit-appropriate-m686.cjs

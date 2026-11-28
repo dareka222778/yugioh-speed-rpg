@@ -1,0 +1,12 @@
+'use strict';
+const assert=require('node:assert/strict');const fs=require('node:fs');const path=require('node:path');
+const evidence=JSON.parse(fs.readFileSync(path.join(__dirname,'../docs/evidence/m686-appropriate.json'),'utf8'));
+const {getDuelCard,getEnabledCardIds}=require('../dist/effectRegistry');
+const source=fs.readFileSync(path.join(__dirname,'../src/cardCertifications.ts'),'utf8');
+const id=evidence.cards[0].passcode,count=(source.match(/['"]\d{8}['"]\s*:/g)||[]).length;
+assert.equal(id,'48539234');assert.equal(evidence.cards[0].konamiCid,4947);
+assert.equal(getDuelCard(id),undefined);assert.equal(getEnabledCardIds().includes(id),false);assert.equal(source.includes(id),false);
+assert.equal(count,evidence.catalogAtStart.engineV9Certified);assert.equal(count,969);
+assert.equal(evidence.catalogAtEnd.engineV9Certified,969);assert.equal(evidence.newlyBehaviorCertifiedCards,0);
+assert.equal(evidence.automaticCertifications,0);assert.equal(evidence.inventoryGrants,0);
+console.log('M686 evidence audit passed: 969 certifications unchanged; Appropriate remains unadmitted.');
