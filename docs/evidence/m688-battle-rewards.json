@@ -1,0 +1,96 @@
+{
+  "format": 1,
+  "mission": "M688",
+  "status": "isolated-adapter-only",
+  "baseline": {
+    "sharedBaseHead": "e7142ea8f08834b29896c042e7d79fa3477515ff",
+    "engineV9Certified": 969,
+    "remainingTo1000": 31,
+    "source": "milestone1000-plan.json artifact run 46091774623"
+  },
+  "cards": [
+    {
+      "id": "18036057",
+      "konamiId": 5023,
+      "name": "Airknight Parshath",
+      "kind": "effect-monster",
+      "officialSummary": "Quando ataca um monstro em Defesa, causa dano perfurante; quando causa dano de batalha ao oponente, compra 1 carta.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5023&request_locale=en",
+      "status": "adapter-tested-pending-engine-integration"
+    },
+    {
+      "id": "88236094",
+      "konamiId": 6026,
+      "name": "Aswan Apparition",
+      "kind": "effect-monster",
+      "officialSummary": "Ao causar dano de batalha ao oponente, pode escolher uma Armadilha no próprio Cemitério e colocá-la no topo do Deck.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6026&request_locale=en",
+      "status": "adapter-tested-pending-engine-integration"
+    },
+    {
+      "id": "49771608",
+      "konamiId": 6034,
+      "name": "Absorbing Kid from the Sky",
+      "kind": "effect-monster",
+      "officialSummary": "Ao destruir um monstro adversário em batalha e enviá-lo ao Cemitério, ganha Pontos de Vida iguais ao Nível do monstro destruído × 300.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6034&request_locale=en",
+      "status": "adapter-tested-pending-engine-integration"
+    }
+  ],
+  "behaviorTests": {
+    "suite": "tests/battleRewardTagAdapter.test.cjs",
+    "authoredCases": 13,
+    "adapterBehaviorVerifiedCards": 3,
+    "engineBehaviorCertifiedCards": 0,
+    "execution": "pending-CI",
+    "coverage": [
+      "Airknight perfurante apenas contra Defesa",
+      "compra pós-dano positivo de batalha",
+      "compra para a mão privada do assento físico ativo",
+      "Deck vazio sem concessão e com sinalização para adjudicação de deck-out",
+      "Aswan devolve Armadilha ao topo do Deck do proprietário físico, sem embaralhar",
+      "alvo Trap no Cemitério da equipe e vínculo UID/epoch",
+      "Absorbing Kid ganha Nível × 300 LP para a equipe",
+      "negação, alvo removido, turno/fase e replay",
+      "mãos privadas e inventário invariantes"
+    ]
+  },
+  "counts": {
+    "baselineEngineV9Certified": 969,
+    "remainingTo1000": 31,
+    "adapterBehaviorVerifiedCards": 3,
+    "newEngineCertifiedCards": 0,
+    "automaticCertifications": 0,
+    "inventoryGrants": 0
+  },
+  "ownerRules": {
+    "mainDeckMin": 20,
+    "mainDeckMax": 30,
+    "extraDeckMax": 5,
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "handLimit": 6,
+    "handCheck": "end",
+    "inventoryGrants": false
+  },
+  "limits": [
+    "Airknight devolve apenas o UID da compra ao chamador; o conteúdo deve ser entregue privadamente ao assento ativo. Deck vazio retorna deck-empty e exige que o resolver central aplique a regra de deck-out.",
+    "Aswan devolve a Armadilha ao topo do Deck do dono físico indicado pelo UID; não embaralha e não transfere a carta para a mão do companheiro.",
+    "Absorbing Kid exige que a fonte permaneça face-up no campo até a resolução. A interação de destruição simultânea da própria fonte não está coberta por este adapter e não é certificada."
+  ],
+  "integration": {
+    "status": "pending-handoff",
+    "targetPR": 17,
+    "files": [
+      "src/monsterEffects.ts",
+      "src/duelEngineCurrent.ts"
+    ],
+    "centralFilesModified": false,
+    "catalogModified": false,
+    "certificationsModified": false,
+    "discordCommandsModified": false,
+    "productionTouched": false
+  },
+  "limitation": "Os testes usam monstros/armadilhas já habilitados como fixtures e lookup de efeitos para os três IDs candidatos. As cartas continuam fora de cardMetadata/cardCertifications; este lote não aumenta a contagem certificada de 969.",
+  "nextBlock": "Após handoff e backup verificável: integrar eventos de dano de batalha, piercing, compra privada, retorno ao topo do Deck do dono e ganho de LP; revisar a interação de destruição simultânea de Absorbing Kid; somente então criar certificados explícitos."
+}
