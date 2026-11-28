@@ -23,12 +23,12 @@ const effectMonsters=enabled.filter(id=>{
 const traps=enabled.filter(id=>getDuelCard(id)?.kind==='trap');
 const spells=enabled.filter(id=>getDuelCard(id)?.kind==='spell'&&!getDuelCard(id)?.field);
 const fieldSpells=enabled.filter(id=>getDuelCard(id)?.kind==='spell'&&getDuelCard(id)?.field);
-assert.ok(normalMonsters.length>=12,'A suíte exige doze Monstros Normais habilitados.');
+assert.ok(normalMonsters.length>=11,'A suíte exige onze Monstros Normais habilitados.');
 assert.ok(effectMonsters.length>=2,'A suíte exige dois monstros de efeito habilitados.');
-assert.ok(traps.length>=4&&spells.length>=3,'A suíte exige cartas de Magia e Armadilha habilitadas.');
+assert.ok(traps.length>=4&&spells.length>=2&&fieldSpells.length>=1,'A suíte exige Magias normais, Magia de Campo e Armadilhas habilitadas.');
 const spritePlaceholder=effectMonsters[0];
 const opponentPlaceholder=effectMonsters[1];
-const deck=[...normalMonsters.slice(0,12),...traps.slice(0,4),...spells.slice(0,3),spritePlaceholder];
+const deck=[...normalMonsters.slice(0,11),...traps.slice(0,4),...spells.slice(0,2),fieldSpells[0],spritePlaceholder,opponentPlaceholder];
 assert.equal(deck.length,20);
 const lookups={ragingFlameSprite:id=>id===spritePlaceholder};
 
@@ -270,6 +270,13 @@ test('a fourth Monster Zone or Spell/Trap Zone is rejected; Field Zone stays sep
   synchronizeCardLifetimes(duel.core);
   assert.equal(assertRagingFlameSpriteRules(duel),undefined);
  }
+ const tooManyMonsters=base();
+ for(let i=0;i<4;i++){
+  const card=take(tooManyMonsters,0,normalMonsters[i]);
+  tooManyMonsters.core.players[0].monsters.push({...card,position:'atk',faceUp:true,entered:1,changed:1,attacked:0,atkBoost:0,defBoost:0,owner:0});
+ }
+ synchronizeCardLifetimes(tooManyMonsters.core);
+ assert.throws(()=>assertRagingFlameSpriteRules(tooManyMonsters),/limite de zonas|Monster Zones/i);
  const tooManyBackrow=base(),team=0;
  for(let i=0;i<4;i++){
   const card=take(tooManyBackrow,0,traps[i]);
@@ -290,8 +297,8 @@ test('the sixth Extra Deck card for one physical seat is rejected',()=>{
  assert.ok(fusions.length>=6,'A suíte exige seis Fusions habilitadas para validar o limite.');
  const duel=base();
  duel.core.players[0].extra??=[];
- duel.core.players[0].extra.push({uid:'m0:m696-extra-six',id:fusions[5]});
- assert.throws(()=>assertRagingFlameSpriteRules(duel),/Deck Adicional físico excedeu cinco/i);
+ for(let i=0;i<6;i++)duel.core.players[0].extra.push({uid:'m0:m696-extra-'+i,id:fusions[i]});
+ assert.throws(()=>assertRagingFlameSpriteRules(duel),/limite de zonas|Deck Adicional físico excedeu cinco/i);
 });
 
 test('the effect conserves every physical UID and card identity',()=>{
