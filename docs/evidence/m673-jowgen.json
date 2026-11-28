@@ -1,0 +1,69 @@
+{
+  "format": 1,
+  "mission": "M673",
+  "runId": "work-20261127071240-0300-M673",
+  "title": "Jowgen the Spiritualist — global Special Summon lock and Special Summon wipe",
+  "cutoff": "2004-09-30",
+  "cards": [
+    {
+      "name": "Jowgen the Spiritualist",
+      "namePt": "Jowgen, o Espiritualista",
+      "id": "41855169",
+      "konamiCid": 5247,
+      "kind": "Effect Monster",
+      "firstTcgRelease": "2003-03-01",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5247&ope=2&request_locale=en",
+      "officialText": "You can discard 1 random card from your hand to the GY; destroy all Special Summoned monsters on the field. Neither player can Special Summon monsters.",
+      "behavior": "Bloqueia Invocações-Especiais de ambas as equipes enquanto face-up. O efeito de ignição descarta aleatoriamente uma carta da mão privada do assento ativo como custo e destrói todas as instâncias Invocadas por Invocação-Especial rastreadas no campo, inclusive face-down e do próprio Jowgen se ele foi Invocado-Especialmente."
+    }
+  ],
+  "scenarioCount": 22,
+  "behaviorVerifiedCards": 1,
+  "engineCertifiedCardsBefore": 959,
+  "engineCertifiedCardsAfter": 959,
+  "newCertifications": 0,
+  "automaticCertifications": 0,
+  "inventoryGrants": 0,
+  "certificationStatus": "adapter-behavior-verified; not engine-v9 certified",
+  "runtimeIntegration": "pending-explicit-engine-hook",
+  "coverage": [
+    "bloqueio global de Special Summon para ambas as equipes",
+    "Jowgen face-down, removido ou com efeito negado não bloqueia",
+    "registro idempotente de Invocação-Normal vs Invocação-Especial por UID/época",
+    "custo aleatório com crypto.randomInt por padrão e RNG injetável em teste",
+    "descarte somente da mão privada do assento ativo, preservando a mão do parceiro",
+    "custo pago na ativação; descarte não retorna se ativação/efeito forem negados",
+    "destruição de especiais das duas equipes, inclusive face-down",
+    "monstros Invocados-Normalmente permanecem",
+    "Jowgen Invocado-Especialmente é destruído pelo próprio efeito",
+    "resolução continua mesmo se Jowgen sair do campo após ativar",
+    "sem alvo especial, custo ainda pago e resolução válida",
+    "mão vazia impede ativação",
+    "histórico de especial invalidado quando a instância sai e retorna em nova época",
+    "histórico especial recuperável de estado persistido",
+    "replays de evento, ativação e resolução idempotentes",
+    "Deck 20–30, mão 6 apenas na End Phase, zonas 3+3, Field Zone separada, Extra Deck 5",
+    "conservação de UIDs e inventário; zero concessões"
+  ],
+  "rules": {
+    "mainDeck": "20–30 por assento físico",
+    "handLimit": 6,
+    "handCheck": "End Phase",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "extraDeckMax": 5,
+    "fieldZone": "separada",
+    "tagDuel": "duas equipes, quatro assentos físicos, mãos/Decks privados, Cemitério compartilhado por equipe"
+  },
+  "production": "unchanged",
+  "merge": "not-authorized",
+  "discordLive": false,
+  "limitations": [
+    "O adapter ainda não está conectado ao resolver central. O host precisa consultar canSpecialSummon antes de cada via de Invocação-Especial e chamar recordMonsterSummon após cada Invocação-Normal/Especial.",
+    "O histórico inicial precisa ser recuperado da persistência ao criar a sessão; sem o hook central, monstros especiais anteriores ao adapter não podem ser inferidos com segurança.",
+    "privateDiscardedUid é dado privado do assento ativo e precisa ser redigido antes de qualquer log/evento transmitido à equipe adversária.",
+    "Jowgen não foi adicionado ao catálogo ou cardCertifications.ts; 0 novas certificações engine-v9.",
+    "Sem comandos, banco, inventário, gateway Discord, merge ou deploy."
+  ],
+  "nextTask": "Solicitar liberação do hook de summon no resolver central; conectar canSpecialSummon/recordMonsterSummon e certificar somente após testes de integração."
+}
