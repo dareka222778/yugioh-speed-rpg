@@ -1,0 +1,38 @@
+name: M594 Ancient Telescope private deck peek adapter
+on:
+  push:
+    branches:
+      - feat/work-m594-ancient-telescope-private-deck-peek-20261124
+    paths:
+      - 'src/ancientTelescopeTagAdapter.ts'
+      - 'tests/ancientTelescopeTagAdapter.test.cjs'
+      - 'docs/evidence/m594-ancient-telescope-private-deck-peek.json'
+      - '.github/workflows/m594-ancient-telescope-private-deck-peek.yml'
+  pull_request:
+    paths:
+      - 'src/ancientTelescopeTagAdapter.ts'
+      - 'tests/ancientTelescopeTagAdapter.test.cjs'
+      - 'docs/evidence/m594-ancient-telescope-private-deck-peek.json'
+      - '.github/workflows/m594-ancient-telescope-private-deck-peek.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  ancient-telescope:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m594-ancient-telescope-private-deck-peek.json', 'utf8'))"
+      - name: Run Ancient Telescope adapter tests
+        run: node --test tests/ancientTelescopeTagAdapter.test.cjs
