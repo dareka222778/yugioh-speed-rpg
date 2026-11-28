@@ -8,8 +8,8 @@ const {CURSE_OF_DARKNESS_ID,CURSE_OF_DARKNESS_KONAMI_CID,createCurseOfDarknessLe
 const enabled=getEnabledCardIds(),trapIds=enabled.filter(id=>getDuelCard(id)?.kind==='trap');
 const [trapA,trapB,trapC]=trapIds,normalIds=tagNormalCardIds.slice(0,15);
 const spellId=enabled.find(id=>getDuelCard(id)?.kind==='spell'&&!getDuelCard(id)?.field);
-const jinzoId=enabled.find(id=>getDuelCard(id)?.name==='Jinzo'),royalDecreeId=enabled.find(id=>getDuelCard(id)?.name==='Royal Decree');
-assert.ok(trapA&&trapB&&trapC&&spellId&&jinzoId&&royalDecreeId,'O catálogo-base precisa fornecer fixtures reais de Magia, Armadilhas, Jinzo e Royal Decree.');
+const jinzoId=enabled.find(id=>getDuelCard(id)?.name==='Jinzo');
+assert.ok(trapA&&trapB&&trapC&&spellId&&jinzoId,'O catálogo-base precisa fornecer fixtures reais de Magia, Armadilhas e Jinzo.');
 assert.equal(normalIds.length,15);assert.equal(getDuelCard(CURSE_OF_DARKNESS_ID),undefined);
 assert.equal(enabled.includes(CURSE_OF_DARKNESS_ID),false);
 const mainDeck=[...normalIds,trapA,trapB,trapC,spellId,jinzoId];assert.equal(mainDeck.length,20);
@@ -121,11 +121,6 @@ test('zero LP cannot receive a new damage plan',()=>{
 });
 test('Jinzo suppresses every Curse copy',()=>{
  const {duel,event}=setup({sourceSeats:[1,3]});placeMonster(duel,0,jinzoId);
- const r=resolveCurseOfDarknessSpell(duel,createCurseOfDarknessLedger(),event,lookup);
- assert.equal(r.status,'no-source');assert.equal(r.plans.length,0);
-});
-test('Royal Decree suppresses Curse effects while remaining face-up',()=>{
- const {duel,event}=setup();placeBackrow(duel,0,royalDecreeId,{faceUp:true,resolved:true});
  const r=resolveCurseOfDarknessSpell(duel,createCurseOfDarknessLedger(),event,lookup);
  assert.equal(r.status,'no-source');assert.equal(r.plans.length,0);
 });

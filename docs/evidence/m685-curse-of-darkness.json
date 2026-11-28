@@ -19,7 +19,7 @@
     "resolution": "Only a Spell whose activation resolved triggers the Trap. A Spell whose effect was negated but whose activation resolved still triggers; a negated activation does not.",
     "routing": "The damaged team is derived from the physical seat that activated the Spell, never from the Spell's immutable owner UID or the Trap's controller.",
     "stacking": "Each face-up, resolved, non-negated copy creates a separate 1000 LP plan. Plans are deterministic by source UID and clamp at remaining LP.",
-    "negation": "Jinzo blocks Trap activations and Royal Decree negates Trap effects; both suppress Curse of Darkness. Per-source negation is also accepted.",
+    "negation": "Jinzo suppresses Curse of Darkness while face-up; per-source negation is also accepted. Royal Decree is not present in the enabled base catalog and is therefore not claimed as directly tested in this block.",
     "integrity": "Event IDs are fingerprinted against the resolved Spell and active sources. Replays are idempotent; changed facts under the same ID are rejected. The adapter returns plans only and never mutates LP, Decks, hands, zones or inventory.",
     "admission": "The card is absent from the shared catalog and certification source. Tests use already-enabled Trap IDs as isolated fixture aliases; this does not admit or certify Curse of Darkness."
   },
@@ -29,7 +29,7 @@
     "Effect-negated-but-resolved versus activation-negated/unresolved",
     "No source, face-down/unresolved source and per-source negation",
     "Multiple copies, cross-team controllers, deterministic stacking and lethal LP clamp",
-    "Jinzo and Royal Decree suppression",
+    "Jinzo global Trap-effect suppression",
     "Real Spell identity, physical UID, active-seat authorization and stale LP",
     "Idempotent replay, changed-fact replay rejection and malformed ledger",
     "Duplicate source UID rejection, immutability and owner-rule invariants"
@@ -68,5 +68,6 @@
     "merge": false,
     "deploy": false,
     "backupVerified": false
-  }
+  },
+  "testCount": 28
 }
