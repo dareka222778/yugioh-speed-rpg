@@ -1,3 +1,4 @@
+import {createHash as nodeCreateHash} from 'node:crypto';
 import type {TagDuel} from './tagDuel';
 import {assertTagDuel,tagInventory} from './tagDuel';
 import {getDuelCard} from './effectRegistry';
@@ -197,8 +198,7 @@ function requireHash(parts:unknown[]):string{
  return createHash(text);
 }
 function createHash(text:string):string{
- // Small deterministic SHA-256 wrapper is supplied by Node in the project runtime.
- return require('node:crypto').createHash('sha256').update(text).digest('hex');
+ return nodeCreateHash('sha256').update(text).digest('hex');
 }
 function assertLedger(ledger:BanishedReturnLedger):void{
  if(!ledger||ledger.version!==1||!Number.isSafeInteger(ledger.lastSequence)||ledger.lastSequence<0||
@@ -311,9 +311,16 @@ function moveSelected(state:TagDuel,team:BanishedReturnTeam,cards:readonly Card[
 function lpDelta(before:readonly [number,number],state:TagDuel):readonly [number,number]{
  return [state.core.players[0].lp-before[0],state.core.players[1].lp-before[1]];
 }
-function changedTeams(before:readonly [number,number],state:TagDuel):BanishedReturnTeam[]{
+function changedTeams(before:TagDuel,state:TagDuel):BanishedReturnTeam[]{
  const result:BanishedReturnTeam[]=[];
- for(const team of [0,1] as const)if(state.core.players[team].lp!==before[team])result.push(team);
+ for(const team of [0,1] as const){
+  const oldPlayer=before.core.players[team],newPlayer=state.core.players[team];
+  const oldMonsters=oldPlayer.monsters.map(card=>card.uid).sort().join('|');
+  const newMonsters=newPlayer.monsters.map(card=>card.uid).sort().join('|');
+  const oldBanished=(oldPlayer.banished??[]).map(card=>card.uid).sort().join('|');
+  const newBanished=(newPlayer.banished??[]).map(card=>card.uid).sort().join('|');
+  if(oldPlayer.lp!==newPlayer.lp||oldMonsters!==newMonsters||oldBanished!==newBanished)result.push(team);
+ }
  return result;
 }
 function applyLifeCost(state:TagDuel,team:BanishedReturnTeam,cost:number):'paid'|'insufficient'|'lethal'{
@@ -393,6 +400,7 @@ export function resolveDDScoutPlaneEndPhase(
  const used=ledger.scoutUsed.some(item=>item.uid===pending.cardUid&&item.turn===pending.turn);
  let status:BanishedReturnResult['status']='no-target',summonedUids:string[]=[];
  let next:BanishedReturnLedger={...ledger,pendingScout:ledger.pendingScout.filter(item=>item.eventId!==pending.eventId)};
+ if(ledger.processed.length>=4096)throw new Error('Ledger de retorno banido atingiu 4096 eventos processados.');
  if(used||pending.turn!==window.turn||!current||current.zone!=='banished'||
   current.epoch!==pending.banishedEpoch||index<0||freeMonsterZones(state,pending.ownerTeam)<1){
   next={...next,processed:[...next.processed,{eventId:pending.eventId,fingerprint:pending.fingerprint,sequence:pending.sequence,status:'no-target'}]};
@@ -409,7 +417,7 @@ export function resolveDDScoutPlaneEndPhase(
    processed:[...next.processed,{eventId:pending.eventId,fingerprint:pending.fingerprint,sequence:pending.sequence,status:'summoned'}]};
  }
  assertRules(state);assertLedger(next);assertInventory(before,inventorySnapshot(state));
- return {status,state,ledger:next,changedTeams:changedTeams(lpBefore,state),summonedUids,banishedUids:[],lpDelta:lpDelta(lpBefore,state)};
+ return {status,state,ledger:next,changedTeams:changedTeams(input,state),summonedUids,banishedUids:[],lpDelta:lpDelta(lpBefore,state)};
 }
 
 export function resolveDimensionFusion(
